@@ -4568,7 +4568,7 @@ const itemRegistry = {
         critCount: 2,
         cost: 1080,
         donTime: "1 full round",
-        specialQualities: ["heavy_6", "slash_resistance", "thrust_resistance", "conductive"],
+        specialQualities: ["heavy_6", "slash_resistance", "thrust_resistance"],
         description: "A classic infantry harness of overlapping iron bands. It offers high vital protection but leaves the limbs relatively exposed. Grants resistance to Slash and Thrust damage."
     },
     "mail_hauberk": {
@@ -4578,7 +4578,7 @@ const itemRegistry = {
         critCount: 3,
         cost: 1440,
         donTime: "2 rounds",
-        specialQualities: ["heavy_5", "flexible", "slash_resistance", "conductive"],
+        specialQualities: ["heavy_5", "flexible", "slash_resistance"],
         description: "A shirt of hand-riveted interlocking steel rings worn over light padding. Excellent against edges, but provides no structure against blunt force. Grants resistance to Slash damage."
     },
     "shanwenjia": {
@@ -4588,7 +4588,7 @@ const itemRegistry = {
         critCount: 2,
         cost: 2160,
         donTime: "2 rounds",
-        specialQualities: ["heavy_5", "tailor_fit", "slash_resistance", "thrust_resistance", "conductive"],
+        specialQualities: ["heavy_5", "tailor_fit", "slash_resistance", "thrust_resistance"],
         description: "Elite Star-pattern mail consisting of non-riveted interlocking 'mountain' plates. A complex defense that deflects points with high efficiency. Grants resistance to Slash and Thrust damage."
     },
     "lacquered_lamellar": {
@@ -4618,7 +4618,7 @@ const itemRegistry = {
         critCount: 4,
         cost: 5760,
         donTime: "3 full rounds",
-        specialQualities: ["heavy_6", "tailor_fit", "slash_resistance", "thrust_resistance", "frost_resistance", "conductive"],
+        specialQualities: ["heavy_6", "tailor_fit", "slash_resistance", "thrust_resistance", "frost_resistance"],
         description: "Fully articulated, fluted steel plates over mail voiders. The pinnacle of late medieval anatomical defense. Grants resistance to Slash, Thrust, and Frost damage, but has vulnerability to Lightning damage."
     },
     "maximilian_plate": {
@@ -4628,7 +4628,7 @@ const itemRegistry = {
         critCount: 4,
         cost: 8640,
         donTime: "3 full rounds and assistance",
-        specialQualities: ["heavy_7", "tailor_fit", "slash_resistance", "thrust_resistance", "bash_resistance", "frost_resistance", "conductive"],
+        specialQualities: ["heavy_7", "tailor_fit", "slash_resistance", "thrust_resistance", "bash_resistance", "frost_resistance"],
         description: "Heavily rounded Renaissance plates featuring close fluting designed to disperse blunt impact and deflect even the most precise thrusts. Grants resistance to Slash, Thrust, Bash, and Frost damage, but has vulnerability to Lightning damage."
     },
 
@@ -10978,6 +10978,9 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
 
 // --- HELPER FUNCTION: COMPOSITE WEAPON + AMMO CALCULATOR ---
     const calculateCompositeProfile = (weaponData, weaponItem, ammoData, ammoItem) => {
+        // Define quality modifiers at the absolute top level of the function
+        const qualityDeltas = { crude: -2, novice: -1, apprentice: 0, journeyman: 1, master: 2, grandmaster: 3 };
+
         const aspectStr = (weaponItem.governingAspect || "DEX").toUpperCase().trim();
         let baseAspectValue = statsMap.DEX;
         
@@ -10986,52 +10989,51 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
         } else if (aspectStr === "VER + RANK" || aspectStr === "VER+RANK") {
             const currentRank = (typeof window.getCurrentCharacterRank === "function") ? window.getCurrentCharacterRank() : 1;
             baseAspectValue = statsMap.VER + currentRank;
-            } else if (aspectStr.includes("½") || aspectStr.includes("1/2")) {
-                baseAspectValue = Math.floor((statsMap.DEX + statsMap.STR) / 2);
+        } else if (aspectStr.includes("½") || aspectStr.includes("1/2")) {
+            baseAspectValue = Math.floor((statsMap.DEX + statsMap.STR) / 2);
+        }
+
+        let weaponDice = baseAspectValue;
+        const isCastingProfile = (aspectStr === "VER + RANK" || aspectStr === "VER+RANK");
+
+        if (!isCastingProfile) {
+            // Apply Bow Material dice bonuses
+            if (weaponData.materialId === "yew_wood" && weaponItem.modTags.includes("arc_bow")) {
+                weaponDice += 1;
             }
 
-            let weaponDice = baseAspectValue;
-            const isCastingProfile = (aspectStr === "VER + RANK" || aspectStr === "VER+RANK");
+            // Apply Bow Quality dice modifiers
+            weaponDice += qualityDeltas[weaponData.qualityId] || 0;
 
-            if (!isCastingProfile) {
-                // Apply Bow Material dice bonuses
-                if (weaponData.materialId === "yew_wood" && weaponItem.modTags.includes("arc_bow")) {
-                    weaponDice += 1;
+            // Apply Bow Maker dice modifiers
+            if (weaponData.makerId === "elven" && weaponItem.modTags.includes("shrewd")) weaponDice += 1;
+            if (weaponData.makerId === "elven" && weaponItem.modTags.includes("arc_bow")) weaponDice += 2;
+            if (weaponData.makerId === "sylvan" && weaponItem.modTags.includes("arc_bow")) weaponDice += 1;
+
+            // Apply Ammo Maker dice modifiers
+            const ammoTag = getTargetAmmoTag(weaponItem.modTags);
+            if (ammoData.makerId === "sylvan" && ammoTag && ammoItem.modTags.includes(ammoTag)) weaponDice += 1;
+        }
+
+        // Apply global/combat skill modifiers
+        if (typeof window.skillBonusRegistry === "object" && window.skillBonusRegistry.dice) {
+            weaponItem.modTags.forEach(tag => {
+                const mappedKey = {
+                    "arc_bow": "arc_bows", "shrewd": "shrewd_weapons", "brutal": "brutal_weapons", "pugil": "pugil_weapons", "common": "common_weapons"
+                }[tag.toLowerCase()];
+                if (mappedKey && window.skillBonusRegistry.dice[mappedKey]) {
+                    weaponDice += window.skillBonusRegistry.dice[mappedKey];
                 }
+            });
+        }
 
-                // Apply Bow Quality dice modifiers
-                const qualityDeltas = { crude: -2, novice: -1, apprentice: 0, journeyman: 1, master: 2, grandmaster: 3 };
-                weaponDice += qualityDeltas[weaponData.qualityId] || 0;
-
-                // Apply Bow Maker dice modifiers
-                if (weaponData.makerId === "elven" && weaponItem.modTags.includes("shrewd")) weaponDice += 1;
-                if (weaponData.makerId === "elven" && weaponItem.modTags.includes("arc_bow")) weaponDice += 2;
-                if (weaponData.makerId === "sylvan" && weaponItem.modTags.includes("arc_bow")) weaponDice += 1;
-
-                // Apply Ammo Maker dice modifiers
-                const ammoTag = getTargetAmmoTag(weaponItem.modTags);
-                if (ammoData.makerId === "sylvan" && ammoTag && ammoItem.modTags.includes(ammoTag)) weaponDice += 1;
-            }
-
-            // Apply global/combat skill modifiers
-            if (typeof window.skillBonusRegistry === "object" && window.skillBonusRegistry.dice) {
-                weaponItem.modTags.forEach(tag => {
-                    const mappedKey = {
-                        "arc_bow": "arc_bows", "shrewd": "shrewd_weapons", "brutal": "brutal_weapons", "pugil": "pugil_weapons", "common": "common_weapons"
-                    }[tag.toLowerCase()];
-                    if (mappedKey && window.skillBonusRegistry.dice[mappedKey]) {
-                        weaponDice += window.skillBonusRegistry.dice[mappedKey];
-                    }
-                });
-            }
-
-            if (!isCastingProfile) {
-                // Apply Racial Masteries
-                if (race === "Dwarf" && weaponItem.modTags.includes("brutal")) weaponDice += 1;
-                if (race === "Felivir" && weaponItem.modTags.includes("pugil")) weaponDice += 1;
-                if (race === "Half-elf" && (weaponItem.modTags.includes("shrewd") || weaponItem.modTags.includes("arc_bow"))) weaponDice += 1;
-                if (race === "Half-orc" && weaponItem.modTags.includes("weapon_2h") && (weaponItem.modTags.includes("brutal") || weaponItem.modTags.includes("shrewd"))) weaponDice += 1;
-            }
+        if (!isCastingProfile) {
+            // Apply Racial Masteries
+            if (race === "Dwarf" && weaponItem.modTags.includes("brutal")) weaponDice += 1;
+            if (race === "Felivir" && weaponItem.modTags.includes("pugil")) weaponDice += 1;
+            if (race === "Half-elf" && (weaponItem.modTags.includes("shrewd") || weaponItem.modTags.includes("arc_bow"))) weaponDice += 1;
+            if (race === "Half-orc" && weaponItem.modTags.includes("weapon_2h") && (weaponItem.modTags.includes("brutal") || weaponItem.modTags.includes("shrewd"))) weaponDice += 1;
+        }
 
         // --- ENCHANTMENT COMPOSITE MERGING LOGIC ---
         const weaponEnchants = [weaponData.enchantmentId, weaponData.enchantment2Id, weaponData.enchantment3Id].filter(e => e && e !== "None");
