@@ -16594,14 +16594,27 @@ const isWeapon = slotId.startsWith("weapon-");
         };
     }
 
-    // 1. Filter Items Options
+// 1. Filter Items Options
     let itemsOptions = '<option value="None">None</option>';
-    Object.entries(itemRegistry).forEach(([key, item]) => {
-        const hasMatchingTag = item.modTags && item.modTags.includes(type);
-        if (hasMatchingTag && !compositeSubKeys.has(key)) {
-            itemsOptions += `<option value="${key}" ${activeData.itemId === key ? 'selected' : ''}>${item.name}</option>`;
-        }
-    });
+    Object.entries(itemRegistry)
+        .sort((a, b) => {
+            // Check if the item keys start with "custom_"
+            const isCustomA = a[0].startsWith("custom_");
+            const isCustomB = b[0].startsWith("custom_");
+            
+            // If one is custom and the other isn't, push the custom one to the bottom
+            if (isCustomA && !isCustomB) return 1;
+            if (!isCustomA && isCustomB) return -1;
+            
+            // Otherwise, alphabetize them normally
+            return a[1].name.localeCompare(b[1].name);
+        })
+        .forEach(([key, item]) => {
+            const hasMatchingTag = item.modTags && item.modTags.includes(type);
+            if (hasMatchingTag && !compositeSubKeys.has(key)) {
+                itemsOptions += `<option value="${key}" ${activeData.itemId === key ? 'selected' : ''}>${item.name}</option>`;
+            }
+        });
 
     // Fetch full active item tracking data to discover sub-profiles
     const currentBaseItem = itemRegistry[activeData.itemId || "None"];
@@ -16652,12 +16665,14 @@ const isCustomWeapon = activeData.itemId && activeData.itemId.startsWith("custom
         customizableProfiles = [...profilesList];
     }
 
-    // Universal Material options processor enforcing exact token intersection and category bounds
+// Universal Material options processor enforcing exact token intersection and category bounds
     window.generateMaterialOptionsHTML = function(targetTags, selectedValue) {
-        let options = '<option value="None">Standard</option>';
+        let options = '<option value="None">Standard</option>'; // Remains untouched at the top
         
-        Object.entries(materialRegistry).forEach(([key, mat]) => {
-            if (!mat.allowedTags) return;
+        Object.entries(materialRegistry)
+            .sort((a, b) => a[1].name.localeCompare(b[1].name)) // <-- Added this line to alphabetize
+            .forEach(([key, mat]) => {
+                if (!mat.allowedTags) return;
             
             // 🧠 FIXED STRICT ELIGIBILITY CHECK:
             // Must share an EXACT token tag. No partial string containment allowed!
