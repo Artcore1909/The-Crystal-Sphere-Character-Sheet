@@ -4234,16 +4234,39 @@ const itemRegistry = {
         cost: 216,
         description: "A light, one-handed blade meant for dueling."
     },
-    "saber": {
+    "saber_standard_grip": {
+        name: "Standard Grip",
+        modTags: ["shrewd", "weapon", "metal_weapon"],
+        governingAspect: "DEX",
+        damageType: "slash",
+        bonusDamageText: "+2",
+        range: "Engaged"
+    },
+    "saber_basket_punch": {
+        name: "Basket Punch",
+        modTags: ["shrewd", "weapon", "metal_weapon"],
+        governingAspect: "DEX",
+        damageType: "bash",
+        range: "Engaged"
+    },
+    "saber_pommel_strike": {
         name: "Saber",
         modTags: ["shrewd", "weapon", "metal_weapon"],
         governingSkill: "Shrewd Weapons",
         governingAspect: "DEX",
-        damageType: "slash",
-        bonusDamageText: "+2",
+        damageType: "bash",
         range: "Engaged",
         cost: 216,
         description: "A light, one-handed blade for cavalry use. When used from beastback during a charge, add +1cc."
+    },
+    "saber": {
+        name: "Saber",
+        modTags: ["shrewd", "weapon", "metal_weapon"],
+        governingSkill: "Shrewd Weapons",
+        cost: 216,
+        specialQualities: ["cavalry_blade"],
+        summary: "A light, one-handed blade for cavalry use.",
+        includes: ["saber_standard_grip", "saber_basket_punch", "saber_pommel_strike"]
     },
     "seax_blade": {
         name: "Standard Grip",
@@ -5904,6 +5927,7 @@ const itemRegistry = {
         "heavy_10": { name: "Heavy X", description: "Requires at least Strength 10 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_11": { name: "Heavy XI", description: "Requires at least Strength 11 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_12": { name: "Heavy XII", description: "Requires at least Strength 12 to be used/worn without disadvantage.", allowedTags: ["any"] },
+        "cavalry_blade": {name: "Cavalry Blade", description: "When used from beastback in a charge, add +1cc.", allowedTags: ["weapon"] },		
         "flexible": { name: "Flexible", description: "This armor inflicts no penalty to Balance, Climb, or Jump checks.", allowedTags: ["armor"] },
         "tailor_fit": { name: "Tailor-fit", description: "This suit can only be worn by the combatant for whom it was designed without inflicting disadvantage to all combat and Athleticism checks.", allowedTags: ["armor"] },
         "piercing": { name: "Piercing", description: "When used in a grapple or against a foe who is not actively avoiding the strike, two Crit Results may be spent to deny the defender his Bonus.", allowedTags: ["weapon"] },
