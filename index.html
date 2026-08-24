@@ -296,6 +296,21 @@ table.game-data td:last-child {
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+		/* Custom styling specifically for the Wyrd Results table */
+table.wyrd-table th,
+table.wyrd-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 24px 12px; /* Doubles the vertical height */
+}
+
+/* Center icon images within the Wyrd table cells */
+table.wyrd-table .table-icon {
+    height: 1.8em;
+    width: auto;
+    display: block;
+    margin: 0 auto 4px auto; /* Centers the icon image horizontally */
+}
 
         /* =========================================================================
            2. COLLAPSIBLE SECTIONS
@@ -1895,11 +1910,11 @@ details[open] #skills-collapsed-summary {
         .btn-primary:hover { background: #7d2a2a; }
 
 .table-icon {
-    height: 1.2em; /* Scales naturally with your table font size */
+    height: 1.8em; /* Slightly larger for better visibility */
     width: auto;
-    vertical-align: middle; /* Aligns smoothly with text */
-    margin: 0 2px; /* Small horizontal padding */
-  }
+    display: block; /* Stacks image above text if desired, or keep inline */
+    margin: 0 auto 4px auto; /* Centers the icon image horizontally */
+}
     </style>
 </head>
 <body>
@@ -2802,44 +2817,44 @@ details[open] #skills-collapsed-summary {
 <ul>
      <li> Wyrd is a force that may be used by the players and the LM to further modify their rolls.</li>
 </ul>
-<table class="game-data">
+<table class="game-data wyrd-table">
     <thead>
         <tr>
-            <th colspan="7" style="text-align: center;">Wyrd Results: Anthropoids</th>
+            <th colspan="7">WYRD RESULTS: ANTHROPOIDS</th>
         </tr>
         <tr>
-            <th>Cost</th>
-            <th>1 Wyrd</th>
-            <th>2 Wyrd</th>
-            <th>3 Wyrd</th>
-            <th>4 Wyrd</th>
-            <th>5 Wyrd</th>
-            <th>6 Wyrd</th>
+            <th>COST</th>
+            <th>1 WYRD</th>
+            <th>2 WYRD</th>
+            <th>3 WYRD</th>
+            <th>4 WYRD</th>
+            <th>5 WYRD</th>
+            <th>6 WYRD</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>1 Luck</strong></td>
             <td>Move up Initiative</td>
-            <td><img src="images/Skill.png" alt="Skill Result" class="table-icon"></td>
-            <td><img src="images/Hit.png" alt="Hit Result" class="table-icon"></td>
-            <td><img src="images/Crit.png" alt="Crit Result" class="table-icon"></td>
+            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"></td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
             <td>Extra Attack</td>
             <td>Fell Foe</td>
         </tr>
         <tr>
             <td><strong>2 Luck</strong></td>
-            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"> Skill Result</td>
-            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"> Hit Result</td>
-            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"> Crit Result</td>
+            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"></td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
             <td>Extra Attack</td>
             <td>Fell Foe</td>
             <td></td>
         </tr>
         <tr>
             <td><strong>3 Luck</strong></td>
-            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"> Hit Result</td>
-            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"> Crit Result</td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
             <td>Extra Attack</td>
             <td>Fell Foe</td>
             <td></td>
