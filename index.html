@@ -1893,6 +1893,13 @@ details[open] #skills-collapsed-summary {
         .btn-danger:hover { background: #ffebeb; border-color: #b82c2c; }
         .btn-primary { background: var(--primary-red); color: #fff; border: 1px solid var(--primary-red); }
         .btn-primary:hover { background: #7d2a2a; }
+
+.table-icon {
+    height: 1.2em; /* Scales naturally with your table font size */
+    width: auto;
+    vertical-align: middle; /* Aligns smoothly with text */
+    margin: 0 2px; /* Small horizontal padding */
+  }
     </style>
 </head>
 <body>
@@ -2714,25 +2721,132 @@ details[open] #skills-collapsed-summary {
 <strong>Checks, Saves, & Confrontations:</strong>
 <ul>
     <li><strong>Checks & Saves:</strong> Follow the same rolling mechanic as Attacks and Avoidance, but skip the multiplication step and add your bonus <em>before</em> determining success. You succeed if your final total meets or exceeds the Target Number (TN) set by the LM.</li>
+<br>
     <li><strong>Confrontations:</strong> When rolling against an active opponent's Skill Check or Save, your roll must exceed your opponent's to succeed. In the case of a tie, the Aggressor fails. All Observation skills are considered aggressive.</li>
+<br>
     <li><strong>Hidden Checks:</strong> These can be rolled secretly by the LM in your stead (such as Smuggling or Thievery) to preserve character ignorance.</li>
+<br>
     <li><strong>Assisted Checks:</strong> When assisting an ally, add your bonus directly to their Check.</li>
 </ul>
 <br>
 <strong>Advantage & Disadvantage:</strong>
 <ul>
     <li><strong>Advantage:</strong> When rolling with Advantage, convert all Hit Results to Crit Results.</li>
+<br>
     <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all Hit Results to Blank Results.</li>
 </ul>
 <br>
 <strong>Proficiency, Extra Training, Mastery, & Resilience:</strong>
 <ul>
     <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
+<br>
     <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to Hit Results whenever rolling for a Proficient skill.</li>
+<br>
     <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
+<br>
     <li><strong>Mastery:</strong> Add one Crit Result to your roll.</li>
+<br>
     <li><strong>Resilience:</strong> You can convert all Blank Results to Skill Results.</li>
 </ul>
+<br>
+<strong>Size Differential</strong>
+<ul>
+     <li> The relative size difference between foes also affects the likelihood of an attack to hit and the amount of damage dealt. Bigger foes tend to have a harder time aiming at smaller foes, but are able to deal devastating hits. The damage type determines whether larger foes are entitled to more or fewer dice, but the Crit Count adjustment is always a bonus.</li>
+</ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="4" style="text-align: center;">Size Penalty (thrust or slash) or Bonus (bash or crush)</th>
+        </tr>
+        <tr>
+            <th>Target</th>
+            <th>B (attacker)</th>
+            <th>C (attacker)</th>
+            <th>D (attacker)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>A</strong></td>
+            <td>±1d / +1cc</td>
+            <td>±2d / +2cc</td>
+            <td>±3d / +3cc</td>
+        </tr>
+        <tr>
+            <td><strong>†B</strong></td>
+            <td></td>
+            <td>±1d / +1cc</td>
+            <td>±2d / +2cc</td>
+        </tr>
+        <tr>
+            <td><strong>C</strong></td>
+            <td></td>
+            <td></td>
+            <td>±1d / +1cc</td>
+        </tr>
+        <tr>
+            <td><strong>D</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" style="text-align: center;">†These already calculated in the <em>Creature Compendium</em></td>
+        </tr>
+    </tfoot>
+</table>
+<br>
+<strong>Wyrd</strong>
+<ul>
+     <li> Wyrd is a force that may be used by the players and the LM to further modify their rolls.</li>
+</ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="7" style="text-align: center;">Wyrd Results: Anthropoids</th>
+        </tr>
+        <tr>
+            <th>Cost</th>
+            <th>1 Wyrd</th>
+            <th>2 Wyrd</th>
+            <th>3 Wyrd</th>
+            <th>4 Wyrd</th>
+            <th>5 Wyrd</th>
+            <th>6 Wyrd</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>1 Luck</strong></td>
+            <td>Move up Initiative</td>
+            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"> Skill Result</td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"> Hit Result</td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"> Crit Result</td>
+            <td>Extra Attack</td>
+            <td>Fell Foe</td>
+        </tr>
+        <tr>
+            <td><strong>2 Luck</strong></td>
+            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"> Skill Result</td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"> Hit Result</td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"> Crit Result</td>
+            <td>Extra Attack</td>
+            <td>Fell Foe</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><strong>3 Luck</strong></td>
+            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"> Hit Result</td>
+            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"> Crit Result</td>
+            <td>Extra Attack</td>
+            <td>Fell Foe</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
             </div>
         </div>
 
@@ -2743,23 +2857,36 @@ details[open] #skills-collapsed-summary {
         <strong>Primary Aspects:</strong>
         <ul>
             <li><strong>Dexterity (Dex):</strong> Governs physical reaction, Dexterity Saves, and Avoidance. Governs or contributes to Shrewd and Thrust Attacks.</li>
+<br>
             <li><strong>Health (Hel):</strong> Governs physical fortitude, Health Saves, and Vitality Regeneration. Added thrice to your Vitality Pool.</li>
+<br>
             <li><strong>Strength (Str):</strong> Governs physical power, Strength Saves, and all Athleticism Checks. Governs or contributes to Brutal and Bash Attacks. Added twice to your Vitality Pool.</li>
+<br>
             <li><strong>Acuity (Act):</strong> Governs focus, awareness, Acuity Saves, Observation, and Mana Regeneration. Added thrice to your Mana Pool.</li>
+<br>
             <li><strong>Intellect (Int):</strong> Governs Intellect Saves and Lore Skills. Prerequisite for certain higher-level Cast Skills.</li>
+<br>
             <li><strong>Verve (Ver):</strong> Governs social influence, the strength of your magic, Verve Saves, and Cast Skills. Added twice to your Mana Pool.</li>
+<br>
             <li><strong>Hap:</strong> Governs raw luck, and can be used to determine the target of an attack.</li>
         </ul>
         <br>
         <strong>Derived Stats:</strong>
         <ul>
             <li><strong>Vitality:</strong> (3 × Health) + (2 × Strength)</li>
+<br>
             <li><strong>Vitality Regen:</strong> 1d × Health</li>
+<br>
             <li><strong>Mana:</strong> (3 × Acuity) + (2 × Verve)</li>
+<br>
             <li><strong>Mana Regen:</strong> 1d × Acuity</li>
+<br>
             <li><strong>Luck:</strong> 1 × Hap</li>
+<br>
             <li><strong>Luck Regen:</strong> Completely regenerates at Lore Master (LM) discretion.</li>
+<br>
             <li><strong>Initiative:</strong> Dexterity + Acuity</li>
+<br>
             <li><strong>Pace:</strong> How many Hexes (yards) you can cover in a Pulse. Sub-Paces default to 1/4 Pace rounded down.</li>
         </ul>
         <br>
@@ -2782,6 +2909,7 @@ details[open] #skills-collapsed-summary {
                 <strong>Sex Adjustments:</strong>
                 <ul>
                     <li><strong>Males:</strong> Gain a +1 to assign to Health, Strength, or Verve.</li>
+<br>
                     <li><strong>Females:</strong> Gain a +1 to assign to Dexterity, Acuity, or Verve.</li>
                 </ul>
                 <br>
@@ -2792,34 +2920,38 @@ details[open] #skills-collapsed-summary {
                             <li><em>Special Abilities:</em> Keen Sniffer.</li>
                 </ul>
                             </li>
+<br>
                     <li><strong>Dwarf:</strong> Shorter than humans but far more muscular, recognized by their long, proudly braided and decorated beards.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Earthray Vision; Weapon Affinity [Brutal].</li>
                 </ul>
                             </li>
+<br>
                     <li><strong>Elf:</strong> Tall, slender, and seemingly ageless folk who originate from either the Gloaming or the Great Forests.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Inexhaustible Mana; Nimble Athlete; Battlemagic Affinity.</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Felivir:</strong> Feline anthropoids whose specific big- or small-cat traits reflect the region they call home.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Natural Acrobat; Starlight Vision; Weapon Affinity [Pugilism].</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Half-elf:</strong> Nearly indistinguishable from humans, save for the subtle, elegant point of their ears.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Half-Human; Starlight Vision; Weapon Affinity [Shrewd & Arc-bow].</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Half-orc:</strong> Often cast out due to the nature of their birth, marked by leathery skin and prominent lower tusks from a strong underbite.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Half-Human; Sinuous Athlete; Starlight Vision; Weapon Affinity [Two-Handed Brutal & Shrewd].</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.</li>
-                <ul>
-                            <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.
                 <ul>
                             <li><em>Earth Hanyo:</em> Earthray Vision, Hardy</li>
                             <li><em>Fire Hanyo:</em> Fire Resistance</li>
@@ -2828,23 +2960,25 @@ details[open] #skills-collapsed-summary {
                            <li><em>Wind Hanyo:</em> Frost Resistance</li>
                 </ul>
                    </li>
-                </ul>
-                            </li>
+<br>
                     <li><strong>Haubid:</strong> Small, childlike folk who make their homes alongside human communities.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Light-Footed; Small; Weapon Affinity [One-Handed Common].</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Human:</strong> Divided largely into two roots: the settled Imperials of the Empire and the resilient Gurzim of the Wildlands.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Human Curiosity.</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Nuss-janni:</strong> Tall, sun-hardened desert folk bearing the distinct bloodline of the Jann.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Half-Human; Half-Jann.</li>
                  </ul>
                             </li>
+<br>
                     <li><strong>Vulpivir:</strong> Small, fox-like anthropoids living mostly among the elves, coated in varied fur with sharp claws, pointed teeth, and bushy tails.</li>
                 <ul>
                             <li><em>Special Abilities:</em> Keen Sniffer; Light-Footed; Small; Starlight Vision; Weapon Affinity [Crossbow].</li>
@@ -3031,7 +3165,9 @@ details[open] #skills-collapsed-summary {
                 <strong>Turn Structure:</strong>
                 <ul>
                     <li><strong>Initiative:</strong> Roll at the start of combat. High rolls act first.</li>
+<br>
                     <li><strong>Simultaneous Actions:</strong> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.</li>
+<br>
                     <li><strong>Right of Firststrike:</strong> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.</li>
                 </ul>
                 <br>
@@ -3045,10 +3181,15 @@ details[open] #skills-collapsed-summary {
                 <strong>Types of Actions:</strong>
                 <ul>
                     <li><strong>Attack:</strong> Move up to 1 hex and make an attack. Hits if your attack roll exceeds the target's Avoidance roll.</li>
+<br>
                     <li><strong>Cast:</strong> Spend Mana to weave ætherial effects. You must be able to speak to cast.</li>
+<br>
                     <li><strong>Free:</strong> Actions that require little to no time. These are only limited by LM discretion.</li>
+<br>
                     <li><strong>Move:</strong> Move up to your Pace + an amount of Hexes equal to your Run Check.</li>
+<br>
                     <li><strong>Skill Check:</strong> Details vary.</li>
+<br>
                     <li><strong>Hold:</strong> Delay your action to act on a later pulse or initiative. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</li>
                 </ul>
             </div>
@@ -3061,27 +3202,47 @@ details[open] #skills-collapsed-summary {
                 <strong>Combat Conditions:</strong>
                 <p class="hint">Conditions limit a character's ability to act. Unless specified, the Save TN is 2. Re-inflicting an active condition increases its Save TN by 1.</p>
                 <ul>
-                    <li><strong>Actively Dying:</strong> Must pass a TN 1 Health (Vitality loss/Asphyxiation) or Acuity (Mana loss) Save each Pulse or die. Stabilize with healing, TN 3 Street Smarts/Survival, or the <em>Stabilize</em> spell.</li>
-                    <li><strong>Advantage:</strong> Convert all Hit results into Crits (occurs against prone/sleeping/immobile targets).</li>
-                    <li><strong>Blind:</strong> Attacks and Avoidance rolls are made at <em>disadvantage</em>. Blind Dexterity Saves automatically fail. Recover sight with a Health Save each Pulse.</li>
-                    <li><strong>Bound & Gagged/Entangled:</strong> Cannot attack, and Avoidance is at <em>disadvantage</em>. Free speech/casting is allowed unless gagged. Escape with a Strength Save or Escape check.</li>
-                    <li><strong>Confused:</strong> Cannot tell friend from foe. Movement and targets are chosen randomly. Recover with an Acuity Save each Pulse.</li>
-                    <li><strong>Dazed:</strong> Cannot take actions or modify Avoidance rolls. Recover with an Acuity Save each Pulse.</li>
-                    <li><strong>Disadvantaged:</strong> Remove all Hit results from your roll.</li>
-                    <li><strong>Envenomed/Poisoned:</strong> Cannot receive healing until neutralized. Save Health each time you would suffer damage to fight off.</li>
-                    <li><strong>Fatigued/Exhausted:</strong> Cumulative -1d penalty to all rolls. Recover exertion with 1 pulse of rest per fatigue level.</li>
-                    <li><strong>Grappled/Pinned:</strong> Grappled targets are in contact. The controller can make one-handed attacks or drag the target. Escape with an Escape check or grapple contest. Both targets are at <em>disadvantage</em> to avoid outside strikes.</li>
-                    <li><strong>Grievously Wounded:</strong> Recover only 1 Vitality per day, and only if treated with a TN 2 Survival check.</li>
-                    <li><strong>Impaired:</strong> Suffer -1d to Dexterity and Strength Checks/Saves. Cumulative.</li>
-                    <li><strong>Nauseated:</strong> Must pass a Health Save before acting. Rolling a 0 causes vomiting as a Move Action.</li>
-                    <li><strong>Off-balance:</strong> No actions until recovered. Regain balance with a Balance check or Dexterity Save; failure causes falling. Made at <em>disadvantage</em>.</li>
-                    <li><strong>Pained:</strong> Must pass a Verve Save before taking any action.</li>
-                    <li><strong>Panicked:</strong> Must flee. Must pass a Hap Save (TN 1) or drop held items. Recover with an Acuity Save each Pulse.</li>
-                    <li><strong>Paralyzed/Petrified:</strong> No actions. Attacks against you are made with <em>advantage</em>. Recover with a Verve Save each Pulse.</li>
-                    <li><strong>Prone & Supine:</strong> Attack and avoid at <em>disadvantage</em> (except crossbows). Prone characters cannot shoot arc-bows or use shields. Takes 1 pulse to stand up.</li>
-                    <li><strong>Numbed:</strong> Move pace and Dexterity are reduced by half. Recover with a Health Save each Pulse.</li>
-                    <li><strong>Surprised:</strong> Fail an Acuity Save at start of combat? Unable to act until the following Pulse.</li>
-                    <li><strong>Weakened:</strong> Strength is halved. Recover with a Health Save each Pulse.</li>
+                    <li><strong>Actively Dying:</strong> Actively dying combatants must pass a TN 0 Health or Acuity save (determined by whether they were felled by Vitality or Asphyxiation for Health, or Mana damage for Acuity) each Pulse or die. If the cause of their condition is Vitality loss, they can be stabilized by healing of any kind, a TN 3 Street Smarts or Survival skill check, or the Stabilize spell. If the cause is Mana loss, only the stabilize spell will work. And if the cause is asphyxiation or drowning, a TN 3 Street Smarts or Survival skill check or the Stabilize spell is necessary to remove the obstruction.</li>
+<br>
+                    <li><strong>Blind:</strong> A blind attack is any kind of attack upon an enemy who the combatant cannot see. The attack is made at disadvantage, and only magical effects can modify their roll. A blind avoidance roll is made when a combatant is attempting to avoid an attack from a foe they cannot see. The Avoidance is made at disadvantage, and only magical effects can modify their roll. Blind Dexterity saves automatically fail, but other saves are only affected if the LM deems it fitting. To regain their sight, a blinded combatant is entitled to a Health save each Pulse.</li>
+<br>
+                    <li><strong>Bound & Gagged/Entangled:</strong> Bound or Entangled combatants cannot attack and are at disadvantage for the purpose of rolling avoidance. They can cast words and speak freely so long as they are not gagged. To escape, the target must either pass a Strength save or an Escape check.</li>
+<br>
+                    <li><strong>Confused:</strong> Confused combatants cannot tell friend from foe and are easily startled. Whether they fight or flee and whom they attack or which direction they run is random. To regain their senses, a confused combatant is entitled to an Acuity save each Pulse.</li>
+<br>
+                    <li><strong>Dazed:</strong> When a combatant becomes dazed, they can take no action nor can they modify their Avoidance. To regain their senses, a dazed combatant is entitled to an Acuity save each Pulse.</li>
+<br>
+                    <li><strong>Envenomed/Poisoned:</strong> Once a target has either been poisoned or envenomed, he can no longer receive healing until the toxin is neutralized or has been fought off. The target is entitled to a Health save each time he would suffer damage to fight off the effect of the toxin.</li>
+<br>
+                    <li><strong>Engaged:</strong> Combatants who are engaged with one another may attack each other with melee and pugil weapons. Any ranged attack on a foe that is engaged has a chance to hit one of the other combatants with whom they are engaged: if the shot or throw misses its intended target, randomly select a new target and roll a blind attack against their blind Avoidance. Unless you have the Melee Shot skill, all ranged attacks you make while you are engaged are at disadvantage.</li>
+<br>
+                    <li><strong>Fatigued:</strong> There are two types of fatigue: exertion and sleep deprivation. In anycase, a fatigued combatant suffers a cumulative -1d penalty on all rolls. Fatigue from physical exertion is removed by resting for one Pulse per level of fatigue while fatigue from sleep deprivation is removed by sleeping for two phases.</li>
+<br>
+                    <li><strong>Grappled/Pinned:</strong> Grappled combatants are in physical contact with one another. At any given time, only one combatant is in control of the grapple. He is able to do the following: make a one-handed attack, perform a reasonable Check, drag or carry the grapplee at ½ pace so long as that target is their size or smaller, or end the grapple. Either combatant can make a non-move, non-attack free action, cast a word spell, or confront the grapple. The grapplee may attempt an Escape versus Grapple Confrontation to slip free. Striking a grappled or pinned foe incurs no penalty, however, a miss incurs an attack at disadvantage against the other combatant.  Either combatant in a grapple or a pin attempting to avoid a strike is at disadvantage. Pinned opponents may have more or fewer restrictions as determined by the LM.</li>
+<br>
+                    <li><strong>Grievously Wounded:</strong> You can only recover one Vitality per day and only if your wounds are treated by a TN 2 Survival check. This effect is removed by the Cure Wounds encænium.</li>
+<br>
+                    <li><strong>Impaired:</strong> Impairment is a -1d penalty to all Dexterity or Strength based skills and to all Dexterity and Strength saves. Impairment is cumulative and all levels of impairment are removed once the cause of the impairment is removed.</li>
+<br>
+                    <li><strong>Nauseated:</strong> A nauseated combatant must pass a Health save before taking any action. If he rolls a zero, he vomits as a Move Action and is no longer nauseated; if rolls a six, he is also no longer nauseated.</li>
+<br>
+                    <li><strong>Off-balance:</strong> The combatant can take no action until he either recovers or falls. He can regain his balance by passing either a Balance Check or a Dexterity Save though if he fails by 2 or more, he falls. So long as he is off-balanced, he is at disadvantage.</li>
+<br>
+                    <li><strong>Pained:</strong> A pained combatant must pass a Verve save before taking any action.</li>
+<br>
+                    <li><strong>Panicked:</strong> Panicked combatants must flee if they can. If they can’t, they must attempt to either run past the enemy or cower. In anycase, a panicked combatant must pass a Hap Save, TN 1, or drop whatever is in his hands. To regain his composure, a panicked combatant is entitled to an Acuity Save each Pulse.</li>
+<br>
+                    <li><strong>Paralyzed/Petrified:</strong> Paralyzed and petrified combatants can take no actions. When striking a Paralyzed or Petrified target, do so with advantage. To regain his composure, a petrified combatant is entitled to a Verve Save each Pulse.</li>
+<br>
+                    <li><strong>Prone & Supine:</strong> If knocked over, or otherwise lying on the ground during combat, a character is either prone or supine. It always takes at least one pulse to return to his feet. Prone combatants are positioned such that they are belly down while supine combatants are belly up. Both Avoid and Attack at disadvantage (crossbows and handgonne excluded), but prone combatants can neither shoot an arc-bow nor use a shield. Prone and supine combatants can roll over as a Free Action but can only access their inventory at LM discretion.</li>
+<br>
+                    <li><strong>Numbed:</strong> Numbed combatants have their pace and Dexterity reduced by half. To regain their sensation and mobility, a numbed combatant is entitled to a Health Save each Pulse.</li>
+<br>
+                    <li><strong>Unconscious/Asleep:</strong> When striking an unconscious or sleeping foe, do so with advantage. Sleeping players can be roused by physical contact or by passing a Listen or Smell check when any sound  or smell out of the ordinary is made or every ¼ phase after two phases of rest. The roll to wake from a magically induced sleep is a Confrontation instead made against the caster’s Verve; any damage suffered by the target adds one to his roll bonus. An unconscious player is entitled to a Hap save, TN 1, each ¼ phase to wake.</li>
+<br>
+                    <li><strong>Surprised:</strong> A surprise check is made at the beginning of combat for all combatants ignorant of the imminent attack. Each combatant will roll an Acuity Save. If they fail, they are unable to act until the following Pulse.</li>
+<br>
+                    <li><strong>Weakened:</strong> A weakened opponent has their Strength reduced by half. To regain their strength, a weakened combatant is entitled to a Health save each Pulse.</li>
                 </ul>
             </div>
         </div>
@@ -3090,29 +3251,136 @@ details[open] #skills-collapsed-summary {
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">6. Equipment, Customization & Sundering ▾</div>
             <div class="skill-body">
-                <strong>Critical Hits by Damage Type:</strong>
+                <strong>Critical Effects by Damage Type:</strong>
                 <ul>
-                    <li><strong>Bash:</strong> Dazes the target.</li>
-                    <li><strong>Slash:</strong> Impairs the target (-1d to Dex/Str Checks and Saves).</li>
-                    <li><strong>Crush:</strong> Grapples or pins the target.</li>
+                    <li><strong>Bash:</strong> Daze.</li>
+                    <li><strong>Slash:</strong> Impair.</li>
+                    <li><strong>Crush:</strong> Grapple.</li>
                     <li><strong>Thrust:</strong> Gains +1 to its Crit Count (cc).</li>
                 </ul>
                 <br>
                 <strong>Armor & Shields:</strong>
                 <ul>
-                    <li>Armor coverage determines Crit Count, and weight determines Damage Reduction (DR). Unarmored Crit Count is 2 by default. Sleeping in armor cuts regeneration in half and inflicts a cumulative -1d penalty to all actions.</li>
+                    <li> Armor increases the wearer's Crit Count (default 1), and provides Damage Reduction (DR). Sleeping in armor cuts regeneration in half and inflicts Fatigue.</li>
+<br>
+                    <li>Shields add dice to the bearer's Avoidance and can be used to attack.</li>
                 </ul>
                 <br>
                 <strong>Grand Bazaar & Enchantments:</strong>
                 <ul>
-                    <li>Each character starts with £1000. Price Formula: <code>(Base Cost × Special Qualities) + Enchantment = Total Cost</code>.</li>
-                    <li><em>Law of Duplicate Effects:</em> Similar magical effects do not stack; only the stronger effect manifests.</li>
+                    <li>Price Formula: (Base Cost × Special Qualities) + 1st Virtue x 1 + 2nd Virtue x 2 + 3rd Virtue x 3 = Total Cost.</li>
+<br>
+                    <li><em>Law of Duplicate Effects:</em> Similar magical effects from different items do not stack; only the stronger effect manifests.</li>
                 </ul>
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
-                    <li>Attacking environmental targets (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (requires a Hap Save relative to the material: Wood TN 1, Metal TN 2, Stone TN 3).</li>
+                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (requires a Hap Save relative to the material: Wood TN 1, Metal TN 2, Stone TN 3).</li>
                 </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="4" style="text-align: center;">Improper Tool Use</th>
+        </tr>
+        <tr>
+            <th>Damage to Target</th>
+            <th>Wood</th>
+            <th>Metal</th>
+            <th>Stone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>None</strong></td>
+            <td>TN 0</td>
+            <td>TN 1</td>
+            <td>TN 2</td>
+        </tr>
+        <tr>
+            <td><strong>Minor</strong></td>
+            <td>TN 2</td>
+            <td>TN 3</td>
+            <td>TN 4</td>
+        </tr>
+        <tr>
+            <td><strong>Moderate</strong></td>
+            <td>TN 4</td>
+            <td>TN 5</td>
+            <td>TN 6</td>
+        </tr>
+        <tr>
+            <td><strong>Major</strong></td>
+            <td>TN 6</td>
+            <td>TN 7</td>
+            <td>TN 8</td>
+        </tr>
+        <tr>
+            <td><strong>Catastrophic</strong></td>
+            <td>TN 8</td>
+            <td>TN 9</td>
+            <td>TN 10</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="5" style="text-align: center;">Sundering</th>
+        </tr>
+        <tr>
+            <th>Material</th>
+            <th>Minor</th>
+            <th>Moderate</th>
+            <th>Major</th>
+            <th>Catastrophic</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Fabric</strong></td>
+            <td>1–6</td>
+            <td>7–12</td>
+            <td>13–18</td>
+            <td>19–24</td>
+        </tr>
+        <tr>
+            <td><strong>Wood</strong></td>
+            <td>19–30</td>
+            <td>31–36</td>
+            <td>37–42</td>
+            <td>43–48</td>
+        </tr>
+        <tr>
+            <td><strong>Stone</strong></td>
+            <td>37–54</td>
+            <td>55–66</td>
+            <td>67–72</td>
+            <td>73–78</td>
+        </tr>
+        <tr>
+            <td><strong>Metal</strong></td>
+            <td>55–78</td>
+            <td>79–90</td>
+            <td>91–96</td>
+            <td>97–102</td>
+        </tr>
+        <tr>
+            <td><strong>Mythral</strong></td>
+            <td>73–96</td>
+            <td>97–108</td>
+            <td>109–114</td>
+            <td>115–120</td>
+        </tr>
+        <tr>
+            <td><strong>Orichalcum</strong></td>
+            <td>79–102</td>
+            <td>103–114</td>
+            <td>115–126</td>
+            <td>127–132</td>
+        </tr>
+    </tbody>
+</table>
             </div>
         </div>
 
