@@ -242,6 +242,61 @@
             font-style: italic;
         }
 
+/* =========================================================================
+   TABLES & LORE DATA
+   ========================================================================= */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 24px;
+}
+
+table.game-data {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: left;
+    background-color: var(--bg-card);
+}
+
+table.game-data th {
+    background-color: var(--bg-cream-dark);
+    color: var(--primary-red);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-dark);
+}
+
+table.game-data td {
+    padding: 10px 12px;
+    border: 1px solid var(--border-warm);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    vertical-align: top;
+    line-height: 1.4;
+}
+
+table.game-data tr:nth-child(even) {
+    background-color: var(--bg-cream);
+}
+
+table.game-data tr:hover {
+    background-color: var(--success-bg);
+}
+
+table.game-data td:first-child {
+    white-space: nowrap;
+    color: var(--primary-red);
+}
+
+table.game-data td:last-child {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
         /* =========================================================================
            2. COLLAPSIBLE SECTIONS
            ========================================================================= */
@@ -1920,16 +1975,16 @@ details[open] #skills-collapsed-summary {
           <select id="char-milieu" onchange="calculateSheet()"> 
             <option value="Commoner">Commoner</option> 
             <option value="Noble">Noble</option> 
-            <option value="Pariah">Pariah</option> 
             <option value="Outsider">Outsider</option> 
+            <option value="Pariah">Pariah</option> 
             <option value="Tribal">Tribal</option> 
           </select> 
         </div> 
         <div class="form-group span-4"> 
           <label for="char-setting">Character Setting</label> 
           <select id="char-setting" onchange="calculateSheet()"> 
-            <option value="Coastal">Coastal</option>
-		    <option value="Urban">Urban</option>  
+            <option value="Coastal">Coastal</option>            
+            <option value="Urban">Urban</option> 
             <option value="Rural">Rural</option> 
             <option value="Tribal">Tribal</option> 
           </select> 
@@ -1938,17 +1993,17 @@ details[open] #skills-collapsed-summary {
           <label for="char-upbringing">Upbringing & Guild Affiliation</label> 
           <select id="char-upbringing" onchange="calculateSheet()"> 
             <option value="Artisan">Artisan</option> 
-			<option value="College Initiate">College Initiate</option> 
-			<option value="Laborer">Laborer</option> 
+            <option value="College Initiate">College Initiate</option> 
+            <option value="Laborer">Laborer</option>
             <option value="Merchant">Merchant</option> 
             <option value="Military">Military</option> 
             <option value="Politician">Politician</option> 
             <option value="Sage">Sage</option> 
-            <option value="Servant">Servant</option> 
-			<option value="Temple Acolyte">Temple Acolyte</option> 
+            <option value="Servant">Servant</option>
+            <option value="Temple Acolyte">Temple Acolyte</option> 
             <option value="Thief">Thief</option> 
             <option value="Tradesman">Tradesman</option> 
-            <option value="Troupe Neophyte">Troupe Neophyte</option> 
+            <option value="Troupe Neophyte">Troupe Neophyte</option>  
           </select> 
         </div> 
         <div class="form-group span-4"> 
@@ -2645,64 +2700,75 @@ details[open] #skills-collapsed-summary {
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">1. Core Mechanics & Dice Rolling ▾</div>
             <div class="skill-body">
-                <strong>The Core Mechanic (The Roll):</strong>
-                <ol>
-                    <li>Roll up to six dice determined by the Governing Aspect, skills, and racial abilities.</li>
-                    <li>Modify the dice pool as allowed by your skills and other active effects.</li>
-                    <li>Count <strong>Hits</strong> as 1 and <strong>Crits</strong> as your Crit Count (default is 2).</li>
-                    <li>Multiply by the number of Crit Results above zero (applies only to Attacks and Avoidance).</li>
-                    <li>Add your <strong>Bonus</strong> (for Attacks and Avoidance, only if the attack hits).</li>
-                    <li>Compare your final total to the Target Number (TN): you must meet or beat the TN to succeed.</li>
-                </ol>
-                <br>
-                <strong>Skill Checks, Hidden Checks, & Confrontations:</strong>
-                <ul>
-                    <li><strong>Skill Check:</strong> Compare your total roll to the TN set by the LM. The difference represents your degree of success or failure.</li>
-                    <li><strong>Hidden Checks:</strong> May be rolled secretly by the LM in your stead (such as Smuggling or Thievery) to preserve character ignorance.</li>
-                    <li><strong>Skill Confrontations:</strong> Occur when the TN is replaced by the target's active skill check. In the case of a tie, the aggressor (initiator) fails. All Observation skills are considered aggressive.</li>
-                    <li><strong>Assisted Checks:</strong> When assisting an ally, add your bonus directly to their check.</li>
-                </ul>
-                <br>
-                <strong>Proficiency & Untrained Actions:</strong>
-                <ul>
-                    <li><strong>Untrained:</strong> You may attempt non-cast skills without training; however, untrained rolls cannot be modified and are made at <em>disadvantage</em>.</li>
-                    <li><strong>Proficient:</strong> You may change up to your Rank in Skill Results to Hit Results whenever rolling for a proficient skill.</li>
-                    <li><strong>Extra Training:</strong> You may reroll Blank Results once whenever rolling for a proficient skill.</li>
-                    <li><strong>Mastery:</strong> Add one Crit Result whenever rolling for a proficient skill.</li>
-                </ul>
+<strong>Attacks & Avoidance:</strong>
+<ol>
+    <li>Determine the number of dice you are entitled to roll and your Dice Limit (default is 6).</li>
+    <li>If you are entitled to more dice than your Dice Limit, convert the excess dice into Bonus Damage or Damage Reduction.</li>
+    <li>Determine your total Bonus Damage or Damage Reduction.</li>
+    <li>Roll the newly constructed dice pool, counting Hits as 1 and Crits as your Crit Count (default is 2).</li>
+    <li>If you roll more than 1 Crit, multiply your roll by that amount.</li>
+    <li>Compare your result with your foe's roll. The attack hits if the Attack roll exceeds the Avoidance roll.</li>
+    <li>If the attack hits, the attacker adds their Bonus Damage, and the defender adds their Damage Reduction.</li>
+</ol>
+<br>
+<strong>Checks, Saves, & Confrontations:</strong>
+<ul>
+    <li><strong>Checks & Saves:</strong> Follow the same rolling mechanic as Attacks and Avoidance, but skip the multiplication step and add your bonus <em>before</em> determining success. You succeed if your final total meets or exceeds the Target Number (TN) set by the LM.</li>
+    <li><strong>Confrontations:</strong> When rolling against an active opponent's Skill Check or Save, your roll must exceed your opponent's to succeed. In the case of a tie, the Aggressor fails. All Observation skills are considered aggressive.</li>
+    <li><strong>Hidden Checks:</strong> These can be rolled secretly by the LM in your stead (such as Smuggling or Thievery) to preserve character ignorance.</li>
+    <li><strong>Assisted Checks:</strong> When assisting an ally, add your bonus directly to their Check.</li>
+</ul>
+<br>
+<strong>Advantage & Disadvantage:</strong>
+<ul>
+    <li><strong>Advantage:</strong> When rolling with Advantage, convert all Hit Results to Crit Results.</li>
+    <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all Hit Results to Blank Results.</li>
+</ul>
+<br>
+<strong>Proficiency, Extra Training, Mastery, & Resilience:</strong>
+<ul>
+    <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
+    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to Hit Results whenever rolling for a Proficient skill.</li>
+    <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
+    <li><strong>Mastery:</strong> Add one Crit Result to your roll.</li>
+    <li><strong>Resilience:</strong> You can convert all Blank Results to Skill Results.</li>
+</ul>
             </div>
         </div>
 
-        <!-- Category 2: Aspects & Secondary Attributes -->
-        <div class="skill-item">
-            <div class="skill-header" onclick="toggleSkill(this)">2. Aspects & Secondary Attributes ▾</div>
-            <div class="skill-body">
-                <strong>Primary Aspects:</strong>
-                <ul>
-                    <li><strong>Dexterity (Dex):</strong> Governs physical reaction, movement, Dexterity saves, Avoidance, and light weapon attacks.</li>
-                    <li><strong>Health (Hel):</strong> Governs physical fortitude, Health saves, and Vitality regeneration. Added thrice to your Vitality pool.</li>
-                    <li><strong>Strength (Str):</strong> Governs physical power, Strength saves, jumping/climbing, and heavy weapon attacks. Added twice to your Vitality pool.</li>
-                    <li><strong>Acuity (Act):</strong> Governs focus, awareness, Acuity saves, Observation, and Mana regeneration. Added thrice to your Mana pool.</li>
-                    <li><strong>Intellect (Int):</strong> Governs learning, retention, Intellect saves, and knowledge/lore skills. Prerequisite for Cast Skills.</li>
-                    <li><strong>Verve (Ver):</strong> Governs social influence, magical manipulation, Verve saves, and cast skills. Added twice to your Mana pool.</li>
-                    <li><strong>Hap:</strong> Governs raw luck. Your Luck pool is equal to Hap.</li>
-                </ul>
-                <br>
-                <strong>Secondary Stats (Formulas):</strong>
-                <ul>
-                    <li><strong>Vitality Pool:</strong> $(3 \times \text{Health}) + (2 \times \text{Strength})$</li>
-                    <li><strong>Mana Pool:</strong> $(3 \times \text{Acuity}) + (2 \times \text{Verve})$</li>
-                    <li><strong>Luck Pool:</strong> Equal to Hap. Completely regenerates at the end of each session.</li>
-                    <li><strong>Initiative:</strong> Roll a dice pool equal to $\text{Dexterity} + \text{Acuity}$ (Max 6d; excess dice add flat +1 each).</li>
-                    <li><strong>Athletic Paces:</strong> Default balance, climb, jump, and swim paces are a quarter of your move pace rounded down.</li>
-                </ul>
-                <br>
-                <strong>Regeneration & Rest:</strong>
-                <ul>
-                    <li>For each 2 phases of rest, roll dice equal to your Health (for Vitality) and Acuity (for Mana). Regenerate 1 point per Hit and 2 points per Crit. Resting all 3 phases allows rolling twice.</li>
-                </ul>
-            </div>
-        </div>
+<!-- Category 2: Aspects & Derived Stats -->
+<div class="skill-item">
+    <div class="skill-header" onclick="toggleSkill(this)">2. Aspects & Derived Stats ▾</div>
+    <div class="skill-body">
+        <strong>Primary Aspects:</strong>
+        <ul>
+            <li><strong>Dexterity (Dex):</strong> Governs physical reaction, Dexterity Saves, and Avoidance. Governs or contributes to Shrewd and Thrust Attacks.</li>
+            <li><strong>Health (Hel):</strong> Governs physical fortitude, Health Saves, and Vitality Regeneration. Added thrice to your Vitality Pool.</li>
+            <li><strong>Strength (Str):</strong> Governs physical power, Strength Saves, and all Athleticism Checks. Governs or contributes to Brutal and Bash Attacks. Added twice to your Vitality Pool.</li>
+            <li><strong>Acuity (Act):</strong> Governs focus, awareness, Acuity Saves, Observation, and Mana Regeneration. Added thrice to your Mana Pool.</li>
+            <li><strong>Intellect (Int):</strong> Governs Intellect Saves and Lore Skills. Prerequisite for certain higher-level Cast Skills.</li>
+            <li><strong>Verve (Ver):</strong> Governs social influence, the strength of your magic, Verve Saves, and Cast Skills. Added twice to your Mana Pool.</li>
+            <li><strong>Hap:</strong> Governs raw luck, and can be used to determine the target of an attack.</li>
+        </ul>
+        <br>
+        <strong>Derived Stats:</strong>
+        <ul>
+            <li><strong>Vitality:</strong> (3 × Health) + (2 × Strength)</li>
+            <li><strong>Vitality Regen:</strong> 1d × Health</li>
+            <li><strong>Mana:</strong> (3 × Acuity) + (2 × Verve)</li>
+            <li><strong>Mana Regen:</strong> 1d × Acuity</li>
+            <li><strong>Luck:</strong> 1 × Hap</li>
+            <li><strong>Luck Regen:</strong> Completely regenerates at Lore Master (LM) discretion.</li>
+            <li><strong>Initiative:</strong> Dexterity + Acuity</li>
+            <li><strong>Pace:</strong> How many Hexes (yards) you can cover in a Pulse. Sub-Paces default to 1/4 Pace rounded down.</li>
+        </ul>
+        <br>
+        <strong>Regeneration & Rest:</strong>
+        <ul>
+            <li>Once per day, for 2 consecutive Phases of rest, roll your Vitality Regen and Mana Regen once. Regenerate 1 point per Hit Result and 2 points per Crit Result. If you rest for 3 consecutive Phases, roll twice.</li>
+        </ul>
+    </div>
+</div>
 
         <!-- Category 3: Character Creation, Races & Cultures -->
         <div class="skill-item">
@@ -2710,7 +2776,7 @@ details[open] #skills-collapsed-summary {
             <div class="skill-body">
                 <strong>Character Creation:</strong>
                 <ul>
-                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to 3 plus an unmodified 2-dice roll (Hits are 1, Crits are 2), except Hap which is determined by rolling 4 dice (rerolling Blank, Skill, and Wyrd once).</li>
+                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to 3 plus an unmodified 2-dice roll (Hit Results count as 1, and Crit Results count as 2), except Hap which is determined by rolling 4 dice (rerolling Blank, Skill, and Wyrd Results once).</li>
                 </ul>
                 <br>
                 <strong>Sex Adjustments:</strong>
@@ -2721,40 +2787,269 @@ details[open] #skills-collapsed-summary {
                 <br>
                 <strong>Racial Pace & Customizations:</strong>
                 <ul>
-                    <li>Races determine move pace, starting modifiers, and special abilities (such as Dwarven <em>Earthray Vision</em> or Elven <em>Inexhaustible Mana</em>).</li>
+                    <li><strong>Canivir:</strong> Canine anthropoids possessing an acute sense of smell, a vicious bite, distinct dog-like hind legs, and a tail.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Keen Sniffer.</li>
+                </ul>
+                            </li>
+                    <li><strong>Dwarf:</strong> Shorter than humans but far more muscular, recognized by their long, proudly braided and decorated beards.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Earthray Vision; Weapon Affinity [Brutal].</li>
+                </ul>
+                            </li>
+                    <li><strong>Elf:</strong> Tall, slender, and seemingly ageless folk who originate from either the Gloaming or the Great Forests.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Inexhaustible Mana; Nimble Athlete; Battlemagic Affinity.</li>
+                 </ul>
+                            </li>
+                    <li><strong>Felivir:</strong> Feline anthropoids whose specific big- or small-cat traits reflect the region they call home.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Natural Acrobat; Starlight Vision; Weapon Affinity [Pugilism].</li>
+                 </ul>
+                            </li>
+                    <li><strong>Half-elf:</strong> Nearly indistinguishable from humans, save for the subtle, elegant point of their ears.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Half-Human; Starlight Vision; Weapon Affinity [Shrewd & Arc-bow].</li>
+                 </ul>
+                            </li>
+                    <li><strong>Half-orc:</strong> Often cast out due to the nature of their birth, marked by leathery skin and prominent lower tusks from a strong underbite.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Half-Human; Sinuous Athlete; Starlight Vision; Weapon Affinity [Two-Handed Brutal & Shrewd].</li>
+                 </ul>
+                            </li>
+                    <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.</li>
+                <ul>
+                            <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.
+                <ul>
+                            <li><em>Earth Hanyo:</em> Earthray Vision, Hardy</li>
+                            <li><em>Fire Hanyo:</em> Fire Resistance</li>
+                            <li><em>Shadow Hanyo:</em> Darkvision, Enshadowed</li>
+                           <li><em>Water Hanyo:</em> Lightning Resistance</li>
+                           <li><em>Wind Hanyo:</em> Frost Resistance</li>
+                </ul>
+                   </li>
+                </ul>
+                            </li>
+                    <li><strong>Haubid:</strong> Small, childlike folk who make their homes alongside human communities.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Light-Footed; Small; Weapon Affinity [One-Handed Common].</li>
+                 </ul>
+                            </li>
+                    <li><strong>Human:</strong> Divided largely into two roots: the settled Imperials of the Empire and the resilient Gurzim of the Wildlands.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Human Curiosity.</li>
+                 </ul>
+                            </li>
+                    <li><strong>Nuss-janni:</strong> Tall, sun-hardened desert folk bearing the distinct bloodline of the Jann.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Half-Human; Half-Jann.</li>
+                 </ul>
+                            </li>
+                    <li><strong>Vulpivir:</strong> Small, fox-like anthropoids living mostly among the elves, coated in varied fur with sharp claws, pointed teeth, and bushy tails.</li>
+                <ul>
+                            <li><em>Special Abilities:</em> Keen Sniffer; Light-Footed; Small; Starlight Vision; Weapon Affinity [Crossbow].</li>
+                 </ul>
+                            </li>
                 </ul>
                 <br>
                 <strong>Culture & Language Fluency:</strong>
                 <ul>
                     <li>Characters speak their native language and all included pidgins. Having an Intellect greater than 2 allows upgrading one pidgin to full fluency.</li>
                 </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th>Ethnos</th>
+            <th>Notes</th>
+            <th>Language</th>
+            <th>Bonus Languages</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Aquoi (N)</strong></td>
+            <td>A tribe of Humans who drive herds of urox across the Grasslands.</td>
+            <td>Aquoi</td>
+            <td>Pidgin-Imperial / Ilioniki / Meso-daar / Vriit</td>
+        </tr>
+        <tr>
+            <td><strong>Dwarven (N)</strong></td>
+            <td>A subterranean people who pride themselves on their stonecraft and smithing. All southern Dwarves hail from the Aizenfestung.</td>
+            <td>Dwarven</td>
+            <td>Pidgin-Imperial / Aquoi / Ilioniki / Meso-daar / Vriit</td>
+        </tr>
+        <tr>
+            <td><strong>Euskal (N)</strong></td>
+            <td>A tribe of Humans who hail from the Frosinlands. They live in tight-nit garths ruled by Jarls.</td>
+            <td>Euskal</td>
+            <td>Pidgin-Imperial / Frost Giant / Old Dwarven</td>
+        </tr>
+        <tr>
+            <td><strong>High Elven (N)</strong></td>
+            <td>The fair folk from beyond the sea. Undying in nature, Elves are known for their wisdom accumulated over many millennia. Many Elves, however, die by causes other than age, and young elves, especially, love to adventure.</td>
+            <td>Elven</td>
+            <td>Pidgin-Imperial / Orcish</td>
+        </tr>
+        <tr>
+            <td><strong>Ilioniki (N)</strong></td>
+            <td>The fiercest of the Gurzim (uncivilized Humans), Ilioniki warriors ride into battle upon the back of a Quadricorn.</td>
+            <td>Ilioniki</td>
+            <td>Pidgin-Imperial / Aquoi / Meso-daar / Vriit</td>
+        </tr>
+        <tr>
+            <td><strong>Imperial (N)</strong></td>
+            <td>Imperials comprise peoples of various ethnic backgrounds and hail from somewhere in the Empire of Man.</td>
+            <td>Imperial</td>
+            <td>Pidgin Ringi &amp; Pidgin Aquoi, Ilioniki, Meso-daar, or Vriit</td>
+        </tr>
+        <tr>
+            <td><strong>Meso-daar (N)</strong></td>
+            <td>The Meso-daar are Human tribes who follow herds of goat or sheep through the Daar Mountains and the Daar Between the Mountains and the River.</td>
+            <td>Meso-daar</td>
+            <td>Pidgin-Imperial / Aquoi / Ilioniki / Vriit</td>
+        </tr>
+        <tr>
+            <td><strong>Nuss-Jann (N)</strong></td>
+            <td>Nuss-Janni either hail from Medina, the heart of the Caliphate, or roam the Desert of the Jann in disparate tribes.</td>
+            <td>al-Lazha</td>
+            <td>Pidgin-Imperial / Fire Giant</td>
+        </tr>
+        <tr>
+            <td><strong>Ringi (N)</strong></td>
+            <td>A tribe of Humans whose lifestyle is near entirely supported by the Kelenken (cattle sized birds).</td>
+            <td>Ringi</td>
+            <td>Pidgin Imperial, &amp; Pidgin al-Lazha, Dwarven, Elven, or Sylvan</td>
+        </tr>
+<tr>
+            <td><strong>Sylvan (N)</strong></td>
+            <td>Sylvan Elves live deep within the great forests and in other dense, old growth forests throughout the mainland.</td>
+            <td>Sylvan</td>
+            <td>Pidgin-Imperial / Elven / Fey</td>
+        </tr>
+        <tr>
+            <td><strong>Vriit (N)</strong></td>
+            <td>A horse-riding, nomadic tribe of Humans occupying the grasslands.</td>
+            <td>Vriit</td>
+            <td>Pidgin-Imperial / Aquoi / Ilioniki / Meso-daar</td>
+        </tr>
+        <tr>
+            <th colspan="4">Non-native Ethnicities</th>
+        </tr>
+        <tr>
+            <td><strong>Avian</strong></td>
+            <td>Any of the intelligent bird races.</td>
+            <td>Screech and Song</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Beastfolk [any]</strong></td>
+            <td>Each of the many tribes has its own language and culture.</td>
+            <td>Eponymous Language</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Darkfolk</strong></td>
+            <td>Oldra, Ogres, Hobgoblins, Goblins, and Kobolds.</td>
+            <td>Darktongue</td>
+            <td>Pidgin Dwarven</td>
+        </tr>
+        <tr>
+            <td><strong>Derro</strong></td>
+            <td>Dwarven nomads who roam the Sculpted Darkness.</td>
+            <td>Dwarven</td>
+            <td>Pidgin Darktongue</td>
+        </tr>
+        <tr>
+            <td><strong>Dragon</strong></td>
+            <td>The Language of Creation/Magic</td>
+            <td>Draconic</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Dwarven, Northern</strong></td>
+            <td>A tribe of Dwarves sometimes referred to as the Lost Reich. Whether they are still alive remains a mystery.</td>
+            <td>Old Dwarven</td>
+            <td>Pidgin-Euskal / Frost Giant</td>
+        </tr>
+        <tr>
+            <td><strong>Ent</strong></td>
+            <td>Very time consuming to speak</td>
+            <td>Entish</td>
+            <td>Fey</td>
+        </tr>
+        <tr>
+            <td><strong>Fey</strong></td>
+            <td>A collection of various anthropoids of the Fey Hegemony—a magical land that never changes.</td>
+            <td>Fey</td>
+            <td>Sylvan &amp; Entish</td>
+        </tr>
+        <tr>
+            <td><strong>Giant, Fire</strong></td>
+            <td>The Giantfolk of the Desert of the Jann.</td>
+            <td>Fire Giant</td>
+            <td>Pidgin-al-Lazha or Pidgin Meso-daar</td>
+        </tr>
+        <tr>
+            <td><strong>Giant, Frost</strong></td>
+            <td>The Giantfolk of the Frosinlands.</td>
+            <td>Frost Giant</td>
+            <td>Pidgin-Euskal</td>
+        </tr>
+        <tr>
+            <td><strong>Giant, Hill</strong></td>
+            <td>The Giantfolk of the Hill Country and Rolling Plains.</td>
+            <td>Hill Giant</td>
+            <td>Pidgin-Imperial</td>
+        </tr>
+        <tr>
+            <td><strong>Giant, Island</strong></td>
+            <td>The Giantfolk of the Isle of Ver.</td>
+            <td>Island Giant</td>
+            <td>Pidgin-Minotaurian</td>
+        </tr>
+        <tr>
+            <td><strong>Orcish</strong></td>
+            <td>Orcs occupy the Orkipelago and pillage whomever and whenever they can. Their economy is founded upon plunder and slavery.</td>
+            <td>Orcish</td>
+            <td>Pidgin Elven</td>
+        </tr>
+        <tr>
+            <td><strong>Troll</strong></td>
+            <td>A bestial race known for uninhibited violence.</td>
+            <td>Trollish</td>
+            <td>—</td>
+        </tr>
+    </tbody>
+</table>
             </div>
         </div>
 
-        <!-- Category 4: Combat & Action Economy -->
+        <!-- Category 4: Combat & Action Types -->
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">4. Combat & Action Economy ▾</div>
             <div class="skill-body">
                 <strong>Turn Structure:</strong>
                 <ul>
                     <li><strong>Initiative:</strong> Roll at the start of combat. High rolls act first.</li>
-                    <li><strong>Simultaneous Actions:</strong> When sharing initiative, combatants resolve actions fully, though incantations/full actions can be interrupted.</li>
-                    <li><strong>Right of Firststrike:</strong> When your melee range is breached, you can attack the approaching combatant immediately if you are unengaged and ungrappled.</li>
+                    <li><strong>Simultaneous Actions:</strong> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.</li>
+                    <li><strong>Right of Firststrike:</strong> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.</li>
                 </ul>
                 <br>
                 <strong>The Pulse:</strong>
                 <ul>
-                    <li>Combat is resolved in pulses. Each pulse, combatants complete or initiate actions:</li>
-                    <li><em>Words, Free Actions, and Standard Actions</em> resolve in the pulse they are declared.</li>
-                    <li><em>Move Actions and Incantations</em> are initiated in one pulse and complete on the following pulse.</li>
+                    <li>Combat is resolved in pulses. Each pulse, combatants complete or initiate actions in initiative order:</li>
+                    <li><em>Words, Free Actions, and Attacks</em> resolve on the pulse they are declared.</li>
+                    <li><em>Move Actions and Incantations</em> are initiated on one pulse and completed on the next.</li>
                 </ul>
                 <br>
                 <strong>Types of Actions:</strong>
                 <ul>
                     <li><strong>Attack:</strong> Move up to 1 hex and make an attack. Hits if your attack roll exceeds the target's Avoidance roll.</li>
-                    <li><strong>Move:</strong> Move hexes up to your pace. Resolved on the following pulse.</li>
-                    <li><strong>Cast, Charge, and Skill Checks:</strong> Actions that consume part or all of a pulse.</li>
-                    <li><strong>Hold:</strong> Delay your action to act on a later pulse or initiative.</li>
+                    <li><strong>Cast:</strong> Spend Mana to weave ætherial effects. You must be able to speak to cast.</li>
+                    <li><strong>Free:</strong> Actions that require little to no time. These are only limited by LM discretion.</li>
+                    <li><strong>Move:</strong> Move up to your Pace + an amount of Hexes equal to your Run Check.</li>
+                    <li><strong>Skill Check:</strong> Details vary.</li>
+                    <li><strong>Hold:</strong> Delay your action to act on a later pulse or initiative. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</li>
                 </ul>
             </div>
         </div>
@@ -2764,29 +3059,29 @@ details[open] #skills-collapsed-summary {
             <div class="skill-header" onclick="toggleSkill(this)">5. Combat Conditions Index ▾</div>
             <div class="skill-body">
                 <strong>Combat Conditions:</strong>
-                <p class="hint">Conditions limit a character's ability to act. Unless specified, the save TN is 2. Re-inflicting an active condition increases its save TN by 1.</p>
+                <p class="hint">Conditions limit a character's ability to act. Unless specified, the Save TN is 2. Re-inflicting an active condition increases its Save TN by 1.</p>
                 <ul>
-                    <li><strong>Actively Dying:</strong> Must pass a TN 0 Health (Vitality loss/Asphyxiation) or Acuity (Mana loss) save each Pulse or die. Stabilize with healing, TN 3 Street Smarts/Survival, or the <em>Stabilize</em> spell.</li>
+                    <li><strong>Actively Dying:</strong> Must pass a TN 1 Health (Vitality loss/Asphyxiation) or Acuity (Mana loss) Save each Pulse or die. Stabilize with healing, TN 3 Street Smarts/Survival, or the <em>Stabilize</em> spell.</li>
                     <li><strong>Advantage:</strong> Convert all Hit results into Crits (occurs against prone/sleeping/immobile targets).</li>
-                    <li><strong>Blind:</strong> Attacks and Avoidance rolls are made at <em>disadvantage</em>. Blind Dexterity saves automatically fail. Recover sight with a Health save each Pulse.</li>
-                    <li><strong>Bound & Gagged/Entangled:</strong> Cannot attack, and Avoidance is at <em>disadvantage</em>. Free speech/casting is allowed unless gagged. Escape with a Strength save or Escape check.</li>
-                    <li><strong>Confused:</strong> Cannot tell friend from foe. Movement and targets are chosen randomly. Recover with an Acuity save each Pulse.</li>
-                    <li><strong>Dazed:</strong> Cannot take actions or modify Avoidance rolls. Recover with an Acuity save each Pulse.</li>
+                    <li><strong>Blind:</strong> Attacks and Avoidance rolls are made at <em>disadvantage</em>. Blind Dexterity Saves automatically fail. Recover sight with a Health Save each Pulse.</li>
+                    <li><strong>Bound & Gagged/Entangled:</strong> Cannot attack, and Avoidance is at <em>disadvantage</em>. Free speech/casting is allowed unless gagged. Escape with a Strength Save or Escape check.</li>
+                    <li><strong>Confused:</strong> Cannot tell friend from foe. Movement and targets are chosen randomly. Recover with an Acuity Save each Pulse.</li>
+                    <li><strong>Dazed:</strong> Cannot take actions or modify Avoidance rolls. Recover with an Acuity Save each Pulse.</li>
                     <li><strong>Disadvantaged:</strong> Remove all Hit results from your roll.</li>
                     <li><strong>Envenomed/Poisoned:</strong> Cannot receive healing until neutralized. Save Health each time you would suffer damage to fight off.</li>
                     <li><strong>Fatigued/Exhausted:</strong> Cumulative -1d penalty to all rolls. Recover exertion with 1 pulse of rest per fatigue level.</li>
                     <li><strong>Grappled/Pinned:</strong> Grappled targets are in contact. The controller can make one-handed attacks or drag the target. Escape with an Escape check or grapple contest. Both targets are at <em>disadvantage</em> to avoid outside strikes.</li>
                     <li><strong>Grievously Wounded:</strong> Recover only 1 Vitality per day, and only if treated with a TN 2 Survival check.</li>
-                    <li><strong>Impaired:</strong> Suffer -1d to Dexterity and Strength checks/saves. Cumulative.</li>
-                    <li><strong>Nauseated:</strong> Must pass a Health save before acting. Rolling a 0 causes vomiting as a Standard Action.</li>
-                    <li><strong>Off-balance:</strong> No actions until recovered. Regain balance with a Balance check or Dexterity save; failure causes falling. Made at <em>disadvantage</em>.</li>
-                    <li><strong>Pained:</strong> Must pass a Verve save before taking any action.</li>
-                    <li><strong>Panicked:</strong> Must flee. Must pass a Hap save (TN 0) or drop held items. Recover with an Acuity save each Pulse.</li>
-                    <li><strong>Paralyzed/Petrified:</strong> No actions. Attacks against you are made with <em>advantage</em>. Recover with a Verve save each Pulse.</li>
+                    <li><strong>Impaired:</strong> Suffer -1d to Dexterity and Strength Checks/Saves. Cumulative.</li>
+                    <li><strong>Nauseated:</strong> Must pass a Health Save before acting. Rolling a 0 causes vomiting as a Move Action.</li>
+                    <li><strong>Off-balance:</strong> No actions until recovered. Regain balance with a Balance check or Dexterity Save; failure causes falling. Made at <em>disadvantage</em>.</li>
+                    <li><strong>Pained:</strong> Must pass a Verve Save before taking any action.</li>
+                    <li><strong>Panicked:</strong> Must flee. Must pass a Hap Save (TN 1) or drop held items. Recover with an Acuity Save each Pulse.</li>
+                    <li><strong>Paralyzed/Petrified:</strong> No actions. Attacks against you are made with <em>advantage</em>. Recover with a Verve Save each Pulse.</li>
                     <li><strong>Prone & Supine:</strong> Attack and avoid at <em>disadvantage</em> (except crossbows). Prone characters cannot shoot arc-bows or use shields. Takes 1 pulse to stand up.</li>
-                    <li><strong>Numbed:</strong> Move pace and Dexterity are reduced by half. Recover with a Health save each Pulse.</li>
-                    <li><strong>Surprised:</strong> Fail an Acuity save at start of combat? Unable to act until the following Pulse.</li>
-                    <li><strong>Weakened:</strong> Strength is halved. Recover with a Health save each Pulse.</li>
+                    <li><strong>Numbed:</strong> Move pace and Dexterity are reduced by half. Recover with a Health Save each Pulse.</li>
+                    <li><strong>Surprised:</strong> Fail an Acuity Save at start of combat? Unable to act until the following Pulse.</li>
+                    <li><strong>Weakened:</strong> Strength is halved. Recover with a Health Save each Pulse.</li>
                 </ul>
             </div>
         </div>
@@ -2798,7 +3093,7 @@ details[open] #skills-collapsed-summary {
                 <strong>Critical Hits by Damage Type:</strong>
                 <ul>
                     <li><strong>Bash:</strong> Dazes the target.</li>
-                    <li><strong>Slash:</strong> Impairs the target (-1d to Dex/Str skills and saves).</li>
+                    <li><strong>Slash:</strong> Impairs the target (-1d to Dex/Str Checks and Saves).</li>
                     <li><strong>Crush:</strong> Grapples or pins the target.</li>
                     <li><strong>Thrust:</strong> Gains +1 to its Crit Count (cc).</li>
                 </ul>
@@ -2816,7 +3111,7 @@ details[open] #skills-collapsed-summary {
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
-                    <li>Attacking environmental targets (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (requires a Hap save relative to the material: Wood TN 0, Metal TN 1, Stone TN 2).</li>
+                    <li>Attacking environmental targets (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (requires a Hap Save relative to the material: Wood TN 1, Metal TN 2, Stone TN 3).</li>
                 </ul>
             </div>
         </div>
@@ -2828,7 +3123,7 @@ details[open] #skills-collapsed-summary {
                 <strong>Action Types & Time Requirements:</strong>
                 <ul>
                     <li><strong>Words:</strong> Resolve instantly. Cost 6 Mana to cast.</li>
-                    <li><strong>Incantations:</strong> Resolve 1 Pulse after declaration. Cost 3 Mana. Can be interrupted (requires a save against damage taken).</li>
+                    <li><strong>Incantations:</strong> Resolve 1 Pulse after declaration. Cost 3 Mana. Can be interrupted (requires an Acuity Save against damage taken).</li>
                     <li><strong>Encænia:</strong> Take longer to perform. Practical only outside combat. Cost 1 Mana.</li>
                     <li><strong>Rites:</strong> Take one full phase of the day (1/6th of a day). Cost 72 Mana and require a specific focus (usually blood).</li>
                 </ul>
@@ -4044,7 +4339,7 @@ const itemRegistry = {
         bonusDamageText: "+1",
         range: "Afar–thrice your Strength hexes",
         cost: 36,
-        description: "Light, long-tipped spears designed to be thrown. If avoided by a shielded defender, they must pass a TN 1 Hap save or the shield is disabled."
+        description: "Light, long-tipped spears designed to be thrown. If avoided by a shielded defender, they must pass a TN 1 Hap Save or their shield is disabled."
     },
     "katana": {
         name: "Katana",
@@ -4121,7 +4416,7 @@ const itemRegistry = {
         range: "Close (two-hexes)",
         cost: 216,
         specialQualities: ["heavy_6"],
-        description: "A long spear for beastback use. Chance of breaking after each use (TN 1 Hap save)."
+        description: "A long spear for beastback use. Chance of breaking after each use (TN 1 Hap Save)."
     },
     "langesmesser_blade": {
         name: "Standard Grip",
@@ -4212,7 +4507,7 @@ const itemRegistry = {
         governingAspect: "STR",
         damageType: "thrust",
         bonusDamageText: "+4",
-        range: "Grappled & Engaged",
+        range: "Grappled & Engaged"
     },
     "odachi": {
         name: "Odachi",
@@ -4866,7 +5161,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 720,
         rarity: 4,
-        description: "If ingested, inhaled, or injected, causes death unless the target passes a TN 2 Health save. Those who save are violently ill for one phase."
+        description: "If ingested, inhaled, or injected, causes death unless the target passes a TN 2 Health Save. Those who save are violently ill for one phase."
     },
     "poison_fear": {
         name: "Poison, Fear",
@@ -4874,7 +5169,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Inhaled, causes the target to become easily panicked for one phase unless they pass a TN 2 Acuity save."
+        description: "Inhaled, causes the target to become easily panicked for one phase unless they pass a TN 2 Acuity Save."
     },
     "poison_gullibility": {
         name: "Poison, Gullibility",
@@ -4882,7 +5177,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Causes target to suffer -2d penalty when confronting or saving against deception, persuasion, intimidation, or Bewitchment spells for one phase (TN 2 Acuity save)."
+        description: "Causes target to suffer -2d penalty when confronting or saving against deception, persuasion, intimidation, or Bewitchment spells for one phase (TN 2 Acuity Save)."
     },
     "poison_vitality_i": {
         name: "Poison, Vitality I",
@@ -4890,7 +5185,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 36,
         rarity: 1,
-        description: "Suffer 1d damage per phase, prevents healing and regeneration, and inflicts -1d penalty to Strength and Dexterity based skills (TN 1 Health save)."
+        description: "Suffer 1d damage per phase, prevents healing and regeneration, and inflicts -1d penalty to Strength and Dexterity based Checks and Saves (TN 1 Health Save)."
     },
     "poison_vitality_ii": {
         name: "Poison, Vitality II",
@@ -4898,7 +5193,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 72,
         rarity: 2,
-        description: "Suffer 2d damage per phase, prevents healing and regeneration, and inflicts -2d penalty to Strength and Dexterity based skills (TN 2 Health save)."
+        description: "Suffer 2d damage per phase, prevents healing and regeneration, and inflicts -2d penalty to Strength and Dexterity based Checks and Saves (TN 2 Health Save)."
     },
     "poison_vitality_iii": {
         name: "Poison, Vitality III",
@@ -4906,7 +5201,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Suffer 3d damage per phase, prevents healing and regeneration, and inflicts -3d penalty to Strength and Dexterity based skills (TN 3 Health save)."
+        description: "Suffer 3d damage per phase, prevents healing and regeneration, and inflicts -3d penalty to Strength and Dexterity based Checks and Saves (TN 3 Health Save)."
     },
     "poison_vitality_iv": {
         name: "Poison, Vitality IV",
@@ -4914,7 +5209,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 4,
-        description: "Suffer 4d damage per phase, prevents healing and regeneration, and inflicts -4d penalty to Strength and Dexterity based skills (TN 4 Health save)."
+        description: "Suffer 4d damage per phase, prevents healing and regeneration, and inflicts -4d penalty to Strength and Dexterity based Checks and Saves (TN 4 Health Save)."
     },
     "poison_mind_i": {
         name: "Poison, Mind I",
@@ -4922,7 +5217,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 36,
         rarity: 1,
-        description: "Inhaled, deals 1d Mana damage per phase, prevents recovery of Mana, and inflicts -1d penalty to Acuity, Intellect, and Verve based skills (TN 1 Health save)."
+        description: "Inhaled, deals 1d Mana damage per phase, prevents recovery of Mana, and inflicts -1d penalty to Acuity, Intellect, and Verve based Checks and Saves (TN 1 Health Save)."
     },
     "poison_mind_ii": {
         name: "Poison, Mind II",
@@ -4930,7 +5225,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 72,
         rarity: 2,
-        description: "Inhaled, deals 2d Mana damage per phase, prevents recovery of Mana, and inflicts -2d penalty to Acuity, Intellect, and Verve based skills (TN 2 Health save)."
+        description: "Inhaled, deals 2d Mana damage per phase, prevents recovery of Mana, and inflicts -2d penalty to Acuity, Intellect, and Verve based Checks and Saves (TN 2 Health Save)."
     },
     "poison_mind_iii": {
         name: "Poison, Mind III",
@@ -4938,7 +5233,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Inhaled, deals 3d Mana damage per phase, prevents recovery of Mana, and inflicts -3d penalty to Acuity, Intellect, and Verve based skills (TN 3 Health save)."
+        description: "Inhaled, deals 3d Mana damage per phase, prevents recovery of Mana, and inflicts -3d penalty to Acuity, Intellect, and Verve based Checks and Saves (TN 3 Health Save)."
     },
     "poison_mind_iv": {
         name: "Poison, Mind IV",
@@ -4946,7 +5241,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 4,
-        description: "Inhaled, deals 4d Mana damage per phase, prevents recovery of Mana, and inflicts -4d penalty to Acuity, Intellect, and Verve based skills (TN 4 Health save)."
+        description: "Inhaled, deals 4d Mana damage per phase, prevents recovery of Mana, and inflicts -4d penalty to Acuity, Intellect, and Verve based Checks and Saves (TN 4 Health Save)."
     },
     "poison_painful_i": {
         name: "Poison, Painful I",
@@ -4954,7 +5249,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 36,
         rarity: 1,
-        description: "Insinuated into body, inflicts pain upon target (TN 1). Target can make Health save each phase to fight off."
+        description: "Insinuated into body, inflicts pain upon target (TN 1). Target can make Health Save each phase to fight off the effect."
     },
     "poison_painful_ii": {
         name: "Poison, Painful II",
@@ -4962,7 +5257,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 72,
         rarity: 2,
-        description: "Insinuated into body, inflicts pain upon target (TN 2). Target can make Health save each phase to fight off."
+        description: "Insinuated into body, inflicts pain upon target (TN 2). Target can make Health Save each phase to fight off the effect."
     },
     "poison_painful_iii": {
         name: "Poison, Painful III",
@@ -4970,7 +5265,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Insinuated into body, inflicts pain upon target (TN 3). Target can make Health save each phase to fight off."
+        description: "Insinuated into body, inflicts pain upon target (TN 3). Target can make Health Save each phase to fight off the effect."
     },
     "poison_painful_iv": {
         name: "Poison, Painful IV",
@@ -4978,7 +5273,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 4,
-        description: "Insinuated into body, inflicts pain upon target (TN 4). Target can make Health save each phase to fight off."
+        description: "Insinuated into body, inflicts pain upon target (TN 4). Target can make Health Save each phase to fight off the effect."
     },
     "poison_paralytic": {
         name: "Poison, Paralytic",
@@ -4986,7 +5281,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 5,
-        description: "Causes target to be completely unable to move for 1/4 phase unless they pass a TN 2 Health save."
+        description: "Causes target to be completely unable to move for 1/4 phase unless they pass a TN 2 Health Save."
     },
     "poison_sleeping": {
         name: "Poison, Sleeping",
@@ -4994,7 +5289,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 5,
-        description: "Causes target to fall unconscious for 1/4 phase unless they pass a TN 2 Health save."
+        description: "Causes target to fall unconscious for 1/4 phase unless they pass a TN 2 Health Save."
     },
     "poison_truth": {
         name: "Poison, Truth",
@@ -5002,7 +5297,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Causes target to suffer inability to lie for 1/4 phase unless they pass a TN 3 Verve save and TN 2 Acuity save."
+        description: "Causes target to suffer inability to lie for 1/4 phase unless they pass a TN 3 Verve Save and TN 2 Acuity Save."
     },
     "poison_vulnerability": {
         name: "Poison, Vulnerability",
@@ -5010,7 +5305,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Causes target to suffer double damage from fire, frost, light, lightning, or thunder for 1/4 phase (TN 2 Health save)."
+        description: "Causes target to suffer double damage from fire, frost, light, lightning, or thunder for 1/4 phase (TN 2 Health Save)."
     },
 
     // ── POTIONS ──────────────────────────────────────────────────────────
@@ -5129,7 +5424,7 @@ const itemRegistry = {
         itemSlot: "Cart",
         cost: 36,
         rarity: 1,
-        description: "Deals 6d damage and immobilizes target. Requires full round and TN 4 Strength save to pry off."
+        description: "Deals 6d damage and immobilizes target. Requires full round and TN 4 Strength Save to pry off."
     },
     "enchanted_purse": {
         name: "Enchanted Purse",
@@ -5233,7 +5528,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 36,
         rarity: 1,
-        description: "Stores three points of Mana. If Hap save fails upon use, the Manastone explodes."
+        description: "Stores three points of Mana. If Hap Save fails upon use, the Manastone explodes."
     },
     "manastone_ii": {
         name: "Manastone II",
@@ -5241,7 +5536,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 72,
         rarity: 2,
-        description: "Stores six points of Mana. If Hap save fails upon use, the Manastone explodes."
+        description: "Stores six points of Mana. If Hap Save fails upon use, the Manastone explodes."
     },
     "manastone_iii": {
         name: "Manastone III",
@@ -5249,7 +5544,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 144,
         rarity: 3,
-        description: "Stores nine points of Mana. If Hap save fails upon use, the Manastone explodes."
+        description: "Stores nine points of Mana. If Hap Save fails upon use, the Manastone explodes."
     },
     "manastone_iv": {
         name: "Manastone IV",
@@ -5257,7 +5552,7 @@ const itemRegistry = {
         itemSlot: "Belt",
         cost: 288,
         rarity: 4,
-        description: "Stores twelve points of Mana. If Hap save fails upon use, the Manastone explodes."
+        description: "Stores twelve points of Mana. If Hap Save fails upon use, the Manastone explodes."
     },
     "phoenix_plume": {
         name: "Phoenix Plume",
@@ -5417,7 +5712,7 @@ const itemRegistry = {
         itemSlot: "Bracers",
         cost: 5000,
         rarity: 4,
-        description: "When commanded, you must do as you are told unless you pass a TN 6 Verve save."
+        description: "When commanded, you must do as you are told unless you pass a TN 6 Verve Save."
     },
     "gloves_of_amanuensis": {
         name: "Gloves of Amanuensis",
@@ -5577,7 +5872,7 @@ const itemRegistry = {
         itemSlot: "Footwear",
         cost: 2500,
         rarity: 3,
-        description: "Grants Advantage on Hap saves concerning stepping on traps or hazards."
+        description: "Grants Advantage on Hap Saves concerning stepping on traps or hazards."
     },
     "charm_of_the_hearth": {
         name: "Charm of the Hearth",
@@ -5665,7 +5960,7 @@ const itemRegistry = {
         itemSlot: "Amulet",
         cost: 5000,
         rarity: 4,
-        description: "Houses an enchanted Manastone containing 12 stored Mana. Upon suffering damage that would have killed the wearer, it stabilizes them and heals 12 Vitality. The wearer must then roll a Hap save (TN three); on a failure, the amulet explodes."
+        description: "Houses an enchanted Manastone containing 12 stored Mana. Upon suffering damage that would have killed the wearer, it stabilizes them and heals 12 Vitality. The wearer must then roll a Hap Save (TN three); on a failure, the amulet explodes."
     },
     "deathward_amulet_mana": {
         name: "Deathward Amulet [Mana]",
@@ -5673,7 +5968,7 @@ const itemRegistry = {
         itemSlot: "Amulet",
         cost: 5000,
         rarity: 4,
-        description: "Houses an enchanted Manastone containing 12 stored Mana. Upon suffering damage or mana depletion that would have killed the wearer, it stabilizes them and restores 12 Mana. The wearer must then roll a Hap save (TN three); on a failure, the amulet explodes."
+        description: "Houses an enchanted Manastone containing 12 stored Mana. Upon suffering damage or mana depletion that would have killed the wearer, it stabilizes them and restores 12 Mana. The wearer must then roll a Hap Save (TN three); on a failure, the amulet explodes."
     },
     "girdle_of_fortitude": {
         name: "Girdle of Fortitude",
@@ -5915,7 +6210,7 @@ const itemRegistry = {
 };
 
     const specialQualitiesRegistry = {
-"heavy_1": { name: "Heavy I", description: "Requires at least Strength 1 to be used/worn without disadvantage.", allowedTags: ["any"] },
+        "heavy_1": { name: "Heavy I", description: "Requires at least Strength 1 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_2": { name: "Heavy II", description: "Requires at least Strength 2 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_3": { name: "Heavy III", description: "Requires at least Strength 3 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_4": { name: "Heavy IV", description: "Requires at least Strength 4 to be used/worn without disadvantage.", allowedTags: ["any"] },
@@ -5927,7 +6222,7 @@ const itemRegistry = {
         "heavy_10": { name: "Heavy X", description: "Requires at least Strength 10 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_11": { name: "Heavy XI", description: "Requires at least Strength 11 to be used/worn without disadvantage.", allowedTags: ["any"] },
         "heavy_12": { name: "Heavy XII", description: "Requires at least Strength 12 to be used/worn without disadvantage.", allowedTags: ["any"] },
-        "cavalry_blade": {name: "Cavalry Blade", description: "When used from beastback in a charge, add +1cc.", allowedTags: ["weapon"] },		
+        "cavalry_blade": {name: "Cavalry Blade", description: "When used from beastback in a charge, add +1cc.", allowedTags: ["weapon"] },
         "flexible": { name: "Flexible", description: "This armor inflicts no penalty to Balance, Climb, or Jump checks.", allowedTags: ["armor"] },
         "tailor_fit": { name: "Tailor-fit", description: "This suit can only be worn by the combatant for whom it was designed without inflicting disadvantage to all combat and Athleticism checks.", allowedTags: ["armor"] },
         "piercing": { name: "Piercing", description: "When used in a grapple or against a foe who is not actively avoiding the strike, two Crit Results may be spent to deny the defender his Bonus.", allowedTags: ["weapon"] },
@@ -5937,7 +6232,7 @@ const itemRegistry = {
         "sweep": { name: "Sweep", description: "Provides a +2d bonus to Trip attempts when the weapon is wielded with both hands.", allowedTags: ["weapon"] },
         "unwieldy": { name: "Unwieldy", description: "This item cannot be used from beastback without disadvantage, unless it can be wielded half-pike.", allowedTags: ["weapon", "shield"] },
         "wrap_strike": { name: "Wrap Strike", description: "Attacks ignore the opponents shield and cannot be parried.", allowedTags: ["weapon"] },
-        "brittle": { name: "Brittle", description: "Upon any attack that hits but deals no damage, pass a TN 1 Hap save or the item breaks.", allowedTags: ["any"] },
+        "brittle": { name: "Brittle", description: "Upon any attack that hits but deals no damage, pass a TN 1 Hap Save or the item breaks.", allowedTags: ["any"] },
         "slash_resistance": { name: "Slash Resistance", description: "The wearer suffers only ½ damage from slashing.", allowedTags: ["armor", "shield"] },
         "thrust_resistance": { name: "Thrust Resistance", description: "The wearer suffers only ½ damage from thrusting.", allowedTags: ["armor", "shield"] },
         "bash_resistance": { name: "Bash Resistance", description: "The wearer suffers only ½ damage from bashing.", allowedTags: ["armor", "shield"] },
@@ -5962,7 +6257,7 @@ const itemRegistry = {
         "battle_magic_immunity": { name: "Battle Magic Immunity", description: "The wearer is immune to Battle Magic spells.", allowedTags: ["armor", "shield"] },
         "arcane_force_immunity": { name: "Arcane Force Immunity", description: "The wearer is immune to Arcane Force.", allowedTags: ["armor", "shield"] },
         "magic_immunity": { name: "Magic Immunity", description: "The wearer is immune to magic.", allowedTags: ["armor", "shield"] },
-        "inflamable": { name: "Inflamable", description: "After suffering critical Fire damage, pass a TN 1 Hap save or the item takes damage.", allowedTags: ["armor", "shield"] },
+        "inflamable": { name: "Inflamable", description: "After suffering critical Fire damage, pass a TN 1 Hap Save or the item takes damage.", allowedTags: ["armor", "shield"] },
         "lightning_vulnerability": { name: "Lightning Vulnerability", description: "The wearer suffers double damage from Lightning attacks.", allowedTags: ["armor", "shield"] }
     };
 
@@ -6097,7 +6392,7 @@ const materialRegistry = {
         rarity: 2,
         costMultiplier: 3,
         allowedTags: ["metal_armor", "metal_shield", "jewelry"],
-        bonus: "+2 to all saves against magic.",
+        bonus: "+2 to all Saves against magic.",
         description: "A brilliant, pale-gold coating that disrupts the flow of magic."
     },
     "mythral": {
@@ -6297,14 +6592,14 @@ const enchantmentRegistry = {
         allowedTags: ["feet", "legs", "waist"],
         cost: 1000,
         rarity: 3,
-        description: "Grants +2d on Strength based Skill Check and Saves."
+        description: "Grants +2d on Strength based Checks and Saves."
     },
     "awareness": {
         name: "Awareness",
         allowedTags: ["charm", "head", "mask"],
         cost: 1000,
         rarity: 3,
-        description: "Grants +2d on Acuity based Skill Checks and Saves."
+        description: "Grants +2d on Acuity based Checks and Saves."
     },
     "casting_consumable": {
         name: "Casting (consumable)",
@@ -6389,7 +6684,7 @@ const enchantmentRegistry = {
         allowedTags: ["jewelry", "helmet"],
         cost: 1000,
         rarity: 3,
-        description: "Grants +2d on Intellect based Skill Checks or Saves."
+        description: "Grants +2d on Intellect based Checks or Saves."
     },
     "mana": {
         name: "Mana",
@@ -6417,7 +6712,7 @@ const enchantmentRegistry = {
         allowedTags: ["jewelry", "mask", "helmet"],
         cost: 18000,
         rarity: 4,
-        description: "Grants +2d on non-cast Verve based Skill Checks or Saves."
+        description: "Grants +2d on non-cast Verve based Checks and Saves."
     },
     "protection": {
         name: "Protection",
@@ -6459,7 +6754,7 @@ const enchantmentRegistry = {
         allowedTags: ["jewelry", "gloves"],
         cost: 1000,
         rarity: 3,
-        description: "Grants +2d on non-attack Dexterity based skill checks or saves."
+        description: "Grants +2d on non-attack Dexterity based Checks or Saves."
     },
     "sounding": {
         name: "Sounding",
@@ -6544,11 +6839,11 @@ const tooltipRegistry = {
   },
   "light_footed": {
     title: "Light-Footed",
-    description: "You gain +1d to Hide Sneak and others suffer -1d to all Listen and Tracking Skill Checks made against you."
+    description: "You gain +1d to Hide Sneak and others suffer -1d to all Listen and Tracking Checks made against you."
   },
   "keen_sniffer": {
     title: "Keen Sniffer",
-    description: "You gain +1 Crit Result on all Smell and Tracking Skill Checks."
+    description: "You gain +1 Crit Result on all Smell and Tracking Checks."
   },
   "small": {
     title: "Small",
@@ -6755,7 +7050,7 @@ const tooltipRegistry = {
   },
   "quickness_of_mind": {
     title: "Quickness Of Mind",
-    description: "You are considered proficient when rolling for initiative and Acuity, Intellect, or Verve saves."
+    description: "You are considered proficient when rolling for initiative and Acuity, Intellect, or Verve Saves."
   },
   "direction_sense": {
     title: "Direction Sense",
@@ -7062,7 +7357,7 @@ const tooltipRegistry = {
     "dispel_magic": {
         title: "Dispel Magic",
         action_type: "Cast + Skill Check [Verve]",
-        description: "You can dispel ephemeral, non-temple magical effects or channel the spell to suppress the magic on enchanted objects. This spell is confronted by a Verve save.",
+        description: "You can dispel ephemeral, non-temple magical effects or channel the spell to suppress the magic on enchanted objects. This spell is confronted by a Verve Save.",
         extras: [{"label": "Encænium", "text": "Against non-ceremonial spells, you roll to dispel twice and take the better result."},{"label": "Rite [Disenchantment]", "text": "You can break permanent magical effects."}]
     },
     "tongues": {
@@ -7158,7 +7453,7 @@ const tooltipRegistry = {
   },
   "vim_vigor_vitality": {
     title: "Vim Vigor Vitality",
-    description: "Your Vitality is increased by six, and your Vitality Regen and all Health saves are increased by 1d."
+    description: "Your Vitality is increased by six, and your Vitality Regen and all Health Saves are increased by 1d."
   },
   "abjuration": {
     title: "Abjuration",
@@ -7190,7 +7485,7 @@ const tooltipRegistry = {
   },
   "holy_radiance": {
     title: "Holy Radiance",
-    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve save to ignore the effect."
+    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve Save to ignore the effect."
   },
   "illusion": {
     title: "Illusion",
@@ -7202,7 +7497,7 @@ const tooltipRegistry = {
   },
   "ki_strike": {
     title: "Ki Strike",
-    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve save to ignore the effect."
+    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve Save to ignore the effect."
   },
   "necromancy": {
     title: "Necromancy",
@@ -7441,7 +7736,7 @@ const tooltipRegistry = {
   "charm_person": {
     title: "Charm Person",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You insinuate romantic or fraternal feelings towards yourself into the target anthropoid’s mind for Verve rounds. The target is allowed a Verve save to resist if asked to do something against their interest.",
+    description: "You insinuate romantic or fraternal feelings towards yourself into the target anthropoid’s mind for Verve rounds. The target is allowed a Verve Save to resist if asked to do something against their interest.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "confusion": {
@@ -7459,12 +7754,12 @@ const tooltipRegistry = {
   "command": {
     title: "Command",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve save to ignore any given command."
+    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve Save to ignore any given command."
   },
   "sleep": {
     title: "Sleep",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead."
+    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead."
   },
   "geas": {
     title: "Geas [Rite]",
@@ -7490,13 +7785,13 @@ const tooltipRegistry = {
   "darkness": {
     title: "Darkness [Encænium]",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You conjure darkness to obscure things and cause fear. When a person encounters conjured darkness, they must pass a Verve save to take any further action regarding it. Once a person looks away from conjured darkness, they must pass an Acuity save or they forget about it. You can conjure enough darkness to cover Verve hexes.",
-    extras: [{"label":"Rite","text":"When a creature saves against your conjured darkness, they roll twice and take the worse roll."}]
+    description: "You conjure darkness to obscure things and cause fear. When a person encounters conjured darkness, they must pass a Verve Save to take any further action regarding it. Once a person looks away from conjured darkness, they must pass an Acuity Save or they forget about it. You can conjure enough darkness to cover Verve hexes.",
+    extras: [{"label":"Rite","text":"When a creature Saves against your conjured darkness, they roll twice and take the worse roll."}]
   },
   "acid_splash": {
     title: "Acid Splash",
     actionType: "Cast + Attack",
-    description: "You can throw a fistful of conjured acid at a target dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Splash deals -1d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
+    description: "You can throw a fistful of conjured acid at a target dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Splash deals -1d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
   },
   "acid_spray": {
     title: "Acid Spray",
@@ -7527,7 +7822,7 @@ const tooltipRegistry = {
   "gust_of_wind": {
     title: "Gust Of Wind",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You send forth a gust of wind one hex in diameter which knocks over or out of the sky all size B or smaller creatures unless they pass a Balance confrontation. Their position, prone or supine, is determined by the LM. The gust lasts for one pulse, but can be channeled to maintain.",
+    description: "You send forth a gust of wind one hex in diameter which knocks over or out of the sky all size B or smaller creatures unless they pass a Balance Confrontation. Their position, prone or supine, is determined by the LM. The gust lasts for one pulse, but can be channeled to maintain.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "wall_of_wind": {
@@ -7647,7 +7942,7 @@ const tooltipRegistry = {
   "detect_thoughts": {
     title: "Detect Thoughts",
     actionType: "Cast + Skill Check [Acuity]",
-    description: "You make a Skill Check against an intelligent target. The better the check, the more you learn.\n\n●Their current mood (TN 0)\n●Isolated, single-word, conscious thoughts (TN 1)\n●Isolated, single-phrase, conscious thoughts (TN 2)\n●Their complete conscious thoughts (TN 3)\n●Subconscious thoughts and desires (TN 4)\n●A random memory (TN 5)\n●A memory of your choosing (TN 6)"
+    description: "You make a Skill Check against an intelligent target. The better the check, the more you learn.\n\n●Their current mood (TN 1)\n●Isolated, single-word, conscious thoughts (TN 2)\n●Isolated, single-phrase, conscious thoughts (TN 3)\n●Their complete conscious thoughts (TN 4)\n●Subconscious thoughts and desires (TN 5\n●A random memory (TN 6)\n●A memory of your choosing (TN 7)"
   },
   "locate": {
     title: "Locate [Encænium]",
@@ -7658,7 +7953,7 @@ const tooltipRegistry = {
   "analyze": {
     title: "Analyze [Encænium]",
     actionType: "Cast + Skill Check [Acuity]",
-    description: "You make a Skill Check on a single item. The better the check, the more you learn.\n\n●Number of Virtues (TN 0)\n●School of Magic (TN 1)\n●Virtue Name (TN 2)\n●Effects (TN 3)\n●Command Words (TN 4)\n●Arcane Signature (TN 5)",
+    description: "You make a Skill Check on a single item. The better the check, the more you learn.\n\n●Number of Virtues (TN 1)\n●School of Magic (TN 2)\n●Virtue Name (TN 3)\n●Effects (TN 4)\n●Command Words (TN 5)\n●Arcane Signature (TN 6)",
     extras: [{"label":"Rite","text":"You learn the entire history of the object."}]
   },
   "augury": {
@@ -7831,7 +8126,7 @@ const tooltipRegistry = {
   "charging_overrun": {
     title: "Charging Overrun",
     actionType: "Move + Attack(s)",
-    description: "You can run down enemies from beastback. When you declare that you are charging, you targets must pass an immediate Verve confrontation or become panicked. If they fail, they must attempt a Jump or Run check confronted by your Equestrianism to escape your trajectory. If they passes, the attack is negated and you ride past them; if they fail, you and your beast are granted single strikes each for which the targets are at disadvantage.If they pass the Verve confrontation, and regardless of whether they have already acted, they can invoke Total Defense, stand their ground, or otherwise act however they wish."
+    description: "You can run down enemies from beastback. When you declare that you are charging, you targets must pass an immediate Verve Confrontation or become panicked. If they fail, they must attempt a Jump or Run check confronted by your Equestrianism to escape your trajectory. If they passes, the attack is negated and you ride past them; if they fail, you and your beast are granted single strikes each for which the targets are at disadvantage.If they pass the Verve Confrontation, and regardless of whether they have already acted, they can invoke Total Defense, stand their ground, or otherwise act however they wish."
   },
   "patron_deity": {
     title: "Patron Deity",
@@ -7857,7 +8152,7 @@ const tooltipRegistry = {
   },
   "indomitable": {
     title: "Indomitable",
-    description: "Reroll all Blank Results once for all Verve saves and confrontations."
+    description: "Reroll all Blank Results once for all Verve saves and Confrontations."
   },
   "true_abjuration": {
     title: "True Abjuration",
@@ -8180,7 +8475,7 @@ const tooltipRegistry = {
   "tornado": {
     title: "Tornado",
     actionType: "Cast + Attack",
-    description: "A 5-hex radius tornado, centered on you and not affecting the hex you are in, spawns causing the following to occur:\nPulse one: the wind begins to pick up;\nPulse two: all valid targets within a 10-hex diameter circle must pass a TN 0 balance check or fall;\nPulse three: targets within the affected area must pass a TN 1 Hap save each Pulse or they are struck with debris, dealing Verve + Rank dice of Bashing, Slashing, or Thrusting damage;\nPulse four: affected targets are lifted from the ground and spun about;\nPulse five: affected targets are thrown Verve hexes in a random direction;\nFor each additional Pulse the spell is channeled, valid targets within thrice your Verve hexes of yourself are assailed with debris; targets must pass a TN 1 Hap save or suffer Verve + Rank dice of Slashing, Bashing, or Thrusting damage.",
+    description: "A 5-hex radius tornado, centered on you and not affecting the hex you are in, spawns causing the following to occur:\nPulse one: the wind begins to pick up;\nPulse two: all valid targets within a 10-hex diameter circle must pass a TN 1 balance check or fall;\nPulse three: targets within the affected area must pass a TN 1 Hap save each Pulse or they are struck with debris, dealing Verve + Rank dice of Bashing, Slashing, or Thrusting damage;\nPulse four: affected targets are lifted from the ground and spun about;\nPulse five: affected targets are thrown Verve hexes in a random direction;\nFor each additional Pulse the spell is channeled, valid targets within thrice your Verve hexes of yourself are assailed with debris; targets must pass a TN 1 Hap save or suffer Verve + Rank dice of Slashing, Bashing, or Thrusting damage.",
     extras: [{"label":"Bonus Spells","text":"Down Draft; Gust of Wind"}]
   },
   "enshadow": {
@@ -8350,7 +8645,7 @@ const tooltipRegistry = {
   },
   "indomitable": {
     title: "Indomitable",
-    description: "Reroll all Blank Results once for all Verve saves and confrontations."
+    description: "Reroll all Blank Results once for all Verve Saves and Confrontations."
   },
   "true_abjuration": {
     title: "True Abjuration",
@@ -8362,7 +8657,7 @@ const tooltipRegistry = {
   },
   "inexhaustible": {
     title: "Inexhaustible",
-    description: "You can reroll all Blank Results once on all Acuity saves."
+    description: "You can reroll all Blank Results once on all Acuity Saves."
   },
   "true_force": {
     title: "True Force",
@@ -8432,12 +8727,12 @@ const tooltipRegistry = {
   },
    "caustic_fog": {
     title: "Caustic Fog",
-    description: "You can conjure and atomize enough acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Caustic Fog deals -4d damage until no further damage can be dealt. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates.",
+    description: "You can conjure and atomize enough acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Caustic Fog deals -4d damage until no further damage can be dealt. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
   "stonefist_modified": {
     title: "Stonefist [Modified]",
-    description: "Your Stonefist spell melts into a pool of acid after knocking foes over. All targets within the affected area suffer Verve + Rank dice of acid damage per pulse or half that much if they are standing. The pool of acid neutralizes in Verve rounds. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
+    description: "Your Stonefist spell melts into a pool of acid after knocking foes over. All targets within the affected area suffer Verve + Rank dice of acid damage per pulse or half that much if they are standing. The pool of acid neutralizes in Verve rounds. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
   },
   "icicle_modified": {
     title: "Icicle [Modified]",
@@ -8449,7 +8744,7 @@ const tooltipRegistry = {
   },
   "jetstream_modified": {
     title: "Jetstream [Modified]",
-    description: "Your Jetstream now deals lingering acid damage. Each Pulse, your Jetstream deals -3d damage until no further damage can be dealt. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
+    description: "Your Jetstream now deals lingering acid damage. Each Pulse, your Jetstream deals -3d damage until no further damage can be dealt. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
   },
   "sandstorm": {
     title: "Sandstorm",
@@ -8468,12 +8763,12 @@ const tooltipRegistry = {
   },
   "hurricane": {
     title: "Hurricane",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a raging hurricane for Verve rounds. Inside of the hurricane, flying debris and pelting rain deals Verve + Rank dice of damage per Pulse to all targets therewithin. Hunkering down reduces the damage by ½. Targets must pass a Strength save to remain afoot and a Balance save to move; TN 3 for both.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a raging hurricane for Verve rounds. Inside of the hurricane, flying debris and pelting rain deals Verve + Rank dice of damage per Pulse to all targets therewithin. Hunkering down reduces the damage by ½. Targets must pass a Strength Save to remain afoot and a Balance Save to move; TN 3 for both.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
   "permafrost": {
     title: "Permafrost",
-    description: "You rapidly cover a circular area whose diameter is equal to seven-hexes with enough permafrost to cover the feet of all size C or smaller creatures within. As a Standard Action, targets caught are permitted a Strength save, TN 3, to break free.",
+    description: "You rapidly cover a circular area whose diameter is equal to seven-hexes with enough permafrost to cover the feet of all size C or smaller creatures within. As a Move Action, targets caught are permitted a Strength Save, TN 3, to break free.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
   "malignant_shade_modified": {
@@ -8487,16 +8782,16 @@ const tooltipRegistry = {
   },
   "black_ice": {
     title: "Black Ice",
-    description: "You can cover a circular area whose diameter is equal to seven-hexes with effectively invisible ice causing all who trod upon it to pass a Balance save, TN 4, or fall—whether supine or prone is determined by the LM. The ice will last until it melts.",
+    description: "You can cover a circular area whose diameter is equal to seven-hexes with effectively invisible ice causing all who trod upon it to pass a Balance Save, TN 4, or fall—whether supine or prone is determined by the LM. The ice will last until it melts.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
   "slurry": {
     title: "Slurry",
-    description: "You can spray a frozen slurry at all targets in a nine-hex diamond dealing Verve + Rank dice of frost damage and freezing them, rendering them incapable of action. Frozen targets suffer an additional Verve + Rank dice of damage per pulse but are immune to all attacks. Targets are freed after their icy shell is dealt thrice your Verve points of damage or half that amount of bashing or fire damage, or after the occupant passes a Strength save, TN 3. Once freed, targets suffer two levels of fatigue until they warm up. All affected hexes remain visibly frozen and slick until the ice melts away. Traversing it at a pace faster than one hex requires a TN 3 Balance check."
+    description: "You can spray a frozen slurry at all targets in a nine-hex diamond dealing Verve + Rank dice of frost damage and freezing them, rendering them incapable of action. Frozen targets suffer an additional Verve + Rank dice of damage per pulse but are immune to all attacks. Targets are freed after their icy shell is dealt thrice your Verve points of damage or half that amount of bashing or fire damage, or after the occupant passes a Strength Save, TN 3. Once freed, targets suffer two levels of fatigue until they warm up. All affected hexes remain visibly frozen and slick until the ice melts away. Traversing it at a pace faster than one hex requires a TN 3 Balance check."
   },
   "quagmire": {
     title: "Quagmire",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for Verve rounds after which the bog collapses unless the spell is refreshed. Targets can hold their breath for Health rounds and then must pass a TN 1 Health save each round or drown. When making a move action, the target must choose a random direction and can only swim one hex. Each subsequent move action, the target must pass a TN 3 Direction Sense check or randomly choose their direction again. Drowning targets fall unconscious and suffer -2d damage each Pulse until rescued: This attack cannot be avoided.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for Verve rounds after which the bog collapses unless the spell is refreshed. Targets can hold their breath for Health rounds and then must pass a TN 1 Health Save each round or drown. When making a move action, the target must choose a random direction and can only swim one hex. Each subsequent move action, the target must pass a TN 3 Direction Sense check or randomly choose their direction again. Drowning targets fall unconscious and suffer -2d damage each Pulse until rescued: This attack cannot be avoided.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
     "daylight": {
@@ -8508,7 +8803,7 @@ const tooltipRegistry = {
     "true_darkness": {
         title: "True Darkness",
         actionType: "Cast + Skill Check [Verve]",
-        description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; Crit Results cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
+        description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons Save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; Crit Results cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
         extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
     },
     "vernal_warrior": {
@@ -8550,7 +8845,7 @@ const tooltipRegistry = {
   "break_curse": {
     title: "Break Curse",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You call upon the power of your god to break a curse. This skill is confronted by a Verve save."
+    description: "You call upon the power of your god to break a curse. This skill is confronted by a Verve Save."
   },
   "beast_whisperer": {
     title: "Beast Whisperer",
@@ -8590,7 +8885,7 @@ const tooltipRegistry = {
   "obscuration": {
     title: "Obscuration",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You make a person or object immune to Detect Magic, Locate, and Analyze for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity save or forget ever seeing your target.",
+    description: "You make a person or object immune to Detect Magic, Locate, and Analyze for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
     extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
   },
   "obscured_casting": {
@@ -8682,7 +8977,7 @@ const tooltipRegistry = {
   },
   "fortitudinous": {
     title: "Fortitudinous",
-    description: "You can reroll all Blank Results once on all Health saves."
+    description: "You can reroll all Blank Results once on all Health Saves."
   },
   "mana_sickness": {
     title: "Mana Sickness",
@@ -8697,12 +8992,12 @@ const tooltipRegistry = {
   "enthrall_undead": {
     title: "Enthrall Undead",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You can make a servant of the target corporeal undead, rendering it loyal until death. If the target passes a Verve save, the spell fails and the undead becomes hostile. You can control a number of undead no greater than your Rank at any given time.",
+    description: "You can make a servant of the target corporeal undead, rendering it loyal until death. If the target passes a Verve Save, the spell fails and the undead becomes hostile. You can control a number of undead no greater than your Rank at any given time.",
   },
   "rend_life": {
     title: "Rend Life",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You can sever the animating spirit from a living or undead body effectively killing the creature. The creature is entitled to a Verve save to negate the effect."
+    description: "You can sever the animating spirit from a living or undead body effectively killing the creature. The creature is entitled to a Verve Save to negate the effect."
   },
   "rend_soul": {
     title: "Rend Soul",
@@ -16593,7 +16888,6 @@ const isWeapon = slotId.startsWith("weapon-");
             specialQualities: []
         };
     }
-
 // 1. Filter Items Options
     let itemsOptions = '<option value="None">None</option>';
     Object.entries(itemRegistry)
