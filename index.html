@@ -2900,7 +2900,7 @@ details[open] #skills-collapsed-summary {
 <br>
             <li><strong>Luck Regen:</strong> Completely regenerates at Lore Master (LM) discretion.</li>
 <br>
-            <li><strong>Initiative:</strong> Dexterity + Acuity</li>
+            <li><strong>Initiative:</strong> 1d x (Dexterity + Acuity)</li>
 <br>
             <li><strong>Pace:</strong> How many Hexes (yards) you can cover in a Pulse. Sub-Paces default to 1/4 Pace rounded down.</li>
         </ul>
@@ -4573,7 +4573,7 @@ const itemRegistry = {
     "falx": {
         name: "Falx",
         modTags: ["shrewd", "brutal", "weapon", "metal_weapon"],
-        governingSkill: "Shrewd Weapons",
+        governingSkill: "Brutal Weapons or Shrewd Weapons",
         cost: 360,
         specialQualities: ["heavy_4", "shield_hook"],
         summary: "A forward-curved falcate blade designed to deliver devastating downward chops; can be wielded with one or two hands.",
@@ -10155,6 +10155,39 @@ const rank3SkillPrerequisitesRegistry = {
     "restricted: evocatus":   { structuralFlag: "loremaster_permission" }
 };
 
+function getSkillTreeLevel(treeId) {
+    const sanitizedLookupKey = treeId.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+    const input = document.getElementById("sk-xp-" + sanitizedLookupKey);
+    if (!input) return 0;
+    const pts = parseInt(input.value) || 0;
+    
+    let config = null;
+    const allCapsConfigs = { 
+        ...(typeof commonSkillLevelCaps !== 'undefined' ? commonSkillLevelCaps : {}),
+        ...(typeof guildCastSkillLevelCaps !== 'undefined' ? guildCastSkillLevelCaps : {})
+    };
+
+    Object.keys(allCapsConfigs).forEach(key => {
+        const standardKey = key.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+        if (standardKey === sanitizedLookupKey) {
+            config = allCapsConfigs[key];
+        }
+    });
+
+    if (!config) config = { costPerLevel: 6, isPackage: false };
+    
+    if (config.isPackage && config.progression) {
+        let lvl = 0;
+        for (let i = 0; i < config.progression.length; i++) {
+            if (pts >= config.progression[i]) lvl = i;
+        }
+        return lvl;
+    }
+    
+    return Math.floor(pts / (config.costPerLevel || 6)) + 
+    (window.getFreeLevelsCountForTree ? window.getFreeLevelsCountForTree(treeId) : 0);
+}
+
 function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
     // 1. Fetch live Rank Exp. spent to check character rank tier
     let rankXp = 0;
@@ -10172,7 +10205,7 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
     else if (rankXp >= 18) currentRank = 3;
     else if (rankXp >= 6) currentRank = 2;
 
-    // 2. Automatically enforce a Rank 3 requirement if the skill belongs to restricted advanced paths
+    // 2. Enforce Rank 3 requirement for advanced paths
     const advancedTreesArray = typeof restrictedPostCreationTrees !== 'undefined' ? restrictedPostCreationTrees.map(t => t.toLowerCase()) : [];
     const isAdvancedPath = advancedTreesArray.includes(sanitizedKey) || sanitizedKey.startsWith("mastery:") || sanitizedKey.startsWith("occult:") || sanitizedKey.startsWith("paragon:");
 
@@ -10180,57 +10213,122 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
         return { permitted: false, reason: "Requires Character Rank 3+" };
     }
 
-    const prereq = rank3SkillPrerequisitesRegistry[sanitizedKey];
-    if (! prereq) return { permitted: true };
+// -------------------------------------------------------------
+    // 3. INTELLECT THROTTLE CHECK (TIMING-FIXED)
+    // -------------------------------------------------------------
+    const intellectThrottledTrees = [
+        "guild: esoteric", "guild: temple", "guild: troupe", "guild: sages", "guild_sages",
+        "abjuration", "arcane force", "battle magic: fire", "battle magic: frost",
+        "battle magic: light", "battle magic: lightning", "battle magic: thunder",
+        "bewitchment", "conjuration", "divination", "esoteric", "druidism",
+        "illusion", "summoning", "thaumaturgy", "temple", "zoomancy", "occult: necromancer"
+    ];
 
-const getSkillTreeLevel = (treeId) => {
-    // Standardize the incoming key so it safely strips dashes and spaces for matrix lookups
-    const sanitizedLookupKey = treeId.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+    const normalizedIncomingKey = sanitizedKey.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+    const isThrottled = intellectThrottledTrees.some(treeKey => 
+        treeKey.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-") === normalizedIncomingKey
+    );
 
-    const input = document.getElementById("sk-xp-" + sanitizedLookupKey);
-    if (!input) return 0;
-    const pts = parseInt(input.value) || 0;
-    
-    // Find the config object by checking both standard keys and sanitized variants
-    let config = null;
-    const allCapsConfigs = { 
-        ...(typeof commonSkillLevelCaps !== 'undefined' ? commonSkillLevelCaps : {}),
-        ...(typeof guildCastSkillLevelCaps !== 'undefined' ? guildCastSkillLevelCaps : {})
-    };
+    if (isThrottled) {
+        const intEl = document.getElementById("total-int") || document.getElementById("xp-int");
+        let currentIntellect = 3; 
 
-    // Match exact keys, or look up via dash-sanitized variations to avoid key mismatches
-    Object.keys(allCapsConfigs).forEach(key => {
-        const standardKey = key.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
-        if (standardKey === sanitizedLookupKey) {
-            config = allCapsConfigs[key];
+        if (intEl) {
+            let rawValue = parseInt(intEl.value, 10);
+            if (isNaN(rawValue)) {
+                rawValue = parseInt(intEl.textContent, 10);
+            }
+            if (!isNaN(rawValue)) {
+                if (intEl.id && intEl.id.includes("xp")) {
+                    currentIntellect = Math.floor(rawValue / 6);
+                } else {
+                    currentIntellect = rawValue;
+                }
+            }
         }
-    });
 
-    // Fallback default rules configuration if completely missing
-    if (!config) config = { costPerLevel: 6, isPackage: false };
-    
-    // 1. Process custom package tier trees (Temple, Esoteric)
-    if (config.isPackage && config.progression) {
-        let lvl = 0;
-        for (let i = 0; i < config.progression.length; i++) {
-            if (pts >= config.progression[i]) lvl = i;
-        }
-        return lvl;
-    }
-    
-    // 2. Process standard non-package point divisions (Sages, standard traits)
-    return Math.floor(pts / (config.costPerLevel || 6)) + 
-    (window.getFreeLevelsCountForTree ? window.getFreeLevelsCountForTree(treeId) : 0);
-};
-
-      if (sanitizedKey === "mastery: professor") {
-        // 1. Fetch the true skill level points invested
-        const sagesLevel = getSkillTreeLevel("guild: sages");
+        const targetLevel = getSkillTreeLevel(sanitizedKey);
+        const inputEl = document.getElementById("sk-xp-" + normalizedIncomingKey);
         
-        // 2. Sanitize your active upbringing variable for absolute safety
+        // (Change this back to just currentIntellect * 6 if you removed the tweak)
+        const maxAllowedXp = (currentIntellect * 6) + 5; 
+        
+        let isReverting = false;
+
+        if (targetLevel > currentIntellect) {
+            isReverting = true;
+            if (inputEl) {
+                const currentInputVal = parseInt(inputEl.value, 10) || 0;
+                if (currentInputVal !== maxAllowedXp) {
+                    setTimeout(() => {
+                        if (parseInt(inputEl.value, 10) !== maxAllowedXp) {
+                            inputEl.value = maxAllowedXp;
+                            inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+                            inputEl.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    }, 10);
+                }
+            }
+        }
+
+        // --- WARNING UI INJECTION ---
+        if (inputEl) {
+            // BUG FIX: Wrapped in a 50ms timeout.
+            // This guarantees the sheet has finished rendering the "Max Level" text 
+            // BEFORE we read the DOM to check for it!
+            setTimeout(() => {
+                try {
+                    const cardContainer = inputEl.closest('.skill-card') || inputEl.parentElement;
+                    
+                    if (cardContainer) {
+                        let warningEl = cardContainer.querySelector('.intellect-cap-warning');
+                        const currentXp = parseInt(inputEl.value, 10) || 0;
+                        const cardText = cardContainer.textContent || "";
+                        
+                        // Because this runs after a delay, the text is fully updated
+                        const isMaxLevelReached = cardText.includes("Max Level");
+
+                        // We can now just check currentXp directly
+                        if (currentXp === maxAllowedXp && !isMaxLevelReached) {
+                            if (!warningEl) {
+                                warningEl = document.createElement('div');
+                                warningEl.className = 'intellect-cap-warning';
+                                warningEl.style.color = '#d97706'; 
+                                warningEl.style.fontSize = '0.85em';
+                                warningEl.style.fontWeight = 'bold';
+                                warningEl.style.marginTop = '6px';
+                                cardContainer.appendChild(warningEl);
+                            }
+                            if (warningEl.textContent !== "Raise Intellect to advance.") {
+                                warningEl.textContent = `Raise Intellect to advance.`;
+                            }
+                        } else if (warningEl) {
+                            warningEl.remove();
+                        }
+                    }
+                } catch (err) {
+                    console.warn("Intellect Filter UI Injection Error caught safely:", err);
+                }
+            }, 50); // 50ms wait
+        }
+        // ----------------------------
+
+        if (isReverting) {
+            return { 
+                permitted: false, 
+                reason: `Level (${targetLevel}) cannot exceed Intellect (${currentIntellect}). Capped at ${maxAllowedXp} Exp.` 
+            };
+        }
+    }
+
+    // 4. Registry check for specific Rank 3 prerequisites
+    const prereq = rank3SkillPrerequisitesRegistry[sanitizedKey];
+    if (!prereq) return { permitted: true };
+
+    if (sanitizedKey === "mastery: professor") {
+        const sagesLevel = getSkillTreeLevel("guild: sages");
         const sanitizedUpbringing = currentUpbringing ? currentUpbringing.toLowerCase().trim() : "";
 
-        // 3. Strict structural lock condition
         if (sagesLevel < 8 || sanitizedUpbringing !== "sage") {
             let errorMsg = "Requires Guild Sages Level 8";
             if (sanitizedUpbringing !== "sage") {
@@ -10240,12 +10338,9 @@ const getSkillTreeLevel = (treeId) => {
             }
             return { permitted: false, reason: errorMsg };
         }
-        
-        // Short-circuit here to prevent slipping into legacy constraints
         return { permitted: true };
     }
-  
-    // Special Evaluation: Battlemage (Any 5, Any Other 5)
+
     if (prereq.structuralFlag === "battle_magic_dual_five") {
         const schools = ["battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
         let countFive = 0;
@@ -10256,51 +10351,27 @@ const getSkillTreeLevel = (treeId) => {
 
     if (prereq.structuralFlag === "loremaster_permission") return { permitted: true };
 
-// --- INSIDE YOUR renderRank3Cards() SELECTION LOOP ---
-if (prereq.alternatePrimaryTrees) {
-    // 1. Map out the standard, raw requirement tags
-    const altOptionsArray = prereq.alternatePrimaryTrees.map(alt => `${alt.tree.toUpperCase()} (${alt.lvl})`);
-    
-    let weaponsDisplayHint = "";
-    // 2. Apply the strict Oxford serial comma rule for 3 or more choice options
-    if (altOptionsArray.length >= 3) {
-        const disjunctionFormatter = new Intl.ListFormat('en', { style: 'long', type: 'disjunction' });
-        weaponsDisplayHint = disjunctionFormatter.format(altOptionsArray);
-    } else {
-        // Safe standard connector fallback for exactly 2 weapons paths
-        weaponsDisplayHint = altOptionsArray.join(" or ");
-    }
-    
-    // 3. Append this cleanly formatted string variable directly to your card template building block!
-    // (e.g., cardHtmlText += `<div>Requires ${weaponsDisplayHint}</div>`;)
-}
-
-
-    // Array to collect all failed requirements for the current card
     let failedPrereqs = [];
 
-    // 1. Check Primary Tree Requirement
+    // Check Primary Tree Requirement
     if (prereq.tree && !prereq.alternatePrimaryTrees) {
         if (getSkillTreeLevel(prereq.tree) < prereq.requiredLevel) {
-            // 🎯 FIXED: Changed from "Level X+" to "(X)"
             failedPrereqs.push(`${prereq.tree.replace("guild: ", "").toUpperCase()} (${prereq.requiredLevel})`);
         }
     }
 
-    // 2. Check Secondary Tree Requirement (e.g., Arcanist, Necromancer)
+    // Check Secondary Tree Requirement
     if (prereq.secondaryTree) {
         if (getSkillTreeLevel(prereq.secondaryTree) < prereq.secondaryRequiredLevel) {
-            // 🎯 FIXED: Changed from "Level X+" to "(X)"
             failedPrereqs.push(`${prereq.secondaryTree.replace("guild: ", "").toUpperCase()} (${prereq.secondaryRequiredLevel})`);
         }
     }
 
-    // 3. Check Alternate Primary Trees (e.g., Dual-Wielder, Knight, Paladin, Arcane Warrior)
+    // Check Alternate Primary Trees
     if (prereq.alternatePrimaryTrees) {
         const passedAlt = prereq.alternatePrimaryTrees.some(alt => getSkillTreeLevel(alt.tree) >= alt.lvl);
         if (!passedAlt) {
             const altOptionsArray = prereq.alternatePrimaryTrees.map(alt => `${alt.tree.toUpperCase()} (${alt.lvl})`);
-            
             let formattingChoiceText = "";
             if (altOptionsArray.length >= 3) {
                 const disjunctionFormatter = new Intl.ListFormat('en', { style: 'long', type: 'disjunction' });
@@ -10308,44 +10379,41 @@ if (prereq.alternatePrimaryTrees) {
             } else {
                 formattingChoiceText = altOptionsArray.join(" or ");
             }
-
             failedPrereqs.push(formattingChoiceText);
         }
     }
 
-    // 4. Check Multi-Secondary Trees (e.g., Ki Master, Knight, Paladin, Arcane Warrior)
+    // Check Multi-Secondary Trees
     if (prereq.multiSecondaryTrees) {
         prereq.multiSecondaryTrees.forEach(sec => {
             if (getSkillTreeLevel(sec.tree) < sec.lvl) {
-                // 🎯 FIXED: Changed from "Level X+" to "(X)"
                 failedPrereqs.push(`${sec.tree.replace("guild: ", "").toUpperCase()} (${sec.lvl})`);
             }
         });
     }
 
-    // 5. Check Battle Magic Level Requirements
+    // Check Battle Magic Level Requirements
     if (prereq.battleMagicLevel) {
         const schools = ["battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
         const passedBM = schools.some(s => getSkillTreeLevel(s) >= prereq.battleMagicLevel);
         if (!passedBM) {
-            // 🎯 FIXED: Changed from "Level X+" to "(X)"
             failedPrereqs.push(`ANY BATTLE MAGIC (${prereq.battleMagicLevel})`);
         }
     }
 
-// 🎯 DYNAMIC OXFORD SERIAL COMMA EVALUATION 
-if (failedPrereqs.length > 0) { 
-  let cleanReasonText = ""; 
-  if (failedPrereqs.length >= 3) { 
-    const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }); 
-    cleanReasonText = formatter.format(failedPrereqs); 
-  } else { 
-    cleanReasonText = failedPrereqs.join(" and "); 
-  } 
-  return { permitted: false, reason: "Requires " + cleanReasonText }; 
-} 
-return { permitted: true }; 
-} 
+    if (failedPrereqs.length > 0) { 
+        let cleanReasonText = ""; 
+        if (failedPrereqs.length >= 3) { 
+            const formatter = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }); 
+            cleanReasonText = formatter.format(failedPrereqs); 
+        } else { 
+            cleanReasonText = failedPrereqs.join(" and "); 
+        } 
+        return { permitted: false, reason: "Requires " + cleanReasonText }; 
+    } 
+
+    return { permitted: true }; 
+}
 
 // Initialize the choice save-state memory slot inside your top global 'characterChoicesState' object 
 if (!characterChoicesState.sagesSelections) { 
