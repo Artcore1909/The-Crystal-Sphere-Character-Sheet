@@ -3584,7 +3584,7 @@ const alternateSurfaceKeywords = ["head", "shaft", "blade", "grip", "butt", "pom
                     itemId: "None",
                     materialId: "None",
                     makerId: "None",
-                qualityId: "None",       
+                    qualityId: "None",       
                     enchantmentId: "None",
                     enchantment2Id: "None", // Added
                     activeGripIndex: 0
@@ -11806,6 +11806,97 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
         };
     };
 
+// --- HELPER FUNCTION: WEAPON & SHIELD CRIT COUNT PARSER ---
+    const getWeaponCcDisplay = (damageTypeStr, makerId, materialId, itemTags) => {
+        if (!damageTypeStr || damageTypeStr === "—") return "";
+        
+        let ccMod = 0;
+        const safeTags = Array.isArray(itemTags) ? itemTags : [];
+        
+        // 1. Darkfolk design applies +1cc universally
+        if (makerId === "darkfolk" || makerId === "Darkfolk") ccMod += 1;
+        
+        // 2. Jannic design applies +1cc specifically to Shrewd weapons
+        if ((makerId === "jann" || makerId === "Jann") && safeTags.includes("shrewd")) ccMod += 1;
+        
+        // 3. Obsidian material applies +1cc universally
+        if (materialId === "obsidian" || materialId === "Obsidian") ccMod += 1;
+        
+        const typeInfo = {
+            "bash": { cc: 2, effect: "Daze" },
+            "crush": { cc: 2, effect: "Grapple" },
+            "entangle": { cc: 2, effect: "Entangle" },
+            "grapple": { cc: 2, effect: "Grapple" },
+            "slash": { cc: 2, effect: "Impair" },
+            "thrust": { cc: 3, effect: "" }
+        };
+        const getInfo = (t) => typeInfo[t] || { cc: 2, effect: "" };
+
+        const str = damageTypeStr.toLowerCase();
+        
+        // 1. Handle "AND" statements (e.g., "Bash & Thrust")
+        if (str.includes("&")) {
+            const types = str.split("&").map(s => s.trim()).filter(s => s);
+            if (types.length === 0) return "";
+            
+            const infos = types.map(getInfo);
+            const maxCc = Math.max(...infos.map(i => i.cc)) + ccMod;
+            const effects = infos.map(i => i.effect).filter(e => e);
+            
+            let effectStr = effects.length > 0 ? `; ${effects.join(" & ")}` : "";
+            return `Crit Count: ${maxCc}${effectStr}`;
+        } 
+        // 2. Handle "OR" statements (e.g., "Slash or Thrust" / "Bash, Crush, or Slash")
+        else if (str.includes("or") || str.includes(",")) {
+            const types = str.split(/,\s*or\s+|\s+or\s+|,/g).map(s => s.trim()).filter(s => s);
+            if (types.length === 0) return "";
+            
+            const infos = types.map(t => ({ t, info: getInfo(t) }));
+            const uniqueCcs = [...new Set(infos.map(i => i.info.cc + ccMod))].sort((a,b) => a - b);
+            
+            // --- NEW: Higher CC Parenthetical Labeling ---
+            let ccStr = "";
+            if (uniqueCcs.length === 1) {
+                // All options share the same CC
+                ccStr = uniqueCcs[0].toString();
+            } else {
+                // They have different CCs (e.g., 2 and 3)
+                const minCc = uniqueCcs[0];
+                const ccParts = uniqueCcs.map(cc => {
+                    if (cc === minCc) {
+                        return cc.toString(); // Leave lower CC unlabelled
+                    } else {
+                        // Label the higher CC with the type(s) that caused it
+                        const typesWithCc = infos
+                            .filter(i => (i.info.cc + ccMod) === cc)
+                            .map(i => i.t.charAt(0).toUpperCase() + i.t.slice(1));
+                        return `${cc} (${typesWithCc.join(" or ")})`;
+                    }
+                });
+                ccStr = ccParts.join(" or ");
+            }
+            
+            const effectStrs = infos.filter(i => i.info.effect).map(i => {
+                const capType = i.t.charAt(0).toUpperCase() + i.t.slice(1);
+                // Prevents redundancy like "Grapple (Grapple)"
+                return (i.info.effect.toLowerCase() === i.t.toLowerCase()) 
+                    ? i.info.effect 
+                    : `${i.info.effect} (${capType})`;
+            });
+            
+            let effectStr = effectStrs.length > 0 ? `; ${effectStrs.join(" or ")}` : "";
+            return `Crit Count: ${ccStr}${effectStr}`;
+        } 
+        // 3. Handle Standard Single Types
+        else {
+            const t = str.trim();
+            const info = getInfo(t);
+            const ccStr = info.cc + ccMod;
+            const effectStr = info.effect ? `; ${info.effect}` : "";
+            return `Crit Count: ${ccStr}${effectStr}`;
+        }
+    };
+
     // --- REWRITE WEAPON LOOPS ---
     for (let i = 0; i < 3; i++) {
         const weaponData = equip.weapons[i];
@@ -11875,18 +11966,18 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
                 });
             }
 
-            if (targetAmmoTag && foundAmmoProfiles.length > 0) {
+if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                 // RENDER LOADED RANGED PROFILES
                 foundAmmoProfiles.forEach(({comp, gearSlot}) => {
                     let ammoMods = [];
                     if (gearSlot.materialId !== "None") ammoMods.push(modTip(gearSlot.materialId));
                     if (gearSlot.makerId !== "None") ammoMods.push(modTip(gearSlot.makerId));
-                    if (gearSlot.qualityId !== "None") ammoMods.push(modTip(gearSlot.qualityId));
-                    if (gearSlot.enchantmentId !== "None") ammoMods.push(modTip(gearSlot.enchantmentId));
-                    if (gearSlot.enchantment2Id !== "None") ammoMods.push(modTip(gearSlot.enchantment2Id));
-                    if (gearSlot.enchantment3Id !== "None") ammoMods.push(modTip(gearSlot.enchantment3Id));
-
                     const subDetailString = ammoMods.length > 0 ? `<div style="font-size: 0.65rem; color: #7c6f64; margin-top: 1px;">${ammoMods.join(" | ")}</div>` : '';
+
+                    const rawDamageType = profItem.damageType || weaponItem.damageType || "—";
+                    const activeMat = gearSlot.materialId !== "None" ? gearSlot.materialId : (weaponData.materialId || "None");
+                    const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeMat, activeTags);
+                    const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
 
                     cardHtml += `
                         <div class="pnp-static-row" data-tooltip="${comp.ammoKey}">
@@ -11894,9 +11985,10 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
                                 <span style="font-weight: bold; font-size: 0.78rem; color: #5c1d1d;">${comp.name}</span>
                                 <span style="font-size: 0.78rem; font-weight: bold; color: #1b6b55;">${comp.dice}d${comp.bonus >= 0 ? '+' : ''}${comp.bonus}</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.7rem; color: #7c6f64;">
-                                <div>
-                                    <span>${comp.damageType}</span>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
+                                <div style="display:flex; flex-direction:column;">
+                                    <span style="font-weight: bold;">${comp.damageType}</span>
+                                    ${ccHtml}
                                     ${subDetailString}
                                 </div>
                                 <span>${comp.range}</span>
@@ -11981,6 +12073,10 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
                 }
 
                 let cleanDmgType = (profItem.damageType || weaponItem.damageType || "—").toUpperCase();
+
+                const rawDamageType = profItem.damageType || weaponItem.damageType || "—";
+                const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeProfileMaterial, activeTags);
+                const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
                 
                 const elements = { flaming: "FIRE", freezing: "FROST", sapping: "MANA", shining: "LIGHT", sounding: "THUNDER", static: "LIGHTNING" };
                 const elemCounts = {};
@@ -12016,9 +12112,10 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
                 cardHtml += `
                     <div class="pnp-static-row" data-tooltip="${profKey}">
                         ${profileNameHTML}
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;" >
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 2px;" >
                             <div style="display:flex; flex-direction:column;">
                                 <span style="font-weight: bold; font-size: 0.75rem; color: #7d3c1b;">${cleanDmgType}${warningTag}</span>
+                                ${ccHtml}
                                 ${materialLabelHTML}
                             </div>
                             <span style="font-size: 0.75rem; color: #7c6f64;">${cleanRange}</span>
@@ -12141,10 +12238,15 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
 
                     const cleanDmgType = (profileItem.damageType || "BASH").toUpperCase();
                     const cleanRange = profileItem.range || "Engaged";
+                    const ccDisplayString = getWeaponCcDisplay((profileItem.damageType || "BASH"), shieldData.makerId, activeProfileMaterial, activeProfileTags);
+                    const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
 
                     shieldHtml += `
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;" >
-                            <span style="font-weight: bold; font-size: 0.78rem; color: #7d3c1b;">${cleanDmgType}</span>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px;" >
+                            <div style="display: flex; flex-direction: column;">
+                                <span style="font-weight: bold; font-size: 0.78rem; color: #7d3c1b;">${cleanDmgType}</span>
+                                ${ccHtml}
+                            </div>
                             <span style="font-size: 0.75rem; color: #7c6f64;">${cleanRange}</span>
                             <span style="font-weight: bold; font-size: 0.85rem; color: #1b6b55;">${finalShieldDice}d${shieldFlatBonus >= 0 ? '+' : ''}${shieldFlatBonus}</span>
                         </div>
@@ -12221,6 +12323,8 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
 
                         const cleanDmgType = (profileItem.damageType || "BASH").toUpperCase();
                         const cleanRange = profileItem.range || "Engaged";
+                        const ccDisplayString = getWeaponCcDisplay((profileItem.damageType || "BASH"), shieldData.makerId, activeMaterialId, activeProfileTags);
+                        const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
 
                         const materialLabelHTML = (materialIsValidForThisGrip && activeMaterialName) ? `<div style="font-size: 0.65rem; color: #7d3c1b; font-style: italic; margin-top: 1px;">${activeMaterialName}</div>` : '';
 
@@ -12230,9 +12334,10 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
                                     <span style="font-weight: bold; font-size: 0.78rem; color: #5c1d1d;">${profileItem.name}</span>
                                     <span style="font-size: 0.78rem; font-weight: bold; color: #1b6b55;">${finalShieldDice}d${shieldFlatBonus >= 0 ? '+' : ''}${shieldFlatBonus}</span>
                                 </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 0.7rem; color: #7c6f64;">
-                                    <div>
-                                        <span>${cleanDmgType}</span>
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
+                                    <div style="display: flex; flex-direction: column;">
+                                        <span style="font-weight: bold;">${cleanDmgType}</span>
+                                        ${ccHtml}
                                         ${materialLabelHTML}
                                     </div>
                                     <span>${cleanRange}</span>
@@ -12429,6 +12534,8 @@ if (race === "Hanyo (Earth)") baseDr += 2;
 
 // 1. Armor Calculations Helper Pass (Inside Step 3)
 let armorDrMod = 0;
+let armorCc = 0; // <-- NEW: Initialize Armor CC variable
+
 if (equip.armor && equip.armor.itemId !== "None") {
     const armorItem = itemRegistry[equip.armor.itemId];
     const armorTags = (armorItem && armorItem.modTags) || ["armor"];
@@ -18565,24 +18672,41 @@ window.updateEquipmentCardViews = function() {
             parts.push(modTip(slotData.materialId));
         }
 
-if (slotData.makerId && slotData.makerId !== "None") parts.push(modTip(slotData.makerId));
-                if (slotData.qualityId && slotData.qualityId !== "None") parts.push(modTip(slotData.qualityId));
-                if (slotData.enchantmentId && slotData.enchantmentId !== "None") parts.push(modTip(slotData.enchantmentId));
-                if (slotData.enchantment2Id && slotData.enchantment2Id !== "None") parts.push(modTip(slotData.enchantment2Id));
-                if (slotData.enchantment3Id && slotData.enchantment3Id !== "None") parts.push(modTip(slotData.enchantment3Id));
+        if (slotData.makerId && slotData.makerId !== "None") parts.push(modTip(slotData.makerId));
+        if (slotData.qualityId && slotData.qualityId !== "None") parts.push(modTip(slotData.qualityId));
+        if (slotData.enchantmentId && slotData.enchantmentId !== "None") parts.push(modTip(slotData.enchantmentId));
+        if (slotData.enchantment2Id && slotData.enchantment2Id !== "None") parts.push(modTip(slotData.enchantment2Id));
+        if (slotData.enchantment3Id && slotData.enchantment3Id !== "None") parts.push(modTip(slotData.enchantment3Id));
 
-const modifiedQualities = getModifiedSpecialQualities(slotData.itemId, slotData.materialId, slotData.makerId, slotData.profileMaterials);
-modifiedQualities.forEach(qKey => {
-    parts.push(modTip(qKey));
-});
-                if (parts.length > 0) {
+        const modifiedQualities = getModifiedSpecialQualities(slotData.itemId, slotData.materialId, slotData.makerId, slotData.profileMaterials);
+        modifiedQualities.forEach(qKey => {
+            parts.push(modTip(qKey));
+        });
+
+        if (parts.length > 0) {
             detailString = `<span style="font-size: 0.75rem; color: #7c6f64; display:block; margin-top:2px;">${parts.join(" | ")}</span>`;
         }
 
+        // =========================================================================
+        // NEW: CRIT COUNT (CC) CALCULATOR & FLEXBOX RENDERING
+        // =========================================================================
+        let ccDisplayHtml = "";
+        if (item.critCount !== undefined) {
+            let activeCc = item.critCount;
+            if (slotData.makerId === "darkfolk") {
+                activeCc += 1;
+            }
+            ccDisplayHtml = `<strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>`;
+        }
+
         return `<div data-tooltip="${slotData.itemId}">
-            <strong style="color: #5c1d1d; font-size:0.85rem;">${item.name}</strong>
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <strong style="color: #5c1d1d; font-size:0.85rem;">${item.name}</strong>
+                ${ccDisplayHtml}
+            </div>
             ${detailString}
         </div>`;
+        // =========================================================================
     };
 
     const armorHtml = renderCardText(equip.armor);
