@@ -294,7 +294,7 @@ table.game-data td:first-child {
 
 table.game-data td:last-child {
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--text-dark);
 }
 		/* Custom styling specifically for the Wyrd Results table */
 table.wyrd-table th,
@@ -2551,14 +2551,19 @@ details[open] #skills-collapsed-summary {
     <!-- P&P Initiative, Movement, & Positioning Section -->
     <div class="pnp-section-title">Movement</div>
     <div class="pnp-init-move-section">
-        <div class="pnp-checkboxes-col">
-            <div class="pnp-checkbox-field">
-                <input type="checkbox" id="pnp-chk-qob" disabled>
-                <label for="pnp-chk-qob">QoB</label>
-            </div>
+
+<div class="pnp-checkboxes-col">
             <div class="pnp-checkbox-field">
                 <input type="checkbox" id="pnp-chk-qom" disabled>
-                <label for="pnp-chk-qom">QoM</label>
+                <label for="pnp-chk-qom" data-tooltip="quickness_of_mind" style="cursor:help; border-bottom: 1px dotted var(--border-warm);">QoM</label>
+            </div>
+            <div class="pnp-checkbox-field">
+                <input type="checkbox" id="pnp-chk-qob" disabled>
+                <label for="pnp-chk-qob" data-tooltip="quickness_of_body" style="cursor:help; border-bottom: 1px dotted var(--border-warm);">QoB</label>
+            </div>
+            <div class="pnp-checkbox-field">
+                <input type="checkbox" id="pnp-chk-alert" disabled>
+                <label for="pnp-chk-alert" data-tooltip="alertness" style="cursor:help; border-bottom: 1px dotted var(--border-warm);">Alert</label>
             </div>
         </div>
 
@@ -2715,7 +2720,7 @@ details[open] #skills-collapsed-summary {
 <!-- TAB 7: RULES INDEX -->
 <div id="tab-rules" class="tab-content">
     <h2>Rules Index</h2>
-    <p class="hint">Click any category below to expand the rules. Hover over highlighted terms to view detailed tooltips.</p>
+    <p class="hint">Click any category below to expand the rules.</p>
     
     <div class="skill-accordion">
         <!-- Category 1: Core Mechanics -->
@@ -3264,7 +3269,7 @@ details[open] #skills-collapsed-summary {
 
         <!-- Category 6: Equipment, Customization & Sundering -->
         <div class="skill-item">
-            <div class="skill-header" onclick="toggleSkill(this)">6. Equipment, Customization & Sundering ▾</div>
+            <div class="skill-header" onclick="toggleSkill(this)">6. Equipment & Sundering ▾</div>
             <div class="skill-body">
                 <strong>Critical Effects by Damage Type:</strong>
                 <ul>
@@ -3283,14 +3288,21 @@ details[open] #skills-collapsed-summary {
                 <br>
                 <strong>Grand Bazaar & Enchantments:</strong>
                 <ul>
-                    <li>Price Formula: (Base Cost × Special Qualities) + 1st Virtue x 1 + 2nd Virtue x 2 + 3rd Virtue x 3 = Total Cost.</li>
+<li><strong>Pricing Items:</strong>
+    <ul style="margin-top: 4px; margin-bottom: 0;">
+        <li><strong>Step 1:</strong> Multiply Base Cost by your Special Qualities.</li>
+        <li><strong>Step 2:</strong> Add the 1st Virtue at standard price.</li>
+        <li><strong>Step 3:</strong> Add the 2nd Virtue at <strong>double</strong> price.</li>
+        <li><strong>Step 4:</strong> Add the 3rd Virtue at <strong>triple</strong> price.</li>
+    </ul>
+</li>
 <br>
                     <li><em>Law of Duplicate Effects:</em> Similar magical effects from different items do not stack; only the stronger effect manifests.</li>
                 </ul>
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
-                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (requires a Hap Save relative to the material: Wood TN 1, Metal TN 2, Stone TN 3).</li>
+                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (make a Hap Save relative to the material: Wood TN 1, Metal TN 2, Stone TN 3).</li>
                 </ul>
 <table class="game-data">
     <thead>
@@ -3414,7 +3426,7 @@ details[open] #skills-collapsed-summary {
                 <strong>Cast Skills (Spells):</strong>
                 <ul>
                     <li>Spells require Intellect to learn and Mana to cast. Channeling costs 1 Mana per Pulse. Intellect requirements to learn spells scale progressively based on their position in the skill tree (first slot requires 1, second requires 2, eighth requires 8).</li>
-                    <li>Unless specified, all spells have a maximum range equal to 6 times the caster's Verve in hexes.</li>
+                    <li>Unless specified, all spells have a maximum range equal to 6 times the caster's Verve in Hexes.</li>
                 </ul>
                 <br>
                 <strong>Temple Spells & Sage Skills:</strong>
@@ -3425,22 +3437,156 @@ details[open] #skills-collapsed-summary {
             </div>
         </div>
 
-        <!-- Category 8: Lore & World Atlas -->
+<!-- Category 8: Lore & World Atlas -->
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">8. Lore & World Atlas ▾</div>
             <div class="skill-body">
-                <strong>The Creation:</strong>
+<span>As it is important to draw a line between the knowledge of the player and that of the character, all content hereafter and all content contained in the Creature Compendium must necessarily require a Lore check to access. The LM, however, retains the right to waive any checks he sees fit.</span>
+                <br>
+                <strong>Setting Out</strong>
                 <ul>
-                    <li>The Crystal Sphere is composed of air, earth, water, and magma. Day and Night rotate atop the Crystal Axis.</li>
-                    <li><strong>The Four Moons (Deities):</strong> Ver (the green moon/Sea Lord creator), Aestas (the red moon/Fire God creator), Autumnus (the orange moon/Earth Goddess creator), and Hiems (the white moon/Wind Goddess creator).</li>
-                    <li><strong>Grand Conjunctions:</strong> Terrifying alignments occurring once every few thousand years when all four moons are in the sky simultaneously.</li>
+                    <li>If you are not a member of any guild at this point, then you are either a freelance adventurer or a member of the Mercenaries' Guild. When there is a task to be done, an employer generally does one of three things: he contacts someone he knows can get the job done, he solicits the help of adventures in the local tavern, or he approaches the Mercenaries' or Thieves' Guilds as a Seeker. Likewise, you can find work in one of three ways: being someone that people know can get the job done, frequenting the local tavern, or acquiring contracts from the Mercenaries' or Thieves' Guilds.</li>
                 </ul>
                 <br>
-                <strong>The Diaspora & Geography:</strong>
+                <br>
+                <strong>Lore of the Crystal Sphere</strong>
                 <ul>
-                    <li><strong>The Empire:</strong> Formed of eight human kingdoms, ruled by an Emperor and a 300-seat senate. Senatorial capital is Bel Agor; military seat is Bel Inaba.</li>
-                    <li><strong>The Wildlands:</strong> Territory not under imperial control, including the Frosinlands (ruled by Jarls) and Desert of the Jann (theonomic monarchy).</li>
-                    <li><strong>Sculpted Darkness:</strong> A massive subterranean cavern beneath the mainland, containing diverse topography, minerals, and the Temple of Night.</li>
+                    <li>As it is important to draw a line between the knowledge of the player and that of the character, all content hereafter and all content contained in the Creature Compendium must necessarily require a Lore check to access. The LM, however, retains the right to waive any checks he sees fit.</li>
+                </ul>
+                <br>
+                <strong>The Creation</strong>
+                <ul>
+                    <li>Composed equally of air, earth, water, and magma, but due to air being far less dense than the other three, the Crystal Sphere appears half full.</li>
+                    <li>Within the Crystal Sphere, but at its uppermost point, resides the sphere of Day and Night; its rotation atop the Crystal Axis, a tower extending the full diameter of the world and perpendicular to the ground, marks the passage of time.</li>
+                    <li>At the easternmost part of the world, behind the mountains encircling the sea, is the green moon, Ver. Ver rises and falls upon its own axis, but far more slowly than does the Sphere of Day and Night wax and wane. Its rising is the indication that a new year has come.</li>
+                    <li>The other three moons work the same way. The red moon, Aestas, to the south; the orange moon, Autumnus, to the west; and the white moon, Hiems, to the north.</li>
+                    <li>The four moons are not perfectly in sync, and often one moon begins to rise before the other is fully set; this is why once every few thousand years all four moons are in the sky at once. It is called a Grand Conjunction and it is a terrible event with unpredictable consequences. More often, but still rare, is when none of the four moons are visible; these are referred to as True Nights, and they occur about four times per season.</li>
+                    <li>These six great bodies are the gods of creation; their task was to shape the world from the four elements according to their liking. The Creator made each of them to know a specific part of His plan, so that their collective will and His would be aligned.</li>
+                    <li>In the beginning, all four moons and the Sphere of Day and Night looked down upon the formless world, marking the first Grand Conjunction. At once, Day said unto his four subordinates that they shall make a servant each to help shape the four elements. Ver was the first to oblige and created the Sea Lord to tame the sea wherever it should flow. Aestas then created the Fire God to control the magmatic sea upon which all land floats. Autumnus, the Earth Goddess to tend the soil and shape the stones of the world, and finally, Hiems created the Wind Goddess to tame the gales and arctic winds.</li>
+                    <li>When Night saw the four lesser gods hard at work, she created a fifth, the Shadow King, to carve out and sculpt dark places from deep within the earth and stone. It is these five lesser gods that the many demigods and apposite pneumons serve.</li>
+                    <li>When Day had sprung again, he created the Or dragon to be his tool and servant, and he instructed the four moons to do likewise. Vert, Gules, Azure, and Argent dragons were created by Ver, Aestas, Autumnus, and Hiems respectively. When Day rested and Night saw what had begun, She created the Sable dragon to do her will.</li>
+                    <li>First, Day instructed Ver to both cover the dirt and fill the sea with life. And so Ver created grasses and flowers of all kinds to make the world beautiful for Day to look upon. As Day faded from the sky, Night turned to look upon the world, but saw that Ver had neglected the dark places. And so Night created fungi, and all manner of plants beneath the surface.</li>
+                    <li>Then Day looked and saw that, though teeming with life, the world was still to look upon, and so he instructed the four to create life that moved. Ver created the living plants, fish, and birds to fill the sky. Aestas made all sorts of diurnal animals and beasts, Autumnus made bears, foxes, and all manner of crepuscular creatures, but Hiems waited, for Day had already begun to wane. When Night took Day’s place, She saw that, though the world teemed with life, all slept beneath her darkness. And so Hiems made for her Wolves and all manner of nocturnal beasts.</li>
+                    <li>As Day once more looked upon the world, he saw that it was beautiful. He watched all morning and afternoon but saw that the Ents alone possessed the ability to appreciate what had been created, yet they did little but sit and grow old. At once, he commanded Autumnus to create life that could dream, and desire. And so Autumnus created Elvenkind. When Night saw Elvenkind, she became jealous and so Hiems made for her the first of the Darkfolk–the Oldra–who hated the light. Ver in turn created the Fey, Aestas created the Feliviri, Autumnus, the Dwarves, and so on until all the races of the world came into being. Last was Man, the novel race.</li>
+                </ul>
+                <br>
+                <strong>The Diaspora</strong>
+                <ul>
+                    <li>As the centuries unfolded, the races became more and more culturally distinct and began to war with one another for various reasons. The Elves became great craftsmen capable of intricate magic; they built ships and explored the world with some lingering here and there populating the great forests. Most, however, returned to The Isle of Twilight’s Harbor. The Oldra populated the shallow parts of Sculpted Darkness and had very little dealings with the surface. The Dwarves became great smiths and therefore great miners digging deep into the earth, hewing roads from stone, and creating large, beautiful cities therein. Most of the other races became disparate and tribal, but eventually Mankind founded eight kingdoms which, through war and alliances, became the Empire.</li>
+                    <li>Skirting the Empire are the Wildlands, the land inhabited by the tribal peoples. The Gurzim are disparate tribes of Humans who are sprawling and fecund. The Feliviri tribes inhabit the grasslands and savannas and wherever else their bestial brethren reside. The Caniviri hail from the north, but some came to live amongst the Humans and became distinct through selective breeding. Finally, the Haubids are nomadic, gypsy-esq folk, but many of them eventually settled within the great cities of the Empire where they are considered novel and child-like (despite being as varied in nature as any race can be). The tribal people, by-in-large, worship the lesser gods and the offspring thereof.</li>
+                    <li>The wars between the races grew in frequency and intensity until the gods themselves feared the desecration of their temples. Each of the six gods blessed a chosen tribe and their descendants to serve them in perpetuity. The Orcanthrope serve Ver; the Leonthropes, Aestas; the Kitsune, Autumnus; the Lupine, Hiems; the Camasotz, Night; and the Ursanthropes, Day. Incidentally, from these chosen tribes sprang the curse of lycanthropy.</li>
+                </ul>
+                <br>
+                <strong>The Empire</strong>
+                <ul>
+                    <li>The Empire is ruled by both an Emperor and a senate. The senate has 300 seats and its members are selected by the clans to be their representatives. Bel Agor is the senatorial capital of the Empire and is on the north coast of Lake Tarina. In addition to being the home of the senate, Bel Agor is the commercial center of the Empire. The city comprises four districts: the walled central district which includes the senate chamber and the senators’ villas, the residential district for wealthy citizens, the second residential area filled with apartment complexes for the general populous, and the sprawling market district.</li>
+                    <li>Bel Inaba is the seat of the Emperor and is the heart of the Imperial Legion. The Emperor is the high commander of the Legion and the ultimate judge of the land. The civilian population of Bel Inaba is significantly smaller than that of Bel Agor, though it is still substantial. Outside of the city proper, are the Empress’ gardens. There she keeps all manner of flora, art, and entertainment; her chief source of delight, however, are the Haubids that live there. Though the area is private, if granted access, one would see a flourishing Haubid village completely isolated from the outside world.</li>
+                    <li>The westernmost city of the Empire, Kassan, is its premier port. Its position allows it to trade with Medina, the Frosinlands, the Dwarves through the Autumn Gate, and the Elves. It was once the citystate of Kassan: one of the seven kingdoms conquered by the Empire. The capitals of the other six kingdoms serve as cultural hubs of their respective ethnicities.</li>
+                    <li>The Empire extends from Marci Murus to the Grasslands and from the western coast to the Great Slough. While the Emperor claims sovereignty over all Humans, the Emperor’s grip over the Gurzim is loose at best.</li>
+                </ul>
+                <br>
+                <strong>The Wildlands</strong>
+                <ul>
+                    <li>The Wildlands refers to any Human occupied territory not under imperial control. There are four distinct territories that this applies to: the northern wildlands are commonly referred to as the Frosinlands, the eastern wildlands, the Hill Country, is east of the Great Slough and butts up against the Cordillera, the southern wildlands are sandwiched between the Empire and the Daar Mountains and consist of two parts; the side nearer the Empire is the Grasslands, while the far side lay between the Daar River and the Daar Mountains and is often referred to as the Daar Between the Mountains and the River.</li>
+                    <li>The eastern Gurzim call themselves the Ringi. For three moons of the year they live a subsistence life off the meat and eggs of the Keck and other fowl they keep—the Ringi keep no mammals—but for the Autumn moon, they host the Ringi Faire, a grand bazaar in which one can find nearly anything. In addition to commerce, during this time the Ringi host the Great Hunt. Hunters are organized into parties and sent forth to satisfy various contracts.</li>
+                    <li>The Southern Gurzim consists of all the herd following tribes: the Aquoi who follow the urox, the Vriit who ride the horses, the Ilioniki who follow the quadricorn, and the Meso-daar who are split into three and follow the granas along the Daar river, the sheep that graze the Daar between the river and the mountains, and the goats that graze the Daar mountains. No matter the herd they follow, all of the Southern Gurzim follow their herds throughout the grasslands for three moons of the year and return to their Autumn camps until the grasses grow again.</li>
+                </ul>
+                <br>
+                <strong>The Frosinlands</strong>
+                <ul>
+                    <li>The Euskal have a common language and culture, but live in small garths ruled by Jarls who are selected by merit. When necessary, all the Garths in a region—though never the Garths of the entire Frosinlands—meet for a Jarl's Moot to select a Jarl of Jarls. This selection is neither democratic nor monarchical—the Jarl’s Moot is often an affair marked by bloodshed.</li>
+                    <li>To the far north are the God’s Throne Mountains which, aside from the Crystal Axis, is the highest place within the sphere. To stand atop the highest peak therein, The Throne of God, one would see all four moons no matter the time of year. Their nearness to Hiems and The Wind Goddess makes them inhospitably cold for most living things. Within the hollows of the God’s Throne Mountains are the Barrowlands where the local Frosinlanders build cairns for their dead.</li>
+                    <li>The southernmost part of the Frosinlands is The Neck—the isthmus that connects it to the Empire. At the narrowest part of The Neck is Marci Murus, a wall dividing the two.</li>
+                    <li>Beneath the God’s Throne Mountains live the dwarves of the lost kingdom. These dwarves have for so long been separated from the Dwarven Confederacy that they nearly speak a different language. While the great dwarven highway that joins them to the southern dwarves still exists, it has long since been abandoned to the creatures of the Sculpted Darkness.</li>
+                </ul>
+                <br>
+                <strong>The Desert of the Jann</strong>
+                <ul>
+                    <li>The Desert of the Jann is south of the Daar mountains and east of the Desolation. As you would expect, most of those living in the desert either live near Oobar, the great oasis, or in Medina on the Bahr an-Jann.</li>
+                    <li>Running southward from the Daar mountains and into the southern sea is the Bahr an-Jann which feeds the Valley of the Jann and is the road of commerce between them and the Dwarves. The valley begins two-thirds of the way up the river from the sea and gets deeper the nearer the sea you are. As it deepens, ledges appear creating multiple levels to the valley. The natural tiering has been enhanced by the Jann and their magic. These tiers serve the Jann as pasture and farmland while the tier faces serve for housing.</li>
+                    <li>At the northern point of the delta lies Medina, the heart of the Caliphate of the Jann. In its center, in the middle of the river, is a huge stone tower accessible only by a bridge from the eastern face of the valley. Therein live the Caliph and his court. The main channel of the river through the delta has been magically altered to allow barge traffic from the port to enter the city. There are very few constructed buildings in the Valley of the Jann; wary of travelers, the Jann have constructed inns to maintain their distance.</li>
+                    <li>Halfway between the Bahr an-Jann and the eastern sea and halfway between the Daar Mountains and the Southern sea is the great oasis, Oobar. Surrounding it live the second largest settlement of Jann. While most of the population are nomadic, there are permanent structures created from Ramil—magically wrought sand.</li>
+                    <li>The Caliphate of the Jann functions like a theonomic monarchy except that the position of Caliph is not directly inheritable. Instead, the eldest male of each clan elects a new Caliph when the former dies. The Jann are unique in that they do not worship the lesser gods. They worship only the creator.</li>
+                </ul>
+                <br>
+                <strong>The Isle of Ver</strong>
+                <ul>
+                    <li>East of the Cordillera and across the Verdant Strait is the Isle of Ver; home to the Minotaurs. The island is mostly cliff-faced and is surrounded by treacherous rocky structures in the water—some protruding, others just beneath the surface. It is perhaps due to these features that the island has been dubbed Mortis Insula by imperial sailors. On the east face of the Island there is a long, sandy beach wherein dwell the Island Giants.</li>
+                    <li>The Minotaurin people have long been envied for their great wealth as their island is home to some of the most fruitful gold and gem mines in the Crystal Sphere. Gold and gems are of such abundance on the island that High Minotaurs of almost any station can afford at least some ornamentation of their horns. A nose ring, however, indicates that the wearer is either a slave or an indentured servant and the extravagance of the nose ring only goes to show the wealth and status of the owner.</li>
+                    <li>One of the cultural pastimes of the Minotaurin people is to spectate as challengers traverse the Labyrinth risking life and limb for a chance at some of the great wealth of the island. The Labyrinth is set up so that a great many spectators can peer into it from the tiered seating above. Within the Labyrinth are various traps, challenges, beasts, and sentries to thwart the prospective looters. The Labyrinth is also a means for prisoners and slaves to secure their freedom.</li>
+                </ul>
+                <br>
+                <strong>The Orkipelago</strong>
+                <ul>
+                    <li>The Orkipelago is the string of islands that cups the southern and western coasts of the Empire. The islands are the home of dense jungles, ruins of both human and elven origin, the Goritaur, Orcs, venomous beasts, and fabled treasures. Many an adventurer has lost ship, crew, and life exploring the jungles of the Orkipelago.</li>
+                    <li>Orcish pirates often harry and raid small villages along the coast of the mainland and sometimes venture inland through the Darr. They often steal food, weapons, and women and slaughter all men and children they come across. There is a permanent bounty, paid by the Mercenary’s Guild, of £50 per left ear of any Ork.</li>
+                </ul>
+                <br>
+                <strong>The Cordillera</strong>
+                <ul>
+                    <li>The Cordillera is a ring of volcanic mountains east of the Great Slough. This serves the Oldra as a military outpost and as their main means to travel to and from the surface. Keen eyed observers can sometimes see Oldra riding on wyvernback to and from the Cordillera in the night sky.</li>
+                    <li>Surrounding the Cordillera are the Gnolls who inhabit the hilly countryside. Though they are not true darkfolk, they are aligned with them and often do their bidding.</li>
+                </ul>
+                <br>
+                <strong>The Hidden Vale</strong>
+                <ul>
+                    <li>At the western end of the Daar Mountains, the range splits in two leaving an ever-shaded vale. Therein lies a village of Hobgoblins who have been living for centuries in isolation. Though culturally distinct from their Darkfolk cousins, they are racially the same.</li>
+                </ul>
+                <br>
+                <strong>The Sculpted Darkness</strong>
+                <ul>
+                    <li>The Sculpted Darkness begins deep within the stone of the Crystal Sphere. Beneath the mainland lies a great cavern whose perimeter and shape is identical to that of the mainland. Its topography, however, is its own. The rim of the cavern is the shallowest part, and the farther one travels towards the center, the deeper they delve. The grade is not constant though; in some sections the slope is gradual while in others, it's abrupt. The deepest point is directly beneath the Desolation and is separated from the rest of the great cavern by a stone wall beneath the Daar mountains. There is a relatively narrow passage through the wall at its easternmost point. The cavern comprises all manner of minerals. The floor of the Great Cavern is spotted with lakes of various size and clime. Some are hot; some, cold. Some are deep; some, shallow. Some are dark; some, luminous. And some are acid; some, alkaline.</li>
+                    <li>Stretching outward from the Great Cavern are innumerable tunnels that lead to many smaller caverns throughout the stone of the Crystal Sphere. Near the edge of the Crystal Sphere, beneath each of the four temples of the moons, there is a great staircase which leads up to the surface and down into the Magmatic Sea for the passage of souls; all anthropoidal dead must go to one of the temples, depending on the life they lived, to be transmigrated. This is why most anthropoids burn their dead—lest the highways be filled with walking corpses.</li>
+                    <li>In the center of the Great Cavern is an isolated peak that covers the Crystal Axis. Atop it lies the Temple of Night fiercely guarded by a monastic order of Camasotz Elders.</li>
+                    <li>The Darkfolk reign supreme along the rim of the cavern, and their empire—The Dark Mandate—lies beneath the Cordillera covering most of that plateau; however, the deeper sections of the Sculpted Darkness are considered wilderness and few know what lies therein. In the deepest section—below the Desolation—are the Kathonids: the godless anthropoids who must live vicariously through other living things.</li>
+                </ul>
+                <br>
+                <strong>The Great Forest</strong>
+                <ul>
+                    <li>The Great Forest covers a large swath of the mainland. It stretches northward until it reaches Marci Murus and southward until it reaches the rolling, short-grass plains of the Empire—about halfway between Lake Tarina and the nearest northern coast. It ranges from the western coast to the swamplands of the Great Slough. There is, however, an imperial road that cuts through the forest and follows the northern coast until it reaches Marci Murus. Along this road are a number of fishing villages and, further inland, manor houses—though some have long since been abandoned to the wild.</li>
+                    <li>The Fey Hegemony, also known as The Land That Was and Always Will Be, can be accessed via ancient portals throughout the forests of the Crystal Sphere. The Fey guard these forests zealously which has led to constant fighting between them and the Empire. The Fairy King is the Hegemon as the fairies are the ultimate fey. The Centaur Lords rank just beneath the Fairies and command the might of the Fey Hegemony—the Centaurs. All other fey belong to the common class and live either in isolation or in small villages throughout the Fey Hegemony.</li>
+                    <li>Within the Great Forest live, too, the Sylvan Elves and the Antaeons. Though politically distinct, they are culturally similar to the Fey and are therefore considered fey-kin.</li>
+                </ul>
+                <br>
+                <strong>The Dwarven Confederacy</strong>
+                <ul>
+                    <li>Beneath and within the Daar Mountains lies a huge Dwarven metropolis called the Aizenfestung. Four gates lead from the Daar Mountains to the Aizenfestung. In addition to the four gates used by the confederacy, there are many smaller gates that predate its founding. These gates have led to the common misbelief that the dwarves beneath these gates live in distinct communities. This misbelief is further cemented by the fact that no imperial can fathom a city quite the size of the Aizenfestung. The Daar Gate faces the Empire, and between the two is a long, straight, well-kept road with a ferry over the Daar. The River Gate opens onto the Bahr an-Jann and often sends and receives barges of goods. The eastern gate faces the Autumn camps of the Aquoi and Ilioniki and is called the Bull Gate. And the western gate faces the Autumn camps of the Meso-daar and is called the Autumn Gate. As for trade with the Ringi, Autumn is the only moon during which one is likely to see caravans of Dwarves traversing the Empire as they have no gate near the Cordillera.</li>
+                    <li>Radiating outward from the Aizenfestung are many roads leading to just as many mining towns. With the exception of the Cordillera and the Isle of Ver—the latter due to its proximity to the former—wherever ore can be found, so, too, can the Dwarves.</li>
+                    <li>The Dwarven Confederacy is led by a council of Dwarves that is representative of the 11 clans. The Altfather is the leader of the council and is revered by the Dwarven people.</li>
+                    <li>Upon the founding of the confederacy, there were 12 clans, 11 under the Daar and one beneath the God’s Throne Mountains. The transcontinental cog railway that connected the two was an engineering marvel even for the Dwarves, but its extreme length proved to be a liability as it exposed the Aizenfestung to the creatures of the Sculpted Darkness. No matter how they tried, the Dwarves could never secure the entire length of the railway, and so they abandoned the project and sealed it. Eventually, both the 12th clan and the railway passed from living knowledge into legend.</li>
+                    <li>The Derro, though dwarf-kin, are not a part of the confederacy. They do, however, often find themselves aligned and allied with the Dwarves.</li>
+                </ul>
+                <br>
+                <strong>The Gloaming</strong>
+                <ul>
+                    <li>The Gloaming, due to its nearness to the Moon Veil Mountains and its distance from the Sphere of Day and Night, is an area of perpetual twilight. It comprises five islands that are occupied by the Elves and the Vulpiviri. While most of the Moon Veil Mountains are sheer, there is a wide and forested shore at each of the cardinal points. On each of those shores is one of the temples of the moons. Near the Gloaming is the Temple of Autumnus where live the Kitsune.</li>
+                    <li>The Isle of Twilight’s Harbor is the largest of the Elven Islands and is the only island where visitors are permitted. It is here where ships may port to trade with the Elves and where Seekers may beg an audience of them. It was here, too, where one of the Created elves—as opposed to the Born—sat and spoke consciousness into the Vulpiviri. At first, he spoke to the local fox population as a master would speak to his pets while slowly and without his notice they began to change. Each generation of fox became more and more anthropoidal until one day, the first Vulpivir spoke back to him in Elven. The Vulpiviri have lived on the Isle of Twilight’s Harbor ever since.</li>
+                    <li>The Created are undying Elves who rule from the north-most of the Elven Islands from a castle which is as much a part of as it is on the island. The Born are sometimes courtiers, but usually live on one of the other four islands.</li>
+                    <li>After the first recorded Grand Conjunction, one tribe of the Vulpiviri were blessed by Autumnus and changed into the Kitsune. Lycanthropy spread through the Isle of Twilight’s Harbor like a pestilence turning Elves into Orks and Vulpiviri rabid. The Elves necessarily banished the Kitsune to the Temple of Autumnus and the Orks to the later named Orkipelago.</li>
+                </ul>
+                <br>
+                <strong>The Desolation</strong>
+                <ul>
+                    <li>The desolation is south of the Daar mountains but west of the Desert of the Jann. A sprawling civilization once thrived there long before the founding of the empire. Its people vanished abruptly, however, after the first recorded conjunction leaving naught but their shadows behind. The area is studied by both the Sages Guild and the Guild Esoteric for its many anomalies: it rains, but the land is barren; all creatures avoid the area; the dead neither rot nor rise; the ancient wooden structures never rotted but have become petrified instead; even the rainwater is undrinkable; and explorers often go missing.</li>
+                </ul>
+                <br>
+                <strong>The Corruptor</strong>
+                <ul>
+                    <li>When the Crystal Sphere was created, it necessarily encapsulated an amount of umbra equal to its volume. As the Creator filled the Sphere with air, earth, water, and fire, that umbra coalesced into a malignant being known as the Corruptor. The Corruptor's sole aim is to break free from the Sphere in order to return to the void whence it came. It is therefore in the interest of all living things to thwart the Corruptor.</li>
+                </ul>
+                <br>
+                <strong>Omissions</strong>
+                <ul>
+                    <li>There are a few places intentionally left without description: the hill-country north of the Cordillera, the four islands east of the Frosinlands, and perhaps others you will find that we have overlooked. These areas of the Crystal Sphere are for you to flesh out and use in your story telling. Perhaps a strange breed of people live there, or perhaps there lies hidden an ancient tomb filled with treasures. As the LM, it is your responsibility to continue to sculpt the game world to fit your table.</li>
+                </ul>
+                <br>
+                <strong>The Undying</strong>
+                <ul>
+                    <li>The following are some of the undying we make use of in the Crystal Sphere. The undying are a select group of individuals that have defied mortality and have become permanent influences on the world.</li>
+                    <li><strong>The Wanderer:</strong> The Wanderer lives a lonely life accompanied only by his Automatons: clockwork servants of his own design. His manor house lies beside a seasonally frozen lake deep within the hollows of the God’s Throne Mountains. Many centuries ago, he wandered through a portal between worlds which had not yet been sealed by Day, and found himself atop the Throne of God with the portal room sealed behind him. The Wanderer seems human in most respects except that he never ages.</li>
+                    <li><strong>The Oracle:</strong> The Oracle was cursed with immortality as a result of a partially failed quest for omniscience. He lives atop a mesa deep within the Desert of the Jann with his perpetually reincarnated mortal wife whom he scours the world for periodically. Occasionally, adventurers seek him out for guidance on their quests.</li>
+                    <li><strong>The Varcolac:</strong> Infatuated with the wife of his superior, the Varcolac—then a high priest of Day—bargained with Night to be able to steal her away. Upon discovering this betrayal, Day banished the Varcolac forever from his presence, inflicting upon him a cursed immortality in which the full purport of forever could be felt. His stolen bride was also cursed to be an immortal spirit affixed to him who appears only in the twilight. If ever the Varcolac espies her, she vanishes before he is able to approach. His immortality is sustained by the blood of the living, and all those who then drink of his blood become his undead servants.</li>
+                    <li><strong>The Necromancer:</strong> Obsessed with his pursuit of knowledge, the Necromancer spent his youth searching for every rumored source of immortality. At first he sought the legendary Fountain of Youth, but after many disastrous dealings with the Fey, he ruled it to be legend alone. He then consulted the Djinn, but found that even their magic was limited. He already knew of vampirism and mummification, but they offered cripplingly limited versions of what he sought. It was he who finally perfected the rite of splitting one's soul to prevent transmigration.</li>
                 </ul>
             </div>
         </div>
@@ -7176,9 +7322,13 @@ const tooltipRegistry = {
   // ═══════════════════════════════════════════════════════════════════════
   // SKILLS & ABILITIES
   // ═══════════════════════════════════════════════════════════════════════
-  "alertness": {
+ "proficiency": {
+    title: "Proficiency",
+    description: "You can change up to your Rank Skill Results to Hit Results once per check."
+  },  
+"alertness": {
     title: "Alertness",
-    description: "Add a Crit Result to all surprise checks."
+    description: "Add a Crit Result to all Surprise and Initiative Checks."
   },
   "appraise": {
     title: "Appraise",
@@ -11568,6 +11718,24 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
         qomCheckbox.checked = (obsLevel >= 3);
     }
 
+    // Alertness is acquired via Backgrounds or Manual Selection
+    const activeBackgrounds = Object.values(characterChoicesState.backgroundSelections || {});
+    const activeUpbringing = document.getElementById("char-upbringing")?.value.toLowerCase() || "";
+    
+    // Checks memory state instead of the DOM (auto-catches the Servant background too)
+    let hasAlertness = activeBackgrounds.includes("Alertness") || activeUpbringing === "servant";
+
+    // Fallback check in case Alertness is ever manually added to the Extra Training HTML grid
+    const alertPBox = document.querySelector('input[data-skill="alertness"][data-type="p"]');
+    if (alertPBox && alertPBox.checked) {
+        hasAlertness = true;
+    }
+
+    const alertCheckbox = document.getElementById("pnp-chk-alert");
+    if (alertCheckbox) {
+        alertCheckbox.checked = hasAlertness;
+    }
+
         // ==========================================
         // RENDER VISUAL BREAKDOWN LABELS
         // ==========================================
@@ -11925,13 +12093,69 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
         if (weaponData.enchantment2Id && weaponData.enchantment2Id !== "None") mods.push(modTip(weaponData.enchantment2Id));    
         if (weaponData.enchantment3Id && weaponData.enchantment3Id !== "None") mods.push(modTip(weaponData.enchantment3Id)); 
 
-        const modifiedWeaponQualities = getModifiedSpecialQualities(weaponData.itemId, weaponData.materialId, weaponData.makerId, weaponData.profileMaterials);
+const modifiedWeaponQualities = getModifiedSpecialQualities(weaponData.itemId, weaponData.materialId, weaponData.makerId, weaponData.profileMaterials);
         modifiedWeaponQualities.forEach(qKey => mods.push(modTip(qKey)));
+
+        // =========================================================
+        // NEW: REAL-TIME PROFICIENCY, EXTRA TRAINING & MASTERY LABELS
+        // =========================================================
+        const getWeaponTreeLvl = (id) => {
+            const el = document.getElementById("sk-xp-" + id);
+            const pts = el ? (parseInt(el.value) || 0) : 0;
+            const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(id.replace(/-/g, " ")) : 0;
+            return Math.floor(pts / 6) + free;
+        };
+
+        let isProf = false;
+        let isET = false;
+        let isMastery = false;
+
+        const manualEtStates = characterChoicesState.extraTrainingSelections || {};
+        const dropEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
+        const dropMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
+        const bgSelections = Object.values(characterChoicesState.backgroundSelections || {});
+        const uChoice = document.getElementById("char-upbringing") ? document.getElementById("char-upbringing").value.toLowerCase() : "";
+
+        if (weaponItem.modTags) {
+            weaponItem.modTags.forEach(tag => {
+                const t = tag.toLowerCase();
+                let skillKey = "";
+                let skillName = "";
+                let hasP = false;
+
+                if (t === "brutal") {
+                    skillKey = "brutal_weapons"; skillName = "Brutal Weapons";
+                    if (getWeaponTreeLvl("brutal-weapons") >= 1) hasP = true;
+                } else if (t === "shrewd") {
+                    skillKey = "shrewd_weapons"; skillName = "Shrewd Weapons";
+                    if (getWeaponTreeLvl("shrewd-weapons") >= 1) hasP = true;
+                } else if (t === "pugil") {
+                    skillKey = "pugil_weapons"; skillName = "Pugil Weapons";
+                    if (getWeaponTreeLvl("pugilism") >= 1) hasP = true;
+                } else if (t === "arc_bow") {
+                    skillKey = "arc_bows"; skillName = "Arc-bows";
+                    if (getWeaponTreeLvl("arc-bows") >= 1) hasP = true;
+                } else if (t === "common") {
+                    skillKey = "common_weapons"; skillName = "Common Weapons";
+                    if (bgSelections.includes("Common Weapons") || uChoice === "military") hasP = true;
+                }
+
+                if (skillKey) {
+                    if (hasP || manualEtStates[skillKey]?.p) isProf = true;
+                    if (manualEtStates[skillKey]?.et || dropEtStates.includes(skillName)) isET = true;
+                    if (manualEtStates[skillKey]?.m || dropMStates.includes(skillName)) isMastery = true;
+                }
+            });
+        }
+        
+        if (isProf) mods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
+        if (isET) mods.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
+        if (isMastery) mods.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
+        // =========================================================
 
         if (mods.length > 0) { 
             cardHtml += `<div style="font-size: 0.7rem; color: #7c6f64; margin-bottom: 4px; font-style: italic;">${mods.join(" | ")}</div>`; 
         }
-
         let profiles = [];
         if (Array.isArray(weaponItem.includes)) {
             profiles = weaponItem.includes.map(id => ({ key: id, item: itemRegistry[id] })).filter(p => p.item);
@@ -12151,6 +12375,29 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
             modifiedShieldQualities.forEach(qKey => {
                 shieldMods.push(modTip(qKey));
             });
+
+            // =========================================================
+            // NEW: REAL-TIME SHIELD BASH PROFICIENCY LABELS FOR SHIELDS
+            // =========================================================
+            const getShieldTreeLvl = (id) => {
+                const el = document.getElementById("sk-xp-" + id);
+                const pts = el ? (parseInt(el.value) || 0) : 0;
+                const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(id.replace(/-/g, " ")) : 0;
+                const cost = (id === "defense") ? 4 : 6; // Fixed: Defense costs 4!
+                return Math.floor(pts / cost) + free;
+            };
+
+            const manEtStates = characterChoicesState.extraTrainingSelections || {};
+            const drEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
+            const drMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
+
+            let isSbProf = getShieldTreeLvl("defense") >= 1 || (manEtStates["shield_bash"] && manEtStates["shield_bash"].p);
+            let isSbET = (manEtStates["shield_bash"] && manEtStates["shield_bash"].et) || drEtStates.includes("Shield Bash");
+            let isSbM = (manEtStates["shield_bash"] && manEtStates["shield_bash"].m) || drMStates.includes("Shield Bash");
+
+            if (isSbProf) shieldMods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
+            if (isSbET) shieldMods.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
+            if (isSbM) shieldMods.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
 
             if (shieldProfiles.length > 0) {
                 shieldHtml = `
@@ -16846,12 +17093,13 @@ function updatePnpWriteInCards() {
 
     // --- 1. PARSE COMBAT MANEUVERS & SPELLS ---
 
+    if (getLvl("defense") >= 1) attacks.push("Shield Bash");
     if (getLvl("stealth") >= 8) attacks.push("Backstab");
 
     if (getLvl("arc-bows") >= 3) attacks.push("Melee Shot");
     if (getLvl("arc-bows") >= 5) attacks.push("Longshot");
 
-    if (getLvl("brutal-weapons") >= 3) defenses.push("Parry & Ripost");
+    if (getLvl("brutal-weapons") >= 3 || getLvl("shrewd-weapons") >= 3) defenses.push("Parry & Ripost");
     if (getLvl("brutal-weapons") >= 5) attacks.push("Crushing Blow");
 
     if (getLvl("defense") >= 1) defenses.push("Avoidance");
@@ -16868,7 +17116,6 @@ function updatePnpWriteInCards() {
     if (getLvl("pugilism") >= 4) attacks.push("Trip");
     if (getLvl("pugilism") >= 5) attacks.push("Opportune Strike");
 
-    if (getLvl("shrewd-weapons") >= 3) defenses.push("Parry & Ripost");
     if (getLvl("shrewd-weapons") >= 5) attacks.push("Calculated Strike");
 
     if (getLvl("guild-temple") >= 2) attacks.push("Dismiss Undead");
@@ -18682,6 +18929,29 @@ window.updateEquipmentCardViews = function() {
         modifiedQualities.forEach(qKey => {
             parts.push(modTip(qKey));
         });
+
+        // =========================================================
+        // NEW: REAL-TIME AVOIDANCE PROFICIENCY LABELS FOR ARMOR
+        // =========================================================
+        const getArmorTreeLvl = (id) => {
+            const el = document.getElementById("sk-xp-" + id);
+            const pts = el ? (parseInt(el.value) || 0) : 0;
+            const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(id.replace(/-/g, " ")) : 0;
+            const cost = (id === "defense") ? 4 : 6; // Fixed: Defense costs 4!
+            return Math.floor(pts / cost) + free;
+        };
+
+        const manualEtStates = characterChoicesState.extraTrainingSelections || {};
+        const dropEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
+        const dropMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
+
+        let isAvoidProf = getArmorTreeLvl("defense") >= 1 || (manualEtStates["avoidance"] && manualEtStates["avoidance"].p);
+        let isAvoidET = (manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance");
+        let isAvoidM = (manualEtStates["avoidance"] && manualEtStates["avoidance"].m) || dropMStates.includes("Avoidance");
+
+        if (isAvoidProf) parts.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
+        if (isAvoidET) parts.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
+        if (isAvoidM) parts.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
 
         if (parts.length > 0) {
             detailString = `<span style="font-size: 0.75rem; color: #7c6f64; display:block; margin-top:2px;">${parts.join(" | ")}</span>`;
