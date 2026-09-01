@@ -1018,9 +1018,16 @@ table.wyrd-table .table-icon {
 
         .pnp-avoid-columns-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             flex: 1;
+        }
+
+        .pnp-belt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
         }
 
 .pnp-col-slot {
@@ -1667,7 +1674,12 @@ details[open] #skills-collapsed-summary {
                 flex-direction: column; 
                 align-items: stretch; 
             }
-            .pnp-avoid-columns-grid, 
+            .pnp-avoid-columns-grid {
+                grid-template-columns: 1fr;
+            }
+            .pnp-belt-grid {
+                grid-template-columns: 1fr;
+            }
             .pnp-subpaces-grid { 
                 grid-template-columns: repeat(2, 1fr); 
             }
@@ -2450,32 +2462,39 @@ details[open] #skills-collapsed-summary {
             </div>
         </div>
         
-        <!-- Avoidance Equipment Columns -->
-        <div class="pnp-avoid-columns-grid">
-            <div class="pnp-col-slot" id="slot-container-armor">
-                <div class="pnp-col-header">ARMOR <button class="pnp-edit-btn" onclick="toggleBuilder('armor')">Edit</button></div>
-                <div class="pnp-col-content" id="card-view-armor">
-                    <div class="pnp-empty-line">Empty Armor Slot</div>
+        <!-- Defense Equipment & Belt List -->
+        <div style="display: flex; flex-direction: column; gap: 15px; flex: 2;">
+            <div class="pnp-avoid-columns-grid">
+                <div class="pnp-col-slot" id="slot-container-armor">
+                    <div class="pnp-col-header">ARMOR <button class="pnp-edit-btn" onclick="toggleBuilder('armor')">Edit</button></div>
+                    <div class="pnp-col-content" id="card-view-armor">
+                        <div class="pnp-empty-line">Empty Armor Slot</div>
+                    </div>
+                    <div class="builder-panel" id="builder-armor" style="display: none;"></div>
                 </div>
-                <div class="builder-panel" id="builder-armor" style="display: none;"></div>
-            </div>
-            
-            <div class="pnp-col-slot" id="slot-container-shield">
-                <div class="pnp-col-header">SHIELD <button class="pnp-edit-btn" onclick="toggleBuilder('shield')">Edit</button></div>
-                <div class="pnp-col-content" id="card-view-shield">
-                    <div class="pnp-empty-line">Empty Shield Slot</div>
+                
+                <div class="pnp-col-slot" id="slot-container-shield">
+                    <div class="pnp-col-header">SHIELD <button class="pnp-edit-btn" onclick="toggleBuilder('shield')">Edit</button></div>
+                    <div class="pnp-col-content" id="card-view-shield">
+                        <div class="pnp-empty-line">Empty Shield Slot</div>
+                    </div>
+                    <div class="builder-panel" id="builder-shield" style="display: none;"></div>
                 </div>
-                <div class="builder-panel" id="builder-shield" style="display: none;"></div>
             </div>
 
-            <div class="pnp-col-slot">
-                <div class="pnp-col-header">SKILLS / SPELLS</div>
-                <div class="pnp-col-content" id="card-view-active-defenses"></div>
-            </div>
-
-<div class="pnp-col-content" id="pnp-belt-slots-container" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+            <!-- Belt items across the bottom of the armor/shield grid -->
+            <div class="pnp-col-slot" style="margin-top: auto; padding-top: 5px;">
+                <div class="pnp-col-header" style="margin-bottom: 8px;">EQUIPPED BELT ITEMS</div>
+                <div id="pnp-belt-slots-container" class="pnp-belt-grid">
                     <!-- Built dynamically on load -->
                 </div>
+            </div>
+        </div>
+
+        <!-- Defensive Skills mirroring the Offensive Skills card -->
+        <div class="pnp-offensive-skills-card" style="flex: 1; align-self: stretch;">
+            <div class="pnp-col-header" style="margin-bottom: 8px;">DEFENSIVE SKILLS & SPELLS</div>
+            <div class="pnp-offensive-writein-list" id="card-view-active-defenses"></div>
         </div>
     </div>
 
@@ -12245,13 +12264,13 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                                 <span style="font-weight: bold; font-size: 0.78rem; color: #5c1d1d;">${comp.name}</span>
                                 <span style="font-size: 0.78rem; font-weight: bold; color: #1b6b55;">${comp.dice}d${comp.bonus >= 0 ? '+' : ''}${comp.bonus}</span>
                             </div>
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
-                                <div style="display:flex; flex-direction:column;">
-                                    <span style="font-weight: bold;">${comp.damageType}</span>
+                            <div style="display: grid; grid-template-columns: 1fr 115px; gap: 6px; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
+                                <div style="display:flex; flex-direction:column; min-width: 0;">
+                                    <span style="font-weight: bold; line-height: 1.2;">${comp.damageType}</span>
                                     ${ccHtml}
                                     ${subDetailString}
                                 </div>
-                                <span>${comp.range}</span>
+                                <span style="text-align: right; padding-top: 1px;">${comp.range}</span>
                             </div>
                         </div>
                     `;
@@ -12372,14 +12391,14 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                 cardHtml += `
                     <div class="pnp-static-row" data-tooltip="${profKey}">
                         ${profileNameHTML}
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 2px;" >
-                            <div style="display:flex; flex-direction:column;">
-                                <span style="font-weight: bold; font-size: 0.75rem; color: #7d3c1b;">${cleanDmgType}${warningTag}</span>
+                        <div style="display: grid; grid-template-columns: 1fr 115px 50px; gap: 6px; align-items: flex-start; margin-top: 2px;" >
+                            <div style="display:flex; flex-direction:column; min-width: 0;">
+                                <span style="font-weight: bold; font-size: 0.75rem; color: #7d3c1b; line-height: 1.2;">${cleanDmgType}${warningTag}</span>
                                 ${ccHtml}
                                 ${materialLabelHTML}
                             </div>
-                            <span style="font-size: 0.75rem; color: #7c6f64;">${cleanRange}</span>
-                            <span style="font-weight: bold; font-size: 0.85rem; color: #1b6b55;">${finalWpnDice}d${weaponFlatBonus >= 0 ? '+' : ''}${weaponFlatBonus}</span>
+                            <span style="font-size: 0.75rem; color: #7c6f64; text-align: center; padding-top: 1px;">${cleanRange}</span>
+                            <span style="font-weight: bold; font-size: 0.85rem; color: #1b6b55; text-align: right; padding-top: 1px;">${finalWpnDice}d${weaponFlatBonus >= 0 ? '+' : ''}${weaponFlatBonus}</span>
                         </div>
                     </div>
                 `;
@@ -12524,14 +12543,22 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                     const ccDisplayString = getWeaponCcDisplay((profileItem.damageType || "BASH"), shieldData.makerId, activeProfileMaterial, activeProfileTags);
                     const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
 
+                    const materialLabelHTML = (materialIsValidForThisGrip && activeMaterialName) ? `<div style="font-size: 0.65rem; color: #7d3c1b; font-style: italic; margin-top: 1px;">${activeMaterialName}</div>` : '';
+
                     shieldHtml += `
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px;" >
-                            <div style="display: flex; flex-direction: column;">
-                                <span style="font-weight: bold; font-size: 0.78rem; color: #7d3c1b;">${cleanDmgType}</span>
-                                ${ccHtml}
+                        <div class="pnp-static-row" data-tooltip="${profileKey}">
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <span style="font-weight: bold; font-size: 0.78rem; color: #5c1d1d;">${profileItem.name}</span>
+                                <span style="font-size: 0.78rem; font-weight: bold; color: #1b6b55;">${finalShieldDice}d${shieldFlatBonus >= 0 ? '+' : ''}${shieldFlatBonus}</span>
                             </div>
-                            <span style="font-size: 0.75rem; color: #7c6f64;">${cleanRange}</span>
-                            <span style="font-weight: bold; font-size: 0.85rem; color: #1b6b55;">${finalShieldDice}d${shieldFlatBonus >= 0 ? '+' : ''}${shieldFlatBonus}</span>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64; gap: 6px; margin-top: 2px;">
+                                <div style="display: flex; flex-direction: column; min-width: 0; flex: 1;">
+                                    <span style="font-weight: bold; line-height: 1.2;">${cleanDmgType}</span>
+                                    ${ccHtml}
+                                    ${materialLabelHTML}
+                                </div>
+                                <span style="text-align: right; flex-shrink: 0; max-width: 45%; line-height: 1.2;">${cleanRange}</span>
+                            </div>
                         </div>
                     `;
                 } 
@@ -12617,13 +12644,13 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                                     <span style="font-weight: bold; font-size: 0.78rem; color: #5c1d1d;">${profileItem.name}</span>
                                     <span style="font-size: 0.78rem; font-weight: bold; color: #1b6b55;">${finalShieldDice}d${shieldFlatBonus >= 0 ? '+' : ''}${shieldFlatBonus}</span>
                                 </div>
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <span style="font-weight: bold;">${cleanDmgType}</span>
+                                <div style="display: grid; grid-template-columns: 1fr 115px; gap: 6px; align-items: flex-start; width: 100%; font-size: 0.7rem; color: #7c6f64;">
+                                    <div style="display: flex; flex-direction: column; min-width: 0;">
+                                        <span style="font-weight: bold; line-height: 1.2;">${cleanDmgType}</span>
                                         ${ccHtml}
                                         ${materialLabelHTML}
                                     </div>
-                                    <span>${cleanRange}</span>
+                                    <span style="text-align: right; padding-top: 1px;">${cleanRange}</span>
                                 </div>
                             </div>
                         `;
@@ -13235,15 +13262,25 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
      updateExtraTrainingDicePools();
  }
 
-// --- RENDER HOVER MODIFIERS NEAR ROLLS ---
+    // --- RENDER HOVER MODIFIERS NEAR ROLLS ---
     
-    // Avoidance Modifiers (Salvation, Defending)
+    const manualEtStates = characterChoicesState.extraTrainingSelections || {};
+    const dropEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
+    const dropMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
+
+    // Avoidance Modifiers (Salvation, Defending, ET, Mastery)
     let avoidBadges = "";
     if (activeEnchants["salvation"]) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Salvation</span>`;
     }
     if (activeEnchants["defending"]) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_defending" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Defending</span>`;
+    }
+    if ((manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance")) {
+        avoidBadges += `<span class="locus-ench-tag" data-tooltip="extra_training" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Extra Training</span>`;
+    }
+    if ((manualEtStates["avoidance"] && manualEtStates["avoidance"].m) || dropMStates.includes("Avoidance")) {
+        avoidBadges += `<span class="locus-ench-tag" data-tooltip="skill_mastery" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Mastery</span>`;
     }
     const avoidCard = document.getElementById("stat-avoidance-calc")?.parentElement;
     if (avoidCard) {
@@ -18981,29 +19018,6 @@ window.updateEquipmentCardViews = function() {
         modifiedQualities.forEach(qKey => {
             parts.push(modTip(qKey));
         });
-
-        // =========================================================
-        // NEW: REAL-TIME AVOIDANCE PROFICIENCY LABELS FOR ARMOR
-        // =========================================================
-        const getArmorTreeLvl = (id) => {
-            const el = document.getElementById("sk-xp-" + id);
-            const pts = el ? (parseInt(el.value) || 0) : 0;
-            const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(id.replace(/-/g, " ")) : 0;
-            const cost = (id === "defense") ? 4 : 6; // Fixed: Defense costs 4!
-            return Math.floor(pts / cost) + free;
-        };
-
-        const manualEtStates = characterChoicesState.extraTrainingSelections || {};
-        const dropEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
-        const dropMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
-
-        let isAvoidProf = getArmorTreeLvl("defense") >= 1 || (manualEtStates["avoidance"] && manualEtStates["avoidance"].p);
-        let isAvoidET = (manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance");
-        let isAvoidM = (manualEtStates["avoidance"] && manualEtStates["avoidance"].m) || dropMStates.includes("Avoidance");
-
-        if (isAvoidProf) parts.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
-        if (isAvoidET) parts.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
-        if (isAvoidM) parts.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
 
         if (parts.length > 0) {
             detailString = `<span style="font-size: 0.75rem; color: #7c6f64; display:block; margin-top:2px;">${parts.join(" | ")}</span>`;
