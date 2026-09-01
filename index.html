@@ -86,6 +86,7 @@
             grid-template-columns: repeat(7, 1fr);
             gap: 12px;
             margin-top: 10px;
+            align-items: stretch;
         }
 
         .aspect-card {
@@ -96,8 +97,10 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: stretch;
+            height: 100%;
+            box-sizing: border-box;
             text-align: center;
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
@@ -158,9 +161,14 @@
             background-color: var(--success-bg) !important;
             border: 1px solid var(--success-border) !important;
             border-radius: 6px;
-            margin-top: auto;
+            margin-top: 8px;
             text-align: center;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .aspect-card .hint {
+            margin-top: auto !important;
+            padding-top: 6px;
         }
 
         @media (max-width: 950px) {
@@ -907,6 +915,7 @@ table.wyrd-table .table-icon {
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin-bottom: 20px;
+            align-items: stretch;
         }
 
         .pnp-resource-card {
@@ -915,6 +924,10 @@ table.wyrd-table .table-icon {
             border-radius: 6px;
             padding: 8px 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-sizing: border-box;
         }
 
         .pnp-resource-header {
@@ -932,7 +945,7 @@ table.wyrd-table .table-icon {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            align-items: center;
+            align-items: start;
         }
 
         .pnp-resource-field {
@@ -10943,7 +10956,7 @@ window.updateResourceStatusDisplays = function(finalHel, finalAct) {
             if (relativeCard) {
                 container = document.createElement("div");
                 container.id = containerId;
-                container.style.marginTop = "10px";
+                container.style.marginTop = "auto";
                 container.style.paddingTop = "8px";
                 container.style.borderTop = "none";
                 relativeCard.appendChild(container);
@@ -19156,7 +19169,7 @@ window.initStatusContainers = function() {
     if (vitalityCard && !document.getElementById("vitality-status-container")) {
         const div = document.createElement("div");
         div.id = "vitality-status-container";
-        div.style.marginTop = "10px";
+        div.style.marginTop = "auto";
         div.style.paddingTop = "8px";
         div.style.borderTop = "none"; // Start with no border
         vitalityCard.appendChild(div);
@@ -19166,7 +19179,7 @@ window.initStatusContainers = function() {
     if (manaCard && !document.getElementById("mana-status-container")) {
         const div = document.createElement("div");
         div.id = "mana-status-container";
-        div.style.marginTop = "10px";
+        div.style.marginTop = "auto";
         div.style.paddingTop = "8px";
         div.style.borderTop = "none"; // Start with no border
         manaCard.appendChild(div);
