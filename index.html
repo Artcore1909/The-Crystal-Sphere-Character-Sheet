@@ -312,6 +312,12 @@ table.wyrd-table .table-icon {
     margin: 0 auto 4px auto; /* Centers the icon image horizontally */
 }
 
+.lore-image {
+    max-width: 100%;  /* Ensures image never exceeds the container width */
+    height: auto;     /* Maintains proportional aspect ratio */
+    display: block;   /* Prevents extra inline white space around images */
+    margin-bottom: 15px; /* Adds spacing between the two maps */
+}
 
         /* =========================================================================
            2. COLLAPSIBLE SECTIONS
@@ -3442,6 +3448,8 @@ details[open] #skills-collapsed-summary {
 <div class="skill-item">
     <div class="skill-header" onclick="toggleSkill(this)">8. Lore & World Atlas ▾</div>
     <div class="skill-body">
+        <img src="Overworld.jpg" alt="Overworld Map" class="lore-image">
+        <img src="The Sculpted Darkness.jpg" alt="The Sculpted Darkness Map" class="lore-image">
 
 <span>As it is important to draw a line between the knowledge of the player and that of the character, all content hereafter and all content contained in the Creature Compendium must necessarily require a Lore check to access. The LM, however, retains the right to waive any checks he sees fit.</span>
                 <br>
@@ -10402,8 +10410,21 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
         const targetLevel = getSkillTreeLevel(sanitizedKey);
         const inputEl = document.getElementById("sk-xp-" + normalizedIncomingKey);
         
-        // (Change this back to just currentIntellect * 6 if you removed the tweak)
-        const maxAllowedXp = (currentIntellect * 6) + 5; 
+        let maxAllowedXp = (currentIntellect * 6) + 5;
+        const config = (typeof guildCastSkillLevelCaps !== 'undefined' && guildCastSkillLevelCaps[sanitizedKey]) || 
+                       (typeof commonSkillLevelCaps !== 'undefined' && commonSkillLevelCaps[sanitizedKey]);
+                       
+        if (config && config.isPackage && config.progression) {
+            const nextLevelIndex = currentIntellect + 1;
+            if (nextLevelIndex < config.progression.length) {
+                maxAllowedXp = config.progression[nextLevelIndex] - 1;
+            } else {
+                maxAllowedXp = config.progression[config.progression.length - 1];
+            }
+        } else {
+            const cost = (config && config.costPerLevel) ? config.costPerLevel : 6;
+            maxAllowedXp = (currentIntellect * cost) + (cost - 1);
+        }
         
         let isReverting = false;
 
@@ -13546,9 +13567,21 @@ window.verifyRank3PrerequisitesMet = function(advancedTreeKey) {
 
     // Helper utility to read the true current level of any skill tree on Tab 1
     const getTreeLvl = (id, cost = 6) => {
+        const dictKey = id.replace(/-/g, " ").replace("guild ", "guild: ");
         const f = document.getElementById("sk-xp-" + id);
         const pts = f ? parseInt(f.value) || 0 : 0;
-        const free = (typeof getFreeLevelsCountForTree === "function") ? getFreeLevelsCountForTree(id.replace(/-/g, " ")) : 0;
+        const free = (typeof getFreeLevelsCountForTree === "function") ? getFreeLevelsCountForTree(dictKey) : 0;
+        
+        const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[dictKey]) ||
+                       (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[dictKey]);
+                       
+        if (config && config.isPackage && config.progression) {
+            let lvl = 0;
+            for (let i = 0; i < config.progression.length; i++) {
+                if (pts >= config.progression[i]) lvl = i;
+            }
+            return lvl + free;
+        }
         return Math.floor(pts / cost) + free;
     };
 
@@ -14304,7 +14337,11 @@ function renderDynamicActiveTreesFeed() {
     
     let purchasedLvl = 0;
     const isPackageDeal = config && config.isPackage === true;
-    if (isPackageDeal && rawPoints > 0 && rawPoints < activeCost) {
+    if (isPackageDeal && config.progression) {
+      for (let i = 0; i < config.progression.length; i++) {
+        if (rawPoints >= config.progression[i]) purchasedLvl = i;
+      }
+    } else if (isPackageDeal && rawPoints > 0 && rawPoints < activeCost) {
       purchasedLvl = 1;
     } else {
       purchasedLvl = Math.floor(rawPoints / activeCost);
