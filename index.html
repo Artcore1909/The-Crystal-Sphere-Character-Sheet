@@ -7543,7 +7543,7 @@ const tooltipRegistry = {
   },
   "level_headed": {
     title: "Level Headed",
-    description: "You are immune to panic."
+    description: "Add a Crit Result to Verve Saves against Panic."
   },
   "discern_lie": {
     title: "Discern Lie",
@@ -10681,8 +10681,11 @@ function purgeDeactivatedStateChoices() {
     const stateKeys = [
         'extraTrainingSelections', 
         'extraTrainingTalentSelections', 
+        'masteryTalentSelections', 
         'backgroundSelections', 
-        'sagesSelections'
+        'sagesSelections',
+        'scholarTargets',
+        'professorTargets'
     ];
 
     stateKeys.forEach(stateKey => {
@@ -14083,7 +14086,8 @@ function getEffectiveAspect(skillKey) {
 }
 
 window.applySkillGrantedBonuses = function () {
-    const reg = window.skillBonusRegistry || (window.skillBonusRegistry = { dice: {}, damage: {} });
+    // Renamed to 'bonusReg' to permanently fix the "reg already declared" crash
+    const bonusReg = window.skillBonusRegistry || (window.skillBonusRegistry = { dice: {}, damage: {} });
     const activeEnchants = characterChoicesState.activeWornEnchantments || {};
     const maxMap = characterChoicesState.activeWornEnchantments || {};
     const castSkillKeys = castSkillsData.map(s => s.name.toLowerCase().replace(/[^a-z0-9]/g, '_'));
@@ -14097,42 +14101,45 @@ window.applySkillGrantedBonuses = function () {
         const effAspect = getEffectiveAspect(skillKey);
         if (!effAspect) return;
 
-        // Athleticism: +2d to Strength-based checks
         if (activeEnchants["athleticism"] && effAspect === "STR") {
-            reg.dice[skillKey] = (reg.dice[skillKey] || 0) + maxMap["athleticism"] * 2;
+            bonusReg.dice[skillKey] = (bonusReg.dice[skillKey] || 0) + maxMap["athleticism"] * 2;
         }
-        // Awareness: +2d to Acuity-based checks
         if (activeEnchants["awareness"] && effAspect === "ACT") {
-            reg.dice[skillKey] = (reg.dice[skillKey] || 0) + maxMap["awareness"] * 2;
+            bonusReg.dice[skillKey] = (bonusReg.dice[skillKey] || 0) + maxMap["awareness"] * 2;
         }
-        // Intellect (Lore): +2d to Intellect-based checks
         if (activeEnchants["intellect"] && effAspect === "INT") {
-            reg.dice[skillKey] = (reg.dice[skillKey] || 0) + maxMap["intellect"] * 2;
+            bonusReg.dice[skillKey] = (bonusReg.dice[skillKey] || 0) + maxMap["intellect"] * 2;
         }
-        // Power: +2d to Verve-based checks (ignoring cast skill trees)
         if (activeEnchants["power"] && effAspect === "VER" && !castSkillKeys.includes(skillKey)) {
-            reg.dice[skillKey] = (reg.dice[skillKey] || 0) + maxMap["power"] * 2;
+            bonusReg.dice[skillKey] = (bonusReg.dice[skillKey] || 0) + maxMap["power"] * 2;
         }
-        // Skill: +2d to non-attack Dexterity-based checks
         if (activeEnchants["skill"] && effAspect === "DEX") {
             const attackSkills = ["arc_bows", "brutal_weapons", "common_weapons", "pugil_weapons", "shrewd_weapons"];
             if (!attackSkills.includes(skillKey)) {
-                reg.dice[skillKey] = (reg.dice[skillKey] || 0) + maxMap["skill"] * 2;
+                bonusReg.dice[skillKey] = (bonusReg.dice[skillKey] || 0) + maxMap["skill"] * 2;
             }
         }
     });
 
-    // ── Professor: +2d to chosen Lore
-    const profTarget = document.getElementById("professor-target-lore");
-    if (profTarget && profTarget.value) {
-        reg.dice[profTarget.value] = (reg.dice[profTarget.value] || 0) + 2;
+    // ── Scholar: +2d to chosen Lore(s)
+    if (characterChoicesState.scholarTargets) {
+        Object.values(characterChoicesState.scholarTargets).forEach(lore => {
+            if (lore && lore !== "None") {
+                const k = lore.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                bonusReg.dice[k] = (bonusReg.dice[k] || 0) + 2;
+            }
+        });
     }
 
-    // ── Scholar: +2d to chosen Lore(s)
-    document.querySelectorAll(".scholar-target-lore").forEach(el => {
-        const k = el.value;
-        if (k) reg.dice[k] = (reg.dice[k] || 0) + 2;
-    });
+    // ── Professor: +2d to chosen Lore(s)
+    if (characterChoicesState.professorTargets) {
+        Object.values(characterChoicesState.professorTargets).forEach(lore => {
+            if (lore && lore !== "None") {
+                const k = lore.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                bonusReg.dice[k] = (bonusReg.dice[k] || 0) + 2;
+            }
+        });
+    }
 };
 
 window.applyAllBonuses = function () {
@@ -14229,19 +14236,13 @@ function syncDynamicDropdownSelectionsToExtraTraining() {
     });
   }
 
-  // 3. PARSE GUILD: SAGES SLOTS
+// 3. PARSE GUILD: SAGES SLOTS
   if (characterChoicesState.sagesSelections) {
     Object.values(characterChoicesState.sagesSelections).forEach(rawSelection => {
-      if (!rawSelection || rawSelection === "None" || rawSelection === "New Language") return;
+      // Ignore utility selections so they don't trigger phantom proficiency checks
+      if (!rawSelection || rawSelection === "None" || rawSelection === "New Language" || rawSelection === "Scholar" || rawSelection === "Professor") return;
 
-      // Strip out upgrade prefixes like "[Upgrade] Scholar: Lore [History]" to isolate the base skill name
-      let cleanName = rawSelection
-        .replace(/^Scholar:\s*/, '')
-        .replace(/^Professor:\s*/, '')
-        .replace(/^Lore\s*\[/, '')
-        .replace(/\]$/, ''); // Leaves clean tokens like "Architecture" or "History"
-
-      toggleExtraTrainingProficiencyBox(cleanName, true);
+      toggleExtraTrainingProficiencyBox(rawSelection, true);
     });
   }
 
@@ -15103,144 +15104,195 @@ else if (tree.key === "mastery: conjuror") {
 }
 
 // ==========================================
-// 6.5 FIXED: INFINITE SAGES OPEN-CHOICE UPGRADE AND TRACKING LOOP
+// 6.5 FIXED: SAGES OPEN-CHOICE UPGRADE AND TRACKING LOOP
 // ==========================================
 else if (tree.key === "guild: sages") {
- const currentUpbringing = document.getElementById("char-upbringing") ? document.getElementById("char-upbringing").value.toLowerCase() : "";
- const isSage = currentUpbringing === "sage";
+    if (!characterChoicesState.sagesSelections) characterChoicesState.sagesSelections = {};
+    if (!characterChoicesState.scholarTargets) characterChoicesState.scholarTargets = {};
+    if (!characterChoicesState.professorTargets) characterChoicesState.professorTargets = {};
 
- // Loop through every single attained level slot dynamically to Infinity
- for (let i = 0; i < tree.level; i++) {
- const slotNum = i + 1;
- const currentSelection = characterChoicesState.sagesSelections[slotNum] || "None";
- 
- let selectOptionsHtml = `<option value="None">Choose Skill</option>`;
- 
- // 1. Always append the 16 core baseline knowledge lores and language selectors
- availableSagesLoresList.forEach(loreItem => {
-     // RULE: New Language Expansion is inherently stackable and can be selected infinitely!
-     if (loreItem === "New Language") {
-         selectOptionsHtml += `<option value="${loreItem}" ${currentSelection === loreItem ? 'selected' : ''}>${loreItem}</option>`;
-         return;
-     }
-     
-     // Standard Base Lores can only be selected exactly once across your slots to establish them
-     const isTakenElsewhere = Object.values(characterChoicesState.sagesSelections).some(
-         (v, idx) => Object.keys(characterChoicesState.sagesSelections)[idx] !== slotNum.toString() && v === loreItem
-     );
-     if (!isTakenElsewhere || currentSelection === loreItem) {
-         selectOptionsHtml += `<option value="${loreItem}" ${currentSelection === loreItem ? 'selected' : ''}>${loreItem}</option>`;
-     }
- });
+    // 1. Gather all currently proficient lore skills
+    let proficientLores = [];
+    availableSagesLoresList.forEach(lore => {
+        if (lore === "New Language") return;
+        const safeKey = lore.toLowerCase().replace(/[^a-z0-9]/g, '_');
+        const pBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="p"]`);
+        
+        let isProf = (pBox && pBox.checked) || 
+                     (characterChoicesState.extraTrainingSelections && characterChoicesState.extraTrainingSelections[safeKey]?.p);
+                     
+        // Also consider it proficient if it's selected as a base lore in ANY Sages slot
+        if (!isProf) {
+            isProf = Object.values(characterChoicesState.sagesSelections).includes(lore);
+        }
+        if (isProf) proficientLores.push(lore);
+    });
 
- // 2. Compile an array of base lores currently active in other slots to populate upgrade paths
- let activeLoresInSheet = [];
- let activeScholarUpgrades = [];
- 
- Object.entries(characterChoicesState.sagesSelections).forEach(([slot, val]) => {
-     if (parseInt(slot) !== slotNum && val !== "None") {
-         if (val.startsWith("Scholar: ")) {
-             activeScholarUpgrades.push(val.replace("Scholar: ", ""));
-         } else if (!val.startsWith("Professor: ") && val !== "New Language") {
-             activeLoresInSheet.push(val);
-         }
-     }
- });
+    // 2. Gather currently selected Scholar and Professor targets
+    let activeScholarTargets = [];
+    let activeProfessorTargets = [];
+    
+    Object.entries(characterChoicesState.sagesSelections).forEach(([slot, val]) => {
+        if (val === "Scholar") {
+            const tgt = characterChoicesState.scholarTargets[slot];
+            if (tgt && tgt !== "None") activeScholarTargets.push({ slot: parseInt(slot), lore: tgt });
+        } else if (val === "Professor") {
+            const tgt = characterChoicesState.professorTargets[slot];
+            if (tgt && tgt !== "None") activeProfessorTargets.push({ slot: parseInt(slot), lore: tgt });
+        }
+    });
 
- if (isSage) {
-     // SCHOLAR UPGRADE LOOP: Can target any established base lore
-     activeLoresInSheet.forEach(baseLore => {
-         const optionText = `Scholar: ${baseLore}`;
-         const isScholarTaken = Object.values(characterChoicesState.sagesSelections).includes(optionText);
-         if (!isScholarTaken || currentSelection === optionText) {
-             selectOptionsHtml += `<option value="${optionText}" ${currentSelection === optionText ? 'selected' : ''}>[Upgrade] ${optionText}</option>`;
-         }
-     });
-     
-     // PROFESSOR UPGRADE LOOP: Can target any lore upgraded by a Scholar rank
-     activeScholarUpgrades.forEach(scholarLore => {
-         const optionText = `Professor: ${scholarLore}`;
-         const isProfTaken = Object.values(characterChoicesState.sagesSelections).includes(optionText);
-         if (!isProfTaken || currentSelection === optionText) {
-             selectOptionsHtml += `<option value="${optionText}" ${currentSelection === optionText ? 'selected' : ''}>[Ultimate] ${optionText}</option>`;
-         }
-     });
- }
+    // Loop through every single attained level slot dynamically to Infinity
+    for (let i = 0; i < tree.level; i++) {
+        const slotNum = i + 1;
+        const currentSelection = characterChoicesState.sagesSelections[slotNum] || "None";
+        
+        // Find available Scholar targets for THIS slot
+        let availableScholarTargets = proficientLores.filter(lore => {
+            const takenElsewhere = activeScholarTargets.some(st => st.slot !== slotNum && st.lore === lore);
+            return !takenElsewhere;
+        });
 
- // Render the selection input node card row frame
- let labelStyle = "color: #7d3c1b; font-weight: bold;";
- let labelTag = `[Lvl ${slotNum}]`;
- let languageSelectorHtml = "";
+        // Find available Professor targets for THIS slot (must be an active Scholar target)
+        let availableProfessorTargets = activeScholarTargets.map(st => st.lore).filter(lore => {
+            const takenElsewhere = activeProfessorTargets.some(pt => pt.slot !== slotNum && pt.lore === lore);
+            return !takenElsewhere;
+        });
+        
+        let selectOptionsHtml = `<option value="None">Choose Skill</option>`;
+        
+        // Always append the core baseline knowledge lores and language selectors
+        availableSagesLoresList.forEach(loreItem => {
+            if (loreItem === "New Language") {
+                selectOptionsHtml += `<option value="${loreItem}" ${currentSelection === loreItem ? 'selected' : ''}>${loreItem}</option>`;
+                return;
+            }
+            
+            const isTakenElsewhere = Object.entries(characterChoicesState.sagesSelections).some(
+                ([idx, v]) => parseInt(idx) !== slotNum && v === loreItem
+            );
+            if (!isTakenElsewhere || currentSelection === loreItem) {
+                selectOptionsHtml += `<option value="${loreItem}" ${currentSelection === loreItem ? 'selected' : ''}>${loreItem}</option>`;
+            }
+        });
 
- if (currentSelection.startsWith("Scholar:")) {
-     labelStyle = "color: #2e7d32; font-weight: bold;";
-     labelTag = `[Scholar]`;
- } else if (currentSelection.startsWith("Professor:")) {
-     labelStyle = "color: #2b6cb0; font-weight: bold;";
-     labelTag = `[Professor]`;
- } else if (currentSelection === "New Language") {
-     labelStyle = "color: #d97706; font-weight: bold;";
-     labelTag = `[Language]`;
-     
-     // 1. Gather ONLY languages that are already fully native or fluent
-     let fullyFluentLanguages = [];
-     const currentEthnos = document.getElementById("char-ethnos") ? document.getElementById("char-ethnos").value : "None";
-     const ethnosData = typeof ethnosLanguages !== 'undefined' ? ethnosLanguages[currentEthnos] : null;
+        // Add Scholar option if there are targets OR if it's currently selected
+        if (availableScholarTargets.length > 0 || currentSelection === "Scholar") {
+            selectOptionsHtml += `<option value="Scholar" ${currentSelection === "Scholar" ? 'selected' : ''}>Scholar</option>`;
+        }
+        
+        // Add Professor option if there are targets OR if it's currently selected
+        if (availableProfessorTargets.length > 0 || currentSelection === "Professor") {
+            selectOptionsHtml += `<option value="Professor" ${currentSelection === "Professor" ? 'selected' : ''}>Professor</option>`;
+        }
 
-     if (ethnosData) {
-         if (ethnosData.native) {
-             fullyFluentLanguages.push(ethnosData.native.toLowerCase().trim());
-         }
-         
-         // Read your separately upgraded tab attribute pidgin if it exists
-         const pidginSelect = document.getElementById("char-pidgin-select");
-         const upgradedPidginValue = pidginSelect ? pidginSelect.value : "None";
-         if (upgradedPidginValue !== "None") {
-             fullyFluentLanguages.push(upgradedPidginValue.replace("Pidgin-", "").toLowerCase().trim());
-         }
-     }
+        // Render the selection input node card row frame
+        let labelStyle = "color: #7d3c1b; font-weight: bold;";
+        let labelTag = `[Lvl ${slotNum}]`;
+        let secondarySelectorHtml = "";
 
-     // 2. Build options list allowing unknown tongues AND base Pidgins to stay selectable!
-     let dialectOptionsHtml = `<option value="None">Choose Language</option>`;
-     const currentChosenDialect = characterChoicesState.chosenLanguagesPool?.[slotNum] || "None";
+        if (currentSelection === "Scholar") {
+            labelStyle = "color: #2e7d32; font-weight: bold;";
+            labelTag = `[Scholar]`;
+            
+            let targetOptions = `<option value="None">Choose Lore</option>`;
+            const currentTarget = characterChoicesState.scholarTargets[slotNum] || "None";
+            
+            proficientLores.forEach(lore => {
+                const takenElsewhere = activeScholarTargets.some(st => st.slot !== slotNum && st.lore === lore);
+                if (!takenElsewhere || currentTarget === lore) {
+                    targetOptions += `<option value="${lore}" ${currentTarget === lore ? 'selected' : ''}>${lore}</option>`;
+                }
+            });
 
-     availableLanguagesPool.forEach(lang => {
-         const standardizedLangName = lang.toLowerCase().trim();
+            secondarySelectorHtml = `
+            <div style="margin-top: 4px; padding-left: 15px; display: flex; align-items: center; justify-content: space-between; gap: 6px;">
+                <span style="font-size: 0.7rem; color: #7c6f64; font-weight: bold;">└ Lore:</span>
+                <select onchange="if(!characterChoicesState.scholarTargets) characterChoicesState.scholarTargets={}; characterChoicesState.scholarTargets[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; padding: 0 4px; font-size: 0.8rem; max-width: 160px; border: 1px dashed #2e7d32; border-radius: 3px; background: #edf7f4;">
+                    ${targetOptions}
+                </select>
+            </div>`;
+            
+        } else if (currentSelection === "Professor") {
+            labelStyle = "color: #2b6cb0; font-weight: bold;";
+            labelTag = `[Professor]`;
+            
+            let targetOptions = `<option value="None">Choose Lore</option>`;
+            const currentTarget = characterChoicesState.professorTargets[slotNum] || "None";
+            
+            activeScholarTargets.map(st => st.lore).forEach(lore => {
+                const takenElsewhere = activeProfessorTargets.some(pt => pt.slot !== slotNum && pt.lore === lore);
+                if (!takenElsewhere || currentTarget === lore) {
+                    targetOptions += `<option value="${lore}" ${currentTarget === lore ? 'selected' : ''}>${lore}</option>`;
+                }
+            });
 
-         // STAGE A: Hide ONLY if they already speak it with native/mastered fluency
-         if (fullyFluentLanguages.includes(standardizedLangName)) return;
+            secondarySelectorHtml = `
+            <div style="margin-top: 4px; padding-left: 15px; display: flex; align-items: center; justify-content: space-between; gap: 6px;">
+                <span style="font-size: 0.7rem; color: #7c6f64; font-weight: bold;">└ Lore:</span>
+                <select onchange="if(!characterChoicesState.professorTargets) characterChoicesState.professorTargets={}; characterChoicesState.professorTargets[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; padding: 0 4px; font-size: 0.8rem; max-width: 160px; border: 1px dashed #2b6cb0; border-radius: 3px; background: #ebf8ff;">
+                    ${targetOptions}
+                </select>
+            </div>`;
+            
+        } else if (currentSelection === "New Language") {
+            labelStyle = "color: #d97706; font-weight: bold;";
+            labelTag = `[Language]`;
+            
+            // 1. Gather ONLY languages that are already fully native or fluent
+            let fullyFluentLanguages = [];
+            const currentEthnos = document.getElementById("char-ethnos") ? document.getElementById("char-ethnos").value : "None";
+            const ethnosData = typeof ethnosLanguages !== 'undefined' ? ethnosLanguages[currentEthnos] : null;
 
-         // STAGE B: Hide if another Sages slot row has already selected it
-         const isTakenInOtherSagesSlot = Object.entries(characterChoicesState.chosenLanguagesPool || {}).some(
-             ([idx, v]) => parseInt(idx) !== slotNum && v === lang
-         );
+            if (ethnosData) {
+                if (ethnosData.native) {
+                    fullyFluentLanguages.push(ethnosData.native.toLowerCase().trim());
+                }
+                const pidginSelect = document.getElementById("char-pidgin-select");
+                const upgradedPidginValue = pidginSelect ? pidginSelect.value : "None";
+                if (upgradedPidginValue !== "None") {
+                    fullyFluentLanguages.push(upgradedPidginValue.replace("Pidgin-", "").toLowerCase().trim());
+                }
+            }
 
-         if (!isTakenInOtherSagesSlot || currentChosenDialect === lang) {
-             dialectOptionsHtml += `<option value="${lang}" ${currentChosenDialect === lang ? 'selected' : ''}>${lang}</option>`;
-         }
-     });
+            // 2. Build options list allowing unknown tongues AND base Pidgins to stay selectable
+            let dialectOptionsHtml = `<option value="None">Choose Language</option>`;
+            const currentChosenDialect = characterChoicesState.chosenLanguagesPool?.[slotNum] || "None";
 
-     languageSelectorHtml = `
-     <div style="margin-top: 4px; padding-left: 15px; display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-         <span style="font-size: 0.7rem; color: #7c6f64; font-weight: bold;">└ Dialect:</span>
-         <select onchange="if(!characterChoicesState.chosenLanguagesPool) characterChoicesState.chosenLanguagesPool={}; characterChoicesState.chosenLanguagesPool[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; padding: 0 4px; font-size: 0.8rem; max-width: 160px; border: 1px dashed #d97706; border-radius: 3px; background: #fffcf5;">
-             ${dialectOptionsHtml}
-         </select>
-     </div>`;
- }
+            availableLanguagesPool.forEach(lang => {
+                const standardizedLangName = lang.toLowerCase().trim();
+                if (fullyFluentLanguages.includes(standardizedLangName)) return;
 
- // Output the combined list items cleanly back to the Sages card layout frame
- itemsListHtml += `
- <li style="margin-bottom: 10px; list-style-type: none;">
-     <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-         <span style="${labelStyle} font-size: 0.75rem; white-space: nowrap; min-width: 65px;">${labelTag}</span>
-         <select onchange="if(!characterChoicesState.sagesSelections) characterChoicesState.sagesSelections={}; characterChoicesState.sagesSelections[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; max-width: 190px; padding: 0 4px; font-size: 0.8rem; border: 1px solid #decdaf; border-radius: 3px; background: #fff;">
-             ${selectOptionsHtml}
-         </select>
-     </div>
-     ${languageSelectorHtml}
- </li>`;
- }
+                const isTakenInOtherSagesSlot = Object.entries(characterChoicesState.chosenLanguagesPool || {}).some(
+                    ([idx, v]) => parseInt(idx) !== slotNum && v === lang
+                );
+
+                if (!isTakenInOtherSagesSlot || currentChosenDialect === lang) {
+                    dialectOptionsHtml += `<option value="${lang}" ${currentChosenDialect === lang ? 'selected' : ''}>${lang}</option>`;
+                }
+            });
+
+            secondarySelectorHtml = `
+            <div style="margin-top: 4px; padding-left: 15px; display: flex; align-items: center; justify-content: space-between; gap: 6px;">
+                <span style="font-size: 0.7rem; color: #7c6f64; font-weight: bold;">└ Dialect:</span>
+                <select onchange="if(!characterChoicesState.chosenLanguagesPool) characterChoicesState.chosenLanguagesPool={}; characterChoicesState.chosenLanguagesPool[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; padding: 0 4px; font-size: 0.8rem; max-width: 160px; border: 1px dashed #d97706; border-radius: 3px; background: #fffcf5;">
+                    ${dialectOptionsHtml}
+                </select>
+            </div>`;
+        }
+
+        // Output the combined list items cleanly back to the Sages card layout frame
+        itemsListHtml += `
+        <li style="margin-bottom: 10px; list-style-type: none;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                <span style="${labelStyle} font-size: 0.75rem; white-space: nowrap; min-width: 65px;">${labelTag}</span>
+                <select onchange="if(!characterChoicesState.sagesSelections) characterChoicesState.sagesSelections={}; characterChoicesState.sagesSelections[${slotNum}] = this.value; if(typeof calculateSheet === 'function') calculateSheet();" style="flex: 1; height: 24px; min-width: 0; max-width: 190px; padding: 0 4px; font-size: 0.8rem; border: 1px solid #decdaf; border-radius: 3px; background: #fff;">
+                    ${selectOptionsHtml}
+                </select>
+            </div>
+            ${secondarySelectorHtml}
+        </li>`;
+    }
 }
       
   // =========================================================================
@@ -16391,14 +16443,10 @@ function onClick(ev) {
     }
 
     // ── Auto-attach to legacy markup ──────────────────────────────────────
-    // The existing sheet's skill rows and `[Lvl N]` rows don't have
-    // data-tooltip yet. We give them one based on the conventions the
-    // legacy initializers were using, so the rebuild is drop-in.
-    function autoAttach(root) {
+function autoAttach(root) {
         const scope = root || document;
 
-        // 1. Skill rows in the Extra Training containers carry the canonical
-        //    key on their checkboxes (data-skill="run", data-skill="hunt").
+        // 1. Skill rows in the Extra Training containers
         scope.querySelectorAll(".skill-row").forEach(row => {
             if (row.hasAttribute("data-tooltip")) return;
             const cb = row.querySelector('input[type="checkbox"][data-skill]');
@@ -16406,13 +16454,6 @@ function onClick(ev) {
             if (key) row.setAttribute("data-tooltip", key);
         });
 
-        // 2. Trained Skills feed: each `.aspect-card` rendered by
-        //    renderDynamicActiveTreesFeed() contains a header row (tree name
-        //    + level badge) and a <ul> of `<li>` entries. Each <li> shows
-        //    either "[Lvl N] SkillName" or "[Free Unlock] SkillName".
-        //
-        //    Heading detection is structural (no class names to rely on):
-        //    the heading is the first child of the first child of the card.
         function normalizeToKey(text) {
             if (!text) return null;
             return text.trim()
@@ -16421,9 +16462,8 @@ function onClick(ev) {
                 .replace(/[^a-z0-9]+/g, "_")
                 .replace(/^_+|_+$/g, "");
         }
+
         function findHeadingText(card) {
-            // Prefer the first child of the first child (matches the active-trees feed
-            // markup: <div class="aspect-card"><div flex-row><div>NAME</div><div>Level N</div>…)
             const headerRow = card.firstElementChild;
             if (headerRow) {
                 const firstInner = headerRow.firstElementChild;
@@ -16431,11 +16471,11 @@ function onClick(ev) {
                     return firstInner.textContent;
                 }
             }
-            // Fallback: any .aspect-name div (matches the static creation grid cards).
-            const aspectName = card.querySelector(".aspectName");
+            const aspectName = card.querySelector(".aspectName") || card.querySelector(".aspect-name");
             if (aspectName) return aspectName.textContent;
             return null;
         }
+
         scope.querySelectorAll(".aspect-card li").forEach(li => {
             const txt = li.textContent || "";
             const card = li.closest(".aspect-card");
@@ -16443,10 +16483,10 @@ function onClick(ev) {
             const headingText = findHeadingText(card);
             const treeKey = normalizeToKey(headingText);
 
-            // ---- Dropdown-choice rows (Background / Interlocution / Sages / …) ----
-            // These contain a <select>; the tooltip key must follow the user's
-            // current selection. We re-evaluate every time autoAttach runs (which
-            // happens after every feed re-render via MutationObserver).
+            // Declare variable cleanly as 'tooltipDb' to avoid collisions with leftover 'reg' declarations
+            const tooltipDb = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
+
+            // ---- Dropdown-choice rows ----
             const select = li.querySelector("select");
             if (select) {
                 const selectedText = (select.options[select.selectedIndex] && select.options[select.selectedIndex].text) || "";
@@ -16455,8 +16495,8 @@ function onClick(ev) {
                     li.removeAttribute("data-tooltip");
                     return;
                 }
-                const reg = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
-                if (!reg) return;
+                
+                if (!tooltipDb) return;
                 const cleaned = selectedText.replace(/<[^>]*>/g, " ");
                 const variants = [
                     cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
@@ -16464,52 +16504,46 @@ function onClick(ev) {
                     cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                 ];
                 let matched = null;
-                for (const v of variants) { if (v && reg[v]) { matched = v; break; } }
+                for (const v of variants) { if (v && tooltipDb[v]) { matched = v; break; } }
                 if (matched) li.setAttribute("data-tooltip", matched);
                 else li.removeAttribute("data-tooltip");
                 return;
             }
 
-        // ==========================================
-        // INSERTED: ---- Sub-skills / Nested Choices (e.g. "└ Clairvoyance: Augury") ----
-        // ==========================================
-        if (txt.includes("└")) {
-            if (li.hasAttribute("data-tooltip")) return;
-            const cleanText = txt.replace(/^[└\s]+/, "").trim();
-            const reg = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
-            let foundKey = null;
-            if (reg) {
-                const cleaned = cleanText.replace(/<[^>]*>/g, " ");
-                const variants = [
-                    cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
-                    cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
-                    cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
-                ];
-                for (const v of variants) {
-                    if (v && reg[v]) {
-                        foundKey = v;
-                        break;
+            // ---- Sub-skills / Nested Choices ----
+            if (txt.includes("└")) {
+                if (li.hasAttribute("data-tooltip")) return;
+                const cleanText = txt.replace(/^[└\s]+/, "").trim();
+                let foundKey = null;
+                if (tooltipDb) {
+                    const cleaned = cleanText.replace(/<[^>]*>/g, " ");
+                    const variants = [
+                        cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                        cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                        cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                    ];
+                    for (const v of variants) {
+                        if (v && tooltipDb[v]) {
+                            foundKey = v;
+                            break;
+                        }
                     }
                 }
+                if (foundKey) {
+                    li.setAttribute("data-tooltip", foundKey);
+                    return;
+                }
             }
-            if (foundKey) {
-                li.setAttribute("data-tooltip", foundKey);
-                return;
-            }
-        }
 
-// ---- [Lvl N] rows ----
+            // ---- [Lvl N] rows ----
             if (li.hasAttribute("data-tooltip")) return;
             if (!treeKey) return;
 
             const lvlMatch = txt.match(/\[\s*Lvl\s*(\d+)\s*\]/i);
             if (lvlMatch) {
-                // Extract the eponymous skill name after the [Lvl N] bracket
                 const after = txt.replace(/.*\[\s*Lvl\s*\d+\s*\]\s*/i, "").trim();
-                const reg = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
-                
                 let matchedEponymousKey = null;
-                if (reg && after) {
+                if (tooltipDb && after) {
                     const cleaned = after.replace(/<[^>]*>/g, " ");
                     const variants = [
                         cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
@@ -16517,14 +16551,13 @@ function onClick(ev) {
                         cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                     ];
                     for (const v of variants) {
-                        if (v && reg[v]) {
+                        if (v && tooltipDb[v]) {
                             matchedEponymousKey = v;
                             break;
                         }
                     }
                 }
 
-                // If an eponymous match exists, use it. Otherwise, fall back to the tree_level notation.
                 if (matchedEponymousKey) {
                     li.setAttribute("data-tooltip", matchedEponymousKey);
                 } else {
@@ -16533,16 +16566,10 @@ function onClick(ev) {
                 return;
             }
 
-            // [Free Unlock] rows: extract the skill name after the bracket and
-            // try to match it against an existing single-skill registry entry.
+            // ---- [Free Unlock] rows ----
             if (/\[\s*Free\s*Unlock\s*\]/i.test(txt)) {
                 const after = txt.replace(/.*\[\s*Free\s*Unlock\s*\]\s*/i, "").trim();
-                const reg = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
-                if (!reg) return;
-                // Try a few normalisation variants so "Vim, Vigor, & Vitality"
-                // matches whichever key the registry happens to use
-                // ("vim_vigor_and_vitality", "vim_vigor_vitality",
-                //  "vim_vigor_amp_vitality").
+                if (!tooltipDb) return;
                 const cleaned = after.replace(/<[^>]*>/g, " ");
                 const variants = [
                     cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
@@ -16550,7 +16577,7 @@ function onClick(ev) {
                     cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                 ];
                 for (const v of variants) {
-                    if (v && reg[v]) { li.setAttribute("data-tooltip", v); break; }
+                    if (v && tooltipDb[v]) { li.setAttribute("data-tooltip", v); break; }
                 }
             }
         });
