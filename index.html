@@ -7268,6 +7268,7 @@ const enchantmentRegistry = {
     },
     "unbreaking": {
         name: "Unbreaking",
+        allowedTags: ["weapon",  "ammo", "armor", "shield", "helmet", "cloak", "hands", "legs", "mask", "torso", "arms", "waist", "feet", "jewelry"],
         cost: 2000,
         rarity: 3,
         description: "The object must be fully disenchanted before it can be damaged."
@@ -20078,13 +20079,14 @@ function exportCharacterData() {
         customItems: {}
     };
 
-    // Gather standard inputs
+    // Gather standard inputs (including Language and Bonus/Penalty selections)
     const inputIds = [
         "char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing",
         "char-rank-input-xp", "char-xp-awarded",
         "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap",
         "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver",
-        "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current"
+        "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current",
+        "char-native-lang", "char-pidgin-select", "sex-bonus-choice", "race-bonus-choice", "race-penalty-choice"
     ];
     
     // Dynamically grab all skill XP inputs
@@ -20121,11 +20123,23 @@ function importCharacterData(data) {
 
     // 2. Restore State
     if (data.state) {
-        // Deep clone to prevent reference issues
         Object.assign(characterChoicesState, JSON.parse(JSON.stringify(data.state)));
     }
 
-    // 3. Restore Inputs
+    // 3. Restore Core Identity Inputs first (Sex, Race, etc.)
+    if (data.inputs) {
+        ["char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-name", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && data.inputs[id] !== undefined) el.value = data.inputs[id];
+        });
+    }
+
+    // 4. Force setup of conditional dropdowns so bonus/penalty options are generated in the DOM
+    if (typeof setupConditionalDropdowns === "function") {
+        setupConditionalDropdowns();
+    }
+
+    // 5. Restore remaining dependent inputs (Bonuses, Penalties, Pidgin, Skill XPs)
     if (data.inputs) {
         Object.entries(data.inputs).forEach(([id, val]) => {
             const el = document.getElementById(id);
@@ -20133,7 +20147,7 @@ function importCharacterData(data) {
         });
     }
 
-    // 4. Restore Inventories & Laria
+    // 6. Restore Inventories & Laria
     if (data.inventories) {
         document.querySelectorAll(".inventory-textarea").forEach((el, idx) => {
             if (data.inventories[idx] !== undefined) el.value = data.inventories[idx];
@@ -20145,7 +20159,7 @@ function importCharacterData(data) {
         });
     }
 
-    // 5. Trigger System-Wide Recalculation
+    // 7. Trigger System-Wide Recalculation
     if (typeof calculateSheet === "function") calculateSheet();
     if (typeof updateEquipmentCardViews === "function") updateEquipmentCardViews();
     if (typeof populateGearDropdowns === "function") populateGearDropdowns();
