@@ -9951,8 +9951,9 @@ const masterTreeAutoCheckMap = {
   ],
   "pugilism": [
     ["Pugil Weapons"], // Level 1
-    ["Grapple"],       // Level 2
-    ["Trip"]           // Level 3
+    [],                         // Level 2
+    ["Grapple"],       // Level 3
+    ["Trip"]           // Level 4
   ],
   "shrewd weapons": [["Shrewd Weapons"]],
 
@@ -9993,11 +9994,8 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
   const treeLevelMatrix = masterTreeAutoCheckMap[sanitizedKey];
   if (!treeLevelMatrix) return;
 
-  // Loops systematically through every level milestone block in the matrix array
   treeLevelMatrix.forEach((skillsUnlockedAtThisLevel, index) => {
     const levelMilestone = index + 1;
-    
-    // Determine target state: Active if character's tree level meets or exceeds this milestone
     const levelIsActive = currentLevel >= levelMilestone;
 
     skillsUnlockedAtThisLevel.forEach(rawSkillName => {
@@ -10006,13 +10004,48 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
       
       if (targetCheckbox) {
         targetCheckbox.checked = levelIsActive;
-        
-        // 🔥 CRUCIAL ROW LOCKING LOGIC:
-        // Disables user interaction if the level milestone is active, unlocks if points are refunded!
         targetCheckbox.disabled = levelIsActive;
-        
-        // FIXED: removed synthetic 'change' dispatch — same self-recursion pattern as the two in 16-extra-training-sync.js
-        // (syncTreeAllocationToExtraTraining → change → renderDynamicActiveTreesFeed → calculateSheet → here).
+      }
+
+      if (!characterChoicesState.extraTrainingSelections) {
+        characterChoicesState.extraTrainingSelections = {};
+      }
+      if (!characterChoicesState.extraTrainingSelections[subSkillKey]) {
+        characterChoicesState.extraTrainingSelections[subSkillKey] = { p: false, et: false, m: false, aspect: "" };
+      }
+      
+      // Update proficiency state in memory
+      characterChoicesState.extraTrainingSelections[subSkillKey].p = levelIsActive;
+
+      // 🔥 If proficiency is lost, cascade down and automatically revoke ET and Mastery
+      if (!levelIsActive) {
+          characterChoicesState.extraTrainingSelections[subSkillKey].et = false;
+          characterChoicesState.extraTrainingSelections[subSkillKey].m = false;
+
+          const etBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="et"]`);
+          if (etBox) { etBox.checked = false; etBox.disabled = false; }
+          const mBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="m"]`);
+          if (mBox) { mBox.checked = false; mBox.disabled = false; }
+
+          // Find and reset any dropdown slot holding this skill
+          const skillTitleSpan = Array.from(document.querySelectorAll('.skill-title')).find(el => el.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey);
+          if (skillTitleSpan) {
+              const skillName = skillTitleSpan.textContent.trim();
+              if (characterChoicesState.extraTrainingTalentSelections) {
+                  Object.keys(characterChoicesState.extraTrainingTalentSelections).forEach(slot => {
+                      if (characterChoicesState.extraTrainingTalentSelections[slot] === skillName) {
+                          characterChoicesState.extraTrainingTalentSelections[slot] = "None";
+                      }
+                  });
+              }
+              if (characterChoicesState.masteryTalentSelections) {
+                  Object.keys(characterChoicesState.masteryTalentSelections).forEach(slot => {
+                      if (characterChoicesState.masteryTalentSelections[slot] === skillName) {
+                          characterChoicesState.masteryTalentSelections[slot] = "None";
+                      }
+                  });
+              }
+          }
       }
     });
   });
@@ -11212,7 +11245,16 @@ function modTip(id) {
 }
 
 function calculateSheet() {
-    // 1. Run state synchronization and update worn enchantments first
+    // ── 1. VALIDATE RANK & REDRAW DOM CARDS INSTANTLY ──
+    const rankInput = document.getElementById("char-rank-input-xp");
+    const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
+    
+    if (typeof validateRankLock === "function") validateRankLock(rankXp);
+    if (typeof renderRank3Cards === "function") renderRank3Cards(); // <-- Forces immediate DOM re-render
+    if (typeof validateTalentSelections === "function") validateTalentSelections();
+    // ───────────────────────────────────────────────────
+
+    // 2. Run state synchronization and update worn enchantments first
     syncAllDropdownCheckboxes();
     purgeDeactivatedStateChoices();
     if (typeof window.calculateWornEnchantmentsState === "function") {
@@ -11441,6 +11483,10 @@ function calculateSheet() {
         
         let remainingToNext = costPerLevel - (rawPoints % costPerLevel);
         
+        if (typeof syncTreeAllocationToExtraTraining === "function") {
+            syncTreeAllocationToExtraTraining(sanitizedKey, finalCalculatedLevel);
+        }
+
         const hintDisplay = document.getElementById(helperId);
         if (hintDisplay) {
             if (maxLevel !== Infinity && finalCalculatedLevel >= maxLevel) {
@@ -12347,6 +12393,16 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
 
                 let baseDamageBonus = parseBaseWeaponBonus(profItem.bonusDamageText || weaponItem.bonusDamageText);
                 let weaponFlatBonus = baseDamageBonus;
+
+                if (typeof window.skillBonusRegistry === "object" && window.skillBonusRegistry.damage) {
+                    const tagSkillMap = { "arc_bow": "arc_bows", "shrewd": "shrewd_weapons", "brutal": "brutal_weapons", "pugil": "pugil_weapons", "common": "common_weapons" };
+                    activeTags.forEach(tag => {
+                        const mappedKey = tagSkillMap[tag.toLowerCase()];
+                        if (mappedKey && window.skillBonusRegistry.damage[mappedKey]) {
+                            weaponFlatBonus += window.skillBonusRegistry.damage[mappedKey];
+                        }
+                    });
+                }
 
                 let activeProfileMaterial = "None";
                 if (weaponData.profileMaterials && weaponData.profileMaterials[profKey]) {
@@ -13290,7 +13346,7 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
     const dropEtStates = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
     const dropMStates = Object.values(characterChoicesState.masteryTalentSelections || {});
 
-    // Avoidance Modifiers (Salvation, Defending, ET, Mastery)
+// Avoidance Modifiers (Salvation, Defending, Proficiency, ET, Mastery)
     let avoidBadges = "";
     if (activeEnchants["salvation"]) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Salvation</span>`;
@@ -13298,6 +13354,13 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
     if (activeEnchants["defending"]) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_defending" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Defending</span>`;
     }
+
+    // Check if Avoidance is Proficient (via Defense tree or manual Extra Training)
+    const avoidPBox = document.querySelector('input[data-skill="avoidance"][data-type="p"]');
+    if ((avoidPBox && avoidPBox.checked) || (manualEtStates["avoidance"] && manualEtStates["avoidance"].p)) {
+        avoidBadges += `<span class="locus-ench-tag" data-tooltip="proficiency" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Proficiency</span>`;
+    }
+
     if ((manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance")) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="extra_training" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Extra Training</span>`;
     }
@@ -13481,14 +13544,9 @@ function renderRank3Cards() {
     const restrictedGrid = document.getElementById("grid-restricted-paragon-paths");
     if (!restrictedGrid) return;
 
-    let rankXp = 0;
-    if (typeof rankXpSpent !== 'undefined') {
-        rankXp = rankXpSpent;
-    } else {
-        const rankInput = document.getElementById("char-rank-xp") ||
-            document.getElementById("rank-xp") || document.querySelector("input[id*='rank']");
-        rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
-    }
+    // Always read live from the DOM input box instead of waiting on calculated variables
+    const rankInput = document.getElementById("char-rank-input-xp") || document.getElementById("rank-xp") || document.querySelector("input[id*='rank']");
+    const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
 
     const isUnlocked = rankXp >= 18;
     restrictedGrid.style.opacity = isUnlocked ? "1" : "0.6";
@@ -14031,11 +14089,11 @@ window.applyRacialBonuses = function () {
 // Future weapons / materials / makers / enchantments push into the same
 // registry and so stack naturally with everything above.
 window.applyWeaponClassBonuses = function () {
+    window.skillBonusRegistry = window.skillBonusRegistry || { dice: {}, damage: {} };
     const reg = window.skillBonusRegistry;
+    reg.dice = reg.dice || {};
+    reg.damage = reg.damage || {};
 
-    // Shared helper — reads the same XP input the rest of the sheet uses
-    // and computes tree level the same way getTreeLvl() does in 15-cards.js,
-    // including any "free levels" granted by the character's upbringing/background.
     function treeLvl(dashedId, cost) {
         cost = cost || 6;
         const el = document.getElementById("sk-xp-" + dashedId);
@@ -14046,21 +14104,21 @@ window.applyWeaponClassBonuses = function () {
         return Math.floor(pts / cost) + free;
     }
 
-    // ── Arc-bows: Aim at Lvl 2, stacks at Lvl 4 ──────────────────────────
+    // ── Arc-bows: +1d at Lvl 2 (12 Exp), +1d at Lvl 4 (24 Exp) ───────────
     const arc = treeLvl("arc-bows");
-    let arcAim = 0;
-    if (arc >= 2) arcAim += 1;
-    if (arc >= 4) arcAim += 1;
-    if (arcAim) reg.dice["arc_bows"] = (reg.dice["arc_bows"] || 0) + arcAim;
+    let arcDice = 0;
+    if (arc >= 2) arcDice += 1;
+    if (arc >= 4) arcDice += 1;
+    if (arcDice) reg.dice["arc_bows"] = (reg.dice["arc_bows"] || 0) + arcDice;
 
-    // ── Brutal Weapons: Extra Damage at Lvl 2, stacks at Lvl 4 ───────────
+    // ── Brutal Weapons: +1 dmg at Lvl 2 (12 Exp), +1 dmg at Lvl 4 (24 Exp) ──
     const brut = treeLvl("brutal-weapons");
     let brutDmg = 0;
     if (brut >= 2) brutDmg += 1;
     if (brut >= 4) brutDmg += 1;
     if (brutDmg) reg.damage["brutal_weapons"] = (reg.damage["brutal_weapons"] || 0) + brutDmg;
 
-    // ── Shrewd Weapons: Accuracy at Lvl 3 (+1d), Extra Damage at Lvl 5 (+1 dmg) ──
+    // ── Shrewd Weapons: +1d at Lvl 2 (12 Exp), +1 dmg at Lvl 4 (24 Exp) ───
     const shr = treeLvl("shrewd-weapons");
     if (shr >= 2) reg.dice["shrewd_weapons"]   = (reg.dice["shrewd_weapons"]   || 0) + 1;
     if (shr >= 4) reg.damage["shrewd_weapons"] = (reg.damage["shrewd_weapons"] || 0) + 1;
@@ -14349,32 +14407,36 @@ function populateFilteredExtraTrainingOptions(currentSelectedValue = "None") {
  * Scans your talent slots to check and lock out the corresponding "ET" checkboxes.
  */
 function syncExtraTrainingTalentsToBoxes() {
-  // Clear previous non-disabled checkboxes so changes wipe clean perfectly
   const etCheckboxes = document.querySelectorAll('.extra-training-box input[data-type="et"]');
   etCheckboxes.forEach(cb => {
     cb.checked = false;
     cb.disabled = false;
+    const sk = cb.dataset.skill;
+    if (sk && characterChoicesState.extraTrainingSelections?.[sk]) {
+        characterChoicesState.extraTrainingSelections[sk].et = false;
+    }
   });
 
-  // Read current player choice selections from state memory
   if (characterChoicesState && characterChoicesState.extraTrainingTalentSelections) {
     Object.values(characterChoicesState.extraTrainingTalentSelections).forEach(rawSelection => {
       if (!rawSelection || rawSelection === "None") return;
 
-      // Transform "Set Traps" -> "set_traps" to match HTML attributes
       const safeKey = rawSelection.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const targetETBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="et"]`);
 
       if (targetETBox) {
         targetETBox.checked = true;
-        targetETBox.disabled = true; // Lock user from unchecking
-        // FIXED: removed synthetic 'change' dispatch — caused infinite recursion through change handler → renderDynamicActiveTreesFeed → here.
+        targetETBox.disabled = true;
+        
+        // Ensure state memory registers 'et' as true when selected via dropdown
+        if (!characterChoicesState.extraTrainingSelections[safeKey]) {
+          characterChoicesState.extraTrainingSelections[safeKey] = { p: false, et: false, m: false, aspect: "" };
+        }
+        characterChoicesState.extraTrainingSelections[safeKey].et = true;
       }
     });
   }
 }
-  
-
 
 /* ===== js/17-active-trees-feed.js ===== */
 // Automatically loops, tracks active trees across all sections,
@@ -20312,6 +20374,157 @@ function importJSONFile(event) {
         }
     };
     reader.readAsText(file);
+}
+
+function validateTalentSelections() {
+    if (typeof characterChoicesState === 'undefined') return;
+
+    // Helper that looks up the correct cost per level (6 for normal trees, 12 for masteries/paragons)
+    const getTreeLvlAccurate = (treeKey) => {
+        const sanitizedKey = treeKey.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+        const el = document.getElementById("sk-xp-" + sanitizedKey);
+        const pts = el ? (parseInt(el.value) || 0) : 0;
+        
+        let cost = 6;
+        const allCapsConfigs = { 
+            ...(typeof commonSkillLevelCaps !== 'undefined' ? commonSkillLevelCaps : {}),
+            ...(typeof guildCastSkillLevelCaps !== 'undefined' ? guildCastSkillLevelCaps : {})
+        };
+        
+        Object.keys(allCapsConfigs).forEach(key => {
+            const standardKey = key.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+            if (standardKey === sanitizedKey) {
+                cost = allCapsConfigs[key].costPerLevel || 6;
+            }
+        });
+        
+        if (cost === 6 && (sanitizedKey.includes("mastery") || sanitizedKey.includes("paragon") || sanitizedKey.includes("occult") || sanitizedKey.includes("restricted"))) {
+            cost = 12;
+        }
+
+        return Math.floor(pts / cost);
+    };
+
+    const skillTrainingLvl = getTreeLvlAccurate("skill-training");
+    const masteryTrainingLvl = getTreeLvlAccurate("mastery-skill-training") || getTreeLvlAccurate("skill-mastery") || getTreeLvlAccurate("mastery-skill_training") || getTreeLvlAccurate("mastery: skill training");
+
+    // 1. Validate Extra Training Talent Selections
+    if (characterChoicesState.extraTrainingTalentSelections) {
+        Object.keys(characterChoicesState.extraTrainingTalentSelections).forEach(slotStr => {
+            const slotNum = parseInt(slotStr, 10);
+            const selectedSkillName = characterChoicesState.extraTrainingTalentSelections[slotStr];
+
+            if (!selectedSkillName || selectedSkillName === "None") return;
+
+            const safeKey = selectedSkillName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const pBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="p"]`);
+            const skillState = characterChoicesState.extraTrainingSelections?.[safeKey];
+            const isProficient = (pBox && pBox.checked) || (skillState && skillState.p);
+
+            if (slotNum > skillTrainingLvl || !isProficient) {
+                characterChoicesState.extraTrainingTalentSelections[slotStr] = "None";
+            }
+        });
+    }
+
+    // 2. Validate Mastery Talent Selections
+    if (characterChoicesState.masteryTalentSelections) {
+        Object.keys(characterChoicesState.masteryTalentSelections).forEach(slotStr => {
+            const slotNum = parseInt(slotStr, 10);
+            const selectedSkillName = characterChoicesState.masteryTalentSelections[slotStr];
+
+            if (!selectedSkillName || selectedSkillName === "None") return;
+
+            const safeKey = selectedSkillName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const etBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="et"]`);
+            const skillState = characterChoicesState.extraTrainingSelections?.[safeKey];
+            const isExtraTrained = (etBox && etBox.checked) || (skillState && skillState.et);
+
+            if (slotNum > masteryTrainingLvl || !isExtraTrained) {
+                characterChoicesState.masteryTalentSelections[slotStr] = "None";
+            }
+        });
+    }
+}
+
+function validateRankLock(rankXp) {
+    const isRank3Plus = rankXp >= 18;
+    if (!isRank3Plus) {
+        // Clear all restricted/mastery XP inputs when Rank drops below 3
+        if (typeof restrictedPostCreationTrees !== 'undefined') {
+            restrictedPostCreationTrees.forEach(tree => {
+                const sanitizedKey = tree.toLowerCase();
+                const fId = "sk-xp-" + sanitizedKey.replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+                const inputEl = document.getElementById(fId);
+                if (inputEl) {
+                    inputEl.value = 0;
+                }
+            });
+        }
+
+        // Clear all mastery talent dropdown selections
+        if (characterChoicesState && characterChoicesState.masteryTalentSelections) {
+            Object.keys(characterChoicesState.masteryTalentSelections).forEach(slot => {
+                characterChoicesState.masteryTalentSelections[slot] = "None";
+            });
+        }
+
+        // Uncheck all mastery 'm' checkboxes in the DOM
+        document.querySelectorAll('.extra-training-box input[data-type="m"]').forEach(cb => {
+            cb.checked = false;
+            cb.disabled = false;
+        });
+    }
+}
+
+function validateTalentSelections() {
+    if (typeof characterChoicesState === 'undefined') return;
+
+    const getTreeLvlAccurate = (treeKey) => {
+        const sanitizedKey = treeKey.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+        const el = document.getElementById("sk-xp-" + sanitizedKey);
+        const pts = el ? (parseInt(el.value) || 0) : 0;
+        
+        let cost = 6;
+        const allCapsConfigs = { 
+            ...(typeof commonSkillLevelCaps !== 'undefined' ? commonSkillLevelCaps : {}),
+            ...(typeof guildCastSkillLevelCaps !== 'undefined' ? guildCastSkillLevelCaps : {})
+        };
+        
+        Object.keys(allCapsConfigs).forEach(key => {
+            const standardKey = key.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+            if (standardKey === sanitizedKey) {
+                cost = allCapsConfigs[key].costPerLevel || 6;
+            }
+        });
+        
+        if (cost === 6 && (sanitizedKey.includes("mastery") || sanitizedKey.includes("paragon") || sanitizedKey.includes("occult") || sanitizedKey.includes("restricted"))) {
+            cost = 12;
+        }
+
+        return Math.floor(pts / cost);
+    };
+
+    const skillTrainingLvl = getTreeLvlAccurate("skill-training");
+
+    // 1. Validate Extra Training Talent Selections (Reset if slot exceeds level or skill loses proficiency)
+    if (characterChoicesState.extraTrainingTalentSelections) {
+        Object.keys(characterChoicesState.extraTrainingTalentSelections).forEach(slotStr => {
+            const slotNum = parseInt(slotStr, 10);
+            const selectedSkillName = characterChoicesState.extraTrainingTalentSelections[slotStr];
+
+            if (!selectedSkillName || selectedSkillName === "None") return;
+
+            const safeKey = selectedSkillName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const pBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="p"]`);
+            const skillState = characterChoicesState.extraTrainingSelections?.[safeKey];
+            const isProficient = (pBox && pBox.checked) || (skillState && skillState.p);
+
+            if (slotNum > skillTrainingLvl || !isProficient) {
+                characterChoicesState.extraTrainingTalentSelections[slotStr] = "None";
+            }
+        });
+    }
 }
 
 </script>
