@@ -1958,13 +1958,13 @@ details[open] #skills-collapsed-summary {
     
 <!-- Tab Navigation Buttons --> 
 <div class="tab-navigation"> 
-  <button class="tab-btn active" draggable="true" onclick="switchTab('tab-creation', event)">Character Creation & Exp. Investments</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-sheet', event)">Combat & Gear</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-inventory', event)">Inventories & Worn Enchantments</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-character-skills', event)">Character Skill List</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-skills', event)">Skills Codex</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-bazaar', event)">The Grand Bazaar</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-rules', event)">Rules Index</button> 
+  <button class="tab-btn active" draggable="true" onclick="switchTab('tab-creation', event)">Character Creation & Exp. Investments</button> 
 </div>
 
 <!-- TAB 1: CHARACTER CREATION --> 
@@ -2661,7 +2661,9 @@ details[open] #skills-collapsed-summary {
     
     <!-- Left Column: Languages, Special Abilities, & Background Unlocks --> 
     <div id="left-skill-column-wrapper" class="skills-left-col"> 
-      
+
+      <div id="custom-skills-list-container"></div>      
+
       <!-- Languages Box (Dynamic placeholder card remains fully functional) -->
       <div id="sages-languages-tab4-card" style="margin-bottom: 5px;"></div> 
       
@@ -13294,6 +13296,17 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
          });
      }
 
+     const customSkillsForLang = (typeof window.getCustomSkills === "function") ? window.getCustomSkills() : [];
+     customSkillsForLang.forEach(cs => {
+         if (cs.actionType === "Language" && cs.name) {
+             const cleanLang = cs.name.toLowerCase().trim();
+             if (!masteredFluentTongues.includes(cleanLang)) {
+                 masteredFluentTongues.push(cleanLang);
+                 sortedSecondaryLanguagesList.push(cs.name.trim());
+             }
+         }
+     });
+
      if (langData) {
          // D. Process base pidgins and enforce our unique upgrade exclusion rule
          const basePidginsArray = langData.pidgins || [];
@@ -13457,6 +13470,9 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
     }
 
     setTimeout(updateSkillsSummary, 150);
+    updateCreationCardTooltips();
+    syncCustomSkillSlots();
+    refreshCustomSkillRows();
 
 } // Closes calculateSheet
 
@@ -13538,6 +13554,8 @@ function generateOfficialSkillGridCards() {
     });
     magicGrid.innerHTML = magicHtml;
     renderRank3Cards(false);
+
+    updateCreationCardTooltips();
 }
 
 function renderRank3Cards() {
@@ -13587,6 +13605,8 @@ function renderRank3Cards() {
         restrictedGrid.innerHTML = restrictedHtml;
         restrictedGrid.setAttribute("data-unlocked-state", targetUiState);
     }
+
+    updateCreationCardTooltips();
 
     // SAFE VALUE SYNC: Update values directly if fields exist without tearing down the DOM nodes
     if (isUnlocked) {
@@ -17187,6 +17207,17 @@ function updatePnpWriteInCards() {
     let defenses = [];
     let attacks = [];
 
+const customSkillsForCombat = (typeof window.getCustomSkills === "function") ? window.getCustomSkills() : [];
+customSkillsForCombat.forEach(cs => {
+    // Render the name only so the card stays clean and the tooltip triggers on hover
+    const skillLabel = cs.name; 
+    if (cs.category === "Offensive") {
+        attacks.push(skillLabel);
+    } else if (cs.category === "Defensive") {
+        defenses.push(skillLabel);
+    }
+});
+
     const activeEnchants = characterChoicesState.activeWornEnchantments || {};
 
     // --- Dynamic Defensive Resistances (Category C) ---
@@ -20113,6 +20144,12 @@ document.addEventListener('change', () => {
 // 💾 CHARACTER SAVE / LOAD / MANAGER ENGINE
 // =========================================================================
 
+function newCharacter() {
+    if (confirm("Are you sure you want to start a new character? Any unsaved changes will be lost.")) {
+        location.reload();
+    }
+}
+
 function getSavedCharacters() {
     try {
         const stored = localStorage.getItem('cscs_characters');
@@ -20140,6 +20177,16 @@ function exportCharacterData() {
         laria: [],
         customItems: {}
     };
+
+    const tabNav = document.querySelector('.tab-navigation');
+    if (tabNav) {
+        data.tabNavigationHtml = tabNav.innerHTML;
+    }
+    const activeBtn = document.querySelector('.tab-navigation .tab-btn.active');
+    if (activeBtn) {
+        const match = activeBtn.getAttribute('onclick')?.match(/switchTab\('([^']+)'/);
+        if (match) data.activeTabId = match[1];
+    }
 
     // Gather standard inputs (including Language and Bonus/Penalty selections)
     const inputIds = [
@@ -20175,7 +20222,27 @@ function exportCharacterData() {
 
 function importCharacterData(data) {
     if (!data) return;
-    
+
+    if (data.tabNavigationHtml) {
+        const tabNav = document.querySelector('.tab-navigation');
+        if (tabNav) tabNav.innerHTML = data.tabNavigationHtml;
+    }
+    if (data.activeTabId) {
+        const targetTab = document.getElementById(data.activeTabId);
+        if (targetTab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            targetTab.classList.add('active');
+        }
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            const match = btn.getAttribute('onclick')?.match(/switchTab\('([^']+)'/);
+            if (match && match[1] === data.activeTabId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }    
+
     // 1. Restore Custom Items to Registry
     if (data.customItems) {
         Object.keys(data.customItems).forEach(k => {
@@ -20527,6 +20594,562 @@ function validateTalentSelections() {
     }
 }
 
+function getTreeCurrentLevelByName(treeName) {
+    const sanitizedKey = treeName.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+    const el = document.getElementById("sk-xp-" + sanitizedKey);
+    const pts = el ? (parseInt(el.value) || 0) : 0;
+    
+    let dictKey = treeName.toLowerCase();
+    if (dictKey.startsWith("mastery ")) dictKey = dictKey.replace("mastery ", "mastery: ");
+    if (dictKey.startsWith("paragon ")) dictKey = dictKey.replace("paragon ", "paragon: ");
+    if (dictKey.startsWith("occult ") && dictKey !== "occult base") dictKey = dictKey.replace("occult ", "occult: ");
+    if (dictKey.startsWith("restricted ")) dictKey = dictKey.replace("restricted ", "restricted: ");
+    
+    const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[dictKey]) ||
+                   (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[dictKey]);
+    
+    let calculatedLvl = 0;
+    if (config) {
+        if (config.isPackage && config.progression) {
+            calculatedLvl = config.progression.reduce((highestIndex, threshold, currentIndex) => {
+                return pts >= threshold ? currentIndex : highestIndex;
+            }, 0);
+        } else {
+            const cost = config.costPerLevel || 6;
+            calculatedLvl = Math.floor(pts / cost);
+        }
+        if (calculatedLvl > config.maxLevel) {
+            calculatedLvl = config.maxLevel;
+        }
+    } else {
+        const isAdvancedPath = sanitizedKey.startsWith("mastery-") || sanitizedKey.startsWith("paragon-") || sanitizedKey.startsWith("occult-") || sanitizedKey.startsWith("restricted-");
+        calculatedLvl = Math.floor(pts / (isAdvancedPath ? 12 : 6));
+    }
+    
+    const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(treeName) : 0;
+    return calculatedLvl + free;
+}
+
+function getTreeMaxLevelByName(treeName) {
+    let dictKey = treeName.toLowerCase();
+    if (dictKey.startsWith("mastery ")) dictKey = dictKey.replace("mastery ", "mastery: ");
+    if (dictKey.startsWith("paragon ")) dictKey = dictKey.replace("paragon ", "paragon: ");
+    if (dictKey.startsWith("occult ") && dictKey !== "occult base") dictKey = dictKey.replace("occult ", "occult: ");
+    if (dictKey.startsWith("restricted ")) dictKey = dictKey.replace("restricted ", "restricted: ");
+    
+    const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[dictKey]) ||
+                   (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[dictKey]);
+    return config ? config.maxLevel : 5;
+}
+
+function resolveTooltipKey(treeKey, levelNum, abilityName) {
+    if (!abilityName) return `${treeKey.replace(/[^a-z0-9]+/g, "_")}_${levelNum}`;
+    
+    const cleaned = abilityName.replace(/<[^>]*>/g, " ");
+    const nameVariants = [
+        cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
+    ];
+    
+    const baseKey = treeKey.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+    const possibleKeys = [
+        ...nameVariants,
+        `${baseKey}_${levelNum}`,
+        baseKey,
+        `${baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, "")}_${levelNum}`
+    ];
+    
+    for (const k of possibleKeys) {
+        if (k && typeof tooltipRegistry !== "undefined" && tooltipRegistry[k]) {
+            return k;
+        }
+    }
+    return `${baseKey}_${levelNum}`;
+}
+
+function getTreeCurrentLevelByName(treeName) {
+    const sanitizedKey = treeName.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+    const el = document.getElementById("sk-xp-" + sanitizedKey);
+    const pts = el ? (parseInt(el.value) || 0) : 0;
+    
+    let dictKey = treeName.toLowerCase();
+    if (dictKey.startsWith("mastery ")) dictKey = dictKey.replace("mastery ", "mastery: ");
+    if (dictKey.startsWith("paragon ")) dictKey = dictKey.replace("paragon ", "paragon: ");
+    if (dictKey.startsWith("occult ") && dictKey !== "occult base") dictKey = dictKey.replace("occult ", "occult: ");
+    if (dictKey.startsWith("restricted ")) dictKey = dictKey.replace("restricted ", "restricted: ");
+    
+    const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[dictKey]) ||
+                   (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[dictKey]);
+    
+    let calculatedLvl = 0;
+    if (config) {
+        if (config.isPackage && config.progression) {
+            calculatedLvl = config.progression.reduce((highestIndex, threshold, currentIndex) => {
+                return pts >= threshold ? currentIndex : highestIndex;
+            }, 0);
+        } else {
+            const cost = config.costPerLevel || 6;
+            calculatedLvl = Math.floor(pts / cost);
+        }
+        if (calculatedLvl > config.maxLevel) {
+            calculatedLvl = config.maxLevel;
+        }
+    } else {
+        const isAdvancedPath = sanitizedKey.startsWith("mastery-") || sanitizedKey.startsWith("paragon-") || sanitizedKey.startsWith("occult-") || sanitizedKey.startsWith("restricted-");
+        calculatedLvl = Math.floor(pts / (isAdvancedPath ? 12 : 6));
+    }
+    
+    const free = (typeof window.getFreeLevelsCountForTree === "function") ? window.getFreeLevelsCountForTree(treeName) : 0;
+    return calculatedLvl + free;
+}
+
+function getTreeMaxLevelByName(treeName) {
+    let dictKey = treeName.toLowerCase();
+    if (dictKey.startsWith("mastery ")) dictKey = dictKey.replace("mastery ", "mastery: ");
+    if (dictKey.startsWith("paragon ")) dictKey = dictKey.replace("paragon ", "paragon: ");
+    if (dictKey.startsWith("occult ") && dictKey !== "occult base") dictKey = dictKey.replace("occult ", "occult: ");
+    if (dictKey.startsWith("restricted ")) dictKey = dictKey.replace("restricted ", "restricted: ");
+    
+    const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[dictKey]) ||
+                   (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[dictKey]);
+    return config ? config.maxLevel : 5;
+}
+
+function resolveTooltipKey(treeKey, levelNum, abilityName) {
+    if (!abilityName) return `${treeKey.replace(/[^a-z0-9]+/g, "_")}_${levelNum}`;
+    
+    const cleaned = abilityName.replace(/<[^>]*>/g, " ");
+    const nameVariants = [
+        cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
+    ];
+    
+    const baseKey = treeKey.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+    const possibleKeys = [
+        ...nameVariants,
+        `${baseKey}_${levelNum}`,
+        baseKey,
+        `${baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, "")}_${levelNum}`
+    ];
+    
+    for (const k of possibleKeys) {
+        if (k && typeof tooltipRegistry !== "undefined" && tooltipRegistry[k]) {
+            return k;
+        }
+    }
+    return `${baseKey}_${levelNum}`;
+}
+
+function spellNameToTooltipKey(spellName) {
+    const cleaned = spellName.replace(/<[^>]*>/g, " ");
+    const variants = [
+        cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+        cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
+    ];
+    for (const v of variants) {
+        if (v && typeof tooltipRegistry !== "undefined" && tooltipRegistry[v]) return v;
+    }
+    return variants[0];
+}
+
+function updateCreationCardTooltips() {
+    const cardContainers = [
+        document.getElementById("grid-active-creation-trees"),
+        document.getElementById("grid-magic-guild-disciplines"),
+        document.getElementById("grid-restricted-paragon-paths")
+    ];
+
+    cardContainers.forEach(container => {
+        if (!container) return;
+        const cards = container.querySelectorAll(".aspect-card");
+        cards.forEach(card => {
+            const nameEl = card.querySelector(".aspect-name");
+            if (!nameEl) return;
+            const treeName = nameEl.textContent.trim();
+            if (!treeName || treeName === "Character Rank") return;
+
+            const lowerTree = treeName.toLowerCase();
+
+            // 1. Background, Interlocution, Guild: Sages -> "See the Skill Codex for available skills"
+            if (["background", "interlocution", "guild: sages", "guild:sages"].includes(lowerTree)) {
+                const customKey = `codex_fallback_${lowerTree.replace(/[^a-z0-9]/g, "_")}`;
+                tooltipRegistry[customKey] = {
+                    title: treeName,
+                    description: "See the Skill Codex for available skills"
+                };
+                card.setAttribute("data-tooltip", customKey);
+                return;
+            }
+
+            // 2. Conjuration at level 5+ -> Dynamic unchosen discipline spells or guidance prompt
+            if (lowerTree === "conjuration") {
+                const currentLvl = getTreeCurrentLevelByName(treeName);
+                if (currentLvl >= 5) {
+                    const dList = (characterChoicesState && characterChoicesState.conjurationDisciplines) || ["None", "None"];
+                    const disc1 = dList[0] || "None";
+                    const disc2 = dList[1] || "None";
+
+                    const conjCustomKey = "dynamic_conjuration_tooltip";
+                    if (disc1 === "None" && disc2 === "None") {
+                        tooltipRegistry[conjCustomKey] = {
+                            title: "Conjuration",
+                            description: "Choose your disciplines to see available skills"
+                        };
+                    } else {
+                        let availableSpells = [];
+                        if (disc1 !== "None" && typeof availableConjurationSubSkills !== "undefined" && availableConjurationSubSkills[disc1]) {
+                            availableSpells.push(...availableConjurationSubSkills[disc1]);
+                        }
+                        if (disc2 !== "None" && typeof availableConjurationSubSkills !== "undefined" && availableConjurationSubSkills[disc2]) {
+                            availableSpells.push(...availableConjurationSubSkills[disc2]);
+                        }
+
+                        // Filter out spells that have already been chosen in active open-choice slots
+                        const chosenSpells = Object.values(characterChoicesState.conjurationSkillSelections || {});
+                        const unchosenSpells = availableSpells.filter(spell => !chosenSpells.includes(spell));
+                        const spellTooltipKeys = unchosenSpells.map(spell => spellNameToTooltipKey(spell));
+
+                        tooltipRegistry[conjCustomKey] = {
+                            title: "Conjuration (Available Spells)",
+                            summary: unchosenSpells.length > 0 ? "Available unchosen Conjuration spells:" : "All available spells have been chosen.",
+                            includes: spellTooltipKeys
+                        };
+                    }
+                    card.setAttribute("data-tooltip", conjCustomKey);
+                    return;
+                }
+            }
+
+            // 3. Default handling for all other standard skill cards (Next Available Level tooltip)
+            const currentLvl = getTreeCurrentLevelByName(treeName);
+            const maxLvl = getTreeMaxLevelByName(treeName);
+            
+            let nextLvl = currentLvl + 1;
+            if (nextLvl > maxLvl && maxLvl !== Infinity) {
+                nextLvl = maxLvl;
+            }
+
+            const regKey = treeName.toLowerCase();
+            const levelNames = (typeof skillAbilitiesRegistry !== "undefined" && skillAbilitiesRegistry[regKey]) || [];
+            const abilityName = levelNames[nextLvl - 1] || levelNames[levelNames.length - 1] || "";
+
+            const resolvedKey = resolveTooltipKey(regKey, nextLvl, abilityName);
+            if (resolvedKey) {
+                card.setAttribute("data-tooltip", resolvedKey);
+            } else {
+                card.removeAttribute("data-tooltip");
+            }
+        });
+    });
+}
+
+// =========================================================================
+// 🧩 CUSTOM SKILLS MANAGEMENT & INTEGRATION ENGINE
+// =========================================================================
+
+if (!characterChoicesState.customSkills) {
+    characterChoicesState.customSkills = [];
+}
+
+// Global helper for other scripts to access custom skills easily
+window.getCustomSkills = function() {
+    return characterChoicesState.customSkills || [];
+};
+
+// Sync custom skill slots based on every 6 Exp. invested in "Custom Skills"
+function syncCustomSkillSlots() {
+    const customXpEl = document.getElementById("sk-xp-custom-skills");
+    const xp = customXpEl ? parseInt(customXpEl.value) || 0 : 0;
+    const targetCount = Math.floor(xp / 6);
+
+    if (!characterChoicesState.customSkills) {
+        characterChoicesState.customSkills = [];
+    }
+
+    while (characterChoicesState.customSkills.length < targetCount) {
+        const idx = characterChoicesState.customSkills.length;
+        characterChoicesState.customSkills.push({
+            id: idx,
+            name: `Custom Skill ${idx + 1}`,
+            category: "Neither",
+            actionType: "Check",
+            aspect: "DEX",
+            description: "",
+            extraFields: []
+        });
+    }
+    if (characterChoicesState.customSkills.length > targetCount) {
+        characterChoicesState.customSkills = characterChoicesState.customSkills.slice(0, targetCount);
+    }
+
+    renderCustomSkillsManager();
+    registerCustomSkillsTooltips();
+}
+
+function renderCustomSkillsManager() {
+    const container = document.getElementById("custom-skills-list-container");
+    if (!container) return;
+
+    const skills = characterChoicesState.customSkills || [];
+    if (skills.length === 0) {
+        container.innerHTML = "";
+        return;
+    }
+
+    let html = `
+    <div class="aspect-card" style="background: #faf7f2; border: 1px solid var(--border-warm); border-radius: 6px; padding: 12px; margin-bottom: 15px; text-align: left;">
+        <div style="font-weight: bold; color: var(--primary-red); font-size: 0.95rem; margin-bottom: 8px; border-bottom: 1px dashed var(--border-dark); padding-bottom: 4px;">Custom Skills (${skills.length})</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">`;
+
+    skills.forEach((skill, idx) => {
+        const safeKey = skill.name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+        html += `
+            <div style="background: #fff; border: 1px solid var(--border-warm); border-radius: 6px; padding: 10px; box-sizing: border-box;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="color: var(--primary-red); font-size: 0.88rem; cursor: help;" data-tooltip="${safeKey}">${escapeHtml(skill.name)}</strong>
+                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">
+                            [${skill.category}] | Action: ${skill.actionType} | Aspect: ${skill.aspect}
+                        </div>
+                    </div>
+                    <button type="button" class="pnp-edit-btn" onclick="toggleCustomSkillBuilder(${idx})" style="font-size: 0.75rem; font-weight: bold; padding: 2px 6px; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer;">Edit</button>
+                </div>
+                <div id="builder-custom-skill-${idx}" class="builder-panel" style="display: none; margin-top: 10px;">
+                    ${renderCustomSkillBuilderForm(idx, skill)}
+                </div>
+            </div>
+        `;
+    });
+
+    html += `</div></div>`;
+    container.innerHTML = html;
+}
+
+function renderCustomSkillBuilderForm(idx, skill) {
+    const catOptions = ['Neither', 'Offensive', 'Defensive'].map(c => `<option value="${c}" ${skill.category === c ? 'selected' : ''}>${c}</option>`).join('');
+    const actionOptions = ['None', 'Attack', 'Move', 'Cast', 'Lore', 'Language', 'Check'].map(a => `<option value="${a}" ${skill.actionType === a ? 'selected' : ''}>${a}</option>`).join('');
+    const aspectOptions = ['None', 'DEX', 'HEL', 'STR', 'ACT', 'INT', 'VER', 'HAP'].map(as => `<option value="${as}" ${skill.aspect === as ? 'selected' : ''}>${as}</option>`).join('');
+
+    let extraFieldsHtml = '';
+    if (Array.isArray(skill.extraFields)) {
+        skill.extraFields.forEach((ef, efIdx) => {
+            extraFieldsHtml += `
+                <div class="custom-extra-field-row" style="display: flex; gap: 6px; align-items: center; margin-bottom: 6px;" data-ef-idx="${efIdx}">
+                    <input type="text" class="ef-label-input" value="${escapeHtml(ef.label || '')}" placeholder="Label (e.g. Range)" style="flex: 1; padding: 4px; font-size: 0.78rem;">
+                    <input type="text" class="ef-text-input" value="${escapeHtml(ef.text || '')}" placeholder="Description / Value" style="flex: 2; padding: 4px; font-size: 0.78rem;">
+                    <button type="button" class="pnp-edit-btn" onclick="removeCustomSkillExtraField(${idx}, ${efIdx})" style="color: #b82c2c; padding: 2px 4px;">&times;</button>
+                </div>
+            `;
+        });
+    }
+
+    return `
+        <h4 style="color: var(--primary-red); border-bottom: 1px solid var(--border-warm); padding-bottom: 4px; margin-top: 0;">Configure Custom Skill #${idx + 1}</h4>
+        <div class="builder-group">
+            <label>Skill Name</label>
+            <input type="text" id="cs-name-${idx}" value="${escapeHtml(skill.name)}" style="padding: 6px; font-size: 0.85rem;">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="builder-group">
+                <label>Category</label>
+                <select id="cs-cat-${idx}" style="padding: 4px; font-size: 0.8rem;">${catOptions}</select>
+            </div>
+            <div class="builder-group">
+                <label>Action Type</label>
+                <select id="cs-action-${idx}" style="padding: 4px; font-size: 0.8rem;">${actionOptions}</select>
+            </div>
+        </div>
+        <div class="builder-group">
+            <label>Governing Aspect</label>
+            <select id="cs-aspect-${idx}" style="padding: 4px; font-size: 0.8rem;">${aspectOptions}</select>
+        </div>
+        <div class="builder-group">
+            <label>Description</label>
+            <textarea id="cs-desc-${idx}" class="inventory-textarea" style="height: 70px; font-size: 0.8rem; resize: vertical;">${escapeHtml(skill.description)}</textarea>
+        </div>
+        <div class="builder-group">
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Extra Fields</span>
+                <button type="button" class="pnp-edit-btn" onclick="addCustomSkillExtraField(${idx})" style="color: var(--accent-gold); font-weight: bold;">+ Add Field</button>
+            </label>
+            <div id="cs-extra-container-${idx}" style="margin-top: 4px;">
+                ${extraFieldsHtml}
+            </div>
+        </div>
+        <div class="builder-actions" style="margin-top: 10px;">
+            <button type="button" class="builder-btn builder-btn-cancel" onclick="toggleCustomSkillBuilder(${idx})">Close</button>
+            <button type="button" class="builder-btn builder-btn-save" onclick="saveCustomSkill(${idx})">Save</button>
+        </div>
+    `;
+}
+
+window.toggleCustomSkillBuilder = function(idx) {
+    const panel = document.getElementById(`builder-custom-skill-${idx}`);
+    if (!panel) return;
+    panel.style.display = (panel.style.display === "block") ? "none" : "block";
+};
+
+function syncCustomSkillFormToState(idx) {
+    if (!characterChoicesState.customSkills[idx]) return;
+    const nameEl = document.getElementById(`cs-name-${idx}`);
+    const catEl = document.getElementById(`cs-cat-${idx}`);
+    const actionEl = document.getElementById(`cs-action-${idx}`);
+    const aspectEl = document.getElementById(`cs-aspect-${idx}`);
+    const descEl = document.getElementById(`cs-desc-${idx}`);
+
+    if (nameEl) characterChoicesState.customSkills[idx].name = nameEl.value.trim() || `Custom Skill ${idx + 1}`;
+    if (catEl) characterChoicesState.customSkills[idx].category = catEl.value;
+    if (actionEl) characterChoicesState.customSkills[idx].actionType = actionEl.value;
+    if (aspectEl) characterChoicesState.customSkills[idx].aspect = aspectEl.value;
+    if (descEl) characterChoicesState.customSkills[idx].description = descEl.value;
+
+    const container = document.getElementById(`cs-extra-container-${idx}`);
+    if (container) {
+        const rows = container.querySelectorAll('.custom-extra-field-row');
+        const newExtraFields = [];
+        rows.forEach(row => {
+            const label = row.querySelector('.ef-label-input')?.value.trim() || "";
+            const text = row.querySelector('.ef-text-input')?.value.trim() || "";
+            newExtraFields.push({ label, text });
+        });
+        characterChoicesState.customSkills[idx].extraFields = newExtraFields;
+    }
+}
+
+window.addCustomSkillExtraField = function(idx) {
+    syncCustomSkillFormToState(idx); // 👈 Preserves whatever you've typed so far!
+    if (!characterChoicesState.customSkills[idx].extraFields) {
+        characterChoicesState.customSkills[idx].extraFields = [];
+    }
+    characterChoicesState.customSkills[idx].extraFields.push({ label: "", text: "" });
+    renderCustomSkillsManager();
+    const panel = document.getElementById(`builder-custom-skill-${idx}`);
+    if (panel) panel.style.display = "block";
+};
+
+window.removeCustomSkillExtraField = function(idx, efIdx) {
+    syncCustomSkillFormToState(idx); // 👈 Preserves whatever you've typed so far!
+    characterChoicesState.customSkills[idx].extraFields.splice(efIdx, 1);
+    renderCustomSkillsManager();
+    const panel = document.getElementById(`builder-custom-skill-${idx}`);
+    if (panel) panel.style.display = "block";
+};
+
+window.saveCustomSkill = function(idx) {
+    syncCustomSkillFormToState(idx);
+    toggleCustomSkillBuilder(idx);
+    if (typeof refreshCustomSkillRows === "function") refreshCustomSkillRows();
+    if (typeof calculateSheet === "function") calculateSheet();
+};
+
+function registerCustomSkillsTooltips() {
+    if (typeof tooltipRegistry === "undefined") return;
+    const customSkills = window.getCustomSkills();
+    customSkills.forEach(cs => {
+        const key = cs.name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+        const extras = [];
+        if (cs.actionType && cs.actionType !== "None") extras.push({ label: "Action Type", text: cs.actionType });
+        if (cs.aspect && cs.aspect !== "None") extras.push({ label: "Governing Aspect", text: cs.aspect });
+        if (Array.isArray(cs.extraFields)) {
+            cs.extraFields.forEach(ef => {
+                if (ef.label || ef.text) {
+                    extras.push({ label: ef.label, text: ef.text });
+                }
+            });
+        }
+        tooltipRegistry[key] = {
+            title: cs.name,
+            description: cs.description || "",
+            extras: extras
+        };
+    });
+}
+
+window.refreshCustomSkillRows = function() {
+    const customSkills = (typeof window.getCustomSkills === "function") ? window.getCustomSkills() : [];
+    
+    // Remove old custom skill rows first to prevent duplication
+    document.querySelectorAll('.skill-row.custom-skill-row').forEach(el => el.remove());
+
+    customSkills.forEach(cs => {
+        const action = cs.actionType;
+        if (!["Check", "Attack", "Lore", "Cast"].includes(action)) return;
+
+        const targetContainerId = (action === "Cast") ? "castSkillsContainer" : "nonCastSkillsContainer";
+        const container = document.getElementById(targetContainerId);
+        if (!container) return;
+
+        const stateKey = cs.name.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+
+        // Ensure state memory registers proficiency for this custom skill
+        if (!characterChoicesState.extraTrainingSelections) {
+            characterChoicesState.extraTrainingSelections = {};
+        }
+        if (!characterChoicesState.extraTrainingSelections[stateKey]) {
+            characterChoicesState.extraTrainingSelections[stateKey] = { p: false, et: false, m: false, aspect: "" };
+        }
+        characterChoicesState.extraTrainingSelections[stateKey].p = true;
+
+        const row = document.createElement('div');
+        row.className = 'skill-row custom-skill-row';
+
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'skill-title';
+        titleSpan.textContent = cs.name;
+        titleSpan.setAttribute('data-tooltip', stateKey);
+        row.appendChild(titleSpan);
+
+        const checkboxWrapper = document.createElement('div');
+        checkboxWrapper.className = 'skill-checkboxes';
+
+        ['p', 'et', 'm'].forEach(typeToken => {
+            const checkboxInput = document.createElement('input');
+            checkboxInput.type = 'checkbox';
+            checkboxInput.dataset.skill = stateKey;
+            checkboxInput.dataset.type = typeToken;
+
+            if (typeToken === 'p') {
+                // Just having the custom skill renders it proficient by default
+                checkboxInput.checked = true;
+                checkboxInput.disabled = true;
+            } else {
+                // Restore saved state for Extra Training (ET) and Mastery (M)
+                if (characterChoicesState.extraTrainingSelections?.[stateKey]?.[typeToken]) {
+                    checkboxInput.checked = true;
+                }
+            }
+
+            checkboxWrapper.appendChild(checkboxInput);
+        });
+        row.appendChild(checkboxWrapper);
+
+        const aspectContainer = document.createElement('div');
+        aspectContainer.className = 'aspect-container';
+
+        const staticTextNode = document.createElement('span');
+        staticTextNode.className = 'aspect-static';
+        staticTextNode.textContent = (cs.aspect && cs.aspect !== "None") ? cs.aspect : "—";
+        aspectContainer.appendChild(staticTextNode);
+        row.appendChild(aspectContainer);
+
+        const diceCalcSpan = document.createElement('span');
+        diceCalcSpan.className = 'dice-pool-output';
+        diceCalcSpan.id = `dice_output_${stateKey}`;
+        diceCalcSpan.textContent = "—";
+        row.appendChild(diceCalcSpan);
+
+        container.appendChild(row);
+    });
+
+    // Re-run dice pool calculations for the new rows
+    if (typeof updateExtraTrainingDicePools === "function") {
+        updateExtraTrainingDicePools();
+    }
+};
+
 </script>
 <!-- Character Manager Modal -->
 <div id="char-manager-modal" class="modal-overlay">
@@ -20540,6 +21163,7 @@ function validateTalentSelections() {
             <div style="display: flex; gap: 8px; align-items: center;">
                 <input type="text" id="save-char-name" placeholder="Character Name" style="flex: 1; padding: 6px; font-size: 0.9rem; border: 1px solid var(--border-dark); border-radius: 4px;">
                 <button class="btn-sm btn-primary" onclick="saveCurrentCharacter()" style="padding: 6px 12px; font-weight: bold;">Save Current</button>
+                <button class="btn-sm" onclick="newCharacter()" style="padding: 6px 10px; font-weight: bold;" title="Start a fresh character">New</button>
             </div>
             <div style="display: flex; gap: 8px; margin-top: 10px;">
                 <button class="btn-sm" onclick="exportCurrentJSON()" style="flex: 1;">⬇ Export Current (JSON)</button>
