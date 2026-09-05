@@ -1990,23 +1990,56 @@ details[open] #skills-collapsed-summary {
         </div> 
         <div class="form-group span-3"> 
           <label for="char-race">Race</label> 
-          <select id="char-race" onchange="calculateSheet()"> 
-            <option value="Human">Human</option> 
-            <option value="Canivir">Canivir</option> 
-            <option value="Dwarf">Dwarf</option> 
-            <option value="Elf">Elf</option> 
-            <option value="Felivir">Felivir</option> 
-            <option value="Half-elf">Half-Elf</option> 
-            <option value="Half-orc">Half-Orc</option> 
-            <option value="Hanyo (Earth)">Hanyo (Earth)</option> 
-            <option value="Hanyo (Fire)">Hanyo (Fire)</option> 
-            <option value="Hanyo (Shadow)">Hanyo (Shadow)</option> 
-            <option value="Hanyo (Water)">Hanyo (Water)</option> 
-            <option value="Hanyo (Wind)">Hanyo (Wind)</option> 
-            <option value="Haubid">Haubid</option> 
-            <option value="Nuss-janni">Nuss-Janni</option> 
-            <option value="Vulpivir">Vulpivir</option> 
-          </select> 
+<select id="char-race" onchange="calculateSheet()"> 
+    <option value="Human">Human</option> 
+    <option value="Canivir">Canivir</option> 
+    <option value="Dwarf">Dwarf</option> 
+    <option value="Elf">Elf</option> 
+    <option value="Felivir">Felivir</option> 
+    <option value="Half-elf">Half-Elf</option> 
+    <option value="Half-orc">Half-Orc</option> 
+    <option value="Hanyo (Earth)">Hanyo (Earth)</option> 
+    <option value="Hanyo (Fire)">Hanyo (Fire)</option> 
+    <option value="Hanyo (Shadow)">Hanyo (Shadow)</option> 
+    <option value="Hanyo (Water)">Hanyo (Water)</option> 
+    <option value="Hanyo (Wind)">Hanyo (Wind)</option> 
+    <option value="Haubid">Haubid</option> 
+    <option value="Nuss-janni">Nuss-Janni</option> 
+    <option value="Vulpivir">Vulpivir</option> 
+    <option disabled>────────── (LM / Other Anthropoids) ──────────</option>
+<option value="Antaeon">Antaeon</option>
+<option value="Brownies">Brownies</option>
+<option value="Canivir, Wild">Canivir, Wild</option>
+<option value="Centaur">Centaur</option>
+<option value="Derro">Derro</option>
+<option value="Doppelgänger, Transcendent">Doppelgänger, Transcendent</option>
+<option value="Dryad">Dryad</option>
+<option value="Ent">Ent</option>
+<option value="Faeries">Faeries</option>
+<option value="Fishfolk">Fishfolk</option>
+<option value="Giant, Fire">Giant, Fire</option>
+<option value="Giant, Frost">Giant, Frost</option>
+<option value="Giant, Hill">Giant, Hill</option>
+<option value="Giant, Island">Giant, Island</option>
+<option value="Gnole">Gnole</option>
+<option value="Goblin">Goblin</option>
+<option value="Goritaur">Goritaur</option>
+<option value="Hobgoblin">Hobgoblin</option>
+<option value="Kathonid">Kathonid</option>
+<option value="Kobold">Kobold</option>
+<option value="Lizardfolk">Lizardfolk</option>
+<option value="Minotaur">Minotaur</option>
+<option value="Naga">Naga</option>
+<option value="Naiad">Naiad</option>
+<option value="Ogre">Ogre</option>
+<option value="Oldra">Oldra</option>
+<option value="Orc">Orc</option>
+<option value="Pixie">Pixie</option>
+<option value="Scorpionfolk">Scorpionfolk</option>
+<option value="Troll">Troll</option>
+<option value="Troll, Frost">Troll, Frost</option>
+<option value="Weftlings">Weftlings</option>
+</select>
         </div> 
         <div class="form-group span-4"> 
           <label for="char-ethnos">Ethnos (Culture)</label> 
@@ -2021,7 +2054,37 @@ details[open] #skills-collapsed-summary {
             <option value="Nuss-Jann">Nuss-Jann</option> 
             <option value="Ringi">Ringi</option> 
             <option value="Sylvan">Sylvan</option> 
-            <option value="Vriit">Vriit</option> 
+            <option value="Vriit">Vriit</option>
+            <option disabled>────────── (LM / Other Ethnos) ──────────</option>
+            <option value="Antaeon">Antaeon</option>
+            <option value="Brownies">Brownies</option>
+            <option value="Canivir, Wild">Canivir, Wild</option>
+            <option value="Centaur">Centaur</option>
+            <option value="Darkfolk">Darkfolk</option>
+            <option value="Derro">Derro</option>
+            <option value="Dryad">Dryad</option>
+            <option value="Dwarf">Dwarf</option>
+            <option value="Ent">Ent</option>
+            <option value="Faeries">Faeries</option>
+            <option value="Fishfolk">Fishfolk</option>
+            <option value="Giant, Fire">Giant, Fire</option>
+            <option value="Giant, Frost">Giant, Frost</option>
+            <option value="Giant, Hill">Giant, Hill</option>
+            <option value="Giant, Island">Giant, Island</option>
+            <option value="Gnole">Gnole</option>
+            <option value="Goritaur">Goritaur</option>
+            <option value="Kathonid">Kathonid</option>
+            <option value="Kobold">Kobold</option>
+            <option value="Lizardfolk">Lizardfolk</option>
+            <option value="Minotaur">Minotaur</option>
+            <option value="Naga">Naga</option>
+            <option value="Naiad">Naiad</option>
+            <option value="Orc">Orc</option>
+            <option value="Pixie">Pixie</option>
+            <option value="Scorpionfolk">Scorpionfolk</option>
+            <option value="Troll">Troll</option>
+            <option value="Troll, Frost">Troll, Frost</option>
+            <option value="Weftlings">Weftlings</option> 
           </select> 
         </div> 
         <div class="form-group span-4"> 
@@ -7381,7 +7444,194 @@ const tooltipRegistry = {
     title: "Weapon Affinity (Crossbow)",
     description: "You gain +1d on attacks with Crossbows."
   },
-
+"meld": {
+        title: "Meld",
+        description: "Nymphs can meld into the subject of their life bond at will through physical contact. When they do, the two are indistinguishable."
+    },
+    "life_bond": {
+        title: "Life Bond",
+        description: "A nymph will only die when the subject of their life bond is killed, and the subject of their life bond is undying."
+    },
+    "undying": {
+        title: "Undying",
+        description: "Undying do not die from old age: they must be killed."
+    },
+    "magic_immunity": {
+        title: "Magic Immunity",
+        description: "The creature suffers no damage or ill effects from magic."
+    },
+    "curse_disease_immunity": {
+        title: "Curse & Disease Immunity",
+        description: "The creature suffers no damage or ill effects from curses and diseases."
+    },
+    "rend": {
+        title: "Rend",
+        description: "If the creature is in control of the grapple, it can use its rend attack. The defender loses the defense dice granted by their Dexterity and shield, and the grapple is ended."
+    },
+    "firststrike": {
+        title: "Firststrike",
+        description: "You retain the right of first strike against approaching combatants."
+    },
+    "regenerate": {
+        title: "Regenerate",
+        description: "The creature regenerates its Vitality each pulse unless that damage was caused by acid or fire."
+    },
+    "constrict": {
+        title: "Constrict",
+        description: "The damage for a constrict attack is the creature's Strength times one, two, three, or four for size A, B, C, or D creatures respectively. When constricted, creatures trying to oppose the grapple are at disadvantage."
+    },
+    "deadly_bite": {
+        title: "Deadly Bite",
+        description: "Add one Crit result to specified bite attack or all attacks if unspecified."
+    },
+    "web_blast": {
+        title: "Web Blast",
+        description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
+    },
+    "claw_shield": {
+        title: "Claw Shield",
+        description: "Provides a +2d bonus to Avoidance."
+    },
+    "deadly_sting": {
+        title: "Deadly Sting",
+        description: "Add one Crit result to specified sting attack."
+    },
+"frost_vulnerability": {
+        title: "Frost Vulnerability",
+        description: "The creature suffers double damage from frost attacks."
+    },
+    "fire_vulnerability": {
+        title: "Fire Vulnerability",
+        description: "The creature suffers double damage from fire attacks."
+    },
+    "water_vulnerability": {
+        title: "Water Vulnerability",
+        description: "The creature suffers double damage from water attacks."
+    },
+    "lightning_vulnerability": {
+        title: "Lightning Vulnerability",
+        description: "The creature suffers double damage from lightning attacks."
+    },
+    "darkness_vulnerability": {
+        title: "Darkness Vulnerability",
+        description: "The creature suffers double damage from darkness attacks."
+    },
+    "light_vulnerability": {
+        title: "Light Vulnerability",
+        description: "The creature suffers double damage from light attacks."
+    },
+    "thunder_vulnerability": {
+        title: "Thunder Vulnerability",
+        description: "The creature suffers double damage from thunder attacks."
+    },
+    "vulnerability": {
+        title: "Vulnerability",
+        description: "The creature suffers double damage from the specified damage type."
+    },
+    "resistance": {
+        title: "Resistance",
+        description: "The creature suffers ½ damage from the specified damage type."
+    },
+    "immunity": {
+        title: "Immunity",
+        description: "The creature suffers no damage or ill effects from the specified damage type."
+    },
+    "affinity": {
+        title: "Affinity",
+        description: "The creature gains a 1d bonus with the specified skill or weapon."
+    },
+    "aversion": {
+        title: "Aversion",
+        description: "The creature’s natural Avoidance cc is reduced by half for a particular damage type and it loses its Divine Salvation."
+    },
+    "devour": {
+        title: "Devour",
+        description: "The creature can swallow whole targets 2 or 3 sizes smaller than itself."
+    },
+    "divine_salvation": {
+        title: "Divine Salvation",
+        description: "The creature is granted a free Crit result on all Avoidance checks."
+    },
+    "elusive": {
+        title: "Elusive",
+        description: "When rolling Avoidance, Crit results, in addition to their normal effect, negate Crit results made against the creature."
+    },
+    "immortal": {
+        title: "Immortal",
+        description: "When this creature is felled, it undergoes a period of quiescence instead of dying."
+    },
+    "inept": {
+        title: "Inept",
+        description: "The creature has only one Mana."
+    },
+    "squishy": {
+        title: "Squishy",
+        description: "The creature has only one Vitality."
+    },
+    "vampiric_bite": {
+        title: "Vampiric Bite",
+        description: "If bitten by a vampire, and in turn drink of that vampire’s blood, the target must pass a Health save, TN 6, or die and become a vampire themself."
+    },
+"venomous": {
+        title: "Venom",
+        description: "Applies a toxic venom upon a successful strike that requires a Health save to resist or suffer its adverse effects (such as Pain, Nausea, or Paralysis)."
+    },
+    "weapon_affinity_derro_brutal": {
+        title: "Brutal Weapons Affinity",
+        description: "You gain +1d on attacks with Brutal weapons."
+    },
+    "great_bow_affinity": {
+        title: "Great Bow Affinity",
+        description: "You gain +1d on attacks with Great Bows."
+    },
+    "battleaxe_affinity": {
+        title: "Battleaxe Affinity",
+        description: "You gain +1d on attacks with Battleaxes."
+    },
+    "quarterstaff_affinity": {
+        title: "Quarterstaff Affinity",
+        description: "You gain +1d on attacks with Quarterstaffs."
+    },
+    "atgeir_affinity": {
+        title: "Atgeir Affinity",
+        description: "You gain +1d on attacks with Atgeirs."
+    },
+    "quick_acting_vitality_poison": {
+        title: "Quick Acting Vitality Poison",
+        description: "A fast-acting poison that targets Vitality and requires a Health save to resist."
+    },
+    "claw_shield": {
+        title: "Claw Shield",
+        description: "Provides a +2d bonus to Avoidance."
+    },
+    "deadly_sting": {
+        title: "Deadly Sting",
+        description: "Add one Crit result to specified sting attacks."
+    },
+    "web_blast": {
+        title: "Web Blast",
+        description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
+    },
+    "enthral": {
+        title: "Enthral",
+        description: "The target creature must pass a Verve confrontation or become a thrall, obeying its master until the master dies."
+    },
+    "obscure_self": {
+        title: "Obscure Self",
+        description: "All who look upon you must pass a TN Acuity save when they turn away or lose all memory of you."
+    },
+    "ravage_mind": {
+        title: "Ravage Mind",
+        description: "As a Word, the creature can attack its target's Mana directly."
+    },
+    "share_senses": {
+        title: "Share Senses",
+        description: "The creature can see, hear, feel, taste, and smell what its thrall is experiencing at will."
+    },
+    "unspeaking": {
+        title: "Unspeaking",
+        description: "The creature can cast spells without speaking."
+    },
   // ═══════════════════════════════════════════════════════════════════════
   // SKILLS & ABILITIES
   // ═══════════════════════════════════════════════════════════════════════
@@ -9769,10 +10019,10 @@ if (!characterChoicesState.interlocutionSelections) {
     "Meso-daar", "al-Lazha", "Ringi", "Sylvan", "Vriit", "Screech and Song", 
     "Darktounge", "Draconic", "Old Dwarven", "Entish", "Fey", "Fire Giant", 
     "Frost Giant", "Hill Giant", "Island Giant", "Orcish", "Trollish", 
-    "Antaeonic (Antaeon)", "Caniviric (Canivir)", "Feliviric (Felivir)", 
-    "Piscean (Fishfolk)", "Crocutan (Gnole)", "Pithecan (Goritaur)", 
-    "Saurian (Lizardfolk)", "Tauric (Minotaur)", "Nagian (Naga)", 
-    "Scorpionic (Scorpionfolk)", "Weftic (Weftlings)"
+    "Antaeonic", "Caniviric", "Feliviric", 
+    "Piscean", "Crocutan", "Pithecan", 
+    "Saurian", "Tauric", "Nagian", 
+    "Scorpionic", "Weftic"
  ];
 
  if (!characterChoicesState.chosenLanguagesPool) {
@@ -10313,25 +10563,89 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Nuss-Jann": { native: "al-Lazha", pidgins: ["Pidgin-Imperial", "Pidgin-Fire Giant"] },
         "Ringi": { native: "Ringi", pidgins: ["Pidgin-Imperial", "Pidgin-al-Lazha", "Pidgin-Dwarven", "Pidgin-Elven", "Pidgin-Sylvan"] },
         "Sylvan": { native: "Sylvan", pidgins: ["Pidgin-Imperial", "Pidgin-Elven", "Pidgin-Fey"] },
-        "Vriit": { native: "Vriit", pidgins: ["Pidgin-Imperial", "Pidgin-Aquoi", "Pidgin-Ilioniki", "Pidgin-Meso-daar"] }
+        "Vriit": { native: "Vriit", pidgins: ["Pidgin-Imperial", "Pidgin-Aquoi", "Pidgin-Ilioniki", "Pidgin-Meso-daar"] },
+        "Antaeon": { native: "Antaeonic", pidgins: ["Pidgin-Imperial"] },
+        "Brownies": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Canivir, Wild": { native: "Caniviric", pidgins: ["Pidgin-Euskal"] },
+        "Centaur": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Derro": { native: "Darktounge", pidgins: ["Pidgin-Imperial"] },
+        "Doppelgänger, Transcendent": { native: "Imperial", pidgins: [] },
+        "Dryad": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Ent": { native: "Entish", pidgins: ["Pidgin-Sylvan", "Pidgin-Elven"] },
+        "Faeries": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Fishfolk": { native: "Piscean" },
+        "Giant, Fire": { native: "Fire Giant", pidgins: ["Pidgin-Imperial"] },
+        "Giant, Frost": { native: "Frost Giant", pidgins: ["Pidgin-Euskal"] },
+        "Giant, Hill": { native: "Hill Giant", pidgins: ["Pidgin-Imperial"] },
+        "Giant, Island": { native: "Island Giant", pidgins: ["Pidgin-Tauric"] },
+        "Gnole": { native: "Crocutan", pidgins: ["Pidgin-Ringi"] },
+        "Goblin": { native: "Darktounge", pidgins: ["Pidgin-Imperial"] },
+        "Goritaur": { native: "Pithecan" },
+        "Hobgoblin": { native: "Darktounge", pidgins: ["Pidgin-Imperial"] },
+        "Kathonid": { native: "Mute" },
+        "Kobold": { native: "Darktongue" },
+        "Lizardfolk": { native: "Saurian", pidgins: ["Pidgin-Imperial"] },
+        "Minotaur": { native: "Tauric", pidgins: ["Pidgin-Imperial"] },
+        "Naga": { native: "Nagian", pidgins: ["Pidgin-Imperial"] },
+        "Naiad": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Ogre": { native: "Darktounge", pidgins: ["Pidgin-Imperial"] },
+        "Oldra": { native: "Darktounge", pidgins: ["Pidgin-Imperial"] },
+        "Orc": { native: "Orcish", pidgins: ["Pidgin-Imperial", "Pidgin-Elven"] },
+        "Pixie": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
+        "Scorpionfolk": { native: "Scorpionic", pidgins: ["Pidgin-Imperial"] },
+        "Troll": { native: "Trollish" },
+        "Troll, Frost": { native: "Trollish" },
+        "Weftlings": { native: "Weftic", pidgins: ["Pidgin-Imperial"] }
     };
     
     const racialData = {
-        "Human":     { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Canivir":   { pace: 9, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Dwarf":     { pace: 7, dex: -1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Elf":       { pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 1, hap: 0 },
-        "Felivir":   { pace: 10, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Half-elf":  { pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Half-orc":  { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Hanyo (Earth)":  { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
-        "Hanyo (Fire)":   { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
+        "Human": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Canivir": { pace: 9, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Dwarf": { pace: 7, dex: -1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Elf": { pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 1, hap: 0 },
+        "Felivir": { pace: 10, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Half-elf": { pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Half-orc": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Hanyo (Earth)": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
+        "Hanyo (Fire)": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
         "Hanyo (Shadow)": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
         "Hanyo (Water)":  { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
-        "Hanyo (Wind)":   { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
-        "Haubid":    { pace: 7, dex: 1, hel: 0, str: 0, act: 1, int: 0, ver: 0, hap: 1 },
-        "Nuss-janni":{ pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Vulpivir":  { pace: 8, dex: 1, hel: 0, str: 0, act: 1, int: 0, ver: 0, hap: 0 }
+        "Hanyo (Wind)": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: -1 }, 
+        "Haubid": { pace: 7, dex: 1, hel: 0, str: 0, act: 1, int: 0, ver: 0, hap: 1 },
+        "Nuss-janni": { pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
+        "Vulpivir": { pace: 8, dex: 1, hel: 0, str: 0, act: 1, int: 0, ver: 0, hap: 0 },
+        "Antaeon": { pace: 9,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
+        "Brownies": { pace: 6,  dex: 2,  hel: -2, str: -2, act: -1, int: -1, ver: -1, hap: 0 },
+        "Canivir, Wild": { pace: 9,  dex: 1,  hel: 0,  str: 1,  act: 0,  int: -1, ver: 0,  hap: 0 },
+        "Centaur": { pace: 22, dex: 3,  hel: 3,  str: 3,  act: 1,  int: 1,  ver: 1,  hap: 0 },
+        "Derro": { pace: 8,  dex: 0,  hel: 0,  str: 1,  act: 0,  int: 0,  ver: -1, hap: 0 },
+        "Doppelgänger, Transcendent": { pace: 8,  dex: 0,  hel: 5,  str: 5,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Dryad": { pace: 8,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
+        "Ent": { pace: 11, dex: -2, hel: 17, str: 17, act: 1,  int: 1,  ver: 1,  hap: 0 },
+        "Faeries": { pace: 22, dex: 3,  hel: -2, str: -2, act: 7,  int: 7,  ver: 7,  hap: 0 },
+        "Fishfolk": { pace: 8,  dex: 1,  hel: -1, str: -1, act: 1,  int: -1, ver: -1, hap: 0 },
+        "Giant, Fire": { pace: 8,  dex: 1,  hel: 13, str: 7,  act: 1,  int: 0,  ver: 1,  hap: 0 },
+        "Giant, Frost": { pace: 8,  dex: 1,  hel: 7,  str: 7,  act: 3,  int: 0,  ver: 1,  hap: 0 },
+        "Giant, Hill": { pace: 8,  dex: 0,  hel: 13, str: 13, act: 1,  int: 0,  ver: 1,  hap: 0 },
+        "Giant, Island": { pace: 8,  dex: 0,  hel: 7,  str: 13, act: 3,  int: 0,  ver: 1,  hap: 0 },
+        "Gnole": { pace: 9,  dex: 1,  hel: 1,  str: 1,  act: 0,  int: -2, ver: -1, hap: 0 },
+        "Goblin": { pace: 7,  dex: 1,  hel: -1, str: -1, act: 1,  int: 1,  ver: -1, hap: 0 },
+        "Goritaur": { pace: 22, dex: 0,  hel: 8,  str: 8,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Hobgoblin": { pace: 8,  dex: 0,  hel: 0,  str: 0,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Kathonid": { pace: 8,  dex: -1, hel: -1, str: -1, act: 3,  int: 3,  ver: 3,  hap: 0 },
+        "Kobold": { pace: 7,  dex: 0,  hel: -1, str: -2, act: -1, int: -2, ver: -1, hap: 0 },
+        "Lizardfolk": { pace: 8,  dex: 1,  hel: 3,  str: 3,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Minotaur": { pace: 9,  dex: 0,  hel: 2,  str: 2,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Naga": { pace: 7,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
+        "Naiad": { pace: 8,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
+        "Ogre": { pace: 9,  dex: 8,  hel: 8,  str: 8,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Oldra": { pace: 9,  dex: 5,  hel: 5,  str: 5,  act: 5,  int: 5,  ver: 5,  hap: 0 },
+        "Orc": { pace: 8,  dex: 2,  hel: 2,  str: 2,  act: -1, int: -1, ver: -1, hap: 0 },
+        "Pixie": { pace: 22, dex: 3,  hel: -2, str: -2, act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Scorpionfolk": { pace: 8,  dex: 1,  hel: 1,  str: 1,  act: 0,  int: 0,  ver: 0,  hap: 0 },
+        "Troll": { pace: 10, dex: 1,  hel: 11, str: 11, act: -2, int: -2, ver: 0,  hap: 0 },
+        "Troll, Frost": { pace: 12, dex: 3,  hel: 11, str: 11, act: 1,  int: -2, ver: 0,  hap: 0 },
+        "Weftlings": { pace: 8,  dex: 0,  hel: 1,  str: 1,  act: 0,  int: 0,  ver: 0,  hap: 0 }
     };
     
     const xpCosts = { 
@@ -11318,7 +11632,10 @@ function calculateSheet() {
         raceSelect.dataset.lastTracking = currentTrackingKey;
     }
     const race = raceSelect.value;
-    const rData = racialData[race];
+    const fallbackRacialData = {
+        pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0
+    };
+    const rData = racialData[race] || fallbackRacialData;
 
     const rollDex = parseInt(document.getElementById("roll-dex").value) || 0;
     const rollHel = parseInt(document.getElementById("roll-hel").value) || 0;
@@ -11996,6 +12313,10 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
             if (race === "Felivir" && weaponItem.modTags.includes("pugil")) weaponDice += 1;
             if (race === "Half-elf" && (weaponItem.modTags.includes("shrewd") || weaponItem.modTags.includes("arc_bow"))) weaponDice += 1;
             if (race === "Half-orc" && weaponItem.modTags.includes("weapon_2h") && (weaponItem.modTags.includes("brutal") || weaponItem.modTags.includes("shrewd"))) weaponDice += 1;
+            if (race === "Giant, Fire" && weaponData.itemId && weaponData.itemId.startsWith("bow_great")) {
+                weaponDice += 1;
+                }
+           if (race === "Vulpivir" && weaponItem.modTags.includes("crossbow")) weaponDice += 1;
         }
 
         // --- ENCHANTMENT COMPOSITE MERGING LOGIC ---
@@ -12376,6 +12697,10 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                     if (race === "Felivir" && activeTags.includes("pugil")) weaponDice += 1;
                     if (race === "Half-elf" && (activeTags.includes("shrewd") || activeTags.includes("arc_bow"))) weaponDice += 1;
                     if (race === "Half-orc" && activeTags.includes("weapon_2h") && (activeTags.includes("brutal") || activeTags.includes("shrewd"))) weaponDice += 1;
+                    if (race === "Vulpivir" && activeTags.includes("crossbow")) weaponDice += 1;
+                    if (race === "Giant, Frost" && weaponData.itemId === "battleaxe") weaponDice += 1;
+                    if (race === "Giant, Hill" && weaponData.itemId && weaponData.itemId.startsWith("quarterstaff")) weaponDice += 1;
+                    if (race === "Giant, Island" && weaponData.itemId && weaponData.itemId.startsWith("atgeir")) weaponDice += 1;
 
                     if (weaponData.makerId === "elven" && activeTags.includes("shrewd")) weaponDice += 1;
                     if (weaponData.makerId === "elven" && activeTags.includes("arc_bow")) weaponDice += 2;
@@ -13220,7 +13545,8 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
  const pidginSelect = document.getElementById("char-pidgin-select");
 
  // 1. Output mandatory native tongue from master map data
- const langData = ethnosLanguages[currentEthnos];
+const defaultEthnosData = { native: currentEthnos, pidgins: [] };
+const langData = ethnosLanguages[currentEthnos] || defaultEthnosData;
  nativeBox.value = langData ? langData.native : "None";
 
  // 2. Validate Intellect threshold (Must be strictly greater than 2)
@@ -14018,6 +14344,38 @@ window.racialSkillsMap = {
     "Nuss-janni": ["half_jann", "half_human"],
     "Vulpivir":   ["nimble_athlete", "starlight_vision", "keen_sniffer",
                    "light_footed", "small", "weapon_affinity_vulpivir_crossbow"],
+    "Antaeon":                    ["starlight_vision"],
+    "Brownies":                   ["curse_disease_immunity", "starlight_vision"],
+    "Canivir, Wild":              ["keen_sniffer"],
+    "Centaur":                    ["curse_disease_immunity", "starlight_vision"],
+    "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
+    "Doppelgänger, Transcendent": [],
+    "Dryad":                      ["curse_disease_immunity", "meld", "life_bond"],
+    "Ent":                        ["elemental_immunities_ent", "fire_vulnerability"],
+    "Faeries":                    ["twilight_vision", "undying", "curse_disease_immunity", "magic_immunity"],
+    "Fishfolk":                   ["frost_vulnerability"],
+    "Giant, Fire":                ["great_bow_affinity", "fire_resistance"],
+    "Giant, Frost":               ["battleaxe_affinity", "frost_resistance"],
+    "Giant, Hill":                ["quarterstaff_affinity"],
+    "Giant, Island":              ["atgeir_affinity", "thunder_lightning_resistance"],
+    "Gnole":                      ["starlight_vision"],
+    "Goblin":                     ["darkvision"],
+    "Goritaur":                   ["rend", "starlight_vision"],
+    "Hobgoblin":                  ["darkvision"],
+    "Kathonid":                   ["curse_disease_immunity", "enthral", "obscure_self", "ravage_mind", "share_senses", "telepathy", "unspeaking"],
+    "Kobold":                     ["darkvision"],
+    "Lizardfolk":                 ["quick_acting_vitality_poison"],
+    "Minotaur":                   [],
+    "Naga":                       ["constrict", "deadly_bite", "frost_vulnerability", "venomous"],
+    "Naiad":                      ["curse_disease_immunity", "life_bond", "meld"],
+    "Ogre":                       ["darkvision", "rend"],
+    "Oldra":                      ["darkvision"],
+    "Orc":                        ["curse_disease_immunity", "starlight_vision"],
+    "Pixie":                      ["curse_disease_immunity", "magic_immunity", "starlight_vision", "undying"],
+    "Scorpionfolk":               ["claw_shield", "deadly_sting", "venomous"],
+    "Troll":                      ["darkvision", "fire_vulnerability", "firststrike", "rend", "regenerate"],
+    "Troll, Frost":               ["darkvision", "fire_vulnerability", "firststrike", "frost_resistance", "rend", "regenerate"],
+    "Weftlings":                  ["web_blast"]
 };
 
 window.renderSpecialAbilitiesCard = function () {
@@ -14025,6 +14383,10 @@ window.renderSpecialAbilitiesCard = function () {
     if (!container) return;
     const raceSel = document.getElementById("char-race");
     const raceVal = raceSel ? raceSel.value : "";
+    if (raceVal.includes("──────────")) {
+        container.innerHTML = "";
+        return;
+    }
     const skillKeys = (window.racialSkillsMap || {})[raceVal] || [];
 
     if (skillKeys.length === 0) {
@@ -14083,6 +14445,41 @@ window.RACIAL_BONUSES_BY_RACE = {
     "Vulpivir": [
         { skills: ["hide","sneak"], amount: 1 },
     ],
+    // --- Newly Added Races & Affinities ---
+    "Derro": [
+        { skills: ["brutal_weapons"], amount: 1 }, // Brutal Weapons Affinity
+    ],
+    "Giant, Fire": [],
+    "Giant, Frost": [],
+    "Giant, Hill": [],
+    "Giant, Island": [],
+    "Antaeon": [],
+    "Brownies": [],
+    "Canivir, Wild": [],
+    "Centaur": [],
+    "Doppelgänger, Transcendent": [],
+    "Dryad": [],
+    "Ent": [],
+    "Faeries": [],
+    "Fishfolk": [],
+    "Gnole": [],
+    "Goblin": [],
+    "Goritaur": [],
+    "Hobgoblin": [],
+    "Kathonid": [],
+    "Kobold": [],
+    "Lizardfolk": [],
+    "Minotaur": [],
+    "Naga": [],
+    "Naiad": [],
+    "Ogre": [],
+    "Oldra": [],
+    "Orc": [],
+    "Pixie": [],
+    "Scorpionfolk": [],
+    "Troll": [],
+    "Troll, Frost": [],
+    "Weftlings": []
 };
 
 // Reads current race, applies that race's unconditional dice bonuses.
