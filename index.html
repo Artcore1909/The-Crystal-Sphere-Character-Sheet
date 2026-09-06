@@ -2140,6 +2140,12 @@ details[open] #skills-collapsed-summary {
           <label for="sex-bonus-choice">Assign Sex Bonus (+1)</label> 
           <select id="sex-bonus-choice" onchange="calculateSheet()"></select> 
         </div> 
+        <div class="form-group span-12">
+          <label for="upbringing-bonus-choice">Assign Upbringing Bonus (+1)</label>
+          <select id="upbringing-bonus-choice" onchange="calculateSheet()">
+            <option value="none">-- Select Aspect --</option>
+          </select>
+        </div>
         <div class="form-group" id="race-bonus-group" style="display:none;"> 
           <label id="race-bonus-label" for="race-bonus-choice">Racial Bonus Selection</label> 
           <select id="race-bonus-choice" onchange="calculateSheet()"></select> 
@@ -11737,6 +11743,7 @@ function modTip(id) {
 }
 
 function calculateSheet() {
+
     // ── 1. VALIDATE RANK & REDRAW DOM CARDS INSTANTLY ──
     const rankInput = document.getElementById("char-rank-input-xp");
     const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
@@ -11874,15 +11881,76 @@ function calculateSheet() {
         if (rPenalty === "act") act -= 1; if (rPenalty === "int") int -= 1; if (rPenalty === "ver") ver -= 1; if (rPenalty === "hel") hel -= 1; if (rPenalty === "str") str -= 1;
     }
 
-    const sexChoice = document.getElementById("sex-bonus-choice").value;
-    if (sexChoice === "dex") dex += 1; if (sexChoice === "hel") hel += 1; if (sexChoice === "str") str += 1; if (sexChoice === "act") act += 1; if (sexChoice === "ver") ver += 1;
+// 1. Update dynamic options for upbringing select box
+    if (typeof updateUpbringingOptions === "function") updateUpbringingOptions();
 
-    const invDex = parseInt(document.getElementById("xp-dex").value) || 0;
-    const invHel = parseInt(document.getElementById("xp-hel").value) || 0;
-    const invStr = parseInt(document.getElementById("xp-str").value) || 0;
-    const invAct = parseInt(document.getElementById("xp-act").value) || 0;
-    const invInt = parseInt(document.getElementById("xp-int").value) || 0;
-    const invVer = parseInt(document.getElementById("xp-ver").value) || 0;
+    // 2. Apply Sex Bonus
+    const sexChoice = document.getElementById("sex-bonus-choice") ? document.getElementById("sex-bonus-choice").value : "none";
+    if (sexChoice === "dex") dex += 1; 
+    if (sexChoice === "hel") hel += 1; 
+    if (sexChoice === "str") str += 1; 
+    if (sexChoice === "act") act += 1; 
+    if (sexChoice === "ver") ver += 1;
+
+    // 3. Apply Upbringing Bonus
+    const upbringingChoice = document.getElementById("upbringing-bonus-choice") ? document.getElementById("upbringing-bonus-choice").value : "none";
+    if (upbringingChoice === "dex") dex += 1;
+    if (upbringingChoice === "hel") hel += 1;
+    if (upbringingChoice === "str") str += 1;
+    if (upbringingChoice === "act") act += 1;
+    if (upbringingChoice === "int") int += 1;
+    if (upbringingChoice === "ver") ver += 1;
+
+    // =========================================================
+    // 4. CALCULATE CAP BASED ON (ROLL + RACE + SEX + UPBRINGING)
+    // =========================================================
+    const aspectKeys = ['dex', 'hel', 'str', 'act', 'int', 'ver'];
+    const baseVal = { dex: 3 + rollDex, hel: 3 + rollHel, str: 3 + rollStr, act: 3 + rollAct, int: 3 + rollInt, ver: 3 + rollVer };
+    const currentBase = { dex, hel, str, act, int, ver };
+
+    aspectKeys.forEach(key => {
+        const rollVal = parseInt(document.getElementById(`roll-${key}`).value) || 0;
+        
+        // Exact net bonuses/penalties including Sex, Racial, and Upbringing choices
+        const netModifier = currentBase[key] - baseVal[key];
+        
+        // Max limit cap = 3 + Roll + Net Modifiers
+        const maxAllowed = Math.max(0, 3 + rollVal + netModifier);
+        const selectEl = document.getElementById(`xp-${key}`);
+        if (!selectEl) return;
+
+        const currentSelectedVal = parseInt(selectEl.value) || 0;
+
+        selectEl.innerHTML = '';
+        
+        const optZero = document.createElement('option');
+        optZero.value = "0";
+        optZero.textContent = "Uninvested";
+        selectEl.appendChild(optZero);
+
+        const limit = Math.min(25, maxAllowed);
+        for (let i = 1; i <= limit; i++) {
+            const cost = 3 * i * (i + 1);
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = `+${i} (${cost} Exp.)`;
+            selectEl.appendChild(opt);
+        }
+
+        if (currentSelectedVal > maxAllowed) {
+            selectEl.value = maxAllowed;
+        } else {
+            selectEl.value = currentSelectedVal;
+        }
+    });
+
+    // 5. Retrieve investment values (now properly capped)
+    const invDex = parseInt(document.getElementById("xp-dex")?.value) || 0;
+    const invHel = parseInt(document.getElementById("xp-hel")?.value) || 0;
+    const invStr = parseInt(document.getElementById("xp-str")?.value) || 0;
+    const invAct = parseInt(document.getElementById("xp-act")?.value) || 0;
+    const invInt = parseInt(document.getElementById("xp-int")?.value) || 0;
+    const invVer = parseInt(document.getElementById("xp-ver")?.value) || 0;
 
     let finalDex = dex + invDex; 
     let finalHel = hel + invHel; 
@@ -12354,7 +12422,7 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
         alertCheckbox.checked = hasAlertness;
     }
 
-        // ==========================================
+// ==========================================
         // RENDER VISUAL BREAKDOWN LABELS
         // ==========================================
         let nDex = [], nHel = [], nStr = [], nAct = [], nInt = [], nVer = [], nHap = [];
@@ -12393,7 +12461,16 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
         }
 
         if (sexChoice === "dex") nDex.push("Sex: +1"); if (sexChoice === "hel") nHel.push("Sex: +1"); if (sexChoice === "str") nStr.push("Sex: +1"); if (sexChoice === "act") nAct.push("Sex: +1"); if (sexChoice === "ver") nVer.push("Sex: +1");
-        if (invDex > 0) nDex.push(`Exp.: +${invDex}`); if (invHel > 0) nHel.push(`Exp.: +${invHel}`); if (invStr > 0) nStr.push(`Exp.: +${invStr}`); if (invAct > 0) nAct.push(`Exp.: +${invAct}`); if (invInt > 0) nInt.push(`Exp.: +${invInt}`); if (invVer > 0) nVer.push(`Exp.: +${invVer}`);// =========================================================================
+        
+        // Upbringing Bonus Label
+        if (upbringingChoice === "dex") nDex.push("Upbringing: +1");
+        if (upbringingChoice === "hel") nHel.push("Upbringing: +1");
+        if (upbringingChoice === "str") nStr.push("Upbringing: +1");
+        if (upbringingChoice === "act") nAct.push("Upbringing: +1");
+        if (upbringingChoice === "int") nInt.push("Upbringing: +1");
+        if (upbringingChoice === "ver") nVer.push("Upbringing: +1");
+
+        if (invDex > 0) nDex.push(`Exp.: +${invDex}`); if (invHel > 0) nHel.push(`Exp.: +${invHel}`); if (invStr > 0) nStr.push(`Exp.: +${invStr}`); if (invAct > 0) nAct.push(`Exp.: +${invAct}`); if (invInt > 0) nInt.push(`Exp.: +${invInt}`); if (invVer > 0) nVer.push(`Exp.: +${invVer}`);
 
     // =========================================================================
     // ⚔️ STEP 4: WEAPON PROFILE EVALUATOR & DICE POOL CALCULATORS
@@ -13963,9 +14040,35 @@ const langData = ethnosLanguages[currentEthnos] || defaultEthnosData;
         manaRegenBadges += `<span class="locus-ench-tag" data-tooltip="inexhaustible_mana" style="font-size:0.6rem; padding:1px 3px; margin:0;">Inexhaustible</span>`;
     }
     
-    // Output values into their distinct target fields
+// Output values into their distinct target fields
     document.getElementById("stat-mana-regen").innerText = formatRegenDicePool(finalAct);
     document.getElementById("stat-mana-regen-badges").innerHTML = manaRegenBadges;
+
+    // =========================================================
+    // MILIEU VALIDATION: NOBLE REQUIRES HAP >= 7
+    // =========================================================
+    const milieuSelect = document.getElementById("char-milieu");
+    if (milieuSelect) {
+        // Read final HAP value calculated on the sheet
+        const hapVal = parseInt(document.getElementById("total-hap")?.value) || 0;
+        const nobleOption = Array.from(milieuSelect.options).find(opt => opt.value === "Noble");
+
+        if (nobleOption) {
+            if (hapVal < 7) {
+                nobleOption.disabled = true;
+                if (!nobleOption.textContent.includes("(Requires")) {
+                    nobleOption.textContent = "Noble (Requires Hap 7+)";
+                }
+                // Fall back to Commoner if Noble was selected while Hap is under 7
+                if (milieuSelect.value === "Noble") {
+                    milieuSelect.value = "Commoner";
+                }
+            } else {
+                nobleOption.disabled = false;
+                nobleOption.textContent = "Noble";
+            }
+        }
+    }
 
     // Hap Save Modifiers (Apotropaic)
     let hapBadges = "";
@@ -13986,7 +14089,7 @@ const langData = ethnosLanguages[currentEthnos] || defaultEthnosData;
         badgeDiv.innerHTML = hapBadges;
     }
 
-// Update active resource card statuses
+    // Update active resource card statuses
     if (typeof window.updateResourceStatusDisplays === "function") {
         window.updateResourceStatusDisplays(finalHel, finalAct);
     }
@@ -21835,6 +21938,73 @@ function translateSizeToTrample(sizeStr) {
 
     const bonus = multiplier * (baseBonuses[letter] || 0);
     return { dice: 6, bonus: bonus };
+}
+
+function updateUpbringingOptions() {
+    // Corrected element ID to match your HTML ('char-upbringing')
+    const upbringingSelect = document.getElementById("char-upbringing");
+    const upbringing = upbringingSelect ? upbringingSelect.value : "";
+    const choiceSelect = document.getElementById("upbringing-bonus-choice");
+    if (!choiceSelect) return;
+
+    const currentVal = choiceSelect.value;
+    
+    // Map of Upbringings to allowed Aspect options
+    const optionsMap = {
+        "Artisan": [{ val: "dex", label: "Dexterity (+1)" }, { val: "act", label: "Acuity (+1)" }],
+        "College Initiate": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
+        "Laborer": [{ val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }],
+        "Merchant": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
+        "Military": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }, { val: "act", label: "Acuity (+1)" }],
+        "Politician": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
+        "Sage": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }],
+        "Servant": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "act", label: "Acuity (+1)" }],
+        "Temple Acolyte": [{ val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
+        "Thief": [{ val: "dex", label: "Dexterity (+1)" }, { val: "act", label: "Acuity (+1)" }],
+        "Tradesman": [{ val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }],
+        "Troupe Neophyte": [{ val: "dex", label: "Dexterity (+1)" }, { val: "ver", label: "Verve (+1)" }]
+    };
+
+    const allowed = optionsMap[upbringing] || [];
+    choiceSelect.innerHTML = '<option value="none">-- Select Aspect --</option>';
+
+    allowed.forEach(opt => {
+        const el = document.createElement("option");
+        el.value = opt.val;
+        el.textContent = opt.label;
+        choiceSelect.appendChild(el);
+    });
+
+    // Keep current selection if it is still valid for the selected Upbringing
+    if (allowed.some(a => a.val === currentVal)) {
+        choiceSelect.value = currentVal;
+    }
+}
+
+function updateMilieuOptions() {
+    const milieuSelect = document.getElementById("char-milieu"); // Update ID if needed
+    if (!milieuSelect) return;
+
+    // Check current Hap value (adjust 'total-hap' ID to match your DOM element)
+    const hapVal = parseInt(document.getElementById("total-hap")?.value) || 0;
+    
+    // Find the Noble option within the dropdown
+    const nobleOption = Array.from(milieuSelect.options).find(opt => opt.value === "Noble");
+
+    if (nobleOption) {
+        if (hapVal < 7) {
+            nobleOption.disabled = true;
+            nobleOption.textContent = "Noble (Requires Hap 7+)";
+            
+            // If Noble was currently selected, reset to a valid default
+            if (milieuSelect.value === "Noble") {
+                milieuSelect.value = "Commoner"; 
+            }
+        } else {
+            nobleOption.disabled = false;
+            nobleOption.textContent = "Noble";
+        }
+    }
 }
 
 </script>
