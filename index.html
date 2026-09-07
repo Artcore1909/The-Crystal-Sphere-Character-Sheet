@@ -1958,13 +1958,14 @@ details[open] #skills-collapsed-summary {
     
 <!-- Tab Navigation Buttons --> 
 <div class="tab-navigation"> 
-  <button class="tab-btn" draggable="true" onclick="switchTab('tab-sheet', event)">Combat & Gear</button> 
-  <button class="tab-btn" draggable="true" onclick="switchTab('tab-inventory', event)">Inventories & Worn Enchantments</button> 
-  <button class="tab-btn" draggable="true" onclick="switchTab('tab-character-skills', event)">Character Skill List</button> 
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-sheet', event)">Combat</button> 
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-inventory', event)">Inventories</button> 
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-character-skills', event)">Skills</button> 
   <button class="tab-btn" draggable="true" onclick="switchTab('tab-skills', event)">Skills Codex</button> 
-  <button class="tab-btn" draggable="true" onclick="switchTab('tab-bazaar', event)">The Grand Bazaar</button> 
-  <button class="tab-btn" draggable="true" onclick="switchTab('tab-rules', event)">Rules Index</button> 
-  <button class="tab-btn active" draggable="true" onclick="switchTab('tab-creation', event)">Character Creation & Exp. Investments</button> 
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-bazaar', event)">Grand Bazaar</button> 
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-compendium', event)">Creature Compendium</button>
+  <button class="tab-btn" draggable="true" onclick="switchTab('tab-rules', event)">Rules</button>
+  <button class="tab-btn active" draggable="true" onclick="switchTab('tab-creation', event)">Creation</button> 
 </div>
 
 <!-- TAB 1: CHARACTER CREATION --> 
@@ -2103,6 +2104,7 @@ details[open] #skills-collapsed-summary {
             <option value="Urban">Urban</option> 
             <option value="Rural">Rural</option> 
             <option value="Tribal">Tribal</option> 
+            <option value="Wild">Wild</option> 
           </select> 
         </div> 
         <div class="form-group span-8"> 
@@ -2120,6 +2122,7 @@ details[open] #skills-collapsed-summary {
             <option value="Thief">Thief</option> 
             <option value="Tradesman">Tradesman</option> 
             <option value="Troupe Neophyte">Troupe Neophyte</option>  
+            <option value="Wild">Wild</option>  
           </select> 
         </div> 
         <div class="form-group span-4"> 
@@ -2717,7 +2720,7 @@ details[open] #skills-collapsed-summary {
         </div>
     </div>
 </div>
-<!-- TAB 3: CHARACTER SKILL LIST PANEL --> 
+<!-- TAB 3: SKILLS PANEL --> 
 <div id="tab-character-skills" class="tab-content skills-tab-container"> 
   
   <!-- Single, unified master header for the entire tab -->
@@ -2816,9 +2819,9 @@ details[open] #skills-collapsed-summary {
     </div>
 </div>
   
-<!-- TAB 5: THE GRAND BAZAAR -->
+<!-- TAB 5: GRAND BAZAAR -->
 <div id="tab-bazaar" class="tab-content">
-    <h2>The Grand Bazaar</h2>
+    <h2>Grand Bazaar</h2>
     <p class="hint">Click any category below to browse weapons, armor, and magical enhancements. Hover over items to view their details.</p>
     
     <!-- Item Cost Calculator -->
@@ -2844,9 +2847,19 @@ details[open] #skills-collapsed-summary {
     </div>
 </div>
 
-<!-- TAB 7: RULES INDEX -->
+<!-- TAB: CREATURE COMPENDIUM -->
+<div id="tab-compendium" class="tab-content">
+    <h2>Creature Compendium</h2>
+    <p class="hint">Adversaries, beasts, and monstrosities of the Crystal Sphere. Click any category below to expand entries.</p>
+    
+    <div class="compendium-accordion skill-accordion">
+        <!-- Dynamically populated by generateCompendiumTab() on load -->
+    </div>
+</div>
+
+<!-- TAB 7: RULES -->
 <div id="tab-rules" class="tab-content">
-    <h2>Rules Index</h2>
+    <h2>Rules</h2>
     <p class="hint">Click any category below to expand the rules.</p>
     
     <div class="skill-accordion">
@@ -3260,7 +3273,7 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <td><strong>Fey</strong></td>
-            <td>A collection of various anthropoids of the Fey Hegemony—a magical land that never changes.</td>
+            <td>A collection of various anthropoids of the Fey Hegemony—the land that was and always will be.</td>
             <td>Fey</td>
             <td>Sylvan &amp; Entish</td>
         </tr>
@@ -3309,35 +3322,31 @@ details[open] #skills-collapsed-summary {
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">4. Combat & Action Types ▾</div>
             <div class="skill-body">
-                <strong>Turn Structure:</strong>
-                <ul>
-                    <li><strong>Initiative:</strong> Roll at the start of combat. High rolls act first.</li>
-<br>
-                    <li><strong>Simultaneous Actions:</strong> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.</li>
-<br>
-                    <li><strong>Right of Firststrike:</strong> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.</li>
-                </ul>
-                <br>
                 <strong>The Pulse:</strong>
                 <ul>
-                    <li>Combat is resolved in pulses. Each pulse, combatants complete or initiate actions in initiative order:</li>
+                    <li>Combat is resolved in Pulses. Each Pulse, combatants complete or initiate actions in initiative order:</li>
                     <li><em>Words, Free Actions, and Attacks</em> resolve on the pulse they are declared.</li>
                     <li><em>Move Actions and Incantations</em> are initiated on one pulse and completed on the next.</li>
                 </ul>
                 <br>
                 <strong>Types of Actions:</strong>
                 <ul>
-                    <li><strong>Attack:</strong> Move up to 1 hex and make an attack. Hits if your attack roll exceeds the target's Avoidance roll.</li>
+                    <li><strong>Attack:</strong> Move up to 1 Hex and make an attack. Your attack hits if your attack roll exceeds the target's Avoidance roll.</li>
 <br>
                     <li><strong>Cast:</strong> Spend Mana to weave ætherial effects. You must be able to speak to cast.</li>
 <br>
-                    <li><strong>Free:</strong> Actions that require little to no time. These are only limited by LM discretion.</li>
+                    <li><strong>Free:</strong> Actions that require little to no time. These include Words and are only limited by LM discretion.</li>
 <br>
                     <li><strong>Move:</strong> Move up to your Pace + an amount of Hexes equal to your Run Check.</li>
 <br>
                     <li><strong>Skill Check:</strong> Details vary.</li>
 <br>
-                    <li><strong>Hold:</strong> Delay your action to act on a later pulse or initiative. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</li>
+                    <li><strong>Hold:</strong> Delay your action. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</li>
+<br>
+                    <em>Simultaneous Actions:</em> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.
+<br>
+<br>
+                <em>Right of Firststrike:</em> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.
                 </ul>
             </div>
         </div>
@@ -3809,7 +3818,8 @@ const alternateSurfaceKeywords = ["head", "shaft", "blade", "grip", "butt", "pom
             "coastal": { "background": 3 }, // Grants Fish, Sail Boat, Use & Make Rope (3 free levels)
             "rural": { "background": 5 },   // Grants Butcher, Drive Cart, Handle Domestic, Survival, Use & Make Rope (5 free levels)
             "tribal": { "background": 4 },  // Grants Fish, Handle Wild, Hunt & Forage, Survival (4 free levels)
-            "urban": { "background": 1 }    // Grants Street Smarts (1 free level)
+            "urban": { "background": 1 },    // Grants Street Smarts (1 free level)
+            "wild": { "background": 1 }    // Grants Hunt (1 free level)
         },
         upbringing: {
             "laborer": { "background": 1 },  // FIXED: Added missing entry to grant 1 free level to Laborer!
@@ -3821,7 +3831,8 @@ const alternateSurfaceKeywords = ["head", "shaft", "blade", "grip", "butt", "pom
             "servant": { "background": 1 },   
             "thief": { "stealth": 1, "interlocution": 1 }, 
             "tradesman": { "background": 1 }, 
-            "troupe neophyte": { "interlocution": 2 } 
+            "troupe neophyte": { "interlocution": 2 },
+            "wild": { "pugilism": 1, "defense": 1 } 
         }
     };
 
@@ -10830,9 +10841,18 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Guardian of the Crystal Sphere": { size: "C", pace: 37, dex: 5, hel: 11, str: 11, act: 5, int: -1, ver: -1, hap: 0 }
     };
     
-    const xpCosts = { 
-        0: 0,  1: 6,  2: 18, 3: 36, 4: 60, 
-        5: 90, 6: 126, 7: 168, 8: 216, 9: 270 
+const xpCosts = { 
+        0: 0,     1: 6,     2: 18,    3: 36,    4: 60, 
+        5: 90,    6: 126,   7: 168,   8: 216,   9: 270, 
+        10: 330,  11: 396,  12: 468,  13: 546,  14: 630, 
+        15: 720,  16: 816,  17: 918,  18: 1026, 19: 1140, 
+        20: 1260, 21: 1386, 22: 1518, 23: 1656, 24: 1800, 
+        25: 1950, 26: 2106, 27: 2268, 28: 2436, 29: 2610, 
+        30: 2790, 31: 2976, 32: 3168, 33: 3366, 34: 3570, 
+        35: 3780, 36: 3996, 37: 4218, 38: 4446, 39: 4680, 
+        40: 4920, 41: 5166, 42: 5418, 43: 5676, 44: 5940, 
+        45: 6210, 46: 6486, 47: 6768, 48: 7056, 49: 7350, 
+        50: 7650
     };
 
     // Master dictionary mapping specialized skill tracks straight to their Upbringing/Guild prerequisites
@@ -12017,7 +12037,7 @@ function calculateSheet() {
         let maxPurchasableLevels = maxLevel === Infinity ? Infinity : (maxLevel - freeLevelsCount);
         if (maxPurchasableLevels < 0) maxPurchasableLevels = 0;
         
-        let maxPointsAllowed = maxPurchasableLevels === Infinity ? 999 : (maxPurchasableLevels * costPerLevel);
+        let maxPointsAllowed = maxPurchasableLevels === Infinity ? 99999 : (maxPurchasableLevels * costPerLevel);
         
         let rawPoints = inputElement ? parseInt(inputElement.value) || 0 : 0;
         
@@ -15227,6 +15247,7 @@ function renderDynamicActiveTreesFeed() {
             if (sChoice === "rural") mandatedFreeSkillsList.push("Butcher & Grow Crops", "Drive Cart", "Handle Domestic Animal", "Survival", "Use & Make Rope");
             if (sChoice === "tribal") mandatedFreeSkillsList.push("Fish", "Handle Wild Animal", "Hunt & Forage", "Survival");
             if (sChoice === "urban") mandatedFreeSkillsList.push("Street Smarts");
+            if (sChoice === "wild") mandatedFreeSkillsList.push("Hunt");
             
             // Upbringing Elements checks
             if (uChoice === "laborer") mandatedFreeSkillsList.push("Vim, Vigor, & Vitality");
@@ -15236,6 +15257,7 @@ function renderDynamicActiveTreesFeed() {
             if (uChoice === "sage") mandatedFreeSkillsList.push("Research");
             if (uChoice === "servant") mandatedFreeSkillsList.push("Alertness");
             if (uChoice === "tradesman") mandatedFreeSkillsList.push("Trade");
+            if (uChoice === "wild") mandatedFreeSkillsList.push("Pugil Weapons");
 
             // Build a temporary set of automatic unlocks to verify unique choices clearly
             let automatedLockedSet = [];
@@ -17978,11 +18000,11 @@ function updatePnpWriteInCards() {
     } else if (activeRace === "Minotaur") {
         naturalKeys = ["gore_thrust", "bite", "punch", "kick"];
     } else if (activeRace === "Ogre") {
-        naturalKeys = ["bite_oldra", "slam", "rend", "kick"];
+        naturalKeys = ["bite", "slam", "rend", "kick"];
     } else if (activeRace === "Scorpionfolk" || activeRace === "Aqrabu") {
         naturalKeys = ["claw_crush", "bite", "sting", "punch"];
-    } else if (activeRace === "Troll" || activeRace === "Frost Troll") {
-        naturalKeys = ["bite_oldra", "claw_oldra", "rend", "punch", "kick"];
+    } else if (activeRace === "Troll" || activeRace === "Troll, Frost") {
+        naturalKeys = ["bite", "claw_crush_or_slash", "rend", "punch", "kick"];
     }
 
     // Scan Rings and Amulets specifically for properties that modify natural attacks only
@@ -21962,7 +21984,8 @@ function updateUpbringingOptions() {
         "Temple Acolyte": [{ val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
         "Thief": [{ val: "dex", label: "Dexterity (+1)" }, { val: "act", label: "Acuity (+1)" }],
         "Tradesman": [{ val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }],
-        "Troupe Neophyte": [{ val: "dex", label: "Dexterity (+1)" }, { val: "ver", label: "Verve (+1)" }]
+        "Troupe Neophyte": [{ val: "dex", label: "Dexterity (+1)" }, { val: "ver", label: "Verve (+1)" }],
+        "Wild": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }, { val: "act", label: "Acuity (+1)" }]
     };
 
     const allowed = optionsMap[upbringing] || [];
@@ -22006,6 +22029,1418 @@ function updateMilieuOptions() {
         }
     }
 }
+
+// Master Data Registry for the Creature Compendium
+const compendiumRegistry = {
+
+    "Aberration": [
+  { name: "Living Air", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Flame", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Fog", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Frost", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Light", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Lightning", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Thunder", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Shadow", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Stone", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Living Water", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
+],
+    "Construct": [
+  { name: "Golem", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Golem, Clay", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Golem, Iron", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Golem, Stone", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
+],
+    "Animal": [
+  { name: "Bear", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Bear, Sun", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Beetle, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Blood Hornet", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Boar", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Camel", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Crab, Lightning", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Crocodile", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Dog", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Eagle, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Eagle, Screeching", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Goat, War", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Gorilla", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Granas", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Gryphon", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Hawk, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Hawk, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Hellhound", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Horse", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Hyena", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Hyena, Six-paw", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Jaguar", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Keck", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Keck, Bloodbeak", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Keck, Terror Bird", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Lion", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Lion, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Lion, Mountain", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Pegasus", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Phoenix", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Python, Great", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Rat, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Raven, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Raven, Wise", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Shadowcat", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Sheep", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Snake, Constrictor", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Snake, Venomous", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Snow Leopard", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Spider, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Tarantula, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Tiger", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Unicorn", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Urox", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Wasps, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Wolf", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
+  { name: "Wolf, Frost", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
+],
+    "Beast": [
+        { name: "Antlion", size: "3B", pace: "8 burrow; 7 land", vit: 31, mana: 19, avoid: "2d", aspects: { dex: 2, hel: 5, str: 8, act: 3, int: 1, ver: 5 }, attacks: ["Bite: 6d+2; Crush", "Acid: 5d; Sunder", "Erupt: 6d+2"], abilities: ["Acid Spit", "Vibrotactile Perception"] },
+        { name: "Badgerknight", size: "2C", pace: "8 burrow; 26 land", vit: 65, mana: 11, avoid: "2d+12; cc4", aspects: { dex: 2, hel: 13, str: 13, act: 3, int: 1, ver: 1 }, attacks: ["Bite: 6d+7; Crush", "Claw: 6d+7; Slash", "Pounce: 6d+7; Crush", "Erupt: 6d+7"], abilities: ["Exoskeletal Suit", "Vibrotactile Perception"] },
+        { name: "Basilisk", size: "3A", pace: "7", vit: 1, mana: 1, avoid: "5d", aspects: { dex: 5, hel: 1, str: 1, act: 5, int: 1, ver: 5 }, attacks: ["Bite: 5d; Envenom", "Breath: 5d; Envenom", "Gaze: 5d"], abilities: ["Corrupting Breath", "Deadly", "Mortal Gaze", "Squishy & Inept", "Venom: TN 3 Health save"] },
+        { name: "Drake, Black", size: "2C", pace: "50 fly; 26 land; 26 swim", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Acid: 6d+10; Sunder"], abilities: ["Acid Breath", "Acid, Curse, & Disease Immunity", "Drakehide Suit"] },
+        { name: "Drake, Blue", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Lightning: 6d+4; Weaken"], abilities: ["Drakehide Suit", "Lightning Arc", "Curse, Disease, Lightning, & Thunder Immunity"] },
+        { name: "Drake, Green", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Petrify: 6d+10"], abilities: ["Curse & Disease Immunity", "Drakehide Suit", "Petrifying Gaze"] },
+        { name: "Drake, Red", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 10, ver: 16 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Fire: 6d+10; Pain"], abilities: ["Curse, Disease, & Fire Immunity", "Drakehide Suit", "Fire Jet", "Frost Vulnerability"] },
+        { name: "Drake, White", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 50, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 16, act: 10, int: 10, ver: 10 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Frost: 6d+4; Numb"], abilities: ["Curse, Disease, & Frost Immunity", "Drakehide Suit", "Fire Vulnerability", "Ice Jet"] },
+        { name: "Drake, Yellow", size: "2C", pace: "50 fly; 26 land; 13 burrow", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Light: 6d+10; Blind"], abilities: ["Beam of Light", "Curse, Disease, & Light Immunity", "Darkness & Umbra Vulnerability", "Drakehide Suit"] },
+        { name: "Gryphon", size: "2B", pace: "37 fly & land", vit: 30, mana: 28, avoid: "6d", aspects: { dex: 6, hel: 6, str: 6, act: 8, int: 2, ver: 2 }, attacks: ["Bite: 6d; Crush", "Rend: 6d; Slash", "Talon: 6d; Crush or Slash"], abilities: ["Rend"] },
+        { name: "Harpy", size: "B", pace: "37 fly; 8 land", vit: 31, mana: 40, avoid: "5d", aspects: { dex: 5, hel: 5, str: 8, act: 8, int: 8, ver: 8 }, attacks: ["Poison: 4d; Nausea", "Talon: 6d; Crush or Slash"], abilities: ["Guano Spray [rear facing]: TN 4 Health save"] },
+        { name: "Hydra", size: "2C", pace: "26", vit: "26 per head", mana: "12 per head", avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash", "Venom: 3d; Pain"], abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save"] },
+        { name: "Leviathan", size: "3D", pace: "50 swim", vit: 110, mana: 16, avoid: "3d+8; cc4", aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+8; Crush, cc3", "Slam [Giant]: 6d+18; Bash & Sunder, cc3"], abilities: ["Blubar Suit", "Devour"] },
+        { name: "Manticore", size: "2B", pace: "37", vit: 60, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Rend: 6d+6; Slash", "Sting: 6d+4; Envenom & Thrust"], abilities: ["Deadly Sting", "Rend", "Venom: TN 4 Health save"] },
+        { name: "Roc", size: "D", pace: "37", vit: 62, mana: 22, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+7; Crush, cc4", "Talon [Giant]: 6d+7; Crush, cc4"], abilities: ["Devour", "Feather Suit"] },
+        { name: "Wyrm, Cloud-", size: "16C", pace: "8 burrow; 8 land", vit: 98, mana: 98, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"], abilities: ["Poison Cloud: TN4 Health save", "Curse, Disease, & Poison Immunity", "Wyrm Scale Suit"] },
+        { name: "Wyrm, Fire-", size: "16C", pace: "8 burrow; 26 land", vit: 92, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 22, act: 16, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"], abilities: ["Curse, Disease, & Fire Immunity", "Fire Corona", "Frost Vulnerability", "Wyrm Scale Suit"] },
+        { name: "Wyrm, Frost-", size: "16C", pace: "8 burrow; 26 land", vit: 110, mana: 80, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 22, act: 16, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"], abilities: ["Curse, Disease, & Frost Immunity", "Fire Vulnerability", "Frost Corona", "Wyrm Scale Suit"] },
+        { name: "Wyrm, Glow-", size: "16C", pace: "8 burrow; 26 land", vit: 80, mana: 110, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"], abilities: ["Curse, Disease, Lightning, & Thunder Immunity", "Lightning Cloud", "Wyrm Scale Suit"] },
+        { name: "Wyrm [Sarpa]", size: "16C", pace: "8 burrow; 26 land", vit: 98, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 }, attacks: ["Acid: 6d+16; Sunder", "Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc"], abilities: ["Curse, Disease, & Acid Immunity", "Acid Cloud", "Wyrm Scale Suit"] },
+        { name: "Wyvern", size: "2B", pace: "37 fly; 9 land", vit: 50, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Talon: 6d+16; Crush", "Venom: 5d; Pain"], abilities: ["Deadly Bite", "Dive (charge) Only", "Venom: TN 5 Health save"] }
+    ],
+    "Plant": [
+        { 
+            name: "Polyps", 
+            size: "9A (tall)", 
+            pace: "9", 
+            vit: 25, 
+            mana: "—", 
+            avoid: "—", 
+            aspects: { dex: 5, hel: 5, str: 5 }, 
+            attacks: ["Grapple: 5d", "Constrict: 6d+4"], 
+            abilities: ["Constrict", "Curse & Disease Immunity", "Rooted"] 
+        },
+        { 
+            name: "Serpent Vine", 
+            size: "16A", 
+            pace: "16", 
+            vit: 21, 
+            mana: "—", 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 3, str: 6 }, 
+            attacks: ["Grapple: 6d", "Constrict: 6d"], 
+            abilities: ["Constrict", "Curse & Disease Immunity", "Rooted"] 
+        },
+        { 
+            name: "Weeping Willow", 
+            size: "7D x 16", 
+            pace: "16", 
+            vit: 65, 
+            mana: 31, 
+            avoid: "12; cc4", 
+            aspects: { dex: 8, hel: 16, str: 16, act: 5, int: 3, ver: 8 }, 
+            attacks: ["Casting: 6d+2", "Grapple: 6d+10"], 
+            abilities: ["Bark Suit", "Light & Thunder Immunity", "Fire Vulnerability", "Rooted", "Bewitchment & Illusion"] 
+        }
+    ],
+    "Dragon": [
+        { 
+            name: "Dragon, Argent", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 98, 
+            mana: 80, 
+            avoid: "6d+18; cc4", 
+            aspects: { dex: 16, hel: 22, str: 16, act: 16, int: 16, ver: 16 }, 
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Frost: 6d+10; Numb"], 
+            abilities: ["Curse, Disease, & Frost Immunity", "Dragonhide Suit", "Frost Breath", "Fire Aversion", "Magic Resistance"] 
+        },
+        { 
+            name: "Dragon, Azure", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 98, 
+            mana: 98, 
+            avoid: "6d+12; cc4", 
+            aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 16, ver: 16 }, 
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Lightning: 6d+10; Weaken", "Thunder: 6d+10; Daze"], 
+            abilities: ["Curse, Disease, Lightning, & Thunder Immunity", "Dragonhide Suit", "Lightning Arc", "Magic Resistance", "Thunderous Roar"] 
+        },
+        { 
+            name: "Dragon, Gules", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 110, 
+            mana: 92, 
+            avoid: "6d+12; cc4", 
+            aspects: { dex: 10, hel: 22, str: 22, act: 16, int: 22, ver: 22 }, 
+            attacks: ["Bite: 6d+16; Crush", "Claw: 6d+16; Slash", "Tail: 6d+16; Bash", "Trample: 6d+42; Crush", "Fire: 6d+16; Pain"], 
+            abilities: ["Curse, Disease, & Fire Immunity", "Dragonhide Suit", "Fire Breath", "Frost Aversion", "Magic Resistance"] 
+        },
+        { 
+            name: "Dragon, Or", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 98, 
+            mana: 110, 
+            avoid: "6d+12; cc4", 
+            aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 22, ver: 22 }, 
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Light: 6d+16; Blind"], 
+            abilities: ["Curse, Disease, & Light Immunity", "Darkness & Umbra Aversion", "Dragonhide Suit", "Magic Resistance", "Searing Light [Breath]"] 
+        },
+        { 
+            name: "Dragon, Sable", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 98, 
+            mana: 110, 
+            avoid: "6d+12; cc4", 
+            aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 22, ver: 22 }, 
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Acid: 6d+16; Sunder"], 
+            abilities: ["Acid Breath", "Acid, Curse, Darkness, Disease, and Umbra Immunity", "Dragonhide Suit", "Light Aversion", "Magic Resistance"] 
+        },
+        { 
+            name: "Dragon, Vert", 
+            size: "2D", 
+            pace: "50 fly; 26 land", 
+            vit: 98, 
+            mana: 98, 
+            avoid: "6d+18; cc4", 
+            aspects: { dex: 16, hel: 22, str: 16, act: 22, int: 16, ver: 16 }, 
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Petrify: 6d+16", "Poison: 5d"], 
+            abilities: ["Curse, Disease, Poison, & Venom Immunity", "Dragonhide Suit", "Magic Resistance", "Petrifying Gaze: Acuity confronts", "Poison Breath: TN 5"] 
+        }
+    ],
+    "Elemental": [
+        { 
+            name: "Elemental, Air", 
+            size: "B", 
+            pace: "22", 
+            vit: 30, 
+            mana: 95, 
+            avoid: "6d+13", 
+            aspects: { dex: 19, hel: 6, str: 6, act: 19, ver: 6 }, 
+            attacks: ["Slam: 6d; Bash", "Asphyxiate: 1"], 
+            abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Dexterity]", "Invisibility"] 
+        },
+        { 
+            name: "Elemental, Clay", 
+            size: "C", 
+            pace: "22 burrow; 7 land", 
+            vit: 65, 
+            mana: 30, 
+            avoid: "6d; cc2", 
+            aspects: { dex: 6, hel: 13, str: 13, act: 6, ver: 6 }, 
+            attacks: ["Slam: 6d+7; Bash", "Crush: 6d+7; Crush"], 
+            abilities: ["Curse, Disease, Light, Lightning, Physical, & Thunder Immunity"] 
+        },
+        { 
+            name: "Elemental, Dirt", 
+            size: "B", 
+            pace: "22 burrow; 7 land", 
+            vit: 40, 
+            mana: 36, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 8, str: 8, act: 8, ver: 6 }, 
+            attacks: ["Slam: 6d+2; Bash", "Asphyxiate: 6d+2"], 
+            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
+        },
+        { 
+            name: "Elemental, Fog", 
+            size: "B", 
+            pace: "22", 
+            vit: 40, 
+            mana: 51, 
+            avoid: "6d+7", 
+            aspects: { dex: 13, hel: 8, str: 8, act: 13, ver: 6 }, 
+            attacks: ["Slam: 6d+2; Bash", "Asphyxiate: 1"], 
+            abilities: ["Curse, Disease, Lightning, Physical, & Thunder Immunity", "Inundate Being: Skill Check [Dexterity]"] 
+        },
+        { 
+            name: "Elemental, Magma", 
+            size: "C", 
+            pace: "22 swim; 7 land", 
+            vit: 65, 
+            mana: 30, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 13, str: 13, act: 6, ver: 13 }, 
+            attacks: ["Slam: 6d+7; Bash", "Crush: 6d+7; Crush", "Fire: 6d+7; Pain"], 
+            abilities: ["Curse, Disease, Fire, & Physical Immunity", "Frost & Water Vulnerability", "Magmatic Splash"] 
+        },
+        { 
+            name: "Elemental, Mud", 
+            size: "C", 
+            pace: "22 burrow; 7 land", 
+            vit: 65, 
+            mana: 30, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 13, str: 13, act: 6, ver: 6 }, 
+            attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
+            abilities: ["Curse, Disease, Lightning, Physical, & Thunder Immunity", "Inundate Being: Skill Check [Strength]"] 
+        },
+        { 
+            name: "Elemental, Sand", 
+            size: "B", 
+            pace: "22 burrow; 7 land", 
+            vit: 30, 
+            mana: 51, 
+            avoid: "6d+7", 
+            aspects: { dex: 13, hel: 6, str: 6, act: 13, ver: 6 }, 
+            attacks: ["Slam: 6d; Bash", "Asphyxiate: 1"], 
+            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Dexterity]"] 
+        },
+        { 
+            name: "Elemental, Smoke", 
+            size: "B", 
+            pace: "22", 
+            vit: 65, 
+            mana: 36, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 13, str: 13, act: 8, ver: 6 }, 
+            attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
+            abilities: ["Curse, Disease, Fire, & Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
+        },
+        { 
+            name: "Elemental, Stone", 
+            size: "C", 
+            pace: "22 burrow; 7 land", 
+            vit: 95, 
+            mana: 24, 
+            avoid: "4d+18; cc4", 
+            aspects: { dex: 4, hel: 19, str: 19, act: 4, ver: 6 }, 
+            attacks: ["Slam: 6d+13; Bash", "Crush: 6d+13; Crush"], 
+            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Stone suit"] 
+        },
+        { 
+            name: "Elemental, Water", 
+            size: "B", 
+            pace: "22 swim; 7 land", 
+            vit: 50, 
+            mana: 36, 
+            avoid: "6d+7", 
+            aspects: { dex: 13, hel: 8, str: 13, act: 8, ver: 6 }, 
+            attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
+            abilities: ["Curse, Disease, Fire, Lightning, Light, Physical, & Thunder Immunity", "Frost Vulnerability", "Inundate Being: Skill Check [Dexterity]"] 
+        }
+    ],
+    "Genie": [
+        { 
+            name: "Djinn", 
+            size: "B", 
+            pace: "20 fly", 
+            vit: 40, 
+            mana: 65, 
+            avoid: "6d+13", 
+            aspects: { dex: 19, hel: 8, str: 8, act: 13, int: 19, ver: 13 }, 
+            attacks: ["Arcane Force: 6d+13; Numb"], 
+            abilities: ["Curse, Disease, & Frost Immunity", "Invisibility", "Fire Weakness", "Grant Wish"] 
+        },
+        { 
+            name: "Ifrit", 
+            size: "C", 
+            pace: "9", 
+            vit: 50, 
+            mana: 77, 
+            avoid: "6d+13", 
+            aspects: { dex: 19, hel: 8, str: 13, act: 13, int: 8, ver: 19 }, 
+            attacks: ["Arcane Force: 6d+13; Pain", "Flaming Sword [Oldra]: 6d+10; Pain; Slash or Thrust; +1cc", "Flaming Whip [Oldra]: 6d+11; Pain; Grapple or Slash; cc3"], 
+            abilities: ["Curse, Disease, Fire, & Umbra Immunity", "Frost Weakness", "Umbral Shroud"] 
+        },
+        { 
+            name: "Jann", 
+            size: "B", 
+            pace: "8", 
+            vit: 35, 
+            mana: 35, 
+            avoid: "6d+1", 
+            aspects: { dex: 7, hel: 7, str: 7, act: 7, int: 7, ver: 7 }, 
+            attacks: ["Arcane Force: 6d+1; Numb, Pain, & Weaken", "Saber: 6d+1; Slash", "Horse Bow: 6d+3; Thrust"], 
+            abilities: ["Battle Magic Resistance", "Curse & Disease Immunity"] 
+        },
+        { 
+            name: "Thura", 
+            size: "B", 
+            pace: "8", 
+            vit: 95, 
+            mana: 50, 
+            avoid: "6d+7", 
+            aspects: { dex: 13, hel: 19, str: 19, act: 8, int: 8, ver: 13 }, 
+            attacks: ["Arcane Force: 6d+13; Bash"], 
+            abilities: ["Curse & Disease Immunity"] 
+        },
+        { 
+            name: "Undine", 
+            size: "B", 
+            pace: "8", 
+            vit: 80, 
+            mana: 110, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 16, str: 16, act: 22, int: 10, ver: 22 }, 
+            attacks: ["Arcane Force: 6d+22; Panic"], 
+            abilities: ["Curse & Disease Immunity"] 
+        }
+    ],
+    "Lycanthrope": [
+        { 
+            name: "Anpu", 
+            size: "B", 
+            pace: "23", 
+            vit: 50, 
+            mana: 18, 
+            avoid: "6d+8; cc7", 
+            aspects: { dex: 10, hel: 10, str: 10, act: 4, int: 2, ver: 3 }, 
+            attacks: ["Bite: 6d+4; Crush & Slash", "Spear: 6d+6; Thrust", "Spear [Butt]: 6d+5; Bash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Light Hauberk", "Silver Aversion", "Starlight Vision"] 
+        },
+        { 
+            name: "Aqrabu", 
+            size: "B", 
+            pace: "8", 
+            vit: 50, 
+            mana: 20, 
+            avoid: "6d+10; cc8", 
+            aspects: { dex: 10, hel: 10, str: 10, act: 4, int: 4, ver: 4 }, 
+            attacks: ["Claw: 6d+4; Crush", "Flint Spear: 6d+6; Thrust, cc2", "Flint Spear [Butt]: 6d+5; Bash", "Sting: 6d+4; Thrust & Envenom", "Venom: 1d; Pain"], 
+            abilities: ["Chitin Suit", "Claw Shield: +2d", "Curse & Disease Immunity", "Deadly Sting", "Divine Salvation", "Silver Aversion", "Venom: TN2 Health save"] 
+        },
+        { 
+            name: "Camasotz", 
+            size: "B", 
+            pace: "11", 
+            vit: 20, 
+            mana: 20, 
+            avoid: "4d; cc4", 
+            aspects: { dex: 4, hel: 4, str: 4, act: 4, int: 4, ver: 4 }, 
+            attacks: ["Bite: 4d; Crush", "Claw: 4d; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite: TN 1 Health save", "Light Vulnerability", "Silver Aversion"] 
+        },
+        { 
+            name: "Jorōgumo", 
+            size: "D", 
+            pace: "8", 
+            vit: 45, 
+            mana: 25, 
+            avoid: "4d+8; cc7", 
+            aspects: { dex: 4, hel: 9, str: 9, act: 5, int: 5, ver: 5 }, 
+            attacks: ["Bite: 6d; Envenom", "Venom: 4d; Paralyze", "Web: 5d; Entangle"], 
+            abilities: ["Curse & Disease Immunity", "Deadly Bite", "Divine Salvation", "Lycanthropic Bite", "Silk Hauberk", "Silver Aversion", "Venom: TN 3 Health save per ¼ phase", "Web Blast: TN 5 Escape or Strength save"] 
+        },
+        { 
+            name: "Kappa", 
+            size: "B", 
+            pace: "8 land; 9 swim", 
+            vit: 60, 
+            mana: 20, 
+            avoid: "6d+6; cc4", 
+            aspects: { dex: 10, hel: 12, str: 12, act: 4, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+5; Crush or Slash", "Flint Spear: 6d+6; Thrust; cc2", "Flint Spear [Butt]: 6d+8; Bash", "Poison: 4d"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Shell Breastplate", "Quick Acting Vitality Poison: TN 6", "Silver Aversion"] 
+        },
+        { 
+            name: "Kitsune", 
+            size: "B", 
+            pace: "22", 
+            vit: 25, 
+            mana: 35, 
+            avoid: "6d+4; cc4", 
+            aspects: { dex: 10, hel: 5, str: 5, act: 7, int: 7, ver: 7 }, 
+            attacks: ["Bite: 6d+1; Crush or Slash", "Claw: 6d+1; Bash, Crush, or Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite: TN 2 Health Save", "Silver Aversion"] 
+        },
+        { 
+            name: "Leonthrope", 
+            size: "B", 
+            pace: "37", 
+            vit: 40, 
+            mana: 28, 
+            avoid: "6d+6; cc4", 
+            aspects: { dex: 12, hel: 8, str: 8, act: 6, int: 5, ver: 5 }, 
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Bash, Crush, or Slash", "Rend: 6d+2; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Fire Resistance", "Frost Vulnerability", "Lycanthropic Bite", "Rend", "Silver Aversion"] 
+        },
+        { 
+            name: "Lupine", 
+            size: "B", 
+            pace: "22", 
+            vit: 35, 
+            mana: 31, 
+            avoid: "6d+4; cc4", 
+            aspects: { dex: 10, hel: 7, str: 7, act: 7, int: 5, ver: 5 }, 
+            attacks: ["Bite: 6d+2; Crush", "Claw: 6d+2; Slash", "Rend: 6d+1; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Fire Vulnerability", "Frost Resistance", "Lycanthropic Bite", "Rend", "Silver Aversion"] 
+        },
+        { 
+            name: "Nagaraja", 
+            size: "16B", 
+            pace: "10 land; 20 swim", 
+            vit: 60, 
+            mana: 25, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 12, str: 12, act: 5, int: 2, ver: 5 }, 
+            attacks: ["Bite [Oldra]: 6d+14; cc3", "Constrict: 6d+18"], 
+            abilities: ["Constrict", "Curse & Disease Immunity", "Deadly Attack", "Devour [size C and smaller]", "Divine Salvation", "Frost Vulnerability", "Silver Aversion"] 
+        },
+        { 
+            name: "Orcanthrope", 
+            size: "3C", 
+            pace: "26 swim", 
+            vit: 80, 
+            mana: 26, 
+            avoid: "6d+8; cc8", 
+            aspects: { dex: 6, hel: 16, str: 16, act: 6, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+10; Crush or Slash", "Slam: 6d+10; Bash"], 
+            abilities: ["Blubar Suit", "Divine Salvation", "Frost Resistance", "Lycanthropic Bite", "Silver Aversion", "Thunder Vulnerability"] 
+        },
+        { 
+            name: "Ursanthrope", 
+            size: "C", 
+            pace: "26", 
+            vit: 50, 
+            mana: 20, 
+            avoid: "6d+4; cc8", 
+            aspects: { dex: 6, hel: 10, str: 10, act: 4, int: 6, ver: 4 }, 
+            attacks: ["Bite: 6d+2; Crush", "Claw: 6d+4; Bash & Slash", "Trample: 6d+6; Crush"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Hide Suit", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Wendigo", 
+            size: "B", 
+            pace: "22", 
+            vit: 40, 
+            mana: 32, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 8, str: 8, act: 8, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+2; Crush or Slash", "Claw: 6d+2; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Werebat", 
+            size: "B", 
+            pace: "21 fly; 8 land", 
+            vit: 25, 
+            mana: 20, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 5, str: 5, act: 4, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d; Crush or Slash", "Claw: 6d; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Darkness & Umbra Immunity", "Divine Salvation", "Light Vulnerability", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Wereboar", 
+            size: "B", 
+            pace: "21", 
+            vit: 40, 
+            mana: 23, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 8, str: 8, act: 5, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+2; Crush or Slash", "Gore: 6d+2; Thrust"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Werehyena", 
+            size: "B", 
+            pace: "22", 
+            vit: 60, 
+            mana: 30, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 12, str: 12, act: 8, int: 3, ver: 3 }, 
+            attacks: ["Bite: 6d+4; Crush or Slash", "Claw: 6d+4; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Wererat", 
+            size: "B", 
+            pace: "21", 
+            vit: 25, 
+            mana: 26, 
+            avoid: "6d+2; cc4", 
+            aspects: { dex: 8, hel: 5, str: 5, act: 6, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d; Crush or Slash", "Claw: 6d; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite", "Silver Aversion"] 
+        },
+        { 
+            name: "Werewolf", 
+            size: "B", 
+            pace: "22", 
+            vit: 40, 
+            mana: 32, 
+            avoid: "6d+6; cc4", 
+            aspects: { dex: 12, hel: 8, str: 8, act: 8, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+4; Crush or Slash", "Claw: 6d+4; Slash"], 
+            abilities: ["Curse & Disease Immunity", "Divine Salvation", "Lycanthropic Bite", "Silver Aversion"] 
+        }
+    ],
+    "Spirit": [
+        { name: "Doppelgänger", size: "A", pace: "14", vit: "—", mana: 25, avoid: "5d", aspects: { dex: 5, act: 5, int: 5, ver: 5 }, attacks: ["Mischief: 5d", "Drain Mana: 2d"], abilities: ["Cause Mischief", "Curse & Disease Immunity", "Transcend"] }
+    ],
+    "Undead": [
+        { 
+            name: "Banshee", 
+            size: "B", 
+            pace: "8 fly", 
+            vit: "—", 
+            mana: 25, 
+            avoid: "5d", 
+            aspects: { dex: 5, act: 5, int: 2, ver: 5 }, 
+            attacks: ["Touch: 5d", "Mindrot: 3d"], 
+            abilities: ["Disease Immunity", "Ghost Touch", "Mindrot: -2d penalty, TN 2 Verve save"] 
+        },
+        { 
+            name: "Ghost", 
+            size: "B", 
+            pace: "8 fly", 
+            vit: "—", 
+            mana: 25, 
+            avoid: "5d", 
+            aspects: { dex: 5, act: 5, int: 5, ver: 5 }, 
+            attacks: ["Touch: 5d", "Mindrot: 2d"], 
+            abilities: ["Disease Immunity", "Ghost Touch", "Mindrot: -2d penalty, TN 2 Verve save"] 
+        },
+        { 
+            name: "Ghoul", 
+            size: "B", 
+            pace: "8", 
+            vit: 14, 
+            mana: 15, 
+            avoid: "5d; cc4", 
+            aspects: { dex: 5, str: 7, act: 5, int: 3 }, 
+            attacks: ["Bite: 6d; Crush", "Claw: 6d; Slash", "Rot: 3d"], 
+            abilities: ["Blessed Weapon Aversion", "Disease Immunity", "Fire Vulnerability", "Rot: -2d penalty, TN 3 Health save", "Undead Bite"] 
+        },
+        { 
+            name: "Mummy", 
+            size: "B", 
+            pace: "8", 
+            vit: 22, 
+            mana: 32, 
+            avoid: "5d; cc4", 
+            aspects: { dex: 5, str: 11, act: 5, int: 5, ver: 11 }, 
+            attacks: ["Bite: 6d+2; Crush", "Pugil Strike: 6d+5; Bash", "Rot: 4d"], 
+            abilities: ["Blessed Weapon Aversion", "Disease Immunity", "Magic & Physical Resistance", "Rot: -4d penalty, TN 4 Health save", "Undead Bite"] 
+        },
+        { 
+            name: "Skeleton", 
+            size: "B", 
+            pace: "8", 
+            vit: 10, 
+            mana: 15, 
+            avoid: "5d", 
+            aspects: { dex: 5, str: 5, act: 5 }, 
+            attacks: ["Arming Sword: 6d+1; Slash"], 
+            abilities: ["Disease, Battle Magic, & Thrust Immunity", "Slash Resistance"] 
+        },
+        { 
+            name: "Specter", 
+            size: "B", 
+            pace: "8 fly", 
+            vit: "—", 
+            mana: 15, 
+            avoid: "5d", 
+            aspects: { dex: 5, act: 5 }, 
+            attacks: ["Touch: 5d", "Mindrot: 2d"], 
+            abilities: ["Disease Immunity", "Ghost Touch", "Mindrot: -2d penalty, TN 2 Verve save"] 
+        },
+        { 
+            name: "Wight", 
+            size: "B", 
+            pace: "8", 
+            vit: 16, 
+            mana: 27, 
+            avoid: "6d+6; cc6", 
+            aspects: { dex: 6, str: 8, act: 5, int: 5, ver: 6 }, 
+            attacks: ["Touch: 6d; Sleep", "Frost: 6d; Numb", "Mind Rot: 2d"], 
+            abilities: ["Arcane Armor: Rank 6", "Frost Touch", "Mind Rot: -1d penalty, TN 2 Acuity save", "Soporific Touch"] 
+        },
+        { 
+            name: "Wraith", 
+            size: "B", 
+            pace: "8 fly", 
+            vit: "—", 
+            mana: 50, 
+            avoid: "5d", 
+            aspects: { dex: 5, act: 10, int: 10, ver: 10 }, 
+            attacks: ["Casting: 6d+4", "Mind Rot: 4d", "Touch: 5d", "Ravage Mana: 6d+4"], 
+            abilities: ["Disease Immunity", "Enthrall Specter", "Ghost Touch", "Mind Rot: -2d penalty, TN 4 Acuity save", "Ravage Mana"] 
+        },
+        { 
+            name: "Zombie", 
+            size: "B", 
+            pace: "8", 
+            vit: 16, 
+            mana: "—", 
+            avoid: "4d", 
+            aspects: { dex: 4, str: 8, act: 4 }, 
+            attacks: ["Bite: 6d; Crush", "Rot: 2d"], 
+            abilities: ["Bash Resistance", "Rot", "Slash Vulnerability", "Thrust Immunity", "Undead Bite"] 
+        },
+        { 
+            name: "Zombie, Kindorei", 
+            size: "B", 
+            pace: "8", 
+            vit: 16, 
+            mana: "—", 
+            avoid: "4d", 
+            aspects: { dex: 8, str: 8, act: 4 }, 
+            attacks: ["Bite: 6d+2; Crush", "Infect: 2d"], 
+            abilities: ["Bash Resistance", "Kindorei Infection", "Slash Vulnerability", "Thrust Immunity", "Undead Bite: TN 5"] 
+        }
+    ]
+};
+
+// Master Unified Flat Registry Builder for the Inspector
+function getAllCompendiumCreatures() {
+    let masterList = [];
+    if (typeof compendiumRegistry === "undefined") return masterList;
+
+    Object.entries(compendiumRegistry).forEach(([category, list]) => {
+        if (Array.isArray(list)) {
+            list.forEach(creature => {
+                masterList.push({ ...creature, category });
+            });
+        }
+    });
+    return masterList;
+}
+
+// Global state memory for the inspector
+if (!characterChoicesState.compendiumInspector) {
+    characterChoicesState.compendiumInspector = {
+        selectedCreatureName: "None",
+        currentLostVit: 0,
+        currentLostMana: 0
+    };
+}
+
+function renderCompendiumInspectorUI() {
+    const tabCompendium = document.getElementById("tab-compendium");
+    if (!tabCompendium) return;
+
+    if (document.getElementById("compendium-inspector-card")) return;
+
+    const allCreatures = getAllCompendiumCreatures();
+    allCreatures.sort((a, b) => a.name.localeCompare(b.name));
+
+    let optionsHtml = `<option value="None">-- Select Creature to Inspect --</option>`;
+    
+    const categorized = {};
+    allCreatures.forEach(c => {
+        if (!categorized[c.category]) categorized[c.category] = [];
+        categorized[c.category].push(c);
+    });
+
+    Object.entries(categorized).forEach(([cat, creatures]) => {
+        optionsHtml += `<optgroup label="${cat}">`;
+        creatures.forEach(c => {
+            const isSelected = characterChoicesState.compendiumInspector.selectedCreatureName === c.name ? "selected" : "";
+            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)} (Size ${c.size})</option>`;
+        });
+        optionsHtml += `</optgroup>`;
+    });
+
+    const inspectorCard = document.createElement("div");
+    inspectorCard.id = "compendium-inspector-card";
+    inspectorCard.className = "aspect-card";
+    inspectorCard.style.cssText = "margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;";
+    
+    inspectorCard.innerHTML = `
+        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-red); border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">Creature Quick Inspector</h3>
+        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
+                <label>Select Creature</label>
+                <select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                    ${optionsHtml}
+                </select>
+            </div>
+        </div>
+        <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
+            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                Select a creature above to load its interactive mini character sheet.
+            </div>
+        </div>
+    `;
+
+    // Insert inspector right at the top before the accordion list container
+    const accordionEl = tabCompendium.querySelector(".compendium-accordion");
+    if (accordionEl) {
+        tabCompendium.insertBefore(inspectorCard, accordionEl);
+    } else {
+        tabCompendium.appendChild(inspectorCard);
+    }
+    
+    if (characterChoicesState.compendiumInspector.selectedCreatureName !== "None") {
+        window.renderCompendiumMiniSheet(characterChoicesState.compendiumInspector.selectedCreatureName);
+    }
+}
+
+window.selectCompendiumCreature = function(creatureName) {
+    characterChoicesState.compendiumInspector.selectedCreatureName = creatureName;
+    characterChoicesState.compendiumInspector.currentLostVit = 0;
+    characterChoicesState.compendiumInspector.currentLostMana = 0;
+    window.renderCompendiumMiniSheet(creatureName);
+};
+
+window.updateInspectorVit = function(val) {
+    characterChoicesState.compendiumInspector.currentLostVit = Math.max(0, parseInt(val) || 0);
+};
+
+window.updateInspectorMana = function(val) {
+    characterChoicesState.compendiumInspector.currentLostMana = Math.max(0, parseInt(val) || 0);
+};
+
+window.renderCompendiumMiniSheet = function(creatureName) {
+    const container = document.getElementById("compendium-creature-sheet-container");
+    if (!container) return;
+
+    if (!creatureName || creatureName === "None") {
+        container.innerHTML = `
+            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                Select a creature above to load its interactive mini character sheet.
+            </div>
+        `;
+        return;
+    }
+
+    const allCreatures = getAllCompendiumCreatures();
+    const creature = allCreatures.find(c => c.name === creatureName);
+    if (!creature) return;
+
+    const asp = creature.aspects || {};
+    const inspectorState = characterChoicesState.compendiumInspector;
+
+    container.innerHTML = `
+        <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
+            
+            <!-- Row 1: Header Name & Details -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 4px; margin-bottom: 8px;">
+                <span style="font-weight: bold; font-size: 0.95rem; color: #5c1d1d;">${escapeHtml(creature.name)} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">[${escapeHtml(creature.category)}]</span></span>
+                <span style="font-size: 0.78rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(creature.size || 'B')} | Pace ${escapeHtml(creature.pace || '8')}</span>
+            </div>
+
+            <!-- Row 2: Aspect Strip -->
+            <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; color: #5c1d1d; margin-bottom: 8px;">
+                <span>DEX: ${asp.dex ?? '—'}</span>
+                <span>HEL: ${asp.hel ?? '—'}</span>
+                <span>STR: ${asp.str ?? '—'}</span>
+                <span>ACT: ${asp.act ?? '—'}</span>
+                <span>INT: ${asp.int ?? '—'}</span>
+                <span>VER: ${asp.ver ?? '—'}</span>
+                <span>HAP: ${asp.hap ?? '—'}</span>
+            </div>
+
+            <!-- Row 3: Resources and Tracker boxes -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+                    <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
+                    <span style="font-weight: bold;">${creature.vit ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inspectorState.currentLostVit}" onchange="window.updateInspectorVit(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+                    <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
+                    <span style="font-weight: bold;">${creature.mana ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inspectorState.currentLostMana}" onchange="window.updateInspectorMana(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+            </div>
+
+            <!-- Row 4: Avoidance & Defense -->
+            <div style="font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+            </div>
+
+            <!-- Row 5: Attacks & Abilities Columns -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.75rem;">
+                <div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Attacks</div>
+                    ${creature.attacks && creature.attacks.length > 0 ? creature.attacks.map(a => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(a)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                </div>
+                <div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
+                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                </div>
+            </div>
+
+        </div>
+    `;
+};
+
+
+// Master Encounter Charts Registry compiled from the Creature Compendium
+const encounterChartsRegistry = {
+    "Bahr an-Jann & its riparian forest": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Camel", "Crab, Lightning", "Hawk, Fire", "Kobold", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Bear, Sun", "Eagle, Giant", "Hellhound", "Polyps", "Wolf [Egyptian Wolf]", "Antlion", "Bear [Gobi]", "Crocodile [Nile]", "Fishfolk", "Lizardfolk [Nile Crocodile]", "Naga [Gaboon Viper]", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Golden Orb Weaver]", "Wereboar", "Werehyena", "Jorōgumo", "Kappa"],
+        major: ["Badgerknight", "Jann", "Undine", "Aqrabu", "Basilisk", "Drake, Yellow", "Giant, Fire", "Hydra", "Manticore", "Nagaraja", "Troll", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+    },
+    "Barrowlands": {
+        minor: ["Boar", "Kobold", "Rat, Giant", "Raven, Wise"],
+        moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Goblin", "Jorōgumo", "Leonthrope", "Lupine", "Snow Leopard", "Weftlings [Arctic Wolf Spider]"],
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Giant, Hill", "Thura", "Troll, Frost", "Wight", "Wyrm, Frost-"]
+    },
+    "Cliffs of the Verdant Straight": {
+        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Eagle, Screeching", "Raven, Wise", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Wasps, Giant"],
+        moderate: ["Bear [Eurasian Brown]", "Eagle, Giant", "Fishfolk", "Harpy", "Hawk, Giant", "Jorōgumo", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Polyps", "Raven, Giant", "Weftlings [Sulpher Cave Spider]"],
+        major: ["Dragon, Azure", "Drake, Blue", "Manticore", "Nagaraja", "Roc", "Thura", "Undine", "Wyrm, Glow-", "Wyvern"]
+    },
+    "Coast of the Frosinlands": {
+        minor: ["Boar", "Crab, Lightning", "Horse [Belgian Draft]", "Rat, Giant", "Sheep", "Urox"],
+        moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Fishfolk", "Jorōgumo", "Leonthrope", "Lupine", "Orc", "Polyps", "Snow Leopard", "Weftlings [Arctic Wolf Spider]", "Werewolf", "Wolf [Grey]", "Wolf, Frost"],
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
+    },
+    "Cordillera": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Bobcat]", "Gnole", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Recluse]", "Werebat", "Werewolf", "Wolf"],
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+    },
+    "Daar Between the mountains and the river": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Granas", "Hawk, Fire", "Horse [Mustang]", "Kobold", "Rat, Giant", "Sheep", "Snake, Constrictor [Boa]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Cougar]", "Goblin", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Orc", "Raven, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Wererat", "Werewolf", "Wolf"],
+        major: ["Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+    },
+    "Daar Delta": {
+        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Granas", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Crocodile [Alligator]", "Felivir [Jaguar]", "Fishfolk", "Hawk, Giant", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc", "Polyps", "Weftlings [Fishing Spider]", "Wereboar", "Werewolf"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-", "Wyvern"]
+    },
+    "Daar Mountains": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Eagle, Screeching", "Hawk, Fire", "Horse [Altai Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Bullsnake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
+        moderate: ["Faeries", "Felivir [Cougar]", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Werehyena", "Werewolf", "Wolf"],
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+    },
+    "Daar River & its riparian forest": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]"],
+        moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [American]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Hellhound", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Hydra", "Nagaraja", "Quadricorn", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+    },
+    "Dark Mandate": {
+        minor: ["Kobold"],
+        moderate: ["Goblin", "Hobgoblin"],
+        major: ["Ogre", "Oldra", "Wyvern"]
+    },
+    "Depths of the Sculpted Darkness": {
+        minor: ["Beetle, Fire", "Serpent Vine", "Zombie, Kindorei"],
+        moderate: ["Bear, Glow", "Boar, Glow", "Camasotz", "Derro", "Hellhound", "Hyena, Six-paw", "Jorōgumo", "Minotaur [Lycanthropic]", "Scorpionfolk [Deathstalker]", "Spider, Giant", "Weftlings [Black Widow]", "Wereboar"],
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ifrit", "Kathonid", "Ogre", "Oldra", "Troll", "Wyrm [Sarpa]"]
+    },
+    "Desert of the Jann": {
+        minor: ["Beetle, Fire", "Camel", "Hawk, Fire", "Kobold", "Phoenix", "Rat, Giant", "Snake, Venomous [Sand Viper]"],
+        moderate: ["Antlion", "Bear [Gobi]", "Canivir [Painted Dog]", "Felivir [Caracal]", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Fire", "Scorpionfolk [Emperor]", "Weftlings [Six-eyed Sand Spider]", "Wereboar", "Werehyena", "Wolf [Arabian]"],
+        major: ["Aqrabu", "Basilisk", "Dragon, Gules", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Jann", "Manticore", "Quadricorn", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+    },
+    "Desolation": {
+        minor: [],
+        moderate: ["Ghost", "Werehyena"],
+        major: ["Banshee", "Wraith"]
+    },
+    "Euskalian Garths": {
+        minor: ["Dog [Husky]", "Hawk, Fire", "Horse [Shetland Pony]", "Rat, Giant", "Sheep", "Urox"],
+        moderate: ["Wolf [Grey]", "Wolf, Frost"],
+        major: []
+    },
+    "Farmlands": {
+        minor: ["Blood Hornet", "Boar", "Hawk, Fire", "Horse", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Werewolf", "Wolf"],
+        major: ["Badgerknight"]
+    },
+    "Fey Hegemony": {
+        minor: ["Brownies", "Dryad", "Naiad", "Pegasus", "Pixie", "Raven, Wise", "Unicorn"],
+        moderate: ["Centaur", "Ent", "Faeries"],
+        major: ["Dragon, Vert", "Drake, Green"]
+    },
+    "Forests of the Frosinlands": {
+        minor: ["Boar", "Brownies", "Dryad", "Kobold", "Naiad", "Pegasus", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Unicorn", "Weeping Willow"],
+        moderate: ["Antaeon", "Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Felivir [Snow Leopard]", "Goblin", "Jorōgumo", "Leonthrope", "Lupine", "Shadowcat", "Snow Leopard", "Spider, Giant", "Weftlings [Long-jawed Orb Weaver]", "Wendigo", "Werebat"],
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Troll, Frost", "Wight", "Wyrm, Frost-"]
+    },
+    "God’s Throne Mountains": {
+        minor: ["Brownies", "Dryad", "Eagle, Screeching", "Kobold", "Naiad", "Pixie", "Raven, Wise"],
+        moderate: ["Bear [Grizzly]", "Canivir [Tundra Wolf]", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Felivir [Snow Leopard]", "Goblin", "Gryphon", "Jorōgumo", "Leonthrope", "Lupine", "Raven, Giant", "Snow Leopard", "Spider, Giant", "Ursanthrope", "Weftlings [Arctic Wolf Spider]", "Werebat", "Werewolf", "Wolf [Arctic]", "Wolf, Frost"],
+        major: ["Badgerknight [Roaming]", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
+    },
+    "Grasslands": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Quarter Horse]", "Kobold", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Boa]", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Felivir [Lion]", "Goblin", "Jorōgumo", "Leonthrope", "Lion", "Lion, Fire", "Naga [Copperhead]", "Scorpionfolk [Thicktail]", "Spider, Giant", "Ursanthrope", "Weftlings [Lynx Spider]", "Werebat", "Wererat", "Werewolf", "Wolf [Maned Wolf]"],
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Quadricorn", "Wight", "Wyrm, Cloud-", "Wyvern"]
+    },
+    "Great Forest": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Unicorn", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Goblin", "Jorōgumo", "Naga [Asp]", "Scorpionfolk [Yellow-tailed]", "Shadowcat", "Spider, Giant", "Weftlings [Black Tunnelweb Spider]", "Wendigo", "Werebat", "Werewolf", "Wolf [Grey]"],
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wyrm, Cloud-"]
+    },
+    "Great Slough and its swamp": {
+        minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck, Terror Bird", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
+    },
+    "Hidden Vale": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Dog [Shiba Inu]", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Shiba Inu]", "Eagle, Giant", "Hawk, Giant", "Hellhound", "Hobgoblin", "Jorōgumo", "Scorpionfolk [Southern Devil]", "Weftlings [Jorō]", "Wolf", "Hobgoblin [Docile]"],
+        major: ["Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
+    },
+    "Hill Country": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Eagle, Giant", "Felivir [Cougar]", "Gnole", "Goblin", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Lion, Mountain", "Naga [Diamondback]", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Tarantula]", "Werebat", "Werewolf", "Wolf"],
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+    },
+    "Imperial coast": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
+    },
+    "Imperial city/town": {
+        minor: ["Dog", "Horse", "Rat, Giant"],
+        moderate: ["Canivir", "Dwarf", "Elf", "Felivir", "Half-elf", "Half-orc", "Hanyo", "Haubid", "Human", "Nuss-janni", "Vulpivir"],
+        major: []
+    },
+    "Imperial rolling plains": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Shire Horse]", "Keck", "Keck, Bloodbeak", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [King Snake]", "Snake, Venomous [Coral Snake]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Naga [Coral Snake]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wight", "Wyrm, Cloud-"]
+    },
+    "Isle of Twilight’s Harbor": {
+        minor: ["Horse", "Phoenix", "Boar", "Raven, Wise", "Crab, Lightning"],
+        moderate: ["Elf", "Felivir", "Half-elf", "Vulpivir", "Bear"],
+        major: ["Undine"]
+    },
+    "Isle of Ver": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Kobold", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Kodiac]", "Canivir [Dhole]", "Eagle, Giant", "Felivir [Iberian Lynx]", "Goblin", "Harpy", "Hawk, Giant", "Jorōgumo", "Leonthrope", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Orcanthrope", "Raven, Giant", "Weftlings [Mediterranean Recluse]", "Werebat"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Azure", "Drake, Blue", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
+    },
+    "Kassani Delta": {
+        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Crocodile [Siamese]", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
+    },
+    "Kassani River & its riparian forest": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [Siamese]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Orb Weaver]", "Wererat", "Werewolf", "Wolf"],
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Glow-"]
+    },
+    "Lakes of the Sculpted Darkness": {
+        minor: ["Crab, Lightning", "Zombie, Kindorei"],
+        moderate: ["Bear, Glow", "Boar, Glow", "Fishfolk", "Jorōgumo", "Kappa", "Lizardfolk [Gila Monster]", "Polyps", "Weftlings [Fishing Spider]"],
+        major: ["Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Hydra", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
+    },
+    "Medina": {
+        minor: ["Dog [Saluki]", "Hawk, Fire"],
+        moderate: ["Nuss-janni"],
+        major: ["Jann"]
+    },
+    "Moon Veil Mountains, East": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Unicorn", "Wasps, Giant"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Jorōgumo", "Orc", "Raven, Giant", "Spider, Giant", "Weftlings [Brown Recluse]", "Werebat", "Wolf"],
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Azure", "Dragon, Or", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Giant, Hill", "Giant, Island", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+    },
+    "Moon Veil Mountains, North": {
+        minor: ["Eagle, Screeching", "Raven, Wise"],
+        moderate: ["Bear [Grizzly]", "Eagle, Giant", "Gryphon", "Jorōgumo", "Lupine", "Orc", "Raven, Giant", "Snow Leopard", "Spider, Giant", "Weftlings [Clubiona]", "Wolf [Arctic]", "Wolf, Frost"],
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
+    },
+    "Moon Veil Mountains, South": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
+        moderate: ["Bear [Gobi]", "Bear, Sun", "Eagle, Giant", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Lion, Fire", "Orc", "Raven, Giant", "Spider, Giant", "Weftlings [Desert Recluse]", "Wolf [Arabian]"],
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Dragon, Or", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Ifrit", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Fire-"]
+    },
+    "Moon Veil Mountains, West": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Unicorn", "Wasps, Giant"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Kitsune", "Orc", "Raven, Giant", "Spider, Giant", "Vulpivir", "Werebat", "Wolf"],
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+    },
+    "Oobar": {
+        minor: ["Dog [Painted]", "Hawk, Fire", "Wasps, Giant"],
+        moderate: ["Antlion", "Hellhound", "Wolf [Arabian]"],
+        major: ["Badgerknight", "Basilisk", "Drake, Yellow", "Jann", "Undine", "Wyrm, Glow-"]
+    },
+    "Orkipelago": {
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [King Cobra]", "Wasps, Giant"],
+        moderate: ["Antlion", "Bear [Panda]", "Crocodile [Boar Crocodile]", "Eagle, Giant", "Felivir [Tiger]", "Fishfolk", "Gorilla", "Goritaur", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Komodo Dragon]", "Naga [King Cobra]", "Orc", "Shadowcat", "Spider, Giant", "Tarantula, Giant", "Tiger", "Weftlings [Tarantula]"],
+        major: ["Badgerknight", "Basilisk", "Dragon, Azure", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Giant, Island", "Nagaraja", "Roc", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Cloud-", "Wyrm, Glow-"]
+    },
+    "Rim of the Sculpted Darkness": {
+        minor: ["Beetle, Fire", "Kobold", "Zombie, Kindorei"],
+        moderate: ["Bear, Glow", "Boar, Glow", "Goblin", "Hellhound", "Hyena, Six-paw", "Jorōgumo", "Minotaur [Lycanthropic]", "Scorpionfolk [Vietbocap Canhi]", "Spider, Giant", "Weftlings [Black Widow]", "Werebat"],
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ifrit", "Ogre", "Oldra", "Thura", "Troll", "Wyrm, Fire-"]
+    },
+    "Sea": {
+        minor: ["Crab, Lightning", "Snake, Venomous [Yellow Sea Snake]"],
+        moderate: ["Fishfolk", "Kappa", "Lizardfolk [Marine Iguana]", "Naga [Yellow Sea Snake]", "Orc", "Polyps"],
+        major: ["Leviathan", "Nagaraja", "Roc", "Undine", "Wyrm, Glow-"]
+    },
+    "Valley of the Jann": {
+        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Dog [Painted]", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
+        moderate: ["Crocodile [Nile]", "Hellhound", "Werehyena", "Wolf [Arabian]"],
+        major: ["Drake, Yellow", "Jann", "Wyrm, Fire-", "Wyrm, Glow-"]
+    }
+};
+
+// =========================================================================
+// 🐉 CREATURE COMPENDIUM & QUICK INSPECTOR ENGINE
+// =========================================================================
+
+// Ensure global state memory exists safely regardless of script placement order
+window.characterChoicesState = window.characterChoicesState || {};
+if (!characterChoicesState.compendiumInspector) {
+    characterChoicesState.compendiumInspector = {
+        selectedCreatureName: "None",
+        currentLostVit: 0,
+        currentLostMana: 0
+    };
+}
+
+// Local helper for safe HTML escaping
+if (typeof window.escapeHtml !== "function") {
+    window.escapeHtml = function(s) {
+        return String(s || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    };
+}
+
+// Master Unified Flat Registry Builder for the Inspector
+function getAllCompendiumCreatures() {
+    let masterList = [];
+    const registry = window.compendiumRegistry || (typeof compendiumRegistry !== "undefined" ? compendiumRegistry : {});
+
+    Object.entries(registry).forEach(([category, list]) => {
+        if (Array.isArray(list)) {
+            list.forEach(creature => {
+                masterList.push({ ...creature, category });
+            });
+        }
+    });
+    return masterList;
+}
+
+function renderCompendiumInspectorUI() {
+    const tabCompendium = document.getElementById("tab-compendium");
+    if (!tabCompendium) return;
+
+    if (document.getElementById("compendium-inspector-card")) return;
+
+    const allCreatures = getAllCompendiumCreatures();
+    allCreatures.sort((a, b) => a.name.localeCompare(b.name));
+
+    let optionsHtml = `<option value="None">-- Select Creature to Inspect --</option>`;
+    
+    const categorized = {};
+    allCreatures.forEach(c => {
+        if (!categorized[c.category]) categorized[c.category] = [];
+        categorized[c.category].push(c);
+    });
+
+    Object.entries(categorized).forEach(([cat, creatures]) => {
+        optionsHtml += `<optgroup label="${cat}">`;
+        creatures.forEach(c => {
+            const isSelected = characterChoicesState.compendiumInspector.selectedCreatureName === c.name ? "selected" : "";
+            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)} (Size ${c.size})</option>`;
+        });
+        optionsHtml += `</optgroup>`;
+    });
+
+    const inspectorCard = document.createElement("div");
+    inspectorCard.id = "compendium-inspector-card";
+    inspectorCard.className = "aspect-card";
+    inspectorCard.style.cssText = "margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;";
+    
+    inspectorCard.innerHTML = `
+        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-red); border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">Creature Quick Inspector</h3>
+        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
+                <label>Select Creature</label>
+                <select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                    ${optionsHtml}
+                </select>
+            </div>
+        </div>
+        <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
+            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                Select a creature above to load its interactive mini character sheet.
+            </div>
+        </div>
+    `;
+
+    const accordionEl = tabCompendium.querySelector(".compendium-accordion");
+    if (accordionEl) {
+        tabCompendium.insertBefore(inspectorCard, accordionEl);
+    } else {
+        tabCompendium.appendChild(inspectorCard);
+    }
+    
+    if (characterChoicesState.compendiumInspector.selectedCreatureName !== "None") {
+        window.renderCompendiumMiniSheet(characterChoicesState.compendiumInspector.selectedCreatureName);
+    }
+}
+
+window.selectCompendiumCreature = function(creatureName) {
+    characterChoicesState.compendiumInspector.selectedCreatureName = creatureName;
+    characterChoicesState.compendiumInspector.currentLostVit = 0;
+    characterChoicesState.compendiumInspector.currentLostMana = 0;
+    window.renderCompendiumMiniSheet(creatureName);
+};
+
+window.updateInspectorVit = function(val) {
+    characterChoicesState.compendiumInspector.currentLostVit = Math.max(0, parseInt(val) || 0);
+};
+
+window.updateInspectorMana = function(val) {
+    characterChoicesState.compendiumInspector.currentLostMana = Math.max(0, parseInt(val) || 0);
+};
+
+window.renderCompendiumMiniSheet = function(creatureName) {
+    const container = document.getElementById("compendium-creature-sheet-container");
+    if (!container) return;
+
+    if (!creatureName || creatureName === "None") {
+        container.innerHTML = `
+            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                Select a creature above to load its interactive mini character sheet.
+            </div>
+        `;
+        return;
+    }
+
+    const allCreatures = getAllCompendiumCreatures();
+    const creature = allCreatures.find(c => c.name === creatureName);
+    if (!creature) return;
+
+    const asp = creature.aspects || {};
+    const inspectorState = characterChoicesState.compendiumInspector;
+
+    container.innerHTML = `
+        <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
+            
+            <!-- Row 1: Header Name & Details -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 4px; margin-bottom: 8px;">
+                <span style="font-weight: bold; font-size: 0.95rem; color: #5c1d1d;">${escapeHtml(creature.name)} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">[${escapeHtml(creature.category)}]</span></span>
+                <span style="font-size: 0.78rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(creature.size || 'B')} | Pace ${escapeHtml(creature.pace || '8')}</span>
+            </div>
+
+            <!-- Row 2: Aspect Strip -->
+            <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; color: #5c1d1d; margin-bottom: 8px;">
+                <span>DEX: ${asp.dex ?? '—'}</span>
+                <span>HEL: ${asp.hel ?? '—'}</span>
+                <span>STR: ${asp.str ?? '—'}</span>
+                <span>ACT: ${asp.act ?? '—'}</span>
+                <span>INT: ${asp.int ?? '—'}</span>
+                <span>VER: ${asp.ver ?? '—'}</span>
+                <span>HAP: ${asp.hap ?? '—'}</span>
+            </div>
+
+            <!-- Row 3: Resources and Tracker boxes -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+                    <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
+                    <span style="font-weight: bold;">${creature.vit ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inspectorState.currentLostVit}" onchange="window.updateInspectorVit(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
+                    <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
+                    <span style="font-weight: bold;">${creature.mana ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inspectorState.currentLostMana}" onchange="window.updateInspectorMana(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+            </div>
+
+            <!-- Row 4: Avoidance & Defense -->
+            <div style="font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+            </div>
+
+            <!-- Row 5: Attacks & Abilities Columns -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.75rem;">
+                <div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Attacks</div>
+                    ${creature.attacks && creature.attacks.length > 0 ? creature.attacks.map(a => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(a)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                </div>
+                <div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
+                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                </div>
+            </div>
+
+        </div>
+    `;
+};
+
+function generateCompendiumTab() {
+    const accordion = document.querySelector("#tab-compendium .compendium-accordion");
+    if (!accordion) return;
+
+    let codexHtml = "";
+    const registry = window.compendiumRegistry || (typeof compendiumRegistry !== "undefined" ? compendiumRegistry : {});
+
+    Object.entries(registry).forEach(([categoryName, creatures]) => {
+        let itemsHtml = "";
+
+        if (!creatures || creatures.length === 0) {
+            itemsHtml = `<li style="list-style: none; color: #7c6f64; font-style: italic;">No entries recorded in this category yet.</li>`;
+        } else {
+            creatures.forEach(c => {
+                const aspectStr = c.aspects ? `Dex: ${c.aspects.dex || '—'}, Hel: ${c.aspects.hel || '—'}, Str: ${c.aspects.str || '—'}, Act: ${c.aspects.act || '—'}, Int: ${c.aspects.int || '—'}, Ver: ${c.aspects.ver || '—'}` : '';
+                const attacksStr = c.attacks && c.attacks.length > 0 ? `<strong>Attacks:</strong> ${c.attacks.join(" | ")}` : '';
+                const abilitiesStr = c.abilities && c.abilities.length > 0 ? `<strong>Special Abilities:</strong> ${c.abilities.join(", ")}` : '';
+
+                itemsHtml += `
+                    <li style="margin-bottom: 12px; font-size: 0.95rem; color: #2d3748; list-style-type: square;">
+                        <div style="font-weight: bold; color: #7d3c1b; font-size: 1rem; margin-bottom: 2px;">${c.name} <span style="font-size: 0.75rem; color: #7c6f64; font-weight: normal;">(Size ${c.size}, Pace ${c.pace})</span></div>
+                        <div style="font-size: 0.82rem; color: #4a3f35; margin-bottom: 2px;"><strong>Vitality:</strong> ${c.vit} | <strong>Mana:</strong> ${c.mana} | <strong>Avoid:</strong> ${c.avoid}</div>
+                        ${aspectStr ? `<div style="font-size: 0.8rem; color: #7c6f64; margin-bottom: 2px;"><strong>Aspects:</strong> ${aspectStr}</div>` : ''}
+                        ${attacksStr ? `<div style="font-size: 0.82rem; color: #2c251e; margin-bottom: 2px;">${attacksStr}</div>` : ''}
+                        ${abilitiesStr ? `<div style="font-size: 0.8rem; color: #1b6b55; font-style: italic;">${abilitiesStr}</div>` : ''}
+                    </li>
+                `;
+            });
+        }
+
+        codexHtml += `
+            <div class="skill-item" style="border: 1px solid #decdaf; margin-bottom: 8px; border-radius: 4px; overflow: hidden;">
+                <div class="skill-header" onclick="toggleSkill(this)" style="background: #faf7f2; padding: 12px; font-weight: bold; color: #7d3c1b; cursor: pointer; user-select: none;">
+                    ${categoryName} ▾
+                </div>
+                <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
+                    <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
+                        ${itemsHtml}
+                    </ul>
+                </div>
+            </div>
+        `;
+    });
+
+    accordion.innerHTML = codexHtml;
+}
+
+// UI Renderer Function to display Encounters inside the Compendium Tab
+function renderEncounterChartsUI() {
+    const compendiumContainer = document.querySelector("#tab-compendium .compendium-accordion");
+    if (!compendiumContainer) return;
+
+    // Check if the encounter section already exists to avoid duplication
+    if (document.getElementById("encounter-charts-section")) return;
+
+    let regionOptions = `<option value="None">-- Select Region --</option>`;
+    const encRegistry = window.encounterChartsRegistry || (typeof encounterChartsRegistry !== "undefined" ? encounterChartsRegistry : {});
+    Object.keys(encRegistry).sort().forEach(regionName => {
+        regionOptions += `<option value="${regionName}">${regionName}</option>`;
+    });
+
+    const wrapper = document.createElement("div");
+    wrapper.id = "encounter-charts-section";
+    wrapper.className = "skill-item";
+    wrapper.style.cssText = "border: 1px solid #decdaf; margin-top: 15px; border-radius: 4px; overflow: hidden;";
+    
+    wrapper.innerHTML = `
+        <div class="skill-header" onclick="toggleSkill(this)" style="background: #faf7f2; padding: 12px; font-weight: bold; color: #7d3c1b; cursor: pointer; user-select: none;">
+            Encounter Charts (Regional Lookup) ▾
+        </div>
+        <div class="skill-body" style="display: none; padding: 15px; background: #fff; border-top: 1px solid #e2d7c5;">
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                <label style="font-weight: bold; font-size: 0.85rem; color: #5c1d1d;">Select Region:</label>
+                <select id="encounter-region-select" onchange="updateEncounterDisplay(this.value)" style="padding: 6px; font-size: 0.85rem; border: 1px solid #decdaf; border-radius: 4px; background: #fff; flex: 1; max-width: 300px;">
+                    ${regionOptions}
+                </select>
+            </div>
+            <div id="encounter-display-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px;">
+                
+                <!-- Minor Header (Hit + Hit) -->
+                <div style="background: #faf7f2; border: 1px solid #decdaf; border-radius: 6px; padding: 10px;">
+                    <div style="font-weight: bold; font-size: 0.85rem; color: #1b6b55; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Minor</span>
+                        <div style="display: flex; gap: 3px; align-items: center;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
+                        </div>
+                    </div>
+                    <ul id="enc-list-minor" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
+                        <li style="font-style: italic; color: #7c6f64;">Select a region above.</li>
+                    </ul>
+                </div>
+
+                <!-- Moderate Header (Hit + Crit) -->
+                <div style="background: #faf7f2; border: 1px solid #decdaf; border-radius: 6px; padding: 10px;">
+                    <div style="font-weight: bold; font-size: 0.85rem; color: #b7791f; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Moderate</span>
+                        <div style="display: flex; gap: 3px; align-items: center;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
+                        </div>
+                    </div>
+                    <ul id="enc-list-moderate" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
+                        <li style="font-style: italic; color: #7c6f64;">Select a region above.</li>
+                    </ul>
+                </div>
+
+                <!-- Major Header (Crit + Crit) -->
+                <div style="background: #faf7f2; border: 1px solid #decdaf; border-radius: 6px; padding: 10px;">
+                    <div style="font-weight: bold; font-size: 0.85rem; color: #b82c2c; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
+                        <span>Major</span>
+                        <div style="display: flex; gap: 3px; align-items: center;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
+                        </div>
+                    </div>
+                    <ul id="enc-list-major" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
+                        <li style="font-style: italic; color: #7c6f64;">Select a region above.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    `;
+
+    compendiumContainer.appendChild(wrapper);
+}
+
+window.updateEncounterDisplay = function(regionName) {
+    const minorList = document.getElementById("enc-list-minor");
+    const moderateList = document.getElementById("enc-list-moderate");
+    const majorList = document.getElementById("enc-list-major");
+
+    if (!minorList || !moderateList || !majorList) return;
+
+    const encRegistry = window.encounterChartsRegistry || (typeof encounterChartsRegistry !== "undefined" ? encounterChartsRegistry : {});
+    if (regionName === "None" || !encRegistry[regionName]) {
+        minorList.innerHTML = `<li style="font-style: italic; color: #7c6f64;">Select a region above.</li>`;
+        moderateList.innerHTML = `<li style="font-style: italic; color: #7c6f64;">Select a region above.</li>`;
+        majorList.innerHTML = `<li style="font-style: italic; color: #7c6f64;">Select a region above.</li>`;
+        return;
+    }
+
+    const data = encRegistry[regionName];
+    const formatList = (arr) => {
+        if (!arr || arr.length === 0) return `<li style="font-style: italic; color: #7c6f64;">None</li>`;
+        return arr.map(item => `<li>${item}</li>`).join("");
+    };
+
+    minorList.innerHTML = formatList(data.minor);
+    moderateList.innerHTML = formatList(data.moderate);
+    majorList.innerHTML = formatList(data.major);
+};
+
+// Consolidated DOM startup hook
+document.addEventListener("DOMContentLoaded", () => {
+    generateCompendiumTab();
+    setTimeout(renderCompendiumInspectorUI, 200);
+    setTimeout(renderEncounterChartsUI, 300);
+});
+
 
 </script>
 <!-- Character Manager Modal -->
