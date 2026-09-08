@@ -2018,7 +2018,7 @@ details[open] #skills-collapsed-summary {
             <option value="Dryad">Dryad</option>
             <option value="Dwarf">Dwarf</option>
             <option value="Ent">Ent</option>
-            <option value="Faeries">Faeries</option>
+            <option value="Fairy">Fairy</option>
             <option value="Fishfolk">Fishfolk</option>
             <option value="Giant, Fire">Giant, Fire</option>
             <option value="Giant, Frost">Giant, Frost</option>
@@ -7481,6 +7481,10 @@ const tooltipRegistry = {
     title: "Starlight Vision",
     description: "You can see perfectly at night."
   },
+  "twilight_vision": {
+    title: "Twilight Vision",
+    description: "You can see perfectly at dawn and dusk."
+  },
   "earthray_vision": {
     title: "Earthray Vision",
     description: "You can see perfectly underground."
@@ -7573,105 +7577,205 @@ const tooltipRegistry = {
     title: "Weapon Affinity (Crossbow)",
     description: "You gain +1d on attacks with Crossbows."
   },
-   "meld": {
-        title: "Meld",
-        description: "Nymphs can meld into the subject of their life bond at will through physical contact. When they do, the two are indistinguishable."
+"affinity": {
+        title: "Affinity",
+        description: "The creature gains a 1d bonus with the specified skill or weapon."
     },
-    "life_bond": {
-        title: "Life Bond",
-        description: "A nymph will only die when the subject of their life bond is killed, and the subject of their life bond is undying."
+    "asphyxiation": {
+        title: "Asphyxiation",
+        description: "Instead of taking damage, the target acquires one point of asphyxiation per pulse. If the target’s Asphyxiation points exceeds their Vitality, they fall unconscious and are Actively Dying. Once stabilized and their airway is cleared, all Asphyxiation points are removed."
     },
-    "undying": {
-        title: "Undying",
-        description: "Undying do not die from old age: they must be killed."
+    "atgeir_affinity": {
+        title: "Atgeir Affinity",
+        description: "You gain +1d on attacks with Atgeirs."
     },
-    "arcane_immunity": {
-        title: "Arcane Immunity",
-        description: "The creature suffers no damage or ill effects from magic."
+    "banshees_wail": {
+        title: "Banshee’s Wail",
+        description: "The target must pass a Verve save upon hearing the wail or become cursed."
     },
-    "curse_disease_immunity": {
-        title: "Curse & Disease Immunity",
-        description: "The creature suffers no damage or ill effects from curses and diseases."
+    "battleaxe_affinity": {
+        title: "Battleaxe Affinity",
+        description: "You gain +1d on attacks with Battleaxes."
     },
-    "rend": {
-        title: "Rend",
-        description: "If the creature is in control of the grapple, it can use its rend attack. The defender loses the defense dice granted by their Dexterity and shield, and the grapple is ended."
-    },
-    "firststrike": {
-        title: "Firststrike",
-        description: "You retain the right of first strike against approaching combatants."
-    },
-    "regenerate": {
-        title: "Regenerate",
-        description: "The creature regenerates its Vitality each pulse unless that damage was caused by acid or fire."
-    },
-    "constrict": {
-        title: "Constrict",
-        description: "The damage for a constrict attack is the creature's Strength times one, two, three, or four for size A, B, C, or D creatures respectively. When constricted, creatures trying to oppose the grapple are at disadvantage."
-    },
-    "deadly_bite": {
-        title: "Deadly Bite",
-        description: "Add one Crit result to bite attacks."
-    },
-    "web_blast": {
-        title: "Web Blast",
-        description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
+    "cause_mischief": {
+        title: "Cause Mischief",
+        description: "The target must pass a Hap save or suffer misfortune. Such misfortune can always be attributed to normal bad luck and often affects those near the target as well."
     },
     "claw_shield": {
         title: "Claw Shield",
         description: "Provides a +2d bonus to Avoidance."
     },
-    "deadly_sting": {
-        title: "Deadly Sting",
-        description: "Add one Crit result to specified sting attack."
+    "constrict": {
+        title: "Constrict",
+        description: "The damage for a constrict attack is the creature's Strength times one, two, three, or four for size A, B, C, or D creatures respectively. When constricted, creatures trying to oppose the grapple are at disadvantage."
     },
-    "frost_vulnerability": {
-        title: "Frost Vulnerability",
-        description: "The creature suffers double damage from frost attacks."
+    "corrupting_breath": {
+        title: "Corrupting Breath",
+        description: "All targets are envenomed."
     },
-    "fire_vulnerability": {
-        title: "Fire Vulnerability",
-        description: "The creature suffers double damage from fire attacks."
+    "creature_acid_immunity": {
+        title: "Acid Immunity",
+        description: "The creature suffers no damage or ill effects from acid."
     },
-    "water_vulnerability": {
-        title: "Water Vulnerability",
-        description: "The creature suffers double damage from water attacks."
+    "creature_magic_resistance": {
+        title: "Magic Resistance",
+        description: "The creature suffers ½ damage from Magic."
     },
-    "lightning_vulnerability": {
-        title: "Lightning Vulnerability",
-        description: "The creature suffers double damage from lightning attacks."
+    "creature_aversion": {
+        title: "Aversion",
+        description: "The creature’s natural Avoidance cc is reduced by half for a particular damage type and it loses its Divine Salvation."
     },
-    "darkness_vulnerability": {
+    "creature_battle_magic_resistance": {
+        title: "Battle Magic Resistance",
+        description: "The creature suffers ½ damage from Battle Magic."
+    },
+    "creature_critical_effect_immunity": {
+        title: "Critical Effect Immunity",
+        description: "The creature is immune to all critical effects (such as Daze, Impair, Numb, and Pain) resulting from attacks."
+    },
+    "creature_curse_disease_immunity": {
+        title: "Curse & Disease Immunity",
+        description: "The creature suffers no damage or ill effects from curses and diseases."
+    },
+    "creature_darkness_immunity": {
+        title: "Darkness Immunity",
+        description: "The creature suffers no damage or ill effects from darkness attacks."
+    },
+    "creature_darkness_vulnerability": {
         title: "Darkness Vulnerability",
         description: "The creature suffers double damage from darkness attacks."
     },
-    "light_vulnerability": {
-        title: "Light Vulnerability",
-        description: "The creature suffers double damage from light attacks."
+    "creature_disease_immunity": {
+        title: "Disease Immunity",
+        description: "The creature suffers no damage or ill effects from diseases and parasitic infections."
     },
-    "thunder_vulnerability": {
-        title: "Thunder Vulnerability",
-        description: "The creature suffers double damage from thunder attacks."
+    "creature_fire_immunity": {
+        title: "Fire Immunity",
+        description: "The creature suffers no damage or ill effects from fire attacks."
     },
-    "vulnerability": {
-        title: "Vulnerability",
-        description: "The creature suffers double damage from the specified damage type."
+    "creature_fire_resistance": {
+        title: "Fire Resistance",
+        description: "The creature suffers ½ damage from fire attacks."
     },
-    "resistance": {
-        title: "Resistance",
-        description: "The creature suffers ½ damage from the specified damage type."
+    "creature_fire_vulnerability": {
+        title: "Fire Vulnerability",
+        description: "The creature suffers double damage from fire attacks."
     },
-    "immunity": {
+    "creature_frost_immunity": {
+        title: "Frost Immunity",
+        description: "The creature suffers no damage or ill effects from frost attacks."
+    },
+    "creature_frost_resistance": {
+        title: "Frost Resistance",
+        description: "The creature suffers ½ damage from frost attacks."
+    },
+    "creature_frost_vulnerability": {
+        title: "Frost Vulnerability",
+        description: "The creature suffers double damage from frost attacks."
+    },
+    "creature_immunity": {
         title: "Immunity",
         description: "The creature suffers no damage or ill effects from the specified damage type."
     },
-    "affinity": {
-        title: "Affinity",
-        description: "The creature gains a 1d bonus with the specified skill or weapon."
+    "creature_light_immunity": {
+        title: "Light Immunity",
+        description: "The creature suffers no damage or ill effects from light attacks."
     },
-    "aversion": {
-        title: "Aversion",
-        description: "The creature’s natural Avoidance cc is reduced by half for a particular damage type and it loses its Divine Salvation."
+    "creature_light_vulnerability": {
+        title: "Light Vulnerability",
+        description: "The creature suffers double damage from light attacks."
+    },
+    "creature_lightning_immunity": {
+        title: "Lightning Immunity",
+        description: "The creature suffers no damage or ill effects from lightning attacks."
+    },
+    "creature_lightning_resistance": {
+        title: "Lightning Resistance",
+        description: "The creature suffers ½ damage from lightning attacks."
+    },
+    "creature_lightning_vulnerability": {
+        title: "Lightning Vulnerability",
+        description: "The creature suffers double damage from lightning attacks."
+    },
+    "creature_magic_immunity": {
+        title: "Magic Immunity",
+        description: "The creature suffers no damage or ill effects from magic."
+    },
+    "creature_non_sundering_weapon_immunity": {
+        title: "Non-sundering Weapon Immunity",
+        description: "The creature suffers no damage or effects from standard weapons that are not specifically designated for sundering."
+    },
+    "creature_physical_immunity": {
+        title: "Physical Immunity",
+        description: "The creature suffers no damage or ill effects from physical attacks."
+    },
+    "creature_physical_resistance": {
+        title: "Physical Resistance",
+        description: "The creature suffers ½ damage from physical damage."
+    },
+    "creature_poison_immunity": {
+        title: "Poison Immunity",
+        description: "The creature suffers no damage or ill effects from poison and venom."
+    },
+    "creature_resistance": {
+        title: "Resistance",
+        description: "The creature suffers ½ damage from the specified damage type."
+    },
+    "creature_silver_aversion": {
+        title: "Silver Aversion",
+        description: "The creature's natural Avoidance is reduced by half against silver weapons."
+    },
+    "creature_summoning_immunity": {
+        title: "Summoning Immunity",
+        description: "The creature suffers no damage or ill effects from summoning magic."
+    },
+    "creature_thunder_immunity": {
+        title: "Thunder Immunity",
+        description: "The creature suffers no damage or ill effects from thunder attacks."
+    },
+    "creature_thunder_resistance": {
+        title: "Thunder Resistance",
+        description: "The creature suffers ½ damage from thunder attacks."
+    },
+    "creature_thunder_vulnerability": {
+        title: "Thunder Vulnerability",
+        description: "The creature suffers double damage from thunder attacks."
+    },
+    "creature_umbral_immunity": {
+        title: "Umbral Immunity",
+        description: "The creature suffers no damage or ill effects from umbral attacks."
+    },
+    "creature_vulnerability": {
+        title: "Vulnerability",
+        description: "The creature suffers double damage from the specified damage type."
+    },
+    "creature_water_vulnerability": {
+        title: "Water Vulnerability",
+        description: "The creature suffers double damage from water attacks."
+    },
+    "curse_of_lycanthropy": {
+        title: "Curse of Lycanthropy",
+        description: "The target turns into their lycanthropic form whenever a particular moon is risen or on True Nights when none of the four moons are risen as befits their form. All werecreatures are prone to violence, and a TN 4 Verve save is required to exercise discretion."
+    },
+    "curse_of_the_banshee": {
+        title: "Curse of the Banshee",
+        description: "The target recovers neither Vitality nor Mana from sleeping and suffers a -1d penalty on all actions until the Banshee is quelled."
+    },
+    "damage_type_acid": {
+        title: "Acid Damage",
+        description: "Special Effect: Each pulse, the target suffers 1 fewer point of damage until no further damage can be dealt.\nCritical Effect: At the end of the encounter, the target must pass a TN 0 Hap save for each item hit by the attack to prevent minor damage."
+    },
+    "damage_type_darkness": {
+        title: "Darkness Damage",
+        description: "Special Effect: Any area of effect Darkness spell renders all targets without Dark Vision effectively blind.\nCritical Effect: The target must pass a TN Rank Verve save or panic."
+    },
+    "deadly_bite": {
+        title: "Deadly Bite",
+        description: "Add one Crit result to bite attacks."
+    },
+    "deadly_sting": {
+        title: "Deadly Sting",
+        description: "Add one Crit result to specified sting attacks."
     },
     "devour": {
         title: "Devour",
@@ -7685,6 +7789,50 @@ const tooltipRegistry = {
         title: "Elusive",
         description: "When rolling Avoidance, Crit results, in addition to their normal effect, negate Crit results made against the creature."
     },
+    "enthral": {
+        title: "Enthral",
+        description: "The target creature must pass a Verve confrontation or become a thrall, obeying its master until the master dies."
+    },
+    "erupt": {
+        title: "Erupt",
+        description: "All targets fall in the direction opposite the center hex of the eruption. This skill is confronted by Balance."
+    },
+    "explode": {
+        title: "Explode",
+        description: "All targets within 1 hex of the creature suffer damage and fall in the direction opposite that hex. Their falling is confronted by Balance."
+    },
+    "filthy": {
+        title: "Filthy",
+        description: "The target must pass a Health save or become affected by the plague."
+    },
+    "fire_spray": {
+        title: "Fire Spray",
+        description: "As a standard attack action, the creature can spray fire at 1 hex within its spray range."
+    },
+    "fire_touch": {
+        title: "Fire Touch",
+        description: "The creature's natural critical attacks inflict Pain."
+    },
+    "firststrike": {
+        title: "Firststrike",
+        description: "You retain the right of first strike against approaching combatants."
+    },
+    "frost_touch": {
+        title: "Frost Touch",
+        description: "The creature's natural critical attacks Benumb the target."
+    },
+    "ghost_touch": {
+        title: "Ghost Touch",
+        description: "This attack is confronted by a Dexterity save and deals Mana damage. The target must pass an Acuity save or suffer Mindrot."
+    },
+    "grant_wish": {
+        title: "Grant Wish",
+        description: "Djinni can cast Wish as a 72 Mana word. The power of the wish is only limited by the LM, but should not be able to unweave the magics of the gods—not to be confused with that of a priest."
+    },
+    "great_bow_affinity": {
+        title: "Great Bow Affinity",
+        description: "You gain +1d on attacks with Great Bows."
+    },
     "immortal": {
         title: "Immortal",
         description: "When this creature is felled, it undergoes a period of quiescence instead of dying."
@@ -7693,137 +7841,145 @@ const tooltipRegistry = {
         title: "Inept",
         description: "The creature has only one Mana."
     },
-    "squishy": {
-        title: "Squishy",
-        description: "The creature has only one Vitality."
+    "inundate_being": {
+        title: "Inundate Being",
+        description: "When in control of a Grapple, a fluid elemental can force itself into the lungs of its target, causing them to asphyxiate. It is important to note that if a sand elemental dies whilst inundating its victim, the process of removing it requires a rite of Heal Wounds."
     },
-    "vampiric_bite": {
-        title: "Vampiric Bite",
-        description: "If bitten by a vampire, and in turn drink of that vampire’s blood, the target must pass a Health save, TN 6, or die and become a vampire themself."
+    "kindorei_infection": {
+        title: "Kindorei Infection",
+        description: "The target has acquired a parasitic fungus which aims to kill him and take over his corpse. Immediately after acquiring the disease, the target permanently loses 2d Mana per pulse. Once he reaches zero Mana, he becomes a Kindorei Zombie and will immediately try to bite as many people as possible before getting himself killed in the process. TN 6 to purify."
     },
-    "venomous": {
-        title: "Venom",
-        description: "Applies a toxic venom upon a successful strike that requires a Health save to resist or suffer its adverse effects (such as Pain, Nausea, or Paralysis)."
+    "life_bond": {
+        title: "Life Bond",
+        description: "A nymph will only die when the subject of their life bond is killed, and the subject of their life bond is undying."
     },
-    "weapon_affinity_derro_brutal": {
-        title: "Brutal Weapons Affinity",
-        description: "You gain +1d on attacks with Brutal weapons."
+    "light_touch": {
+        title: "Light Touch",
+        description: "The creature's natural critical attacks inflict Blindness."
     },
-    "great_bow_affinity": {
-        title: "Great Bow Affinity",
-        description: "You gain +1d on attacks with Great Bows."
+    "lightning_touch": {
+        title: "Lightning Touch",
+        description: "The creature's natural critical attacks inflict Weakness."
     },
-    "battleaxe_affinity": {
-        title: "Battleaxe Affinity",
-        description: "You gain +1d on attacks with Battleaxes."
+    "lycanthropic_bite": {
+        title: "Lycanthropic Bite",
+        description: "The target must pass a Health save or suffer the Curse of Lycanthropy."
     },
-    "quarterstaff_affinity": {
-        title: "Quarterstaff Affinity",
-        description: "You gain +1d on attacks with Quarterstaffs."
+    "magmatic_splash": {
+        title: "Magmatic Splash",
+        description: "When a magma elemental is impacted or impacts a target, all within 1 hex must avoid his splash attack. Each Pulse, attacks that hit deal 1 fewer die of damage until no further damage can be dealt or the magma is removed."
     },
-    "atgeir_affinity": {
-        title: "Atgeir Affinity",
-        description: "You gain +1d on attacks with Atgeirs."
+    "mantle_of_shadow": {
+        title: "Mantle of Shadow",
+        description: "All attacks and Avoidance rolls made against the target are considered blind."
     },
-    "quick_acting_vitality_poison": {
-        title: "Quick Acting Vitality Poison",
-        description: "A fast-acting poison that targets Vitality and requires a Health save to resist."
+    "meld": {
+        title: "Meld",
+        description: "Nymphs can meld into the subject of their life bond at will through physical contact. When they do, the two are indistinguishable."
     },
-    "claw_shield": {
-        title: "Claw Shield",
-        description: "Provides a +2d bonus to Avoidance."
+    "mindrot": {
+        title: "Mindrot",
+        description: "The target’s total Mana is lowered by the amount rolled, and he suffers a penalty to all Acuity, Intellect, and Verve based skills & saves. This effect recurs every week and each time the subject would have acquired it until the creature has no Mana remaining, at which point he dies and his spirit becomes a specter. TN 5 to purify."
     },
-    "deadly_sting": {
-        title: "Deadly Sting",
-        description: "Add one Crit result to specified sting attacks."
-    },
-    "web_blast": {
-        title: "Web Blast",
-        description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
-    },
-    "enthral": {
-        title: "Enthral",
-        description: "The target creature must pass a Verve confrontation or become a thrall, obeying its master until the master dies."
+    "mortal_gaze": {
+        title: "Mortal Gaze",
+        description: "The target is entitled to an Acuity save to perceive the threat and break eye contact. If they fail, they must pass a Verve confrontation or die."
     },
     "obscure_self": {
         title: "Obscure Self",
         description: "All who look upon you must pass a TN Acuity save when they turn away or lose all memory of you."
     },
+    "plague": {
+        title: "Plague",
+        description: "The target suffers a 3d penalty to all Skills Checks and saves of a single Aspect randomly determined. TN 3 to purify."
+    },
+    "quarterstaff_affinity": {
+        title: "Quarterstaff Affinity",
+        description: "You gain +1d on attacks with Quarterstaffs."
+    },
+    "quick_acting_vitality_poison": {
+        title: "Quick Acting Vitality Poison",
+        description: "A potent and rapid poison that targets Vitality and requires a Health save to resist."
+    },
     "ravage_mind": {
         title: "Ravage Mind",
         description: "As a Word, the creature can attack its target's Mana directly."
     },
+    "regenerate": {
+        title: "Regenerate",
+        description: "The creature regenerates its Vitality each pulse unless that damage was caused by acid or fire."
+    },
+    "rend": {
+        title: "Rend",
+        description: "If the creature is in control of the grapple, it can use its rend attack. The defender loses the defense dice granted by their Dexterity and shield, and the grapple is ended."
+    },
+    "rooted": {
+        title: "Rooted",
+        description: "The creature cannot move. It cannot avoid, and any pace it has only dictates how quickly it can move its extremities."
+    },
+    "rot": {
+        title: "Rot",
+        description: "The target’s total Vitality is lowered by the amount rolled, and he suffers a penalty to all Dexterity, Health, and Strength based skills & saves. This effect recurs every week until the creature has no vitality remaining, at which point he dies and becomes a zombie. TN 5 to purify."
+    },
     "share_senses": {
         title: "Share Senses",
-        description: "The creature can see, hear, feel, taste, and smell what its thrall is experiencing at will."
+        description: "The creature can see, hear, feel, taste, and smell what his thrall is experiencing at will."
+    },
+    "soporific_touch": {
+        title: "Soporific Touch",
+        description: "The target must pass a Verve confrontation or fall asleep."
+    },
+    "squishy": {
+        title: "Squishy",
+        description: "The creature has only one Vitality."
+    },
+    "susceptibility": {
+        title: "Susceptibility",
+        description: "The damage type or weapon group indicated ignores the creature’s resistances and immunities."
+    },
+    "thunder_touch": {
+        title: "Thunder Touch",
+        description: "The creature's natural critical attacks inflict Daze."
+    },
+    "transcend": {
+        title: "Transcend",
+        description: "As a 72 Mana rite, the doppelgänger becomes manifest, taking on the exact features of its victim (a long and grueling process). It then must consume its victim to commandeer its mind."
+    },
+    "undead_bite": {
+        title: "Undead Bite",
+        description: "The target must pass a Health save or acquire Rot."
+    },
+    "undying": {
+        title: "Undying",
+        description: "Undying do not die from old age: they must be killed."
+    },
+    "unhinging_jaw": {
+        title: "Unhinging Jaw",
+        description: "The creature possesses the ability to unhinge its jaw, much like a snake does, allowing it to fit its maw about a victim's head and crush its skull."
     },
     "unspeaking": {
         title: "Unspeaking",
         description: "The creature can cast spells without speaking."
     },
-    "light_immunity": {
-        title: "Light Immunity",
-        description: "The creature suffers no damage or ill effects from light attacks."
+    "vampiric_bite": {
+        title: "Vampiric Bite",
+        description: "If bitten by a vampire, and in turn drink of that vampire’s blood, the target must pass a Health save, TN 6, or die and become a vampire themself."
     },
-    "thunder_immunity": {
-        title: "Thunder Immunity",
-        description: "The creature suffers no damage or ill effects from thunder attacks."
+    "venom": {
+        title: "Venom",
+        description: "Applies a toxic venom upon a successful strike that requires a Health save to resist or suffer its adverse effects (such as Pain, Nausea, or Paralysis)."
     },
-    "lightning_immunity": {
-        title: "Lightning Immunity",
-        description: "The creature suffers no damage or ill effects from lightning attacks."
+    "vibrotactile_perception": {
+        title: "Vibrotactile Perception",
+        description: "The creature can detect the exact location of movement within Acuity hexes of its body."
     },
-    "fire_resistance": {
-        title: "Fire Resistance",
-        description: "The creature suffers ½ damage from fire attacks."
+    "weapon_affinity_derro_brutal": {
+        title: "Brutal Weapons Affinity",
+        description: "You gain +1d on attacks with Brutal weapons."
     },
-    "frost_resistance": {
-        title: "Frost Resistance",
-        description: "The creature suffers ½ damage from frost attacks."
-    },
-    "thunder_resistance": {
-        title: "Thunder Resistance",
-        description: "The creature suffers ½ damage from thunder attacks."
-    },
-    "lightning_resistance": {
-        title: "Lightning Resistance",
-        description: "The creature suffers ½ damage from lightning attacks."
-    },
-     "unhinging_jaw": {
-        title: "Unhinging Jaw",
-        description: "The creature possesses the ability to unhinge its jaw, much like a snake does, allowing it to fit its maw about a victim's head and crush its skull."
-    },
-    "quick_acting_vitality_poison": {
-        title: "Quick Acting Vitality Poison",
-        description: "A potent and rapid poison that targets Vitality upon a successful strike."
-    },
-    "silver_aversion": {
-        title: "Silver Aversion",
-        description: "The creature's natural Avoidance is reduced by half against silver weapons."
-    },
-    "battle_magic_resistance": {
-        title: "Battle Magic Resistance",
-        description: "The creature suffers ½ damage from Battle Magic."
-    },
-    "arcane_resistance": {
-        title: "Arcane Resistance",
-        description: "The creature suffers ½ damage from Magic."
-    },
-    "physical_resistance": {
-        title: "Physical Resistance",
-        description: "The creature suffers ½ damage from physical damage."
-    },
-    "summoning_immunity": {
-        title: "Summoning Immunity",
-        description: "The creature suffers no damage or ill effects from summoning magic."
-    },
-    "umbral_immunity": {
-        title: "Umbral Immunity",
-        description: "The creature suffers no damage or ill effects from umbral attacks."
-    },
-    "darkness_immunity": {
-        title: "Darkness Immunity",
-        description: "The creature suffers no damage or ill effects from darkness attacks."
+    "web_blast": {
+        title: "Web Blast",
+        description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
     },
   // ═══════════════════════════════════════════════════════════════════════
   // SKILLS & ABILITIES
@@ -10808,7 +10964,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Doppelgänger, Transcendent": { size: "B", pace: 8,  dex: 0,  hel: 5,  str: 5,  act: 0,  int: 0,  ver: 0,  hap: 0 },
         "Dryad": { size: "B", pace: 8,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
         "Ent": { size: "C", pace: 11, dex: -2, hel: 17, str: 17, act: 1,  int: 1,  ver: 1,  hap: 0 },
-        "Faeries": { size: "A", pace: 22, dex: 3,  hel: -2, str: -2, act: 7,  int: 7,  ver: 7,  hap: 0 },
+        "Fairy": { size: "A", pace: 22, dex: 3,  hel: -2, str: -2, act: 7,  int: 7,  ver: 7,  hap: 0 },
         "Fishfolk": { size: "B", pace: 8,  dex: 1,  hel: -1, str: -1, act: 1,  int: -1, ver: -1, hap: 0 },
         "Giant, Fire": { size: "D", pace: 8,  dex: 1,  hel: 13, str: 7,  act: 1,  int: 0,  ver: 1,  hap: 0 },
         "Giant, Frost": { size: "D", pace: 8,  dex: 1,  hel: 7,  str: 7,  act: 3,  int: 0,  ver: 1,  hap: 0 },
@@ -14660,54 +14816,54 @@ window.racialSkillsMap = {
     "Half-elf":   ["starlight_vision", "half_human", "weapon_affinity_halfelf_shrewd_arcbow"],
     "Half-orc":   ["sinuous_athlete", "starlight_vision", "half_human", "weapon_affinity_halforc_twohanded_brutal_shrewd"],
     "Hanyo (Earth)":  ["earthray_vision", "hardy"], 
-    "Hanyo (Fire)":   ["fire_resistance"], 
+    "Hanyo (Fire)":   ["creature_fire_resistance"], 
     "Hanyo (Shadow)": ["darkvision", "enshadowed"], 
-    "Hanyo (Water)":  ["lightning_resistance"], 
-    "Hanyo (Wind)":   ["frost_resistance"], 
+    "Hanyo (Water)":  ["creature_lightning_resistance"], 
+    "Hanyo (Wind)":   ["creature_frost_resistance"], 
     "Haubid":     ["light_footed", "small", "weapon_affinity_haubid_onehanded_common"],
     "Nuss-janni": ["half_jann", "half_human"],
     "Vulpivir":   ["nimble_athlete", "starlight_vision", "keen_sniffer",
                    "light_footed", "small", "weapon_affinity_vulpivir_crossbow"],
-    "Anpu": ["curse_disease_immunity", "divine_salvation", "silver_aversion", "starlight_vision"],
+    "Anpu": ["creature_curse_disease_immunity", "divine_salvation", "creature_silver_aversion", "starlight_vision"],
     "Antaeon":                    ["starlight_vision"],
-    "Brownies":                   ["curse_disease_immunity", "starlight_vision"],
+    "Brownies":                   ["creature_curse_disease_immunity", "starlight_vision"],
     "Canivir, Wild":              ["keen_sniffer"],
-    "Centaur":                    ["curse_disease_immunity", "starlight_vision"],
+    "Centaur":                    ["creature_curse_disease_immunity", "starlight_vision"],
     "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
     "Doppelgänger, Transcendent": ["unhinging_jaw"],
-    "Dryad":                      ["curse_disease_immunity", "meld", "life_bond"],
-    "Ent":                        ["curse_disease_immunity", "light_immunity", "thunder_immunity", "lightning_immunity", "fire_vulnerability"],
-    "Faeries":                    ["twilight_vision", "undying", "curse_disease_immunity", "arcane_immunity"],
-    "Fishfolk":                   ["frost_vulnerability"],
-    "Giant, Fire":                ["great_bow_affinity", "fire_resistance"],
-    "Giant, Frost":               ["battleaxe_affinity", "frost_resistance"],
+    "Dryad":                      ["creature_curse_disease_immunity", "meld", "life_bond"],
+    "Ent":                        ["creature_curse_disease_immunity", "creature_light_immunity", "creature_thunder_immunity", "creature_lightning_immunity", "creature_fire_vulnerability"],
+    "Fairy":                    ["twilight_vision", "undying", "creature_curse_disease_immunity", "creature_magic_immunity"],
+    "Fishfolk":                   ["creature_frost_vulnerability"],
+    "Giant, Fire":                ["great_bow_affinity", "creature_fire_resistance"],
+    "Giant, Frost":               ["battleaxe_affinity", "creature_frost_resistance"],
     "Giant, Hill":                ["quarterstaff_affinity"],
-    "Giant, Island":              ["atgeir_affinity", "thunder_resistance", "lightning_resistance"],
+    "Giant, Island":              ["atgeir_affinity", "creature_thunder_resistance", "creature_lightning_resistance"],
     "Gnole":                      ["starlight_vision"],
     "Goblin":                     ["darkvision"],
     "Goritaur":                   ["rend", "starlight_vision"],
     "Hobgoblin":                  ["darkvision"],
-    "Kathonid":                   ["curse_disease_immunity", "enthral", "obscure_self", "ravage_mind", "share_senses", "telepathy", "unspeaking"],
+    "Kathonid":                   ["creature_curse_disease_immunity", "enthral", "obscure_self", "ravage_mind", "share_senses", "telepathy", "unspeaking"],
     "Kobold":                     ["darkvision"],
-    "Lizardfolk":                 ["quick_acting_vitality_poison"],
+    "Lizardfolk":                 ["poison_craft"],
     "Minotaur":                   [],
-    "Naga":                       ["constrict", "deadly_bite", "frost_vulnerability"],
-    "Naiad":                      ["curse_disease_immunity", "life_bond", "meld"],
+    "Naga":                       ["constrict", "deadly_bite", "creature_frost_vulnerability"],
+    "Naiad":                      ["creature_curse_disease_immunity", "life_bond", "meld"],
     "Ogre":                       ["darkvision", "rend"],
     "Oldra":                      ["darkvision"],
-    "Orc":                        ["curse_disease_immunity", "starlight_vision"],
-    "Pixie":                      ["curse_disease_immunity", "arcane_immunity", "starlight_vision", "undying"],
+    "Orc":                        ["creature_curse_disease_immunity", "starlight_vision"],
+    "Pixie":                      ["creature_curse_disease_immunity", "creature_magic_immunity", "starlight_vision", "undying"],
     "Scorpionfolk":               ["claw_shield", "deadly_sting"],
-    "Troll":                      ["darkvision", "fire_vulnerability", "firststrike", "rend", "regenerate"],
-    "Troll, Frost":               ["darkvision", "fire_vulnerability", "firststrike", "frost_resistance", "rend", "regenerate"],
+    "Troll":                      ["darkvision", "creature_fire_vulnerability", "rend", "regenerate"],
+    "Troll, Frost":               ["darkvision", "creature_fire_vulnerability", "creature_frost_resistance", "rend", "regenerate"],
     "Weftlings":                  ["web_blast"],
-     "Kappa":                            ["curse_disease_immunity", "divine_salvation", "quick_acting_vitality_poison", "silver_aversion"],
-    "Pneumon, Earth":                   ["battle_magic_resistance", "curse_disease_immunity", "divine_salvation", "immortal"],
-    "Pneumon, Fire":                    ["curse_disease_immunity", "fire_immunity", "divine_salvation", "frost_vulnerability", "immortal"],
-    "Pneumon, Shadow":                  ["battle_magic_resistance", "curse_disease_immunity", "darkness_immunity", "umbral_immunity", "divine_salvation", "immortal", "light_vulnerability"],
-    "Pneumon, Storm":                   ["curse_disease_immunity", "lightning_immunity", "thunder_immunity", "divine_salvation", "immortal"],
-    "Pneumon, Wind":                    ["curse_disease_immunity", "frost_immunity", "divine_salvation", "immortal", "lightning_resistance", "thunder_resistance"],
-    "Guardian of the Crystal Sphere":  ["curse_disease_immunity", "summoning_immunity", "divine_salvation", "arcane_resistance", "physical_resistance"]
+     "Kappa":                            ["creature_curse_disease_immunity", "divine_salvation", "poison_craft", "creature_silver_aversion"],
+    "Pneumon, Earth":                   ["creature_battle_magic_resistance", "creature_curse_disease_immunity", "divine_salvation", "immortal"],
+    "Pneumon, Fire":                    ["creature_curse_disease_immunity", "creature_fire_immunity", "divine_salvation", "creature_frost_vulnerability", "immortal"],
+    "Pneumon, Shadow":                  ["creature_battle_magic_resistance", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbral_immunity", "divine_salvation", "immortal", "creature_light_vulnerability"],
+    "Pneumon, Storm":                   ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "divine_salvation", "immortal"],
+    "Pneumon, Wind":                    ["creature_curse_disease_immunity", "creature_frost_immunity", "divine_salvation", "immortal", "creature_lightning_resistance", "creature_thunder_resistance"],
+    "Guardian of the Crystal Sphere":  ["creature_curse_disease_immunity", "summoning_immunity", "divine_salvation", "creature_magic_resistance", "creature_physical_resistance"]
 };
 
 window.renderSpecialAbilitiesCard = function () {
@@ -17917,8 +18073,8 @@ function updatePnpWriteInCards() {
         "light_immunity": "Light Immunity",
         "thunder_immunity": "Thunder Immunity",
         "lightning_immunity": "Lightning Immunity",
-        "arcane_immunity": "Arcane Immunity",
-        "arcane_resistance": "Arcane Resistance",
+        "magic_immunity": "Magic Immunity",
+        "magic_resistance": "Magic Resistance",
         "physical_resistance": "Physical Resistance",
         "regenerate": "Regenerate",
         "fire_resistance": "Fire Resistance",
@@ -22032,96 +22188,671 @@ function updateMilieuOptions() {
 
 // Master Data Registry for the Creature Compendium
 const compendiumRegistry = {
-
     "Aberration": [
-  { name: "Living Air", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Flame", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Fog", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Frost", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Light", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Lightning", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Thunder", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Shadow", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Stone", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Living Water", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
-],
+        { 
+            name: "Living Air", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Asphyxiate: 1", "Explode: 6d+7"], 
+            abilities: ["Curse & Disease Immunity", "Physical Immunity", "Inundate Being: Skill Check [Strength]", "Invisibility"] 
+        },
+        { 
+            name: "Living Flame", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7; Daze & Pain", "Fire: 6d+7; Pain"], 
+            abilities: ["Battle Magic: Fire", "Curse & Disease Immunity", "Fire Immunity", "Physical Immunity", "Explode: TN Rank", "Fire Touch", "Frost Vulnerability"] 
+        },
+        { 
+            name: "Living Fog", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Claw: 6d+7", "Explode: 6d+7"], 
+            abilities: ["Curse & Disease Immunity", "Physical Immunity", "Explode: TN Rank", "Fire Vulnerability", "Frost Vulnerability"] 
+        },
+        { 
+            name: "Living Frost", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7; Daze & Numb", "Frost: 6d+7; Numb"], 
+            abilities: ["Battle Magic: Frost", "Curse & Disease Immunity", "Frost Immunity", "Physical Immunity", "Explode: TN Rank", "Fire Vulnerability", "Frost Touch"] 
+        },
+        { 
+            name: "Living Light", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7; Blind & Daze", "Light: 6d+7; Blind"], 
+            abilities: ["Battle Magic: Light", "Curse & Disease Immunity", "Light Immunity", "Physical Immunity", "Explode: TN Rank", "Darkness Vulnerability"] 
+        },
+        { 
+            name: "Living Lightning", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7; Daze & Weaken", "Lightning: 6d+7; Weaken"], 
+            abilities: ["Battle Magic: Lightning", "Curse & Disease Immunity", "Lightning Immunity", "Physical Immunity", "Explode: TN Rank", "Lightning Touch", "Thunder Resistance"] 
+        },
+        { 
+            name: "Living Thunder", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7; Daze", "Thunder: 6d+7; Daze"], 
+            abilities: ["Battle Magic: Thunder", "Curse & Disease Immunity", "Physical Immunity", "Thunder Immunity", "Explode: TN Rank", "Invisibility", "Lightning Resistance", "Thunder Touch"] 
+        },
+        { 
+            name: "Living Shadow", 
+            size: "B", 
+            pace: "8", 
+            vit: 55, 
+            mana: 29, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, 
+            attacks: ["Explode: 6d+7", "Blade: 6d+7+Rank"], 
+            abilities: ["Curse & Disease Immunity", "Darkness Immunity", "Physical Immunity", "Umbral Immunity", "Explode: TN Rank", "Light Vulnerability", "Umbral Blade"] 
+        },
+        { 
+            name: "Living Stone", 
+            size: "B", 
+            pace: "8", 
+            vit: 65, 
+            mana: 25, 
+            avoid: "5d+18; cc4", 
+            aspects: { dex: 5, hel: 13, str: 13, act: 3, ver: 8 }, 
+            attacks: ["Explode: 6d+2; Daze", "Slam: 6d+7; Daze"], 
+            abilities: ["Curse & Disease Immunity", "Physical Immunity", "Explode: TN Rank", "Stone Suit"] 
+        },
+        { 
+            name: "Living Water", 
+            size: "B", 
+            pace: "8", 
+            vit: 65, 
+            mana: 25, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 13, str: 13, act: 3, ver: 8 }, 
+            attacks: ["Asphyxiate: 1", "Explode: 6d+2; Daze"], 
+            abilities: ["Curse & Disease Immunity", "Physical Immunity", "Explode: TN Rank", "Inundate Being: Skill Check [Strength]"] 
+        }
+    ],
     "Construct": [
-  { name: "Golem", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Golem, Clay", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Golem, Iron", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Golem, Stone", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
-],
+        { 
+            name: "Golem, Clay", 
+            size: "C", 
+            pace: "6", 
+            vit: 28, 
+            mana: 15, 
+            avoid: "5d+8; cc4", 
+            aspects: { dex: 5, str: 14, act: 5 }, 
+            attacks: ["Slam: 6d+8; Bash"], 
+            abilities: ["Curse Immunity", "Critical Effect Immunity", "Disease Immunity", "Thrust Immunity", "Earthen Suit", "Fire Vulnerability", "Frost Vulnerability"] 
+        },
+        { 
+            name: "Golem, Iron", 
+            size: "D", 
+            pace: "6", 
+            vit: 52, 
+            mana: 15, 
+            avoid: "5d+24; cc4", 
+            aspects: { dex: 5, str: 26, act: 5 }, 
+            attacks: ["Fire: 6d; Pain", "Morningstar [Giant]: 6d+23; Bash & Thrust; cc5", "Stomp [Giant]: 6d+20; Bash & Crush; cc4"], 
+            abilities: ["Battle Magic Immunity", "Curse Immunity", "Critical Effect Immunity", "Disease Immunity", "Non-sundering Weapon Immunity", "Fire Breath", "Iron Suit [Giant]"] 
+        },
+        { 
+            name: "Golem, Stone", 
+            size: "D", 
+            pace: "6", 
+            vit: 52, 
+            mana: 15, 
+            avoid: "5d+18; cc4", 
+            aspects: { dex: 5, str: 26, act: 5 }, 
+            attacks: ["Slam [Giant]: 6d+21; Bash; cc4"], 
+            abilities: ["Battle Magic Immunity", "Curse Immunity", "Critical Effect Immunity", "Disease Immunity", "Non-sundering Weapon Immunity", "Stone Suit [Giant]"] 
+        }
+    ],
     "Animal": [
-  { name: "Bear", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Bear, Sun", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Beetle, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Blood Hornet", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Boar", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Camel", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Crab, Lightning", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Crocodile", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Dog", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Eagle, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Eagle, Screeching", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Goat, War", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Gorilla", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Granas", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Gryphon", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Hawk, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Hawk, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Hellhound", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Horse", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Hyena", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Hyena, Six-paw", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Jaguar", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Keck", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Keck, Bloodbeak", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Keck, Terror Bird", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Lion", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Lion, Fire", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Lion, Mountain", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Pegasus", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Phoenix", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Python, Great", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Rat, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Raven, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Raven, Wise", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Shadowcat", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Sheep", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Snake, Constrictor", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Snake, Venomous", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Snow Leopard", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Spider, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Tarantula, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Tiger", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Unicorn", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Urox", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Wasps, Giant", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Wolf", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] },
-  { name: "Wolf, Frost", size: "B", pace: "8", vit: 55, mana: 29, avoid: "5d", aspects: { dex: 5, hel: 13, str: 8, act: 3, ver: 13 }, attacks: ["Asphyxiate: 1", "Explode: 6d+7"], abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being", "Invisibility"] }
-],
-    "Beast": [
-        { name: "Antlion", size: "3B", pace: "8 burrow; 7 land", vit: 31, mana: 19, avoid: "2d", aspects: { dex: 2, hel: 5, str: 8, act: 3, int: 1, ver: 5 }, attacks: ["Bite: 6d+2; Crush", "Acid: 5d; Sunder", "Erupt: 6d+2"], abilities: ["Acid Spit", "Vibrotactile Perception"] },
-        { name: "Badgerknight", size: "2C", pace: "8 burrow; 26 land", vit: 65, mana: 11, avoid: "2d+12; cc4", aspects: { dex: 2, hel: 13, str: 13, act: 3, int: 1, ver: 1 }, attacks: ["Bite: 6d+7; Crush", "Claw: 6d+7; Slash", "Pounce: 6d+7; Crush", "Erupt: 6d+7"], abilities: ["Exoskeletal Suit", "Vibrotactile Perception"] },
-        { name: "Basilisk", size: "3A", pace: "7", vit: 1, mana: 1, avoid: "5d", aspects: { dex: 5, hel: 1, str: 1, act: 5, int: 1, ver: 5 }, attacks: ["Bite: 5d; Envenom", "Breath: 5d; Envenom", "Gaze: 5d"], abilities: ["Corrupting Breath", "Deadly", "Mortal Gaze", "Squishy & Inept", "Venom: TN 3 Health save"] },
-        { name: "Drake, Black", size: "2C", pace: "50 fly; 26 land; 26 swim", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Acid: 6d+10; Sunder"], abilities: ["Acid Breath", "Acid, Curse, & Disease Immunity", "Drakehide Suit"] },
-        { name: "Drake, Blue", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Lightning: 6d+4; Weaken"], abilities: ["Drakehide Suit", "Lightning Arc", "Curse, Disease, Lightning, & Thunder Immunity"] },
-        { name: "Drake, Green", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Petrify: 6d+10"], abilities: ["Curse & Disease Immunity", "Drakehide Suit", "Petrifying Gaze"] },
-        { name: "Drake, Red", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 10, ver: 16 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Fire: 6d+10; Pain"], abilities: ["Curse, Disease, & Fire Immunity", "Drakehide Suit", "Fire Jet", "Frost Vulnerability"] },
-        { name: "Drake, White", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 50, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 16, act: 10, int: 10, ver: 10 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Frost: 6d+4; Numb"], abilities: ["Curse, Disease, & Frost Immunity", "Drakehide Suit", "Fire Vulnerability", "Ice Jet"] },
-        { name: "Drake, Yellow", size: "2C", pace: "50 fly; 26 land; 13 burrow", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Light: 6d+10; Blind"], abilities: ["Beam of Light", "Curse, Disease, & Light Immunity", "Darkness & Umbra Vulnerability", "Drakehide Suit"] },
-        { name: "Gryphon", size: "2B", pace: "37 fly & land", vit: 30, mana: 28, avoid: "6d", aspects: { dex: 6, hel: 6, str: 6, act: 8, int: 2, ver: 2 }, attacks: ["Bite: 6d; Crush", "Rend: 6d; Slash", "Talon: 6d; Crush or Slash"], abilities: ["Rend"] },
-        { name: "Harpy", size: "B", pace: "37 fly; 8 land", vit: 31, mana: 40, avoid: "5d", aspects: { dex: 5, hel: 5, str: 8, act: 8, int: 8, ver: 8 }, attacks: ["Poison: 4d; Nausea", "Talon: 6d; Crush or Slash"], abilities: ["Guano Spray [rear facing]: TN 4 Health save"] },
-        { name: "Hydra", size: "2C", pace: "26", vit: "26 per head", mana: "12 per head", avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash", "Venom: 3d; Pain"], abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save"] },
-        { name: "Leviathan", size: "3D", pace: "50 swim", vit: 110, mana: 16, avoid: "3d+8; cc4", aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+8; Crush, cc3", "Slam [Giant]: 6d+18; Bash & Sunder, cc3"], abilities: ["Blubar Suit", "Devour"] },
-        { name: "Manticore", size: "2B", pace: "37", vit: 60, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Rend: 6d+6; Slash", "Sting: 6d+4; Envenom & Thrust"], abilities: ["Deadly Sting", "Rend", "Venom: TN 4 Health save"] },
-        { name: "Roc", size: "D", pace: "37", vit: 62, mana: 22, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+7; Crush, cc4", "Talon [Giant]: 6d+7; Crush, cc4"], abilities: ["Devour", "Feather Suit"] },
-        { name: "Wyrm, Cloud-", size: "16C", pace: "8 burrow; 8 land", vit: 98, mana: 98, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"], abilities: ["Poison Cloud: TN4 Health save", "Curse, Disease, & Poison Immunity", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Fire-", size: "16C", pace: "8 burrow; 26 land", vit: 92, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 22, act: 16, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"], abilities: ["Curse, Disease, & Fire Immunity", "Fire Corona", "Frost Vulnerability", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Frost-", size: "16C", pace: "8 burrow; 26 land", vit: 110, mana: 80, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 22, act: 16, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"], abilities: ["Curse, Disease, & Frost Immunity", "Fire Vulnerability", "Frost Corona", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Glow-", size: "16C", pace: "8 burrow; 26 land", vit: 80, mana: 110, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"], abilities: ["Curse, Disease, Lightning, & Thunder Immunity", "Lightning Cloud", "Wyrm Scale Suit"] },
-        { name: "Wyrm [Sarpa]", size: "16C", pace: "8 burrow; 26 land", vit: 98, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 }, attacks: ["Acid: 6d+16; Sunder", "Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc"], abilities: ["Curse, Disease, & Acid Immunity", "Acid Cloud", "Wyrm Scale Suit"] },
-        { name: "Wyvern", size: "2B", pace: "37 fly; 9 land", vit: 50, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Talon: 6d+16; Crush", "Venom: 5d; Pain"], abilities: ["Deadly Bite", "Dive (charge) Only", "Venom: TN 5 Health save"] }
+        { 
+            name: "Bear", 
+            size: "2B", 
+            pace: "26 land; 9 swim", 
+            vit: 40, 
+            mana: 17, 
+            avoid: "6d; cc2", 
+            aspects: { dex: 6, hel: 8, str: 8, act: 5, int: 2, ver: 1 }, 
+            attacks: ["Bite: 6d+1; Crush", "Claw: 6d+2; Bash & Slash", "Trample: 6d+6; Crush"], 
+            abilities: [] 
+        },
+        { 
+            name: "Bear, Sun", 
+            size: "2B", 
+            pace: "26", 
+            vit: 40, 
+            mana: 25, 
+            avoid: "6d; cc2", 
+            aspects: { dex: 3, hel: 8, str: 8, act: 5, int: 2, ver: 5 }, 
+            attacks: ["Bite: 6d+1; Crush", "Claw: 6d+2; Bash & Slash", "Fire: 5d; Pain", "Trample: 6d+6; Crush"], 
+            abilities: ["Frost Vulnerability", "Fire Corona", "Fire Immunity"] 
+        },
+        { 
+            name: "Beetle, Fire", 
+            size: "A", 
+            pace: "6 land; 3 burrow", 
+            vit: 16, 
+            mana: 13, 
+            avoid: "1d+8; cc4", 
+            aspects: { dex: 1, hel: 2, str: 5, act: 1, int: 1, ver: 5 }, 
+            attacks: ["Bite: 5d; Crush", "Fire: 5d; Pain"], 
+            abilities: ["Chitin Suit", "Frost Vulnerability", "Fire Immunity", "Fire Spray"] 
+        },
+        { 
+            name: "Blood Hornet", 
+            size: "A", 
+            pace: "37", 
+            vit: 1, 
+            mana: 1, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 1, str: 1, act: 1, int: 1, ver: 1 }, 
+            attacks: ["Bite: 5d; Crush", "Gorge: 2d; Weaken"], 
+            abilities: ["Squishy & Inept"] 
+        },
+        { 
+            name: "Boar", 
+            size: "B", 
+            pace: "18", 
+            vit: 25, 
+            mana: 11, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 5, str: 5, act: 3, int: 2, ver: 1 }, 
+            attacks: ["Gore: 5d; Thrust"], 
+            abilities: [] 
+        },
+        { 
+            name: "Camel", 
+            size: "2B", 
+            pace: "22", 
+            vit: 50, 
+            mana: 16, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 10, str: 10, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+4; Crush", "Kick: 6d+4; Bash"], 
+            abilities: [] 
+        },
+        { 
+            name: "Crab, Lightning", 
+            size: "A", 
+            pace: "7", 
+            vit: 13, 
+            mana: 7, 
+            avoid: "1d+8; cc3", 
+            aspects: { dex: 1, hel: 1, str: 5, act: 1, int: 1, ver: 2 }, 
+            attacks: ["Pinch: 5d; Crush", "Lightning: 2d; Weaken"], 
+            abilities: ["Static Discharge", "Chitin Suit", "Lightning Immunity"] 
+        },
+        { 
+            name: "Crocodile", 
+            size: "3B", 
+            pace: "15 swim; 6 land", 
+            vit: 40, 
+            mana: 8, 
+            avoid: "3d", 
+            aspects: { dex: 3, hel: 8, str: 8, act: 2, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d+2; Crush", "Death Roll: 6d+2; Bash"], 
+            abilities: [] 
+        },
+        { 
+            name: "Dog", 
+            size: "2A", 
+            pace: "22", 
+            vit: 19, 
+            mana: 16, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 3, str: 5, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Bite: 5d; Crush"], 
+            abilities: ["Keen Sniffer"] 
+        },
+        { 
+            name: "Eagle, Giant", 
+            size: "C", 
+            pace: "37", 
+            vit: 32, 
+            mana: 26, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 4, str: 10, act: 6, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d+4; Crush", "Talon: 6d+2; Slash or Crush"], 
+            abilities: ["Devour"] 
+        },
+        { 
+            name: "Eagle, Screeching", 
+            size: "A", 
+            pace: "37", 
+            vit: 10, 
+            mana: 28, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 2, str: 2, act: 6, int: 2, ver: 5 }, 
+            attacks: ["Bite: 2d", "Talon: 2d", "Thunder: 5d; Daze"], 
+            abilities: ["Thunder Immunity", "Screech [Breath]"] 
+        },
+        { 
+            name: "Goat, War", 
+            size: "2B", 
+            pace: "21", 
+            vit: 30, 
+            mana: 16, 
+            avoid: "6d+12; cc4", 
+            aspects: { dex: 10, hel: 6, str: 6, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Gore: 6d+2; Bash"], 
+            abilities: ["Charge (+12d)"] 
+        },
+        { 
+            name: "Gorilla", 
+            size: "B", 
+            pace: "8", 
+            vit: 42, 
+            mana: 20, 
+            avoid: "4d+4; cc4", 
+            aspects: { dex: 4, hel: 8, str: 13, act: 4, int: 2, ver: 4 }, 
+            attacks: ["Bite: 6d+7; Crush", "Rend: 6d+7; Maim", "Slam: 6d+7; Bash"], 
+            abilities: ["Hide Suit", "Rend"] 
+        },
+        { 
+            name: "Granas", 
+            size: "2C", 
+            pace: "18", 
+            vit: 80, 
+            mana: 16, 
+            avoid: "3d+8; cc4", 
+            aspects: { dex: 3, hel: 16, str: 16, act: 4, int: 4, ver: 2 }, 
+            attacks: ["Gore: 6d+2; Thrust", "Kick: 6d+10; Bash", "Trample: 6d+18; Bash & Crush"], 
+            abilities: ["Hide Suit"] 
+        },
+        { 
+            name: "Gryphon", 
+            size: "2B", 
+            pace: "37 fly & land", 
+            vit: 30, 
+            mana: 28, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 6, str: 6, act: 8, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d; Crush", "Rend: 6d; Slash", "Talon: 6d; Crush or Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Hawk, Fire", 
+            size: "A", 
+            pace: "37", 
+            vit: 10, 
+            mana: 30, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 2, str: 2, act: 6, int: 2, ver: 6 }, 
+            attacks: ["Talon: 4d; Crush", "Fire: 6d; Pain"], 
+            abilities: ["Fire Corona"] 
+        },
+        { 
+            name: "Hawk, Giant", 
+            size: "C", 
+            pace: "37", 
+            vit: 24, 
+            mana: 26, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 4, str: 6, act: 6, int: 4, ver: 4 }, 
+            attacks: ["Bite: 6d; Crush", "Talon: 6d; Crush or Slash"], 
+            abilities: [] 
+        },
+        { 
+            name: "Hellhound", 
+            size: "2A", 
+            pace: "22", 
+            vit: 30, 
+            mana: 30, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 6, str: 6, act: 6, int: 2, ver: 6 }, 
+            attacks: ["Bite: 6d; Crush", "Fire: 6d; Pain"], 
+            abilities: ["Fire Spray"] 
+        },
+        { 
+            name: "Horse", 
+            size: "2B", 
+            pace: "30", 
+            vit: 50, 
+            mana: 16, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 10, str: 10, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+4; Crush", "Kick: 6d+4; Bash", "Trample: 6d+6; Bash & Crush"], 
+            abilities: ["Charge (+12d)"] 
+        },
+        { 
+            name: "Hyena", 
+            size: "2A", 
+            pace: "22", 
+            vit: 24, 
+            mana: 22, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 4, str: 6, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d"], 
+            abilities: [] 
+        },
+        { 
+            name: "Hyena, Six-paw", 
+            size: "2A", 
+            pace: "22", 
+            vit: 34, 
+            mana: 28, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 6, str: 8, act: 6, int: 2, ver: 5 }, 
+            attacks: ["Bite: 6d+2; Crush", "Claw: 6d+2; Slash", "Acid: 5d; Sunder"], 
+            abilities: ["Acid Spray"] 
+        },
+        { 
+            name: "Jaguar", 
+            size: "2B", 
+            pace: "37", 
+            vit: 40, 
+            mana: 28, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 8, str: 8, act: 8, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+2; Crush", "Claw: 6d+2; Crush, Slash, or Bash", "Rend: 6d+2; Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Keck", 
+            size: "B", 
+            pace: "32", 
+            vit: 25, 
+            mana: 17, 
+            avoid: "6d+1", 
+            aspects: { dex: 7, hel: 5, str: 5, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Bite: 5d; Crush", "Spur: 6d+1; Thrust"], 
+            abilities: [] 
+        },
+        { 
+            name: "Keck, Bloodbeak", 
+            size: "A", 
+            pace: "32", 
+            vit: 15, 
+            mana: 8, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 3, str: 3, act: 2, int: 1, ver: 1 }, 
+            attacks: ["Bite: 5d; Crush", "Spur: 6d+2; Thrust"], 
+            abilities: [] 
+        },
+        { 
+            name: "Keck, Terror Bird", 
+            size: "C", 
+            pace: "26", 
+            vit: 50, 
+            mana: 17, 
+            avoid: "6d+1", 
+            aspects: { dex: 7, hel: 10, str: 10, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d+2; Crush", "Trample: 6d+6; Crush"], 
+            abilities: [] 
+        },
+        { 
+            name: "Lion", 
+            size: "2B", 
+            pace: "37", 
+            vit: 60, 
+            mana: 22, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+5; Crush", "Claw: 6d+5; Crush, Slash, or Bash", "Rend: 6d+6; Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Lion, Fire", 
+            size: "2B", 
+            pace: "37", 
+            vit: 60, 
+            mana: 22, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+5; Crush", "Claw: 6d+5; Bash, Crush, or Slash", "Fire: 5d; Pain", "Rend: 6d+6; Slash"], 
+            abilities: ["Fire Corona", "Fire Immunity", "Frost Vulnerability", "Rend"] 
+        },
+        { 
+            name: "Lion, Mountain", 
+            size: "2B", 
+            pace: "37", 
+            vit: 35, 
+            mana: 25, 
+            avoid: "6d+1", 
+            aspects: { dex: 7, hel: 7, str: 7, act: 7, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+1; Crush", "Claw: 6d+1; Crush, Slash, or Bash", "Rend: 6d+1; Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Pegasus", 
+            size: "2B", 
+            pace: "30 land; 30 fly", 
+            vit: 50, 
+            mana: 16, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 10, str: 10, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+4; Crush", "Kick: 6d+4; Bash", "Trample: 6d+6; Bash & Crush"], 
+            abilities: ["Charge (+12d)"] 
+        },
+        { 
+            name: "Phoenix", 
+            size: "A", 
+            pace: "37", 
+            vit: 10, 
+            mana: 30, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 2, str: 2, act: 6, int: 4, ver: 6 }, 
+            attacks: ["Heal: 6d", "Fire: 6d; Pain", "Talons: 3d; Crush or Slash"], 
+            abilities: ["Fire Corona", "Fire Spray", "Heal Wounds", "Immortal"] 
+        },
+        { 
+            name: "Python, Great", 
+            size: "9B", 
+            pace: "7", 
+            vit: 38, 
+            mana: 17, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 6, str: 10, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d+4; Crush", "Constrict: 6d+14"], 
+            abilities: ["Constrict", "Devour"] 
+        },
+        { 
+            name: "Rat, Giant", 
+            size: "A", 
+            pace: "10", 
+            vit: 1, 
+            mana: 1, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 2, str: 2, act: 2, int: 2, ver: 2 }, 
+            attacks: ["Bite: 4d"], 
+            abilities: ["Elusive", "Filthy: TN 2 Health save", "Squishy & Inept"] 
+        },
+        { 
+            name: "Raven, Giant", 
+            size: "C", 
+            pace: "37", 
+            vit: 24, 
+            mana: 26, 
+            avoid: "6d+6", 
+            aspects: { dex: 12, hel: 4, str: 6, act: 6, int: 5, ver: 4 }, 
+            attacks: ["Bite: 6d+3; Slash", "Talon: 6d+3; Crush"], 
+            abilities: ["Devour"] 
+        },
+        { 
+            name: "Raven, Wise", 
+            size: "A", 
+            pace: "37", 
+            vit: 1, 
+            mana: 42, 
+            avoid: "4d", 
+            aspects: { dex: 4, hel: 2, str: 2, act: 10, int: 6, ver: 6 }, 
+            attacks: ["Bite: 3d; Slash", "Cast: 6d", "Talon: 3d; Crush"], 
+            abilities: ["Elusive", "Squishy"] 
+        },
+        { 
+            name: "Shadowcat", 
+            size: "2B", 
+            pace: "26", 
+            vit: 50, 
+            mana: 22, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Crush, Slash, or Bash", "Rend: 6d+4; Slash"], 
+            abilities: ["Darkness & Umbra Immunity", "Mantle of Shadow", "Light Vulnerability", "Rend"] 
+        },
+        { 
+            name: "Sheep", 
+            size: "2A", 
+            pace: "21", 
+            vit: 15, 
+            mana: 16, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 3, str: 3, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Ram: 3d; Bash"], 
+            abilities: [] 
+        },
+        { 
+            name: "Snake, Constrictor", 
+            size: "3A", 
+            pace: "7", 
+            vit: 19, 
+            mana: 17, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 3, str: 5, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d+4; Crush", "Constrict: 5d"], 
+            abilities: ["Constrict", "Devour"] 
+        },
+        { 
+            name: "Snake, Venomous", 
+            size: "3A", 
+            pace: "7", 
+            vit: 1, 
+            mana: 1, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 1, str: 1, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d; Envenom", "Venom: 2d; Pain"], 
+            abilities: ["Deadly Bite", "Squishy and Inept", "Venom: TN 2 Health save"] 
+        },
+        { 
+            name: "Snow Leopard", 
+            size: "2A", 
+            pace: "37", 
+            vit: 30, 
+            mana: 22, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 6, str: 6, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d; Crush", "Claw: 6d; Crush, Slash, or Bash", "Rend: 6d; Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Spider, Giant", 
+            size: "C", 
+            pace: "8", 
+            vit: 30, 
+            mana: 28, 
+            avoid: "6d", 
+            aspects: { dex: 4, hel: 6, str: 6, act: 6, int: 2, ver: 5 }, 
+            attacks: ["Bite: 5d; Crush & Envenom", "Venom: 3d; Paralyze", "Web: 5d; Entangle"], 
+            abilities: ["Deadly Bite", "Venom: TN 3 Health save per ¼ phase", "Web Blast: TN 5 Escape or Strength save"] 
+        },
+        { 
+            name: "Tarantula, Giant", 
+            size: "C", 
+            pace: "22", 
+            vit: 30, 
+            mana: 28, 
+            avoid: "6d", 
+            aspects: { dex: 4, hel: 6, str: 6, act: 6, int: 2, ver: 5 }, 
+            attacks: ["Bite: 5d; Crush & Envenom", "Venom: 3d; Paralyze"], 
+            abilities: ["Deadly Bite", "Venom: TN 3 Health save per ¼ phase"] 
+        },
+        { 
+            name: "Tiger", 
+            size: "2B", 
+            pace: "37", 
+            vit: 70, 
+            mana: 22, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, hel: 14, str: 14, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+6; Crush", "Claw: 6d+6; Crush, Slash, or Bash", "Rend: 6d+8; Slash"], 
+            abilities: ["Rend"] 
+        },
+        { 
+            name: "Unicorn", 
+            size: "2B", 
+            pace: "30", 
+            vit: 50, 
+            mana: 30, 
+            avoid: "6d", 
+            aspects: { dex: 6, hel: 10, str: 10, act: 6, int: 2, ver: 6 }, 
+            attacks: ["Bite: 6d+4; Crush", "Gore: 6d; Thrust", "Kick: 6d+4; Bash", "Trample: 6d+6; Crush"], 
+            abilities: ["Curse, Disease, & Magic Immunity"] 
+        },
+        { 
+            name: "Urox", 
+            size: "2B", 
+            pace: "26", 
+            vit: 65, 
+            mana: 19, 
+            avoid: "6d+4; cc4", 
+            aspects: { dex: 6, hel: 13, str: 13, act: 5, int: 2, ver: 2 }, 
+            attacks: ["Gore: 6d+3; Thrust", "Kick: 6d+7; Bash", "Trample: 6d+6; Crush"], 
+            abilities: ["Hide Suit"] 
+        },
+        { 
+            name: "Wasps, Giant", 
+            size: "A", 
+            pace: "19", 
+            vit: 1, 
+            mana: 1, 
+            avoid: "6d; Elude", 
+            aspects: { dex: 6, hel: 1, str: 1, act: 5, int: 1, ver: 1 }, 
+            attacks: ["Sting: 6d; Envenom", "Venom: 2d; Pain"], 
+            abilities: ["Deadly Bite", "Elusive", "Squishy and Inept", "Venom: TN 2 Health save"] 
+        },
+        { 
+            name: "Wolf", 
+            size: "2A", 
+            pace: "22", 
+            vit: 50, 
+            mana: 24, 
+            avoid: "6d+4; Elude", 
+            aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 3, ver: 3 }, 
+            attacks: ["Bite: 6d+4; Crush or Slash"], 
+            abilities: ["Elusive"] 
+        },
+        { 
+            name: "Wolf, Frost", 
+            size: "2A", 
+            pace: "22", 
+            vit: 50, 
+            mana: 28, 
+            avoid: "6d+4; Elude", 
+            aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 3, ver: 5 }, 
+            attacks: ["Bite: 6d+4; Crush or Slash", "Frost: 5d; Numb"], 
+            abilities: ["Elusive", "Fire Vulnerability", "Frost Immunity", "Frost Spray"] 
+        }
     ],
     "Plant": [
         { 
@@ -22155,7 +22886,7 @@ const compendiumRegistry = {
             avoid: "12; cc4", 
             aspects: { dex: 8, hel: 16, str: 16, act: 5, int: 3, ver: 8 }, 
             attacks: ["Casting: 6d+2", "Grapple: 6d+10"], 
-            abilities: ["Bark Suit", "Light & Thunder Immunity", "Fire Vulnerability", "Rooted", "Bewitchment & Illusion"] 
+            abilities: ["Bark Suit", "Light Immunity", "Thunder Immunity", "Fire Vulnerability", "Rooted", "Bewitchment & Illusion"] 
         }
     ],
     "Dragon": [
@@ -22168,7 +22899,7 @@ const compendiumRegistry = {
             avoid: "6d+18; cc4", 
             aspects: { dex: 16, hel: 22, str: 16, act: 16, int: 16, ver: 16 }, 
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Frost: 6d+10; Numb"], 
-            abilities: ["Curse, Disease, & Frost Immunity", "Dragonhide Suit", "Frost Breath", "Fire Aversion", "Magic Resistance"] 
+            abilities: ["Curse & Disease Immunity", "Frost Immunity", "Dragonhide Suit", "Frost Breath", "Fire Aversion", "Magic Resistance"] 
         },
         { 
             name: "Dragon, Azure", 
@@ -22179,7 +22910,7 @@ const compendiumRegistry = {
             avoid: "6d+12; cc4", 
             aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 16, ver: 16 }, 
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Lightning: 6d+10; Weaken", "Thunder: 6d+10; Daze"], 
-            abilities: ["Curse, Disease, Lightning, & Thunder Immunity", "Dragonhide Suit", "Lightning Arc", "Magic Resistance", "Thunderous Roar"] 
+            abilities: ["Curse & Disease Immunity", "Lightning Immunity", "Thunder Immunity", "Dragonhide Suit", "Lightning Arc", "Magic Resistance", "Thunderous Roar"] 
         },
         { 
             name: "Dragon, Gules", 
@@ -22190,7 +22921,7 @@ const compendiumRegistry = {
             avoid: "6d+12; cc4", 
             aspects: { dex: 10, hel: 22, str: 22, act: 16, int: 22, ver: 22 }, 
             attacks: ["Bite: 6d+16; Crush", "Claw: 6d+16; Slash", "Tail: 6d+16; Bash", "Trample: 6d+42; Crush", "Fire: 6d+16; Pain"], 
-            abilities: ["Curse, Disease, & Fire Immunity", "Dragonhide Suit", "Fire Breath", "Frost Aversion", "Magic Resistance"] 
+            abilities: ["Curse & Disease Immunity", "Fire Immunity", "Dragonhide Suit", "Fire Breath", "Frost Aversion", "Magic Resistance"] 
         },
         { 
             name: "Dragon, Or", 
@@ -22201,7 +22932,7 @@ const compendiumRegistry = {
             avoid: "6d+12; cc4", 
             aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 22, ver: 22 }, 
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Light: 6d+16; Blind"], 
-            abilities: ["Curse, Disease, & Light Immunity", "Darkness & Umbra Aversion", "Dragonhide Suit", "Magic Resistance", "Searing Light [Breath]"] 
+            abilities: ["Curse & Disease Immunity", "Light Immunity", "Darkness Aversion", "Umbra Aversion", "Dragonhide Suit", "Magic Resistance", "Searing Light [Breath]"] 
         },
         { 
             name: "Dragon, Sable", 
@@ -22212,7 +22943,7 @@ const compendiumRegistry = {
             avoid: "6d+12; cc4", 
             aspects: { dex: 10, hel: 22, str: 16, act: 22, int: 22, ver: 22 }, 
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Acid: 6d+16; Sunder"], 
-            abilities: ["Acid Breath", "Acid, Curse, Darkness, Disease, and Umbra Immunity", "Dragonhide Suit", "Light Aversion", "Magic Resistance"] 
+            abilities: ["Acid Breath", "Acid Immunity", "Curse & Disease Immunity", "Darkness Immunity", "Umbra Immunity", "Dragonhide Suit", "Light Aversion", "Magic Resistance"] 
         },
         { 
             name: "Dragon, Vert", 
@@ -22223,7 +22954,7 @@ const compendiumRegistry = {
             avoid: "6d+18; cc4", 
             aspects: { dex: 16, hel: 22, str: 16, act: 22, int: 16, ver: 16 }, 
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Petrify: 6d+16", "Poison: 5d"], 
-            abilities: ["Curse, Disease, Poison, & Venom Immunity", "Dragonhide Suit", "Magic Resistance", "Petrifying Gaze: Acuity confronts", "Poison Breath: TN 5"] 
+            abilities: ["Curse & Disease Immunity", "Poison Immunity", "Venom Immunity", "Dragonhide Suit", "Magic Resistance", "Petrifying Gaze: Acuity confronts", "Poison Breath: TN 5"] 
         }
     ],
     "Elemental": [
@@ -22236,7 +22967,7 @@ const compendiumRegistry = {
             avoid: "6d+13", 
             aspects: { dex: 19, hel: 6, str: 6, act: 19, ver: 6 }, 
             attacks: ["Slam: 6d; Bash", "Asphyxiate: 1"], 
-            abilities: ["Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Dexterity]", "Invisibility"] 
+            abilities: ["Curse & Disease Immunity", "Physical Immunity", "Inundate Being: Skill Check [Dexterity]", "Invisibility"] 
         },
         { 
             name: "Elemental, Clay", 
@@ -22247,7 +22978,7 @@ const compendiumRegistry = {
             avoid: "6d; cc2", 
             aspects: { dex: 6, hel: 13, str: 13, act: 6, ver: 6 }, 
             attacks: ["Slam: 6d+7; Bash", "Crush: 6d+7; Crush"], 
-            abilities: ["Curse, Disease, Light, Lightning, Physical, & Thunder Immunity"] 
+            abilities: ["Curse & Disease Immunity", "Light Immunity", "Lightning Immunity", "Physical Immunity", "Thunder Immunity"] 
         },
         { 
             name: "Elemental, Dirt", 
@@ -22258,7 +22989,7 @@ const compendiumRegistry = {
             avoid: "6d+2", 
             aspects: { dex: 8, hel: 8, str: 8, act: 8, ver: 6 }, 
             attacks: ["Slam: 6d+2; Bash", "Asphyxiate: 6d+2"], 
-            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
+            abilities: ["Battle Magic Immunity", "Curse & Disease Immunity", "Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
         },
         { 
             name: "Elemental, Fog", 
@@ -22269,7 +23000,7 @@ const compendiumRegistry = {
             avoid: "6d+7", 
             aspects: { dex: 13, hel: 8, str: 8, act: 13, ver: 6 }, 
             attacks: ["Slam: 6d+2; Bash", "Asphyxiate: 1"], 
-            abilities: ["Curse, Disease, Lightning, Physical, & Thunder Immunity", "Inundate Being: Skill Check [Dexterity]"] 
+            abilities: ["Curse & Disease Immunity", "Lightning Immunity", "Physical Immunity", "Thunder Immunity", "Inundate Being: Skill Check [Dexterity]"] 
         },
         { 
             name: "Elemental, Magma", 
@@ -22280,7 +23011,7 @@ const compendiumRegistry = {
             avoid: "6d", 
             aspects: { dex: 6, hel: 13, str: 13, act: 6, ver: 13 }, 
             attacks: ["Slam: 6d+7; Bash", "Crush: 6d+7; Crush", "Fire: 6d+7; Pain"], 
-            abilities: ["Curse, Disease, Fire, & Physical Immunity", "Frost & Water Vulnerability", "Magmatic Splash"] 
+            abilities: ["Curse & Disease Immunity", "Fire Immunity", "Physical Immunity", "Frost Vulnerability", "Water Vulnerability", "Magmatic Splash"] 
         },
         { 
             name: "Elemental, Mud", 
@@ -22291,7 +23022,7 @@ const compendiumRegistry = {
             avoid: "6d+2", 
             aspects: { dex: 8, hel: 13, str: 13, act: 6, ver: 6 }, 
             attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
-            abilities: ["Curse, Disease, Lightning, Physical, & Thunder Immunity", "Inundate Being: Skill Check [Strength]"] 
+            abilities: ["Curse & Disease Immunity", "Lightning Immunity", "Physical Immunity", "Thunder Immunity", "Inundate Being: Skill Check [Strength]"] 
         },
         { 
             name: "Elemental, Sand", 
@@ -22302,7 +23033,7 @@ const compendiumRegistry = {
             avoid: "6d+7", 
             aspects: { dex: 13, hel: 6, str: 6, act: 13, ver: 6 }, 
             attacks: ["Slam: 6d; Bash", "Asphyxiate: 1"], 
-            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Inundate Being: Skill Check [Dexterity]"] 
+            abilities: ["Battle Magic Immunity", "Curse & Disease Immunity", "Physical Immunity", "Inundate Being: Skill Check [Dexterity]"] 
         },
         { 
             name: "Elemental, Smoke", 
@@ -22313,7 +23044,7 @@ const compendiumRegistry = {
             avoid: "6d+2", 
             aspects: { dex: 8, hel: 13, str: 13, act: 8, ver: 6 }, 
             attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
-            abilities: ["Curse, Disease, Fire, & Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
+            abilities: ["Curse & Disease Immunity", "Fire Immunity", "Physical Immunity", "Inundate Being: Skill Check [Strength]"] 
         },
         { 
             name: "Elemental, Stone", 
@@ -22324,7 +23055,7 @@ const compendiumRegistry = {
             avoid: "4d+18; cc4", 
             aspects: { dex: 4, hel: 19, str: 19, act: 4, ver: 6 }, 
             attacks: ["Slam: 6d+13; Bash", "Crush: 6d+13; Crush"], 
-            abilities: ["Battle Magic, Curse, Disease, & Physical Immunity", "Stone suit"] 
+            abilities: ["Battle Magic Immunity", "Curse & Disease Immunity", "Physical Immunity", "Stone suit"] 
         },
         { 
             name: "Elemental, Water", 
@@ -22335,7 +23066,7 @@ const compendiumRegistry = {
             avoid: "6d+7", 
             aspects: { dex: 13, hel: 8, str: 13, act: 8, ver: 6 }, 
             attacks: ["Slam: 6d+7; Bash", "Asphyxiate: 1"], 
-            abilities: ["Curse, Disease, Fire, Lightning, Light, Physical, & Thunder Immunity", "Frost Vulnerability", "Inundate Being: Skill Check [Dexterity]"] 
+            abilities: ["Curse & Disease Immunity", "Fire Immunity", "Lightning Immunity", "Light Immunity", "Physical Immunity", "Thunder Immunity", "Frost Vulnerability", "Inundate Being: Skill Check [Dexterity]"] 
         }
     ],
     "Genie": [
@@ -22348,7 +23079,7 @@ const compendiumRegistry = {
             avoid: "6d+13", 
             aspects: { dex: 19, hel: 8, str: 8, act: 13, int: 19, ver: 13 }, 
             attacks: ["Arcane Force: 6d+13; Numb"], 
-            abilities: ["Curse, Disease, & Frost Immunity", "Invisibility", "Fire Weakness", "Grant Wish"] 
+            abilities: ["Curse & Disease Immunity", "Frost Immunity", "Invisibility", "Fire Weakness", "Grant Wish"] 
         },
         { 
             name: "Ifrit", 
@@ -22359,7 +23090,7 @@ const compendiumRegistry = {
             avoid: "6d+13", 
             aspects: { dex: 19, hel: 8, str: 13, act: 13, int: 8, ver: 19 }, 
             attacks: ["Arcane Force: 6d+13; Pain", "Flaming Sword [Oldra]: 6d+10; Pain; Slash or Thrust; +1cc", "Flaming Whip [Oldra]: 6d+11; Pain; Grapple or Slash; cc3"], 
-            abilities: ["Curse, Disease, Fire, & Umbra Immunity", "Frost Weakness", "Umbral Shroud"] 
+            abilities: ["Curse & Disease Immunity", "Fire Immunity", "Umbra Immunity", "Frost Weakness", "Umbral Shroud"] 
         },
         { 
             name: "Jann", 
@@ -22537,7 +23268,7 @@ const compendiumRegistry = {
             avoid: "6d+2; cc4", 
             aspects: { dex: 8, hel: 5, str: 5, act: 4, int: 4, ver: 4 }, 
             attacks: ["Bite: 6d; Crush or Slash", "Claw: 6d; Slash"], 
-            abilities: ["Curse & Disease Immunity", "Darkness & Umbra Immunity", "Divine Salvation", "Light Vulnerability", "Lycanthropic Bite", "Silver Aversion"] 
+            abilities: ["Curse & Disease Immunity", "Darkness Immunity","Umbra Immunity", "Divine Salvation", "Light Vulnerability", "Lycanthropic Bite", "Silver Aversion"] 
         },
         { 
             name: "Wereboar", 
@@ -22630,7 +23361,7 @@ const compendiumRegistry = {
             avoid: "5d; cc4", 
             aspects: { dex: 5, str: 11, act: 5, int: 5, ver: 11 }, 
             attacks: ["Bite: 6d+2; Crush", "Pugil Strike: 6d+5; Bash", "Rot: 4d"], 
-            abilities: ["Blessed Weapon Aversion", "Disease Immunity", "Magic & Physical Resistance", "Rot: -4d penalty, TN 4 Health save", "Undead Bite"] 
+            abilities: ["Blessed Weapon Aversion", "Disease Immunity", "Magic Resistance", "Physical Resistance", "Rot: -4d penalty, TN 4 Health save", "Undead Bite"] 
         },
         { 
             name: "Skeleton", 
@@ -22641,7 +23372,7 @@ const compendiumRegistry = {
             avoid: "5d", 
             aspects: { dex: 5, str: 5, act: 5 }, 
             attacks: ["Arming Sword: 6d+1; Slash"], 
-            abilities: ["Disease, Battle Magic, & Thrust Immunity", "Slash Resistance"] 
+            abilities: ["Battle Magic Immunity", "Disease Immunity",  "Thrust Immunity", "Slash Resistance"] 
         },
         { 
             name: "Specter", 
@@ -23092,7 +23823,6 @@ const encounterChartsRegistry = {
 // 🐉 CREATURE COMPENDIUM & QUICK INSPECTOR ENGINE
 // =========================================================================
 
-// Ensure global state memory exists safely regardless of script placement order
 window.characterChoicesState = window.characterChoicesState || {};
 if (!characterChoicesState.compendiumInspector) {
     characterChoicesState.compendiumInspector = {
@@ -23102,7 +23832,6 @@ if (!characterChoicesState.compendiumInspector) {
     };
 }
 
-// Local helper for safe HTML escaping
 if (typeof window.escapeHtml !== "function") {
     window.escapeHtml = function(s) {
         return String(s || "")
@@ -23112,6 +23841,52 @@ if (typeof window.escapeHtml !== "function") {
             .replace(/"/g, "&quot;");
     };
 }
+
+// Global smart ability key normalizer to match tooltipRegistry keys accurately
+window.getAbilityTooltipKey = function(abilityStr) {
+    if (!abilityStr) return "";
+    let clean = abilityStr.replace(/^[†‡⹋⸸\*\s]+/g, "");
+    clean = clean.split(/[:\[]/)[0].trim();
+    let key = clean.toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+    
+    const explicitMapping = {
+        "venom": "venom",
+        "poison": "venom",
+        "breath": "corrupting_breath",
+        "petrifying_gaze": "petrifying_gaze",
+        "poison_breath": "venom",
+        "web_blast": "web_blast",
+        "web": "web_blast",
+        "rot": "rot",
+        "mindrot": "mindrot",
+        "kindorei_infection": "kindorei_infection",
+        "infect": "kindorei_infection",
+        "explode": "explode",
+        "asphyxiate": "asphyxiation",
+        "asphyxiation": "asphyxiation"
+    };
+
+    if (explicitMapping[key]) return explicitMapping[key];
+
+    // Automatically check for namespaced creature traits (immunities, resistances, vulnerabilities, etc.)
+    const traitKeywords = ["immunity", "resistance", "vulnerability", "aversion", "susceptibility", "ward"];
+    const isTrait = traitKeywords.some(kw => key.includes(kw));
+    
+    if (isTrait) {
+        const namespacedKey = `creature_${key}`;
+        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[namespacedKey]) {
+            return namespacedKey;
+        }
+        return namespacedKey; // Defaults to looking up the creature_ prefixed version
+    }
+
+    if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[key]) return key;
+
+    return key;
+};
 
 // Master Unified Flat Registry Builder for the Inspector
 function getAllCompendiumCreatures() {
@@ -23149,7 +23924,7 @@ function renderCompendiumInspectorUI() {
         optionsHtml += `<optgroup label="${cat}">`;
         creatures.forEach(c => {
             const isSelected = characterChoicesState.compendiumInspector.selectedCreatureName === c.name ? "selected" : "";
-            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)} (Size ${c.size})</option>`;
+            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)}</option>`;
         });
         optionsHtml += `</optgroup>`;
     });
@@ -23272,7 +24047,16 @@ window.renderCompendiumMiniSheet = function(creatureName) {
                 </div>
                 <div>
                     <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
-                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => {
+                        const tooltipKey = getAbilityTooltipKey(ab);
+                        if (typeof Tooltip !== "undefined" && !Tooltip.get(tooltipKey)) {
+                            Tooltip.register(tooltipKey, {
+                                title: ab.split(/[:\[]/)[0].replace(/^[†‡⹋⸸\*\s]+/g, "").trim(),
+                                description: ab
+                            });
+                        }
+                        return `<div style="margin-bottom: 2px; color: var(--text-dark); cursor: help;" data-tooltip="${tooltipKey}">• ${escapeHtml(ab)}</div>`;
+                    }).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
                 </div>
             </div>
 
@@ -23296,7 +24080,22 @@ function generateCompendiumTab() {
             creatures.forEach(c => {
                 const aspectStr = c.aspects ? `Dex: ${c.aspects.dex || '—'}, Hel: ${c.aspects.hel || '—'}, Str: ${c.aspects.str || '—'}, Act: ${c.aspects.act || '—'}, Int: ${c.aspects.int || '—'}, Ver: ${c.aspects.ver || '—'}` : '';
                 const attacksStr = c.attacks && c.attacks.length > 0 ? `<strong>Attacks:</strong> ${c.attacks.join(" | ")}` : '';
-                const abilitiesStr = c.abilities && c.abilities.length > 0 ? `<strong>Special Abilities:</strong> ${c.abilities.join(", ")}` : '';
+                
+                // Wrap each green special ability in a tooltip-enabled span
+                let abilitiesStr = '';
+                if (c.abilities && c.abilities.length > 0) {
+                    const mappedAbilities = c.abilities.map(ab => {
+                        const tooltipKey = getAbilityTooltipKey(ab);
+                        if (typeof Tooltip !== "undefined" && !Tooltip.get(tooltipKey)) {
+                            Tooltip.register(tooltipKey, {
+                                title: ab.split(/[:\[]/)[0].replace(/^[†‡⹋⸸\*\s]+/g, "").trim(),
+                                description: ab
+                            });
+                        }
+                        return `<span data-tooltip="${tooltipKey}" style="cursor: help; color: #1b6b55; font-style: italic;">${escapeHtml(ab)}</span>`;
+                    });
+                    abilitiesStr = `<strong>Special Abilities:</strong> ${mappedAbilities.join(", ")}`;
+                }
 
                 itemsHtml += `
                     <li style="margin-bottom: 12px; font-size: 0.95rem; color: #2d3748; list-style-type: square;">
@@ -23304,7 +24103,7 @@ function generateCompendiumTab() {
                         <div style="font-size: 0.82rem; color: #4a3f35; margin-bottom: 2px;"><strong>Vitality:</strong> ${c.vit} | <strong>Mana:</strong> ${c.mana} | <strong>Avoid:</strong> ${c.avoid}</div>
                         ${aspectStr ? `<div style="font-size: 0.8rem; color: #7c6f64; margin-bottom: 2px;"><strong>Aspects:</strong> ${aspectStr}</div>` : ''}
                         ${attacksStr ? `<div style="font-size: 0.82rem; color: #2c251e; margin-bottom: 2px;">${attacksStr}</div>` : ''}
-                        ${abilitiesStr ? `<div style="font-size: 0.8rem; color: #1b6b55; font-style: italic;">${abilitiesStr}</div>` : ''}
+                        ${abilitiesStr ? `<div style="font-size: 0.8rem;">${abilitiesStr}</div>` : ''}
                     </li>
                 `;
             });
@@ -23327,12 +24126,10 @@ function generateCompendiumTab() {
     accordion.innerHTML = codexHtml;
 }
 
-// UI Renderer Function to display Encounters inside the Compendium Tab
 function renderEncounterChartsUI() {
     const compendiumContainer = document.querySelector("#tab-compendium .compendium-accordion");
     if (!compendiumContainer) return;
 
-    // Check if the encounter section already exists to avoid duplication
     if (document.getElementById("encounter-charts-section")) return;
 
     let regionOptions = `<option value="None">-- Select Region --</option>`;
@@ -23364,8 +24161,8 @@ function renderEncounterChartsUI() {
                     <div style="font-weight: bold; font-size: 0.85rem; color: #1b6b55; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
                         <span>Minor</span>
                         <div style="display: flex; gap: 3px; align-items: center;">
-                            <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;">
-                            <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
                         </div>
                     </div>
                     <ul id="enc-list-minor" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
@@ -23378,8 +24175,8 @@ function renderEncounterChartsUI() {
                     <div style="font-weight: bold; font-size: 0.85rem; color: #b7791f; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
                         <span>Moderate</span>
                         <div style="display: flex; gap: 3px; align-items: center;">
-                            <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;">
-                            <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;">
+                            <img src="images/Hit.jpg" alt="Hit" style="height: 1.3em; width: auto;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
                         </div>
                     </div>
                     <ul id="enc-list-moderate" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
@@ -23392,8 +24189,8 @@ function renderEncounterChartsUI() {
                     <div style="font-weight: bold; font-size: 0.85rem; color: #b82c2c; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
                         <span>Major</span>
                         <div style="display: flex; gap: 3px; align-items: center;">
-                            <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;">
-                            <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
+                            <img src="images/Crit.jpg" alt="Crit" style="height: 1.3em; width: auto;">
                         </div>
                     </div>
                     <ul id="enc-list-major" style="margin: 0; padding-left: 15px; font-size: 0.82rem; color: #4a3f35; line-height: 1.4;">
@@ -23434,7 +24231,7 @@ window.updateEncounterDisplay = function(regionName) {
     majorList.innerHTML = formatList(data.major);
 };
 
-// Consolidated DOM startup hook
+// Consolidated startup hook
 document.addEventListener("DOMContentLoaded", () => {
     generateCompendiumTab();
     setTimeout(renderCompendiumInspectorUI, 200);
