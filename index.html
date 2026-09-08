@@ -2850,7 +2850,7 @@ details[open] #skills-collapsed-summary {
 <!-- TAB: CREATURE COMPENDIUM -->
 <div id="tab-compendium" class="tab-content">
     <h2>Creature Compendium</h2>
-    <p class="hint">Adversaries, beasts, and monstrosities of the Crystal Sphere. Click any category below to expand entries.</p>
+    <p class="hint">Creatures of the Crystal Sphere. Click any category below to expand entries.</p>
     
     <div class="compendium-accordion skill-accordion">
         <!-- Dynamically populated by generateCompendiumTab() on load -->
@@ -24145,7 +24145,7 @@ function renderEncounterChartsUI() {
     
     wrapper.innerHTML = `
         <div class="skill-header" onclick="toggleSkill(this)" style="background: #faf7f2; padding: 12px; font-weight: bold; color: #7d3c1b; cursor: pointer; user-select: none;">
-            Encounter Charts (Regional Lookup) ▾
+            Encounter Charts ▾
         </div>
         <div class="skill-body" style="display: none; padding: 15px; background: #fff; border-top: 1px solid #e2d7c5;">
             <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
@@ -24153,6 +24153,8 @@ function renderEncounterChartsUI() {
                 <select id="encounter-region-select" onchange="updateEncounterDisplay(this.value)" style="padding: 6px; font-size: 0.85rem; border: 1px solid #decdaf; border-radius: 4px; background: #fff; flex: 1; max-width: 300px;">
                     ${regionOptions}
                 </select>
+<br>
+            <p class="hint">Roll two dice per phase of the day to determine encounters.</p>
             </div>
             <div id="encounter-display-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px;">
                 
