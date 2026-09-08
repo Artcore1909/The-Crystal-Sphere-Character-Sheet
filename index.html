@@ -23477,7 +23477,7 @@ function renderCompendiumInspectorUI() {
         optionsHtml += `<optgroup label="${cat}">`;
         creatures.forEach(c => {
             const isSelected = characterChoicesState.compendiumInspector.selectedCreatureName === c.name ? "selected" : "";
-            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)} (Size ${c.size})</option>`;
+            optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)}</option>`;
         });
         optionsHtml += `</optgroup>`;
     });
@@ -23538,9 +23538,7 @@ window.renderCompendiumMiniSheet = function(creatureName) {
 
     if (!creatureName || creatureName === "None") {
         container.innerHTML = `
-            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
-                Select a creature above to load its interactive mini character sheet.
-            </div>
+
         `;
         return;
     }
@@ -23945,9 +23943,7 @@ function renderCompendiumInspectorUI() {
             </div>
         </div>
         <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
-            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
-                Select a creature above to load its interactive mini character sheet.
-            </div>
+
         </div>
     `;
 
@@ -23984,9 +23980,6 @@ window.renderCompendiumMiniSheet = function(creatureName) {
 
     if (!creatureName || creatureName === "None") {
         container.innerHTML = `
-            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
-                Select a creature above to load its interactive mini character sheet.
-            </div>
         `;
         return;
     }
