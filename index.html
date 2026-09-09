@@ -23614,7 +23614,9 @@ function renderCompendiumInspectorUI() {
         <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
             <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
                 <label>Select Creature</label>
-<select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold; text-align: left;">${optionsHtml}</select>
+                <select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                    ${optionsHtml}
+                </select>
             </div>
         </div>
         <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
@@ -24057,9 +24059,7 @@ function renderCompendiumInspectorUI() {
         <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
             <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
                 <label>Select Creature</label>
-                <select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
-                    ${optionsHtml}
-                </select>
+<select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold; text-align: left;">${optionsHtml}</select>
             </div>
         </div>
         <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
