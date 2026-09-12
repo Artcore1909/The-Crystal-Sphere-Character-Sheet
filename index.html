@@ -1947,6 +1947,13 @@ details[open] #skills-collapsed-summary {
     display: block; /* Stacks image above text if desired, or keep inline */
     margin: 0 auto 4px auto; /* Centers the icon image horizontally */
 }
+
+.inline-icon {
+  height: 1.2em;
+  width: auto;
+  vertical-align: -0.25em; /* Nudges the icon down to straddle the baseline */
+  display: inline-block;
+}
     </style>
 </head>
 <body>
@@ -2872,7 +2879,7 @@ details[open] #skills-collapsed-summary {
     <li>Determine the number of dice you are entitled to roll and your Dice Limit (default is 6).</li>
     <li>If you are entitled to more dice than your Dice Limit, convert the excess dice into Bonus Damage or Damage Reduction.</li>
     <li>Determine your total Bonus Damage or Damage Reduction.</li>
-    <li>Roll the newly constructed dice pool, counting <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> as 1 and <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;"> as your Crit Count (default is 2).</li>
+    <li>Roll the newly constructed dice pool, counting <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> as 1 and <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;"> as your Crit Count (default is 2).</li>
     <li>If you roll more than 1 Crit, multiply your roll by that amount.</li>
     <li>Compare your result with your foe's roll. The attack hits if the Attack roll exceeds the Avoidance roll.</li>
     <li>If the attack hits, the attacker adds their Bonus Damage, and the defender adds their Damage Reduction.</li>
@@ -2891,16 +2898,16 @@ details[open] #skills-collapsed-summary {
 <br>
 <strong>Advantage & Disadvantage:</strong>
 <ul>
-    <li><strong>Advantage:</strong> When rolling with Advantage, convert all <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> to Crit Results.</li>
+    <li><strong>Advantage:</strong> When rolling with Advantage, convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to <img src='images/Critenc.png' alt='Crit' class='inline-icon'>.</li>
 <br>
-    <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> to Blank Results.</li>
+    <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to Blank Results.</li>
 </ul>
 <br>
 <strong>Proficiency, Extra Training, Mastery, & Resilience:</strong>
 <ul>
     <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
 <br>
-    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> whenever rolling for a Proficient skill.</li>
+    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> whenever rolling for a Proficient skill.</li>
 <br>
     <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
 <br>
@@ -3052,7 +3059,7 @@ details[open] #skills-collapsed-summary {
         <br>
         <strong>Regeneration & Rest:</strong>
         <ul>
-            <li>Once per day, for 2 consecutive Phases of rest, roll your Vitality Regen and Mana Regen once. Regenerate 1 point per <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> and 2 points per Crit Result. If you rest for 3 consecutive Phases, roll twice.</li>
+            <li>Once per day, for 2 consecutive Phases of rest, roll your Vitality Regen and Mana Regen once. Regenerate 1 point per <img src="images/Hitenc.png" alt="Hit" class="inline-icon"> and 2 points per Crit Result. If you rest for 3 consecutive Phases, roll twice.</li>
         </ul>
     </div>
 </div>
