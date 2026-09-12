@@ -2891,16 +2891,16 @@ details[open] #skills-collapsed-summary {
 <br>
 <strong>Advantage & Disadvantage:</strong>
 <ul>
-    <li><strong>Advantage:</strong> When rolling with Advantage, convert all Hit Results to Crit Results.</li>
+    <li><strong>Advantage:</strong> When rolling with Advantage, convert all <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> to Crit Results.</li>
 <br>
-    <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all Hit Results to Blank Results.</li>
+    <li><strong>Disadvantage:</strong> When rolling with Disadvantage, convert all <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> to Blank Results.</li>
 </ul>
 <br>
 <strong>Proficiency, Extra Training, Mastery, & Resilience:</strong>
 <ul>
     <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
 <br>
-    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to Hit Results whenever rolling for a Proficient skill.</li>
+    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> whenever rolling for a Proficient skill.</li>
 <br>
     <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
 <br>
@@ -3052,7 +3052,7 @@ details[open] #skills-collapsed-summary {
         <br>
         <strong>Regeneration & Rest:</strong>
         <ul>
-            <li>Once per day, for 2 consecutive Phases of rest, roll your Vitality Regen and Mana Regen once. Regenerate 1 point per Hit Result and 2 points per Crit Result. If you rest for 3 consecutive Phases, roll twice.</li>
+            <li>Once per day, for 2 consecutive Phases of rest, roll your Vitality Regen and Mana Regen once. Regenerate 1 point per <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> and 2 points per Crit Result. If you rest for 3 consecutive Phases, roll twice.</li>
         </ul>
     </div>
 </div>
@@ -3063,7 +3063,7 @@ details[open] #skills-collapsed-summary {
             <div class="skill-body">
                 <strong>Character Creation:</strong>
                 <ul>
-                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to 3 plus an unmodified 2-dice roll (Hit Results count as 1, and Crit Results count as 2), except Hap which is determined by rolling 4 dice (rerolling Blank, Skill, and Wyrd Results once).</li>
+                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to 3 plus an unmodified 2-dice roll (<img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> count as 1, and Crit Results count as 2), except Hap which is determined by rolling 4 dice (rerolling Blank, Skill, and Wyrd Results once).</li>
                 </ul>
                 <br>
                 <strong>Sex Adjustments:</strong>
@@ -6387,7 +6387,7 @@ const itemRegistry = {
         itemSlot: "Bracers",
         cost: 4000,
         rarity: 3,
-        description: "When shot, the wearer can expend six Mana to change one Critical result to a normal Hit result before damage is calculated."
+        description: "When shot, the wearer can expend six Mana to change one <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> before damage is calculated."
     },
     "shackles_of_imprisonment": {
         name: "Shackles of Imprisonment",
@@ -6659,7 +6659,7 @@ const itemRegistry = {
         itemSlot: "Girdle",
         cost: 4000,
         rarity: 3,
-        description: "When struck, the wearer can expend six Mana to change one Critical result to a normal Hit result before damage is calculated."
+        description: "When struck, the wearer can expend six Mana to change one <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> before damage is calculated."
     },
     "purse_of_liquification": {
         name: "Purse of Liquification",
@@ -7268,7 +7268,7 @@ const enchantmentRegistry = {
         allowedTags: ["jewelry"],
         cost: 1000,
         rarity: 3,
-        description: "Grants the wearer a Hit Result on all Hap Saves and Checks against curses."
+        description: "Grants the wearer a <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Hap Saves and Checks against curses."
     },
     "athleticism": {
         name: "Athleticism",
@@ -7986,7 +7986,7 @@ const tooltipRegistry = {
   // ═══════════════════════════════════════════════════════════════════════
  "proficiency": {
     title: "Proficiency",
-    description: "You can change up to your Rank Skill Results to Hit Results once per check."
+    description: "You can change up to your Rank Skill Results to <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> once per check."
   },  
 "alertness": {
     title: "Alertness",
@@ -8088,11 +8088,11 @@ const tooltipRegistry = {
   },
   "crushing_blow": {
     title: "Crushing Blow",
-    description: "Using a brutal weapon, you can change up to your Rank Hit Results to Crits, but Skill Results cannot be modified. When you use this skill, your attack is limited to one strike."
+    description: "Using a brutal weapon, you can change up to your Rank <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Crits, but Skill Results cannot be modified. When you use this skill, your attack is limited to one strike."
   },
   "dual_wielding": {
     title: "Dual-Wielding",
-    description: "Using one-handed melee weapons with which you are proficient, you can dual-wield. While dual-wielding, you may strike once with each hand per attack but you must change one Hit Result to a Skill Result per roll."
+    description: "Using one-handed melee weapons with which you are proficient, you can dual-wield. While dual-wielding, you may strike once with each hand per attack but you must change one <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a Skill Result per roll."
   },
   "no_shield_no_problem": {
     title: "No Shield? No Problem",
@@ -8432,7 +8432,7 @@ const tooltipRegistry = {
   },
   "calculated_strike": {
     title: "Calculated Strike",
-    description: "Using a shrewd weapon, you can change up to your Rank Skill Results to Crits, but Hit Results are removed from the roll. When you use this skill, your attack is limited to one strike."
+    description: "Using a shrewd weapon, you can change up to your Rank Skill Results to Crits, but <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are removed from the roll. When you use this skill, your attack is limited to one strike."
   },
 "extra_training": {
         title: "Extra Training",
@@ -9239,7 +9239,7 @@ const tooltipRegistry = {
   "opportune_strike": {
     title: "Opportune Strike",
     actionType: "Move",
-    description: "By holding your initiative, you can wait for your opponent to mistep before striking. If your opponent misses you, you are granted an attack or Skill Check. For every point your Avoidance exceeded your opponent's strike, add 1 Hit Result to your roll."
+    description: "By holding your initiative, you can wait for your opponent to mistep before striking. If your opponent misses you, you are granted an attack or Skill Check. For every point your Avoidance exceeded your opponent's strike, add 1 <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to your roll."
   },
   "improved_sanctum": {
     title: "Improved Sanctum",
@@ -9472,7 +9472,7 @@ const tooltipRegistry = {
   "arcane_dart": {
     title: "Arcane Dart",
     actionType: "Cast + Attack",
-    description: "You can throw a fistfull of arcane force at a target dealing Verve + Rank dice of damage; Crit Results change to Hit Results. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result."
+    description: "You can throw a fistfull of arcane force at a target dealing Verve + Rank dice of damage; Crit Results change to <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result."
   },
   "arcane_lock": {
     title: "Arcane Lock",
@@ -9528,7 +9528,7 @@ const tooltipRegistry = {
   "true_lightning": {
     title: "True Lightning",
     actionType: "Cast + Attack",
-    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. Skill Results are discarded, and Hit Results are changed to Crits. Crit Results weaken your target.",
+    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. Skill Results are discarded, and <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to Crits. Crit Results weaken your target.",
     extras: [{"label":"Bonus Spells","text":"Static Discharge; Static Aura"}]
   },
   "pillar_of_flame": {
@@ -9558,7 +9558,7 @@ const tooltipRegistry = {
   "immolate": {
     title: "Immolate",
     actionType: "Cast + Attack",
-    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. Skill Results are discarded, and Hit Results are changed to Crits. Crit Results inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. Skill Results are discarded, and <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to Crits. Crit Results inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
   "entomb": {
@@ -9597,7 +9597,7 @@ const tooltipRegistry = {
     "luck_is_what_you_make_it": {
         title: "Luck Is What You Make It",
         action_type: "Cast",
-        description: "Targets can change up to their Rank Skill Results to Hit Results when making Hap saves."
+        description: "Targets can change up to their Rank Skill Results to <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when making Hap saves."
     },
     "lucky_hit": {
         title: "Lucky Hit",
