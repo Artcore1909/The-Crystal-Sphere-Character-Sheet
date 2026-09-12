@@ -2872,7 +2872,7 @@ details[open] #skills-collapsed-summary {
     <li>Determine the number of dice you are entitled to roll and your Dice Limit (default is 6).</li>
     <li>If you are entitled to more dice than your Dice Limit, convert the excess dice into Bonus Damage or Damage Reduction.</li>
     <li>Determine your total Bonus Damage or Damage Reduction.</li>
-    <li>Roll the newly constructed dice pool, counting Hits as 1 and Crits as your Crit Count (default is 2).</li>
+    <li>Roll the newly constructed dice pool, counting <img src="images/Hitenc.png" alt="Hit" style="height: 1.3em; width: auto;"> as 1 and <img src="images/Critenc.png" alt="Crit" style="height: 1.3em; width: auto;"> as your Crit Count (default is 2).</li>
     <li>If you roll more than 1 Crit, multiply your roll by that amount.</li>
     <li>Compare your result with your foe's roll. The attack hits if the Attack roll exceeds the Avoidance roll.</li>
     <li>If the attack hits, the attacker adds their Bonus Damage, and the defender adds their Damage Reduction.</li>
@@ -8031,7 +8031,7 @@ const tooltipRegistry = {
   },
   "avoidance": {
     title: "Avoidance",
-    description: "When you are attacked, roll an amount of dice equal to your Dexterity plus any bonuses from your Shield, gear, or magical effects (max six). So long as you are aware of the attack and are unarmored, you may change up to your Rank Skill Results to Evade (Hit) Results per Round. Count each Evade and Crit Result as 1, Multiply the count by the number of Crit Results. If you are struck, add your bonus as damage reduction."
+    description: "You are proficient at avoiding and mitigating incoming damage in combat. Your unarmored CC is one."
   },
   "balance": {
     title: "Balance",
@@ -8088,7 +8088,7 @@ const tooltipRegistry = {
   },
   "crushing_blow": {
     title: "Crushing Blow",
-    description: "Using a brutal weapon, you can change up to your Rank <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Crits, but Skill Results cannot be modified. When you use this skill, your attack is limited to one strike."
+    description: "Using a brutal weapon, you can change up to your Rank <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but Skill Results cannot be modified. When you use this skill, your attack is limited to one strike."
   },
   "dual_wielding": {
     title: "Dual-Wielding",
@@ -9263,7 +9263,7 @@ const tooltipRegistry = {
   },
   "true_force": {
     title: "True Force",
-    description: "You no longer change Crit Results to Hits when attacking with Arcane Dart or Vortex."
+    description: "You no longer change Crit Results to <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
 
   // ── COMPOSITE / MULTI-SKILL PACKAGE MILESTONES ──
@@ -9494,7 +9494,7 @@ const tooltipRegistry = {
   "arcane_vortex": {
     title: "Arcane Vortex",
     actionType: "Cast + Attack",
-    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; Crit Results are changed to hits. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled."
+    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; Crit Results are changed to <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled."
   },
   "dismiss_undead": {
     title: "Dismiss Undead",
@@ -9756,7 +9756,7 @@ const tooltipRegistry = {
   },
   "true_force": {
     title: "True Force",
-    description: "You no longer change Crit Results to Hits when attacking with Arcane Dart or Vortex."
+    description: "You no longer change Crit Results to <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
 "hailfire": {
         title: "Hailfire",
@@ -10152,11 +10152,11 @@ const tooltipRegistry = {
   "arcane_surge": {
     title: "Arcane Surge [Word]",
     actionType: "Cast + Attack",
-    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all Evade, Crit, and Skill Results to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
+    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/Hitenc.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and Skill Results to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "improved_stealth": {
     title: "Improved Stealth",
-    description: "You can change one Skill Result to a Crit Result on Stealth checks."
+    description: "You can change one Skill Result to a <img src='images/Critenc.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on Stealth checks."
   },
   "trained_assassin": {
     title: "Trained Assassin",
