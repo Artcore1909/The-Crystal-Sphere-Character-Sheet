@@ -3826,7 +3826,7 @@ const alternateSurfaceKeywords = ["head", "shaft", "blade", "grip", "butt", "pom
             "rural": { "background": 5 },   // Grants Butcher, Drive Cart, Handle Domestic, Survival, Use & Make Rope (5 free levels)
             "tribal": { "background": 4 },  // Grants Fish, Handle Wild, Hunt & Forage, Survival (4 free levels)
             "urban": { "background": 1 },    // Grants Street Smarts (1 free level)
-            "wild": { "background": 1 }    // Grants Hunt (1 free level)
+            "wild": { "pugilism": 1 }    // Grants Hunt (1 free level)
         },
         upbringing: {
             "laborer": { "background": 1 },  // FIXED: Added missing entry to grant 1 free level to Laborer!
@@ -15420,7 +15420,6 @@ function renderDynamicActiveTreesFeed() {
             if (uChoice === "sage") mandatedFreeSkillsList.push("Research");
             if (uChoice === "servant") mandatedFreeSkillsList.push("Alertness");
             if (uChoice === "tradesman") mandatedFreeSkillsList.push("Trade");
-            if (uChoice === "wild") mandatedFreeSkillsList.push("Pugil Weapons");
 
             // Build a temporary set of automatic unlocks to verify unique choices clearly
             let automatedLockedSet = [];
@@ -16367,17 +16366,27 @@ else if (tree.key === "guild: sages") {
         `;
       }
     }
- // 🔥 PATH C: STANDARD SEQUENTIAL SKILL PROGRESSION TIER BLOCKS
+// 🔥 PATH C: STANDARD SEQUENTIAL SKILL PROGRESSION TIER BLOCKS
  else {
+   const freeLevelsCount = (typeof getFreeLevelsCountForTree === "function") ? getFreeLevelsCountForTree(tree.key) : 0;
    for (let i = 0; i < tree.level; i++) {
      const currentRankIndex = i + 1;
+     const isFree = i < freeLevelsCount;
      
      if (unlockedPoolNames[i]) {
-       itemsListHtml += `
-         <li style="margin-bottom: 4px; font-size: 0.88rem; color: #4e3e33; font-weight: 500; list-style-type: square;">
-           <span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl ${currentRankIndex}]</span> ${unlockedPoolNames[i]}
-         </li>
-       `;
+       if (isFree) {
+         itemsListHtml += `
+         <li style="margin-bottom: 8px; list-style-type: none; display: flex; align-items: center; gap: 8px;">
+             <span style="color: #2e7d32; font-weight: bold; font-size: 0.75rem; white-space: nowrap;">[Free Unlock]</span>
+             <span style="font-size: 0.9rem; color: #2e7d32; font-weight: bold; padding: 2px 0;">${unlockedPoolNames[i]}</span>
+         </li>`;
+       } else {
+         itemsListHtml += `
+           <li style="margin-bottom: 4px; font-size: 0.88rem; color: #4e3e33; font-weight: 500; list-style-type: square;">
+             <span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl ${currentRankIndex}]</span> ${unlockedPoolNames[i]}
+           </li>
+         `;
+       }
 } else {
        // 📍 FIXED ARCHITECTURE LOOKUP: Crawl your skillTreeLevelsRegistry to find the true static spell name if it exists
        let resolvedStaticName = "Advanced Specialty Mastery Tier";
