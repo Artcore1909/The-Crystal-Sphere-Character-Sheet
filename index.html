@@ -2022,6 +2022,12 @@ details[open] #skills-collapsed-summary {
             <option value="Centaur">Centaur</option>
             <option value="Darkfolk">Darkfolk</option>
             <option value="Derro">Derro</option>
+            <option value="Dragon, Argent">Dragon, Argent</option>
+            <option value="Dragon, Azure">Dragon, Azure</option>
+            <option value="Dragon, Gules">Dragon, Gules</option>
+            <option value="Dragon, Or">Dragon, Or</option>
+            <option value="Dragon, Sable">Dragon, Sable</option>
+            <option value="Dragon, Vert">Dragon, Vert</option>
             <option value="Dryad">Dryad</option>
             <option value="Dwarf">Dwarf</option>
             <option value="Ent">Ent</option>
@@ -2073,6 +2079,13 @@ details[open] #skills-collapsed-summary {
             <option value="Canivir, Wild">Canivir, Wild</option>
             <option value="Darkfolk">Darkfolk</option>
             <option value="Derro">Derro</option>
+            <option value="Dragon, Argent">Dragon, Argent</option>
+            <option value="Dragon, Azure">Dragon, Azure</option>
+            <option value="Dragon, Gules">Dragon, Gules</option>
+            <option value="Dragon, Or">Dragon, Or</option>
+            <option value="Dragon, Sable">Dragon, Sable</option>
+            <option value="Dragon, Vert">Dragon, Vert</option>
+            <option value="Draconic">Draconic</option>
             <option value="Entish">Entish</option>
             <option value="Fey">Fey</option>
             <option value="Fishfolk">Fishfolk</option>
@@ -7734,6 +7747,30 @@ const tooltipRegistry = {
         title: "Silver Aversion",
         description: "The creature's natural Avoidance is reduced by half against silver weapons."
     },
+    "creature_fire_aversion": {
+        title: "Fire Aversion",
+        description: "The creature's natural Avoidance is reduced by half against fire damage."
+    },
+"creature_darkness_aversion": {
+    title: "Darkness Aversion",
+    description: "The creature's natural Avoidance is reduced by half against darkness damage."
+},
+"creature_fire_aversion": {
+    title: "Fire Aversion",
+    description: "The creature's natural Avoidance is reduced by half against fire damage."
+},
+"creature_frost_aversion": {
+    title: "Frost Aversion",
+    description: "The creature's natural Avoidance is reduced by half against frost damage."
+},
+"creature_light_aversion": {
+    title: "Light Aversion",
+    description: "The creature's natural Avoidance is reduced by half against light damage."
+},
+"creature_umbra_aversion": {
+    title: "Umbra Aversion",
+    description: "The creature's natural Avoidance is reduced by half against umbra damage."
+},
     "creature_summoning_immunity": {
         title: "Summoning Immunity",
         description: "The creature suffers no damage or ill effects from summoning magic."
@@ -7990,6 +8027,42 @@ const tooltipRegistry = {
         title: "Web Blast",
         description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
     },
+"creature_acid_breath": {
+    title: "Acid Breath",
+    description: "Targets all creatures within a 9-hex diamond."
+},
+"creature_fire_breath": {
+    title: "Fire Breath",
+    description: "Targets all creatures within a 9-hex diamond."
+},
+"creature_frost_breath": {
+    title: "Frost Breath",
+    description: "Targets all creatures within a 9-hex diamond."
+},
+"creature_lightning_arc": {
+    title: "Lightning Arc",
+    description: "Targets 1 hex."
+},
+"creature_mortal_gaze": {
+    title: "Mortal Gaze",
+    description: "The target is entitled to an Acuity save to perceive the threat and break eye contact. If they fail, they must pass a Verve confrontation or die."
+},
+"creature_petrifying_gaze": {
+    title: "Petrifying Gaze",
+    description: "Affects one target."
+},
+"creature_poison_breath": {
+    title: "Poison Breath",
+    description: "Targets all creatures within a 9-hex diamond (TN 5)."
+},
+"creature_searing_light_breath": {
+    title: "Searing Light [Breath]",
+    description: "Targets all creatures within a 9-hex diamond."
+},
+"creature_thunderous_roar": {
+    title: "Thunderous Roar",
+    description: "Targets all creatures within a 9-hex diamond."
+},
   // ═══════════════════════════════════════════════════════════════════════
   // SKILLS & ABILITIES
   // ═══════════════════════════════════════════════════════════════════════
@@ -10925,6 +10998,12 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Antaeon": { native: "Antaeonic", pidgins: ["Pidgin-Imperial"] },
         "Canivir, Wild": { native: "Caniviric", pidgins: ["Pidgin-Euskal"] },
         "Derro": { native: "Dwarven", pidgins: ["Pidgin-Imperial"] },
+        "Dragon, Argent": { native: "Draconic" },
+        "Dragon, Azure": { native: "Draconic" },
+        "Dragon, Gules": { native: "Draconic" },
+        "Dragon, Or": { native: "Draconic" },
+        "Dragon, Sable": { native: "Draconic" },
+        "Dragon, Vert": { native: "Draconic" },
         "Dryad": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
         "Ent": { native: "Entish", pidgins: ["Pidgin-Sylvan", "Pidgin-Elven"] },
         "Fey": { native: "Fey", pidgins: ["Pidgin-Sylvan"] },
@@ -10970,6 +11049,12 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Canivir, Wild": { size: "B", pace: 9,  dex: 1,  hel: 0,  str: 1,  act: 0,  int: -1, ver: 0,  hap: 0 },
         "Centaur": { size: "2B", pace: 22, dex: 3,  hel: 3,  str: 3,  act: 1,  int: 1,  ver: 1,  hap: 0 },
         "Derro": { size: "B", pace: 8,  dex: 0,  hel: 0,  str: 1,  act: 0,  int: 0,  ver: -1, hap: 0 },
+        "Dragon, Argent": { size: "2D", pace: 50, dex: 11, hel: 17, str: 11, act: 11, int: 11, ver: 11, hap: 0 },
+        "Dragon, Azure":  { size: "2D", pace: 50, dex: 5,  hel: 17, str: 11, act: 17, int: 11, ver: 11, hap: 0 },
+        "Dragon, Gules":  { size: "2D", pace: 50, dex: 5,  hel: 17, str: 17, act: 11, int: 17, ver: 17, hap: 0 },
+        "Dragon, Or":     { size: "2D", pace: 50, dex: 5,  hel: 17, str: 11, act: 17, int: 17, ver: 17, hap: 0 },
+        "Dragon, Sable":  { size: "2D", pace: 50, dex: 5,  hel: 17, str: 11, act: 17, int: 17, ver: 17, hap: 0 },
+        "Dragon, Vert":   { size: "2D", pace: 50, dex: 11, hel: 17, str: 11, act: 17, int: 11, ver: 11, hap: 0 },
         "Doppelgänger, Transcendent": { size: "B", pace: 8,  dex: 0,  hel: 5,  str: 5,  act: 0,  int: 0,  ver: 0,  hap: 0 },
         "Dryad": { size: "B", pace: 8,  dex: 0,  hel: 0,  str: 0,  act: 2,  int: 2,  ver: 2,  hap: 0 },
         "Ent": { size: "C", pace: 11, dex: -2, hel: 17, str: 17, act: 1,  int: 1,  ver: 1,  hap: 0 },
@@ -11021,31 +11106,51 @@ const xpCosts = {
     };
 
     // Master dictionary mapping specialized skill tracks straight to their Upbringing/Guild prerequisites
-    const guildControlAccessRegistry = {
-        // Requires Upbringing to be exactly "College Initiate"
-        collegeInitiateRequired: [
-            "guild: esoteric",
-            "arcane force",
-            "battle magic: fire",
-            "battle magic: frost",
-            "battle magic: light",
-            "battle magic: lightning",
-            "battle magic: thunder",
-            "conjuration"
-        ],
-        // Requires Upbringing to be exactly "Sage"
-        sageRequired: [
-            "guild: sages"
-        ],
-        // Requires Upbringing to be exactly "Temple Acolyte"
-        templeAcolyteRequired: [
-            "guild: temple"
-        ],
-        // Requires Upbringing to be exactly "Troupe Neophyte"
-        troupeNeophyteRequired: [
-            "guild: troupe"
-        ]
-    };
+const guildControlAccessRegistry = {
+    collegeInitiateRequired: [
+        "guild: esoteric",
+        "arcane force",
+        "battle magic: fire",
+        "battle magic: frost",
+        "battle magic: light",
+        "battle magic: lightning",
+        "battle magic: thunder",
+        "conjuration"
+    ],
+    sageRequired: [
+        "guild: sages"
+    ],
+    templeAcolyteRequired: [
+        "guild: temple"
+    ],
+    troupeNeophyteRequired: [
+        "guild: troupe"
+    ]
+};
+
+function getUnlockedGuildControls(upbringing, race) {
+    // Standardize input values in case arguments are swapped or padded
+    const strArg1 = String(upbringing || "").toLowerCase();
+    const strArg2 = String(race || "").toLowerCase();
+
+    // Check if either parameter contains "dragon" to guard against swapped arguments
+    const isDragon = strArg1.includes("dragon") || strArg2.includes("dragon");
+
+    if (isDragon) {
+        return Object.values(guildControlAccessRegistry).flat();
+    }
+
+    // Resolve actual upbringing string
+    const currentUpbringing = strArg1.includes("dragon") ? race : upbringing;
+
+    const unlocked = [];
+    if (currentUpbringing === "College Initiate") unlocked.push(...guildControlAccessRegistry.collegeInitiateRequired);
+    if (currentUpbringing === "Sage") unlocked.push(...guildControlAccessRegistry.sageRequired);
+    if (currentUpbringing === "Temple Acolyte") unlocked.push(...guildControlAccessRegistry.templeAcolyteRequired);
+    if (currentUpbringing === "Troupe Neophyte") unlocked.push(...guildControlAccessRegistry.troupeNeophyteRequired);
+
+    return unlocked;
+}
 
 
 
@@ -11211,25 +11316,28 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
             }
         }
 
-        // --- WARNING UI INJECTION ---
+// --- WARNING UI INJECTION ---
         if (inputEl) {
-            // BUG FIX: Wrapped in a 50ms timeout.
-            // This guarantees the sheet has finished rendering the "Max Level" text 
-            // BEFORE we read the DOM to check for it!
             setTimeout(() => {
                 try {
-                    const cardContainer = inputEl.closest('.skill-card') || inputEl.parentElement;
+                    const cardContainer = inputEl.closest('.aspect-card') || inputEl.parentElement;
                     
                     if (cardContainer) {
                         let warningEl = cardContainer.querySelector('.intellect-cap-warning');
                         const currentXp = parseInt(inputEl.value, 10) || 0;
-                        const cardText = cardContainer.textContent || "";
                         
-                        // Because this runs after a delay, the text is fully updated
-                        const isMaxLevelReached = cardText.includes("Max Level");
+                        // Programmatically check if the skill has reached its absolute max level
+                        const currentLevel = getSkillTreeLevel(sanitizedKey);
+                        let maxLevel = 5;
+                        const config = (typeof guildCastSkillLevelCaps !== 'undefined' && guildCastSkillLevelCaps[sanitizedKey]) || 
+                                       (typeof commonSkillLevelCaps !== 'undefined' && commonSkillLevelCaps[sanitizedKey]);
+                        if (config && config.maxLevel !== undefined) {
+                            maxLevel = config.maxLevel;
+                        }
+                        const isAtMaxLevel = currentLevel >= maxLevel;
 
-                        // We can now just check currentXp directly
-                        if (currentXp === maxAllowedXp && !isMaxLevelReached) {
+                        // Only show the warning if capped by intellect AND not already at max level
+                        if (currentXp === maxAllowedXp && !isAtMaxLevel) {
                             if (!warningEl) {
                                 warningEl = document.createElement('div');
                                 warningEl.className = 'intellect-cap-warning';
@@ -12262,7 +12370,7 @@ function calculateSheet() {
   
   
     // Modular processor mapping function for Guild, Cast, and Rank 3+ tracks with strict Guild Controls
-    const processSkillList = (skillArray, defaultCost, isGuildCastGroup) => {
+const processSkillList = (skillArray, defaultCost, isGuildCastGroup) => {
     skillArray.forEach(treeName => {
         const sanitizedKey = treeName.toLowerCase();
         const fieldId = "sk-xp-" + sanitizedKey.replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
@@ -12270,10 +12378,16 @@ function calculateSheet() {
         const inputElement = document.getElementById(fieldId);
         const currentUpbringing = document.getElementById("char-upbringing") ? document.getElementById("char-upbringing").value.toLowerCase() : "";
 
+        // Check if character race is a dragon
+        const raceSelect = document.getElementById("char-race");
+        const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
+        const isDragon = currentRace.includes("dragon");
+
         let isAccessPermitted = true;
         let accessDenialReason = "";
 
-        if (isGuildCastGroup) {
+        // Only enforce guild/upbringing restrictions if NOT a dragon
+        if (isGuildCastGroup && !isDragon) {
             if (guildControlAccessRegistry.collegeInitiateRequired.includes(sanitizedKey) && currentUpbringing !== "college initiate") {
                 if (sanitizedKey.startsWith("battle magic:")) {
                     const currentXp = inputElement ? parseInt(inputElement.value) || 0 : 0;
@@ -12297,7 +12411,7 @@ function calculateSheet() {
         }
 
         const prereqCheck = checkPrerequisiteAccess(sanitizedKey, currentUpbringing);
-        if (! prereqCheck.permitted) {
+        if (!prereqCheck.permitted) {
             isAccessPermitted = false;
             accessDenialReason = prereqCheck.reason;
         }
@@ -14003,25 +14117,33 @@ const langData = ethnosLanguages[currentEthnos] || defaultEthnosData;
  nativeBox.value = langData ? langData.native : "None";
 
  // 2. Validate Intellect threshold (Must be strictly greater than 2)
- if (finalInt > 2 && langData) {
-     pidginSelect.disabled = false;
-     const trackingKey = "lang-" + currentEthnos;
-     if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
-         let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
-         langData.pidgins.forEach(p => {
-             // Supports clean trailing formats (e.g., "Pidgin-Imperial" -> "Imperial")
-             const fluentName = p.toLowerCase().replace("pidgin-", "").replace("pidgin", "").trim();
-             const capitalizedName = fluentName.charAt(0).toUpperCase() + fluentName.slice(1);
-             optionsHtml += `<option value="${p}">${capitalizedName}</option>`;
-         });
-         pidginSelect.innerHTML = optionsHtml;
-         pidginSelect.dataset.lastLangTracking = trackingKey;
-     }
- } else {
-     pidginSelect.disabled = true;
-     pidginSelect.innerHTML = '<option value="None">Intellect must be > 2 to upgrade a Pidgin...</option>';
-     pidginSelect.dataset.lastLangTracking = "";
- }
+const hasPidgins = langData && Array.isArray(langData.pidgins) && langData.pidgins.length > 0;
+
+if (!hasPidgins) {
+    // 1. Superceding condition: Culture has no pidgins available
+    pidginSelect.disabled = true;
+    pidginSelect.innerHTML = '<option value="None">No pidgin languages available...</option>';
+    pidginSelect.dataset.lastLangTracking = "";
+} else if (finalInt <= 2) {
+    // 2. Intellect requirement condition
+    pidginSelect.disabled = true;
+    pidginSelect.innerHTML = '<option value="None">Intellect must be > 2 to upgrade a Pidgin...</option>';
+    pidginSelect.dataset.lastLangTracking = "";
+} else {
+    // 3. Valid state: Intellect > 2 AND pidgins exist
+    pidginSelect.disabled = false;
+    const trackingKey = "lang-" + currentEthnos;
+    if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
+        let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
+        langData.pidgins.forEach(p => {
+            const fluentName = p.toLowerCase().replace("pidgin-", "").replace("pidgin", "").trim();
+            const capitalizedName = fluentName.charAt(0).toUpperCase() + fluentName.slice(1);
+            optionsHtml += `<option value="${p}">${capitalizedName}</option>`;
+        });
+        pidginSelect.innerHTML = optionsHtml;
+        pidginSelect.dataset.lastLangTracking = trackingKey;
+    }
+}
 
  // 3. Build and format Tab 4 dynamic badges summary
  const langContainer = document.getElementById("sages-languages-tab4-card");
@@ -14495,6 +14617,11 @@ function toggleRank3Unlock(checked) {
 
   // Global verification rule function allowing Tab 4 to see if a Guild or Cast skill tree's current level is locked out by controls
 window.isGuildAccessBlockedForLevel = function(treeKey, targetLevel) {
+    // Dragons bypass all guild/upbringing skill blockade levels entirely
+    const raceSelect = document.getElementById("char-race");
+    const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
+    if (currentRace.includes("dragon")) return false;
+
     const upbringingSelect = document.getElementById("char-upbringing");
     const currentAffiliation = upbringingSelect ? upbringingSelect.value.toLowerCase() : "";
 
@@ -14839,6 +14966,12 @@ window.racialSkillsMap = {
     "Canivir, Wild":              ["keen_sniffer"],
     "Centaur":                    ["creature_curse_disease_immunity", "starlight_vision"],
     "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
+    "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "dragonhide_suit", "creature_frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
+    "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "dragonhide_suit", "creature_lightning_arc", "creature_magic_resistance", "creature_thunderous_roar"],
+    "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "dragonhide_suit", "creature_fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
+    "Dragon, Or": ["creature_curse_disease_immunity", "creature_light_immunity", "creature_darkness_aversion", "creature_umbra_aversion", "dragonhide_suit", "creature_magic_resistance", "creature_searing_light_breath"],
+    "Dragon, Sable": ["creature_acid_breath", "creature_acid_immunity", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbra_immunity", "dragonhide_suit", "creature_light_aversion", "creature_magic_resistance"],
+    "Dragon, Vert": ["creature_curse_disease_immunity", "creature_poison_immunity", "creature_venom_immunity", "dragonhide_suit", "creature_magic_resistance", "creature_petrifying_gaze", "creature_poison_breath"],
     "Doppelgänger, Transcendent": ["unhinging_jaw"],
     "Dryad":                      ["creature_curse_disease_immunity", "meld", "life_bond"],
     "Ent":                        ["creature_curse_disease_immunity", "creature_light_immunity", "creature_thunder_immunity", "creature_lightning_immunity", "creature_fire_vulnerability"],
@@ -14942,7 +15075,6 @@ window.RACIAL_BONUSES_BY_RACE = {
     "Vulpivir": [
         { skills: ["hide","sneak"], amount: 1 },
     ],
-    // --- Newly Added Races & Affinities ---
     "Derro": [
         { skills: ["brutal_weapons"], amount: 1 }, // Brutal Weapons Affinity
     ]
