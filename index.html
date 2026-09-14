@@ -2295,18 +2295,20 @@ details[open] #skills-collapsed-summary {
           <input type="text" id="total-ver" readonly>
           <div class="hint" id="mod-note-ver" style="margin-top: 5px; text-align: center;"></div>
         </div>
- <!-- HAP -->
-        <div class="aspect-card">
-          <div class="aspect-name">Hap</div>
-          <div class="form-group" style="height: 58px; display: flex; align-items: center; justify-content: center;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
-              <label style="margin: 0; font-size: 0.68rem; text-transform: uppercase;">Roll:</label>
-              <input type="number" id="base-hap" class="roll-input" value="5" min="1" max="12" oninput="calculateSheet()">
-            </div>
-          </div>
-          <input type="text" id="total-hap" readonly>
-          <div class="hint" id="mod-note-hap" style="margin-top: 5px; text-align: center;"></div>
-        </div>
+<!-- HAP -->
+<div class="aspect-card">
+  <div class="aspect-name">Hap</div>
+  <div class="form-group">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 4px;">
+      <label style="margin: 0; font-size: 0.68rem; text-transform: uppercase;">Roll:</label>
+      <input type="number" id="base-hap" class="roll-input" value="5" min="1" max="12" oninput="calculateSheet()">
+    </div>
+    <!-- Invisible spacer matching the height of the select box in other cards -->
+    <div style="visibility: hidden; height: 30px;" aria-hidden="true"></div>
+  </div>
+  <input type="text" id="total-hap" readonly>
+  <div class="hint" id="mod-note-hap" style="margin-top: 5px; text-align: center;"></div>
+</div>
       </div>
     </div> 
   </details>
