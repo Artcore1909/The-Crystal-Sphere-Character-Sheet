@@ -7833,7 +7833,7 @@ const tooltipRegistry = {
     },
     "elusive": {
         title: "Elusive",
-        description: "When rolling Avoidance, Crit results, in addition to their normal effect, negate Crit results made against the creature."
+        description: "When rolling Avoidance, Crit results, in addition to their normal effect, negate Crit results made against you."
     },
     "enthral": {
         title: "Enthral",
@@ -10090,10 +10090,6 @@ const tooltipRegistry = {
   "bullseye": {
     title: "Bullseye",
     description: "You can change all Blank Attack Results to Skill Results while shooting an Arc-bow."
-  },
-  "elusive": {
-    title: "Elusive",
-    description: "You can change all Blank Avoidance Results to Skill Results so long as you are unarmored."
   },
   "martial_prowess": {
     title: "Martial Prowess",
@@ -24008,9 +24004,7 @@ window.renderCompendiumMiniSheet = function(creatureName) {
     if (!container) return;
 
     if (!creatureName || creatureName === "None") {
-        container.innerHTML = `
-
-        `;
+        container.innerHTML = ``;
         return;
     }
 
@@ -24020,6 +24014,18 @@ window.renderCompendiumMiniSheet = function(creatureName) {
 
     const asp = creature.aspects || {};
     const inspectorState = characterChoicesState.compendiumInspector;
+
+    // --- Initiative Calculation Logic ---
+    const dexVal = parseInt(asp.dex) || 0;
+    const actVal = parseInt(asp.act ?? asp.acu) || 0; // Checks act or acu
+    const rawTotal = dexVal + actVal;
+
+    let initString = "—";
+    if (asp.dex !== undefined || (asp.act !== undefined || asp.acu !== undefined)) {
+        const diceCount = Math.min(6, rawTotal);
+        const remainder = Math.max(0, rawTotal - 6);
+        initString = `${diceCount}d${remainder > 0 ? ` + ${remainder}` : ''}`;
+    }
 
     container.innerHTML = `
         <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
@@ -24057,9 +24063,16 @@ window.renderCompendiumMiniSheet = function(creatureName) {
                 </div>
             </div>
 
-            <!-- Row 4: Avoidance & Defense -->
-            <div style="font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
-                <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+            <!-- Row 4: Avoidance & Initiative Defense Stats -->
+            <div style="display: flex; gap: 15px; font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <div>
+                    <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span> 
+                    <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Initiative:</span> 
+                    <span style="font-weight: bold; color: #d97706;">${initString}</span>
+                </div>
             </div>
 
             <!-- Row 5: Attacks & Abilities Columns -->
@@ -24293,12 +24306,48 @@ const encounterChartsRegistry = {
 // =========================================================================
 
 window.characterChoicesState = window.characterChoicesState || {};
-if (!characterChoicesState.compendiumInspector) {
-    characterChoicesState.compendiumInspector = {
-        selectedCreatureName: "None",
-        currentLostVit: 0,
-        currentLostMana: 0
-    };
+// Ensure state structure supports an array of inspectors
+if (!characterChoicesState.compendiumInspectorCards) {
+    characterChoicesState.compendiumInspectorCards = [
+        { id: 'inspector-0', selectedCreatureName: "None", currentLostVit: 0, currentLostMana: 0 }
+    ];
+}
+
+function renderCompendiumInspectorUI() {
+    const tabCompendium = document.getElementById("tab-compendium");
+    if (!tabCompendium) return;
+
+    // Main wrapper container for all inspector cards
+    let wrapper = document.getElementById("compendium-inspector-wrapper");
+    if (!wrapper) {
+        wrapper = document.createElement("div");
+        wrapper.id = "compendium-inspector-wrapper";
+        
+        const accordionEl = tabCompendium.querySelector(".compendium-accordion");
+        if (accordionEl) {
+            tabCompendium.insertBefore(wrapper, accordionEl);
+        } else {
+            tabCompendium.appendChild(wrapper);
+        }
+    }
+
+    // Render each inspector card in the state
+    wrapper.innerHTML = characterChoicesState.compendiumInspectorCards.map((inspector, index) => {
+        return renderInspectorCardHTML(inspector, index);
+    }).join('') + `
+        <div style="margin-bottom: 20px;">
+            <button onclick="window.addCompendiumInspector()" style="padding: 6px 12px; background: #5c1d1d; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">
+                + Inspect Another Creature
+            </button>
+        </div>
+    `;
+
+    // Re-render mini sheets for each card
+    characterChoicesState.compendiumInspectorCards.forEach((inspector, index) => {
+        if (inspector.selectedCreatureName !== "None") {
+            window.renderCompendiumMiniSheet(inspector.selectedCreatureName, index);
+        }
+    });
 }
 
 if (typeof window.escapeHtml !== "function") {
@@ -24376,13 +24425,56 @@ function renderCompendiumInspectorUI() {
     const tabCompendium = document.getElementById("tab-compendium");
     if (!tabCompendium) return;
 
-    if (document.getElementById("compendium-inspector-card")) return;
+    // Initialize array state if missing or legacy single object exists
+    if (!characterChoicesState.compendiumInspectorCards) {
+        characterChoicesState.compendiumInspectorCards = [
+            characterChoicesState.compendiumInspector || {
+                id: 'inspector-0',
+                selectedCreatureName: "None",
+                currentLostVit: 0,
+                currentLostMana: 0
+            }
+        ];
+    }
 
+    // Wrapper container for all inspectors
+    let wrapper = document.getElementById("compendium-inspector-wrapper");
+    if (!wrapper) {
+        wrapper = document.createElement("div");
+        wrapper.id = "compendium-inspector-wrapper";
+        
+        const accordionEl = tabCompendium.querySelector(".compendium-accordion");
+        if (accordionEl) {
+            tabCompendium.insertBefore(wrapper, accordionEl);
+        } else {
+            tabCompendium.appendChild(wrapper);
+        }
+    }
+
+    // Render inspector cards and "Add" button
+    wrapper.innerHTML = characterChoicesState.compendiumInspectorCards.map((inspector, index) => {
+        return renderInspectorCardHTML(inspector, index);
+    }).join('') + `
+        <div style="margin-bottom: 20px;">
+            <button onclick="window.addCompendiumInspector()" style="padding: 6px 12px; background: #5c1d1d; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">
+                + Inspect Another Creature
+            </button>
+        </div>
+    `;
+
+    // Populate mini-sheets for each inspector
+    characterChoicesState.compendiumInspectorCards.forEach((inspector, index) => {
+        if (inspector.selectedCreatureName && inspector.selectedCreatureName !== "None") {
+            window.renderCompendiumMiniSheet(inspector.selectedCreatureName, index);
+        }
+    });
+}
+
+function renderInspectorCardHTML(inspector, index) {
     const allCreatures = getAllCompendiumCreatures();
     allCreatures.sort((a, b) => a.name.localeCompare(b.name));
 
     let optionsHtml = `<option value="None">-- Select Creature to Inspect --</option>`;
-    
     const categorized = {};
     allCreatures.forEach(c => {
         if (!categorized[c.category]) categorized[c.category] = [];
@@ -24392,63 +24484,51 @@ function renderCompendiumInspectorUI() {
     Object.entries(categorized).forEach(([cat, creatures]) => {
         optionsHtml += `<optgroup label="${cat}">`;
         creatures.forEach(c => {
-            const isSelected = characterChoicesState.compendiumInspector.selectedCreatureName === c.name ? "selected" : "";
+            const isSelected = inspector.selectedCreatureName === c.name ? "selected" : "";
             optionsHtml += `<option value="${escapeHtml(c.name)}" ${isSelected}>${escapeHtml(c.name)}</option>`;
         });
         optionsHtml += `</optgroup>`;
     });
 
-    const inspectorCard = document.createElement("div");
-    inspectorCard.id = "compendium-inspector-card";
-    inspectorCard.className = "aspect-card";
-    inspectorCard.style.cssText = "margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;";
-    
-    inspectorCard.innerHTML = `
-        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-red); border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">Creature Quick Inspector</h3>
-        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-            <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
-                <label>Select Creature</label>
-<select id="compendium-creature-select" onchange="window.selectCompendiumCreature(this.value)" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold; text-align: left;">${optionsHtml}</select>
+    const isOriginal = index === 0;
+
+    return `
+        <div id="compendium-inspector-card-${index}" class="aspect-card" style="margin-bottom: 15px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 5px; margin-bottom: 10px;">
+                <h3 style="margin: 0; color: var(--primary-red);">Creature Quick Inspector ${index > 0 ? `#${index + 1}` : ''}</h3>
+                ${isOriginal ? `
+                    <button onclick="window.clearCompendiumInspector(${index})" style="background: none; border: 1px solid #7c6f64; color: #7c6f64; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.75rem;">Clear</button>
+                ` : `
+                    <button onclick="window.removeCompendiumInspector(${index})" style="background: #b91c1c; border: none; color: white; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.75rem; font-weight: bold;">Delete</button>
+                `}
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <div class="builder-group" style="margin-bottom: 0; flex: 1; min-width: 240px;">
+                    <label style="font-size: 0.8rem; font-weight: bold;">Select Creature</label>
+                    <select onchange="window.selectCompendiumCreature(this.value, ${index})" style="width: 100%; padding: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                        ${optionsHtml}
+                    </select>
+                </div>
+            </div>
+            <div id="compendium-creature-sheet-container-${index}" style="margin-top: 15px;">
+                <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                    Select a creature above to load its interactive mini character sheet.
+                </div>
             </div>
         </div>
-        <div id="compendium-creature-sheet-container" style="margin-top: 15px;">
-
-        </div>
     `;
-
-    const accordionEl = tabCompendium.querySelector(".compendium-accordion");
-    if (accordionEl) {
-        tabCompendium.insertBefore(inspectorCard, accordionEl);
-    } else {
-        tabCompendium.appendChild(inspectorCard);
-    }
-    
-    if (characterChoicesState.compendiumInspector.selectedCreatureName !== "None") {
-        window.renderCompendiumMiniSheet(characterChoicesState.compendiumInspector.selectedCreatureName);
-    }
 }
 
-window.selectCompendiumCreature = function(creatureName) {
-    characterChoicesState.compendiumInspector.selectedCreatureName = creatureName;
-    characterChoicesState.compendiumInspector.currentLostVit = 0;
-    characterChoicesState.compendiumInspector.currentLostMana = 0;
-    window.renderCompendiumMiniSheet(creatureName);
-};
-
-window.updateInspectorVit = function(val) {
-    characterChoicesState.compendiumInspector.currentLostVit = Math.max(0, parseInt(val) || 0);
-};
-
-window.updateInspectorMana = function(val) {
-    characterChoicesState.compendiumInspector.currentLostMana = Math.max(0, parseInt(val) || 0);
-};
-
-window.renderCompendiumMiniSheet = function(creatureName) {
-    const container = document.getElementById("compendium-creature-sheet-container");
+window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
+    const container = document.getElementById(`compendium-creature-sheet-container-${index}`);
     if (!container) return;
 
     if (!creatureName || creatureName === "None") {
-        container.innerHTML = ``;
+        container.innerHTML = `
+            <div style="font-style: italic; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 10px;">
+                Select a creature above to load its interactive mini character sheet.
+            </div>
+        `;
         return;
     }
 
@@ -24457,19 +24537,16 @@ window.renderCompendiumMiniSheet = function(creatureName) {
     if (!creature) return;
 
     const asp = creature.aspects || {};
-    const inspectorState = characterChoicesState.compendiumInspector;
+    const inspectorState = characterChoicesState.compendiumInspectorCards[index] || {};
 
     container.innerHTML = `
         <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
             
             <!-- Row 1: Header Name & Details -->
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 4px; margin-bottom: 6px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 4px; margin-bottom: 8px;">
                 <span style="font-weight: bold; font-size: 0.95rem; color: #5c1d1d;">${escapeHtml(creature.name)} <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">[${escapeHtml(creature.category)}]</span></span>
                 <span style="font-size: 0.78rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(creature.size || 'B')} | Pace ${escapeHtml(creature.pace || '8')}</span>
             </div>
-
-            <!-- Optional Description Row in Inspector -->
-            ${creature.description ? `<div style="font-size: 0.78rem; color: #4a3f35; font-style: italic; margin-bottom: 8px; line-height: 1.35; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">${escapeHtml(creature.description)}</div>` : ''}
 
             <!-- Row 2: Aspect Strip -->
             <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; color: #5c1d1d; margin-bottom: 8px;">
@@ -24488,19 +24565,36 @@ window.renderCompendiumMiniSheet = function(creatureName) {
                     <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
                     <span style="font-weight: bold;">${creature.vit ?? '—'}</span>
                     <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${inspectorState.currentLostVit}" onchange="window.updateInspectorVit(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                    <input type="number" value="${inspectorState.currentLostVit || 0}" onchange="window.updateInspectorVit(this.value, ${index})" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
                 </div>
                 <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
                     <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
                     <span style="font-weight: bold;">${creature.mana ?? '—'}</span>
                     <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${inspectorState.currentLostMana}" onchange="window.updateInspectorMana(this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                    <input type="number" value="${inspectorState.currentLostMana || 0}" onchange="window.updateInspectorMana(this.value, ${index})" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
                 </div>
             </div>
 
-            <!-- Row 4: Avoidance & Defense -->
-            <div style="font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
-                <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+            <!-- Row 4: Avoidance & Initiative -->
+            <div style="display: flex; gap: 15px; font-size: 0.78rem; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
+                <div>
+                    <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoidance:</span>
+                    <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(creature.avoid || '—')}</span>
+                </div>
+                <div>
+                    <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Initiative:</span>
+                    <span style="font-weight: bold; color: #d97706;">
+                        ${(() => {
+                            const dex = parseInt(asp.dex, 10) || 0;
+                            const act = parseInt(asp.act ?? asp.acu, 10) || 0;
+                            const total = dex + act;
+                            if (total <= 0) return '—';
+                            const dice = Math.min(6, total);
+                            const rem = Math.max(0, total - 6);
+                            return `${dice}d${rem > 0 ? ` + ${rem}` : ''}`;
+                        })()}
+                    </span>
+                </div>
             </div>
 
             <!-- Row 5: Attacks & Abilities Columns -->
@@ -24511,16 +24605,7 @@ window.renderCompendiumMiniSheet = function(creatureName) {
                 </div>
                 <div>
                     <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
-                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => {
-                        const tooltipKey = getAbilityTooltipKey(ab);
-                        if (typeof Tooltip !== "undefined" && !Tooltip.get(tooltipKey)) {
-                            Tooltip.register(tooltipKey, {
-                                title: ab.split(/[:\[]/)[0].replace(/^[†‡⹋⸸\*\s]+/g, "").trim(),
-                                description: ab
-                            });
-                        }
-                        return `<div style="margin-bottom: 2px; color: var(--text-dark); cursor: help;" data-tooltip="${tooltipKey}">• ${escapeHtml(ab)}</div>`;
-                    }).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
                 </div>
             </div>
 
@@ -24528,6 +24613,53 @@ window.renderCompendiumMiniSheet = function(creatureName) {
     `;
 };
 
+// Global Actions
+window.addCompendiumInspector = function() {
+    characterChoicesState.compendiumInspectorCards.push({
+        id: `inspector-${Date.now()}`,
+        selectedCreatureName: "None",
+        currentLostVit: 0,
+        currentLostMana: 0
+    });
+    renderCompendiumInspectorUI();
+};
+
+window.removeCompendiumInspector = function(index) {
+    characterChoicesState.compendiumInspectorCards.splice(index, 1);
+    renderCompendiumInspectorUI();
+};
+
+window.clearCompendiumInspector = function(index) {
+    characterChoicesState.compendiumInspectorCards[index] = {
+        id: characterChoicesState.compendiumInspectorCards[index].id,
+        selectedCreatureName: "None",
+        currentLostVit: 0,
+        currentLostMana: 0
+    };
+    renderCompendiumInspectorUI();
+};
+
+window.selectCompendiumCreature = function(creatureName, index = 0) {
+    const card = characterChoicesState.compendiumInspectorCards[index];
+    if (card) {
+        card.selectedCreatureName = creatureName;
+        card.currentLostVit = 0;
+        card.currentLostMana = 0;
+        window.renderCompendiumMiniSheet(creatureName, index);
+    }
+};
+
+window.updateInspectorVit = function(val, index = 0) {
+    if (characterChoicesState.compendiumInspectorCards[index]) {
+        characterChoicesState.compendiumInspectorCards[index].currentLostVit = Math.max(0, parseInt(val) || 0);
+    }
+};
+
+window.updateInspectorMana = function(val, index = 0) {
+    if (characterChoicesState.compendiumInspectorCards[index]) {
+        characterChoicesState.compendiumInspectorCards[index].currentLostMana = Math.max(0, parseInt(val) || 0);
+    }
+};
 function generateCompendiumTab() {
     const accordion = document.querySelector("#tab-compendium .compendium-accordion");
     if (!accordion) return;
