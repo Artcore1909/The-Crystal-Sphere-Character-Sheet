@@ -4297,32 +4297,32 @@ const itemRegistry = {
         summary: "A two-handed polearm with an axe head.",
         includes: ["halberd_head", "halberd_butt", "halberd_half_pike"]
     },
-    "hammer_lurcrene_head": {
+    "hammer_lucerne_head": {
         name: "Head",
         modTags: ["brutal", "weapon", "metal_weapon", "weapon_2h"],
         governingAspect: "STR",
         damageType: "bash or thrust", bonusDamageText: "4 + ½ Dexterity", range: "Close (2 hexes)"
     },
-    "hammer_lurcrene_cue": {
+    "hammer_lucerne_cue": {
         name: "Cue Strike",
         modTags: ["brutal", "weapon", "metal_weapon", "weapon_2h"],
         governingAspect: "STR",
         damageType: "thrust", bonusDamageText: "+2", range: "Grappled & Engaged"
     },
-    "hammer_lurcrene_half_staff": {
+    "hammer_lucerne_half_staff": {
         name: "Half-Staff",
         modTags: ["brutal", "weapon", "metal_weapon", "weapon_2h"],
         governingAspect: "STR",
         damageType: "bash or thrust", bonusDamageText: "+4", range: "Engaged"
     },
-    "hammer_lurcrene": {
-        name: "Hammer, Lurcrene",
+    "hammer_lucerne": {
+        name: "Hammer, Lucerne",
         modTags: ["brutal", "weapon", "metal_weapon", "weapon_2h"],
         governingSkill: "Brutal Weapons",
         cost: 720,
         specialQualities: ["heavy_6", "sweep", "unwieldy"],
         summary: "A two-handed polearm designed to take out armored foes.",
-        includes: ["hammer_lurcrene_head", "hammer_lurcrene_cue", "hammer_lurcrene_half_staff"]
+        includes: ["hammer_lucerne_head", "hammer_lucerne_cue", "hammer_lucerne_half_staff"]
     },
     "hatchet_blade": {
         name: "Standard Grip",
@@ -5091,7 +5091,7 @@ const itemRegistry = {
         name: "Half-Sword",
         modTags: ["shrewd", "common", "weapon", "metal_weapon", "weapon_2h"],
         governingAspect: "STR",
-        damageType: "slash",
+        damageType: "slash or thrust",
         bonusDamageText: "+3",
         range: "Engaged"
     },
@@ -18736,9 +18736,9 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
 
     if (getLvl("mastery-illusionist") >= 3) attacks.push("Illusory Spell");
 
-    if (getLvl("mastery-jager") >= 1) attacks.push("Multi-shot");
-    if (getLvl("mastery-jager") >= 2) attacks.push("Ghost Arrow");
-    if (getLvl("mastery-jager") >= 3) attacks.push("Bullseye");
+    if (getLvl("mastery-j-ger") >= 1) attacks.push("Multi-shot");
+    if (getLvl("mastery-j-ger") >= 2) attacks.push("Ghost Arrow");
+    if (getLvl("mastery-j-ger") >= 3) attacks.push("Bullseye");
 
     if (getLvl("mastery-pugilist") >= 1) defenses.push("Elusive");
     if (getLvl("mastery-pugilist") >= 2) attacks.push("Martial Prowess");
@@ -18755,9 +18755,9 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
     if (getLvl("mastery-thaumaturgist") >= 2) attacks.push("Glyph");
     if (getLvl("mastery-thaumaturgist") >= 3) defenses.push("Haste");
 
-    if (getLvl("mastery-zweihander") >= 1) defenses.push("Deflect Strike");
-    if (getLvl("mastery-zweihander") >= 2) attacks.push("Deathstrike");
-    if (getLvl("mastery-zweihander") >= 3) defenses.push("Fortitudinous");
+    if (getLvl("mastery-zweih-nder") >= 1) defenses.push("Deflect Strike");
+    if (getLvl("mastery-zweih-nder") >= 2) attacks.push("Deathstrike");
+    if (getLvl("mastery-zweih-nder") >= 3) defenses.push("Fortitudinous");
 
     if (getLvl("occult-necromancer") >= 2) attacks.push("Enthrall Undead");
     if (getLvl("occult-necromancer") >= 3) attacks.push("Rend Life");
@@ -21353,9 +21353,9 @@ function importCharacterData(data) {
         Object.assign(characterChoicesState, JSON.parse(JSON.stringify(data.state)));
     }
 
-    // 3. Restore Core Identity Inputs first (Sex, Race, etc.)
+    // 3. Restore Core Identity Inputs first (Sex, Race, Rank XP, etc.)
     if (data.inputs) {
-        ["char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-name", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current"].forEach(id => {
+        ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current"].forEach(id => {
             const el = document.getElementById(id);
             if (el && data.inputs[id] !== undefined) el.value = data.inputs[id];
         });
@@ -21366,7 +21366,12 @@ function importCharacterData(data) {
         setupConditionalDropdowns();
     }
 
-    // 5. Restore remaining dependent inputs (Bonuses, Penalties, Pidgin, Skill XPs)
+    // 4.5. 🔥 BUILD RANK 3+ DOM INPUT ELEMENTS BASED ON RESTORED RANK XP
+    if (typeof renderRank3Cards === "function") {
+        renderRank3Cards();
+    }
+
+    // 5. Restore remaining dependent inputs (Bonuses, Penalties, Pidgin, Skill XPs including Rank 3+ inputs)
     if (data.inputs) {
         Object.entries(data.inputs).forEach(([id, val]) => {
             const el = document.getElementById(id);
