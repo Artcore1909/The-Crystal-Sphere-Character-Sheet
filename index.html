@@ -14133,6 +14133,10 @@ if (!hasPidgins) {
     // 3. Valid state: Intellect > 2 AND pidgins exist
     pidginSelect.disabled = false;
     const trackingKey = "lang-" + currentEthnos;
+    
+    // Save current selection before potentially overwriting innerHTML
+    const currentPidginVal = pidginSelect.value; 
+
     if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
         let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
         langData.pidgins.forEach(p => {
@@ -14142,6 +14146,11 @@ if (!hasPidgins) {
         });
         pidginSelect.innerHTML = optionsHtml;
         pidginSelect.dataset.lastLangTracking = trackingKey;
+    }
+
+    // Restore selected value if it exists in the options list
+    if (currentPidginVal && currentPidginVal !== "None" && Array.from(pidginSelect.options).some(opt => opt.value === currentPidginVal)) {
+        pidginSelect.value = currentPidginVal;
     }
 }
 
@@ -16606,104 +16615,118 @@ else if (tree.key === "guild: sages") {
 } // Closes renderDynamicActiveTreesFeed cleanly once and for all!
  
 /* ===== js/09-extra-training.js ===== */
+function syncExtraTrainingDomFromState() {
+    if (!characterChoicesState.extraTrainingSelections) return;
+    Object.entries(characterChoicesState.extraTrainingSelections).forEach(([skillKey, state]) => {
+        ['p', 'et', 'm'].forEach(typeToken => {
+            const cb = document.querySelector(`input[data-skill="${skillKey}"][data-type="${typeToken}"]`);
+            if (cb && !cb.disabled) {
+                cb.checked = !!state[typeToken];
+            }
+        });
+        const row = document.querySelector(`input[data-skill="${skillKey}"]`)?.closest('.skill-row');
+        if (row) {
+            const sel = row.querySelector('.aspect-select');
+            if (sel && state.aspect) {
+                sel.value = state.aspect;
+            }
+        }
+    });
+}
+
 function renderExtraTrainingList(skillsDatasetArray, targetContainerId) {
   const container = document.getElementById(targetContainerId);
   if (!container) return;
 
-  // Clear out any old content inside the container placeholder first
   container.innerHTML = "";
 
   skillsDatasetArray.forEach(skillItem => {
-    // 1. Create a clean base row layout node
     const row = document.createElement('div');
     row.className = 'skill-row';
 
-    // 2. Transform the skill name to a standard snake-case dataset key (e.g. "Pick Locks" -> "pick_locks")
     const stateKey = skillItem.name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const skillState = characterChoicesState.extraTrainingSelections?.[stateKey] || {};
 
-    // 3. Build the left-hand Title Column Span Element
     const titleSpan = document.createElement('span');
-    titleSpan.className = 'skill-title'; // 🔥 CRUCIAL: Enables hover identification rules!
+    titleSpan.className = 'skill-title';
     titleSpan.textContent = skillItem.name;
     row.appendChild(titleSpan);
 
-    // 4. Build the center Checkboxes Flex Layout Column Element
     const checkboxWrapper = document.createElement('div');
     checkboxWrapper.className = 'skill-checkboxes';
 
-    // Generate checkboxes for Proficiency (p), Extra Training (et), and Mastery (m)
     ['p', 'et', 'm'].forEach(typeToken => {
       const checkboxInput = document.createElement('input');
       checkboxInput.type = 'checkbox';
-      checkboxInput.dataset.skill = stateKey; // 🔥 CRUCIAL: Cross-references your rule book arrays!
+      checkboxInput.dataset.skill = stateKey;
       checkboxInput.dataset.type = typeToken;
+      if (typeToken === 'p' && skillState.p) checkboxInput.checked = true;
+      if (typeToken === 'et' && skillState.et) checkboxInput.checked = true;
+      if (typeToken === 'm' && skillState.m) checkboxInput.checked = true;
       checkboxWrapper.appendChild(checkboxInput);
     });
     row.appendChild(checkboxWrapper);
 
-    // 5. Build the Aspect Column Container Element
     const aspectContainer = document.createElement('div');
     aspectContainer.className = 'aspect-container';
 
-    // Check if the skill has variable configurations or static governing attributes
     if (skillItem.aspect === "Var." || Array.isArray(skillItem.aspects)) {
       const selectMenu = document.createElement('select');
       selectMenu.className = 'aspect-select';
 
-// Compile option tags matching available rule book variables
-    const optionalAspects = Array.isArray(skillItem.aspects) ? skillItem.aspects : ["DEX", "STR", "1/2 (DEX + STR)", "VER"];
-    optionalAspects.forEach(aspectToken => {
-        const option = document.createElement('option');
-        option.value = aspectToken;
-        option.textContent = aspectToken;
-        selectMenu.appendChild(option);
-    });
-    aspectContainer.appendChild(selectMenu);
-} else if (targetContainerId === "castSkillsContainer" && skillItem.aspect === "VER") {
-    const selectMenu = document.createElement('select');
-    selectMenu.className = 'aspect-select';
-    ["VER", "VER + RANK"].forEach(opt => {
-        const o = document.createElement('option');
-        o.value = opt;
-        o.textContent = opt;
-        selectMenu.appendChild(o);
-    });
-    aspectContainer.appendChild(selectMenu);
-} else {
-    const staticTextNode = document.createElement('span');
-    staticTextNode.className = 'aspect-static';
-    
-    let aspectText = skillItem.aspect || "DEX";
+      const optionalAspects = Array.isArray(skillItem.aspects) ? skillItem.aspects : ["DEX", "STR", "1/2 (DEX + STR)", "VER"];
+      optionalAspects.forEach(aspectToken => {
+          const option = document.createElement('option');
+          option.value = aspectToken;
+          option.textContent = aspectToken;
+          selectMenu.appendChild(option);
+      });
+      if (skillState.aspect) {
+          selectMenu.value = skillState.aspect;
+      }
+      aspectContainer.appendChild(selectMenu);
+    } else if (targetContainerId === "castSkillsContainer" && skillItem.aspect === "VER") {
+      const selectMenu = document.createElement('select');
+      selectMenu.className = 'aspect-select';
+      ["VER", "VER + RANK"].forEach(opt => {
+          const o = document.createElement('option');
+          o.value = opt;
+          o.textContent = opt;
+          selectMenu.appendChild(o);
+      });
+      if (skillState.aspect) {
+          selectMenu.value = skillState.aspect;
+      }
+      aspectContainer.appendChild(selectMenu);
+    } else {
+      const staticTextNode = document.createElement('span');
+      staticTextNode.className = 'aspect-static';
+      
+      let aspectText = skillItem.aspect || "DEX";
+      const dexRaces = ["elf", "vulpivir"];
+      const dexOverrideSkills = ["balance", "charge", "climb", "jump", "run", "swim"];
+      const currentRace = (typeof characterChoicesState !== "undefined" && characterChoicesState) 
+          ? (characterChoicesState.race || "None") 
+          : "None";
 
-    // --- 🧠 DYNAMIC ASPECT SWAP FOR ELVES/VULPIVIR ---
-    const dexRaces = ["elf", "vulpivir"];
-    const dexOverrideSkills = ["balance", "charge", "climb", "jump", "run", "swim"];
-    const currentRace = (typeof characterChoicesState !== "undefined" && characterChoicesState) 
-        ? (characterChoicesState.race || "None") 
-        : "None";
+      if (dexOverrideSkills.includes(skillItem.name) && dexRaces.includes(currentRace)) {
+          aspectText = "DEX";
+      }
 
-    // If the race is Elf/Vulpivir and the skill is in our list, draw "DEX" instead of "STR"
-    if (dexOverrideSkills.includes(skillItem.name) && dexRaces.includes(currentRace)) {
-        aspectText = "DEX";
+      staticTextNode.textContent = aspectText;
+      aspectContainer.appendChild(staticTextNode);
     }
+    row.appendChild(aspectContainer);
 
-    staticTextNode.textContent = aspectText;
-    aspectContainer.appendChild(staticTextNode);
-}
-row.appendChild(aspectContainer);
-
-    // 6. Build the Right-Hand Dice Calculation Output Column Element
     const diceCalcSpan = document.createElement('span');
     diceCalcSpan.className = 'dice-pool-output';
-    diceCalcSpan.id = `dice_output_${stateKey}`; // Used by the automated math formula engine
-    diceCalcSpan.textContent = "—"; // Standard em dash fallback on initialization
+    diceCalcSpan.id = `dice_output_${stateKey}`;
+    diceCalcSpan.textContent = "—";
     row.appendChild(diceCalcSpan);
 
-    // Append the newly created skill row item into your main wrapper layout
     container.appendChild(row);
   });
 
-  // Automatically compute dice values right after rendering rows into the DOM
   if (typeof updateExtraTrainingDicePools === "function") {
     updateExtraTrainingDicePools();
   }
@@ -21273,7 +21296,10 @@ function exportCharacterData() {
         inputs: {},
         inventories: [],
         laria: [],
-        customItems: {}
+        customItems: {},
+        uiState: {
+            isSkillsOverviewCollapsed: document.getElementById("skills-overview-card")?.classList.contains("collapsed") || false
+        }
     };
 
     const tabNav = document.querySelector('.tab-navigation');
@@ -21293,7 +21319,7 @@ function exportCharacterData() {
         "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap",
         "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver",
         "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current",
-        "char-native-lang", "char-pidgin-select", "sex-bonus-choice", "race-bonus-choice", "race-penalty-choice"
+        "char-native-lang", "char-pidgin-select", "sex-bonus-choice", "upbringing-bonus-choice", "race-bonus-choice", "race-penalty-choice"
     ];
     
     // Dynamically grab all skill XP inputs
@@ -21353,25 +21379,48 @@ function importCharacterData(data) {
         Object.assign(characterChoicesState, JSON.parse(JSON.stringify(data.state)));
     }
 
-    // 3. Restore Core Identity Inputs first (Sex, Race, Rank XP, etc.)
+    // 3. Restore Core Identity Inputs first (so char-upbringing, char-race, etc. are set in DOM)
     if (data.inputs) {
-        ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current"].forEach(id => {
+        ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current", "char-native-lang", "char-pidgin-select"].forEach(id => {
             const el = document.getElementById(id);
             if (el && data.inputs[id] !== undefined) el.value = data.inputs[id];
         });
     }
 
-    // 4. Force setup of conditional dropdowns so bonus/penalty options are generated in the DOM
-    if (typeof setupConditionalDropdowns === "function") {
-        setupConditionalDropdowns();
+    // 4. Update upbringing options and conditional dropdowns now that identities are set
+    if (typeof updateUpbringingOptions === "function") updateUpbringingOptions();
+    if (typeof setupConditionalDropdowns === "function") setupConditionalDropdowns();
+
+    // 5. Restore bonus/penalty selection inputs now that their options exist in the DOM
+    if (data.inputs) {
+        ["sex-bonus-choice", "upbringing-bonus-choice", "race-bonus-choice", "race-penalty-choice"].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && data.inputs[id] !== undefined) el.value = data.inputs[id];
+        });
     }
 
-    // 4.5. 🔥 BUILD RANK 3+ DOM INPUT ELEMENTS BASED ON RESTORED RANK XP
-    if (typeof renderRank3Cards === "function") {
-        renderRank3Cards();
+    // 5.5. Re-render dynamic UI components and sync table states
+    if (typeof renderRank3Cards === "function") renderRank3Cards();
+    if (typeof renderCustomSkillsManager === "function") renderCustomSkillsManager();
+    if (typeof refreshCustomSkillRows === "function") refreshCustomSkillRows();
+    if (typeof renderDynamicActiveTreesFeed === "function") renderDynamicActiveTreesFeed();
+    if (typeof syncExtraTrainingDomFromState === "function") syncExtraTrainingDomFromState();
+    if (typeof syncExtraTrainingTalentsToBoxes === "function") syncExtraTrainingTalentsToBoxes();
+    if (typeof syncMasteryTalentsToBoxes === "function") syncMasteryTalentsToBoxes();
+
+    // 5.6. Restore UI Toggle State (Skills Overview collapsed state)
+    if (data.uiState) {
+        const overviewCard = document.getElementById("skills-overview-card");
+        if (overviewCard) {
+            if (data.uiState.isSkillsOverviewCollapsed) {
+                overviewCard.classList.add("collapsed");
+            } else {
+                overviewCard.classList.remove("collapsed");
+            }
+        }
     }
 
-    // 5. Restore remaining dependent inputs (Bonuses, Penalties, Pidgin, Skill XPs including Rank 3+ inputs)
+    // 6. Restore remaining dependent inputs (Skill XPs, etc.)
     if (data.inputs) {
         Object.entries(data.inputs).forEach(([id, val]) => {
             const el = document.getElementById(id);
@@ -21379,7 +21428,7 @@ function importCharacterData(data) {
         });
     }
 
-    // 6. Restore Inventories & Laria
+    // 7. Restore Inventories & Laria
     if (data.inventories) {
         document.querySelectorAll(".inventory-textarea").forEach((el, idx) => {
             if (data.inventories[idx] !== undefined) el.value = data.inventories[idx];
@@ -21391,12 +21440,20 @@ function importCharacterData(data) {
         });
     }
 
-    // 7. Trigger System-Wide Recalculation
+    // 8. Trigger System-Wide Recalculation
     if (typeof calculateSheet === "function") calculateSheet();
     if (typeof updateEquipmentCardViews === "function") updateEquipmentCardViews();
     if (typeof populateGearDropdowns === "function") populateGearDropdowns();
     if (typeof populateWornEnchantmentDropdowns === "function") populateWornEnchantmentDropdowns();
     if (typeof renderMountMiniSheet === "function") renderMountMiniSheet();
+
+// At the end of importCharacterData(), right before alert("Character loaded successfully!"):
+    if (data.inputs && data.inputs["char-pidgin-select"]) {
+        const pidginEl = document.getElementById("char-pidgin-select");
+        if (pidginEl) {
+            pidginEl.value = data.inputs["char-pidgin-select"];
+        }
+    }
 
     closeCharacterManager();
     alert("Character loaded successfully!");
