@@ -10670,7 +10670,64 @@ const masterTreeAutoCheckMap = {
 };
 
 /**
- * Automation Handler Module (Rewritten for Multi-Dimensional Levels)
+ * Checks if a skill is granted proficiency from dropdown choices (Sages, Background,
+ * Interlocution) or another active tree in masterTreeAutoCheckMap.
+ */
+function isSkillProficientFromOtherSources(subSkillKey, currentTreeKey) {
+  // 1. Check choice memory in characterChoicesState
+  if (typeof characterChoicesState !== 'undefined') {
+    const choiceCategories = ['sagesSelections', 'backgroundSelections', 'interlocutionSelections'];
+    for (const cat of choiceCategories) {
+      const selections = characterChoicesState[cat];
+      if (selections && typeof selections === 'object') {
+        for (const rawVal of Object.values(selections)) {
+          if (typeof rawVal === 'string' && rawVal && rawVal !== 'None' && !rawVal.includes('Choose')) {
+            const parts = rawVal.split(' & ');
+            for (const part of parts) {
+              if (part.toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey) {
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 2. Check live dropdown selections in the DOM
+  const dropdownSelects = document.querySelectorAll('#left-skill-column-wrapper select');
+  for (const select of dropdownSelects) {
+    const val = select.value;
+    if (val && val !== 'None' && val !== 'Choose Skill' && !val.includes('Choose')) {
+      const parts = val.split(' & ');
+      for (const part of parts) {
+        if (part.toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey) {
+          return true;
+        }
+      }
+    }
+  }
+
+  // 3. Check if another progressive tree milestone grants this skill
+  if (typeof masterTreeAutoCheckMap !== 'undefined' && typeof getSkillTreeLevel === 'function') {
+    const normalizedCurrentKey = (currentTreeKey || '').toLowerCase();
+    for (const [treeKey, matrix] of Object.entries(masterTreeAutoCheckMap)) {
+      if (treeKey.toLowerCase() === normalizedCurrentKey) continue;
+      const otherLvl = getSkillTreeLevel(treeKey);
+      for (let i = 0; i < matrix.length; i++) {
+        if (otherLvl >= i + 1) {
+          const hasSkill = matrix[i].some(name => name.toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey);
+          if (hasSkill) return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Automation Handler Module (Multi-Source Aware)
  * Evaluates path unlocks and locks/unlocks the "P" target box states progressively.
  */
 function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
@@ -10684,10 +10741,14 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     skillsUnlockedAtThisLevel.forEach(rawSkillName => {
       const subSkillKey = rawSkillName.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const targetCheckbox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="p"]`);
-      
+
+      // Check if another source (e.g. Sages Guild dropdown) grants proficiency
+      const hasOtherSource = isSkillProficientFromOtherSources(subSkillKey, sanitizedKey);
+      const isProficient = levelIsActive || hasOtherSource;
+
       if (targetCheckbox) {
-        targetCheckbox.checked = levelIsActive;
-        targetCheckbox.disabled = levelIsActive;
+        targetCheckbox.checked = isProficient;
+        targetCheckbox.disabled = isProficient;
       }
 
       if (!characterChoicesState.extraTrainingSelections) {
@@ -10696,43 +10757,44 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
       if (!characterChoicesState.extraTrainingSelections[subSkillKey]) {
         characterChoicesState.extraTrainingSelections[subSkillKey] = { p: false, et: false, m: false, aspect: "" };
       }
-      
+
       // Update proficiency state in memory
-      characterChoicesState.extraTrainingSelections[subSkillKey].p = levelIsActive;
+      characterChoicesState.extraTrainingSelections[subSkillKey].p = isProficient;
 
-      // 🔥 If proficiency is lost, cascade down and automatically revoke ET and Mastery
-      if (!levelIsActive) {
-          characterChoicesState.extraTrainingSelections[subSkillKey].et = false;
-          characterChoicesState.extraTrainingSelections[subSkillKey].m = false;
+      // 🔥 ONLY revoke ET and Mastery if proficiency is truly lost across ALL sources
+      if (!isProficient) {
+        characterChoicesState.extraTrainingSelections[subSkillKey].et = false;
+        characterChoicesState.extraTrainingSelections[subSkillKey].m = false;
 
-          const etBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="et"]`);
-          if (etBox) { etBox.checked = false; etBox.disabled = false; }
-          const mBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="m"]`);
-          if (mBox) { mBox.checked = false; mBox.disabled = false; }
+        const etBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="et"]`);
+        if (etBox) { etBox.checked = false; etBox.disabled = false; }
+        const mBox = document.querySelector(`input[data-skill="${subSkillKey}"][data-type="m"]`);
+        if (mBox) { mBox.checked = false; mBox.disabled = false; }
 
-          // Find and reset any dropdown slot holding this skill
-          const skillTitleSpan = Array.from(document.querySelectorAll('.skill-title')).find(el => el.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey);
-          if (skillTitleSpan) {
-              const skillName = skillTitleSpan.textContent.trim();
-              if (characterChoicesState.extraTrainingTalentSelections) {
-                  Object.keys(characterChoicesState.extraTrainingTalentSelections).forEach(slot => {
-                      if (characterChoicesState.extraTrainingTalentSelections[slot] === skillName) {
-                          characterChoicesState.extraTrainingTalentSelections[slot] = "None";
-                      }
-                  });
+        // Find and reset any dropdown slot holding this skill
+        const skillTitleSpan = Array.from(document.querySelectorAll('.skill-title')).find(el => el.textContent.trim().toLowerCase().replace(/[^a-z0-9]/g, '_') === subSkillKey);
+        if (skillTitleSpan) {
+          const skillName = skillTitleSpan.textContent.trim();
+          if (characterChoicesState.extraTrainingTalentSelections) {
+            Object.keys(characterChoicesState.extraTrainingTalentSelections).forEach(slot => {
+              if (characterChoicesState.extraTrainingTalentSelections[slot] === skillName) {
+                characterChoicesState.extraTrainingTalentSelections[slot] = "None";
               }
-              if (characterChoicesState.masteryTalentSelections) {
-                  Object.keys(characterChoicesState.masteryTalentSelections).forEach(slot => {
-                      if (characterChoicesState.masteryTalentSelections[slot] === skillName) {
-                          characterChoicesState.masteryTalentSelections[slot] = "None";
-                      }
-                  });
-              }
+            });
           }
+          if (characterChoicesState.masteryTalentSelections) {
+            Object.keys(characterChoicesState.masteryTalentSelections).forEach(slot => {
+              if (characterChoicesState.masteryTalentSelections[slot] === skillName) {
+                characterChoicesState.masteryTalentSelections[slot] = "None";
+              }
+            });
+          }
+        }
       }
     });
   });
 }
+
     // Master registry linking all 58 skill tree handles directly to their level-by-level rulebook unlock names
     const skillAbilitiesRegistry = {
     // --- Common Skills ---
@@ -11576,18 +11638,14 @@ function switchTab(tabId, event) {
 
 // Scans the active select dropdowns in the DOM and synchronizes/unchecks the checkboxes on the right
 function syncAllDropdownCheckboxes() {
-    // 1. Find all P (proficiency) checkboxes in the Skills Overview table
     const pBoxes = document.querySelectorAll('input[data-type="p"]');
-    
-    // Compile a set of all skills currently selected in any left-column dropdown
     const activeSelectedSkills = new Set();
 
-    // 2. Scan all select dropdowns currently existing on the page
+    // Scan all select dropdowns currently existing on the page
     const allSelects = document.querySelectorAll('#left-skill-column-wrapper select');
     allSelects.forEach(select => {
         const val = select.value;
         if (val && val !== "None" && val !== "Choose Skill" && !val.includes("Choose")) {
-            // Split options in case of combined skills (e.g. "Coerce & Intimidate")
             const parts = val.split(" & ");
             parts.forEach(skill => {
                 activeSelectedSkills.add(skill.toLowerCase().replace(/[^a-z0-9]/g, '_'));
@@ -11595,19 +11653,39 @@ function syncAllDropdownCheckboxes() {
         }
     });
 
-    // 3. Sync the checkboxes with the active selections
+    // Sync the checkboxes and memory with the active selections
     pBoxes.forEach(box => {
         const skillKey = box.getAttribute('data-skill');
         if (!skillKey) return;
 
         if (activeSelectedSkills.has(skillKey)) {
             box.checked = true;
-            box.disabled = true; // Lock the checkbox from manual user clicks
+            box.disabled = true;
+
+            // Keep state memory in sync with dropdown selection
+            if (typeof characterChoicesState !== 'undefined') {
+                if (!characterChoicesState.extraTrainingSelections) {
+                    characterChoicesState.extraTrainingSelections = {};
+                }
+                if (!characterChoicesState.extraTrainingSelections[skillKey]) {
+                    characterChoicesState.extraTrainingSelections[skillKey] = { p: true, et: false, m: false, aspect: "" };
+                } else {
+                    characterChoicesState.extraTrainingSelections[skillKey].p = true;
+                }
+            }
         } else {
-            // Only uncheck and unlock if it was previously checked/locked by a dropdown
-            if (box.disabled) {
+            // Guard: Only unlock and uncheck if this skill isn't granted by an active tree milestone
+            const hasTreeSource = typeof isSkillProficientFromOtherSources === 'function'
+                ? isSkillProficientFromOtherSources(skillKey, null)
+                : false;
+
+            if (!hasTreeSource && box.disabled) {
                 box.checked = false;
-                box.disabled = false; // Unlock
+                box.disabled = false;
+
+                if (typeof characterChoicesState !== 'undefined' && characterChoicesState.extraTrainingSelections?.[skillKey]) {
+                    characterChoicesState.extraTrainingSelections[skillKey].p = false;
+                }
             }
         }
     });
