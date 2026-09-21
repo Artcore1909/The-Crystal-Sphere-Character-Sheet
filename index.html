@@ -18351,13 +18351,13 @@ function updatePnpWriteInCards() {
     });
 
     // --- Innate Offensive Traits (Deadly Bite, Constrict, Devour, etc.) ---
-    const offenseLabelsMap = {
-        "deadly_bite": "Deadly Bite",
-        "deadly_sting": "Deadly Sting",
-        "constrict": "Constrict",
-        "devour": "Devour",
-        "firststrike": "Firststrike"
-    };
+const offenseLabelsMap = {
+    "deadly_bite": "Deadly Bite",
+    "deadly_sting": "Deadly Sting",
+    "constrict": "Constrict",
+    "devour": "Devour",
+    "firststrike": "Firststrike"
+};
 
     racialSkillsList.forEach(skillKey => {
         if (offenseLabelsMap[skillKey] && !attacks.includes(offenseLabelsMap[skillKey])) {
@@ -18565,7 +18565,7 @@ const bonusOffensiveSpellsMap = {
   "Aestas": ["Fire Sting", "Fire Corona"],
   "Autumnus": ["Transient Noise", "Shroud of Thunder"],
   "Hiems": ["Frostbite", "Frostshield", "Icicle"],
-  "Sea Lord": ["Jet Stream"],
+  "Sea Lord": ["Jetstream"], // Fixed space
   "Fire God": ["Fire Sting", "Fire Corona"],
   "Earth Goddess": ["Stone Fist", "Rend Earth"],
   "Wind Goddess": ["Down Draft", "Gust of Wind"],
