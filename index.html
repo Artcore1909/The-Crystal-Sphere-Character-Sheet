@@ -14356,14 +14356,18 @@ if (!hasPidgins) {
         "Wendigo", "Werebat", "Wereboar", "Werehyena", "Wererat", "Werewolf"
     ];
 
-    const hasDivineSalvation = activeEnchants["salvation"] || 
-                               activeEnchants["divine_salvation"] || 
+    const hasDivineSalvation = activeEnchants["divine_salvation"] || 
                                racialSkillsList.includes("divine_salvation") ||
                                racesWithDivineSalvation.includes(activeRace);
+
+    const hasSalvation = activeEnchants["salvation"];
 
     let avoidBadges = "";
     if (hasDivineSalvation) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="divine_salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Divine Salvation</span>`;
+    }
+    if (hasSalvation) {
+        avoidBadges += `<span class="locus-ench-tag" data-tooltip="salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Salvation</span>`;
     }
     if (activeEnchants["defending"]) {
         avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_defending" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Defending</span>`;
