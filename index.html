@@ -2154,7 +2154,7 @@ details[open] #skills-collapsed-summary {
         </div> 
         <div class="form-group span-12"> 
           <label for="char-pidgin-select">Second Language (Requires Int > 2)</label> 
-          <select id="char-pidgin-select" onchange="calculateSheet()" disabled> 
+          <select id="char-pidgin-select" onchange="this.dataset.savedPidgin = this.value; calculateSheet()" disabled> 
             <option value="None">Intellect too low for second language...</option> 
           </select> 
         </div> 
@@ -14215,8 +14215,10 @@ if (!hasPidgins) {
     pidginSelect.disabled = false;
     const trackingKey = "lang-" + currentEthnos;
     
-    // Save current selection before potentially overwriting innerHTML
-    const currentPidginVal = pidginSelect.value; 
+// Save current selection before potentially overwriting innerHTML
+    const currentPidginVal = (pidginSelect.dataset.savedPidgin && pidginSelect.dataset.savedPidgin !== "None")
+        ? pidginSelect.dataset.savedPidgin
+        : pidginSelect.value;
 
     if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
         let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
@@ -14232,6 +14234,9 @@ if (!hasPidgins) {
     // Restore selected value if it exists in the options list
     if (currentPidginVal && currentPidginVal !== "None" && Array.from(pidginSelect.options).some(opt => opt.value === currentPidginVal)) {
         pidginSelect.value = currentPidginVal;
+        pidginSelect.dataset.savedPidgin = currentPidginVal;
+    } else if (pidginSelect.value === "None") {
+        pidginSelect.dataset.savedPidgin = "None";
     }
 }
 
@@ -21410,9 +21415,15 @@ function exportCharacterData() {
     // Dynamically grab all skill XP inputs
     document.querySelectorAll("input[id^='sk-xp-']").forEach(el => inputIds.push(el.id));
     
-    inputIds.forEach(id => {
+inputIds.forEach(id => {
         const el = document.getElementById(id);
-        if (el) data.inputs[id] = el.value;
+        if (el) {
+            if (id === "char-pidgin-select" && el.dataset.savedPidgin && el.dataset.savedPidgin !== "None") {
+                data.inputs[id] = el.dataset.savedPidgin;
+            } else {
+                data.inputs[id] = el.value;
+            }
+        }
     });
 
     // Gather Inventories & Laria
@@ -21472,8 +21483,9 @@ function importCharacterData(data) {
         });
     }
 
-    // 4. Update upbringing options and conditional dropdowns now that identities are set
-    if (typeof updateUpbringingOptions === "function") updateUpbringingOptions();
+// 4. Update upbringing options and conditional dropdowns now that identities are set
+    const savedUpbringingBonus = (data.inputs && data.inputs["upbringing-bonus-choice"]) || "none";
+    if (typeof updateUpbringingOptions === "function") updateUpbringingOptions(savedUpbringingBonus);
     if (typeof setupConditionalDropdowns === "function") setupConditionalDropdowns();
 
     // 5. Restore bonus/penalty selection inputs now that their options exist in the DOM
@@ -21533,9 +21545,42 @@ function importCharacterData(data) {
     if (typeof renderMountMiniSheet === "function") renderMountMiniSheet();
 
 // At the end of importCharacterData(), right before alert("Character loaded successfully!"):
-    if (data.inputs && data.inputs["char-pidgin-select"]) {
+    if (data.inputs) {
+        const savedPidgin = data.inputs["char-pidgin-select"] || "None";
         const pidginEl = document.getElementById("char-pidgin-select");
         if (pidginEl) {
+            pidginEl.dataset.savedPidgin = savedPidgin;
+            pidginEl.dataset.lastLangTracking = ""; // forces calculateSheet to rebuild options for restored ethnos
+        }
+        if (data.inputs["upbringing-bonus-choice"]) {
+            const upEl = document.getElementById("upbringing-bonus-choice");
+            if (upEl) upEl.value = data.inputs["upbringing-bonus-choice"];
+        }
+        if (data.inputs["sex-bonus-choice"]) {
+            const sexEl = document.getElementById("sex-bonus-choice");
+            if (sexEl) sexEl.value = data.inputs["sex-bonus-choice"];
+        }
+        if (data.inputs["race-bonus-choice"]) {
+            const rBonusEl = document.getElementById("race-bonus-choice");
+            if (rBonusEl) rBonusEl.value = data.inputs["race-bonus-choice"];
+        }
+        if (data.inputs["race-penalty-choice"]) {
+            const rPenEl = document.getElementById("race-penalty-choice");
+            if (rPenEl) rPenEl.value = data.inputs["race-penalty-choice"];
+        }
+    }
+
+    // Force an immediate synchronous recalculation with the restored values
+    if (typeof calculateSheet.flush === "function") {
+        calculateSheet.flush();
+    } else if (typeof calculateSheet === "function") {
+        calculateSheet();
+    }
+
+    // Final safety assignment to ensure DOM dropdown matches restored state
+    if (data.inputs && data.inputs["char-pidgin-select"] && data.inputs["char-pidgin-select"] !== "None") {
+        const pidginEl = document.getElementById("char-pidgin-select");
+        if (pidginEl && !pidginEl.disabled) {
             pidginEl.value = data.inputs["char-pidgin-select"];
         }
     }
@@ -22415,14 +22460,13 @@ function translateSizeToTrample(sizeStr) {
     return { dice: 6, bonus: bonus };
 }
 
-function updateUpbringingOptions() {
-    // Corrected element ID to match your HTML ('char-upbringing')
+function updateUpbringingOptions(preferredVal) {
     const upbringingSelect = document.getElementById("char-upbringing");
     const upbringing = upbringingSelect ? upbringingSelect.value : "";
     const choiceSelect = document.getElementById("upbringing-bonus-choice");
     if (!choiceSelect) return;
 
-    const currentVal = choiceSelect.value;
+    const currentVal = preferredVal !== undefined ? preferredVal : choiceSelect.value;
     
     // Map of Upbringings to allowed Aspect options
     const optionsMap = {
@@ -22442,18 +22486,24 @@ function updateUpbringingOptions() {
     };
 
     const allowed = optionsMap[upbringing] || [];
-    choiceSelect.innerHTML = '<option value="none">-- Select Aspect --</option>';
 
-    allowed.forEach(opt => {
-        const el = document.createElement("option");
-        el.value = opt.val;
-        el.textContent = opt.label;
-        choiceSelect.appendChild(el);
-    });
+    // Only rebuild the options if the upbringing category changed or options are empty
+    if (choiceSelect.dataset.currentUpbringing !== upbringing || choiceSelect.options.length <= 1) {
+        choiceSelect.innerHTML = '<option value="none">-- Select Aspect --</option>';
+        allowed.forEach(opt => {
+            const el = document.createElement("option");
+            el.value = opt.val;
+            el.textContent = opt.label;
+            choiceSelect.appendChild(el);
+        });
+        choiceSelect.dataset.currentUpbringing = upbringing;
+    }
 
-    // Keep current selection if it is still valid for the selected Upbringing
-    if (allowed.some(a => a.val === currentVal)) {
+    // Keep or set current selection if valid for the selected Upbringing
+    if (currentVal && allowed.some(a => a.val === currentVal)) {
         choiceSelect.value = currentVal;
+    } else if (!allowed.some(a => a.val === choiceSelect.value)) {
+        choiceSelect.value = "none";
     }
 }
 
