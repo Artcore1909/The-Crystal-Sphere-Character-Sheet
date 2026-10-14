@@ -3387,7 +3387,7 @@ details[open] #skills-collapsed-summary {
 <br>
                     <li><strong>Blind:</strong> A blind attack is any kind of attack upon an enemy who the combatant cannot see. The attack is made at disadvantage, and only magical effects can modify their roll. A blind avoidance roll is made when a combatant is attempting to avoid an attack from a foe they cannot see. The Avoidance is made at disadvantage, and only magical effects can modify their roll. Blind Dexterity saves automatically fail, but other saves are only affected if the LM deems it fitting. To regain their sight, a blinded combatant is entitled to a Health save each Pulse.</li>
 <br>
-                    <li><strong>Bound & Gagged/Entangled:</strong> Bound or Entangled combatants cannot attack and are at disadvantage for the purpose of rolling avoidance. They can cast words and speak freely so long as they are not gagged. To escape, the target must either pass a Strength save or an Escape check.</li>
+                    <li><strong>Bound & Gagged/Entangled:</strong> Bound or Entangled combatants cannot attack, are at disadvantage for the purpose of rolling avoidance, and attacks made against them are at advantage. They can cast words and speak freely so long as they are not gagged. To escape, the target must either pass a Strength save or an Escape check.</li>
 <br>
                     <li><strong>Confused:</strong> Confused combatants cannot tell friend from foe and are easily startled. Whether they fight or flee and whom they attack or which direction they run is random. To regain their senses, a confused combatant is entitled to an Acuity save each Pulse.</li>
 <br>
@@ -3397,19 +3397,19 @@ details[open] #skills-collapsed-summary {
 <br>
                     <li><strong>Engaged:</strong> Combatants who are engaged with one another may attack each other with melee and pugil weapons. Any ranged attack on a foe that is engaged has a chance to hit one of the other combatants with whom they are engaged: if the shot or throw misses its intended target, randomly select a new target and roll a blind attack against their blind Avoidance. Unless you have the Melee Shot skill, all ranged attacks you make while you are engaged are at disadvantage.</li>
 <br>
-                    <li><strong>Fatigued:</strong> There are two types of fatigue: exertion and sleep deprivation. In anycase, a fatigued combatant suffers a cumulative -1d penalty on all rolls. Fatigue from physical exertion is removed by resting for one Pulse per level of fatigue while fatigue from sleep deprivation is removed by sleeping for two phases.</li>
+                    <li><strong>Fatigued:</strong> There are two types of fatigue: exertion and sleep deprivation. In anycase, a fatigued combatant suffers a cumulative -1 dice limit penalty on all rolls. Fatigue from physical exertion is removed by resting for one Pulse per level of fatigue while fatigue from sleep deprivation is removed by sleeping for two phases.</li>
 <br>
                     <li><strong>Grappled/Pinned:</strong> Grappled combatants are in physical contact with one another. At any given time, only one combatant is in control of the grapple. He is able to do the following: make a one-handed attack, perform a reasonable Check, drag or carry the grapplee at ½ pace so long as that target is their size or smaller, or end the grapple. Either combatant can make a non-move, non-attack free action, cast a word spell, or confront the grapple. The grapplee may attempt an Escape versus Grapple Confrontation to slip free. Striking a grappled or pinned foe incurs no penalty, however, a miss incurs an attack at disadvantage against the other combatant.  Either combatant in a grapple or a pin attempting to avoid a strike is at disadvantage. Pinned opponents may have more or fewer restrictions as determined by the LM.</li>
 <br>
                     <li><strong>Grievously Wounded:</strong> You can only recover one Vitality per day and only if your wounds are treated by a TN 2 Survival check. This effect is removed by the Cure Wounds encænium.</li>
 <br>
-                    <li><strong>Impaired:</strong> Impairment is a -1d penalty to all Dexterity or Strength based skills and to all Dexterity and Strength saves. Impairment is cumulative and all levels of impairment are removed once the cause of the impairment is removed.</li>
+                    <li><strong>Impaired:</strong> Impairment is a -1 dice limit penalty to all Dexterity or Strength based skills and to all Dexterity and Strength saves. Impairment is cumulative and all levels of impairment are removed once the cause of the impairment is removed.</li>
 <br>
                     <li><strong>Nauseated:</strong> A nauseated combatant must pass a Health save before taking any action. If he rolls a zero, he vomits as a Move Action and is no longer nauseated; if rolls a six, he is also no longer nauseated.</li>
 <br>
                     <li><strong>Off-balance:</strong> The combatant can take no action until he either recovers or falls. He can regain his balance by passing either a Balance Check or a Dexterity Save though if he fails by 2 or more, he falls. So long as he is off-balanced, he is at disadvantage.</li>
 <br>
-                    <li><strong>Pained:</strong> A pained combatant must pass a Verve save before taking any action.</li>
+                    <li><strong>Pained:</strong> A pained combatant must pass a Verve save before taking any action. While writhing in pain, a target is at disadvantage and attacks made against them are at advantage.</li>
 <br>
                     <li><strong>Panicked:</strong> Panicked combatants must flee if they can. If they can’t, they must attempt to either run past the enemy or cower. In anycase, a panicked combatant must pass a Hap Save, TN 1, or drop whatever is in his hands. To regain his composure, a panicked combatant is entitled to an Acuity Save each Pulse.</li>
 <br>
@@ -8173,7 +8173,7 @@ const tooltipRegistry = {
   },
   "parry_ripost": {
     title: "Parry & Ripost",
-    description: "Instead of rolling Avoidance against an attack you see coming, and so long as you are not engaged, you can choose to use your attack as your avoidance. If your parry causes the attack against you to miss, you may take a single strike against that foe. Alternatively, you may forgo the riposte."
+    description: "You can use the dice pool of a melee attack of your choice in lieu of your Avoidance. If you are hit, only your Damage Reduction can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike against your opponent. The number of parries you can make per round is limited by your Dexterity."
   },
   "crushing_blow": {
     title: "Crushing Blow",
@@ -8508,7 +8508,7 @@ const tooltipRegistry = {
   "shield_bash": {
     title: "Shield Bash",
     actionType: "Attack + Attack",
-    description: "You can use medium and heavy shields as weapons to create an opening against your foe. If you daze or knock down your target with your Shield Bash, you are granted a free strike with your main hand. Alternatively, instead of rolling Avoidance against an attack from a frontal hex, if you have yet to attack during that Round, you can choose to use a Shield Bash as your avoidance. If the attack misses, you are granted a free strike with your main hand."
+    description: "You can use medium and heavy shields as weapons to create an opening against your foe. If you daze or knock down your target with a Shield Bash, you are granted a free strike with your main hand. Alternatively, in lieu of rolling Avoidance against an attack from a frontal hex, you can choose to use a Shield Bash as your avoidance. If you are hit, only your Damage Reduction can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike with your main hand."
   },
   "shrewd_weapons": {
     title: "Shrewd Weapons",
@@ -11715,9 +11715,11 @@ function toggleSkill(element) {
   }
 }
 
-    function setupConditionalDropdowns() {
-        const sex = document.getElementById("char-sex").value;
-        const race = document.getElementById("char-race").value;
+function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSexBonus) {
+        const sexSelect = document.getElementById("char-sex");
+        const raceSelect = document.getElementById("char-race");
+        const sex = sexSelect ? sexSelect.value : "None";
+        const race = raceSelect ? raceSelect.value : "Human";
         
         const sexGroup = document.getElementById("sex-bonus-group");
         const sexChoice = document.getElementById("sex-bonus-choice");
@@ -11727,6 +11729,11 @@ function toggleSkill(element) {
         const rPenaltyGroup = document.getElementById("race-penalty-group");
         const rPenaltyChoice = document.getElementById("race-penalty-choice");
         const rPenaltyLabel = document.getElementById("race-penalty-label");
+
+        // Preserve existing or preferred values before rebuilding options
+        const curBonus = preferredBonus !== undefined ? preferredBonus : (rBonusChoice ? rBonusChoice.value : "");
+        const curPenalty = preferredPenalty !== undefined ? preferredPenalty : (rPenaltyChoice ? rPenaltyChoice.value : "");
+        const curSex = preferredSexBonus !== undefined ? preferredSexBonus : (sexChoice ? sexChoice.value : "");
 
         // Sex options
         if (sex === "Male") {
@@ -11745,6 +11752,9 @@ function toggleSkill(element) {
             sexGroup.style.display = "none";
             sexChoice.innerHTML = "";
             sexChoice.dataset.current = "";
+        }
+        if (curSex && Array.from(sexChoice.options).some(o => o.value === curSex)) {
+            sexChoice.value = curSex;
         }
 
         // Default Reset for Race Layouts
@@ -11820,25 +11830,25 @@ function toggleSkill(element) {
                 <option value="split">Intellect (-1) & Verve (-1)</option>
             `;
         } 
-else if (race.startsWith("Hanyo")) { 
-  rBonusGroup.style.display = "flex"; 
-  rBonusLabel.innerText = "Allocate +2 Bonus:"; 
-  rBonusChoice.innerHTML = ` 
-    <option value="dex2">Dexterity (+2)</option> 
-    <option value="hel2">Health (+2)</option> 
-    <option value="str2">Strength (+2)</option> 
-    <option value="split_dh">Dexterity (+1) & Health (+1)</option> 
-    <option value="split_ds">Dexterity (+1) & Strength (+1)</option> 
-    <option value="split_hs">Health (+1) & Strength (+1)</option> 
-  `; 
-  rPenaltyGroup.style.display = "flex"; 
-  rPenaltyLabel.innerText = "Assign -1 Penalty:"; 
-  rPenaltyChoice.innerHTML = ` 
-    <option value="act">Acuity (-1)</option> 
-    <option value="int">Intellect (-1)</option> 
-    <option value="ver">Verve (-1)</option> 
-  `; 
-}
+        else if (race.startsWith("Hanyo")) { 
+          rBonusGroup.style.display = "flex"; 
+          rBonusLabel.innerText = "Allocate +2 Bonus:"; 
+          rBonusChoice.innerHTML = ` 
+            <option value="dex2">Dexterity (+2)</option> 
+            <option value="hel2">Health (+2)</option> 
+            <option value="str2">Strength (+2)</option> 
+            <option value="split_dh">Dexterity (+1) & Health (+1)</option> 
+            <option value="split_ds">Dexterity (+1) & Strength (+1)</option> 
+            <option value="split_hs">Health (+1) & Strength (+1)</option> 
+          `; 
+          rPenaltyGroup.style.display = "flex"; 
+          rPenaltyLabel.innerText = "Assign -1 Penalty:"; 
+          rPenaltyChoice.innerHTML = ` 
+            <option value="act">Acuity (-1)</option> 
+            <option value="int">Intellect (-1)</option> 
+            <option value="ver">Verve (-1)</option> 
+          `; 
+        }
         else if (race === "Haubid" || race === "Vulpivir") {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
@@ -11852,6 +11862,19 @@ else if (race.startsWith("Hanyo")) {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
             rPenaltyChoice.innerHTML = '<option value="act">Acuity (-1)</option><option value="int">Intellect (-1)</option><option value="ver">Verve (-1)</option>';
+        }
+
+        // Restore values if valid options exist
+        if (curBonus && Array.from(rBonusChoice.options).some(o => o.value === curBonus)) {
+            rBonusChoice.value = curBonus;
+        }
+        if (curPenalty && Array.from(rPenaltyChoice.options).some(o => o.value === curPenalty)) {
+            rPenaltyChoice.value = curPenalty;
+        }
+
+        // Keep tracking key in sync so calculateSheet doesn't re-trigger setup and reset dropdowns
+        if (raceSelect) {
+            raceSelect.dataset.lastTracking = sex + "-" + race;
         }
     }
 
@@ -21486,7 +21509,10 @@ function importCharacterData(data) {
 // 4. Update upbringing options and conditional dropdowns now that identities are set
     const savedUpbringingBonus = (data.inputs && data.inputs["upbringing-bonus-choice"]) || "none";
     if (typeof updateUpbringingOptions === "function") updateUpbringingOptions(savedUpbringingBonus);
-    if (typeof setupConditionalDropdowns === "function") setupConditionalDropdowns();
+    const savedRaceBonus = data.inputs && data.inputs["race-bonus-choice"];
+    const savedRacePenalty = data.inputs && data.inputs["race-penalty-choice"];
+    const savedSexBonus = data.inputs && data.inputs["sex-bonus-choice"];
+    if (typeof setupConditionalDropdowns === "function") setupConditionalDropdowns(savedRaceBonus, savedRacePenalty, savedSexBonus);
 
     // 5. Restore bonus/penalty selection inputs now that their options exist in the DOM
     if (data.inputs) {
@@ -21570,7 +21596,7 @@ function importCharacterData(data) {
         }
     }
 
-    // Force an immediate synchronous recalculation with the restored values
+// Force an immediate synchronous recalculation with the restored values
     if (typeof calculateSheet.flush === "function") {
         calculateSheet.flush();
     } else if (typeof calculateSheet === "function") {
@@ -21578,10 +21604,24 @@ function importCharacterData(data) {
     }
 
     // Final safety assignment to ensure DOM dropdown matches restored state
-    if (data.inputs && data.inputs["char-pidgin-select"] && data.inputs["char-pidgin-select"] !== "None") {
-        const pidginEl = document.getElementById("char-pidgin-select");
-        if (pidginEl && !pidginEl.disabled) {
-            pidginEl.value = data.inputs["char-pidgin-select"];
+    if (data.inputs) {
+        if (data.inputs["race-penalty-choice"]) {
+            const rPenEl = document.getElementById("race-penalty-choice");
+            if (rPenEl && Array.from(rPenEl.options).some(o => o.value === data.inputs["race-penalty-choice"])) {
+                rPenEl.value = data.inputs["race-penalty-choice"];
+            }
+        }
+        if (data.inputs["race-bonus-choice"]) {
+            const rBonusEl = document.getElementById("race-bonus-choice");
+            if (rBonusEl && Array.from(rBonusEl.options).some(o => o.value === data.inputs["race-bonus-choice"])) {
+                rBonusEl.value = data.inputs["race-bonus-choice"];
+            }
+        }
+        if (data.inputs["char-pidgin-select"] && data.inputs["char-pidgin-select"] !== "None") {
+            const pidginEl = document.getElementById("char-pidgin-select");
+            if (pidginEl && !pidginEl.disabled) {
+                pidginEl.value = data.inputs["char-pidgin-select"];
+            }
         }
     }
 
