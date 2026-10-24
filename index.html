@@ -14099,7 +14099,10 @@ let finalAvoidDice = baseAvoidDice + shieldAvoidDiceMod;
 let finalArmorDR = baseDr + armorDrMod + shieldDrMod + getMaxEnchant("protection", true, true) * 3; 
 const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
 const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
-if (hasArcaneArmor || hasBarkskin) {
+if (hasArcaneArmor) {
+    finalArmorDR += finalVer;
+}
+if (hasBarkskin) {
     finalArmorDR += finalVer;
 }
 let maxUnifiedLimit = 6 + shieldLimitDiceBonus + enshadowedBonus + getMaxEnchant("defending", true, true); 
