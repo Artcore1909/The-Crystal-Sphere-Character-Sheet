@@ -2589,6 +2589,10 @@ details[open] #skills-collapsed-summary {
 
         <!-- Defensive Skills mirroring the Offensive Skills card -->
         <div class="pnp-offensive-skills-card" style="flex: 1; align-self: stretch;">
+<div style="display: flex; gap: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; color: #433827;">
+    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-arcane-armor" onchange="calculateSheet()"> Arcane Armor</label>
+    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-barkskin" onchange="calculateSheet()"> Barkskin</label>
+</div>
             <div class="pnp-col-header" style="margin-bottom: 8px;">DEFENSIVE SKILLS & SPELLS</div>
             <div class="pnp-offensive-writein-list" id="card-view-active-defenses"></div>
         </div>
@@ -14093,6 +14097,11 @@ document.getElementById("sub-def-shield").innerText = `${shieldOnlyAvoid}d+${shi
 // ------------------------------------------ 
 let finalAvoidDice = baseAvoidDice + shieldAvoidDiceMod; 
 let finalArmorDR = baseDr + armorDrMod + shieldDrMod + getMaxEnchant("protection", true, true) * 3; 
+const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
+const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
+if (hasArcaneArmor || hasBarkskin) {
+    finalArmorDR += finalVer;
+}
 let maxUnifiedLimit = 6 + shieldLimitDiceBonus + enshadowedBonus + getMaxEnchant("defending", true, true); 
 
 // Process uniform Unified dice overflow to DR conversion 
@@ -20578,6 +20587,18 @@ window.updateEquipmentCardViews = function() {
             if (slotData.makerId === "darkfolk") {
                 activeCc += 1;
             }
+const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
+if (hasArcaneArmor) {
+    const rankInput = document.getElementById("char-rank-input-xp");
+    const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
+    let charRank = 1;
+    if (rankXp >= 90) charRank = 6;
+    else if (rankXp >= 60) charRank = 5;
+    else if (rankXp >= 36) charRank = 4;
+    else if (rankXp >= 18) charRank = 3;
+    else if (rankXp >= 6) charRank = 2;
+    activeCc += charRank;
+}
             ccDisplayHtml = `<strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>`;
         }
 
