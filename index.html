@@ -21657,9 +21657,12 @@ function openCharacterManager() {
     const modal = document.getElementById("char-manager-modal");
     if (!modal) return;
     
-    // Pre-fill save name input
-    const charName = document.getElementById("char-name")?.value.trim() || "Unknown Character";
-    document.getElementById("save-char-name").value = charName;
+    // Only pre-fill if the input box is currently empty
+    const nameInput = document.getElementById("save-char-name");
+    if (!nameInput.value.trim()) {
+        const charName = document.getElementById("char-name")?.value.trim() || "Unknown Character";
+        nameInput.value = charName;
+    }
     
     refreshCharacterList();
     modal.style.display = "flex";
@@ -21728,10 +21731,17 @@ function saveCurrentCharacter() {
 }
 
 function loadCharacter(id) {
+    if (!confirm("Are you sure you want to load this character? Any unsaved changes in your current session will be lost.")) return;
     const chars = getSavedCharacters();
     const char = chars.find(c => c.id === id);
     if (char) {
         importCharacterData(char.data);
+        
+        // Update the save/export name input to match the loaded character's name
+        const nameInput = document.getElementById("save-char-name");
+        if (nameInput) {
+            nameInput.value = char.name;
+        }
     }
 }
 
