@@ -17656,10 +17656,12 @@ function formatTextContent(text) {
         if (to && trig.contains(to)) return;
         hide();
     }
-    function onClick(ev) {
+    function onDblClick(ev) {
         const trig = findTrigger(ev.target);
         if (!trig) return;
-        if (trig.tagName === "SELECT") return;
+        
+        // Prevent spawning if double-clicking inside form inputs, dropdowns, or buttons
+        if (["SELECT", "INPUT", "TEXTAREA", "BUTTON"].includes(ev.target.tagName) || ev.target.closest("input, select, textarea, button")) return;
 
         const key = getKey(trig);
         if (!key) return;
@@ -17667,7 +17669,7 @@ function formatTextContent(text) {
         // Hide temporary hover tooltip if visible
         hide();
 
-        // Spawn independent draggable floating window with an X button
+        // Spawn independent draggable floating window on double-click
         spawnFloatingWindow(key, ev.clientX + 15, ev.clientY + 15);
         ev.stopPropagation();
         ev.preventDefault();
@@ -17683,7 +17685,7 @@ function formatTextContent(text) {
         document.addEventListener("mouseover", onMouseOver, true);
         document.addEventListener("mousemove", onMouseMove,  true);
         document.addEventListener("mouseout",  onMouseOut,  true);
-        document.addEventListener("click",     onClick,      true);
+        document.addEventListener("dblclick",  onDblClick,  true); // Changed from 'click' to 'dblclick'
         document.addEventListener("keydown",   onKeyDown);
         window.addEventListener("scroll",    onScrollOrResize, true);
         window.addEventListener("resize",    onScrollOrResize);
