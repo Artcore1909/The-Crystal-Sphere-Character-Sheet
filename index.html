@@ -4670,10 +4670,10 @@ const itemRegistry = {
         modTags: ["natural", "pugil"],
         governingSkill: "Pugil Strike",
         governingAspect: "SIZE",
-        damageType: "crush",
+        damageType: "trample",
         bonusDamageText: "0",
         range: "Engaged",
-        description: "A crushing trample attack."
+        description: "So long as you are entitled to a charge bonus, you can make a trample attack against all targets smaller than yourself on your path. Once you veer, you must regain your charge bonus before you can trample again."
     },
     "quarterstaff_close": {
         name: "Quarterstaff",
@@ -8188,7 +8188,7 @@ const tooltipRegistry = {
   "charge": {
     title: "Charge",
     actionType: "Move",
-    description: "Add bonus damage to your attack: size A creatures gain +3 per hex; B, +6 per hex; C, +12; and D, +24 per hex. Set spears or Sarrissas directed against you also gain this bonus."
+    description: "You can charge at a target who is at least three hexes away (based on the charging creature's hex size) to add a momentum bonus to your attack: Size A creatures gain +3 per hex they occupy; B, +6; C, +12; and D, +24. Set spears or Sarrissas directed against you also gain this bonus. After impact, you may engage your target or charge past them. If you charge past to wheel, you may only turn 60° per hex traveled and another three hexes of straightaway is required to regain the bonus."
   },
   "climb": {
     title: "Climb",
@@ -10596,9 +10596,9 @@ const masterTreeAutoCheckMap = {
     ["Balance", "Climb", "Jump", "Swim"] // Level 2
   ],
   
-  "observation": [
-    ["Empathy", "Discern Lie"],          // Level 1
-    ["Listen", "Feel", "Spot", "Search", "Smell", "Taste"], // Level 2
+  "observation": [          
+    ["Listen", "Feel", "Spot", "Search", "Smell", "Taste"], // Level 1
+    ["Empathy", "Discern Lie"], // Level 2
     [],                                  // Level 3 (Empty)
     ["Direction Sense"],                 // Level 4
     ["Disbelieve Illusion"]              // Level 5
@@ -10803,7 +10803,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Interrogate & Torture", "Intimate", "Lie", "Orate", "Persuade"
     ],
     "observation": [
-        "Empathy & Discern Lie", "Listen, Feel, Search, Spot, Smell, & Taste", "Quickness of Mind", "Direction Sense", "Disbelieve Illusion", "Mana Increase", "Level Headed"
+        "Listen, Feel, Search, Spot, Smell, & Taste", "Empathy & Discern Lie", "Quickness of Mind", "Direction Sense", "Disbelieve Illusion", "Mana Increase", "Level Headed"
     ],
     "stealth": [
         "Hide & Sneak", "Escape", "Sleight of Hand", "Disguise", "Pick Locks & Set/Disarm Traps", "Smuggling", "Forgery", "Backstab"
