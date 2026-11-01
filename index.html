@@ -2853,9 +2853,12 @@ details[open] #skills-collapsed-summary {
     <h2>Grand Bazaar</h2>
     <p class="hint">Click any category below to browse weapons, armor, and magical enhancements. Hover over items to view their details.</p>
     
-    <!-- Item Cost Calculator -->
+<!-- Item Cost Calculator -->
     <div class="aspect-card" style="margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;">
-        <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-red); border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">Item Cost Calculator</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 5px; margin-bottom: 10px;">
+            <h3 style="margin: 0; color: var(--primary-red);">Item Cost Calculator</h3>
+            <button type="button" class="pnp-edit-btn" onclick="window.clearBazaarCalculator()" style="background: none; border: 1px solid #7c6f64; color: #7c6f64; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.75rem;">Clear</button>
+        </div>
         <div class="builder-group" style="margin-bottom: 10px;">
             <label>Select Item Type</label>
             <select id="bazaar-calc-type-select" onchange="window.openBazaarCalculator(this.value)" style="max-width: 250px;">
@@ -2989,7 +2992,7 @@ details[open] #skills-collapsed-summary {
 <br>
 <strong>Wyrd</strong>
 <ul>
-     <li> Wyrd is a force that may be used by the players and the LM to further modify their rolls.</li>
+     <li> Wyrd is the force that controls all that happens. In every roll of the dice, Wyrd Results threaten to upset what is expected and turn the tide in favor of the lucky. Players can spend Luck points to modify Wyrd results.</li>
 </ul>
 <table class="game-data wyrd-table">
     <thead>
@@ -2998,41 +3001,21 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <th>COST</th>
-<th>1 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
-<th>2 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
-<th>3 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
-<th>4 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
-<th>5 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
-<th>6 <img src="images/Wyrd.png" alt="Wyrd" class="inline-icon" style="height: 1.5em; vertical-align: middle;"></th>
+            <th>EFFECT</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>1 Luck</strong></td>
-            <td>Move up Initiative</td>
-            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"></td>
-            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
-            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
-            <td>Extra Attack</td>
-            <td>Fell Foe</td>
+            <td>Mulligan</td>
         </tr>
         <tr>
             <td><strong>2 Luck</strong></td>
-            <td><img src="images/Plus_Skill_Icon.png" alt="Skill Result" class="table-icon"></td>
-            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
-            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
-            <td>Extra Attack</td>
-            <td>Fell Foe</td>
-            <td></td>
+            <td>Wyrd to Hit</td>
         </tr>
         <tr>
             <td><strong>3 Luck</strong></td>
-            <td><img src="images/Plus_Hit_Icon.png" alt="Hit Result" class="table-icon"></td>
-            <td><img src="images/Plus_Crit_Icon.png" alt="Crit Result" class="table-icon"></td>
-            <td>Extra Attack</td>
-            <td>Fell Foe</td>
-            <td></td>
-            <td></td>
+            <td>Wyrd to Crit</td>
         </tr>
     </tbody>
 </table>
@@ -6852,7 +6835,7 @@ const itemRegistry = {
     "slave_skilled": {
         name: "Slave, Skilled",
         type: "slave",
-        cost: "£60,000 / Rank",
+        cost: "60000 / Rank",
         description: "A skilled slave is a Rank I–VI character."
     },
 
@@ -6881,6 +6864,7 @@ const itemRegistry = {
         terrain: "Loose",
         speed: "72 miles/day",
         fare: "£6/Mile",
+        cost: 1200,
         description: "Designed for 1-2 dray beasts or dogs for traveling across snow or sand. Holds 1 driver and 2x4x6 cargo space."
     },
     "wagon": {
@@ -7137,7 +7121,7 @@ const materialRegistry = {
         costMultiplier: 25,
         allowedTags: ["metal_armor", "metal_shield", "metal_weapon"],
         bonus: "+2; +3d Avoidance; Grants Battle Magic, Innate Sorcery, and Arcane Force resistance (immunity for armor and shield); Weapons ignore Abjuration",
-        description: "Thought originally to be of the sphere itself, the translucent shards of various colored Star-Glass that can be found throughout the Crystal Sphere are now understood to be drops of divine blood from an ancient celestial battle. The greatest smiths would fight for the chance to craft Star-Glass enameled steel for anyone lucky enough to find enough."
+        description: "Thought originally to be of the sphere itself, the translucent shards of various colored Star-Glass that can be found throughout the Crystal Sphere are now understood to be drops of divine blood from an ancient celestial battle."
     },
     "drake_hide": {
         name: "Drakehide",
@@ -16955,35 +16939,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===== js/20-tooltip-system.js ===== */
 
 /* =========================================================================
-   20-tooltip-system.js  —  Unified Tooltip Renderer
-   -------------------------------------------------------------------------
-   Single tooltip engine for the entire character sheet. Replaces the legacy
-   initializeSkillDefinitionTooltips / initializeSkillTreeLevelTooltips
-   pair and the two CSS style injections in 06-injected-styles.js.
-
-   ─── How to attach a tooltip to ANY element ──────────────────────────────
-   Add a `data-tooltip` attribute with the registry key:
-
-     <span data-tooltip="run">Run</span>
-     <li  data-tooltip="athleticism_3">[Lvl 3]</li>
-     <div data-tooltip="hunt_and_forage">Hunt & Forage</div>
-     <td  data-tooltip="initiative">Initiative</td>
-
-   Triggers: hover, keyboard focus, click/tap-to-toggle, Escape closes.
-
-   ─── How to add a new entry ───────────────────────────────────────────────
-   Open  js/02-data-tooltip-registry.js  and add a key. That's it.
-   Or do it at runtime:
-
-     Tooltip.register("sword", { title: "Sword", description: "..." });
-
-   ─── Composite ("multi-skill package") entries ───────────────────────────
-   {
-     title:    "Defense Package",
-     summary:  "Optional one-liner shown before member bodies.",
-     includes: ["avoidance", "shield_bash", "block"]
-   }
-   The renderer stacks each included member's full body under the summary.
+   20-tooltip-system.js  —  Unified Tooltip & Draggable Floating Window Engine
    ========================================================================= */
 (function () {
     "use strict";
@@ -17012,9 +16968,47 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: 1;
     transform: translateY(0);
 }
-.tcs-tooltip.tcs-pinned {
-    pointer-events: auto;
-    border-color: #d97706;
+.tcs-floating-window {
+    position: fixed;
+    z-index: 10005;
+    max-width: 360px;
+    min-width: 220px;
+    background: #25201a;
+    color: #f5f2eb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.45;
+    padding: 12px 14px;
+    padding-right: 32px;
+    border: 1px solid #d97706;
+    border-radius: 6px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.55);
+    cursor: move;
+    user-select: none;
+}
+.tcs-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: 1px solid #decdaf;
+    color: #decdaf;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    z-index: 2;
+}
+.tcs-close-btn:hover {
+    border-color: #b82c2c;
+    color: #b82c2c;
+    background: #fff5f5;
 }
 .tcs-title {
     display: block;
@@ -17025,6 +17019,7 @@ document.addEventListener("DOMContentLoaded", () => {
     border-bottom: 1px dashed #7d3c1b;
     padding-bottom: 4px;
     margin-bottom: 6px;
+    padding-right: 16px;
 }
 .tcs-meta {
     display: block;
@@ -17033,7 +17028,7 @@ document.addEventListener("DOMContentLoaded", () => {
     margin-bottom: 4px;
 }
 .tcs-meta strong {
-    color: #decdaf; /* Unified with your titles and extras */
+    color: #decdaf;
     text-transform: uppercase;
     letter-spacing: 0.25px;
     font-size: 10.5px;
@@ -17091,10 +17086,10 @@ document.addEventListener("DOMContentLoaded", () => {
     margin-top: 4px;
 }
 .tcs-bullet {
-    color: #decdaf; /* Your existing gold color */
+    color: #decdaf;
     font-weight: bold;
     display: inline-block;
-    margin-right: 4px; /* Ensures clean spacing after the star */
+    margin-right: 4px;
 }
 .tcs-missing {
     display: block;
@@ -17115,7 +17110,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.head.appendChild(tag);
     }
 
-    // ── DOM root (one tooltip element, reused) ────────────────────────────
+    // ── DOM root (singleton for temporary hover tooltips) ─────────────────
     let rootEl = null;
     function getRoot() {
         if (rootEl && document.body.contains(rootEl)) return rootEl;
@@ -17127,306 +17122,306 @@ document.addEventListener("DOMContentLoaded", () => {
         return rootEl;
     }
 
-// ── Lookup ────────────────────────────────────────────────────────────
-function lookup(key, anchor) {
-    if (!key) return null;
+    // ── Lookup ────────────────────────────────────────────────────────────
+    function lookup(key, anchor) {
+        if (!key) return null;
 
-    // 0.5 Check Centralized Special Qualities Registry
-    if (typeof specialQualitiesRegistry !== "undefined" && specialQualitiesRegistry[key]) {
-        const sq = specialQualitiesRegistry[key];
-        return {
-            title: sq.name,
-            description: sq.description,
-            extras: [{ label: "Type", text: "Special Quality" }]
-        };
-    }
+        // 0.5 Check Centralized Special Qualities Registry
+        if (typeof specialQualitiesRegistry !== "undefined" && specialQualitiesRegistry[key]) {
+            const sq = specialQualitiesRegistry[key];
+            return {
+                title: sq.name,
+                description: sq.description,
+                extras: [{ label: "Type", text: "Special Quality" }]
+            };
+        }
 
-    // Dynamic Filtering: Spell Fusion (Conjuror Mastery Level 2)
-    if (key === "spell_fusion") {
-        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["spell_fusion"]) {
-            const entryCopy = { ...tooltipRegistry["spell_fusion"] };
-            
-            const dList = (characterChoicesState && characterChoicesState.conjurationDisciplines) || ["None", "None"];
-            const elementA = dList[0] ? dList[0].trim() : "None";
-            const elementB = dList[1] ? dList[1].trim() : "None";
+        // Dynamic Filtering: Spell Fusion (Conjuror Mastery Level 2)
+        if (key === "spell_fusion") {
+            if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["spell_fusion"]) {
+                const entryCopy = { ...tooltipRegistry["spell_fusion"] };
+                
+                const dList = (characterChoicesState && characterChoicesState.conjurationDisciplines) || ["None", "None"];
+                const elementA = dList[0] ? dList[0].trim() : "None";
+                const elementB = dList[1] ? dList[1].trim() : "None";
 
-            if (elementA !== "None" && elementB !== "None") {
-                const pairKey = [elementA, elementB].sort().join(" & ");
-                const combinationMatrix = {
-                    "Acid & Air": "caustic_fog",
-                    "Acid & Earth": "stonefist_modified",
-                    "Acid & Ice": "icicle_modified",
-                    "Acid & Umbra": "umbral_blade_modified",
-                    "Acid & Water": "jetstream_modified",
-                    "Air & Earth": "sandstorm",
-                    "Air & Ice": "hailstorm",
-                    "Air & Umbra": "living_fog",
-                    "Air & Water": "hurricane",
-                    "Earth & Ice": "permafrost",
-                    "Earth & Umbra": "malignant_shade_modified",
-                    "Earth & Water": "geyser",
-                    "Ice & Umbra": "black_ice",
-                    "Ice & Water": "slurry",
-                    "Umbra & Water": "quagmire"
+                if (elementA !== "None" && elementB !== "None") {
+                    const pairKey = [elementA, elementB].sort().join(" & ");
+                    const combinationMatrix = {
+                        "Acid & Air": "caustic_fog",
+                        "Acid & Earth": "stonefist_modified",
+                        "Acid & Ice": "icicle_modified",
+                        "Acid & Umbra": "umbral_blade_modified",
+                        "Acid & Water": "jetstream_modified",
+                        "Air & Earth": "sandstorm",
+                        "Air & Ice": "hailstorm",
+                        "Air & Umbra": "living_fog",
+                        "Air & Water": "hurricane",
+                        "Earth & Ice": "permafrost",
+                        "Earth & Umbra": "malignant_shade_modified",
+                        "Earth & Water": "geyser",
+                        "Ice & Umbra": "black_ice",
+                        "Ice & Water": "slurry",
+                        "Umbra & Water": "quagmire"
+                    };
+
+                    const matchedFusion = combinationMatrix[pairKey];
+                    if (matchedFusion) {
+                        entryCopy.includes = [matchedFusion];
+                    }
+                }
+                return entryCopy;
+            }
+        }
+
+        // Dynamic Filtering: Deific Boon (Deific Boon Level 1)
+        if (key === "deific_boon") {
+            if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["deific_boon"]) {
+                const entryCopy = { ...tooltipRegistry["deific_boon"] };
+                const patron = (characterChoicesState && characterChoicesState.patronDeity) || "None";
+                
+                if (patron !== "None") {
+                    const boonMapping = {
+                        "Day": "daylight",
+                        "Night": "true_darkness",
+                        "Ver": "vernal_warrior",
+                        "Aestas": "aestival_warrior",
+                        "Autumnus": "autumnal_warrior",
+                        "Hiems": "brumal_warrior",
+                        "Sea Lord": "salt_sprayed_warrior",
+                        "Fire God": "burning_warrior",
+                        "Earth Goddess": "stonefist_warrior",
+                        "Wind Goddess": "wind_favored_warrior",
+                        "Shadow King": "umbral_warrior"
+                    };
+                    const matchedBoon = boonMapping[patron];
+                    if (matchedBoon) {
+                        entryCopy.includes = [matchedBoon];
+                    }
+                }
+                return entryCopy;
+            }
+        }
+
+        // Dynamic Filtering: Battlemage Spellstorms
+        if (key === "spellstorm" && anchor && anchor.closest("#tab-character-skills")) {
+            if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["spellstorm"]) {
+                const entryCopy = { ...tooltipRegistry["spellstorm"] };
+                
+                const checkLvl = (id) => {
+                    const f = document.getElementById("sk-xp-" + id);
+                    return f ? Math.floor((parseInt(f.value) || 0) / 6) >= 5 : false;
                 };
 
-                const matchedFusion = combinationMatrix[pairKey];
-                if (matchedFusion) {
-                    entryCopy.includes = [matchedFusion];
-                }
-            }
-            return entryCopy;
-        }
-    }
+                const fire = checkLvl("battle-magic-fire");
+                const frost = checkLvl("battle-magic-frost");
+                const light = checkLvl("battle-magic-light");
+                const lightning = checkLvl("battle-magic-lightning");
+                const thunder = checkLvl("battle-magic-thunder");
 
-    // Dynamic Filtering: Deific Boon (Deific Boon Level 1)
-    if (key === "deific_boon") {
-        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["deific_boon"]) {
-            const entryCopy = { ...tooltipRegistry["deific_boon"] };
-            const patron = (characterChoicesState && characterChoicesState.patronDeity) || "None";
-            
-            if (patron !== "None") {
-                const boonMapping = {
-                    "Day": "daylight",
-                    "Night": "true_darkness",
-                    "Ver": "vernal_warrior",
-                    "Aestas": "aestival_warrior",
-                    "Autumnus": "autumnal_warrior",
-                    "Hiems": "brumal_warrior",
-                    "Sea Lord": "salt_sprayed_warrior",
-                    "Fire God": "burning_warrior",
-                    "Earth Goddess": "stonefist_warrior",
-                    "Wind Goddess": "wind_favored_warrior",
-                    "Shadow King": "umbral_warrior"
+                const eligibilityMap = {
+                    "hailfire": fire && frost,
+                    "solar_tempest": fire && light,
+                    "firestorm": fire && lightning,
+                    "pyroclasm": fire && thunder,
+                    "whiteout_blizzard": frost && light,
+                    "froststorm": frost && lightning,
+                    "avalanche": frost && thunder,
+                    "fulgent_tempest": light && lightning,
+                    "photic_storm": light && thunder,
+                    "thunderstorm": lightning && thunder
                 };
-                const matchedBoon = boonMapping[patron];
-                if (matchedBoon) {
-                    entryCopy.includes = [matchedBoon];
-                }
+
+                entryCopy.includes = (entryCopy.includes || []).filter(stormKey => eligibilityMap[stormKey]);
+                return entryCopy;
             }
-            return entryCopy;
         }
-    }
 
-    // Dynamic Filtering: Battlemage Spellstorms
-    if (key === "spellstorm" && anchor && anchor.closest("#tab-character-skills")) {
-        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry["spellstorm"]) {
-            const entryCopy = { ...tooltipRegistry["spellstorm"] };
-            
-            const checkLvl = (id) => {
-                const f = document.getElementById("sk-xp-" + id);
-                return f ? Math.floor((parseInt(f.value) || 0) / 6) >= 5 : false;
-            };
-
-            const fire = checkLvl("battle-magic-fire");
-            const frost = checkLvl("battle-magic-frost");
-            const light = checkLvl("battle-magic-light");
-            const lightning = checkLvl("battle-magic-lightning");
-            const thunder = checkLvl("battle-magic-thunder");
-
-            const eligibilityMap = {
-                "hailfire": fire && frost,
-                "solar_tempest": fire && light,
-                "firestorm": fire && lightning,
-                "pyroclasm": fire && thunder,
-                "whiteout_blizzard": frost && light,
-                "froststorm": frost && lightning,
-                "avalanche": frost && thunder,
-                "fulgent_tempest": light && lightning,
-                "photic_storm": light && thunder,
-                "thunderstorm": lightning && thunder
-            };
-
-            entryCopy.includes = (entryCopy.includes || []).filter(stormKey => eligibilityMap[stormKey]);
-            return entryCopy;
+        // 1. Check primary Skill / Milestone Registry
+        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[key]) {
+            return tooltipRegistry[key];
         }
-    }
 
-    // 1. Check primary Skill / Milestone Registry
-    if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[key]) {
-        return tooltipRegistry[key];
-    }
+        // 2. Check Item Registry
+        if (typeof itemRegistry !== "undefined" && itemRegistry[key]) {
+            const item = itemRegistry[key];
 
-    // 2. Check Item Registry
-    if (typeof itemRegistry !== "undefined" && itemRegistry[key]) {
-        const item = itemRegistry[key];
+            if (Array.isArray(item.includes)) {
+                const extras = [];
+                if (item.cost !== undefined) {
+                    extras.push({ label: "Cost", text: typeof item.cost === 'string' ? item.cost : `£${item.cost}` });
+                }
+                const isShield = item.modTags && item.modTags.includes("shield");
+                if (isShield && item.avoidanceBonusText) {
+                    extras.push({ label: "Avoidance", text: item.avoidanceBonusText });
+                }
+                if (item.governingSkill) {
+                    extras.push({ label: "Governing Skill", text: item.governingSkill });
+                }
+                if (item.range) {
+                    extras.push({ label: "Range", text: item.range });
+                }
+                if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
+                    const resolvedQualities = item.specialQualities.map(qKey => {
+                        if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
+                            return qualityRegistry[qKey].name;
+                        }
+                        return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+                    });
+                    extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
+                }
 
-    if (Array.isArray(item.includes)) {
+                return {
+                    title: item.name,
+                    summary: item.summary || item.description,
+                    includes: item.includes,
+                    extras: extras 
+                };
+            }
+
             const extras = [];
+            
             if (item.cost !== undefined) {
                 extras.push({ label: "Cost", text: typeof item.cost === 'string' ? item.cost : `£${item.cost}` });
             }
+
+            const isWeapon = item.modTags && item.modTags.includes("weapon");
+            const isArmor = item.modTags && item.modTags.includes("armor") && !item.modTags.includes("shield");
             const isShield = item.modTags && item.modTags.includes("shield");
-            if (isShield && item.avoidanceBonusText) {
-                extras.push({ label: "Avoidance", text: item.avoidanceBonusText });
-            }
-            if (item.governingSkill) {
-                extras.push({ label: "Governing Skill", text: item.governingSkill });
-            }
-            if (item.range) {
-                extras.push({ label: "Range", text: item.range });
-            }
-            if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
-                const resolvedQualities = item.specialQualities.map(qKey => {
-                    if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
-                        return qualityRegistry[qKey].name;
-                    }
-                    return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-                });
-                extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
+
+            if (isWeapon) {
+                if (item.governingSkill) extras.push({ label: "Governing Skill", text: item.governingSkill });
+                if (item.governingAspect) extras.push({ label: "Governing Aspect", text: item.governingAspect });
+                if (item.damageType) extras.push({ label: "Damage Type", text: item.damageType.toUpperCase()});
+                if (item.damageType) extras.push({ label: "Bonus", text: item.bonusDamageText || "—" });
+                if (item.range) extras.push({ label: "Range", text: item.range });
+                if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
+                    const resolvedQualities = item.specialQualities.map(qKey => {
+                        if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
+                            return qualityRegistry[qKey].name;
+                        }
+                        return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+                    });
+                    extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
+                }
+            } else if (isArmor) {
+                if (item.avoidanceBonus) extras.push({ label: "Avoidance", text: `+${item.avoidanceBonus}` });
+                if (item.critCount) extras.push({ label: "Crit Count", text: String(item.critCount) });
+                if (item.donTime) extras.push({ label: "Don Time", text: item.donTime });
+                if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
+                    const resolvedQualities = item.specialQualities.map(qKey => {
+                        if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
+                            return qualityRegistry[qKey].name;
+                        }
+                        return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+                    });
+                    extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
+                }
+            } else if (isShield) {
+                if (item.avoidanceBonusText) extras.push({ label: "Avoidance", text: item.avoidanceBonusText });
+                if (item.damageType) extras.push({ label: "Damage", text: `${item.damageType.toUpperCase()} (${item.bonusDamageText || "0"})` });
             }
 
             return {
                 title: item.name,
-                summary: item.summary || item.description,
-                includes: item.includes,
+                actionType: null,
+                description: item.description || "",
+                extras: extras
+            };
+        }
+
+        // 3. Dynamic Fallback: Check Enchantment Registry
+        const enchantKey = key.startsWith("enchant_") ? key.replace("enchant_", "") : key;
+        if (typeof enchantmentRegistry !== "undefined" && enchantmentRegistry[enchantKey]) {
+            const enchant = enchantmentRegistry[enchantKey];
+            
+            const extras = [
+                { label: "Rarity", text: enchant.rarity ? `${enchant.rarity}` : "Virtue" }
+            ];
+
+            if (enchant.cost) {
+                extras.push({ label: "Cost", text: `£${enchant.cost}` });
+            }
+
+            return { 
+                title: enchant.name || "Unnamed Virtue", 
+                description: enchant.description || "No description available.", 
                 extras: extras 
             };
         }
 
-        const extras = [];
-        
-        if (item.cost !== undefined) {
-            extras.push({ label: "Cost", text: typeof item.cost === 'string' ? item.cost : `£${item.cost}` });
+        // 4. Dynamic Fallback: Check Maker Registry
+        if (typeof makerRegistry !== "undefined" && makerRegistry[key]) {
+            const maker = makerRegistry[key];
+            
+            const extras = [
+                { label: "Type", text: `Specific Maker Design` },
+            ];
+
+            if (maker.rarity) extras.push({ label: "Rarity", text: String(maker.rarity) });
+            if (maker.costMultiplier) extras.push({ label: "Cost Multiplier", text: `${maker.costMultiplier}x` });
+            
+            if (maker.penalty) extras.push({ label: "Penalty", text: maker.penalty });
+            if (maker.bonus) extras.push({ label: "Bonus", text: maker.bonus });
+
+            const displayTitle = maker.name || maker.makerGroup || key;
+
+            return { 
+                title: displayTitle, 
+                description: maker.description || "No description available.", 
+                extras: extras 
+            };
         }
 
-        const isWeapon = item.modTags && item.modTags.includes("weapon");
-        const isArmor = item.modTags && item.modTags.includes("armor") && !item.modTags.includes("shield");
-        const isShield = item.modTags && item.modTags.includes("shield");
+        // 5. Dynamic Fallback: Check Material Registry
+        if (typeof materialRegistry !== "undefined" && materialRegistry[key]) {
+            const mat = materialRegistry[key];
+            
+            const extras = [
+                { label: "Type", text: `Special Material` },
+            ];
 
-        if (isWeapon) {
-            if (item.governingSkill) extras.push({ label: "Governing Skill", text: item.governingSkill });
-            if (item.governingAspect) extras.push({ label: "Governing Aspect", text: item.governingAspect });
-            if (item.damageType) extras.push({ label: "Damage Type", text: item.damageType.toUpperCase()});
-            if (item.damageType) extras.push({ label: "Bonus", text: item.bonusDamageText || "—" });
-            if (item.range) extras.push({ label: "Range", text: item.range });
-            if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
-                const resolvedQualities = item.specialQualities.map(qKey => {
-                    if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
-                        return qualityRegistry[qKey].name;
-                    }
-                    return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-                });
-                extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
+            if (mat.rarity) extras.push({ label: "Rarity", text: String(mat.rarity) });
+            if (mat.costMultiplier) extras.push({ label: "Cost Multiplier", text: `${mat.costMultiplier}x` });
+            
+            if (mat.bonus) extras.push({ label: "Bonus", text: mat.bonus });
+            if (mat.penalty) extras.push({ label: "Penalty", text: mat.penalty });
+            
+            if (Array.isArray(mat.specialQualities) && mat.specialQualities.length > 0) {
+                extras.push({ label: "Special Qualities", text: mat.specialQualities.join(", ") });
             }
-        } else if (isArmor) {
-            if (item.avoidanceBonus) extras.push({ label: "Avoidance", text: `+${item.avoidanceBonus}` });
-            if (item.critCount) extras.push({ label: "Crit Count", text: String(item.critCount) });
-            if (item.donTime) extras.push({ label: "Don Time", text: item.donTime });
-            if (Array.isArray(item.specialQualities) && item.specialQualities.length > 0) {
-                const resolvedQualities = item.specialQualities.map(qKey => {
-                    if (typeof qualityRegistry !== "undefined" && qualityRegistry[qKey]) {
-                        return qualityRegistry[qKey].name;
-                    }
-                    return qKey.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-                });
-                extras.push({ label: "Special Qualities", text: resolvedQualities.join(", ") });
-            }
-        } else if (isShield) {
-            if (item.avoidanceBonusText) extras.push({ label: "Avoidance", text: item.avoidanceBonusText });
-            if (item.damageType) extras.push({ label: "Damage", text: `${item.damageType.toUpperCase()} (${item.bonusDamageText || "0"})` });
+
+            return { 
+                title: mat.name, 
+                description: mat.description || "No description available.", 
+                extras: extras 
+            };
         }
 
-        return {
-            title: item.name,
-            actionType: null,
-            description: item.description || "",
-            extras: extras
-        };
-    }
+        // 6. Dynamic Fallback: Check Quality Registry
+        if (typeof qualityRegistry !== "undefined" && qualityRegistry[key]) {
+            const qual = qualityRegistry[key];
+            
+            const extras = [
+                { label: "Type", text: "Item Quality" }
+            ];
 
-    // 3. Dynamic Fallback: Check Enchantment Registry
-    const enchantKey = key.startsWith("enchant_") ? key.replace("enchant_", "") : key;
-    if (typeof enchantmentRegistry !== "undefined" && enchantmentRegistry[enchantKey]) {
-        const enchant = enchantmentRegistry[enchantKey];
-        
-        const extras = [
-            { label: "Rarity", text: enchant.rarity ? `${enchant.rarity}` : "Virtue" }
-        ];
+            if (qual.rarity !== undefined) extras.push({ label: "Rarity", text: String(qual.rarity) });
+            if (qual.costMultiplier !== undefined) extras.push({ label: "Cost Multiplier", text: `${qual.costMultiplier}x` });
+            if (qual.bonus) extras.push({ label: "Bonus", text: qual.bonus });
+            if (qual.penalty) extras.push({ label: "Penalty", text: qual.penalty });
 
-        if (enchant.cost) {
-            extras.push({ label: "Cost", text: `£${enchant.cost}` });
+            return {
+                title: qual.name,
+                description: qual.description || "No description available.",
+                extras: extras
+            };
         }
 
-        return { 
-            title: enchant.name || "Unnamed Virtue", 
-            description: enchant.description || "No description available.", 
-            extras: extras 
-        };
+        return null;
     }
 
-    // 4. Dynamic Fallback: Check Maker Registry
-    if (typeof makerRegistry !== "undefined" && makerRegistry[key]) {
-        const maker = makerRegistry[key];
-        
-        const extras = [
-            { label: "Type", text: `Specific Maker Design` },
-        ];
-
-        if (maker.rarity) extras.push({ label: "Rarity", text: String(maker.rarity) });
-        if (maker.costMultiplier) extras.push({ label: "Cost Multiplier", text: `${maker.costMultiplier}x` });
-        
-        if (maker.penalty) extras.push({ label: "Penalty", text: maker.penalty });
-        if (maker.bonus) extras.push({ label: "Bonus", text: maker.bonus });
-
-        const displayTitle = maker.name || maker.makerGroup || key;
-
-        return { 
-            title: displayTitle, 
-            description: maker.description || "No description available.", 
-            extras: extras 
-        };
-    }
-
-    // 5. Dynamic Fallback: Check Material Registry
-    if (typeof materialRegistry !== "undefined" && materialRegistry[key]) {
-        const mat = materialRegistry[key];
-        
-        const extras = [
-            { label: "Type", text: `Special Material` },
-        ];
-
-        if (mat.rarity) extras.push({ label: "Rarity", text: String(mat.rarity) });
-        if (mat.costMultiplier) extras.push({ label: "Cost Multiplier", text: `${mat.costMultiplier}x` });
-        
-        if (mat.bonus) extras.push({ label: "Bonus", text: mat.bonus });
-        if (mat.penalty) extras.push({ label: "Penalty", text: mat.penalty });
-        
-        if (Array.isArray(mat.specialQualities) && mat.specialQualities.length > 0) {
-            extras.push({ label: "Special Qualities", text: mat.specialQualities.join(", ") });
-        }
-
-        return { 
-            title: mat.name, 
-            description: mat.description || "No description available.", 
-            extras: extras 
-        };
-    }
-
-    // 6. Dynamic Fallback: Check Quality Registry
-    if (typeof qualityRegistry !== "undefined" && qualityRegistry[key]) {
-        const qual = qualityRegistry[key];
-        
-        const extras = [
-            { label: "Type", text: "Item Quality" }
-        ];
-
-        if (qual.rarity !== undefined) extras.push({ label: "Rarity", text: String(qual.rarity) });
-        if (qual.costMultiplier !== undefined) extras.push({ label: "Cost Multiplier", text: `${qual.costMultiplier}x` });
-        if (qual.bonus) extras.push({ label: "Bonus", text: qual.bonus });
-        if (qual.penalty) extras.push({ label: "Penalty", text: qual.penalty });
-
-        return {
-            title: qual.name,
-            description: qual.description || "No description available.",
-            extras: extras
-        };
-    }
-
-    return null;
-}
-
-// ── Rendering ─────────────────────────────────────────────────────────
+    // ── Rendering ─────────────────────────────────────────────────────────
     function escapeHtml(s) {
         return String(s)
             .replace(/&/g, "&amp;")
@@ -17435,19 +17430,20 @@ function lookup(key, anchor) {
             .replace(/"/g, "&quot;");
     }
 
-    function formatTextContent(text) {
+function formatTextContent(text) {
         if (!text) return "";
         
         // 1. Escape HTML for safety
         let escaped = escapeHtml(text);
         
-        // 2. Replace any black circle '●'
-        // with the gold-colored HTML suare
-        return escaped.replace(/[●✦▪]\s*/g, `<span class="tcs-bullet">▪</span>`);
+        // 2. Unescape any <img> tags so icons render properly as images
+        let restored = escaped.replace(/&lt;img([^&]*?)&gt;/gi, '<$1>');
+        
+        // 3. Replace bullet symbols
+        return restored.replace(/[●✦▪]\s*/g, `<span class="tcs-bullet">▪</span>`);
     }
 
     function renderEntry(entry, opts, lookupKey) {
-        // opts: { embedded: true } when used as a member of a composite
         const parts = [];
         if (!opts || !opts.embedded) {
             parts.push(`<span class="tcs-title">${escapeHtml(entry.title || "")}</span>`);
@@ -17466,7 +17462,6 @@ function lookup(key, anchor) {
             for (const ex of entry.extras) {
                 if (!ex || !ex.text) continue;
                 if (ex.label) {
-                    // FIXED: Changed ex.text from escapeHtml to formatTextContent
                     parts.push(`<span class="tcs-extra"><strong>${escapeHtml(ex.label)}:</strong>${formatTextContent(ex.text)}</span>`);
                 } else {
                     parts.push(`<span class="tcs-extra">${formatTextContent(ex.text)}</span>`);
@@ -17489,7 +17484,6 @@ function lookup(key, anchor) {
     function renderComposite(entry, ownKey) {
         const parts = [`<span class="tcs-title">${escapeHtml(entry.title || "")}</span>`];
         
-        // Render Action Type if it exists on the composite entry
         const actionType = entry.actionType || entry.action_type;
         if (actionType) {
             parts.push(`<span class="tcs-meta"><strong>Action Type:</strong> ${escapeHtml(actionType)}</span>`);
@@ -17539,11 +17533,10 @@ function lookup(key, anchor) {
         return renderEntry(entry, undefined, key);
     }
 
-    // ── Positioning ───────────────────────────────────────────────────────
+    // ── Positioning (Hover Tooltip) ───────────────────────────────────────
     function positionAt(x, y) {
         const el = getRoot();
         const pad = 14;
-        // Wait one tick so size is measurable
         requestAnimationFrame(() => {
             const w = el.offsetWidth;
             const h = el.offsetHeight;
@@ -17558,47 +17551,76 @@ function lookup(key, anchor) {
         });
     }
 
-    // ── Show / Hide / Pin ─────────────────────────────────────────────────
-    let pinned = false;
-    let currentAnchor = null;
-    let currentKey = null;
-
-function show(key, x, y, anchor) {
+    function show(key, x, y, anchor) {
         const entry = lookup(key, anchor);
         if (!entry) return;
         const el = getRoot();
         el.innerHTML = render(entry, key);
         el.classList.add("tcs-visible");
-        currentKey = key;
-        currentAnchor = anchor || null;
         positionAt(x, y);
     }
 
-    function hide(force) {
-        if (pinned && !force) return;
+    function hide() {
         const el = getRoot();
         el.classList.remove("tcs-visible");
-        el.classList.remove("tcs-pinned");
-        pinned = false;
-        currentKey = null;
-        currentAnchor = null;
     }
 
-    function pin() {
-        if (!currentKey) return;
-        pinned = true;
-        const el = getRoot();
-        el.classList.add("tcs-pinned");
-    }
+    // ── Click to Spawn Draggable Floating Window ──────────────────────────
+    let maxZIndex = 10005;
+    function spawnFloatingWindow(key, x, y) {
+        const entry = lookup(key);
+        if (!entry) return;
 
-    function togglePin(key, x, y, anchor) {
-        if (pinned && currentKey === key) {
-            hide(true);
-            return;
-        }
-        pinned = false;          // reset so show() works
-        show(key, x, y, anchor);
-        pin();
+        const win = document.createElement("div");
+        win.className = "tcs-floating-window";
+        win.style.zIndex = ++maxZIndex;
+
+        const closeBtn = document.createElement("button");
+        closeBtn.className = "tcs-close-btn";
+        closeBtn.innerHTML = "&times;";
+        closeBtn.title = "Close";
+        closeBtn.onclick = (e) => {
+            e.stopPropagation();
+            win.remove();
+        };
+
+        const content = document.createElement("div");
+        content.innerHTML = render(entry, key);
+
+        win.appendChild(closeBtn);
+        win.appendChild(content);
+        document.body.appendChild(win);
+
+        // Initial position (unconstrained to allow off-screen dropping)
+        win.style.left = x + "px";
+        win.style.top = y + "px";
+
+        // Drag functionality (allows going off-screen, positive or negative)
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        win.addEventListener("mousedown", (e) => {
+            if (e.target.closest("button") || e.target.closest("a") || e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = parseInt(win.style.left, 10) || win.offsetLeft;
+            initialTop = parseInt(win.style.top, 10) || win.offsetTop;
+            win.style.zIndex = ++maxZIndex;
+            e.preventDefault();
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            win.style.left = (initialLeft + dx) + "px";
+            win.style.top = (initialTop + dy) + "px";
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
     }
 
     // ── Event delegation ──────────────────────────────────────────────────
@@ -17616,7 +17638,6 @@ function show(key, x, y, anchor) {
     }
 
     function onMouseOver(ev) {
-        if (pinned) return;
         const trig = findTrigger(ev.target);
         if (!trig) return;
         const key = getKey(trig);
@@ -17624,64 +17645,38 @@ function show(key, x, y, anchor) {
         show(key, ev.clientX, ev.clientY, trig);
     }
     function onMouseMove(ev) {
-        if (pinned) return;
         const el = getRoot();
         if (!el.classList.contains("tcs-visible")) return;
         positionAt(ev.clientX, ev.clientY);
     }
     function onMouseOut(ev) {
-        if (pinned) return;
         const trig = findTrigger(ev.target);
         if (!trig) return;
-        // Hide only if we've truly left the trigger (not just moved to a child)
         const to = ev.relatedTarget;
         if (to && trig.contains(to)) return;
         hide();
     }
-function onClick(ev) {
+    function onClick(ev) {
         const trig = findTrigger(ev.target);
         if (!trig) return;
-        // Ignore click events on select dropdowns to prevent immediate pinning on choice
         if (trig.tagName === "SELECT") return;
 
         const key = getKey(trig);
         if (!key) return;
-        // Tap / click toggles pin. Position near the element's right edge.
-        const rect = trig.getBoundingClientRect();
-        togglePin(key, rect.right, rect.bottom, trig);
-        ev.stopPropagation();
-    }
-    function onFocusIn(ev) {
-        const trig = findTrigger(ev.target);
-        if (!trig) return;
-        // Ignore focus events on select dropdowns to prevent immediate popups on selection
-        if (trig.tagName === "SELECT") return;
 
-        const key = getKey(trig);
-        if (!key) return;
-        const rect = trig.getBoundingClientRect();
-        show(key, rect.right, rect.bottom, trig);
-    }
-    function onFocusOut(ev) {
-        if (pinned) return;
-        const trig = findTrigger(ev.target);
-        if (!trig) return;
+        // Hide temporary hover tooltip if visible
         hide();
+
+        // Spawn independent draggable floating window with an X button
+        spawnFloatingWindow(key, ev.clientX + 15, ev.clientY + 15);
+        ev.stopPropagation();
+        ev.preventDefault();
     }
     function onKeyDown(ev) {
-        if (ev.key === "Escape") hide(true);
+        if (ev.key === "Escape") hide();
     }
     function onScrollOrResize() {
-        if (pinned) return;
         hide();
-    }
-    function onDocClick(ev) {
-        if (!pinned) return;
-        const el = getRoot();
-        if (el.contains(ev.target)) return;
-        const trig = findTrigger(ev.target);
-        if (trig && getKey(trig) === currentKey) return;
-        hide(true);
     }
 
     function bind() {
@@ -17689,19 +17684,15 @@ function onClick(ev) {
         document.addEventListener("mousemove", onMouseMove,  true);
         document.addEventListener("mouseout",  onMouseOut,  true);
         document.addEventListener("click",     onClick,      true);
-        document.addEventListener("focusin",   onFocusIn);
-        document.addEventListener("focusout",  onFocusOut);
         document.addEventListener("keydown",   onKeyDown);
         window.addEventListener("scroll",    onScrollOrResize, true);
         window.addEventListener("resize",    onScrollOrResize);
-        document.addEventListener("click",   onDocClick);
     }
 
     // ── Auto-attach to legacy markup ──────────────────────────────────────
-function autoAttach(root) {
+    function autoAttach(root) {
         const scope = root || document;
 
-        // 1. Skill rows in the Extra Training containers
         scope.querySelectorAll(".skill-row").forEach(row => {
             if (row.hasAttribute("data-tooltip")) return;
             const cb = row.querySelector('input[type="checkbox"][data-skill]');
@@ -17738,10 +17729,8 @@ function autoAttach(root) {
             const headingText = findHeadingText(card);
             const treeKey = normalizeToKey(headingText);
 
-            // Declare variable cleanly as 'tooltipDb' to avoid collisions with leftover 'reg' declarations
             const tooltipDb = (typeof tooltipRegistry !== "undefined") ? tooltipRegistry : null;
 
-            // ---- Dropdown-choice rows ----
             const select = li.querySelector("select");
             if (select) {
                 const selectedText = (select.options[select.selectedIndex] && select.options[select.selectedIndex].text) || "";
@@ -17765,7 +17754,6 @@ function autoAttach(root) {
                 return;
             }
 
-            // ---- Sub-skills / Nested Choices ----
             if (txt.includes("└")) {
                 if (li.hasAttribute("data-tooltip")) return;
                 const cleanText = txt.replace(/^[└\s]+/, "").trim();
@@ -17778,10 +17766,7 @@ function autoAttach(root) {
                         cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                     ];
                     for (const v of variants) {
-                        if (v && tooltipDb[v]) {
-                            foundKey = v;
-                            break;
-                        }
+                        if (v && tooltipDb[v]) { foundKey = v; break; }
                     }
                 }
                 if (foundKey) {
@@ -17790,7 +17775,6 @@ function autoAttach(root) {
                 }
             }
 
-            // ---- [Lvl N] rows ----
             if (li.hasAttribute("data-tooltip")) return;
             if (!treeKey) return;
 
@@ -17803,13 +17787,11 @@ function autoAttach(root) {
                     const variants = [
                         cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                         cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                        cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""), // duplicate variant for safety
                         cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
                     ];
                     for (const v of variants) {
-                        if (v && tooltipDb[v]) {
-                            matchedEponymousKey = v;
-                            break;
-                        }
+                        if (v && tooltipDb[v]) { matchedEponymousKey = v; break; }
                     }
                 }
 
@@ -17821,7 +17803,6 @@ function autoAttach(root) {
                 return;
             }
 
-            // ---- [Free Unlock] rows ----
             if (/\[\s*Free\s*Unlock\s*\]/i.test(txt)) {
                 const after = txt.replace(/.*\[\s*Free\s*Unlock\s*\]\s*/i, "").trim();
                 if (!tooltipDb) return;
@@ -17838,7 +17819,6 @@ function autoAttach(root) {
         });
     }
 
-    // Re-attach after any DOM mutation (the sheet re-renders cards often).
     let attachScheduled = false;
     function scheduleAutoAttach() {
         if (attachScheduled) return;
@@ -17854,9 +17834,8 @@ function autoAttach(root) {
         obs.observe(document.body, { childList: true, subtree: true });
     }
 
-    // ── Public API ────────────────────────────────────────────────────────
     const Tooltip = {
-        show, hide, pin, togglePin,
+        show, hide,
         register(key, entry) {
             if (typeof tooltipRegistry === "undefined") {
                 console.warn("[Tooltip] tooltipRegistry not loaded yet; cannot register", key);
@@ -17865,11 +17844,10 @@ function autoAttach(root) {
             tooltipRegistry[key] = entry;
         },
         get(key) { return lookup(key); },
-        autoAttach,                      // call manually if you've just injected markup
+        autoAttach,
     };
     window.Tooltip = Tooltip;
 
-    // ── Bootstrap ─────────────────────────────────────────────────────────
     function boot() {
         injectStyles();
         bind();
@@ -18135,7 +18113,6 @@ function generateBazaarTab() {
     const accordion = document.querySelector("#tab-bazaar .bazaar-accordion");
     if (!accordion) return;
 
-    // Ordered categories to match your layout
     const categories = {
         "Maker": [],
         "Material": [],
@@ -18157,7 +18134,6 @@ function generateBazaarTab() {
         "Vehicles": []
     };
 
-    // Gather all sub-keys that are included inside composite items so we can skip listing them
     const compositeSubKeys = new Set();
     if (typeof itemRegistry !== "undefined") {
         Object.values(itemRegistry).forEach(item => {
@@ -18171,8 +18147,9 @@ function generateBazaarTab() {
     if (typeof itemRegistry !== "undefined") {
         Object.entries(itemRegistry).forEach(([key, item]) => {
             if (compositeSubKeys.has(key)) return;
+            if (key === "custom_armor" || key === "custom_shield" || key.startsWith("custom_weapon_")) return;
 
-let matchedCats = [];
+            let matchedCats = [];
             const isWeapon = item.modTags && item.modTags.includes("weapon");
             const isShield = item.modTags && item.modTags.includes("shield");
             const isArmor = item.modTags && item.modTags.includes("armor") && !isShield;
@@ -18211,12 +18188,20 @@ let matchedCats = [];
             }
 
             if (matchedCats.length > 0) {
-                const costLabel = item.cost !== undefined ? ` — £${item.cost}` : "";
+                let metaParts = [];
+                if (item.cost !== undefined) {
+                    metaParts.push(`£${item.cost}`);
+                }
+                if (item.fare) {
+                    metaParts.push(`Fare: ${item.fare}`);
+                }
+                const metaLabel = metaParts.join(" | ");
+
                 matchedCats.forEach(cat => {
                     categories[cat].push({
                         key: key,
                         name: item.name,
-                        display: `${item.name}${costLabel}`
+                        meta: metaLabel
                     });
                 });
             }
@@ -18229,7 +18214,7 @@ let matchedCats = [];
             categories["Maker"].push({
                 key: key,
                 name: maker.name,
-                display: `${maker.name} (Rarity ${maker.rarity}) — Cost: ${maker.costMultiplier}x`
+                meta: `Rarity ${maker.rarity} | ${maker.costMultiplier}x Cost`
             });
         });
     }
@@ -18240,51 +18225,49 @@ let matchedCats = [];
             categories["Material"].push({
                 key: key,
                 name: mat.name,
-                display: `${mat.name} (Rarity ${mat.rarity}) — Cost: ${mat.costMultiplier}x`
+                meta: `Rarity ${mat.rarity} | ${mat.costMultiplier}x Cost`
             });
         });
     }
 
-    // 3.5 Parse Quality
+    // 4. Parse Quality
     if (typeof qualityRegistry !== "undefined") {
         Object.entries(qualityRegistry).forEach(([key, qual]) => {
             categories["Quality"].push({
                 key: key,
                 name: qual.name,
-                display: `${qual.name} (Rarity ${qual.rarity}) — Cost: ${qual.costMultiplier}x`
+                meta: `Rarity ${qual.rarity} | ${qual.costMultiplier}x Cost`
             });
         });
     }
 
-    // 4. Parse Enchantments
+    // 5. Parse Enchantments (Virtues)
     if (typeof enchantmentRegistry !== "undefined") {
         Object.entries(enchantmentRegistry).forEach(([key, enchant]) => {
             categories["Virtues"].push({
                 key: `enchant_${key}`,
                 name: enchant.name,
-                display: `${enchant.name} — £${enchant.cost}`
+                meta: enchant.cost ? `£${enchant.cost}` : "Virtue"
             });
         });
     }
 
-    // 4.5 Parse Special Qualities
+    // 6. Parse Special Qualities
     if (typeof specialQualitiesRegistry !== "undefined") {
         Object.entries(specialQualitiesRegistry).forEach(([key, sq]) => {
             categories["Special Qualities"].push({
                 key: key,
                 name: sq.name,
-                display: sq.name
+                meta: ""
             });
         });
     }
 
     let codexHtml = "";
 
-    // Generate Accordion structure preserving the defined category order
     Object.entries(categories).forEach(([catName, items]) => {
         if (items.length === 0) return;
 
-        // Custom sort for Quality, otherwise sort alphabetically
         if (catName === "Quality") {
             const qualityOrder = ["crude", "novice", "apprentice", "journeyman", "master", "grandmaster"];
             items.sort((a, b) => qualityOrder.indexOf(a.key) - qualityOrder.indexOf(b.key));
@@ -18295,8 +18278,11 @@ let matchedCats = [];
         let itemsHtml = "";
         items.forEach(item => {
             itemsHtml += `
-                <li data-tooltip="${item.key}" style="margin-bottom: 6px; font-size: 0.95rem; color: #2d3748; font-weight: 600; list-style-type: square; cursor: help;">
-                    ${item.display}
+                <li data-tooltip="${item.key}" style="margin-bottom: 6px; font-size: 0.9rem; list-style-type: square; cursor: help;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 15px; border-bottom: 1px dashed rgba(211, 196, 168, 0.4); padding-bottom: 3px;">
+                        <span style="font-weight: 600; color: var(--text-dark);">${escapeHtml(item.name)}</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; font-weight: 500;">${escapeHtml(item.meta)}</span>
+                    </div>
                 </li>
             `;
         });
@@ -18307,7 +18293,7 @@ let matchedCats = [];
                     ${catName} ▾
                 </div>
                 <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
-                    <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
+                    <ul style="margin: 0; padding-left: 18px; line-height: 1.5;">
                         ${itemsHtml}
                     </ul>
                 </div>
@@ -19015,6 +19001,37 @@ window.openBazaarCalculator = function(type) {
     }
 };
 
+window.clearBazaarCalculator = function() {
+    const selectEl = document.getElementById("bazaar-calc-type-select");
+    if (selectEl) selectEl.value = "None";
+
+    ["weapon", "armor", "shield"].forEach(calcType => {
+        const slotId = `calc-${calcType}`;
+        const panel = document.getElementById("builder-" + slotId);
+        if (panel) {
+            panel.style.display = "none";
+            panel.innerHTML = "";
+        }
+        
+        if (characterChoicesState.calculator && characterChoicesState.calculator[calcType]) {
+            characterChoicesState.calculator[calcType] = {
+                itemId: "None", 
+                materialId: "None", 
+                makerId: "None", 
+                qualityId: "None", 
+                enchantmentId: "None", 
+                enchantment2Id: "None", 
+                enchantment3Id: "None", 
+                profileMaterials: {}
+            };
+        }
+    });
+
+    if (characterChoicesState.calculator) {
+        characterChoicesState.calculator.activeType = "None";
+    }
+};
+
 window.calculateItemCost = function(slotId) {
     const itemEl = document.getElementById(`build-select-item-${slotId}`);
     if (!itemEl) return;
@@ -19443,7 +19460,7 @@ const isCustomWeapon = activeData.itemId && activeData.itemId.startsWith("custom
 
     // Render HTML config panel layout configuration frame (Overhauled to prevent infinite loop reflows)
     panel.innerHTML = `
-        <h4 style="color: var(--primary-red); border-bottom: 1px solid var(--border-warm); padding-bottom: 4px;">Configure ${currentBaseItem ? currentBaseItem.name : (isWeapon ? 'Weapon ' + (weaponIdx + 1) : type)}</h4>
+        <h4 style="color: var(--primary-red); border-bottom: 1px solid var(--border-warm); padding-bottom: 4px;">Configure ${currentBaseItem ? currentBaseItem.name : (isWeapon ? 'Weapon ' : type)}</h4>
         
         ${isGear ? `
             <input type="hidden" id="build-select-item-${slotId}" value="${activeData.itemId || 'None'}">
@@ -21428,6 +21445,12 @@ function saveCharactersToStorage(chars) {
 }
 
 function exportCharacterData() {
+
+    // 1. Snapshot the calculator DOM state into memory before saving
+    if (typeof saveCalculatorStateToMemory === "function") {
+        saveCalculatorStateToMemory();
+    }
+
     const data = {
         state: characterChoicesState,
         inputs: {},
@@ -21593,6 +21616,11 @@ function importCharacterData(data) {
     if (typeof populateGearDropdowns === "function") populateGearDropdowns();
     if (typeof populateWornEnchantmentDropdowns === "function") populateWornEnchantmentDropdowns();
     if (typeof renderMountMiniSheet === "function") renderMountMiniSheet();
+    if (typeof renderCompendiumInspectorUI === "function") renderCompendiumInspectorUI();
+
+    if (typeof restoreCalculatorStateFromMemory === "function") {
+        restoreCalculatorStateFromMemory();
+    }
 
 // At the end of importCharacterData(), right before alert("Character loaded successfully!"):
     if (data.inputs) {
@@ -24573,14 +24601,19 @@ const encounterChartsRegistry = {
 };
 
 // =========================================================================
-// 🐉 CREATURE COMPENDIUM & QUICK INSPECTOR ENGINE
+// 🐉 CREATURE COMPENDIUM & QUICK INSPECTOR ENGINE (MULTI-INSTANCE & NOTES)
 // =========================================================================
 
 window.characterChoicesState = window.characterChoicesState || {};
-// Ensure state structure supports an array of inspectors
 if (!characterChoicesState.compendiumInspectorCards) {
     characterChoicesState.compendiumInspectorCards = [
-        { id: 'inspector-0', selectedCreatureName: "None", currentLostVit: 0, currentLostMana: 0 }
+        { 
+            id: 'inspector-0', 
+            selectedCreatureName: "None", 
+            instances: [
+                { lostVit: 0, lostMana: 0, notes: "" }
+            ] 
+        }
     ];
 }
 
@@ -24588,7 +24621,6 @@ function renderCompendiumInspectorUI() {
     const tabCompendium = document.getElementById("tab-compendium");
     if (!tabCompendium) return;
 
-    // Main wrapper container for all inspector cards
     let wrapper = document.getElementById("compendium-inspector-wrapper");
     if (!wrapper) {
         wrapper = document.createElement("div");
@@ -24602,7 +24634,6 @@ function renderCompendiumInspectorUI() {
         }
     }
 
-    // Render each inspector card in the state
     wrapper.innerHTML = characterChoicesState.compendiumInspectorCards.map((inspector, index) => {
         return renderInspectorCardHTML(inspector, index);
     }).join('') + `
@@ -24613,9 +24644,8 @@ function renderCompendiumInspectorUI() {
         </div>
     `;
 
-    // Re-render mini sheets for each card
     characterChoicesState.compendiumInspectorCards.forEach((inspector, index) => {
-        if (inspector.selectedCreatureName !== "None") {
+        if (inspector.selectedCreatureName && inspector.selectedCreatureName !== "None") {
             window.renderCompendiumMiniSheet(inspector.selectedCreatureName, index);
         }
     });
@@ -24660,7 +24690,6 @@ window.getAbilityTooltipKey = function(abilityStr) {
 
     if (explicitMapping[key]) return explicitMapping[key];
 
-    // Automatically check for namespaced creature traits (immunities, resistances, vulnerabilities, etc.)
     const traitKeywords = ["immunity", "resistance", "vulnerability", "aversion", "susceptibility", "ward"];
     const isTrait = traitKeywords.some(kw => key.includes(kw));
     
@@ -24669,7 +24698,7 @@ window.getAbilityTooltipKey = function(abilityStr) {
         if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[namespacedKey]) {
             return namespacedKey;
         }
-        return namespacedKey; // Defaults to looking up the creature_ prefixed version
+        return namespacedKey;
     }
 
     if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[key]) return key;
@@ -24696,19 +24725,16 @@ function renderCompendiumInspectorUI() {
     const tabCompendium = document.getElementById("tab-compendium");
     if (!tabCompendium) return;
 
-    // Initialize array state if missing or legacy single object exists
     if (!characterChoicesState.compendiumInspectorCards) {
         characterChoicesState.compendiumInspectorCards = [
             characterChoicesState.compendiumInspector || {
                 id: 'inspector-0',
                 selectedCreatureName: "None",
-                currentLostVit: 0,
-                currentLostMana: 0
+                instances: [{ lostVit: 0, lostMana: 0, notes: "" }]
             }
         ];
     }
 
-    // Wrapper container for all inspectors
     let wrapper = document.getElementById("compendium-inspector-wrapper");
     if (!wrapper) {
         wrapper = document.createElement("div");
@@ -24722,7 +24748,6 @@ function renderCompendiumInspectorUI() {
         }
     }
 
-    // Render inspector cards and "Add" button
     wrapper.innerHTML = characterChoicesState.compendiumInspectorCards.map((inspector, index) => {
         return renderInspectorCardHTML(inspector, index);
     }).join('') + `
@@ -24733,7 +24758,6 @@ function renderCompendiumInspectorUI() {
         </div>
     `;
 
-    // Populate mini-sheets for each inspector
     characterChoicesState.compendiumInspectorCards.forEach((inspector, index) => {
         if (inspector.selectedCreatureName && inspector.selectedCreatureName !== "None") {
             window.renderCompendiumMiniSheet(inspector.selectedCreatureName, index);
@@ -24808,7 +24832,39 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
     if (!creature) return;
 
     const asp = creature.aspects || {};
-    const inspectorState = characterChoicesState.compendiumInspectorCards[index] || {};
+    const inspectorState = characterChoicesState.compendiumInspectorCards[index] || { instances: [{ lostVit: 0, lostMana: 0, notes: "" }] };
+
+    if (!inspectorState.instances || inspectorState.instances.length === 0) {
+        inspectorState.instances = [{ lostVit: 0, lostMana: 0, notes: "" }];
+    }
+
+    let instancesHtml = '';
+    inspectorState.instances.forEach((inst, instIdx) => {
+        const instNum = instIdx + 1;
+        instancesHtml += `
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; background: #faf3e8; padding: 6px; border-radius: 4px; border: 1px solid #decdaf;">
+                <span style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; min-width: 24px;">#${instNum}</span>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 0.75rem; flex-shrink: 0;">
+                    <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
+                    <span style="font-weight: bold;">${creature.vit ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inst.lostVit || 0}" onchange="window.updateInspectorInstanceVit(${index}, ${instIdx}, this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+                <div style="display: flex; align-items: center; gap: 4px; font-size: 0.75rem; flex-shrink: 0;">
+                    <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
+                    <span style="font-weight: bold;">${creature.mana ?? '—'}</span>
+                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
+                    <input type="number" value="${inst.lostMana || 0}" onchange="window.updateInspectorInstanceMana(${index}, ${instIdx}, this.value)" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
+                </div>
+                <div style="flex: 1; min-width: 140px; display: flex; align-items: center; gap: 4px;">
+                    <textarea placeholder="Combat conditions / notes..." rows="1" oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; window.updateInspectorInstanceNotes(${index}, ${instIdx}, this.value)" style="width: 100%; padding: 3px 6px; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px; background: #fff; resize: none; overflow: hidden; line-height: 1.3;">${escapeHtml(inst.notes || '')}</textarea>
+                    ${inspectorState.instances.length > 1 ? `
+                        <button type="button" onclick="window.removeCompendiumInstance(${index}, ${instIdx})" style="background: transparent; border: 1px solid #decdaf; color: #8c7b6c; border-radius: 3px; width: 22px; height: 24px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s ease;" onmouseover="this.style.borderColor='#b82c2c'; this.style.color='#b82c2c'; this.style.background='#fff5f5';" onmouseout="this.style.borderColor='#decdaf'; this.style.color='#8c7b6c'; this.style.background='transparent';" title="Delete instance">&times;</button>
+                    ` : `<div style="width: 22px; flex-shrink: 0;"></div>`}
+                </div>
+            </div>
+        `;
+    });
 
     container.innerHTML = `
         <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
@@ -24830,20 +24886,15 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
                 <span>HAP: ${asp.hap ?? '—'}</span>
             </div>
 
-            <!-- Row 3: Resources and Tracker boxes -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 6px;">
-                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
-                    <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
-                    <span style="font-weight: bold;">${creature.vit ?? '—'}</span>
-                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${inspectorState.currentLostVit || 0}" onchange="window.updateInspectorVit(this.value, ${index})" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
-                </div>
-                <div style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem;">
-                    <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
-                    <span style="font-weight: bold;">${creature.mana ?? '—'}</span>
-                    <label style="font-size: 0.7rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${inspectorState.currentLostMana || 0}" onchange="window.updateInspectorMana(this.value, ${index})" style="width: 38px; padding: 2px; text-align: center; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px;">
-                </div>
+            <!-- Row 3: Instances Header & Add Button -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 0.75rem; font-weight: bold; color: #5c1d1d; text-transform: uppercase;">Instances</span>
+                <button type="button" onclick="window.addCompendiumInstance(${index})" style="background: #fff; border: 1px dashed #7d3c1b; color: #7d3c1b; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; cursor: pointer;">+ Add instance</button>
+            </div>
+
+            <!-- Row 3.5: Instances List Container -->
+            <div style="margin-bottom: 8px; border-bottom: 1px dashed #decdaf; padding-bottom: 2px;">
+                ${instancesHtml}
             </div>
 
             <!-- Row 4: Avoidance & Initiative -->
@@ -24882,15 +24933,19 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
 
         </div>
     `;
+
+    container.querySelectorAll('textarea').forEach(ta => {
+        ta.style.height = 'auto';
+        ta.style.height = ta.scrollHeight + 'px';
+    });
 };
 
-// Global Actions
+// Global Actions & Instance Handlers
 window.addCompendiumInspector = function() {
     characterChoicesState.compendiumInspectorCards.push({
         id: `inspector-${Date.now()}`,
         selectedCreatureName: "None",
-        currentLostVit: 0,
-        currentLostMana: 0
+        instances: [{ lostVit: 0, lostMana: 0, notes: "" }]
     });
     renderCompendiumInspectorUI();
 };
@@ -24904,8 +24959,7 @@ window.clearCompendiumInspector = function(index) {
     characterChoicesState.compendiumInspectorCards[index] = {
         id: characterChoicesState.compendiumInspectorCards[index].id,
         selectedCreatureName: "None",
-        currentLostVit: 0,
-        currentLostMana: 0
+        instances: [{ lostVit: 0, lostMana: 0, notes: "" }]
     };
     renderCompendiumInspectorUI();
 };
@@ -24914,21 +24968,45 @@ window.selectCompendiumCreature = function(creatureName, index = 0) {
     const card = characterChoicesState.compendiumInspectorCards[index];
     if (card) {
         card.selectedCreatureName = creatureName;
-        card.currentLostVit = 0;
-        card.currentLostMana = 0;
+        card.instances = [{ lostVit: 0, lostMana: 0, notes: "" }];
         window.renderCompendiumMiniSheet(creatureName, index);
     }
 };
 
-window.updateInspectorVit = function(val, index = 0) {
-    if (characterChoicesState.compendiumInspectorCards[index]) {
-        characterChoicesState.compendiumInspectorCards[index].currentLostVit = Math.max(0, parseInt(val) || 0);
+window.addCompendiumInstance = function(cardIndex) {
+    const card = characterChoicesState.compendiumInspectorCards[cardIndex];
+    if (card) {
+        card.instances.push({ lostVit: 0, lostMana: 0, notes: "" });
+        window.renderCompendiumMiniSheet(card.selectedCreatureName, cardIndex);
     }
 };
 
-window.updateInspectorMana = function(val, index = 0) {
-    if (characterChoicesState.compendiumInspectorCards[index]) {
-        characterChoicesState.compendiumInspectorCards[index].currentLostMana = Math.max(0, parseInt(val) || 0);
+window.removeCompendiumInstance = function(cardIndex, instIndex) {
+    const card = characterChoicesState.compendiumInspectorCards[cardIndex];
+    if (card && card.instances.length > 0) {
+        card.instances.splice(instIndex, 1);
+        window.renderCompendiumMiniSheet(card.selectedCreatureName, cardIndex);
+    }
+};
+
+window.updateInspectorInstanceVit = function(cardIndex, instIndex, val) {
+    const card = characterChoicesState.compendiumInspectorCards[cardIndex];
+    if (card && card.instances[instIndex]) {
+        card.instances[instIndex].lostVit = Math.max(0, parseInt(val) || 0);
+    }
+};
+
+window.updateInspectorInstanceMana = function(cardIndex, instIndex, val) {
+    const card = characterChoicesState.compendiumInspectorCards[cardIndex];
+    if (card && card.instances[instIndex]) {
+        card.instances[instIndex].lostMana = Math.max(0, parseInt(val) || 0);
+    }
+};
+
+window.updateInspectorInstanceNotes = function(cardIndex, instIndex, val) {
+    const card = characterChoicesState.compendiumInspectorCards[cardIndex];
+    if (card && card.instances[instIndex]) {
+        card.instances[instIndex].notes = val;
     }
 };
 function generateCompendiumTab() {
@@ -25110,6 +25188,112 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(renderEncounterChartsUI, 300);
 });
 
+// =========================================================================
+// 🧮 GRAND BAZAAR CALCULATOR STATE PERSISTENCE HELPERS
+// =========================================================================
+
+function saveCalculatorStateToMemory() {
+    if (!characterChoicesState.calculator) {
+        characterChoicesState.calculator = {
+            activeType: "None",
+            weapon: {}, armor: {}, shield: {}
+        };
+    }
+    
+    const typeSelect = document.getElementById("bazaar-calc-type-select");
+    characterChoicesState.calculator.activeType = typeSelect ? typeSelect.value : "None";
+
+    ["weapon", "armor", "shield"].forEach(calcType => {
+        const slotId = `calc-${calcType}`;
+        const itemEl = document.getElementById(`build-select-item-${slotId}`);
+        if (!itemEl) return;
+
+        const matEl = document.getElementById(`build-select-material-${slotId}`);
+        const makerEl = document.getElementById(`build-select-maker-${slotId}`);
+        const qualEl = document.getElementById(`build-select-quality-${slotId}`);
+        const e1El = document.getElementById(`build-select-enchantment-${slotId}`);
+        const e2El = document.getElementById(`build-select-enchantment2-${slotId}`);
+        const e3El = document.getElementById(`build-select-enchantment3-${slotId}`);
+
+        const profileMats = {};
+        document.querySelectorAll(`#builder-${slotId} .sub-profile-material-select`).forEach(sel => {
+            const profKey = sel.getAttribute('data-profile-key');
+            if (profKey) profileMats[profKey] = sel.value;
+        });
+
+        characterChoicesState.calculator[calcType] = {
+            itemId: itemEl.value,
+            materialId: matEl ? matEl.value : "None",
+            makerId: makerEl ? makerEl.value : "None",
+            qualityId: qualEl ? qualEl.value : "None",
+            enchantmentId: e1El ? e1El.value : "None",
+            enchantment2Id: e2El ? e2El.value : "None",
+            enchantment3Id: e3El ? e3El.value : "None",
+            profileMaterials: profileMats
+        };
+    });
+}
+
+function restoreCalculatorStateFromMemory() {
+    if (!characterChoicesState.calculator) return;
+
+    const activeType = characterChoicesState.calculator.activeType || "None";
+    const typeSelect = document.getElementById("bazaar-calc-type-select");
+    if (typeSelect) {
+        typeSelect.value = activeType;
+        if (typeof window.openBazaarCalculator === "function") {
+            window.openBazaarCalculator(activeType);
+        }
+    }
+
+    ["weapon", "armor", "shield"].forEach(calcType => {
+        const slotId = `calc-${calcType}`;
+        const calcData = characterChoicesState.calculator[calcType];
+        if (!calcData) return;
+
+        if (activeType === calcType) {
+            if (typeof window.toggleBuilder === "function") {
+                window.toggleBuilder(slotId);
+            }
+        }
+
+        const itemEl = document.getElementById(`build-select-item-${slotId}`);
+        if (itemEl) {
+            itemEl.value = calcData.itemId || "None";
+            if (typeof rebuildMaterialDropdowns === "function") rebuildMaterialDropdowns(slotId, calcType);
+            if (typeof applyModTagFilter === "function") applyModTagFilter(slotId);
+        }
+
+        const matEl = document.getElementById(`build-select-material-${slotId}`);
+        if (matEl) matEl.value = calcData.materialId || "None";
+
+        const makerEl = document.getElementById(`build-select-maker-${slotId}`);
+        if (makerEl) makerEl.value = calcData.makerId || "None";
+
+        const qualEl = document.getElementById(`build-select-quality-${slotId}`);
+        if (qualEl) qualEl.value = calcData.qualityId || "None";
+
+        const e1El = document.getElementById(`build-select-enchantment-${slotId}`);
+        if (e1El) e1El.value = calcData.enchantmentId || "None";
+
+        const e2El = document.getElementById(`build-select-enchantment2-${slotId}`);
+        if (e2El) e2El.value = calcData.enchantment2Id || "None";
+
+        const e3El = document.getElementById(`build-select-enchantment3-${slotId}`);
+        if (e3El) e3El.value = calcData.enchantment3Id || "None";
+
+        if (calcData.profileMaterials) {
+            Object.entries(calcData.profileMaterials).forEach(([profKey, matId]) => {
+                const subMatEl = document.getElementById(`build-select-material-${slotId}-${profKey}`);
+                if (subMatEl) subMatEl.value = matId;
+            });
+        }
+
+        if (typeof window.calculateItemCost === "function" && activeType === calcType) {
+            window.calculateItemCost(slotId);
+        }
+    });
+}
 
 </script>
 <!-- Character Manager Modal -->
