@@ -9340,7 +9340,7 @@ const tooltipRegistry = {
   },
   "true_force": {
     title: "True Force",
-    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
+    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
 
   // ── COMPOSITE / MULTI-SKILL PACKAGE MILESTONES ──
@@ -9420,10 +9420,34 @@ const tooltipRegistry = {
     includes: ["blinding_presence", "pall_of_darkness", "true_lightning", "pillar_of_flame", "thunderous_roar", "blizzard", "drown", "immolate", "entomb", "tornado", "enshadow"]
   },
   "wyrdsinger": {
-        title: "Wyrdsinger [Encænium]",
-        actionType: "Cast",
-        summary: "When you perform for an audience, you can activate one of the following effects which lasts for Verve phases. Only one effect can be active at a time.",
-        includes: [ "in_it_together", "luck_be_with_you", "luck_is_what_you_make_it", "lucky_hit", "wyrd_control"]
+        title: "Wyrdsinger [Incantation]",
+        actionType: "Cast + Skill Check [Verve]",
+        summary: "Upon making a performance Check, you can activate one or more of the following effects for Verve Rounds. The combined TNs of all effects produced cannot exceed your Skill Check.",
+        includes: ["luck_be_with_you", "luck_is_what_you_make_it", "lucky_hit", "wyrd_control", "sucks_to_be_you", "lucky_bastard"]
+    },
+    "wyrd_control": {
+        title: "Wyrd Control",
+        description: "TN 1: Targets can change one Blank Result to a Wyrd Result or one Wyrd Result to a Blank Result per roll. This can be activated multiple times."
+    },
+    "luck_is_what_you_make_it": {
+        title: "Luck Is What You Make It",
+        description: "TN 2: Targets can change Wyrd Results to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free."
+    },
+    "luck_be_with_you": {
+        title: "Luck Be With You",
+        description: "TN 3: All targets gain or lose your Rank points of Luck. This can be activated multiple times."
+    },
+    "lucky_hit": {
+        title: "Lucky Hit",
+        description: "TN 4: Targets gain a bonus amount of dice equal to their Luck on a single roll."
+    },
+    "sucks_to_be_you": {
+        title: "Sucks to be You!",
+        description: "TN 5: Designated targets change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Wyrd Results."
+    },
+    "lucky_bastard": {
+        title: "Lucky Bastard",
+        description: "TN 6: Targets can change one Wyrd Result to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free. This can be activated multiple times."
     },
     "discipline_acid": {
         title: "Discipline [Acid]",
@@ -9587,7 +9611,7 @@ const tooltipRegistry = {
   "divine_judgement": {
     title: "Divine Judgement",
     actionType: "Cast",
-    description: "You either increase or decrease your target’s dice limit on all rolls by an amount equal to one third your Rank for Verve rounds.",
+    description: "The target gains or loses your Rank number of dice on all Saves for Verve rounds.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases instead."},{"label":"Rite","text":"The effect is permanent."}]
   },
 "blinding_presence": {
@@ -9661,31 +9685,6 @@ const tooltipRegistry = {
     actionType: "Cast",
     description: "You can ask up to Verve yes-or-no questions of your patron deity. While the LM will answer truthfully, he will also answer literally. Questions that do not fit the format are not answered but still count against the total."
   },
-    "in_it_together": {
-        title: "In It Together",
-        action_type: "Cast",
-        description: "Your Hap is used instead of the party average when a single roll is made affecting the group."
-    },
-    "luck_be_with_you": {
-        title: "Luck Be With You",
-        action_type: "Cast",
-        description: "The effective Hap of all targets is increased by an amount equal to your Rank."
-    },
-    "luck_is_what_you_make_it": {
-        title: "Luck Is What You Make It",
-        action_type: "Cast",
-        description: "Targets can change up to their Rank Skill Results to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when making Hap saves."
-    },
-    "lucky_hit": {
-        title: "Lucky Hit",
-        action_type: "Cast",
-        description: "Targets gain a bonus amount of dice equal to their Hap on a single roll."
-    },
-    "wyrd_control": {
-        title: "Wyrd Control",
-        action_type: "Cast",
-        description: "Targets can change one Blank Result to a Wyrd Result or one Wyrd Result to a Blank Result per roll."
-    },
   "mana_shield": {
     title: "Mana Shield",
     description: "You suffer only ½ damage from a single incoming spell or magical effect."
@@ -9793,7 +9792,7 @@ const tooltipRegistry = {
     title: "Heal Wounds",
     actionType: "Cast",
     description: "Target recovers Verve + Rank points of Vitality.",
-    extras: [{"label":"Encænium","text":"You can heal Verve targets at once so long as they are no farther than thrice your Verve hexes from you."}, {"label":"Rite","text":"The target of your spell recovers one lost Aspect points or one body part."}]
+    extras: [{"label":"Encænium","text":"You can heal Verve targets at once so long as they are no farther than thrice your Verve hexes from you."}, {"label":"Rite","text":"The target of your spell recovers one lost Aspect point or one body part."}]
   },
   "inflict_wounds": {
     title: "Inflict Wounds",
