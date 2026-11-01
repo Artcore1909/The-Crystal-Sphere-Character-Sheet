@@ -17436,8 +17436,8 @@ function formatTextContent(text) {
         // 1. Escape HTML for safety
         let escaped = escapeHtml(text);
         
-        // 2. Unescape any <img> tags so icons render properly as images
-        let restored = escaped.replace(/&lt;img([^&]*?)&gt;/gi, '<$1>');
+        // 2. Unescape any <img> tags properly so icons render as images
+        let restored = escaped.replace(/&lt;(img\s+[^&]*?)&gt;/gi, '<$1>');
         
         // 3. Replace bullet symbols
         return restored.replace(/[●✦▪]\s*/g, `<span class="tcs-bullet">▪</span>`);
