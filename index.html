@@ -8215,8 +8215,8 @@ const tooltipRegistry = {
     actionType: "Skill Check [Dexterity or Intellect]",
     description: "You are able to competently engage in a particular craft. The difficulty, required time, and value for any given piece must be determined by the LM, but the following list should serve as a guide:\n● TN 1: ₤6; ¼ phase\n● TN 2: ₤12; ¼ phase\n● TN 3: ₤24; 1 phase\n● TN 4: ₤48; 1 phase\n● TN 5: ₤96; 1 day\n● TN 6: ₤192; 1 day\n● TN 7: ₤384; 1 week\n● TN 8: ₤768; 1 week"
   },
-  "cthnology": {
-    title: "Cthnology",
+  "chthnology": {
+    title: "Chthnology",
     actionType: "Skill Check [Intellect]",
     description: "You consult your knowledge of the underworld."
   },
@@ -8524,7 +8524,7 @@ const tooltipRegistry = {
     "transfer_mana": {
         title: "Transfer Mana",
         action_type: "Cast",
-        description: "You can channel Mana into another Mana pool."
+        description: "You can channel Mana into or from another Mana pool."
     },
     "dispel_magic": {
         title: "Dispel Magic",
@@ -8695,36 +8695,78 @@ const tooltipRegistry = {
   // ═══════════════════════════════════════════════════════════════════════
   // PROGRESSIVE CAST MANEUVERS, SPELLS, & TALENTS
   // ═══════════════════════════════════════════════════════════════════════
+  "orb_of_darkness": {
+    title: "Orb of Darkness",
+    actionType: "Cast + Attack",
+    description: "You can shoot an orb of darkness at a target dealing Verve + Rank dice of darkness damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+  },
+  "dark_mantle": {
+    title: "Dark Mantle",
+    actionType: "Cast",
+    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+  },
+  "ball_of_darkness": {
+    title: "Ball of Darkness",
+    actionType: "Cast + Attack",
+    description: "You blast a five-hex diameter circle with blinding darkness dealing Verve + Rank dice of darkness damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+  },
+  "veil_of_darkness": {
+    title: "Veil of Darkness",
+    actionType: "Cast + Attack",
+    description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+  },
+  "tendril_of_darkness": {
+    title: "Tendril of Darkness",
+    actionType: "Cast + Verve",
+    description: "You send out a piercing tendril of darkness which passes through all targets up to Verve hexes away in a straight line, dealing Verve + Rank dice of darkness damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+  },
+  "dark_strike": {
+    title: "Dark Strike",
+    actionType: "Cast",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of darkness damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve rounds.",
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+  },
+  "foreboding_darkness": {
+    title: "Foreboding Darkness",
+    description: "You can change all Blank Results to Skill Results for all Battle Magic: Darkness skills."
+  },
+  "living_darkness": {
+    title: "Living Darkness",
+    actionType: "Cast",
+    description: "You bring into being a darkness elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
+    extras: [{"label":"Rite","text":"The effect is permanent."}]
+  },
   "fire_sting": {
     title: "Fire Sting",
     actionType: "Cast + Attack",
-    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
   },
   "fire_corona": {
     title: "Fire Corona",
     actionType: "Cast",
-    description: "You surround yourself in flames for Verve rounds dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    description: "You surround yourself in flames for Verve rounds dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
   },
   "fireball": {
     title: "Fireball",
     actionType: "Cast + Attack",
-    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
   },
   "fire_wall": {
     title: "Fire Wall",
     actionType: "Cast + Attack",
-    description: "You erect a wall of fire two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of fire damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The wall lasts for Verve rounds.",
+    description: "You erect a wall of fire two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of fire damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "firebolt": {
     title: "Firebolt",
     actionType: "Cast + Attack",
-    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
   },
   "fire_strike": {
     title: "Fire Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of fire damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of fire damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The enchantment on the weapon lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
   },
   "intense_flames": {
@@ -8740,33 +8782,33 @@ const tooltipRegistry = {
   "frostbite": {
     title: "Frostbite",
     actionType: "Cast + Attack",
-    description: "You can throw a fistfull of intense cold at a target dealing Verve + Rank dice of frost damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    description: "You can throw a fistfull of intense cold at a target dealing Verve + Rank dice of frost damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
   },
   "frostshield": {
     title: "Frostshield",
     actionType: "Cast",
-    description: "You surround yourself in extreme cold for Verve rounds dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    description: "You surround yourself in extreme cold for Verve rounds dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
   },
   "frost_blast": {
     title: "Frost Blast",
     actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with intense cold dealing Verve + Rank dice of frost damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    description: "You blast a five-hex diameter circle with intense cold dealing Verve + Rank dice of frost damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
   },
   "frost_wall": {
     title: "Frost Wall",
     actionType: "Cast + Attack",
-    description: "You erect a wall of frost two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of frost damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of frost two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of frost damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "coldsnap": {
     title: "Coldsnap",
     actionType: "Cast + Attack",
-    description: "You send out an intense stream of frost which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of frost damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    description: "You send out an intense stream of frost which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of frost damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
   },
   "frost_strike": {
     title: "Frost Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of frost damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of frost damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The enchantment on the weapon lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
   },
   "intense_cold": {
@@ -8782,33 +8824,33 @@ const tooltipRegistry = {
   "arrow_of_light": {
     title: "Arrow Of Light",
     actionType: "Cast + Attack",
-    description: "You can shoot an arrow of light at a target dealing Verve + Rank dice of light damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You can shoot an arrow of light at a target dealing Verve + Rank dice of light damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "halo": {
     title: "Halo",
     actionType: "Cast",
-    description: "You surround yourself in extreme brightness for Verve rounds dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You surround yourself in extreme brightness for Verve rounds dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "flashbang": {
     title: "Flashbang",
     actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with blinding light dealing Verve + Rank dice of light damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You blast a five-hex diameter circle with blinding light dealing Verve + Rank dice of light damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "wall_of_light": {
     title: "Wall Of Light",
     actionType: "Cast + Attack",
-    description: "You erect a wall of light two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of light damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of light two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of light damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "flash_of_light": {
     title: "Flash Of Light",
     actionType: "Cast + Verve",
-    description: "You send out an intense flash of light which passes through all targets within a hemisphere whose radius is Verve hexes dealing Verve + Rank dice of light damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You send out an intense flash of light which passes through all targets within a hemisphere whose radius is Verve hexes dealing Verve + Rank dice of light damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "light_strike": {
     title: "Light Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of light damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of light damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
   },
   "searing_light": {
@@ -8824,33 +8866,33 @@ const tooltipRegistry = {
   "static_discharge": {
     title: "Static Discharge",
     actionType: "Cast + Attack",
-    description: "You can throw an arc of lightning at a target dealing Verve + Rank dice of lightning damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    description: "You can throw an arc of lightning at a target dealing Verve + Rank dice of lightning damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
   },
   "static_aura": {
     title: "Static Aura",
     actionType: "Cast",
-    description: "Lightning arcs from your body for Verve rounds dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    description: "Lightning arcs from your body for Verve rounds dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
   },
   "lightning_blast": {
     title: "Lightning Blast",
     actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with lightning dealing Verve + Rank dice of lightning damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    description: "You blast a five-hex diameter circle with lightning dealing Verve + Rank dice of lightning damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
   },
   "wall_of_lightning": {
     title: "Wall Of Lightning",
     actionType: "Cast + Attack",
-    description: "You erect a wall of lightning two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of lightning damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of lightning two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of lightning damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "lightning_bolt": {
     title: "Lightning Bolt",
     actionType: "Cast + Attack",
-    description: "You send out an intense arc of lightning which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of lightning damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    description: "You send out an intense arc of lightning which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of lightning damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
   },
   "lightning_strike": {
     title: "Lightning Strike",
     actionType: "Cast + Attack",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of lightning damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of lightning damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The enchantment on the weapon lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
   },
   "high_voltage": {
@@ -8866,33 +8908,33 @@ const tooltipRegistry = {
   "transient_noise": {
     title: "Transient Noise",
     actionType: "Cast + Attack",
-    description: "You can throw a pocket of sound at a target dealing Verve + Rank dice of damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "You can throw a pocket of sound at a target dealing Verve + Rank dice of damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
   },
   "shroud_of_thunder": {
     title: "Shroud Of Thunder",
     actionType: "Cast",
-    description: "Thunder pulsates from your body for Verve rounds dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "Thunder pulsates from your body for Verve rounds dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
   },
   "sonic_boom": {
     title: "Sonic Boom",
     actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with thunderous noise dealing Verve + Rank dice of damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "You blast a five-hex diameter circle with thunderous noise dealing Verve + Rank dice of damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
   },
   "wall_of_thunder": {
     title: "Wall Of Thunder",
     actionType: "Cast + Attack",
-    description: "You erect a wall of thunder two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The wall lasts for Verve rounds.",
+    description: "You erect a wall of thunder two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "rolling_thunder": {
     title: "Rolling Thunder",
     actionType: "Cast + Attack",
-    description: "You send out an intense wave of thunder which passes through all targets up to Verve hexes away dealing Verve + Rank dice of damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "You send out an intense wave of thunder which passes through all targets up to Verve hexes away dealing Verve + Rank dice of damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
   },
   "thunder_strike": {
     title: "Thunder Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of thunder damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of thunder damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The enchantment on the weapon lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
   },
   "deafening_thunder": {
@@ -9328,7 +9370,7 @@ const tooltipRegistry = {
   },
   "true_abjuration": {
     title: "True Abjuration",
-    description: "Abjure Energy and Abjure Wounds now provide immunity to their respective damage types, and Abjure Death now grants the target an additional <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Avoidance rolls."
+    description: "Abjure Energy and Abjure Wounds now provide immunity to their respective damage types, and Abjure Death now grants the target an additional <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Avoidance rolls."
   },
   "improved_force": {
     title: "Improved Force",
@@ -9760,12 +9802,6 @@ const tooltipRegistry = {
     actionType: "Cast",
     description: "You create a rune and charge it with a spell you know by channeling Mana into it. You must channel into it three times the Mana it will output. When you create the rune, you must also scribe into it the triggering condition: command, destruction, manipulation, or proximity. The range that the rune can detect and affect is thrice your Verve hexes from itself.",
     extras: [{"label":"Rite","text":"The rune recharges over the course of three days."}]
-  },
-  "drain_mana": {
-    title: "Drain Mana",
-    actionType: "Cast",
-    description: "Through steady, skin-on-skin contact, you are able to steal 1d/Rank Mana from your target per Pulse you channel the spell. Once your Mana is full, additional damage will be stored in a surplus Mana pool which will last for ¼ phase. Surplus Mana is always used first.",
-    extras: [{"label":"Word","text":"This spell no longer requires contact."}]
   },
   "levitate": {
     title: "Levitate",
@@ -10408,7 +10444,7 @@ function updateSkillsSummary() {
       // Master list of available Knowledge fields for the Guild: Sages dropdown selectors
     const availableSagesLoresList = [
         "Arcana", "Architecture", "Biology", "Botany", "Cosmology",
-        "Cthnology", "Engineering", "Ethnology", "Geography", "History",
+        "Chthnology", "Engineering", "Ethnology", "Geography", "History",
         "Mathematics", "Medicine", "Physics", "Pneumonology", "Theology",
         "New Language"
     ];
@@ -10468,7 +10504,7 @@ const nonCastSkillsData = [
   { name: "Common Weapons", aspect: "Var." },
   { name: "Cosmology", aspect: "INT" },
   { name: "Craft", aspects: ["DEX", "INT"] },
-  { name: "Cthnology", aspect: "INT" },
+  { name: "Chthnology", aspect: "INT" },
   { name: "Direction Sense", aspect: "ACT" },
   { name: "Disarm Traps", aspect: "DEX" },
   { name: "Disbelieve Illusion", aspect: "ACT" },
@@ -10788,156 +10824,365 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     // Master registry linking all 58 skill tree handles directly to their level-by-level rulebook unlock names
     const skillAbilitiesRegistry = {
     // --- Common Skills ---
-    "background": [
+    "background": {
+        description: "Vestigle skills, crafts, and trades indicative of your life before adventuring.",
+        levels:    [
         "Alertness", "Appraise", "Butcher & Grow Crops", "Common Weapons", "Craft",
         "Drive Cart", "Fish", "Handle Domestic Animal", "Handle Wild Animal", "Hunt & Forage",
         "Research", "Sail Boat", "Sleuthing", "Street Smarts", "Survival", "Tracking",
         "Trade", "Use & Make Rope", "Vim, Vigor, & Vitality"
-    ],
-    "athleticism": [
+    ]
+},
+    "athleticism": {
+        description: "Skills relating to your honed athletic prowess and vigor.",
+        levels:    [
         "Run & Charge", "Balance, Climb, Jump, & Swim", "Higher Balance, Climb, & Swim Pace", "Vitality Increase", "Regeneration"
-    ],
-    "interlocution": [
+    ]
+},
+    "interlocution": {
+        description: "The art of knowing what to say, what not to say, and how to say many things and nothing all at once.",
+        levels:    [
         "Coerce & Intimidate", "Etiquette", "Goad", "Haggle", "Improvise",
         "Interrogate & Torture", "Intimate", "Lie", "Orate", "Persuade"
-    ],
-    "observation": [
+    ]
+},
+    "observation": {
+        description: "Skills relating to your sharpened mental faculties and inescapable vigilance.",
+        levels:    [
         "Listen, Feel, Search, Spot, Smell, & Taste", "Empathy & Discern Lie", "Quickness of Mind", "Direction Sense", "Disbelieve Illusion", "Mana Increase", "Level Headed"
-    ],
-    "stealth": [
+    ]
+},
+    "stealth": {
+        description: "The art of being undetected and the craft of artful misdirection.",
+        levels:    [
         "Hide & Sneak", "Escape", "Sleight of Hand", "Disguise", "Pick Locks & Set/Disarm Traps", "Smuggling", "Forgery", "Backstab"
-    ],
-    "arc-bows": [
+    ]
+},
+    "arc-bows": {
+        description: "The mastery and handling of all manner of bows and firearms.",
+        levels:    [
         "Arc-bows", "Aim", "Melee Shot", "Aim", "Longshot"
-    ],
-    "brutal weapons": [
+    ]
+},
+    "brutal weapons": {
+        description: "Mastery of heavy impact and bludgeoning arms, relying on sheer force over precision.",
+        levels:    [
         "Brutal Weapons", "Extra Damage", "Parry & Ripost", "Extra Damage", "Crushing Blow"
-    ],
-    "defense": [
+    ]
+},
+    "defense": {
+        description: "The art of getting the hell out of the way and keeping your head on your shoulders.",
+        levels:    [
         "Avoidance, Total Defense, Positioning, & Shield Bash"
-    ],
-    "dual-wielding": [
+    ]
+},
+    "dual-wielding": {
+        description: "No one ever told you what a shield was for, so now you kill with both hands.",
+        levels:    [
         "Dual-Wielding", "No Shield? No Problem", "Gauche Feint"
-    ],
-    "equestrianism": [
+    ]
+},
+    "equestrianism": {
+        description: "Whoever said dog is man's best friend has never tried to saddle up a greyhound. The art of using a mount to cheese the fight.",
+        levels:    [
         "Mounted Attack", "Beast Attack", "Charging Overrun"
-    ],
-    "pugilism": [
+    ]
+},
+    "pugilism": {
+        description: "Long weapons are nice, but if you don't know how to fight hand-to-hand, you'll find yourself on your back with a knife in your visor.",
+        levels:    [
         "Pugil Weapons", "Quickness of Body", "Grapple", "Trip", "Opportune Strike"
-    ],
-    "shrewd weapons": [
+    ]
+},
+    "shrewd weapons": {
+        description: "Mastery of all that is long and sharp and the art of knowing where and how to stick it.",
+        levels:    [
         "Shrewd Weapons", "Accuracy", "Parry & Ripost", "Extra Damage", "Calculated Strike"
-    ],
-    "skill training": [
+    ]
+},
+    "skill training": {
+        description: "",
+        levels:    [
         "Extra Training"
-    ],
+    ]
+},
 
     // --- Guild & Cast Skills ---
-    "guild: esoteric": [
+    "guild: esoteric": {
+        description: "The school of magic concerned with the flow of Aether. Produces indigo light when divined.",
+        levels:    [
         "Arcana & New Language", "Arcane Mark", "Transfer Mana", "Dispel Magic", "Tongues", "Teleport"
-    ],
-    "guild: sages": [
+    ]
+},
+    "guild: sages": {
+        description: "All skills of scholastic interest and academic pursuit.",
+        levels:    [
         "Arcana", "Architecture", "Biology", "Botany", "Cosmology",
-        "Cthnology", "Engineering", "Ethnology", "Geography", "History",
+        "Chthnology", "Engineering", "Ethnology", "Geography", "History",
         "Mathematics", "Medicine", "Physics", "Pneumonology", "Theology",
         "New Language", "Scholar", "Professor"
-    ],
-    "guild: temple": [
+    ]
+},
+    "guild: temple": {
+        description: "Foundational training for all servants of the pantheon. Produces alabaster light when divined.",
+        levels:    [
         "Theology, Patron Deity, Mandatum Divinum, Bless, & New Language", "Dismiss Undead", "Wraithstrike", "Divine Judgement", "Divine Wrath", "Commune"
-    ],
-    "guild: troupe": [
+    ]
+},
+    "guild: troupe": {
+        description: "The prerequisite skillset and the resultant benefits of living on the road and from the patron's purse",
+        levels:    [
         "Performance", "Bardic Knowledge", "Wyrdsinger"
-    ],
-    "abjuration": [
+    ]
+},
+    "abjuration": {
+        description: "The school of magic concerned with the mitigation of harm. Produces cobolt blue light when divined.",
+        levels:    [
         "Arcane Armor", "Picket Line", "Sanctum", "Abjure Creature", "Abjure Energy", "Abjure Wound", "Arcane Seal", "Abjure Death"
-    ],
-    "arcane force": [
-        "Arcane Dart", "Arcane Lock", "Shockwave", "Arcane Wall", "Arcane Vortex"
-    ],
-    "battle magic: fire": [
+    ]
+},
+    "arcane force": {
+        description: "The school of magic concerned with weaving explosive and impenatrable force from the Aether. Produces white light when divined.",
+        levels:    [
+        "Arcane Dart", "Shockwave", "Arcane Wall", "Arcane Vortex"
+    ]
+},
+    "battle magic: darkness": {
+        description: "The school of magic concerned with weaving darkness from the Aether. Produces charcoal light when divined.",
+        levels:    [
+        "Orb of Darkness", "Shadow Cloak", "Ball of Darkness", "Veil of Darkness", "Tendril of Darkness", "Dark Strike", "Foreboding Darkness", "Living Darkness"
+    ]
+},
+    "battle magic: fire": {
+        description: "The school of magic concerned with weaving fire from the Aether. Produces crimson light when divined.",
+        levels:    [
         "Fire Sting", "Fire Corona", "Fireball", "Fire Wall", "Firebolt", "Fire Strike", "Intense Flames", "Living Flame"
-    ],
-    "battle magic: frost": [
+    ]
+},
+    "battle magic: frost": {
+        description: "The school of magic concerned with weaving frost from the Aether. Produces ice blue light when divined.",
+        levels:    [
         "Frostbite", "Frostshield", "Frost Blast", "Frost Wall", "Coldsnap", "Frost Strike", "Intense Cold", "Living Frost"
-    ],
-    "battle magic: light": [
+    ]
+},
+    "battle magic: light": {
+        description: "The school of magic concerned with weaving light from the Aether. Produces gold light when divined.",
+        levels:    [
         "Arrow of Light", "Halo", "Flashbang", "Wall of Light", "Flash of Light", "Light Strike", "Searing Light", "Living Light"
-    ],
-    "battle magic: lightning": [
+    ]
+},
+    "battle magic: lightning": {
+        description: "The school of magic concerned with weaving lightning from the Aether. Produces cyan light when divined.",
+        levels:    [
         "Static Discharge", "Static Aura", "Lightning Blast", "Wall of Lightning", "Lightning Bolt", "Lightning Strike", "High Voltage", "Living Lightning"
-    ],
-    "battle magic: thunder": [
+    ]
+},
+    "battle magic: thunder": {
+        description: "The school of magic concerned with weaving thunder from the Aether. Produces slate grey light when divined.",
+        levels:    [
         "Transient Noise", "Shroud of Thunder", "Sonic Boom", "Wall of Thunder", "Rolling Thunder", "Thunder Strike", "Deafening Thunder", "Living Thunder"
-    ],
-    "bewitchment": [
+    ]
+},
+    "bewitchment": {
+        description: "The school of magic concerned with the manipulation of others. Produces magenta light when divined.",
+        levels:    [
         "Charm Person", "Confusion", "Drain Vitality", "Command", "Sleep", "Geas"
-    ],
-    "conjuration": [
+    ]
+},
+    "conjuration": {
+        description: "The school of magic concerned with weaving matter from the Aether. Produces opalescent light when divined.",
+        levels:    [
         "Conjured Light", "Sustenance", "Cobweb", "Darkness", "Discipline: Acid", "Discipline: Air",
         "Discipline: Earth", "Discipline: Ice", "Discipline: Umbra", "Discipline: Water"
-    ],
-    "divination": [
+    ]
+},
+    "divination": {
+        description: "The school of magic concerned with seeing through the Aether. Produces silver light when divined.",
+        levels:    [
         "Detect Magic", "Detect Thoughts", "Locate", "Analyze", "Clairvoyance"
-    ],
-    "druidism": [
+    ]
+},
+    "druidism": {
+        description: "The school of magic concerned with manipulating nature. Produces forest green light when divined.",
+        levels:    [
         "Whispering Leaves", "Summon Animal", "Speak with Animal", "Barkskin", "Enthrall Animal", "Animal Form", "Wall of Thorns", "Entangle"
-    ],
-    "illusion": [
+    ]
+},
+    "illusion": {
+        description: "The school of magic concerned with imitation and obscuration. Produces teal light when divined.",
+        levels:    [
         "Blur", "Invisibility", "Change/Render Image", "Change/Render Sound", "Fearsome Form", "Alluring Form", "Impersonate", "Mirage"
-    ],
-    "innate sorcery": [
+    ]
+},
+    "innate sorcery": {
+        description: "The inherent ability some have to channel the Aether directly. Produces crimson-gold light when divined.",
+        levels:    [
         "Manaburst, Mana Sting, Mana Bullet, & Manawall", "Mana Shield", "Sense Mana", "Rend Mana"
-    ],
-    "summoning": [
+    ]
+},
+    "summoning": {
+        description: "The school of magic concerned with the manipulation of the spirit. Produces black light when divined.",
+        levels:    [
         "Private Hallway", "Private Chest", "Summon Spirit", "Trap Soul", "Summon Pneumon", "Bind Pneumon/Spirit", "Possess Other", "Private Sanctum"
-    ],
-    "thaumaturgy": [
-        "Phantom Steed", "Cooperative Casting", "Throw Weapon", "Etch Rune", "Drain Mana", "Levitate", "Alter Speed", "Force Choke"
-    ],
-    "zoomancy": [
+    ]
+},
+    "thaumaturgy": {
+        description: "The school of magic concerned with the fine manipulation of Aetherial force. Produces white light when divined.",
+        levels:    [
+        "Phantom Steed", "Cooperative Casting", "Arcane Lock", "Throw Weapon", "Etch Rune", "Levitate", "Alter Speed", "Force Choke"
+    ]
+},
+    "zoomancy": {
+        description: "The school of magic concerened with life. Produces viridian light when divined.",
+        levels:    [
         "Stabilize", "Heal Wounds", "Inflict Wounds", "Purify", "Resurrection"
-    ],
+    ]
+},
 
     // --- Rank 3+ Masteries ---
-    "mastery: abjuror": ["Improved Sanctum", "Indomitable", "True Abjuration"],
-    "mastery: arcanist": ["Improved Force", "Inexhaustible", "True Force"],
-    "mastery: battlemage": ["Spellstorm", "Larger Effect", "Largest Effect"],
-    "mastery: conjuror": ["Disciplined Caster", "Spell Fusion"],
-    "mastery: deific boon": ["Deific Boon", "Break Curse"],
-    "mastery: druid": ["Beast Whisperer", "Improved Animal Form", "Beast Form"],
-    "mastery: diviner": ["Telepathy", "Keen", "Inexhaustible"],
-    "mastery: dual-wielder": ["Fencer", "Daze", "Dervish"],
-    "mastery: illusionist": ["Obscuration", "Obscured Casting", "Illusory Spell"],
-    "mastery: jäger": ["Multi-shot", "Ghost Arrow", "Bullseye"],
-    "mastery: pugilist": ["Elusive", "Martial Prowess", "Viper Strike"],
-    "mastery: professor": ["Learned", "Quick-Witted", "Polyglot"],
-    "mastery: scutifer": ["Deflect Strike", "Knock Down", "Shield Mastery"],
-    "mastery: summoner": ["Improved Possess Other", "Indomitable", "Improved Summoning"],
-    "mastery: thaumaturgist": ["Improved Levitation", "Glyph", "Haste"],
-    "mastery: zweihänder": ["Deflect Strike", "Deathstrike", "Fortitudinous"],
-    "mastery: skill training": ["Skill Mastery"],
+    "mastery: abjuror": {
+        description: "In-depth mastery of the abjurative arts indicative of deep, contemplative study.",
+        levels:    ["Improved Sanctum", "Indomitable", "True Abjuration"
+    ]
+},
+    "mastery: arcanist": {
+        description: "In-depth mastery of the gross manipulation of vis arcana.",
+        levels:    ["Improved Force", "Inexhaustible", "True Force"
+    ]
+},
+    "mastery: battlemage": {
+        description: "In-depth mastery of Aetherial energy.",
+        levels:    ["Spellstorm", "Larger Effect", "Largest Effect"
+    ]
+},
+    "mastery: conjuror": {
+        description: "In-depth mastery of weaving matter from the Aether.",
+        levels:    ["Disciplined Caster", "Spell Fusion"
+    ]
+},
+    "mastery: deific boon": {
+        description: "The elevation of a lay priest into a conduit of his God.",
+        levels:    ["Deific Boon", "Break Curse"
+    ]
+},
+    "mastery: druid": {
+        description: "In-depth mastery of the natural and primative magics.",
+        levels:    ["Beast Whisperer", "Improved Animal Form", "Beast Form"
+    ]
+},
+    "mastery: diviner": {
+        description: "In-depth mastery of the art of divination.",
+        levels:    ["Telepathy", "Keen", "Inexhaustible"
+    ]
+},
+    "mastery: dual-wielder": {
+        description: "The tornadic mastery of dual-wielding.",
+        levels:    ["Fencer", "Daze", "Dervish"
+    ]
+},
+    "mastery: illusionist": {
+        description: "In-depth mastery of the art of making things appear other than they are.",
+        levels:    ["Obscuration", "Obscured Casting", "Illusory Spell"
+    ]
+},
+    "mastery: jäger": {
+        description: "Mastery of the bow to the point of legendary prowess.",
+        levels:    ["Multi-shot", "Ghost Arrow", "Bullseye"
+    ]
+},
+    "mastery: pugilist": {
+        description: "In-depth mastery of the martial arts.",
+        levels:    ["Elusive", "Martial Prowess", "Viper Strike"
+    ]
+},
+    "mastery: professor": {
+        description: "In-depth mastery of many fields of study.",
+        levels:    ["Learned", "Quick-Witted", "Polyglot"
+    ]
+},
+    "mastery: scutifer": {
+        description: "You really know how to keep your head on your shoulders.",
+        levels:    ["Deflect Strike", "Knock Down", "Shield Mastery"
+    ]
+},
+    "mastery: summoner": {
+        description: "In-depth mastery of the spirit.",
+        levels:    ["Improved Possess Other", "Indomitable", "Improved Summoning"
+    ]
+},
+    "mastery: thaumaturgist": {
+        description: "In-depth mastery of the fine manipulation of vis arcana.",
+        levels:    ["Improved Levitation", "Glyph", "Haste"
+    ]
+},
+    "mastery: zweihänder": {
+        description: "In-depth mastery of the art of swinging a really big weapon.",
+        levels:    ["Deflect Strike", "Deathstrike", "Fortitudinous"
+    ]
+},
+    "mastery: skill training": {
+        description: "",
+        levels:    ["Skill Mastery"
+    ]
+},
 
     // --- Occult & Paragon Paths ---
-    "occult: manathrall": ["Mana Sickness"],
-    "occult: necromancer": ["Animate Dead", "Enthrall Undead", "Rend Life", "Rend Soul"],
-    "occult: woodswitch": ["Curse", "Beguiling", "Undying"],
-    "paragon: arcane warrior": ["Elemental Weapon", "Arcane Warrior", "Arcane Surge"],
-    "paragon: assassin": ["Improved Stealth", "Trained Assassin", "Sniper"],
-    "paragon: ki master": ["Ki Strike", "Bukūjutsu", "One With the Earth"],
-    "paragon: knight": ["Martial Training", "Meditative Healing", "Killing Machine"],
-    "paragon: paladin": ["Holy Strike", "Wraithguard", "Holy Radiance"],
-    "restricted: evocatus": ["Obedience", "Supreme Training", "Dissever"]
+    "occult: manathrall": {
+        description: "The unfortunate end for all sorcerors.",
+        levels:    ["Mana Sickness"
+    ]
+},
+    "occult: necromancer": {
+        description: "The product of a lifelong search for eternal life: put your soul in a dead body because you can't die if you're already dead (well, you can, but there are lots of dead bodies lying around).",
+        levels:    ["Animate Dead", "Enthrall Undead", "Rend Life", "Rend Soul"
+    ]
+},
+    "occult: woodswitch": {
+        description: "Another adit to immortality and immense power, the path of the woodswitch is nightmarishly brutal.",
+        levels:    ["Curse", "Beguiling", "Undying"
+    ]
+},
+    "paragon: arcane warrior": {
+        description: "A fusion of battle magic and old fashioned fighting, arcane warriors are the elite fighting force of the Guild Esoteric.",
+        levels:    ["Elemental Weapon", "Arcane Warrior", "Arcane Surge"
+    ]
+},
+    "paragon: assassin": {
+        description: "Nobody likes you (but you're really good at killing them, so there's that).",
+        levels:    ["Improved Stealth", "Trained Assassin", "Sniper"
+    ]
+},
+    "paragon: ki master": {
+        description: "In seeming defiance of all the Guild Esoteric knows of the Aether, instead of weaving it, you weave yourself into and through it to great effect.",
+        levels:    ["Ki Strike", "Bukūjutsu", "One With the Earth"
+    ]
+},
+    "paragon: knight": {
+        description: "You have followed the path of immense discipline and now reap the benefits of unparalled combat prowess.",
+        levels:    ["Martial Training", "Meditative Healing", "Killing Machine"
+    ]
+},
+    "paragon: paladin": {
+        description: "The warriors of the Temple and enforcers of the Ecclesiastical Peace, keeping pneumons, the undead, and michieveous spirits at bay.",
+        levels:    ["Holy Strike", "Wraithguard", "Holy Radiance"
+    ]
+},
+    "restricted: evocatus": {
+        description: "The elite wariors of the empire, hand chosen by the Emperor and affirmed by both the Ecclesiarch and the Grand Arcanist.",
+        levels:    ["Obedience", "Supreme Training", "Dissever"
+    ]
+},
 };
   
     // Defines the exact structural level caps and costs for Guild & Cast Skills
   
     const guildCastSkillLevelCaps = {
-        "guild: esoteric":         { maxLevel: 7,  isPackage: true,  progression: [0, 2, 8, 14, 20, 26, 32, 38] }, // 2 Exp. package, 6 levels after
+        "guild: esoteric":         { maxLevel: 6,  isPackage: true,  progression: [0, 2, 8, 14, 20, 26, 32] }, // 2 Exp. package, 5 levels after
         "guild: sages":            { maxLevel: 16, isPackage: false, costPerLevel: 6 },
         "guild: temple":           { maxLevel: 6,  isPackage: true,  progression: [0, 5, 11, 17, 23, 29, 35] }, // 5 Exp. package, 5 levels after
         "guild: troupe":           { maxLevel: 3,  isPackage: false, costPerLevel: 6 },
         "abjuration":              { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
-        "arcane force":            { maxLevel: 5,  isPackage: false, costPerLevel: 6 },
+        "arcane force":            { maxLevel: 4,  isPackage: false, costPerLevel: 6 },
         "battle magic: fire":      { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "battle magic: frost":     { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "battle magic: light":     { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
@@ -16513,7 +16758,8 @@ else if (tree.key === "guild: sages") {
   // 7. STANDARD SEQUENTIAL FALLBACK RENDERER & DYNAMIC EXTRA TRAINING MENU
   // =========================================================================
   else {
-    const unlockedPoolNames = skillAbilitiesRegistry[tree.key] || [];
+    const treeEntry = skillAbilitiesRegistry[tree.key];
+    const unlockedPoolNames = Array.isArray(treeEntry) ? treeEntry : (treeEntry?.levels || []);
     
         if (typeof syncDynamicDropdownSelectionsToExtraTraining === "function") {
       syncDynamicDropdownSelectionsToExtraTraining();
@@ -18015,17 +18261,47 @@ function generateSkillCodex() {
 
     let codexHtml = "";
 
-    // 1. Compile all Skill Trees in the exact sequential order they appear/process on Tab 1
     const allTrees = [
         ...creationSkillTrees.filter(t => t !== "Custom Skills"),
         ...specializedMagicGuildTrees,
         ...restrictedPostCreationTrees
     ];
 
-allTrees.forEach(treeName => {
+    allTrees.forEach(treeName => {
         const sanitizedKey = treeName.toLowerCase();
-        const levelNames = skillAbilitiesRegistry[sanitizedKey] || [];
+        const treeData = skillAbilitiesRegistry[sanitizedKey] || [];
         
+        // Dual-purpose resolver: supports both plain arrays and { description, levels } objects
+        let levelNames = [];
+        let treeDesc = "";
+
+        if (Array.isArray(treeData)) {
+            levelNames = treeData;
+        } else if (treeData && typeof treeData === 'object') {
+            levelNames = treeData.levels || [];
+            treeDesc = treeData.description || "";
+        }
+
+        // Fallback: Check tooltipRegistry if no description was defined in skillAbilitiesRegistry
+        if (!treeDesc) {
+            const cleanName = sanitizedKey
+                .replace(/^(mastery|occult|paragon|restricted|guild)[:\s]+/g, "")
+                .trim();
+            const possibleTreeKeys = [
+                cleanName.replace(/[^a-z0-9]+/g, "_"),
+                sanitizedKey.replace(/[^a-z0-9]+/g, "_"),
+                cleanName,
+                sanitizedKey
+            ];
+            for (const tk of possibleTreeKeys) {
+                if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[tk]) {
+                    const regEntry = tooltipRegistry[tk];
+                    treeDesc = regEntry.description || regEntry.summary || "";
+                    if (treeDesc) break;
+                }
+            }
+        }
+
         let itemsHtml = "";
         
         if (levelNames.length === 0) {
@@ -18035,7 +18311,6 @@ allTrees.forEach(treeName => {
                 const levelNum = index + 1;
                 const baseKey = sanitizedKey.replace(/[^a-z0-9]+/g, "_");
                 
-                // 1. Generate normalization variants for the actual skill name to handle ampersands cleanly
                 const cleaned = lvlName.replace(/<[^>]*>/g, " ");
                 const nameVariants = [
                     cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
@@ -18043,9 +18318,8 @@ allTrees.forEach(treeName => {
                     cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
                 ];
                 
-                // 2. Generate potential registry key matches (checking name variants first)
                 const possibleKeys = [
-                    ...nameVariants, // Checks "run_charge", "run_and_charge", etc.
+                    ...nameVariants,
                     `${baseKey}_${levelNum}`,
                     baseKey,
                     `${baseKey}_overview`,
@@ -18054,7 +18328,6 @@ allTrees.forEach(treeName => {
                     `${baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, "")}_overview`,
                 ];
                 
-                // 3. Address specialized casting/occult system naming exceptions
                 if (baseKey === "occult_necromancer") possibleKeys.push("necromancy");
                 if (baseKey === "paragon_paladin") possibleKeys.push("holy_radiance");
                 if (baseKey === "paragon_ki_master") possibleKeys.push("ki_strike");
@@ -18067,38 +18340,37 @@ allTrees.forEach(treeName => {
                     }
                 }
 
-	// 4. Apply data-tooltip so the global MutationObserver binds the interactions seamlessly
-	const tooltipAttr = resolvedTooltipKey ? `data-tooltip="${resolvedTooltipKey}"` : "";
-	
-	// Determine whether to display the specific level number or the variable [Lvl x]
-	const lowerTree = treeName.toLowerCase();
-	const showLevelTag = !(
-	    lowerTree === "background" ||
-	    lowerTree === "interlocution" ||
-	    lowerTree === "guild: sages" ||
-	    lowerTree === "skill training" ||
-	    lowerTree === "mastery: skill training" ||
-	    (lowerTree === "conjuration" && levelNum >= 5 && levelNum <= 10)
-	);
-	
-	itemsHtml += `
-	    <li ${tooltipAttr} style="margin-bottom: 6px; font-size: 0.95rem; color: #2d3748; font-weight: 600; list-style-type: square; cursor: help;">
-	        ${showLevelTag 
-	            ? `<span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl ${levelNum}]</span>` 
-	            : `<span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl <i style="font-family: 'Times New Roman', Times, serif; font-style: italic;">x</i>]</span>`
-	        }${lvlName}
-	    </li>
-	`;
+                const tooltipAttr = resolvedTooltipKey ? `data-tooltip="${resolvedTooltipKey}"` : "";
+                
+                const lowerTree = treeName.toLowerCase();
+                const showLevelTag = !(
+                    lowerTree === "background" ||
+                    lowerTree === "interlocution" ||
+                    lowerTree === "guild: sages" ||
+                    lowerTree === "guild:sages" ||
+                    lowerTree === "skill training" ||
+                    lowerTree === "mastery: skill training" ||
+                    (lowerTree === "conjuration" && levelNum >= 5 && levelNum <= 10)
+                );
+                
+                itemsHtml += `
+                    <li ${tooltipAttr} style="margin-bottom: 6px; font-size: 0.95rem; color: #2d3748; font-weight: 600; list-style-type: square; cursor: help;">
+                        ${showLevelTag 
+                            ? `<span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl ${levelNum}]</span>` 
+                            : `<span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl <i style="font-family: 'Times New Roman', Times, serif; font-style: italic;">x</i>]</span>`
+                        }${lvlName}
+                    </li>
+                `;
             });
         }
 
-        // 5. Structure each accordion item collapsed by default (display: none)
         codexHtml += `
             <div class="skill-item" style="border: 1px solid #decdaf; margin-bottom: 8px; border-radius: 4px; overflow: hidden;">
                 <div class="skill-header" onclick="toggleSkill(this)" style="background: #faf7f2; padding: 12px; font-weight: bold; color: #7d3c1b; cursor: pointer; user-select: none;">
                     ${treeName} ▾
                 </div>
                 <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
+                    ${treeDesc ? `<div style="font-size: 0.9rem; color: #4a3f35; font-style: italic; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">${escapeHtml(treeDesc)}</div>` : ''}
                     <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
                         ${itemsHtml}
                     </ul>
@@ -18740,8 +19012,7 @@ if (innateLvl >= 4) {
     if (summoningLevel >= 6) attacks.push("Bind Pneumon/Spirit");
     if (summoningLevel >= 7) attacks.push("Possess Other");
 
-    if (getLvl("thaumaturgy") >= 3) attacks.push("Throw Weapon");
-    if (getLvl("thaumaturgy") >= 5) attacks.push("Drain Mana");
+    if (getLvl("thaumaturgy") >= 4) attacks.push("Throw Weapon");
     if (getLvl("thaumaturgy") >= 6) defenses.push("Levitate");
     if (getLvl("thaumaturgy") >= 7) attacks.push("Alter Speed");
     if (getLvl("thaumaturgy") >= 8) attacks.push("Force Choke");
@@ -22166,18 +22437,20 @@ function updateCreationCardTooltips() {
 
             const lowerTree = treeName.toLowerCase();
 
-            // 1. Background, Interlocution, Guild: Sages -> "See the Skill Codex for available skills"
+            // 1. Static fallbacks for multi-choice or open-slot trees
             if (["background", "interlocution", "guild: sages", "guild:sages"].includes(lowerTree)) {
                 const customKey = `codex_fallback_${lowerTree.replace(/[^a-z0-9]/g, "_")}`;
-                tooltipRegistry[customKey] = {
-                    title: treeName,
-                    description: "See the Skill Codex for available skills"
-                };
+                if (typeof tooltipRegistry !== "undefined" && !tooltipRegistry[customKey]) {
+                    tooltipRegistry[customKey] = {
+                        title: treeName,
+                        description: "See the Skill Codex for available skills"
+                    };
+                }
                 card.setAttribute("data-tooltip", customKey);
                 return;
             }
 
-            // 2. Conjuration at level 5+ -> Dynamic unchosen discipline spells or guidance prompt
+            // 2. Conjuration dynamic level 5+ check
             if (lowerTree === "conjuration") {
                 const currentLvl = getTreeCurrentLevelByName(treeName);
                 if (currentLvl >= 5) {
@@ -22187,10 +22460,12 @@ function updateCreationCardTooltips() {
 
                     const conjCustomKey = "dynamic_conjuration_tooltip";
                     if (disc1 === "None" && disc2 === "None") {
-                        tooltipRegistry[conjCustomKey] = {
-                            title: "Conjuration",
-                            description: "Choose your disciplines to see available skills"
-                        };
+                        if (typeof tooltipRegistry !== "undefined") {
+                            tooltipRegistry[conjCustomKey] = {
+                                title: "Conjuration",
+                                description: "Choose your disciplines to see available skills"
+                            };
+                        }
                     } else {
                         let availableSpells = [];
                         if (disc1 !== "None" && typeof availableConjurationSubSkills !== "undefined" && availableConjurationSubSkills[disc1]) {
@@ -22200,23 +22475,24 @@ function updateCreationCardTooltips() {
                             availableSpells.push(...availableConjurationSubSkills[disc2]);
                         }
 
-                        // Filter out spells that have already been chosen in active open-choice slots
                         const chosenSpells = Object.values(characterChoicesState.conjurationSkillSelections || {});
                         const unchosenSpells = availableSpells.filter(spell => !chosenSpells.includes(spell));
                         const spellTooltipKeys = unchosenSpells.map(spell => spellNameToTooltipKey(spell));
 
-                        tooltipRegistry[conjCustomKey] = {
-                            title: "Conjuration (Available Spells)",
-                            summary: unchosenSpells.length > 0 ? "Available unchosen Conjuration spells:" : "All available spells have been chosen.",
-                            includes: spellTooltipKeys
-                        };
+                        if (typeof tooltipRegistry !== "undefined") {
+                            tooltipRegistry[conjCustomKey] = {
+                                title: "Conjuration (Available Spells)",
+                                summary: unchosenSpells.length > 0 ? "Available unchosen Conjuration spells:" : "All available spells have been chosen.",
+                                includes: spellTooltipKeys
+                            };
+                        }
                     }
                     card.setAttribute("data-tooltip", conjCustomKey);
                     return;
                 }
             }
 
-            // 3. Default handling for all other standard skill cards (Next Available Level tooltip)
+            // 3. General skill cards lookup: match ability name directly against tooltipRegistry
             const currentLvl = getTreeCurrentLevelByName(treeName);
             const maxLvl = getTreeMaxLevelByName(treeName);
             
@@ -22226,11 +22502,33 @@ function updateCreationCardTooltips() {
             }
 
             const regKey = treeName.toLowerCase();
-            const levelNames = (typeof skillAbilitiesRegistry !== "undefined" && skillAbilitiesRegistry[regKey]) || [];
+            const rawTreeData = (typeof skillAbilitiesRegistry !== "undefined" && skillAbilitiesRegistry[regKey]) || [];
+            const levelNames = Array.isArray(rawTreeData) ? rawTreeData : (rawTreeData.levels || []);
             const abilityName = levelNames[nextLvl - 1] || levelNames[levelNames.length - 1] || "";
 
-            const resolvedKey = resolveTooltipKey(regKey, nextLvl, abilityName);
-            if (resolvedKey) {
+            // Search tooltipRegistry using exact name variant matching (same as Codex)
+            let resolvedKey = "";
+            if (abilityName && typeof tooltipRegistry !== "undefined") {
+                const cleaned = abilityName.replace(/<[^>]*>/g, " ");
+                const nameVariants = [
+                    cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                    cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                    cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
+                ];
+                for (const v of nameVariants) {
+                    if (v && tooltipRegistry[v]) {
+                        resolvedKey = v;
+                        break;
+                    }
+                }
+            }
+
+            // Fallback to tree key structure if text match fails
+            if (!resolvedKey) {
+                resolvedKey = resolveTooltipKey(regKey, nextLvl, abilityName);
+            }
+
+            if (resolvedKey && typeof tooltipRegistry !== "undefined" && tooltipRegistry[resolvedKey]) {
                 card.setAttribute("data-tooltip", resolvedKey);
             } else {
                 card.removeAttribute("data-tooltip");
@@ -23383,7 +23681,7 @@ const compendiumRegistry = {
         { name: "Haubid", description: "Nomadic small anthropoid race.", size: "B", pace: "7", vit: 20, mana: 28, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 5, ver: 5 }, attacks: ["Dagger: 6d+2; Slash or Thrust", "Sling: 6d+2; Bash"], abilities: ["Light-Footed", "Light Suit", "One-Handed Common Weapon Affinity", "Small"] },
         { name: "Hobgoblin", description: "Ruling class of Darkfolk above Goblins.", size: "B", pace: "8", vit: 25, mana: 25, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Katana [Goblin Craft]: 6d+3; Slash or Thrust & Grievious", "Tanto [Goblin Craft]: 5d+1; Thrust & Grievious", "Yumi [Goblin Craft]: 5d+3; Thrust & Grievious"], abilities: ["Darkvision"] },
         { name: "Human", description: "Standard imperial anthropoid race.", size: "B", pace: "8", vit: 25, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Arming Sword: 5d+2", "War Bow: 5d+3"], abilities: ["Light Suit"] },
-        { name: "Kathonid", description: "Blind and mute race of anthropoids living deep in the Sculpted Darkness.", size: "B", pace: "8", vit: 20, mana: 40, avoid: "4d", aspects: { dex: 4, hel: 4, str: 4, act: 8, int: 8, ver: 8 }, attacks: ["Pugil Strike: 4d; Bash", "Drain Mana: 6d+2; Pain"], immunities: ["Bewitchment", "Curse", "Disease"], abilities: ["Enthral", "Obscure Self", "Ravage Mind", "Share Senses", "Telepathy", "Unspeaking"] },
+        { name: "Kathonid", description: "Blind and mute race of anthropoids living deep in the Sculpted Darkness.", size: "B", pace: "8", vit: 20, mana: 40, avoid: "4d", aspects: { dex: 4, hel: 4, str: 4, act: 8, int: 8, ver: 8 }, attacks: ["Pugil Strike: 4d; Bash", "Transfer Mana: 6d+2; Pain"], immunities: ["Bewitchment", "Curse", "Disease"], abilities: ["Enthral", "Obscure Self", "Ravage Mind", "Share Senses", "Telepathy", "Unspeaking"] },
         { name: "Kobold", description: "Small dog-like creatures living in burrows.", size: "B", pace: "7", vit: 18, mana: 20, avoid: "5d", aspects: { dex: 5, hel: 4, str: 3, act: 4, int: 2, ver: 4 }, attacks: ["Bite: 4d; Crush or Slash", "Flint Spear: 5d+2; Thrust; cc2", "Flint Spear [Butt]: 3d+1; Bash"], abilities: ["Darkvision"] },
         { name: "Lizardfolk", description: "Amphibious beastfolk living in the Great Slough.", size: "B", pace: "8 land; 9 swim", vit: 40, mana: 25, avoid: "6d", aspects: { dex: 6, hel: 8, str: 8, act: 5, int: 5, ver: 5 }, attacks: ["Bite: 6d+1; Crush", "Flint Spear: 6d+2; Thrust; cc2", "Flint Spear [Butt]: 6d+3; Bash", "Poison: 4d"], abilities: ["Quick Acting Vitality Poison: TN 6"] },
         { name: "Minotaur", description: "Bull-like beastfolk living on the Isle of Ver.", size: "B", pace: "9", vit: 35, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 7, str: 7, act: 5, int: 5, ver: 5 }, attacks: ["Gore: 6d; Thrust", "Battlexe: 6d+7; Slash"], abilities: ["Hide Suit"] },
@@ -24039,7 +24337,7 @@ const compendiumRegistry = {
             mana: 25, 
             avoid: "5d", 
             aspects: { dex: 5, act: 5, int: 5, ver: 5 }, 
-            attacks: ["Mischief: 5d", "Drain Mana: 2d"], 
+            attacks: ["Mischief: 5d", "Transfer Mana: 2d"], 
             immunities: ["Curse", "Disease"],
             abilities: ["Cause Mischief", "Transcend"] 
         }
