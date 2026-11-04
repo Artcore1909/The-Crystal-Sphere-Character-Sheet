@@ -7590,7 +7590,11 @@ const tooltipRegistry = {
     title: "Weapon Affinity (Crossbow)",
     description: "You gain +1d on attacks with Crossbows."
   },
-"affinity": {
+    "aetherial_tension": {
+        title: "Aetherial Tension",
+        description: "So long as the spirit is within its Mana reserve number of Hexes, all regenerated Mana goes to it instead the target anthropoids."
+    },
+    "affinity": {
         title: "Affinity",
         description: "The creature gains a 1d bonus with the specified skill or weapon."
     },
@@ -7980,7 +7984,7 @@ const tooltipRegistry = {
     },
     "transcend": {
         title: "Transcend",
-        description: "As a 72 Mana rite, the doppelgänger becomes manifest, taking on the exact features of its victim (a long and grueling process). It then must consume its victim to commandeer its mind."
+        description: "As a 72 Mana rite, a living spirit becomes manifest."
     },
     "undead_bite": {
         title: "Undead Bite",
@@ -8040,7 +8044,7 @@ const tooltipRegistry = {
 },
 "creature_petrifying_gaze": {
     title: "Petrifying Gaze",
-    description: "Affects one target."
+    description: "One target must pass an Acuity Save or become Petrified."
 },
 "creature_poison_breath": {
     title: "Poison Breath",
@@ -22939,7 +22943,7 @@ const compendiumRegistry = {
     "Aberration": [
         { 
             name: "Living Air", 
-            description: "Living Air is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living Air takes commands literally and obeys only its master.",
+            description: "Living Air takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -22952,7 +22956,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Flame", 
-            description: "Living flame is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living flame takes commands literally and obeys only its master.",
+            description: "Living flame takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -22966,7 +22970,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Fog", 
-            description: "Living fog is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living fog takes commands literally and obeys only its master.",
+            description: "Living fog takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -22980,7 +22984,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Frost", 
-            description: "Living frost is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living frost takes commands literally and obeys only its master.",
+            description: "Living frost takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -22994,7 +22998,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Light", 
-            description: "Living light is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living light takes commands literally and obeys only its master.",
+            description: "Living light takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -23008,7 +23012,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Lightning", 
-            description: "Living lightning is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living lightning takes commands literally and obeys only its master.",
+            description: "Living lightning takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -23022,7 +23026,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Thunder", 
-            description: "Living thunder is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living thunder takes commands literally and obeys only its master.",
+            description: "Living thunder takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -23036,7 +23040,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Shadow", 
-            description: "Living shadow is a magical aberration with neither mind nor spirit, brought into being by a battlemage or priest of the Shadow King. Living shadow takes commands literally and obeys only its master.",
+            description: "Living shadow takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 55, 
@@ -23050,7 +23054,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Stone", 
-            description: "Living stone is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living stone takes commands literally and obeys only its master.",
+            description: "Living stone takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 65, 
@@ -23063,7 +23067,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Living Water", 
-            description: "Living water is a magical aberration with neither mind nor spirit, brought into being by a battlemage. Living water takes commands literally and obeys only its master.",
+            description: "Living water takes commands literally and obeys only its master.",
             size: "B", 
             pace: "8", 
             vit: 65, 
@@ -23589,7 +23593,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Unicorn", 
-            description: "The unicorn is a 1-horned beast that resembles a beautiful white horse. It is often afraid of people and will flee if able. Unicorn horns, also called alicorn, are in high demand because of their magical properties. Slaying a unicorn for its horn is anathema to the fey, but using its powdered horn as a material component increases the potency of spells drastically. For this reason, the Fey often hide Unicorns within the Fey Hegemony.",
+            description: "The unicorn is a one-horned beast that resembles a beautiful white horse. It is often afraid of people and will flee if able. Unicorn horns, also called alicorn, are in high demand because of their magical properties. Slaying a unicorn for its horn is anathema to the fey, but using its powdered horn as a material component increases the potency of spells drastically. For this reason, the Fey often hide Unicorns within the Fey Hegemony.",
             size: "2B", 
             pace: "30", 
             vit: 50, 
@@ -23651,76 +23655,907 @@ const compendiumRegistry = {
         }
     ],
     "Anthropoid": [
-        { name: "Antaeon", description: "Antlered beastfolk who live deep within the great forests.", size: "B", pace: "9", vit: 20, mana: 35, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 }, attacks: ["Gore: 5d; Bash", "Quarterstaff: 5d+3; Bash", "Sling: 5d+1; Bash"], abilities: ["Starlight Vision"] },
-        { name: "Brownies", description: "Mischievous fey that live outside the Fey Hegemony.", size: "A", pace: "6", vit: 5, mana: 20, avoid: "6d+2", aspects: { dex: 7, hel: 1, str: 1, act: 4, int: 4, ver: 4 }, attacks: ["Knife [Fey]: 4d+1; Slash or Thrust; -1cc", "Hunting Bow [Fey]: 6d+2; Thrust; cc2"], immunities: ["Curse", "Disease"], abilities: ["Starlight Vision"] },
-        { name: "Canivir", description: "Wolf-like beastfolk.", size: "B", pace: "9", vit: 27, mana: 25, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Bite: 6d; Crush or Slash", "Lurcrene hammer: 6d+7; Bash or Thrust", "Crossbow: 6d+2; Thrust"], abilities: ["Keen Sniffer", "Light Suit"] },
-        { name: "Canivir, Wild", description: "Wild wolf-like beastfolk.", size: "B", pace: "9", vit: 27, mana: 25, avoid: "6d", aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Bite: 6d; Crush or Slash", "Atlatl [Flint]: 6d+7; Thrust; cc2", "Flint Dagger: 6d+1; Slash & Thrust, -1cc"], abilities: ["Keen Sniffer"] },
-        { name: "Centaur", description: "Fey resembling a man from the waist up attached to a horse body.", size: "2B", pace: "22", vit: 40, mana: 30, avoid: "6d", aspects: { dex: 8, hel: 8, str: 8, act: 6, int: 6, ver: 6 }, attacks: ["Kick: 6d+2; Bash", "Trample: 6d+6; Crush", "Great-bow: 6d+10; Thrust", "Atgeir: 6d+9; Thrust", "Atgeir [Butt]: 6d+3; Bash"], immunities: ["Curse", "Disease"], abilities: ["Starlight Vision"] },
-        { name: "Derro", description: "Dwarvenkind who travel throughout the realms of Dwarves and the Sculpted Darkness.", size: "B", pace: "8", vit: 27, mana: 23, avoid: "5d", aspects: { dex: 5, hel: 5, str: 6, act: 5, int: 5, ver: 4 }, attacks: ["War Pick: 6d+8; Thrust", "Prodd Pistol: 6d+4; Bash"], abilities: ["Earthray Vision", "Brutal Weapons Affinity"] },
-        { name: "Doppelgänger, Transcendent", description: "Looks and sounds exactly like its victim.", size: "B", pace: "8", vit: 50, mana: 25, avoid: "5d+2", aspects: { dex: 5, hel: 10, str: 10, act: 5, int: 5, ver: 5 }, attacks: ["Bite: 6d+1; Crush", "Morningstar: 6d+7; Bash & Thrust", "Shield Bash [Kite]: 6d+5; Bash"], abilities: [] },
-        { name: "Dwarf", description: "Shorter than humans, highly muscular with Earthray Vision.", size: "B", pace: "7", vit: 30, mana: 23, avoid: "4d+6; cc4", aspects: { dex: 4, hel: 6, str: 6, act: 5, int: 5, ver: 4 }, attacks: ["Dwarven Warpick: 4d+9; Thrust", "Prodd Pistol: 4d+6; Bash"], abilities: ["Earthray Vision", "Brutal Weapon Affinity", "Dwarven Light Suit"] },
-        { name: "Elf", description: "Graceful fey-adjacent anthropoid.", size: "B", pace: "8", vit: 20, mana: 27, avoid: "6d+12; cc4", aspects: { dex: 6, hel: 4, str: 4, act: 5, int: 5, ver: 6 }, attacks: ["Arming Sword [Elven Blade]: 6d+3", "War Bow [Elven Bow]: 6d+5"], abilities: ["Elven Medium Suit", "Elven Round Shield", "Inexhaustible Mana", "Nimble Athlete", "Starlight Vision"] },
-        { name: "Ent", description: "Ponderous, tree-like oldest race.", size: "C", pace: "11", vit: 110, mana: 30, avoid: "3d+12; cc4", aspects: { dex: 3, hel: 22, str: 22, act: 6, int: 6, ver: 6 }, attacks: ["Slam: 6d+16; Bash"], immunities: ["Curse", "Disease", "Light", "Lightning", "Thunder"], vulnerabilities: ["Fire"], abilities: ["Barkskin suit"] },
-        { name: "Faeries", description: "Small, flying fey that rule the Fey Hegemony.", size: "A", pace: "22 fly", vit: 10, mana: 60, avoid: "6d+2", aspects: { dex: 8, hel: 2, str: 2, act: 12, int: 12, ver: 12 }, attacks: ["Knife [Fey]: 5d+1; Slash & Thrust, -1cc", "Bow [Fey]: 6d+3; Thrust, cc2"], immunities: ["Curse", "Disease", "Magic"], abilities: ["Twilight Vision", "Undying"] },
-        { name: "Felivir", description: "Cat-like anthropoids.", size: "B", pace: "10", vit: 25, mana: 23, avoid: "6d+1", aspects: { dex: 7, hel: 5, str: 5, act: 5, int: 4, ver: 4 }, attacks: ["Bite: 6d+1; Bash, Crush or Slash", "Claw: 6d+1; Slash & Crush"], abilities: ["Natural Acrobat", "Pugil Weapon Affinity", "Starlight Vision"] },
-        { name: "Fishfolk", description: "Shark-like aquatic beastfolk.", size: "B", pace: "8 swim; 7 land", vit: 20, mana: 26, avoid: "6d", aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 4, ver: 4 }, attacks: ["Bite: 5d; Crush & Slash", "Spear: 6d+2; Thrust", "Spear [Butt]: 5d; Bash"], vulnerabilities: ["Frost"], abilities: [] },
-        { name: "Giant, Fire", description: "18-foot tall anthropoids with ruddy complexion and red hair.", size: "D", pace: "8", vit: 78, mana: 30, avoid: "6d", aspects: { dex: 6, hel: 18, str: 12, act: 6, int: 5, ver: 6 }, attacks: ["Slam [Giant]: 6d+8; Bash; cc4", "Cudgel [Giant]: 6d+9; Bash; cc4", "Greatbow [Giant]: 5d+7; Thrust, cc5"], resistances: ["Fire"], abilities: ["Great Bow Affinity"] },
-        { name: "Giant, Frost", description: "18-foot tall anthropoids living in Frosinland.", size: "D", pace: "8", vit: 60, mana: 36, avoid: "6d", aspects: { dex: 6, hel: 12, str: 12, act: 8, int: 5, ver: 6 }, attacks: ["Slam [Giant]: 6d+10; Bash; cc4", "Battleaxe [Giant]: 6d+16; Slash; cc4", "Sling [Giant]: 4d+3; Bash; cc4"], resistances: ["Frost"], abilities: ["Battleaxe Affinity"] },
-        { name: "Giant, Hill", description: "Civilized giants trading wine, wool, and mutton.", size: "D", pace: "8", vit: 90, mana: 30, avoid: "5d", aspects: { dex: 5, hel: 18, str: 18, act: 6, int: 5, ver: 6 }, attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Quarterstaff [Giant]: 6d+25; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"], abilities: ["Quarterstaff Affinity"] },
-        { name: "Giant, Island", description: "Black and white dappled complexion giants on the Isle of Ver.", size: "D", pace: "8", vit: 72, mana: 36, avoid: "5d", aspects: { dex: 5, hel: 12, str: 18, act: 8, int: 5, ver: 6 }, attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Atgeir [Giant]: 5d+3; Thrust, cc5", "Atgeir [Butt; Giant]: 6d+16; Bash, cc4"], resistances: ["Thunder", "Lightning"], abilities: ["Atgeir Affinity"] },
-        { name: "Gnole", description: "Long-snouted beastfolk resembling bipedal hyenas.", size: "B", pace: "9", vit: 30, mana: 23, avoid: "6d", aspects: { dex: 6, hel: 6, str: 6, act: 5, int: 3, ver: 4 }, attacks: ["Bite: 6d; Crush & Slash", "Spear: 6d+2; Thrust", "Spear: 6d+1; Bash"], abilities: ["Starlight Vision"] },
-        { name: "Goblin", description: "Small, grotesque Darkfolk living in caves.", size: "B", pace: "7", vit: 20, mana: 26, avoid: "6d", aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 6, ver: 4 }, attacks: ["Katana [Goblin Craft]: 6d+3; Slash or Thrust & Grievious", "Handgonne [Goblin Craft]: 6d+9; Thrust & Grievious"], abilities: ["Darkvision"] },
-        { name: "Goritaur", description: "Gorilla torso up attached to a bull body.", size: "2B", pace: "22", vit: 65, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 13, str: 13, act: 5, int: 5, ver: 5 }, attacks: ["Rend: 6d+7; Maim", "Slam: 6d+7; Bash", "Trample: 6d+6; Crush or Bash", "Atgeir: 6d+4; Thrust", "Atgeir [Butt]: 6d+8; Bash"], abilities: ["Hide Suit", "Rend", "Starlight Vision"] },
-        { name: "Half-Elf", description: "Human-elf hybrid anthropoid.", size: "B", pace: "8", vit: 22, mana: 25, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 4, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Arming Sword: 6d+2; Slash or Thrust", "Warbow: 6d+4; Thrust"], abilities: ["Arc-bow Affinity", "Half-Human", "Light Suit", "Shrewd Weapon Affinity", "Starlight Vision"] },
-        { name: "Half-Orc", description: "Human-orc hybrid anthropoid.", size: "B", pace: "8", vit: 30, mana: 23, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 4, ver: 4 }, attacks: ["Battleaxe: 6d+7; Slash", "Warbow: 5d+3; Thrust"], abilities: ["Half-Human", "Light Suit", "Sinuous Athlete", "Starlight Vision", "Two-handed Brutal or Shrewd Affinity"] },
-        { name: "Hanyo, Earth", description: "Earth-aligned Hanyo anthropoid.", size: "B", pace: "8", vit: 30, mana: 25, avoid: "5d+6; cc4", aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Arming Sword: 5d+2; Slash", "Warbow: 5d+3; Thrust"], abilities: ["Hardy", "Light Suit"] },
-        { name: "Hanyo, Fire", description: "Fire-aligned Hanyo anthropoid.", size: "B", pace: "8", vit: 27, mana: 25, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"], resistances: ["Fire"], abilities: ["Light Suit"] },
-        { name: "Hanyo, Shadow", description: "Shadow-aligned Hanyo anthropoid.", size: "B", pace: "8", vit: 25, mana: 25, avoid: "7d+4; cc4", aspects: { dex: 7, hel: 5, str: 5, act: 5, int: 4, ver: 5 }, attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"], abilities: ["Enshadowed", "Light Suit"] },
-        { name: "Hanyo, Water", description: "Water-aligned Hanyo anthropoid.", size: "B", pace: "8", vit: 27, mana: 25, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"], resistances: ["Lightning"], abilities: ["Light Suit"] },
-        { name: "Hanyo, Wind", description: "Wind-aligned Hanyo anthropoid.", size: "B", pace: "8", vit: 27, mana: 25, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 }, attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"], resistances: ["Frost"], abilities: ["Light Suit"] },
-        { name: "Haubid", description: "Nomadic small anthropoid race.", size: "B", pace: "7", vit: 20, mana: 28, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 5, ver: 5 }, attacks: ["Dagger: 6d+2; Slash or Thrust", "Sling: 6d+2; Bash"], abilities: ["Light-Footed", "Light Suit", "One-Handed Common Weapon Affinity", "Small"] },
-        { name: "Hobgoblin", description: "Ruling class of Darkfolk above Goblins.", size: "B", pace: "8", vit: 25, mana: 25, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Katana [Goblin Craft]: 6d+3; Slash or Thrust & Grievious", "Tanto [Goblin Craft]: 5d+1; Thrust & Grievious", "Yumi [Goblin Craft]: 5d+3; Thrust & Grievious"], abilities: ["Darkvision"] },
-        { name: "Human", description: "Standard imperial anthropoid race.", size: "B", pace: "8", vit: 25, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Arming Sword: 5d+2", "War Bow: 5d+3"], abilities: ["Light Suit"] },
-        { name: "Kathonid", description: "Blind and mute race of anthropoids living deep in the Sculpted Darkness.", size: "B", pace: "8", vit: 20, mana: 40, avoid: "4d", aspects: { dex: 4, hel: 4, str: 4, act: 8, int: 8, ver: 8 }, attacks: ["Pugil Strike: 4d; Bash", "Transfer Mana: 6d+2; Pain"], immunities: ["Bewitchment", "Curse", "Disease"], abilities: ["Enthral", "Obscure Self", "Ravage Mind", "Share Senses", "Telepathy", "Unspeaking"] },
-        { name: "Kobold", description: "Small dog-like creatures living in burrows.", size: "B", pace: "7", vit: 18, mana: 20, avoid: "5d", aspects: { dex: 5, hel: 4, str: 3, act: 4, int: 2, ver: 4 }, attacks: ["Bite: 4d; Crush or Slash", "Flint Spear: 5d+2; Thrust; cc2", "Flint Spear [Butt]: 3d+1; Bash"], abilities: ["Darkvision"] },
-        { name: "Lizardfolk", description: "Amphibious beastfolk living in the Great Slough.", size: "B", pace: "8 land; 9 swim", vit: 40, mana: 25, avoid: "6d", aspects: { dex: 6, hel: 8, str: 8, act: 5, int: 5, ver: 5 }, attacks: ["Bite: 6d+1; Crush", "Flint Spear: 6d+2; Thrust; cc2", "Flint Spear [Butt]: 6d+3; Bash", "Poison: 4d"], abilities: ["Quick Acting Vitality Poison: TN 6"] },
-        { name: "Minotaur", description: "Bull-like beastfolk living on the Isle of Ver.", size: "B", pace: "9", vit: 35, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 7, str: 7, act: 5, int: 5, ver: 5 }, attacks: ["Gore: 6d; Thrust", "Battlexe: 6d+7; Slash"], abilities: ["Hide Suit"] },
-        { name: "Naga", description: "Snake-like folk with human torso and head.", size: "3B", pace: "7", vit: 25, mana: 35, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 }, attacks: ["Bite: 5d; Crush & Envenom", "Constrict: 6d+4", "Machete: 5d+1; Slash", "Venom: 1d"], vulnerabilities: ["Frost"], abilities: ["Constrict", "Deadly Bite", "Venom: TN 2 Health save"] },
-        { name: "Naiad", description: "Nymph guarding springs.", size: "B", pace: "8 land; 12 swim", vit: 25, mana: 35, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 }, attacks: ["Flint Knife: 5d+1; cc1"], immunities: ["Curse", "Disease"], abilities: ["Life Bond", "Meld"] },
-        { name: "Nuss-Janni", description: "Human-jann hybrid anthropoid.", size: "B", pace: "8", vit: 28, mana: 25, avoid: "5d+4; cc4", aspects: { dex: 5, hel: 6, str: 5, act: 5, int: 4, ver: 5 }, attacks: ["Half-Jann Ability: 6d; Variable", "Arming Sword: 5d+2", "War Bow: 5d+3"], abilities: ["Light Suit", "Half-Human", "Half-Jann"] },
-        { name: "Ogre", description: "Penultimate Darkfolk functioning as heavy cavalry.", size: "C", pace: "9", vit: 65, mana: 25, avoid: "6d+11; cc4", aspects: { dex: 13, hel: 13, str: 13, act: 5, int: 5, ver: 5 }, attacks: ["Bite [Oldra]: 6d+9; cc3", "Rend: 6d+7", "Slam [Oldra]: 6d+8; Bash, cc3", "Odachi [Oldra]: 6d+16; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+9; Thrust, cc4"], abilities: ["Darkvision", "Hide Suit", "Rend"] },
-        { name: "Oldra", description: "Highest caste of Darkfolk.", size: "C", pace: "9", vit: 50, mana: 50, avoid: "6d+16; cc4", aspects: { dex: 10, hel: 10, str: 10, act: 10, int: 10, ver: 10 }, attacks: ["Odachi [Oldra]: 6d+12; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+6; Thrust, cc4"], abilities: ["Darkvision", "Heavy Suit"] },
-        { name: "Orc", description: "Brutish green-skinned anthropoids.", size: "B", pace: "8", vit: 25, mana: 20, avoid: "6d+1", aspects: { dex: 7, hel: 7, str: 7, act: 4, int: 4, ver: 4 }, attacks: ["Saber: 6d+3; Slash or Thrust", "War Bow: 6d+4; Thrust"], immunities: ["Curse", "Disease"], abilities: ["Starlight Vision"] },
-        { name: "Pixie", description: "Lesser fey nearly indistinguishable from faeries.", size: "A", pace: "22 fly", vit: 10, mana: 25, avoid: "6d+2", aspects: { dex: 8, hel: 2, str: 2, act: 5, int: 5, ver: 5 }, attacks: ["Knife [Fey]: 5d+1; Slash & Thrust, -1cc", "Bow [Fey]: 6d+2; Thrust, cc2"], immunities: ["Curse", "Disease", "Magic"], abilities: ["Starlight Vision", "Undying"] },
-        { name: "Satyr", description: "Lustful goat-like fey.", size: "B", pace: "9", vit: 25, mana: 25, avoid: "5d", aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 }, attacks: ["Gore: 5d; Bash", "Cudgel: 5d+1; Bash", "Sling: 5d+1; Bash"], immunities: ["Curse", "Disease"], abilities: ["Starlight Vision"] },
-        { name: "Scorpionfolk", description: "Anthropoid torso and arms with giant scorpion lower body.", size: "2B", pace: "8", vit: 30, mana: 25, avoid: "6d+6; cc4", aspects: { dex: 6, hel: 6, str: 6, act: 5, int: 5, ver: 5 }, attacks: ["Claw: 6d; Crush", "Flint Spear: 6d+2; Thrust, 2cc", "Flint Spear [Butt]: 6d+1; Bash", "Sting: 6d; Thrust & Envenom", "Venom: 1d; Pain"], abilities: ["Chitin Suit", "Claw Shield: +2d", "Deadly Sting", "Venom: TN2 Health save"] },
-        { name: "Troll", description: "Highly aggressive long-limbed killing machines.", size: "C", pace: "10", vit: 80, mana: 19, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 16, str: 16, act: 3, int: 2, ver: 5 }, attacks: ["Bite [Oldra]: 6d+6; Crush; cc3", "Claw [Oldra]: 6d+6; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"], vulnerabilities: ["Fire"], abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"] },
-        { name: "Troll, Frost", description: "Faster and more perceptive northern trolls.", size: "C", pace: "12", vit: 80, mana: 28, avoid: "6d+6; cc4", aspects: { dex: 8, hel: 16, str: 16, act: 6, int: 2, ver: 5 }, attacks: ["Bite [Oldra]: 6d+7; Crush; cc3", "Claw [Oldra]: 6d+7; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"], resistances: ["Frost"], vulnerabilities: ["Fire"], abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"] },
-        { name: "Vulpivir", description: "Fox-like anthropoids.", size: "B", pace: "8", vit: 20, mana: 28, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 5, ver: 5 }, attacks: ["Dagger: 6d+1; Slash or Thrust", "Crossbow: 6d+3; Thrust"], abilities: ["Crossbow Affinity", "Light-Footed", "Keen Sniffer", "Light Suit", "Nimble Athlete", "Small", "Starlight Vision"] },
-        { name: "Weftlings", description: "Spider-like beastfolk.", size: "2B", pace: "8", vit: 30, mana: 25, avoid: "5d+8; cc3", aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 5, ver: 5 }, attacks: ["Flint Spear: 5d+2; cc2", "Flint Spear [Butt]: 5d+1; Bash, cc1", "Web: 5d; Entangle"], abilities: ["Silk Hauberk", "Web Blast: TN 5 Escape or Strength save"] }
+        {
+            name: "Antaeon",
+            description: "Antaeon are the antlered beastfolk who live deep within the great forests. Though they are not fey, they share secrets and trade with the fey as if they were kin. Antaeons are very distrustful of all save those from the Fey Hegemony. Antaeon Druids are able to use all Druidism skills, Heal Wounds, and Purify.",
+            size: "B",
+            pace: "9",
+            vit: 20,
+            mana: 35,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 },
+            attacks: ["Gore: 5d; Bash", "Quarterstaff: 5d+3; Bash", "Sling: 5d+1; Bash"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Brownies",
+            description: "Brownies are a mischievous fey that sometimes live outside of the Fey Hegemony in attics, basements, walls, and barns, borrowing food from their hosts and removing or destroying ungainly furnishings thereby improving their accommodations. They are the bane of the “Woods-cutters”.",
+            size: "A",
+            pace: "6",
+            vit: 5,
+            mana: 20,
+            avoid: "6d+2",
+            aspects: { dex: 7, hel: 1, str: 1, act: 4, int: 4, ver: 4 },
+            attacks: ["Knife [Fey]: 4d+1; Slash or Thrust; -1cc", "Hunting Bow [Fey]: 6d+2; Thrust; cc2"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Canivir",
+            description: "Caniviri are dog-like anthropoids. They have a snout, a bite attack, dog-like hind legs, and a tail.",
+            size: "B",
+            pace: "9",
+            vit: 27,
+            mana: 25,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Bite: 6d; Crush or Slash", "Lurcrene hammer: 6d+7; Bash or Thrust", "Crossbow: 6d+2; Thrust"],
+            abilities: ["Keen Sniffer", "Light Suit"]
+        },
+        {
+            name: "Canivir, Wild",
+            description: "Wild Caniviri are the wolf-like beastfolk who live within the great forests and the Frosinland. When affected by the Curse of Lycanthropy, Canivir go mad and must be put down.",
+            size: "B",
+            pace: "9",
+            vit: 27,
+            mana: 25,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Bite: 6d; Crush or Slash", "Atlatl [Flint]: 6d+7; Thrust; cc2", "Flint Dagger: 6d+1; Slash & Thrust, -1cc"],
+            abilities: ["Keen Sniffer"]
+        },
+        {
+            name: "Centaur",
+            description: "Centaur are fey that resemble a man from the waist up attached to the body of a horse at its neck. Of the fey, they control the weakest magic but the strongest physical strength.",
+            size: "2B",
+            pace: "22",
+            vit: 40,
+            mana: 30,
+            avoid: "6d",
+            aspects: { dex: 8, hel: 8, str: 8, act: 6, int: 6, ver: 6 },
+            attacks: ["Kick: 6d+2; Bash", "Trample: 6d+6; Crush", "Great-bow: 6d+10; Thrust", "Atgeir: 6d+9; Thrust", "Atgeir [Butt]: 6d+3; Bash"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Derro",
+            description: "The Derro are Dwarvenkind who travel throughout the realms of Dwarves and the Sculpted Darkness. They are essentially Dwarves except that they are leaner and quicker than Dwarves.",
+            size: "B",
+            pace: "8",
+            vit: 27,
+            mana: 23,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 6, act: 5, int: 5, ver: 4 },
+            attacks: ["War Pick: 6d+8; Thrust", "Prodd Pistol: 6d+4; Bash"],
+            abilities: ["Earthray Vision", "Brutal Weapons Affinity"]
+        },
+        {
+            name: "Dryad",
+            description: "Dryads, being a type of nymph, are incredibly beautiful and sometimes lure lustful men into compromising situations to slit their throats–though only if she believes that they are a threat to her tree—the subject of her life bond.",
+            size: "B",
+            pace: "8",
+            vit: 25,
+            mana: 35,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 },
+            attacks: ["Flint Knife: 5d+1; cc1; Slash or Thrust"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Meld", "Life Bond"]
+        },
+        {
+            name: "Dwarf",
+            description: "Dwarves are shorter than humans but are more muscular. They have Earthray Vision which allows them to see perfectly underground.",
+            size: "B",
+            pace: "7",
+            vit: 30,
+            mana: 23,
+            avoid: "4d+6; cc4",
+            aspects: { dex: 4, hel: 6, str: 6, act: 5, int: 5, ver: 4 },
+            attacks: ["Dwarven Warpick: 4d+9; Thrust", "Prodd Pistol: 4d+6; Bash"],
+            abilities: ["Earthray Vision", "Brutal Weapon Affinity", "Dwarven Light Suit"]
+        },
+        {
+            name: "Elf",
+            description: "Elves are tall, slender, and seemingly unaging folk who hail either from the Gloaming or the Great Forests.",
+            size: "B",
+            pace: "8",
+            vit: 20,
+            mana: 27,
+            avoid: "6d+12; cc4",
+            aspects: { dex: 6, hel: 4, str: 4, act: 5, int: 5, ver: 6 },
+            attacks: ["Arming Sword [Elven Blade]: 6d+3", "War Bow [Elven Bow]: 6d+5"],
+            abilities: ["Elven Medium Suit", "Elven Round Shield", "Inexhaustible Mana", "Nimble Athlete", "Starlight Vision"]
+        },
+        {
+            name: "Ent",
+            description: "Ents are ponderous creatures that tend to see the world in terms of eons. They are the oldest race and they value routine and ceremony. Talking to an Ent is not a thing hastily done, though it can be rewarding as they are veritable encyclopedias when it comes to knowledge of the natural world.\n\n“They found that they were looking at a most extraordinary face. It belonged to a large Man-like, almost Troll-like, figure, at least fourteen foot high, very sturdy, with a tall head, and hardly any neck. Whether it was clad in stuff like green and grey bark, or whether that was its hide, was difficult to say.”\n\nThe Two Towers by J.R.R. Tolkien",
+            size: "C",
+            pace: "11",
+            vit: 110,
+            mana: 30,
+            avoid: "3d+12; cc4",
+            aspects: { dex: 3, hel: 22, str: 22, act: 6, int: 6, ver: 6 },
+            attacks: ["Slam: 6d+16; Bash"],
+            immunities: ["Curse", "Disease", "Light", "Lightning", "Thunder"],
+            vulnerabilities: ["Fire"],
+            abilities: ["Barkskin suit"]
+        },
+        {
+            name: "Faeries",
+            description: "Faeries are small, flying fey that rule the Fey Hegemony that can only be seen either by creatures with Starlight Vision or if they wish to be.",
+            size: "A",
+            pace: "22 fly",
+            vit: 10,
+            mana: 60,
+            avoid: "6d+2",
+            aspects: { dex: 8, hel: 2, str: 2, act: 12, int: 12, ver: 12 },
+            attacks: ["Knife [Fey]: 5d+1; Slash or Thrust, -1cc", "Bow [Fey]: 6d+3; Thrust, cc2"],
+            immunities: ["Curse", "Disease", "Magic"],
+            abilities: ["Twilight Vision", "Undying"]
+        },
+        {
+            name: "Felivir",
+            description: "The Feliviri is the special name given to all of the cat-like anthropoids. In every biome, the feliviri thereof resemble the native large cat. The lion-like feliviri live throughout the Grasslands south of the empire; the tiger-like, on the jungle islands; those who resemble snow leopards, the Frosinlands; etc.",
+            size: "B",
+            pace: "10",
+            vit: 25,
+            mana: 23,
+            avoid: "6d+1",
+            aspects: { dex: 7, hel: 5, str: 5, act: 5, int: 4, ver: 4 },
+            attacks: ["Bite: 6d+1; Bash, Crush or Slash", "Claw: 6d+1; Slash & Crush"],
+            abilities: ["Natural Acrobat", "Pugil Weapon Affinity", "Starlight Vision"]
+        },
+        {
+            name: "Fishfolk",
+            description: "Fishfolk are the shark-like aquatic beastfolk who live throughout the sea. They are the bane of fishermen and captains alike.",
+            size: "B",
+            pace: "8 swim; 7 land",
+            vit: 20,
+            mana: 26,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 4, ver: 4 },
+            attacks: ["Bite: 5d; Crush & Slash", "Spear: 6d+2; Thrust", "Spear [Butt]: 5d; Bash"],
+            vulnerabilities: ["Frost"],
+            abilities: []
+        },
+
+        {
+            name: "Gnole",
+            description: "Gnoles are a long-snouted beastfolk that resemble bipedal hyenas. They live throughout the hill country surrounding the Cordillera and in caves and cliff dwellings throughout the Cordillera itself. They are firmly allied with the Oldrae and have just as firmly made themselves the scourge of the Ringi. Gnoles affected by the Curse of Lycanthropy permanently transform into Anpu: an elite warrior class of their society.",
+            size: "B",
+            pace: "9",
+            vit: 30,
+            mana: 23,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 6, str: 6, act: 5, int: 3, ver: 4 },
+            attacks: ["Bite: 6d; Crush & Slash", "Spear: 6d+2; Thrust", "Spear: 6d+1; Bash"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Goblin",
+            description: "Goblins are small, grotesque Darkfolk that live in caves relatively close to the surface. Their engineering is second only to that of the Dwarves—yet by appearances, it is crude.",
+            size: "B",
+            pace: "7",
+            vit: 20,
+            mana: 26,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 6, ver: 4 },
+            attacks: ["Katana [Goblin Craft]: 6d+3; Slash or Thrust & Grievious", "Handgonne [Goblin Craft]: 6d+9; Thrust & Grievious"],
+            abilities: ["Darkvision"]
+        },
+        {
+            name: "Goritaur",
+            description: "The Goritaur resemble a gorilla from the torso up attached to the body of a bull. They are deadly, but they are peaceful. Unlike their bestial brethren, the Goritaur hunt for and cook their food. They inhabit many of the jungle islands of the Orkipelago and hate Orcs nearly as much as the mainlanders.",
+            size: "2B",
+            pace: "22",
+            vit: 65,
+            mana: 25,
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 13, str: 13, act: 5, int: 5, ver: 5 },
+            attacks: ["Rend: 6d+7; Maim", "Slam: 6d+7; Bash", "Trample: 6d+6; Crush or Bash", "Atgeir: 6d+4; Thrust", "Atgeir [Butt]: 6d+8; Bash"],
+            abilities: ["Hide Suit", "Rend", "Starlight Vision"]
+        },
+        {
+            name: "Half-Elf",
+            description: "Half-elves are mostly indistinguishable from tall, fair Humans. They sometimes have a slight point to their ears, but usually not.",
+            size: "B",
+            pace: "8",
+            vit: 22,
+            mana: 25,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 4, str: 5, act: 5, int: 5, ver: 5 },
+            attacks: ["Arming Sword: 6d+2; Slash or Thrust", "Warbow: 6d+4; Thrust"],
+            abilities: ["Arc-bow Affinity", "Half-Human", "Light Suit", "Shrewd Weapon Affinity", "Starlight Vision"]
+        },
+        {
+            name: "Half-Orc",
+            description: "Half-orcs are social outcasts due to their unseemly conception. A Half-orc is distinguishable from Humans by an underbite, revealing enlarged canines, and leathery skin.",
+            size: "B",
+            pace: "8",
+            vit: 30,
+            mana: 23,
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 4, ver: 4 },
+            attacks: ["Battleaxe: 6d+7; Slash", "Warbow: 5d+3; Thrust"],
+            abilities: ["Half-Human", "Light Suit", "Sinuous Athlete", "Starlight Vision", "Two-handed Brutal or Shrewd Affinity"]
+        },
+        {
+            name: "Hanyo, Earth",
+            description: "Hanyo are humans with pneumonic lineage—that is, they are sired by a Pneumon. They sometimes bear small indicators of their race such as slit pupils or peculiar eye or hair colors. The more obvious Hanyo tend to be slain at birth.",
+            size: "B",
+            pace: "8",
+            vit: 30,
+            mana: 25,
+            avoid: "5d+6; cc4",
+            aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Arming Sword: 5d+2; Slash", "Warbow: 5d+3; Thrust"],
+            abilities: ["Hardy", "Light Suit"]
+        },
+        {
+            name: "Hanyo, Fire",
+            description: "Hanyo are humans with pneumonic lineage—that is, they are sired by a Pneumon. They sometimes bear small indicators of their race such as slit pupils or peculiar eye or hair colors. The more obvious Hanyo tend to be slain at birth.",
+            size: "B",
+            pace: "8",
+            vit: 27,
+            mana: 25,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"],
+            resistances: ["Fire"],
+            abilities: ["Light Suit"]
+        },
+        {
+            name: "Hanyo, Shadow",
+            description: "Hanyo are humans with pneumonic lineage—that is, they are sired by a Pneumon. They sometimes bear small indicators of their race such as slit pupils or peculiar eye or hair colors. The more obvious Hanyo tend to be slain at birth.",
+            size: "B",
+            pace: "8",
+            vit: 25,
+            mana: 25,
+            avoid: "7d+4; cc4",
+            aspects: { dex: 7, hel: 5, str: 5, act: 5, int: 4, ver: 5 },
+            attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"],
+            abilities: ["Enshadowed", "Light Suit"]
+        },
+        {
+            name: "Hanyo, Water",
+            description: "Hanyo are humans with pneumonic lineage—that is, they are sired by a Pneumon. They sometimes bear small indicators of their race such as slit pupils or peculiar eye or hair colors. The more obvious Hanyo tend to be slain at birth.",
+            size: "B",
+            pace: "8",
+            vit: 27,
+            mana: 25,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"],
+            resistances: ["Lightning"],
+            abilities: ["Light Suit"]
+        },
+        {
+            name: "Hanyo, Wind",
+            description: "Hanyo are humans with pneumonic lineage—that is, they are sired by a Pneumon. They sometimes bear small indicators of their race such as slit pupils or peculiar eye or hair colors. The more obvious Hanyo tend to be slain at birth.",
+            size: "B",
+            pace: "8",
+            vit: 27,
+            mana: 25,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 5, str: 6, act: 5, int: 4, ver: 5 },
+            attacks: ["Arming Sword: 6d+2; Slash", "Warbow: 6d+3; Thrust"],
+            resistances: ["Frost"],
+            abilities: ["Light Suit"]
+        },
+        {
+            name: "Haubid",
+            description: "Haubids are small, childlike creatures that usually live among Humans. Another breed of Haubid travel the great Grass Sea in nomadic tribes.",
+            size: "B",
+            pace: "7",
+            vit: 20,
+            mana: 28,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 5, ver: 5 },
+            attacks: ["Dagger: 6d+2; Slash or Thrust", "Sling: 6d+2; Bash"],
+            abilities: ["Light-Footed", "Light Suit", "One-Handed Common Weapon Affinity", "Small"]
+        },
+        {
+            name: "Hobgoblin",
+            description: "Hobgoblins rank above Goblins in the hierarchy of Darkfolk. They live in the same society as Goblins, but as the ruling class. Like Goblins, they can be encountered anywhere within the mainland of the Crystal Sphere and live in shallow caves near to the surface.",
+            size: "B",
+            pace: "8",
+            vit: 25,
+            mana: 25,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 },
+            attacks: ["Katana [Goblin Craft]: 6d+3; Slash or Thrust & Grievious", "Tanto [Goblin Craft]: 5d+1; Thrust & Grievious", "Yumi [Goblin Craft]: 5d+3; Thrust & Grievious"],
+            abilities: ["Darkvision"]
+        },
+        {
+            name: "Human",
+            description: "Humans are typically either Imperial, who hail from the Empire, or Gurzim, who hail from the Wildlands.",
+            size: "B",
+            pace: "8",
+            vit: 25,
+            mana: 25,
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 },
+            attacks: ["Arming Sword: 5d+2", "War Bow: 5d+3"],
+            abilities: ["Light Suit"]
+        },
+        {
+            name: "Kathonid",
+            description: "The Kathonid are a blind and mute race of anthropoids that live deep within the Sculpted Darkness. Kathonids care only for control and exercise command over all they encounter. They are a godless society who wish to become the de facto gods of the Crystal Sphere.",
+            size: "B",
+            pace: "8",
+            vit: 20,
+            mana: 40,
+            avoid: "4d",
+            aspects: { dex: 4, hel: 4, str: 4, act: 8, int: 8, ver: 8 },
+            attacks: ["Pugil Strike: 4d; Bash", "Transfer Mana: 6d+2; Pain"],
+            immunities: ["Bewitchment", "Curse", "Disease"],
+            abilities: ["Enthral", "Obscure Self", "Ravage Mind", "Share Senses", "Telepathy", "Unspeaking"]
+        },
+        {
+            name: "Kobold",
+            description: "Kobolds are small dog-like creatures that tend to live in burrows rather than larger caves. They prefer to attack individuals, unguarded traders, and small farmsteads, but, if desperate enough, they will attack armed adventurers.",
+            size: "B",
+            pace: "7",
+            vit: 18,
+            mana: 20,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 4, str: 3, act: 4, int: 2, ver: 4 },
+            attacks: ["Bite: 4d; Crush or Slash", "Flint Spear: 5d+2; Thrust; cc2", "Flint Spear [Butt]: 3d+1; Bash"],
+            abilities: ["Darkvision"]
+        },
+        {
+            name: "Lizardfolk",
+            description: "Lizardfolk are the amphibious beastfolk who live in the swamp of the Great Slough and are known for the potency of their poisons; any poison crafted by a Lizardfolk shaman has a +2 to its TN for the purpose of saves. Lizardfolk affected by the Curse of Lycanthropy are permanently transformed into Kappa: an elite warrior class of their society.",
+            size: "B",
+            pace: "8 land; 9 swim",
+            vit: 40,
+            mana: 25,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 8, str: 8, act: 5, int: 5, ver: 5 },
+            attacks: ["Bite: 6d+1; Crush", "Flint Spear: 6d+2; Thrust; cc2", "Flint Spear [Butt]: 6d+3; Bash", "Poison: 4d"],
+            abilities: ["Quick Acting Vitality Poison: TN 6"]
+        },
+        {
+            name: "Minotaur",
+            description: "Minotaur are the bull-like beastfolk who live on the Isle of Ver. Those who succumb to the Curse of Lycanthropy become raging beasts and are banished to the Sculpted Darkness—although some find their way out.",
+            size: "B",
+            pace: "9",
+            vit: 35,
+            mana: 25,
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 7, str: 7, act: 5, int: 5, ver: 5 },
+            attacks: ["Gore: 6d; Thrust", "Battlexe: 6d+7; Slash"],
+            abilities: ["Hide Suit"]
+        },
+        {
+            name: "Naga",
+            description: "Nagas are the snake-like folk who live in the swamps and forests. They have the head, torso, and arms of an anthropoid with the tail of a snake. Naga venom glands are highly sought after as they are necessary to make the antivenom.",
+            size: "3B",
+            pace: "7",
+            vit: 25,
+            mana: 35,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 },
+            attacks: ["Bite: 5d; Crush & Envenom", "Constrict: 6d+4", "Machete: 5d+1; Slash", "Venom: 1d"],
+            vulnerabilities: ["Frost"],
+            abilities: ["Constrict", "Deadly Bite", "Venom: TN 2 Health save"]
+        },
+        {
+            name: "Naiad",
+            description: "Naiads, being a type of nymph, are incredibly beautiful and often lure lusty men into compromising situations to drown them—though only if she believes that they may defile her spring—the subject of her life bond.",
+            size: "B",
+            pace: "8 land; 12 swim",
+            vit: 25,
+            mana: 35,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 7, int: 7, ver: 7 },
+            attacks: ["Flint Knife: 5d+1; cc1"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Life Bond", "Meld"]
+        },
+        {
+            name: "Nuss-Janni",
+            description: "Nuss-jann are tall desert folk who are half Jann.",
+            size: "B",
+            pace: "8",
+            vit: 28,
+            mana: 25,
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 6, str: 5, act: 5, int: 4, ver: 5 },
+            attacks: ["Half-Jann Ability: 6d; Variable", "Arming Sword: 5d+2", "War Bow: 5d+3"],
+            abilities: ["Light Suit", "Half-Human", "Half-Jann"]
+        },
+        {
+            name: "Ogre",
+            description: "Ogres are the penultimate Darkfolk. They are the equivalent of heavy cavalry to the Oldra. They are massive, quick, and deadly and are the focal point of much art depicting the Dark Ages in which the Oldra, Man, and Elves warred over dominion of the Crystal Sphere.",
+            size: "C",
+            pace: "9",
+            vit: 65,
+            mana: 25,
+            avoid: "6d+11; cc4",
+            aspects: { dex: 13, hel: 13, str: 13, act: 5, int: 5, ver: 5 },
+            attacks: ["Bite [Oldra]: 6d+9; cc3", "Rend: 6d+7", "Slam [Oldra]: 6d+8; Bash, cc3", "Odachi [Oldra]: 6d+16; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+9; Thrust, cc4"],
+            abilities: ["Darkvision", "Hide Suit", "Rend"]
+        },
+        {
+            name: "Oldra",
+            description: "Oldra are the highest caste of Darkfolk. High Darkfolk–Ogres and Oldra–live in cities scattered throughout the shallow portions of the Sculpted Darkness. Their capital lies directly beneath the Cordillera. These cities often have towers that extend into the mountains above.",
+            size: "C",
+            pace: "9",
+            vit: 50,
+            mana: 50,
+            avoid: "6d+16; cc4",
+            aspects: { dex: 10, hel: 10, str: 10, act: 10, int: 10, ver: 10 },
+            attacks: ["Odachi [Oldra]: 6d+12; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+6; Thrust, cc4"],
+            abilities: ["Darkvision", "Heavy Suit"]
+        },
+        {
+            name: "Orc",
+            description: "Orcs are viscous, brutish anthropoids that live throughout the Orkipelago west of the Empire. They are mostly bald with only patches of hair, they have a greenish complexion, they are prognathous, their nose is almost snout like, and their bottom canines are relatively massive. Although it is attested that Elves do not survive lycanthropy, there is a persistent rumor that Orcs are their lycanthropic form. This rumor is partially fueled by the similarity of their languages; although Orcish is far simpler and much more coarse.",
+            size: "B",
+            pace: "8",
+            vit: 25,
+            mana: 20,
+            avoid: "6d+1",
+            aspects: { dex: 7, hel: 7, str: 7, act: 4, int: 4, ver: 4 },
+            attacks: ["Saber: 6d+3; Slash or Thrust", "War Bow: 6d+4; Thrust"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Pixie",
+            description: "Pixies are a lesser fey nearly indistinguishable from faeries. They are much more mischievous in nature and sport much weaker magical abilities.",
+            size: "A",
+            pace: "22 fly",
+            vit: 10,
+            mana: 25,
+            avoid: "6d+2",
+            aspects: { dex: 8, hel: 2, str: 2, act: 5, int: 5, ver: 5 },
+            attacks: ["Knife [Fey]: 5d+1; Slash & Thrust, -1cc", "Bow [Fey]: 6d+2; Thrust, cc2"],
+            immunities: ["Curse", "Disease", "Magic"],
+            abilities: ["Starlight Vision", "Undying"]
+        },
+        {
+            name: "Satyr",
+            description: "Satyrs are lustful, goat-like fey that often stray from the Fey Hegemony to lure away and enslave young women. Satyrs have the legs and horns of a goat, but are otherwise anthropoidal.",
+            size: "B",
+            pace: "9",
+            vit: 25,
+            mana: 25,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 5, act: 5, int: 5, ver: 5 },
+            attacks: ["Gore: 5d; Bash", "Cudgel: 5d+1; Bash", "Sling: 5d+1; Bash"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Starlight Vision"]
+        },
+        {
+            name: "Scorpionfolk",
+            description: "Scorpionfolk have the torso, right arm, and head of an anthropoid attached to the body and left arm of a giant scorpion. They live exclusively in the Desert of the Jann. Scorpionfolk stingers are highly sought after as they are necessary to make the antivenom. Scorpionfolk affected by the Curse of Lycanthropy are permanently transformed into Aqrabu: the elite warrior class of their society.",
+            size: "2B",
+            pace: "8",
+            vit: 30,
+            mana: 25,
+            avoid: "6d+6; cc4",
+            aspects: { dex: 6, hel: 6, str: 6, act: 5, int: 5, ver: 5 },
+            attacks: ["Claw: 6d; Crush", "Flint Spear: 6d+2; Thrust, 2cc", "Flint Spear [Butt]: 6d+1; Bash", "Sting: 6d; Thrust & Envenom", "Venom: 1d; Pain"],
+            abilities: ["Chitin Suit", "Claw Shield: +2d", "Deadly Sting", "Venom: TN2 Health save"]
+        },
+        {
+            name: "Troll",
+            description: "Trolls are highly aggressive long-limbed killing machines. They live near rivers, in forests, in mountain caves, and throughout the Sculpted Darkness. Trolls live in small clans and are minimally social, using grunts and growls to communicate. On True Nights, Trolls affected by the Curse of Lycanthropy take the form of a Man.",
+            size: "C",
+            pace: "10",
+            vit: 80,
+            mana: 19,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 16, str: 16, act: 3, int: 2, ver: 5 },
+            attacks: ["Bite [Oldra]: 6d+6; Crush; cc3", "Claw [Oldra]: 6d+6; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
+            vulnerabilities: ["Fire"],
+            abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
+        },
+        {
+            name: "Troll, Frost",
+            description: "Frost trolls live throughout the Frosinlands and throughout the northern Moonveil Mountains. They are faster and more perceptive than their southern counterparts. On True Nights, Trolls affected by the Curse of Lycanthropy take the form of a Man.",
+            size: "C",
+            pace: "12",
+            vit: 80,
+            mana: 28,
+            avoid: "6d+6; cc4",
+            aspects: { dex: 8, hel: 16, str: 16, act: 6, int: 2, ver: 5 },
+            attacks: ["Bite [Oldra]: 6d+7; Crush; cc3", "Claw [Oldra]: 6d+7; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
+            resistances: ["Frost"],
+            vulnerabilities: ["Fire"],
+            abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
+        },
+        {
+            name: "Vulpivir",
+            description: "Vulpes are small fox-like anthropoids that generally live among the Elves. They are covered in fur of a variety of colors, have a tail, claws, and sharp teeth.",
+            size: "B",
+            pace: "8",
+            vit: 20,
+            mana: 28,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 4, str: 4, act: 6, int: 5, ver: 5 },
+            attacks: ["Dagger: 6d+1; Slash or Thrust", "Crossbow: 6d+3; Thrust"],
+            abilities: ["Crossbow Affinity", "Light-Footed", "Keen Sniffer", "Light Suit", "Nimble Athlete", "Small", "Starlight Vision"]
+        },
+        {
+            name: "Weftlings",
+            description: "Weftlings are the spider-like beastfolk that live throughout Sculpted Darkness, beneath mountains, and in the deepest parts of the great forests. Their body comprises the head, torso, and arms of a human affixed to the thorax, abdomen, and legs of a widow spider. Their silk is highly valued as a luxury textile.",
+            size: "2B",
+            pace: "8",
+            vit: 30,
+            mana: 25,
+            avoid: "5d+8; cc3",
+            aspects: { dex: 5, hel: 6, str: 6, act: 5, int: 5, ver: 5 },
+            attacks: ["Flint Spear: 5d+2; cc2", "Flint Spear [Butt]: 5d+1; Bash, cc1", "Web: 5d; Entangle"],
+            abilities: ["Silk Hauberk", "Web Blast: TN 5 Escape or Strength save"]
+        }
+    ],
+    "Giant": [
+        {
+            name: "Giant, Fire",
+            description: "Fire Giants live throughout the Desert of the Jann and along the southern arc of the Moonveil mountains. They have a ruddy complexion, green eyes, and fiery red hair.",
+            size: "D",
+            pace: "8",
+            vit: 78,
+            mana: 30,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 18, str: 12, act: 6, int: 5, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+8; Bash; cc4", "Cudgel [Giant]: 6d+9; Bash; cc4", "Greatbow [Giant]: 5d+7; Thrust, cc5"],
+            resistances: ["Fire"],
+            abilities: ["Great Bow Affinity"]
+        },
+        {
+            name: "Giant, Frost",
+            description: "Frost giants live throughout the Frosinland and along the northern arc of the Moonveil mountains and wield giant ice axes crafted by their secret technique. They are pale skinned, coarse haired, and blue eyed and dress in the furs and skins of the mammoth beasts they hunt.",
+            size: "D",
+            pace: "8",
+            vit: 60,
+            mana: 36,
+            avoid: "6d",
+            aspects: { dex: 6, hel: 12, str: 12, act: 8, int: 5, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+10; Bash; cc4", "Battleaxe [Giant]: 6d+16; Slash; cc4", "Sling [Giant]: 4d+3; Bash; cc4"],
+            resistances: ["Frost"],
+            abilities: ["Battleaxe Affinity"]
+        },
+        {
+            name: "Giant, Hill",
+            description: "Hill Giants live throughout the hill country skirting the Cordillera, the foothills of the Daar mountains, and in the most remote stretches of the imperial rolling plains. They are the most civilized of the giants and regularly trade their wine, wool, and mutton with the rural villages of the empire or the Gurzim. They’re olive skinned, dark haired, and dark eyed.",
+            size: "D",
+            pace: "8",
+            vit: 90,
+            mana: 30,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 18, str: 18, act: 6, int: 5, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Quarterstaff [Giant]: 6d+25; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            abilities: ["Quarterstaff Affinity"]
+        },
+        {
+            name: "Giant, Island",
+            description: "Island Giants have a black and white dappled complexion and live on the sandy eastern coast of the Isle of Ver.",
+            size: "D",
+            pace: "8",
+            vit: 72,
+            mana: 36,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 12, str: 18, act: 8, int: 5, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Atgeir [Giant]: 5d+3; Thrust, cc5", "Atgeir [Butt; Giant]: 6d+16; Bash, cc4"],
+            resistances: ["Thunder", "Lightning"],
+            abilities: ["Atgeir Affinity"]
+        }
     ],
     "Beast": [
-        { name: "Antlion", description: "Burrowing insectoid predator using vibrotactile perception.", size: "3B", pace: "8 burrow; 7 land", vit: 31, mana: 19, avoid: "2d", aspects: { dex: 2, hel: 5, str: 8, act: 3, int: 1, ver: 5 }, attacks: ["Bite: 6d+2; Crush", "Acid: 5d; Sunder", "Erupt: 6d+2"], abilities: ["Acid Spit", "Vibrotactile Perception", "Erupt: Skill Check [Strength]"] },
-        { name: "Badgerknight", description: "Armored underground hunting animal.", size: "2C", pace: "8 burrow; 26 land", vit: 65, mana: 11, avoid: "2d+12; cc4", aspects: { dex: 2, hel: 13, str: 13, act: 3, int: 1, ver: 1 }, attacks: ["Bite: 6d+7; Crush", "Claw: 6d+7; Slash", "Pounce: 6d+7; Crush", "Erupt: 6d+7"], abilities: ["Exoskeletal Suit", "Vibrotactile Perception"] },
-        { name: "Basilisk", description: "Legendary serpent with a deadly gaze and corrupting influence.", size: "3A", pace: "7", vit: 1, mana: 1, avoid: "5d", aspects: { dex: 5, hel: 1, str: 1, act: 5, int: 1, ver: 5 }, attacks: ["Bite: 5d; Envenom", "Breath: 5d; Envenom", "Gaze: 5d", "Venom: 3d; Pain"], abilities: ["Corrupting Breath [Verve]", "Deadly", "Mortal Gaze", "Squishy", "Inept", "Venom: TN 3 Health save"] },
-        { name: "Drake, Black", description: "Swamp-dwelling or underground black drake.", size: "2C", pace: "50 fly; 26 land; 26 swim", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Acid: 6d+10; Sunder"], immunities: ["Acid", "Curse", "Disease"], abilities: ["Acid Breath", "Drakehide Suit"] },
-        { name: "Drake, Blue", description: "Island and cliffside cave dwelling blue drake.", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Lightning: 6d+4; Weaken"], immunities: ["Curse", "Disease", "Lightning", "Thunder"], abilities: ["Drakehide Suit", "Lightning Arc"] },
-        { name: "Drake, Green", description: "Forest-camouflaged green drake.", size: "2C", pace: "50 fly; 26 land", vit: 68, mana: 68, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 10, act: 16, int: 10, ver: 10 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Petrify: 6d+10"], immunities: ["Curse", "Disease"], abilities: ["Drakehide Suit", "Petrifying Gaze"] },
-        { name: "Drake, Red", description: "Mountain cave dwelling red drake utilizing fiery jets.", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 10, ver: 16 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Fire: 6d+10; Pain"], immunities: ["Curse", "Disease", "Fire"], vulnerabilities: ["Frost"], abilities: ["Drakehide Suit", "Fire Jet"] },
-        { name: "Drake, White", description: "Frosinland mountain cave dwelling white drake.", size: "2C", pace: "50 fly; 26 land", vit: 80, mana: 50, avoid: "6d+14; cc4", aspects: { dex: 16, hel: 16, str: 16, act: 10, int: 10, ver: 10 }, attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Frost: 6d+4; Numb"], immunities: ["Curse", "Disease", "Frost"], vulnerabilities: ["Fire"], abilities: ["Drakehide Suit", "Ice Jet"] },
-        { name: "Drake, Yellow", description: "Desert burrowing yellow drake.", size: "2C", pace: "50 fly; 26 land; 13 burrow", vit: 68, mana: 62, avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 }, attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Light: 6d+10; Blind"], immunities: ["Curse", "Disease", "Light"], vulnerabilities: ["Darkness", "Umbra"], abilities: ["Beam of Light", "Drakehide Suit"] },
-        { name: "Harpy", description: "Isle of Ver beast with woman's top and bird's wings/talons.", size: "B", pace: "37 fly; 8 land", vit: 31, mana: 40, avoid: "5d", aspects: { dex: 5, hel: 5, str: 8, act: 8, int: 8, ver: 8 }, attacks: ["Poison: 4d; Nausea", "Talon: 6d; Crush or Slash"], abilities: ["Guano Spray [rear facing]: TN 4 Health save"] },
-        { name: "Hydra", description: "Many-headed, long-necked swamp dwelling beast with venomous bites.", size: "2C", pace: "26", vit: "26 per head", mana: "12 per head", avoid: "6d+8; cc4", aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash", "Venom: 3d; Pain"], abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save"] },
-        { name: "Leviathan", description: "Massive sea beast feared by all sailors.", size: "3D", pace: "50 swim", vit: 110, mana: 16, avoid: "3d+8; cc4", aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+8; Crush, cc3", "Slam [Giant]: 6d+18; Bash & Sunder, cc3"], abilities: ["Blubar Suit", "Devour"] },
-        { name: "Manticore", description: "Desert beast with anthropoidal face, lion body, and scorpion tail.", size: "2B", pace: "37", vit: 60, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Rend: 6d+6; Slash", "Sting: 6d+4; Envenom & Thrust", "Venom: 4d; Pain"], abilities: ["Deadly Sting", "Rend", "Venom: TN 4 Health save"] },
-        { name: "Quadricorn", description: "Fearsome 4-horned beast tamed by the Gurzim.", size: "2C", pace: "26", vit: 110, mana: 16, avoid: "3d+12; cc4", aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 }, attacks: ["Gore [Oldra]: 6d+5; Thrust, cc4", "Kick [Oldra]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"], abilities: ["Hide Suit"] },
-        { name: "Roc", description: "Giant bird living in the cliffsides of the Isle of Ver and Cordillera.", size: "D", pace: "37", vit: 62, mana: 22, avoid: "6d+4; cc4", aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 }, attacks: ["Bite [Giant]: 6d+7; Crush, cc4", "Talon [Giant]: 6d+7; Crush, cc4"], abilities: ["Devour", "Feather Suit"] },
-        { name: "Wyrm, Cloud-", description: "Cloudwyrm flightless serpentine dragon.", size: "16C", pace: "8 burrow; 8 land", vit: 98, mana: 98, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"], immunities: ["Curse", "Disease", "Poison"], abilities: ["Poison Cloud: TN4 Health save", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Fire-", description: "Firewyrm flightless serpentine dragon.", size: "16C", pace: "8 burrow; 26 land", vit: 92, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 22, act: 16, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"], immunities: ["Curse", "Disease", "Fire"], vulnerabilities: ["Frost"], abilities: ["Fire Corona", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Frost-", description: "Frostwyrm flightless serpentine dragon.", size: "16C", pace: "8 burrow; 26 land", vit: 110, mana: 80, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 22, act: 16, int: 6, ver: 16 }, attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"], immunities: ["Curse", "Disease", "Frost"], vulnerabilities: ["Fire"], abilities: ["Frost Corona", "Wyrm Scale Suit"] },
-        { name: "Wyrm, Glow-", description: "Glowwyrm flightless serpentine dragon.", size: "16C", pace: "8 burrow; 26 land", vit: 80, mana: 110, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 }, attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"], immunities: ["Curse", "Disease", "Lightning", "Thunder"], abilities: ["Lightning Cloud", "Wyrm Scale Suit"] },
-        { name: "Wyrm [Sarpa]", description: "Swamp-dwelling Sarpa wyrm.", size: "16C", pace: "8 burrow; 26 land", vit: 98, mana: 92, avoid: "6d+14; cc5", aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 }, attacks: ["Acid: 6d+16; Sunder", "Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc"], immunities: ["Acid", "Curse", "Disease"], abilities: ["Acid Cloud", "Wyrm Scale Suit"] },
-        { name: "Wyvern", description: "Drake-like beast with longer neck, 2 legs, and lethal venom bite.", size: "2B", pace: "37 fly; 9 land", vit: 50, mana: 22, avoid: "6d+4", aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 2, ver: 2 }, attacks: ["Bite: 6d+4; Crush & Envenom", "Talon: 6d+16; Crush", "Venom: 5d; Pain"], abilities: ["Deadly Bite", "Dive (charge) Only", "Venom: TN 5 Health save"] }
+        {
+            name: "Antlion",
+            description: "The behavior of an antlion varies based on its habitat, but its primary mode of transportation is burrowing. In plains and farmlands, antlions typically lay in wait for their prey whereas in the desert, antlions roam beneath the surface hunting for prey. When an antlion identifies its prey through vibrotactile perception, it erupts from the ground, biting its target. Once it grapples its prey, the antlion retreats to its burrow so as to feast undisturbed.",
+            size: "3B",
+            pace: "8 burrow; 7 land",
+            vit: 31,
+            mana: 19,
+            avoid: "2d",
+            aspects: { dex: 2, hel: 5, str: 8, act: 3, int: 1, ver: 5 },
+            attacks: ["Bite: 6d+2; Crush", "Acid: 5d; Sunder", "Erupt: 6d+2"],
+            abilities: ["Acid Spit", "Vibrotactile Perception", "Erupt: Skill Check [Strength]"]
+        },
+        {
+            name: "Badgerknight",
+            description: "The badgerknight is an armored animal that tends to stay underground. A badgerknight hunts using vibrotactile perception. When it detects prey, a badgerknight erupts from the earth before pouncing upon it. In the Sculpted Darkness and other stoney areas, badgerknight roam rather than burrow but still pounce upon their prey as an opening tactic.",
+            size: "2C",
+            pace: "8 burrow; 26 land",
+            vit: 65,
+            mana: 11,
+            avoid: "2d+12; cc4",
+            aspects: { dex: 2, hel: 13, str: 13, act: 3, int: 1, ver: 1 },
+            attacks: ["Bite: 6d+7; Crush", "Claw: 6d+7; Slash", "Pounce: 6d+7; Crush", "Erupt: 6d+7"],
+            abilities: ["Exoskeletal Suit", "Vibrotactile Perception"]
+        },
+        {
+            name: "Basilisk",
+            description: "“...all who behold its eyes, fall dead upon the spot…When it hisses, all the other serpents fly from it: and it does not advance its body, like the others, by a succession of folds, but moves along upright and erect upon the middle. It destroys all shrubs, not only by its contact, but those even that it has breathed upon; it burns up all the grass too, and breaks the stones, so tremendous is its noxious influence. It was formerly a general belief that if a man on horseback killed one of these animals with a spear, the poison would run up the weapon and kill, not only the rider, but the horse as well. To this dreadful monster the effluvium of the weasel is fatal, a thing that has been tried with success, for kings have ovampireften desired to see its body when killed; so true is it that it has pleased Nature that there should be nothing without its antidote. The animal is thrown into the hole of the basilisk, which is easily known from the soil around it being infected. The weasel destroys the basilisk by its odour, but dies itself in this struggle of nature against its own self.”\n\nThe Natural History by Pliny the Elder",
+            size: "3A",
+            pace: "7",
+            vit: 1,
+            mana: 1,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 1, str: 1, act: 5, int: 1, ver: 5 },
+            attacks: ["Bite: 5d; Envenom", "Breath: 5d; Envenom", "Gaze: 5d", "Venom: 3d; Pain"],
+            abilities: ["Corrupting Breath [Verve]", "Deadly", "Mortal Gaze", "Squishy", "Inept", "Venom: TN 3 Health save"]
+        },
+        {
+            name: "Drake, Black",
+            description: "Black drakes tend to live in swampy areas or deep underground. Instead of living in stony caves, black drakes live in burrows, which are often completely concealed by swampy water.",
+            size: "2C",
+            pace: "50 fly; 26 land; 26 swim",
+            vit: 68,
+            mana: 62,
+            avoid: "6d+8; cc4",
+            aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 },
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Acid: 6d+10; Sunder"],
+            immunities: ["Acid", "Curse", "Disease"],
+            abilities: ["Acid Breath", "Drakehide Suit"]
+        },
+        {
+            name: "Drake, Blue",
+            description: "Blue drakes tend to live on islands and in cliffside caves; however, they hunt on both land and sea and can therefore be encountered many miles inland.",
+            size: "2C",
+            pace: "50 fly; 26 land",
+            vit: 68,
+            mana: 68,
+            avoid: "6d+8; cc4",
+            aspects: { dex: 10, hel: 16, str: 10, act: 16, int: 10, ver: 10 },
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Lightning: 6d+4; Weaken"],
+            immunities: ["Curse", "Disease", "Lightning", "Thunder"],
+            abilities: ["Drakehide Suit", "Lightning Arc"]
+        },
+        {
+            name: "Drake, Green",
+            description: "Green drakes tend to live near forests so that they can make use of their natural camouflage while hunting. They prefer to occupy stony caves, but are also known to burrow.",
+            size: "2C",
+            pace: "50 fly; 26 land",
+            vit: 68,
+            mana: 68,
+            avoid: "6d+14; cc4",
+            aspects: { dex: 16, hel: 16, str: 10, act: 16, int: 10, ver: 10 },
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Petrify: 6d+10"],
+            immunities: ["Curse", "Disease"],
+            abilities: ["Drakehide Suit", "Petrifying Gaze"]
+        },
+        {
+            name: "Drake, Red",
+            description: "Red drakes tend to live in the mountain caves of the Cordillera and the Daar Mountains. When hunting, they swoop low and blast their prey with fiery jets.",
+            size: "2C",
+            pace: "50 fly; 26 land",
+            vit: 80,
+            mana: 62,
+            avoid: "6d+8; cc4",
+            aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 10, ver: 16 },
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Fire: 6d+10; Pain"],
+            immunities: ["Curse", "Disease", "Fire"],
+            vulnerabilities: ["Frost"],
+            abilities: ["Drakehide Suit", "Fire Jet"]
+        },
+        {
+            name: "Drake, White",
+            description: "White drakes tend to live in the mountain caves of the Frosinlands. When hunting, they swoop low and blast their prey with icy jets.",
+            size: "2C",
+            pace: "50 fly; 26 land",
+            vit: 80,
+            mana: 50,
+            avoid: "6d+14; cc4",
+            aspects: { dex: 16, hel: 16, str: 16, act: 10, int: 10, ver: 10 },
+            attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Frost: 6d+4; Numb"],
+            immunities: ["Curse", "Disease", "Frost"],
+            vulnerabilities: ["Fire"],
+            abilities: ["Drakehide Suit", "Ice Jet"]
+        },
+        {
+            name: "Drake, Yellow",
+            description: "Yellow drakes tend to live in the mountain caves on the desert side of the Daar and in burrows or beneath the sand throughout the Desert of the Jann.",
+            size: "2C",
+            pace: "50 fly; 26 land; 13 burrow",
+            vit: 68,
+            mana: 62,
+            avoid: "6d+8; cc4",
+            aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 },
+            attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Light: 6d+10; Blind"],
+            immunities: ["Curse", "Disease", "Light"],
+            vulnerabilities: ["Darkness", "Umbra"],
+            abilities: ["Beam of Light", "Drakehide Suit"]
+        },
+        {
+            name: "Harpy",
+            description: "Harpies live exclusively on the Isle of Ver east of the mainland. They resemble the top half of either a beautiful or hideous woman with the wings and talons of a bird. Harpies regularly swarm ships, steal any food they can lay hold of, and shit on anything and everything they fly over. If a target so much as touches the Harpy’s guano, he is poisoned. Harpies are also known to carry off sailors (size B or smaller) and drop them from great height into the sea or against the rocks.",
+            size: "B",
+            pace: "37 fly; 8 land",
+            vit: 31,
+            mana: 40,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 5, str: 8, act: 8, int: 8, ver: 8 },
+            attacks: ["Poison: 4d; Nausea", "Talon: 6d; Crush or Slash"],
+            abilities: ["Guano Spray [rear facing]: TN 4 Health save"]
+        },
+        {
+            name: "Hydra",
+            description: "The hydra is a many-headed, long-necked, swamp dwelling beast with venomous bites. When disturbed, the hydra attempts to face as many of its foe as possible, snapping at each one. A hydra’s venom glands are highly sought after as they are necessary to create the proper antivenom. A hydra can only be killed by cutting off or crushing its many heads then burning the corpse. A hydra’s heads evenly occupy the three threatened hexes of the hydra and threaten 3 hexes each of their own.",
+            size: "2C",
+            pace: "26",
+            vit: "26 per head",
+            mana: "12 per head",
+            avoid: "6d+8; cc4",
+            aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 2, ver: 2 },
+            attacks: ["Bite: 6d+4; Crush & Envenom", "Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash", "Venom: 3d; Pain"],
+            abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save"]
+        },
+        {
+            name: "Leviathan",
+            description: "The leviathan is the beast that all sailors fear. While all sailors know of the leviathan, few claim to have seen one. Many folk believe that it is silly to fear such a beast when the other dangers of the sea are cruel enough. Though, if such a beast were to exist, it would be large enough to sunder a galley with its slam and be able to swallow whole the sailors as they fell from its deck.",
+            size: "3D",
+            pace: "50 swim",
+            vit: 110,
+            mana: 16,
+            avoid: "3d+8; cc4",
+            aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
+            attacks: ["Bite [Giant]: 6d+8; Crush, cc3", "Slam [Giant]: 6d+18; Bash & Sunder, cc3"],
+            abilities: ["Blubar Suit", "Devour"]
+        },
+        {
+            name: "Manticore",
+            description: "The manticore is a beast found exclusively in the Desert of the Jann often called the “man eater.” It has an anthropoidal face, the body of a lion, and the tail of a scorpion. The venom of the manticore is second only to that of the Wyvern. Manticore tails are highly sought after as they are necessary for an effective antivenom.",
+            size: "2B",
+            pace: "37",
+            vit: 60,
+            mana: 22,
+            avoid: "6d+4",
+            aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 },
+            attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Rend: 6d+6; Slash", "Sting: 6d+4; Envenom & Thrust", "Venom: 4d; Pain"],
+            abilities: ["Deadly Sting", "Rend", "Venom: TN 4 Health save"]
+        },
+        {
+            name: "Quadricorn",
+            description: "The quadricorn is a fearsome 4-horned beast tamed only by the most indomitable of the Gurzim. They are very aggressive and will attack for such little provocation as one walking on their side of the river. They are encountered in the Grasslands and in the Daar Between the Mountains and the River.",
+            size: "2C",
+            pace: "26",
+            vit: 110,
+            mana: 16,
+            avoid: "3d+12; cc4",
+            aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
+            attacks: ["Gore [Oldra]: 6d+5; Thrust, cc4", "Kick [Oldra]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"],
+            abilities: ["Hide Suit"]
+        },
+        {
+            name: "Roc",
+            description: "The roc is a giant bird who lives in the cliffsides of the Isle of Ver and in the Cordillera. Rocs don’t actively hunt people, but they tend to eat whatever they can find when they are hungry, which is often.",
+            size: "D",
+            pace: "37",
+            vit: 62,
+            mana: 22,
+            avoid: "6d+4; cc4",
+            aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 },
+            attacks: ["Bite [Giant]: 6d+7; Crush, cc4", "Talon [Giant]: 6d+7; Crush, cc4"],
+            abilities: ["Devour", "Feather Suit"]
+        },
+        {
+            name: "Wyrm, Cloud-",
+            description: "Cloudwyrms are typically located in the mountains, forests, or plains of the Empire and within the eastern and western Moon Veil Mountains.",
+            size: "16C",
+            pace: "8 burrow; 8 land",
+            vit: 98,
+            mana: 98,
+            avoid: "6d+14; cc5",
+            aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 },
+            attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"],
+            immunities: ["Curse", "Disease", "Poison"],
+            abilities: ["Poison Cloud: TN4 Health save", "Wyrm Scale Suit"]
+        },
+        {
+            name: "Wyrm, Fire-",
+            description: "Firewyrms are typically located in the mountains, forests, or plains. How they react to people is hard to predict and has to be determined by the LM on a case by case basis.",
+            size: "16C",
+            pace: "8 burrow; 26 land",
+            vit: 92,
+            mana: 92,
+            avoid: "6d+14; cc5",
+            aspects: { dex: 8, hel: 16, str: 22, act: 16, int: 6, ver: 22 },
+            attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"],
+            immunities: ["Curse", "Disease", "Fire"],
+            vulnerabilities: ["Frost"],
+            abilities: ["Fire Corona", "Wyrm Scale Suit"]
+        },
+        {
+            name: "Wyrm, Frost-",
+            description: "Frostwyrms are found in the Frosinlands and in the northern Frosinlands. How they react to people is hard to predict and has to be determined by the LM on a case-by-case basis.",
+            size: "16C",
+            pace: "8 burrow; 26 land",
+            vit: 110,
+            mana: 80,
+            avoid: "6d+14; cc5",
+            aspects: { dex: 8, hel: 22, str: 22, act: 16, int: 6, ver: 16 },
+            attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"],
+            immunities: ["Curse", "Disease", "Frost"],
+            vulnerabilities: ["Fire"],
+            abilities: ["Frost Corona", "Wyrm Scale Suit"]
+        },
+        {
+            name: "Wyrm, Glow-",
+            description: "Wyrms are a special type of flightless dragon with a long serpentine body and six legs. Glowwyrms come in two varieties–desert dwelling or sea dwelling.",
+            size: "16C",
+            pace: "8 burrow; 26 land",
+            vit: 80,
+            mana: 110,
+            avoid: "6d+14; cc5",
+            aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 },
+            attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"],
+            immunities: ["Curse", "Disease", "Lightning", "Thunder"],
+            abilities: ["Lightning Cloud", "Wyrm Scale Suit"]
+        },
+        {
+            name: "Wyrm [Sarpa]",
+            description: "Sarpa are typically located in the swamps such as that of the Great Slough or the deltas of the Kassani and Daar rivers. They can also be encountered in the Sculpted Darkness, rivers, or open water, but their burrows are always in swamps, fens, bogs, or quagmires.",
+            size: "16C",
+            pace: "8 burrow; 26 land",
+            vit: 98,
+            mana: 92,
+            avoid: "6d+14; cc5",
+            aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 },
+            attacks: ["Acid: 6d+16; Sunder", "Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc"],
+            immunities: ["Acid", "Curse", "Disease"],
+            abilities: ["Acid Cloud", "Wyrm Scale Suit"]
+        },
+        {
+            name: "Wyvern",
+            description: "Wyverns greatly resemble drakes except that they have longer necks and maws and have 2 legs only. Wyverns will carry off size B or smaller prey but will actually ground themselves to fight larger prey if they are hungry enough. 3-6 wyverns will surround a group of larger prey and close in upon them snapping at any who attempt to escape. Their bite is their only weapon when grounded, but it injects a lethal venom. Wyvern venom glands are highly sought after as they are necessary for an effective antivenom.",
+            size: "2B",
+            pace: "37 fly; 9 land",
+            vit: 50,
+            mana: 22,
+            avoid: "6d+4",
+            aspects: { dex: 10, hel: 10, str: 10, act: 6, int: 2, ver: 2 },
+            attacks: ["Bite: 6d+4; Crush & Envenom", "Talon: 6d+16; Crush", "Venom: 5d; Pain"],
+            abilities: ["Deadly Bite", "Dive (charge) Only", "Venom: TN 5 Health save"]
+        }
+    ],
+    "Construct": [
+{
+    "name": "Golem, Clay", 
+    "description": "Clay golems are by far the cheapest golems to craft and for that reason are the most common.",
+    "size": "C", 
+    "pace": "6", 
+    "vit": 28, 
+    "mana": 15, 
+    "avoid": "5d+8; cc4", 
+    "aspects": { dex: 5, str: 14, act: 5 }, 
+    "attacks": ["Slam: 6d+8; Bash"], 
+    "immunities": ["Curse", "Critical Effect", "Disease", "Thrust"],
+    "vulnerabilities": ["Fire", "Frost"],
+    "abilities": ["Earthen Suit"]
+},
+{ 
+    "name": "Golem, Iron", 
+    "description": "Iron golems are often created to defend an area from intrusion and are considered one of the most deadly things within the Crystal Sphere.",
+    "size": "D", 
+    "pace": "6", 
+    "vit": 52, 
+    "mana": 15, 
+    "avoid": "5d+24; cc4", 
+    "aspects": { dex: 5, str: 26, act: 5 }, 
+    "attacks": ["Fire: 6d; Pain", "Morningstar [Giant]: 6d+23; Bash & Thrust; cc5", "Stomp [Giant]: 6d+20; Bash & Crush; cc4"], 
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
+    "abilities": ["Fire Breath", "Iron Suit [Giant]"]
+},
+{ 
+    "name": "Golem, Stone", 
+    "description": "Stone golems are suited to any task that involves indiscriminate bashing. For this reason, they are nearly always made as large and powerful as possible.",
+    "size": "D", 
+    "pace": "6", 
+    "vit": 52, 
+    "mana": 15, 
+    "avoid": "5d+18; cc4", 
+    "aspects": { dex: 5, str: 26, act: 5 }, 
+    "attacks": ["Slam [Giant]: 6d+21; Bash; cc4"], 
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
+    "abilities": ["Stone Suit [Giant]"]
+}
     ],
     "Plant": [
         { 
@@ -23765,6 +24600,7 @@ const compendiumRegistry = {
         }
     ],
     "Dragon": [
+
         { 
             name: "Dragon, Argent", 
             description: "Argent Dragons tend to live within the God’s Throne Mountains of the Frosinlands. They sometimes have interests that involve the other races, but when they do, they take the form of a tall, pale, silver-eyed and silver-haired anthropoid.",
@@ -23989,7 +24825,7 @@ const compendiumRegistry = {
         },
         {
             name: "Manathrall",
-            description: "A sorcerer that has been consumed by Mana Sickness.",
+            description: "The inevitable end of all sorcerors; the product of Mana Sickness.",
             size: "B",
             pace: "8",
             vit: "—",
@@ -24320,14 +25156,92 @@ const compendiumRegistry = {
         }
     ],
     "Pneumon": [
-        { name: "Pneumon, Earth", description: "Serve the Earth Goddess and live far beneath the Temple of Autumnus.", size: "B", pace: "8", vit: 80, mana: 49, avoid: "6d+2", aspects: { dex: 8, hel: 16, str: 16, act: 11, int: 8, ver: 8 }, attacks: ["Casting: 6d+8", "Slam: 6d+10; Bash"], immunities: ["Curse", "Disease"], resistances: ["Battle Magic"], abilities: ["Divine Salvation", "Immortal"] },
-        { name: "Pneumon, Fire", description: "Serve the Fire God and live far beneath the Temple of Aestas.", size: "B", pace: "8", vit: 70, mana: 54, avoid: "6d+2", aspects: { dex: 8, hel: 16, str: 11, act: 16, int: 8, ver: 8 }, attacks: ["Casting: 6d+8", "Claw: 6d+2; Slash"], immunities: ["Curse", "Disease", "Fire"], vulnerabilities: ["Frost"], abilities: ["Divine Salvation", "Immortal"] },
-        { name: "Pneumon, Shadow", description: "Serve the Shadow King and live far beneath the Temple of Night.", size: "B", pace: "8", vit: 55, mana: 54, avoid: "6d+5", aspects: { dex: 11, hel: 11, str: 11, act: 16, int: 8, ver: 8 }, attacks: ["Casting: 6d+8", "Claw: 6d+5; Slash"], immunities: ["Curse", "Darkness", "Disease", "Umbral"], resistances: ["Battle Magic"], vulnerabilities: ["Light"], abilities: ["Divine Salvation", "Immortal"] },
-        { name: "Pneumon, Storm", description: "Serve the Sea Lord and live far beneath the Temple of Ver.", size: "B", pace: "8", vit: 80, mana: 60, avoid: "6d+5", aspects: { dex: 11, hel: 16, str: 16, act: 16, int: 6, ver: 6 }, attacks: ["Casting: 6d+6", "Slam: 6d+10; Bash"], immunities: ["Curse", "Disease", "Lightning", "Thunder"], abilities: ["Divine Salvation", "Immortal"] },
-        { name: "Pneumon, Wind", description: "Serve the Wind Goddess and live far beneath the Temple of Heims.", size: "B", pace: "8", vit: 69, mana: 49, avoid: "6d+5", aspects: { dex: 11, hel: 11, str: 16, act: 11, int: 8, ver: 8 }, attacks: ["Bite: 6d+7; Crush", "Casting: 6d+8"], immunities: ["Curse", "Disease", "Frost"], resistances: ["Lightning", "Thunder"], abilities: ["Divine Salvation", "Immortal"] },
-        { name: "The Guardians of the Crystal Sphere", description: "Live within the Moonveil Mountains, executing all who attempt to tamper with the Crystal Sphere.", size: "C", pace: "37 fly; 10 land", vit: 80, mana: 38, avoid: "6d+25; cc4", aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 4, ver: 4 }, attacks: ["Morningstar [Oldra]: 6d+16; Bash & Thrust, cc4", "Full Shield [Oldra]: 6d+13; Bash, cc3", "Dive: +12d"], immunities: ["Curse", "Disease", "Summoning"], resistances: ["Magic", "Physical"], abilities: ["Divine Salvation", "Full Shield [Oldra]", "Heavy Suit [Oldra]"] }
+        {
+            name: "Pneumon, Earth",
+            description: "Earth Pneumons serve the Earth Goddess and live far beneath the Temple of Autumnus. Earth Pneumons come in many forms but are always distinguishable by their tan complexion and black eyes.",
+            size: "B",
+            pace: "8",
+            vit: 80,
+            mana: 49,
+            avoid: "6d+2",
+            aspects: { dex: 8, hel: 16, str: 16, act: 11, int: 8, ver: 8 },
+            attacks: ["Casting: 6d+8", "Slam: 6d+10; Bash"],
+            immunities: ["Curse", "Disease"],
+            resistances: ["Battle Magic"],
+            abilities: ["Divine Salvation", "Immortal"]
+        },
+        {
+            name: "Pneumon, Fire",
+            description: "Fire Pneumons serve the Fire God and live far beneath the Temple of Aestas. Fire Pneumons come in many forms but are always distinguishable by their ruddy complexion and black eyes.",
+            size: "B",
+            pace: "8",
+            vit: 70,
+            mana: 54,
+            avoid: "6d+2",
+            aspects: { dex: 8, hel: 16, str: 11, act: 16, int: 8, ver: 8 },
+            attacks: ["Casting: 6d+8", "Claw: 6d+2; Slash"],
+            immunities: ["Curse", "Disease", "Fire"],
+            vulnerabilities: ["Frost"],
+            abilities: ["Divine Salvation", "Immortal"]
+        },
+        {
+            name: "Pneumon, Shadow",
+            description: "Shadow Pneumons serve the Shadow King and live far beneath the Temple of Night. Shadow Pneumons come in many forms but are always distinguishable by their gray complexion and black eyes.",
+            size: "B",
+            pace: "8",
+            vit: 55,
+            mana: 54,
+            avoid: "6d+5",
+            aspects: { dex: 11, hel: 11, str: 11, act: 16, int: 8, ver: 8 },
+            attacks: ["Casting: 6d+8", "Claw: 6d+5; Slash"],
+            immunities: ["Curse", "Darkness", "Disease", "Umbral"],
+            resistances: ["Battle Magic"],
+            vulnerabilities: ["Light"],
+            abilities: ["Divine Salvation", "Immortal"]
+        },
+        {
+            name: "Pneumon, Storm",
+            description: "Storm Pneumons serve the Sea Lord and live far beneath the Temple of Ver. Storm Pneumons come in many forms but are always distinguishable by their pale blue complexion and black eyes.",
+            size: "B",
+            pace: "8",
+            vit: 80,
+            mana: 60,
+            avoid: "6d+5",
+            aspects: { dex: 11, hel: 16, str: 16, act: 16, int: 6, ver: 6 },
+            attacks: ["Casting: 6d+6", "Slam: 6d+10; Bash"],
+            immunities: ["Curse", "Disease", "Lightning", "Thunder"],
+            abilities: ["Divine Salvation", "Immortal"]
+        },
+        {
+            name: "Pneumon, Wind",
+            description: "Wind Pneumons serve the Wind Goddess and live far beneath the Temple of Heims. Wind Pneumons come in many forms but are always distinguishable by their pale complexion and black eyes.",
+            size: "B",
+            pace: "8",
+            vit: 69,
+            mana: 49,
+            avoid: "6d+5",
+            aspects: { dex: 11, hel: 11, str: 16, act: 11, int: 8, ver: 8 },
+            attacks: ["Bite: 6d+7; Crush", "Casting: 6d+8"],
+            immunities: ["Curse", "Disease", "Frost"],
+            resistances: ["Lightning", "Thunder"],
+            abilities: ["Divine Salvation", "Immortal"]
+        },
+        {
+            name: "The Guardians of the Crystal Sphere",
+            description: "The Guardians of the Crystal Sphere live within the Moonveil Mountains, executing all who attempt to tamper with the Crystal Sphere. They are swift and merciless pnuemons.",
+            size: "C",
+            pace: "37 fly; 10 land",
+            vit: 80,
+            mana: 38,
+            avoid: "6d+25; cc4",
+            aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 4, ver: 4 },
+            attacks: ["Morningstar [Oldra]: 6d+16; Bash & Thrust, cc4", "Full Shield [Oldra]: 6d+13; Bash, cc3", "Dive: +12d"],
+            immunities: ["Curse", "Disease", "Summoning"],
+            resistances: ["Magic", "Physical"],
+            abilities: ["Divine Salvation", "Full Shield [Oldra]", "Heavy Suit [Oldra]"]
+        }
     ],
-    "Spirit": [
+    "Living Spirit": [
         { 
             name: "Doppelgänger", 
             description: "The doppelgänger is a living spirit which feeds upon the misery of its victim. When its host is asleep, the doppelgänger drains its Mana. The Mana gained can be stored in surplus by the doppelgänger indefinitely so long as it comes from a single victim. The spirit causes mischief at first, then grows in power, causing more misery the more capable it becomes. Eventually, it transcends.",
@@ -24340,6 +25254,70 @@ const compendiumRegistry = {
             attacks: ["Mischief: 5d", "Transfer Mana: 2d"], 
             immunities: ["Curse", "Disease"],
             abilities: ["Cause Mischief", "Transcend"] 
+        },
+        {
+            name: "Doppelgänger, Transcendent",
+            description: "A transcendent doppelgänger looks and sounds exactly like its victim; however, its mannerisms, memory, thoughts, and arcane signature—the way it is identified via divination—are its own until it has consumed its victim’s brain. An interesting anomaly is that due to that need, it possesses the ability to unhinge its jaw, much like a snake does. When it does so, it is capable of fitting its maw about its victim’s head and crushing its skull. This ability is retained even after it commandeers its victims life, and is a useful way to identify it.",
+            size: "B",
+            pace: "8",
+            vit: 50,
+            mana: 25,
+            avoid: "5d+2",
+            aspects: { dex: 5, hel: 10, str: 10, act: 5, int: 5, ver: 5 },
+            attacks: ["Bite: 6d+1; Crush", "Morningstar: 6d+7; Bash & Thrust", "Shield Bash [Kite]: 6d+5; Bash"],
+            abilities: []
+        },
+        { 
+            name: "Aether-Wraith", 
+            description: "A naturally-forming and sentient aetherial being devoid of personality. The aether-wraith desires to be and feeds on those who are.",
+            size: "A", 
+            pace: "14", 
+            vit: "—", 
+            mana: 30, 
+            avoid: "6d+4", 
+            aspects: { dex: 10, act: 10}, 
+            attacks: [], 
+            immunities: ["Curse", "Disease"],
+            abilities: ["Transcend", "Aetherial Tension"] 
+        },
+        {
+            name: "Aether-Wraith, Transcendent",
+            description: "A transcendent aether-wraith, finally free of its selflessness, now desires nothing more than to tear the flesh, blood, bone, and sinew from the living in hopes of escaping its incorporeality as well.",
+            size: "B", 
+            pace: "8", 
+            vit: "—", 
+            mana: 90, 
+            avoid: "6d+16", 
+            aspects: { dex: 22, act: 22, ver: 12}, 
+            attacks: ["Ravage Mind: 6d+6; Confuse"], 
+            immunities: ["Curse", "Disease"],
+            abilities: ["Ravage Mind"] 
+        },
+        { 
+            name: "Egregore", 
+            description: "An aetherial being born of social contagion, corruption, or mass hysteria. Many believe the story of the egregore is simply an admonishing tale against vice, but whenever a populace bends its collective mind to one thing long enough, an unintentional ritual of sorts occurs, creating an egregore, which, in order to preserve itself and sate its ever increasing hunger, perpetuates the social circumstances of its birth to the point of social collapse.",
+            size: "A", 
+            pace: "—", 
+            vit: "—", 
+            mana: 5, 
+            avoid: "2d", 
+            aspects: { dex: 1, act: 1, int: 1, ver: 1 }, 
+            attacks: [], 
+            immunities: ["Curse", "Disease"],
+            abilities: ["Transcend", "Enthral", "Aetherial Tension"] 
+        },
+        { 
+            name: "Egregore, Transcendent", 
+            description: "Eachtime an Egregore transcends, its Acuity, Verve, and Thrall Limit increase by one. Although it is still incapable of defending itself, if it suffers as much as a single point of damage, its thralls will defend it with their lives.",
+            size: "D", 
+            pace: "—", 
+            vit: "—", 
+            mana: 120, 
+            avoid: "2d", 
+            aspects: { dex: 1, act: 24, int: 1, ver: 24 }, 
+            attacks: [], 
+            immunities: ["Curse", "Disease"],
+            abilities: ["Transcend", "Enthral", "Aetherial Tension"] 
         }
     ],
     "Undead": [
@@ -24401,7 +25379,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Skeleton", 
-            description: "Skeletons are mostly necromantic in origin and, being the easiest undead to raise, are often sent en masse to neutralize a threat.",
+            description: "Skeletons are usually necromantic in origin and, being the easiest undead to raise, are often sent en masse to neutralize a threat. Some spirits, however refuse to move on even from their skeletal remains.",
             size: "B", 
             pace: "8", 
             vit: 10, 
@@ -24428,7 +25406,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Vampire", 
-            description: "Classic corporeal living dead creature of the night.",
+            description: "“I was afraid to raise my eyelids, but looked out and saw perfectly under the lashes. The girl went on her knees, and bent over me, simply gloating. There was a deliberate voluptuousness which was both thrilling and repulsive, and as she arched her neck she actually licked her lips like an animal, till I could see in the moonlight the moisture shining on the scarlet lips and on the red tongue as it lapped the white sharp teeth.”\n\nDracula by Bram Stoker",
             size: "B",
             pace: "12",
             vit: 24,
@@ -24466,7 +25444,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Zombie", 
-            description: "A zombie is one of the 4 corporeal undead. The zombie craves the flesh of the living and will mindlessly attack any and all they encounter with no sense of self preservation.",
+            description: "A zombie is one of the four corporeal undead. The zombie craves the flesh of the living and will mindlessly attack any and all they encounter with no sense of self preservation.",
             size: "B", 
             pace: "8", 
             vit: 16, 
@@ -25165,6 +26143,22 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
         `;
     });
 
+    // Build defenses HTML block for the Inspector view
+    let inspectorDefensesHtml = '';
+    const inspectorDefenseParts = [];
+    if (creature.immunities && creature.immunities.length > 0) inspectorDefenseParts.push(`<strong>Immunities:</strong> ${creature.immunities.join(", ")}`);
+    if (creature.resistances && creature.resistances.length > 0) inspectorDefenseParts.push(`<strong>Resistances:</strong> ${creature.resistances.join(", ")}`);
+    if (creature.vulnerabilities && creature.vulnerabilities.length > 0) inspectorDefenseParts.push(`<strong>Vulnerabilities:</strong> ${creature.vulnerabilities.join(", ")}`);
+    if (creature.weaknesses && creature.weaknesses.length > 0) inspectorDefenseParts.push(`<strong>Weaknesses:</strong> ${creature.weaknesses.join(", ")}`);
+
+    if (inspectorDefenseParts.length > 0) {
+        inspectorDefensesHtml = `
+            <div style="margin-top: 6px; font-size: 0.75rem; color: #4a3f35; border-top: 1px dotted #decdaf; padding-top: 4px;">
+                ${inspectorDefenseParts.join("<br>")}
+            </div>
+        `;
+    }
+
     container.innerHTML = `
         <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 12px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
             
@@ -25227,6 +26221,7 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
                 <div>
                     <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
                     ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                    ${inspectorDefensesHtml}
                 </div>
             </div>
 
@@ -25308,6 +26303,24 @@ window.updateInspectorInstanceNotes = function(cardIndex, instIndex, val) {
         card.instances[instIndex].notes = val;
     }
 };
+// Optional category descriptors mapping registry
+const compendiumCategoryDescriptions = {
+    "Aberration":"Aberrations are Aetherial beings with neither mind nor spirit woven into being by a caster.",
+    "Animal":"Animals both wild and domesticated all of whom are suceptible to the druidic manipulation of the Aether.",
+    "Anthropoid": "Bipedal races, beastfolk, fey, and sentient humanoids inhabiting the realms.",
+    "Giant": "Giants are 18-foot tall anthropoids of varying complexions, cultures, and dispositions. In general, giants are nomadic and keep out of the affairs of the other races, but when riled, giants are a ruthless foe.\n\n“Among the rest was one detestable monster, named Goëmagot, in stature twelve cubits, and of such prodigious strength that at one shake he pulled up an oak as if it had been a hazel wand.”\n\nHistoria Regum Britanniae by Geoffrey of Monmouth",
+    "Beast": "An indominable class of fauna often hunted for prestige, wealth, and survival. Few who take on such quests survive.",
+    "Construct":"A golem is a magical construct meant to do various tasks. A golem can be made from clay, stone, or iron. Orichalcum, mythral, gold, and silver golems are theoretically possible, however they are cost prohibitive. Since golems are made for specific purposes, each needs to be designed by the LM. A golem only has 3 Aspects: Dexterity, Strength, and Acuity. You must distribute among those 3 a number of Aspect Points equal to ⅑, ⅙, ⅓, or ½ the amount of Mana spent in the rite for size A, B, C, or D golems respectively. Having no Verve, golems cannot cast, they can, however, be charged. A golem charged with a spell will bear runes that contain and discharge the charged spells; runes have their own charges and do not deplete the Mana of the golem. Runes can be etched before and charged after a golem has been made, and so the Mana cost of these need not lessen the aspects of the golem.",
+    "Plant":"Across the Empire rages a great debate as to the palatability of certain plants: some argue the Coriandrum sativum is delicious, others argue it tastes like soap. These plants, however, are in complete agreements that people are yummy.",
+    "Dragon":"There are three types of dragons within the Crystal Sphere: High Dragons, Drakes, and Wyrms. High dragons (the heraldic colors) are civil creatures whereas lesser dragon (Drakes and Wyrms), though still intelligent, are bestial.\n\n“My armour is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!”\n\nThe Hobbit by J.R.R. Tolkien",
+    "Elemental":"Elementals are composed of spirit and body alone—they are mindless. The elementals came into being incidentally when the various elements were spoken into existence, and they are generally of a neutral disposition. It is suspected that elementals cannot truly die, and that when one is “slain” its spirit immediately takes possession of more matter of its kind, bypassing the transmigration process. Slaying an elemental, however, is tricky. Their vitality can only be damaged by Battle Magic, Arcane Dart or Vortex, Drain Vitality, or weapons with the Powered Blade enchantment. When an elemental is slain, there is left behind a granular essence which is prized for its fortifying effect on alchemy, enchantments, and spells and its mind altering effects when consumed. Elementals tend to avoid civilized portions of the world, because, although they can pass freely through the element of their composition naturally deposited, they are incapable of travelling through that which has been wrought.",
+    "Genie":"Genies are composed of mind and body, but have no spirit.",
+    "Lycanthrope":" Each of the six gods blessed a chosen tribe and their descendants to serve them in perpetuity. The Orcanthrope serve Ver; the Leonthropes, Aestas; the Kitsune, Autumnus; the Lupine, Hiems; the Camasotz, Night; and the Ursanthropes, Day. Incidentally, from these chosen tribes sprang the curse of lycanthropy.",
+    "Pneumon": "Pneumons, so named because they are merely “breath” or spirit with no body except that which they can conjure, were created by the lesser gods to be their servants. Since the passing of the Epoch of Creation, however, the gods have been, more or less, in a state of quiessence; their servants, not made to be idle, have therefore busied themselves with the dealings of the Crystal Sphere. When they are not assisting souls in the process of transmigration, pneumons are seeking ways to increase the number of souls and the amount of worship their masters receive. Whether by cutting deals, providing boons, plotting, scheming, or simply harvesting souls, they usually make poor use of their mortal playthings and have, over the years, made for themselves an abysmal reputation.",
+    "Living Spirit":"Living spirits are ill-understood incorporeal creatures that seem to originate from, or at least be attracted to, social disorder. They subsist on the minds of anthropoids and sometimes transcend their incorporeality.",
+    "Undead":""
+};
+
 function generateCompendiumTab() {
     const accordion = document.querySelector("#tab-compendium .compendium-accordion");
     if (!accordion) return;
@@ -25317,6 +26330,9 @@ function generateCompendiumTab() {
 
     Object.entries(registry).forEach(([categoryName, creatures]) => {
         let itemsHtml = "";
+
+        // Check for an optional category descriptor
+        const categoryDesc = compendiumCategoryDescriptions[categoryName] || "";
 
         if (!creatures || creatures.length === 0) {
             itemsHtml = `<li style="list-style: none; color: #7c6f64; font-style: italic;">No entries recorded in this category yet.</li>`;
@@ -25343,6 +26359,17 @@ function generateCompendiumTab() {
                     abilitiesStr = `<strong>Special Abilities:</strong> ${mappedAbilities.join(", ")}`;
                 }
 
+                let defensesStr = '';
+                const defenseParts = [];
+                if (c.immunities && c.immunities.length > 0) defenseParts.push(`<strong>Immunities:</strong> ${c.immunities.join(", ")}`);
+                if (c.resistances && c.resistances.length > 0) defenseParts.push(`<strong>Resistances:</strong> ${c.resistances.join(", ")}`);
+                if (c.vulnerabilities && c.vulnerabilities.length > 0) defenseParts.push(`<strong>Vulnerabilities:</strong> ${c.vulnerabilities.join(", ")}`);
+                if (c.weaknesses && c.weaknesses.length > 0) defenseParts.push(`<strong>Weaknesses:</strong> ${c.weaknesses.join(", ")}`);
+                
+                if (defenseParts.length > 0) {
+                    defensesStr = `<div style="font-size: 0.8rem; margin-top: 2px; color: #4a3f35;">${defenseParts.join(" | ")}</div>`;
+                }
+
                 itemsHtml += `
                     <li style="margin-bottom: 14px; font-size: 0.95rem; color: #2d3748; list-style-type: square;">
                         <div style="font-weight: bold; color: #7d3c1b; font-size: 1rem; margin-bottom: 2px;">${escapeHtml(c.name)} <span style="font-size: 0.75rem; color: #7c6f64; font-weight: normal;">(Size ${escapeHtml(c.size)}, Pace ${escapeHtml(c.pace)})</span></div>
@@ -25351,6 +26378,7 @@ function generateCompendiumTab() {
                         ${aspectStr ? `<div style="font-size: 0.8rem; color: #7c6f64; margin-bottom: 2px;"><strong>Aspects:</strong> ${aspectStr}</div>` : ''}
                         ${attacksStr ? `<div style="font-size: 0.82rem; color: #2c251e; margin-bottom: 2px;">${attacksStr}</div>` : ''}
                         ${abilitiesStr ? `<div style="font-size: 0.8rem;">${abilitiesStr}</div>` : ''}
+                        ${defensesStr}
                     </li>
                 `;
             });
@@ -25362,6 +26390,7 @@ function generateCompendiumTab() {
                     ${categoryName} ▾
                 </div>
                 <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
+                    ${categoryDesc ? `<div style="font-size: 0.9rem; color: #4a3f35; font-style: italic; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">${escapeHtml(categoryDesc)}</div>` : ''}
                     <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
                         ${itemsHtml}
                     </ul>
