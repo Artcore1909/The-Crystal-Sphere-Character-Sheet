@@ -3841,7 +3841,7 @@ const alternateSurfaceKeywords = ["head", "shaft", "blade", "grip", "butt", "pom
             "military": { "background": 1, "interlocution": 1, "defense": 1 }, 
             "politician": { "interlocution": 3 }, 
             "sage": { "background": 1},      
-            "servant": { "background": 1 },   
+            "servant": { "observation": 1, "interlocution": 1 },   
             "thief": { "stealth": 1, "interlocution": 1 }, 
             "tradesman": { "background": 1 }, 
             "troupe neophyte": { "interlocution": 2 },
@@ -10442,7 +10442,7 @@ function updateSkillsSummary() {
 /* ===== js/08-data-lists.js ===== */
     // Master list of background skills for the dropdown selector
     const availableBackgroundSkillsList = [
-        "Alertness", "Appraise", "Butcher & Grow Crops", "Common Weapons", "Craft",
+        "Level Headed", "Appraise", "Butcher & Grow Crops", "Common Weapons", "Craft",
         "Drive Cart", "Fish", "Handle Domestic Animal", "Handle Wild Animal", "Hunt & Forage",
         "Research", "Sail Boat", "Sleuthing", "Street Smarts", "Survival", "Tracking",
         "Trade", "Use & Make Rope", "Vim, Vigor, & Vitality"
@@ -10847,7 +10847,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "background": {
         description: "Vestigle skills, crafts, and trades indicative of your life before adventuring.",
         levels:    [
-        "Alertness", "Appraise", "Butcher & Grow Crops", "Common Weapons", "Craft",
+        "Level Headed", "Appraise", "Butcher & Grow Crops", "Common Weapons", "Craft",
         "Drive Cart", "Fish", "Handle Domestic Animal", "Handle Wild Animal", "Hunt & Forage",
         "Research", "Sail Boat", "Sleuthing", "Street Smarts", "Survival", "Tracking",
         "Trade", "Use & Make Rope", "Vim, Vigor, & Vitality"
@@ -10869,7 +10869,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "observation": {
         description: "Skills relating to your sharpened mental faculties and inescapable vigilance.",
         levels:    [
-        "Listen, Feel, Search, Spot, Smell, & Taste", "Empathy & Discern Lie", "Quickness of Mind", "Direction Sense", "Disbelieve Illusion", "Mana Increase", "Level Headed"
+        "Listen, Feel, Search, Spot, Smell, & Taste", "Empathy & Discern Lie", "Quickness of Mind", "Direction Sense", "Disbelieve Illusion", "Mana Increase", "Alertness"
     ]
 },
     "stealth": {
@@ -13055,26 +13055,20 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
     const obsXp = parseInt(document.getElementById("sk-xp-observation")?.value) || 0;
     const obsLevel = Math.floor(obsXp / 6);
     const qomCheckbox = document.getElementById("pnp-chk-qom");
+
+// Add +1 to obsLevel if the character's upbringing is Servant
+    if (charUpbringing === "Servant") {
+        obsLevel += 1;
+    }
+
     if (qomCheckbox) {
         qomCheckbox.checked = (obsLevel >= 3);
     }
 
-    // Alertness is acquired via Backgrounds or Manual Selection
-    const activeBackgrounds = Object.values(characterChoicesState.backgroundSelections || {});
-    const activeUpbringing = document.getElementById("char-upbringing")?.value.toLowerCase() || "";
-    
-    // Checks memory state instead of the DOM (auto-catches the Servant background too)
-    let hasAlertness = activeBackgrounds.includes("Alertness") || activeUpbringing === "servant";
-
-    // Fallback check in case Alertness is ever manually added to the Extra Training HTML grid
-    const alertPBox = document.querySelector('input[data-skill="alertness"][data-type="p"]');
-    if (alertPBox && alertPBox.checked) {
-        hasAlertness = true;
-    }
-
+    // Alertness is unlocked at Observation Level 7
     const alertCheckbox = document.getElementById("pnp-chk-alert");
     if (alertCheckbox) {
-        alertCheckbox.checked = hasAlertness;
+        alertCheckbox.checked = (obsLevel >= 7);
     }
 
 // ==========================================
@@ -15959,7 +15953,6 @@ function renderDynamicActiveTreesFeed() {
             if (uChoice === "merchant") mandatedFreeSkillsList.push("Appraise");
             if (uChoice === "military") mandatedFreeSkillsList.push("Common Weapons");
             if (uChoice === "sage") mandatedFreeSkillsList.push("Research");
-            if (uChoice === "servant") mandatedFreeSkillsList.push("Alertness");
             if (uChoice === "tradesman") mandatedFreeSkillsList.push("Trade");
 
             // Build a temporary set of automatic unlocks to verify unique choices clearly
@@ -16041,6 +16034,7 @@ else if (tree.key === "interlocution") {
     if (uChoice === "merchant") mandatedInterlocutionFreeList.push("Haggle");
     if (uChoice === "military") mandatedInterlocutionFreeList.push("Coerce & Intimidate");
     if (uChoice === "politician") mandatedInterlocutionFreeList.push("Persuade", "Orate", "Lie");
+    if (uChoice === "servant") mandatedInterlocutionFreeList.push("Etiquette");
     if (uChoice === "thief") mandatedInterlocutionFreeList.push("Lie");
     if (uChoice === "troupe neophyte") mandatedInterlocutionFreeList.push("Improvise", "Orate");
 
