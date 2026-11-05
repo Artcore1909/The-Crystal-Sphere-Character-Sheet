@@ -2650,12 +2650,13 @@ details[open] #skills-collapsed-summary {
             <!-- Charge Slot with Mount Mini-Sheet -->
             <div class="pnp-weapon-slot-row pnp-charge-slot">
                 
-                <div class="pnp-weapon-meta" style="width: 100%;">
-                    <span class="pnp-col-header pnp-charge-header">
-                        <span>CHARGE BONUS</span>
-                        <button class="pnp-edit-btn" onclick="toggleMountBuilder()">Edit</button>
-                    </span>
-                </div>
+<span class="pnp-col-header pnp-charge-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <span>CHARGE BONUS</span>
+    <div style="display: flex; gap: 8px;">
+        <button class="pnp-edit-btn" onclick="toggleMountCatalogModal()">Current Mount</button>
+        <button class="pnp-edit-btn" onclick="toggleMountBuilder()">Custom</button>
+    </div>
+</span>
                 
                 <div class="builder-panel" id="builder-mount" style="display: none; width: 100%; box-sizing: border-box;"></div>
 
@@ -26649,6 +26650,121 @@ function restoreCalculatorStateFromMemory() {
         }
     });
 }
+
+window.toggleMountCatalogModal = function() {
+    let modal = document.getElementById("mount-catalog-modal");
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "mount-catalog-modal";
+        modal.className = "modal-overlay";
+        modal.style.display = "flex";
+        
+        let optionsHtml = `<option value="None">-- Select Official Mount --</option>`;
+        const sourceCats = ["Animal", "Beast"];
+        
+const knownMounts = ["Horse", "Camel", "Dog, Riding", "Ram, Riding", "Pony, Riding", "Pegasus", "Urox", "Quadricorn", "Wyvern"];
+
+        sourceCats.forEach(cat => {
+            if (compendiumRegistry[cat]) {
+                // Filter the list first so it ONLY includes known mounts
+                const mountList = compendiumRegistry[cat].filter(c => knownMounts.includes(c.name));
+                
+                if (mountList.length > 0) {
+                    optionsHtml += `<optgroup label="${cat}">`;
+                    mountList.forEach(c => {
+                        optionsHtml += `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`;
+                    });
+                    optionsHtml += `</optgroup>`;
+                }
+            }
+        });
+
+        modal.innerHTML = `
+            <div class="char-modal">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: var(--primary-red);">Select Official Mount</h3>
+                    <button onclick="document.getElementById('mount-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                </div>
+                <div class="builder-group" style="margin-bottom: 15px;">
+                    <label>Choose Riding Beast</label>
+                    <select id="catalog-mount-select" style="width: 100%; padding: 2px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                        ${optionsHtml}
+                    </select>
+                </div>
+                <div class="builder-actions" style="display: flex; justify-content: space-between;">
+                    <button type="button" class="builder-btn" onclick="deleteMount(); document.getElementById('mount-catalog-modal').style.display='none';" style="background:#7a1f1f; color:#fff;">Delete</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="builder-btn builder-btn-cancel" onclick="document.getElementById('mount-catalog-modal').style.display='none'">Cancel</button>
+                        <button class="builder-btn builder-btn-save" onclick="applySelectedCatalogMount()">Select</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    } else {
+        modal.style.display = "flex";
+        
+        // Sync dropdown to currently active mount if configured
+        const sel = document.getElementById("catalog-mount-select");
+        if (sel && characterChoicesState.mount && characterChoicesState.mount.isConfigured) {
+            sel.value = characterChoicesState.mount.name;
+        }
+    }
+};
+
+window.applySelectedCatalogMount = function() {
+    const sel = document.getElementById("catalog-mount-select");
+    if (!sel || sel.value === "None") return;
+    
+    const mountName = sel.value;
+    let foundCreature = null;
+    
+    Object.values(compendiumRegistry).forEach(catList => {
+        if (Array.isArray(catList)) {
+            const match = catList.find(c => c.name === mountName);
+            if (match) foundCreature = match;
+        }
+    });
+
+    if (!foundCreature) return;
+
+    // Parse pace number safely from strings like "22" or "30 land; 30 fly"
+    const paceMatch = (foundCreature.pace || "30").match(/\d+/);
+    const parsedPace = paceMatch ? parseInt(paceMatch[0], 10) : 30;
+
+    // Map Compendium creature data into the mount state structure
+    characterChoicesState.mount = {
+        isConfigured: true,
+        name: foundCreature.name,
+        size: foundCreature.size || "2B",
+        pace: parsedPace,
+        dex: foundCreature.aspects?.dex || 4,
+        hel: foundCreature.aspects?.hel || 10,
+        str: foundCreature.aspects?.str || 10,
+        act: foundCreature.aspects?.act || 4,
+        int: foundCreature.aspects?.int || 2,
+        ver: foundCreature.aspects?.ver || 2,
+        hap: foundCreature.aspects?.hap || 3,
+        vitalityMax: parseInt(foundCreature.vit) || 50,
+        vitalityLost: 0,
+        manaMax: parseInt(foundCreature.mana) || 16,
+        manaLost: 0,
+        luckMax: 3,
+        luckSpent: 0,
+        initiative: "6d+2",
+        avoidance: foundCreature.avoid || "4d",
+        run: "6d+4",
+        attack1Name: foundCreature.attacks?.[0] ? foundCreature.attacks[0].split(":")[0] : "Attack 1",
+        attack1Roll: foundCreature.attacks?.[0] ? foundCreature.attacks[0].split(":").slice(1).join(":").trim() : "6d+4; Bash",
+        attack2Name: foundCreature.attacks?.[1] ? foundCreature.attacks[1].split(":")[0] : "",
+        attack2Roll: foundCreature.attacks?.[1] ? foundCreature.attacks[1].split(":").slice(1).join(":").trim() : "",
+        attack3Name: foundCreature.attacks?.[2] ? foundCreature.attacks[2].split(":")[0] : "",
+        attack3Roll: foundCreature.attacks?.[2] ? foundCreature.attacks[2].split(":").slice(1).join(":").trim() : ""
+    };
+
+    document.getElementById("mount-catalog-modal").style.display = "none";
+    if (typeof calculateSheet === "function") calculateSheet();
+};
 
 </script>
 <!-- Character Manager Modal -->
