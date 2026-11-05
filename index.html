@@ -6698,77 +6698,6 @@ const itemRegistry = {
         rarity: 4,
         description: "When commanded, this pendant will absorb all damage of a particular kind for six Mana per Pulse. When commanded a second time, the pendant will release the attack in whichever direction the bearer aims it."
     },
-    // ── WAR, DRAY, & RIDING BEASTS ───────────────────────────────────────
-    "camel_war": {
-        name: "Camel, War/Dray",
-        type: "beast",
-        ethnos: "Nuss-janni",
-        cost: 1200,
-        description: "A robust war and dray beast suited for desert environments."
-    },
-    "camel_riding": {
-        name: "Camel, Riding",
-        type: "beast",
-        ethnos: "Nuss-janni",
-        cost: 600,
-        description: "A reliable riding beast suited for sand travel."
-    },
-    "dog_war": {
-        name: "Dog, War",
-        type: "beast",
-        ethnos: "Imperial; Haubid",
-        cost: 1200,
-        description: "A fierce combat dog bred for battlefield action."
-    },
-    "dog_riding": {
-        name: "Dog, Riding",
-        type: "beast",
-        ethnos: "Haubid",
-        cost: 600,
-        description: "A large hound bred specifically for Haubid riders."
-    },
-    "ram_war": {
-        name: "Ram, War/Dray",
-        type: "beast",
-        ethnos: "Dwarf",
-        cost: 1200,
-        description: "Stocky and powerful ram armored for battlefield transport."
-    },
-    "ram_riding": {
-        name: "Ram, Riding",
-        type: "beast",
-        ethnos: "Dwarf",
-        cost: 600,
-        description: "A reliable mount favored by Dwarven travelers."
-    },
-    "horse_war": {
-        name: "Horse, War/Dray",
-        type: "beast",
-        ethnos: "Imperial; Gurz",
-        cost: 1800,
-        description: "The classic heavily armored warhorse designed for charges."
-    },
-    "horse_riding": {
-        name: "Horse, Riding",
-        type: "beast",
-        ethnos: "Imperial; Gurz",
-        cost: 600,
-        description: "A swift horse suited for travel and general riding."
-    },
-    "pony_war": {
-        name: "Pony, War",
-        type: "beast",
-        ethnos: "Dwarf; Haubid",
-        cost: 1200,
-        description: "Fierce pony favored for cavalry tactics."
-    },
-    "pony_riding": {
-        name: "Pony, Riding",
-        type: "beast",
-        ethnos: "Dwarf; Haubid",
-        cost: 600,
-        description: "A gentle and compact riding pony."
-    },
 
     // ── PETS ─────────────────────────────────────────────────────────────
     "canary": {
@@ -6905,6 +6834,92 @@ const itemRegistry = {
         description: "A large boat meant for carrying cargo and passengers."
     }
 };
+
+// Helper to automatically pull lore text from compendiumRegistry
+function getCompendiumLore(creatureName) {
+    const registry = window.compendiumRegistry || (typeof compendiumRegistry !== "undefined" ? compendiumRegistry : {});
+    for (const list of Object.values(registry)) {
+        if (Array.isArray(list)) {
+            const match = list.find(c => c.name.toLowerCase() === creatureName.toLowerCase());
+            if (match && match.description) return match.description;
+        }
+    }
+    return "A formidable beast of the Crystal Sphere.";
+}
+
+// ── DYNAMIC MOUNT REGISTRY ──────────────────────────────────────────
+const compendiumMountConfigs = {
+    // Tier 1: Livestock & Basic Travel (£50 – £600)
+    "Sheep": { cost: 50 },
+    "Dog": { cost: 150 },
+    "Keck": { cost: 300 },
+    "Pony": { cost: 350 },
+    "Boar": { cost: 400 },
+    "Hyena": { cost: 450 },
+    "Wolf": { cost: 500 },
+    "Horse": { cost: 600 },
+    "Camel": { cost: 600 },
+    
+    // Tier 2: Heavy Working & Apex Predators (£1,000 – £5,000)
+    "Urox": { cost: 1000 },
+    "Goat, War": { cost: 1200 },
+    "Lion, Mountain": { cost: 1400 },
+    "Crocodile": { cost: 1500 },
+    "Jaguar": { cost: 1800 },
+    "Snow Leopard": { cost: 2000 },
+    "Lion": { cost: 2200 },
+    "Keck [Terror Bird]": { cost: 2500 },
+    "Hyena, Six-paw": { cost: 2500 },
+    "Wolf, Frost": { cost: 2800 },
+    "Bear": { cost: 3000 },
+    "Tiger": { cost: 3200 },
+    "Hellhound": { cost: 3500 },
+    "Spider, Giant": { cost: 4000 },
+    "Tarantula, Giant": { cost: 4500 },
+    "Lion, Fire": { cost: 5000 },
+    "Granas": { cost: 5000 },
+    "Badgerknight": { cost: 5500 },
+    
+    // Tier 3: Exotic Heavy Hitters & Flight (£6,000 – £20,000)
+    "Hawk, Giant": { cost: 6000 },
+    "Shadowcat": { cost: 6000 },
+    "Raven, Giant": { cost: 7000 },
+    "Eagle, Giant": { cost: 8000 },
+    "Quadricorn": { cost: 8000 },
+    "Manticore": { cost: 14000 },
+    "Pegasus": { cost: 15000 },
+    "Wyvern": { cost: 16000 },
+    
+    // Tier 4: Draconic Siege Assets (£35,000 – £50,000)
+    "Drake, Black": { cost: 35000 },
+    "Drake, Blue": { cost: 35000 },
+    "Drake, Green": { cost: 35000 },
+    "Drake, Yellow": { cost: 35000 },
+    "Drake, Red": { cost: 40000 },
+    "Drake, White": { cost: 40000 },
+    
+    // Tier 5: Absolute Apex Titans (£60,000 – £85,000)
+    "Wyrm, Cloud-": { cost: 65000 },
+    "Unicorn": { cost: 70000 },
+    "Wyrm, Glow-": { cost: 70000 },
+    "Wyrm [Sarpa]": { cost: 72000 },
+    "Wyrm, Fire-": { cost: 80000 },
+    "Wyrm, Frost-": { cost: 80000 },
+    "Roc": { cost: 85000 }
+};
+
+// Automatically populate itemRegistry with dynamic compendium references
+Object.entries(compendiumMountConfigs).forEach(([name, cfg]) => {
+    const safeKey = "beast_" + name.toLowerCase().replace(/[^a-z0-9]/g, "_");
+    itemRegistry[safeKey] = {
+        name: name,
+        type: "beast",
+        cost: cfg.cost,
+        get description() {
+            return getCompendiumLore(name);
+        }
+    };
+});
 
     const specialQualitiesRegistry = {
         "heavy_1": { name: "Heavy I", description: "Requires at least Strength 1 to be used/worn without disadvantage.", allowedTags: ["any"] },
@@ -18433,7 +18448,7 @@ function generateBazaarTab() {
         "Poisons": [],
         "Potions": [],
         "Gear": [],
-        "War, Dray, & Riding Beasts": [],
+        "Mounts": [],
         "Pets": [],
         "Slaves": [],
         "Vehicles": []
@@ -18483,7 +18498,7 @@ function generateBazaarTab() {
             } else if (item.type === "gear") {
                 matchedCats.push("Gear");
             } else if (item.type === "beast") {
-                matchedCats.push("War, Dray, & Riding Beasts");
+                matchedCats.push("Mounts");
             } else if (item.type === "pet") {
                 matchedCats.push("Pets");
             } else if (item.type === "slave") {
@@ -23401,7 +23416,7 @@ const compendiumRegistry = {
             abilities: [] 
         },
         { 
-            name: "Keck, Terror Bird", 
+            name: "Keck [Terror Bird]", 
             description: "Terror birds are the largest breed of keck which roam wild the hill country north of the Great Slough. They stand twice the size of a full-grown man and their bite can crush plate armor. Though they often hunt alone, they have been known to form packs of 3–6 to take down more formidable foes.",
             size: "C", 
             pace: "26", 
@@ -23449,6 +23464,17 @@ const compendiumRegistry = {
             aspects: { dex: 7, hel: 7, str: 7, act: 7, int: 2, ver: 2 }, 
             attacks: ["Bite: 6d+1; Crush", "Claw: 6d+1; Crush, Slash, or Bash", "Rend: 6d+1; Slash"], 
             abilities: ["Rend"] 
+        },
+        { 
+            name: "Pony", 
+            description: "Smaller and hardier than their full-sized kin, ponies are commonly used as draft and riding animals in rugged terrain where larger mounts struggle.",
+            size: "2A", 
+            pace: "26", 
+            vit: 38, 
+            mana: 16, 
+            avoid: "5d", 
+            aspects: { dex: 5, hel: 8, str: 7, act: 4, int: 2, ver: 2 }, 
+            attacks: ["Bite: 6d+1; Crush", "Kick: 6d+1; Bash", "Trample: 6d; Bash & Crush"]
         },
         { 
             name: "Pegasus", 
@@ -25714,17 +25740,17 @@ const encounterChartsRegistry = {
         major: ["Dragon, Azure", "Drake, Blue", "Manticore", "Nagaraja", "Roc", "Thura", "Undine", "Wyrm, Glow-", "Wyvern"]
     },
     "Coast of the Frosinlands": {
-        minor: ["Boar", "Crab, Lightning", "Horse [Belgian Draft]", "Rat, Giant", "Sheep", "Urox"],
+        minor: ["Boar", "Crab, Lightning", "Horse [Belgian Draft]", "Pony", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Fishfolk", "Jorōgumo", "Leonthrope", "Lupine", "Orc", "Polyps", "Snow Leopard", "Weftlings [Arctic Wolf Spider]", "Werewolf", "Wolf [Grey]", "Wolf, Frost"],
         major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
     },
     "Cordillera": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
-        moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Bobcat]", "Gnole", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Recluse]", "Werebat", "Werewolf", "Wolf"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Bobcat]", "Gnole", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Recluse]", "Werebat", "Werewolf", "Wolf"],
         major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar Between the mountains and the river": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Granas", "Hawk, Fire", "Horse [Mustang]", "Kobold", "Rat, Giant", "Sheep", "Snake, Constrictor [Boa]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Granas", "Hawk, Fire", "Horse [Mustang]", "Pony", "Kobold", "Rat, Giant", "Sheep", "Snake, Constrictor [Boa]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Cougar]", "Goblin", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Orc", "Raven, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Wererat", "Werewolf", "Wolf"],
         major: ["Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
@@ -25734,12 +25760,12 @@ const encounterChartsRegistry = {
         major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-", "Wyvern"]
     },
     "Daar Mountains": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Eagle, Screeching", "Hawk, Fire", "Horse [Altai Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Bullsnake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Eagle, Screeching", "Hawk, Fire", "Horse [Altai Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Bullsnake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Faeries", "Felivir [Cougar]", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Werehyena", "Werewolf", "Wolf"],
         major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar River & its riparian forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]"],
         moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [American]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Hellhound", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc"],
         major: ["Badgerknight", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Hydra", "Nagaraja", "Quadricorn", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
@@ -25764,12 +25790,12 @@ const encounterChartsRegistry = {
         major: ["Banshee", "Wraith"]
     },
     "Euskalian Garths": {
-        minor: ["Dog [Husky]", "Hawk, Fire", "Horse [Shetland Pony]", "Rat, Giant", "Sheep", "Urox"],
+        minor: ["Dog [Husky]", "Hawk, Fire", "Pony [Shetland]", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Wolf [Grey]", "Wolf, Frost"],
         major: []
     },
     "Farmlands": {
-        minor: ["Blood Hornet", "Boar", "Hawk, Fire", "Horse", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Blood Hornet", "Boar", "Hawk, Fire", "Horse", "Pony", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Werewolf", "Wolf"],
         major: ["Badgerknight"]
     },
@@ -25789,18 +25815,18 @@ const encounterChartsRegistry = {
         major: ["Badgerknight [Roaming]", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
     },
     "Grasslands": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Quarter Horse]", "Kobold", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Boa]", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Boa]", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Felivir [Lion]", "Goblin", "Jorōgumo", "Leonthrope", "Lion", "Lion, Fire", "Naga [Copperhead]", "Scorpionfolk [Thicktail]", "Spider, Giant", "Ursanthrope", "Weftlings [Lynx Spider]", "Werebat", "Wererat", "Werewolf", "Wolf [Maned Wolf]"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Quadricorn", "Wight", "Wyrm, Cloud-", "Wyvern"]
     },
     "Great Forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Unicorn", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Pony [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Unicorn", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Goblin", "Jorōgumo", "Naga [Asp]", "Scorpionfolk [Yellow-tailed]", "Shadowcat", "Spider, Giant", "Weftlings [Black Tunnelweb Spider]", "Wendigo", "Werebat", "Werewolf", "Wolf [Grey]"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wyrm, Cloud-"]
     },
     "Great Slough and its swamp": {
         minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck, Terror Bird", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
+        moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck [Terror Bird]", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
         major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Hidden Vale": {
@@ -25809,27 +25835,27 @@ const encounterChartsRegistry = {
         major: ["Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
     },
     "Hill Country": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
-        moderate: ["Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Eagle, Giant", "Felivir [Cougar]", "Gnole", "Goblin", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Lion, Mountain", "Naga [Diamondback]", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Tarantula]", "Werebat", "Werewolf", "Wolf"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
+        moderate: ["Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Eagle, Giant", "Felivir [Cougar]", "Gnole", "Goblin", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Naga [Diamondback]", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Tarantula]", "Werebat", "Werewolf", "Wolf"],
         major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Imperial coast": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
     },
     "Imperial city/town": {
-        minor: ["Dog", "Horse", "Rat, Giant"],
+        minor: ["Dog", "Horse", "Pony", "Rat, Giant"],
         moderate: ["Canivir", "Dwarf", "Elf", "Felivir", "Half-elf", "Half-orc", "Hanyo", "Haubid", "Human", "Nuss-janni", "Vulpivir"],
         major: []
     },
     "Imperial rolling plains": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Shire Horse]", "Keck", "Keck, Bloodbeak", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [King Snake]", "Snake, Venomous [Coral Snake]", "Urox", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck, Terror Bird", "Leonthrope", "Naga [Coral Snake]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Shire Horse]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [King Snake]", "Snake, Venomous [Coral Snake]", "Urox", "Wasps, Giant", "Weeping Willow"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Naga [Coral Snake]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
         major: ["Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wight", "Wyrm, Cloud-"]
     },
     "Isle of Twilight’s Harbor": {
-        minor: ["Horse", "Phoenix", "Boar", "Raven, Wise", "Crab, Lightning"],
+        minor: ["Horse", "Pony", "Phoenix", "Boar", "Raven, Wise", "Crab, Lightning"],
         moderate: ["Elf", "Felivir", "Half-elf", "Vulpivir", "Bear"],
         major: ["Undine"]
     },
@@ -25839,12 +25865,12 @@ const encounterChartsRegistry = {
         major: ["Badgerknight", "Basilisk", "Dragon, Azure", "Drake, Blue", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
     },
     "Kassani Delta": {
-        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Pony", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Crocodile [Siamese]", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
         major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Kassani River & its riparian forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [Siamese]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Orb Weaver]", "Wererat", "Werewolf", "Wolf"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Glow-"]
     },
@@ -26662,7 +26688,7 @@ window.toggleMountCatalogModal = function() {
         let optionsHtml = `<option value="None">-- Select Official Mount --</option>`;
         const sourceCats = ["Animal", "Beast"];
         
-const knownMounts = ["Horse", "Camel", "Dog, Riding", "Ram, Riding", "Pony, Riding", "Pegasus", "Urox", "Quadricorn", "Wyvern"];
+const knownMounts = ["Bear", "Bear, Sun", "Boar", "Camel", "Crocodile", "Dog", "Eagle, Giant", "Goat, War", "Granas", "Gryphon", "Hawk, Giant", "Hellhound", "Horse", "Hyena", "Hyena, Six-paw", "Jaguar", "Keck", "Keck [Terror Bird]", "Lion", "Lion, Fire", "Lion, Mountain", "Pony", "Pegasus", "Raven, Giant", "Shadowcat", "Sheep", "Snow Leopard", "Spider, Giant", "Tarantula, Giant", "Tiger", "Unicorn", "Urox", "Wolf", "Wolf, Frost", "Badgerknight", "Drake, Black", "Drake, Blue", "Drake, Green", "Drake, Red", "Drake, White", "Drake, Yellow", "Manticore", "Quadricorn", "Roc", "Wyrm, Cloud", "Wyrm, Fire", "Wyrm, Frost", "Wyrm, Glow", "Wyrm [Sarpa]", "Wyvern"];
 
         sourceCats.forEach(cat => {
             if (compendiumRegistry[cat]) {
