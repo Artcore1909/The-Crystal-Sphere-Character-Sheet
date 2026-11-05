@@ -24242,6 +24242,18 @@ const compendiumRegistry = {
     ],
     "Giant": [
         {
+            name: "Cyclops",
+            description: "Cyclops are the single-eyed giants of the cliffward edge of the Isle of Ver. Isolated and mistrusting of others, Cyclops tend to kill first, and ask questions (about how best to cook you) later.",
+            size: "D",
+            pace: "8",
+            vit: 90,
+            mana: 18,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 18, str: 18, act: 2, int: 3, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Cudgel [Giant]: 6d+15; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            abilities: []
+        },
+        {
             name: "Giant, Fire",
             description: "Fire Giants live throughout the Desert of the Jann and along the southern arc of the Moonveil mountains. They have a ruddy complexion, green eyes, and fiery red hair.",
             size: "D",
@@ -25479,7 +25491,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Wraith", 
-            description: "A wraith is the vengeful spirit of an anthropoid, and it is one of the 3 incorporeal undead. There are many reasons a wraith may have come to be, but wraiths are always aggressive.",
+            description: "A wraith is the vengeful spirit of an anthropoid, and it is one of the three incorporeal undead. There are many reasons a wraith may have come to be, but wraiths are always aggressive.",
             size: "B", 
             pace: "8 fly", 
             vit: "—", 
@@ -25766,7 +25778,7 @@ const encounterChartsRegistry = {
     "Dark Mandate": {
         minor: ["Kobold"],
         moderate: ["Goblin", "Hobgoblin"],
-        major: ["Ogre", "Oldra", "Wyvern"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Ogre", "Oldra", "Wyvern"]
     },
     "Depths of the Sculpted Darkness": {
         minor: ["Beetle, Fire", "Serpent Vine", "Zombie, Kindorei"],
@@ -25786,12 +25798,12 @@ const encounterChartsRegistry = {
     "Euskalian Garths": {
         minor: ["Dog [Husky]", "Hawk, Fire", "Pony [Shetland]", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Wolf [Grey]", "Wolf, Frost"],
-        major: []
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent"]
     },
     "Farmlands": {
         minor: ["Blood Hornet", "Boar", "Hawk, Fire", "Horse", "Pony", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Werewolf", "Wolf"],
-        major: ["Badgerknight"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight"]
     },
     "Fey Hegemony": {
         minor: ["Brownies", "Dryad", "Naiad", "Pegasus", "Pixie", "Raven, Wise", "Unicorn"],
@@ -25826,7 +25838,7 @@ const encounterChartsRegistry = {
     "Hidden Vale": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Dog [Shiba Inu]", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Shiba Inu]", "Eagle, Giant", "Hawk, Giant", "Hellhound", "Hobgoblin", "Jorōgumo", "Scorpionfolk [Southern Devil]", "Weftlings [Jorō]", "Wolf", "Hobgoblin [Docile]"],
-        major: ["Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
     },
     "Hill Country": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
@@ -25836,32 +25848,32 @@ const encounterChartsRegistry = {
     "Imperial coast": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
-        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
     },
     "Imperial city/town": {
         minor: ["Dog", "Horse", "Pony", "Rat, Giant"],
         moderate: ["Canivir", "Dwarf", "Elf", "Felivir", "Half-elf", "Half-orc", "Hanyo", "Haubid", "Human", "Nuss-janni", "Vulpivir"],
-        major: []
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", ]
     },
     "Imperial rolling plains": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Shire Horse]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [King Snake]", "Snake, Venomous [Coral Snake]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Naga [Coral Snake]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wight", "Wyrm, Cloud-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wight", "Wyrm, Cloud-"]
     },
     "Isle of Twilight’s Harbor": {
         minor: ["Horse", "Pony", "Phoenix", "Boar", "Raven, Wise", "Crab, Lightning"],
         moderate: ["Elf", "Felivir", "Half-elf", "Vulpivir", "Bear"],
-        major: ["Undine"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Undine"]
     },
     "Isle of Ver": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Kobold", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Kodiac]", "Canivir [Dhole]", "Eagle, Giant", "Felivir [Iberian Lynx]", "Goblin", "Harpy", "Hawk, Giant", "Jorōgumo", "Leonthrope", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Orcanthrope", "Raven, Giant", "Weftlings [Mediterranean Recluse]", "Werebat"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Azure", "Drake, Blue", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Cyclops", "Dragon, Azure", "Drake, Blue", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
     },
     "Kassani Delta": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Pony", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Crocodile [Siamese]", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Kassani River & its riparian forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Wasps, Giant", "Weeping Willow"],
@@ -25876,7 +25888,7 @@ const encounterChartsRegistry = {
     "Medina": {
         minor: ["Dog [Saluki]", "Hawk, Fire"],
         moderate: ["Nuss-janni"],
-        major: ["Jann"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Jann"]
     },
     "Moon Veil Mountains, East": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Unicorn", "Wasps, Giant"],
@@ -25901,7 +25913,7 @@ const encounterChartsRegistry = {
     "Oobar": {
         minor: ["Dog [Painted]", "Hawk, Fire", "Wasps, Giant"],
         moderate: ["Antlion", "Hellhound", "Wolf [Arabian]"],
-        major: ["Badgerknight", "Basilisk", "Drake, Yellow", "Jann", "Undine", "Wyrm, Glow-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Drake, Yellow", "Jann", "Undine", "Wyrm, Glow-"]
     },
     "Orkipelago": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [King Cobra]", "Wasps, Giant"],
@@ -25921,7 +25933,7 @@ const encounterChartsRegistry = {
     "Valley of the Jann": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Dog [Painted]", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
         moderate: ["Crocodile [Nile]", "Hellhound", "Werehyena", "Wolf [Arabian]"],
-        major: ["Drake, Yellow", "Jann", "Wyrm, Fire-", "Wyrm, Glow-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Drake, Yellow", "Jann", "Wyrm, Fire-", "Wyrm, Glow-"]
     }
 };
 
