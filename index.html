@@ -14762,6 +14762,31 @@ if (!hasPidgins) {
         badgeDiv.innerHTML = hapBadges;
     }
 
+// Health Save Modifiers (Fortitudinous Skill Check)
+let helBadges = "";
+// Explicitly check input field for Zweihander level
+const zweiInput = document.getElementById("sk-xp-mastery-zweih-nder") || document.getElementById("sk-xp-mastery-zweihänder");
+const zweiPts = zweiInput ? (parseInt(zweiInput.value) || 0) : 0;
+const zweihanderLvl = Math.floor(zweiPts / 12); // Masteries cost 12 Exp per level
+
+if (zweihanderLvl >= 3) {
+    helBadges += `<span class="locus-ench-tag" data-tooltip="fortitudinous" style="font-size:0.6rem; padding:1px 3px; margin-top:4px;">Fortitudinous</span>`;
+}
+
+const helCard = document.getElementById("pnp-oct-hel")?.parentElement;
+if (helCard) {
+    let badgeDiv = helCard.querySelector(".locus-badge-container");
+    if (!badgeDiv) {
+        badgeDiv = document.createElement("div");
+        badgeDiv.className = "locus-badge-container";
+        badgeDiv.style.display = "flex";
+        badgeDiv.style.justifyContent = "center";
+        badgeDiv.style.marginTop = "4px";
+        helCard.appendChild(badgeDiv);
+    }
+    badgeDiv.innerHTML = helBadges;
+}
+
     // Update active resource card statuses
     if (typeof window.updateResourceStatusDisplays === "function") {
         window.updateResourceStatusDisplays(finalHel, finalAct);
@@ -16147,8 +16172,9 @@ else if (tree.key === "divination") {
       // 🎯 VISUAL STYLING: STEALTH BACKGROUND FREE MILESTONE UNIFORMITY
       // =========================================================================
 else if (tree.key === "stealth") {
-    // 1. Pull the absolute array of skills from your master text registry table
-    const stealthSkillsPool = skillAbilitiesRegistry["stealth"] || [];
+    // 1. Pull the absolute array of skills safely
+    const stealthEntry = skillAbilitiesRegistry["stealth"];
+    const stealthSkillsPool = Array.isArray(stealthEntry) ? stealthEntry : (stealthEntry?.levels || []);
     
     // 2. Fetch the exact count of free background ranks granted to this tree
     const freeLevelsCount = (typeof getFreeLevelsCountForTree === "function") ? getFreeLevelsCountForTree("stealth") : 0;
@@ -16174,7 +16200,8 @@ else if (tree.key === "stealth") {
 // 🎯 VISUAL STYLING: DEFENSE BACKGROUND FREE MILESTONE UNIFORMITY
 // =========================================================================
 else if (tree.key === "defense") {
-    const defenseSkillsPool = skillAbilitiesRegistry["defense"] || [];
+    const defenseEntry = skillAbilitiesRegistry["defense"];
+    const defenseSkillsPool = Array.isArray(defenseEntry) ? defenseEntry : (defenseEntry?.levels || []);
     const freeLevelsCount = (typeof getFreeLevelsCountForTree === "function") ? getFreeLevelsCountForTree("defense") : 0;
 
     for (let i = 0; i < tree.level; i++) {
