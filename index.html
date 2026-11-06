@@ -2933,13 +2933,13 @@ details[open] #skills-collapsed-summary {
 <ul>
     <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
 <br>
-    <li><strong>Proficient:</strong> You can change up to your Rank in Skill Results to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> whenever rolling for a Proficient skill.</li>
+    <li><strong>Proficient:</strong> You can change up to your Rank <img src='images/Skillenc.png' alt='Skill' class='inline-icon'> to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> whenever rolling for a Proficient skill.</li>
 <br>
     <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
 <br>
     <li><strong>Mastery:</strong> Add one <img src="images/Critenc.png" alt="Crit" class="inline-icon"> to your roll.</li>
 <br>
-    <li><strong>Resilience:</strong> You can convert all Blank Results to Skill Results.</li>
+    <li><strong>Resilience:</strong> You can convert all Blank Results to <img src='images/Skillenc.png' alt='Skill' class='inline-icon'>.</li>
 </ul>
 <br>
 <strong>Size Differential</strong>
@@ -2993,7 +2993,7 @@ details[open] #skills-collapsed-summary {
 <br>
 <strong>Wyrd</strong>
 <ul>
-     <li> Wyrd is the force that controls all that happens. In every roll of the dice, Wyrd Results threaten to upset what is expected and turn the tide in favor of the lucky. Players can spend Luck points to cause one or more Wyrd Effects.</li>
+     <li> Wyrd is the force that controls all that happens. In every roll of the dice, <img src='images/Wyrdenc.png' alt='Wyrd' class='inline-icon'> threaten to upset what is expected and turn the tide in favor of the lucky. Players can spend Luck points to cause one or more Wyrd Effects.</li>
 </ul>
 <table class="game-data wyrd-table">
     <thead>
@@ -3012,11 +3012,11 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <td><strong>2 Luck</strong></td>
-            <td>All Wyrds to Hits</td>
+            <td>All <img src='images/Wyrdenc.png' alt='Wyrd' class='inline-icon'> to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'></td>
         </tr>
         <tr>
             <td><strong>3 Luck</strong></td>
-            <td>One Wyrd to Crit</td>
+            <td>One <img src='images/Wyrdenc.png' alt='Wyrd' class='inline-icon'> to <img src='images/Critenc.png' alt='Crit' class='inline-icon'></td>
         </tr>
     </tbody>
 </table>
@@ -3076,7 +3076,7 @@ details[open] #skills-collapsed-summary {
             <div class="skill-body">
                 <strong>Character Creation:</strong>
                 <ul>
-                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to three plus an unmodified two-dice roll (<img src="images/Hitenc.png" alt="Hit" class = "inline-icon"> count as one, and <img src="images/Critenc.png" alt="Crit" class="inline-icon"> count as two), except Hap which is determined by rolling four dice (rerolling Blank, Skill, and Wyrd Results once).</li>
+                    <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to three plus an unmodified two-dice roll (<img src="images/Hitenc.png" alt="Hit" class = "inline-icon"> count as one, and <img src="images/Critenc.png" alt="Crit" class="inline-icon"> count as two), except Hap which is determined by rolling four dice (rerolling Blank, <img src='images/Skillenc.png' alt='Skill' class='inline-icon'>, and <img src='images/Wyrdenc.png' alt='Wyrd' class='inline-icon'> once).</li>
                 </ul>
                 <br>
                 <strong>Sex Adjustments:</strong>
@@ -7114,7 +7114,7 @@ const materialRegistry = {
         rarity: 4,
         costMultiplier: 10,
         allowedTags: ["metal_armor", "metal_shield", "metal_weapon", "ammunition"],
-        bonus: "+4;  +4d Avoidance; You can change all Blank results to Wyrd Results; -2 Heaviness",
+        bonus: "+4;  +4d Avoidance; You can change all Blank results to <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>; -2 Heaviness",
         description: "An untarnishing and rare, silvery metal mined deep within the Crystal Sphere. Although nearly all of the Mythral in circulation has been wrought by the Dwarven smiths, it is most associated with Elves due to their great love of it."
     },
     "orichalcum": {
@@ -8191,7 +8191,7 @@ const tooltipRegistry = {
   },
   "dual_wielding": {
     title: "Dual-Wielding",
-    description: "Using one-handed melee weapons with which you are proficient, you can dual-wield. While dual-wielding, you may strike once with each hand per attack but you must change one <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a Skill Result per roll."
+    description: "Using one-handed melee weapons with which you are proficient, you can dual-wield. While dual-wielding, you may strike once with each hand per attack but you must change one <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per roll."
   },
   "no_shield_no_problem": {
     title: "No Shield? No Problem",
@@ -8531,7 +8531,7 @@ const tooltipRegistry = {
   },
   "calculated_strike": {
     title: "Calculated Strike",
-    description: "Using a shrewd weapon, you can change up to your Rank Skill Results to Crits, but <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are removed from the roll. When you use this skill, your attack is limited to one strike."
+    description: "Using a shrewd weapon, you can change up to your Rank <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are removed from the roll. When you use this skill, your attack is limited to one strike."
   },
 "extra_training": {
         title: "Extra Training",
@@ -8751,7 +8751,7 @@ const tooltipRegistry = {
   },
   "foreboding_darkness": {
     title: "Foreboding Darkness",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Darkness skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Darkness skills."
   },
   "living_darkness": {
     title: "Living Darkness",
@@ -8793,7 +8793,7 @@ const tooltipRegistry = {
   },
   "intense_flames": {
     title: "Intense Flames",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Fire skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Fire skills."
   },
   "living_flame": {
     title: "Living Flame",
@@ -8835,7 +8835,7 @@ const tooltipRegistry = {
   },
   "intense_cold": {
     title: "Intense Cold",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Frost skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Frost skills."
   },
   "living_frost": {
     title: "Living Frost",
@@ -8877,7 +8877,7 @@ const tooltipRegistry = {
   },
   "searing_light": {
     title: "Searing Light",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Light skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Light skills."
   },
   "living_light": {
     title: "Living Light",
@@ -8919,7 +8919,7 @@ const tooltipRegistry = {
   },
   "high_voltage": {
     title: "High Voltage",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Lightning skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Lightning skills."
   },
   "living_lightning": {
     title: "Living Lightning",
@@ -8961,7 +8961,7 @@ const tooltipRegistry = {
   },
   "deafening_thunder": {
     title: "Deafening Thunder",
-    description: "You can change all Blank Results to Skill Results for all Battle Magic: Thunder skills."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Thunder skills."
   },
   "living_thunder": {
     title: "Living Thunder",
@@ -9396,7 +9396,7 @@ const tooltipRegistry = {
   },
   "improved_force": {
     title: "Improved Force",
-    description: "You can change all Blank Results to Skill Results when casting Dispel Magic, Arcane Dart, Arcane Lock, Shockwave, or Arcane Vortex."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when casting Dispel Magic, Arcane Dart, Arcane Lock, Shockwave, or Arcane Vortex."
   },
   "inexhaustible": {
     title: "Inexhaustible",
@@ -9491,7 +9491,7 @@ const tooltipRegistry = {
     },
     "wyrd_control": {
         title: "Wyrd Control",
-        description: "TN 1: Targets can change one Blank Result to a Wyrd Result or one Wyrd Result to a Blank Result per roll. This can be activated multiple times."
+        description: "TN 1: Targets can change one Blank Result to a <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> or one <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a Blank Result per roll. This can be activated multiple times."
     },
     "luck_is_what_you_make_it": {
         title: "Luck Is What You Make It",
@@ -9507,11 +9507,11 @@ const tooltipRegistry = {
     },
     "sucks_to_be_you": {
         title: "Sucks to be You!",
-        description: "TN 5: Designated targets change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Wyrd Results."
+        description: "TN 5: Designated targets change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>."
     },
     "lucky_bastard": {
         title: "Lucky Bastard",
-        description: "TN 6: Targets can change one Wyrd Result to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free. This can be activated multiple times."
+        description: "TN 6: Targets can change one <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free. This can be activated multiple times."
     },
     "discipline_acid": {
         title: "Discipline [Acid]",
@@ -9693,7 +9693,7 @@ const tooltipRegistry = {
   "true_lightning": {
     title: "True Lightning",
     actionType: "Cast + Attack",
-    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Weakness.",
+    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Weakness.",
     extras: [{"label":"Bonus Spells","text":"Static Discharge; Static Aura"}]
   },
   "pillar_of_flame": {
@@ -9723,7 +9723,7 @@ const tooltipRegistry = {
   "immolate": {
     title: "Immolate",
     actionType: "Cast + Attack",
-    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
   "entomb": {
@@ -9817,7 +9817,7 @@ const tooltipRegistry = {
   "throw_weapon": {
     title: "Throw Weapon",
     actionType: "Cast + Attack",
-    description: "You can telepathically launch Verve number of small objects or one large object at one or more targets as if you had thrown them except that your Verve is its Governing Aspect. The objects will continue to attack the targets from all directions for Rank rounds rerolling Skill Results instead of modifying them."
+    description: "You can telepathically launch Verve number of small objects or one large object at one or more targets as if you had thrown them except that your Verve is its Governing Aspect. The objects will continue to attack the targets from all directions for Rank rounds rerolling <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> instead of modifying them."
   },
   "etch_rune": {
     title: "Etch Rune",
@@ -9882,7 +9882,7 @@ const tooltipRegistry = {
   },
   "improved_force": {
     title: "Improved Force",
-    description: "You can change all Blank Results to Skill Results when casting Dispel Magic, Arcane Dart, Arcane Lock, Shockwave, or Arcane Vortex."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when casting Dispel Magic, Arcane Dart, Arcane Lock, Shockwave, or Arcane Vortex."
   },
   "inexhaustible": {
     title: "Inexhaustible",
@@ -9952,7 +9952,7 @@ const tooltipRegistry = {
   },
   "disciplined_caster": {
     title: "Disciplined Caster",
-    description: "You can change all Blank Results to Skill Results for all Conjuration Skill checks and attack rolls."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Conjuration Skill Checks and attack rolls."
   },
    "caustic_fog": {
     title: "Caustic Fog",
@@ -10069,7 +10069,7 @@ const tooltipRegistry = {
     },
     "umbral_warrior": {
         title: "Umbral Warrior",
-        description: "Your Blur spell makes you completely invisible and inaudible while in shadows. You can change all Blank Results to Skill Results on all attacks while you are undetected and wielding a weapon blessed in the name of the Shadow King."
+        description: "Your Blur spell makes you completely invisible and inaudible while in shadows. You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all attacks while you are undetected and wielding a weapon blessed in the name of the Shadow King."
     },
   "break_curse": {
     title: "Break Curse",
@@ -10097,11 +10097,11 @@ const tooltipRegistry = {
   },
   "keen": {
     title: "Keen",
-    description: "You can change all Blank Results to Skill Results on all Acuity checks. Additionally, when detecting magic, you can immediately identify the school of magic."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Acuity checks. Additionally, when detecting magic, you can immediately identify the school of magic."
   },
   "fencer": {
     title: "Fencer",
-    description: "You can change all Blank Attack Results to Skill Results while dual-wielding."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while attacking dual-wielding."
   },
   "daze": {
     title: "Daze",
@@ -10133,23 +10133,23 @@ const tooltipRegistry = {
   "ghost_arrow": {
     title: "Ghost Arrow",
     actionType: "Cast + Attack",
-    description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all Evade, Crit, and Skill Results to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
+    description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "bullseye": {
     title: "Bullseye",
-    description: "You can change all Blank Attack Results to Skill Results while shooting an Arc-bow."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while shooting an Arc-bow."
   },
   "martial_prowess": {
     title: "Martial Prowess",
-    description: "You can change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while using Trip and Grapple."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while using Trip and Grapple."
   },
   "viper_strike": {
     title: "Viper Strike",
-    description: "You can change all Blank Results to Skill Results for Pugil Strikes."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for Pugil Strikes."
   },
   "learned": {
     title: "Learned",
-    description: "You can change all Blank Results to Skill Results on all Lore Checks."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Lore Checks."
   },
   "quick_witted": {
     title: "Quick-Witted",
@@ -10161,7 +10161,7 @@ const tooltipRegistry = {
   },
   "deflect_strike": {
     title: "Deflect Strike",
-    description: "You can change all Blank Avoidance Results to Skill Results."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on Avoidance checks."
   },
   "knock_down": {
     title: "Knock Down",
@@ -10198,7 +10198,7 @@ const tooltipRegistry = {
   },
   "deathstrike": {
     title: "Deathstrike",
-    description: "You can change all Blank Results to Skill Results while attacking with a brutal or shrewd two-handed weapon."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while attacking with a brutal or shrewd two-handed weapon."
   },
   "fortitudinous": {
     title: "Fortitudinous",
@@ -10232,7 +10232,7 @@ const tooltipRegistry = {
   },
   "beguiling": {
     title: "Beguiling",
-    description: "You can change all Blank Results to Skill Results on all Verve checks."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Verve checks."
   },
 "curse_of_the_evil_eye": {
     title: "Curse of the Evil Eye [Word]",
@@ -10282,15 +10282,15 @@ const tooltipRegistry = {
   "arcane_surge": {
     title: "Arcane Surge [Word]",
     actionType: "Cast + Attack",
-    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and Skill Results to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
+    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "improved_stealth": {
     title: "Improved Stealth",
-    description: "You can change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on Stealth checks."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on Stealth checks."
   },
   "trained_assassin": {
     title: "Trained Assassin",
-    description: "While using the Backstab skill, you can change all Blank Results to Skill Results."
+    description: "While using the Backstab skill, you can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>."
   },
   "sniper": {
     title: "Sniper",
@@ -10307,7 +10307,7 @@ const tooltipRegistry = {
   },
   "martial_training": {
     title: "Martial Training",
-    description: "You can change all Blank Results to Skill Results when attacking with one-handed Brutal or Shrewd weapons."
+    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with one-handed Brutal or Shrewd weapons."
   },
   "meditative_healing": {
     title: "Meditative Healing [Encænium]",
@@ -10334,7 +10334,7 @@ const tooltipRegistry = {
   },
   "supreme_training": {
     title: "Supreme Training",
-    description: "Evocati can change all Blank Results to Skill Results on all melee attacks and Avoidance rolls."
+    description: "Evocati can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all melee attacks and Avoidance rolls."
   },
   "dissever": {
     title: "Dissever",
