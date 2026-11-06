@@ -26418,11 +26418,11 @@ window.updateInspectorInstanceNotes = function(cardIndex, instIndex, val) {
 const compendiumCategoryDescriptions = {
     "Aberration":"Aberrations are Aetherial beings with neither mind nor spirit woven into being by a caster.",
     "Animal":"Animals both wild and domesticated all of whom are suceptible to the druidic manipulation of the Aether.",
-    "Anthropoid": "Bipedal races, beastfolk, fey, and sentient humanoids inhabiting the realms.",
+    "Anthropoid": "The sentient Human-like folk of the Crystal Sphere.",
     "Giant": "Giants are 18-foot tall anthropoids of varying complexions, cultures, and dispositions. In general, giants are nomadic and keep out of the affairs of the other races, but when riled, giants are a ruthless foe.\n\n“Among the rest was one detestable monster, named Goëmagot, in stature twelve cubits, and of such prodigious strength that at one shake he pulled up an oak as if it had been a hazel wand.”\n\nHistoria Regum Britanniae by Geoffrey of Monmouth",
-    "Beast": "An indominable class of fauna often hunted for prestige, wealth, and survival. Few who take on such quests survive.",
+    "Beast": "An indominable class of fauna often hunted for prestige, wealth, and survival. Few who take on such marks survive.",
     "Construct":"A golem is a magical construct meant to do various tasks. A golem can be made from clay, stone, or iron. Orichalcum, mythral, gold, and silver golems are theoretically possible, however they are cost prohibitive. Since golems are made for specific purposes, each needs to be designed by the LM. A golem only has 3 Aspects: Dexterity, Strength, and Acuity. You must distribute among those 3 a number of Aspect Points equal to ⅑, ⅙, ⅓, or ½ the amount of Mana spent in the rite for size A, B, C, or D golems respectively. Having no Verve, golems cannot cast, they can, however, be charged. A golem charged with a spell will bear runes that contain and discharge the charged spells; runes have their own charges and do not deplete the Mana of the golem. Runes can be etched before and charged after a golem has been made, and so the Mana cost of these need not lessen the aspects of the golem.",
-    "Plant":"Across the Empire rages a great debate as to the palatability of certain plants: some argue the Coriandrum sativum is delicious, others argue it tastes like soap. These plants, however, are in complete agreements that people are yummy.",
+    "Plant":"Across the Empire rages a great debate as to the palatability of certain plants: some argue the Coriandrum sativum is delicious, others argue it tastes like soap. The plants herein, however, engage in no such bickering when it comes to eating people.",
     "Dragon":"There are three types of dragons within the Crystal Sphere: High Dragons, Drakes, and Wyrms. High dragons (the heraldic colors) are civil creatures whereas lesser dragon (Drakes and Wyrms), though still intelligent, are bestial.\n\n“My armour is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!”\n\nThe Hobbit by J.R.R. Tolkien",
     "Elemental":"Elementals are composed of spirit and body alone—they are mindless. The elementals came into being incidentally when the various elements were spoken into existence, and they are generally of a neutral disposition. It is suspected that elementals cannot truly die, and that when one is “slain” its spirit immediately takes possession of more matter of its kind, bypassing the transmigration process. Slaying an elemental, however, is tricky. Their vitality can only be damaged by Battle Magic, Arcane Dart or Vortex, Drain Vitality, or weapons with the Powered Blade enchantment. When an elemental is slain, there is left behind a granular essence which is prized for its fortifying effect on alchemy, enchantments, and spells and its mind altering effects when consumed. Elementals tend to avoid civilized portions of the world, because, although they can pass freely through the element of their composition naturally deposited, they are incapable of travelling through that which has been wrought.",
     "Genie":"Genies are composed of mind and body, but have no spirit.",
@@ -26442,8 +26442,9 @@ function generateCompendiumTab() {
     Object.entries(registry).forEach(([categoryName, creatures]) => {
         let itemsHtml = "";
 
-        // Check for an optional category descriptor
-        const categoryDesc = compendiumCategoryDescriptions[categoryName] || "";
+        // Check for an optional category descriptor and convert \n to <br>
+        const rawDesc = compendiumCategoryDescriptions[categoryName] || "";
+        const categoryDesc = rawDesc.replace(/\n/g, "<br>");
 
         if (!creatures || creatures.length === 0) {
             itemsHtml = `<li style="list-style: none; color: #7c6f64; font-style: italic;">No entries recorded in this category yet.</li>`;
@@ -26501,7 +26502,7 @@ function generateCompendiumTab() {
                     ${categoryName} ▾
                 </div>
                 <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
-                    ${categoryDesc ? `<div style="font-size: 0.9rem; color: #4a3f35; font-style: italic; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">${escapeHtml(categoryDesc)}</div>` : ''}
+                    ${categoryDesc ? `<div class="compendium-cat-desc" style="font-size: 0.9rem; color: #4a3f35; font-style: italic; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">${categoryDesc}</div>` : ''}
                     <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
                         ${itemsHtml}
                     </ul>
