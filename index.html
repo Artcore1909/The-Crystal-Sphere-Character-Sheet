@@ -2653,7 +2653,7 @@ details[open] #skills-collapsed-summary {
 <span class="pnp-col-header pnp-charge-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
     <span>CHARGE BONUS</span>
     <div style="display: flex; gap: 8px;">
-        <button class="pnp-edit-btn" onclick="toggleMountCatalogModal()">Current Mount</button>
+        <button class="pnp-edit-btn" onclick="toggleMountCatalogModal()">Catalog</button>
         <button class="pnp-edit-btn" onclick="toggleMountBuilder()">Custom</button>
     </div>
 </span>
@@ -2678,18 +2678,16 @@ details[open] #skills-collapsed-summary {
                 </div>
             </div>
 
-            <!-- 🐾 PET SLOT MINI-SHEET -->
-            <div class="pnp-weapon-slot-row pnp-charge-slot" style="margin-top: 15px;">
+<!-- 🐾 COMPANIONS & PETS CONTAINER -->
+            <div class="pnp-weapon-slot-row pnp-charge-slot" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
                 <span class="pnp-col-header pnp-charge-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                    <span>COMPANION / PET</span>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="pnp-edit-btn" onclick="togglePetCatalogModal()">Catalog</button>
-                        <button class="pnp-edit-btn" onclick="togglePetBuilder()">Custom</button>
-                    </div>
+                    <span>PETS (<span id="pet-count-display">0</span>)</span>
+                    <button class="pnp-edit-btn" onclick="window.addPetSlot()" style="background:#7d3c1b; color:#fff; border-radius:3px; padding:2px 8px; font-size:0.75rem;">+ Add Pet</button>
                 </span>
                 
-                <div class="builder-panel" id="builder-pet" style="display: none; width: 100%; box-sizing: border-box;"></div>
-                <div id="pet-mini-sheet-container" class="mount-sheet-wrapper" style="width: 100%;"></div>
+                <div id="pets-master-container" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                    <!-- Populated dynamically -->
+                </div>
             </div>
 
         </div>
@@ -26754,7 +26752,7 @@ window.toggleMountCatalogModal = function() {
         modal.className = "modal-overlay";
         modal.style.display = "flex";
         
-        let optionsHtml = `<option value="None">-- Select Official Mount --</option>`;
+        let optionsHtml = `<option value="None">-- Select Mount --</option>`;
         const sourceCats = ["Animal", "Beast"];
         
 const knownMounts = ["Bear", "Bear, Sun", "Boar", "Camel", "Crocodile", "Dog", "Eagle, Giant", "Goat, War", "Granas", "Gryphon", "Hawk, Giant", "Hellhound", "Horse", "Hyena", "Hyena, Six-paw", "Jaguar", "Keck", "Keck [Terror Bird]", "Lion", "Lion, Fire", "Lion, Mountain", "Pony", "Pegasus", "Raven, Giant", "Shadowcat", "Sheep", "Snow Leopard", "Spider, Giant", "Tarantula, Giant", "Tiger", "Unicorn", "Urox", "Wolf", "Wolf, Frost", "Badgerknight", "Drake, Black", "Drake, Blue", "Drake, Green", "Drake, Red", "Drake, White", "Drake, Yellow", "Manticore", "Quadricorn", "Roc", "Wyrm, Cloud", "Wyrm, Fire", "Wyrm, Frost", "Wyrm, Glow", "Wyrm [Sarpa]", "Wyvern"];
@@ -26777,7 +26775,7 @@ const knownMounts = ["Bear", "Bear, Sun", "Boar", "Camel", "Crocodile", "Dog", "
         modal.innerHTML = `
             <div class="char-modal">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: var(--primary-red);">Select Official Mount</h3>
+                    <h3 style="margin: 0; color: var(--primary-red);">Select Mount</h3>
                     <button onclick="document.getElementById('mount-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
                 </div>
                 <div class="builder-group" style="margin-bottom: 15px;">
@@ -26861,11 +26859,15 @@ window.applySelectedCatalogMount = function() {
     if (typeof calculateSheet === "function") calculateSheet();
 };
 
-// Initialize Pet Schema inside characterChoicesState if missing
-if (!characterChoicesState.pet) {
-    characterChoicesState.pet = {
-        isConfigured: false,
-        name: "Companion",
+// Initialize Pets array inside characterChoicesState if missing
+if (!characterChoicesState.pets) {
+    characterChoicesState.pets = [];
+}
+
+window.addPetSlot = function() {
+    characterChoicesState.pets.push({
+        isConfigured: true,
+        name: `Pet #${characterChoicesState.pets.length + 1}`,
         size: "A",
         pace: 22,
         dex: 6, hel: 3, str: 5, act: 4, int: 2, ver: 2, hap: 3,
@@ -26875,12 +26877,22 @@ if (!characterChoicesState.pet) {
         avoidance: "6d",
         run: "6d",
         initiative: "4d",
-        attack1Name: "Bite", attack1Roll: "5d; Crush"
-    };
-}
+        attack1Name: "Bite", attack1Roll: "5d; Crush",
+        attack2Name: "", attack2Roll: ""
+    });
 
-window.togglePetBuilder = function() {
-    const panel = document.getElementById("builder-pet");
+    if (typeof calculateSheet === "function") calculateSheet();
+};
+
+window.removePetSlot = function(index) {
+    if (confirm("Are you sure you want to dismiss this pet?")) {
+        characterChoicesState.pets.splice(index, 1);
+        if (typeof calculateSheet === "function") calculateSheet();
+    }
+};
+
+window.togglePetBuilder = function(index) {
+    const panel = document.getElementById(`builder-pet-${index}`);
     if (!panel) return;
 
     if (panel.style.display === "block") {
@@ -26888,191 +26900,103 @@ window.togglePetBuilder = function() {
         return;
     }
 
+    // Close other builders
+    document.querySelectorAll(".builder-panel[id^='builder-pet-']").forEach(p => p.style.display = "none");
     panel.style.display = "block";
-    const pet = characterChoicesState.pet || {};
-    const rawName = pet.name || "Companion";
+
+    const pet = characterChoicesState.pets[index] || {};
+    const rawName = pet.name || "";
 
     panel.innerHTML = `
-        <h4 style="margin-top:0; color:#5c1d1d;">Edit Pet</h4>
+        <h4 style="margin-top:0; color:#5c1d1d;">Edit Pet #${index + 1}</h4>
         
-<div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-            <div class="builder-group"><label>Pet Name</label><input type="text" id="pet-setup-name" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
-            <div class="builder-group"><label>Size</label><input type="text" id="pet-setup-size" value="${escapeHtml(pet.size || 'A')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            <div class="builder-group"><label>Pace</label><input type="number" id="pet-setup-pace" value="${pet.pace ?? 22}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+            <div class="builder-group"><label>Pet Name</label><input type="text" id="pet-setup-name-${index}" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
+            <div class="builder-group"><label>Size</label><input type="text" id="pet-setup-size-${index}" value="${escapeHtml(pet.size || 'A')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Pace</label><input type="number" id="pet-setup-pace-${index}" value="${pet.pace ?? 22}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;">
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">DEX</label><input type="number" id="pet-setup-dex" value="${pet.dex ?? 6}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">HEL</label><input type="number" id="pet-setup-hel" value="${pet.hel ?? 3}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">STR</label><input type="number" id="pet-setup-str" value="${pet.str ?? 5}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">ACT</label><input type="number" id="pet-setup-act" value="${pet.act ?? 4}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">INT</label><input type="number" id="pet-setup-int" value="${pet.int ?? 2}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">VER</label><input type="number" id="pet-setup-ver" value="${pet.ver ?? 2}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">HAP</label><input type="number" id="pet-setup-hap" value="${pet.hap ?? 3}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">DEX</label><input type="number" id="pet-setup-dex-${index}" value="${pet.dex ?? 6}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">HEL</label><input type="number" id="pet-setup-hel-${index}" value="${pet.hel ?? 3}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">STR</label><input type="number" id="pet-setup-str-${index}" value="${pet.str ?? 5}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">ACT</label><input type="number" id="pet-setup-act-${index}" value="${pet.act ?? 4}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">INT</label><input type="number" id="pet-setup-int-${index}" value="${pet.int ?? 2}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">VER</label><input type="number" id="pet-setup-ver-${index}" value="${pet.ver ?? 2}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">HAP</label><input type="number" id="pet-setup-hap-${index}" value="${pet.hap ?? 3}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px;">
-            <div class="builder-group"><label>Max Vitality</label><input type="number" id="pet-setup-vit" value="${pet.vitalityMax ?? 19}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            <div class="builder-group"><label>Max Mana</label><input type="number" id="pet-setup-mana" value="${pet.manaMax ?? 16}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            <div class="builder-group"><label>Max Luck</label><input type="number" id="pet-setup-luck" value="${pet.luckMax ?? 3}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Max Vitality</label><input type="number" id="pet-setup-vit-${index}" value="${pet.vitalityMax ?? 19}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Max Mana</label><input type="number" id="pet-setup-mana-${index}" value="${pet.manaMax ?? 16}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Max Luck</label><input type="number" id="pet-setup-luck-${index}" value="${pet.luckMax ?? 3}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px;">
-            <div class="builder-group"><label>Avoidance</label><input type="text" id="pet-setup-avoid" value="${escapeHtml(pet.avoidance || '6d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            <div class="builder-group"><label>Run</label><input type="text" id="pet-setup-run" value="${escapeHtml(pet.run || '6d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            <div class="builder-group"><label>Initiative</label><input type="text" id="pet-setup-init" value="${escapeHtml(pet.initiative || '4d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Avoidance</label><input type="text" id="pet-setup-avoid-${index}" value="${escapeHtml(pet.avoidance || '6d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Run</label><input type="text" id="pet-setup-run-${index}" value="${escapeHtml(pet.run || '6d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+            <div class="builder-group"><label>Initiative</label><input type="text" id="pet-setup-init-${index}" value="${escapeHtml(pet.initiative || '4d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
             <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
-                <div class="builder-group" style="margin:0;"><label>Attack 1 Name</label><input type="text" id="pet-setup-atk1-name" value="${escapeHtml(pet.attack1Name || 'Bite')}" style="padding:4px; font-size:0.8rem;"></div>
-                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk1-roll" value="${escapeHtml(pet.attack1Roll || '5d; Crush')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+                <div class="builder-group" style="margin:0;"><label>Attack 1 Name</label><input type="text" id="pet-setup-atk1-name-${index}" value="${escapeHtml(pet.attack1Name || 'Bite')}" style="padding:4px; font-size:0.8rem;"></div>
+                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk1-roll-${index}" value="${escapeHtml(pet.attack1Roll || '5d; Crush')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
             </div>
             <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
-                <div class="builder-group" style="margin:0;"><label>Attack 2 Name</label><input type="text" id="pet-setup-atk2-name" value="${escapeHtml(pet.attack2Name || '')}" style="padding:4px; font-size:0.8rem;"></div>
-                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk2-roll" value="${escapeHtml(pet.attack2Roll || '')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+                <div class="builder-group" style="margin:0;"><label>Attack 2 Name</label><input type="text" id="pet-setup-atk2-name-${index}" value="${escapeHtml(pet.attack2Name || '')}" style="padding:4px; font-size:0.8rem;"></div>
+                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk2-roll-${index}" value="${escapeHtml(pet.attack2Roll || '')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
             </div>
         </div>
 
         <div class="builder-actions">
-            <button class="builder-btn builder-btn-cancel" onclick="togglePetBuilder()">Cancel</button>
-            <button class="builder-btn builder-btn-save" onclick="savePet()">Save</button>
-            <button type="button" class="builder-btn" onclick="deletePet()" style="background:#7a1f1f;color:#fff;">Delete</button>
+            <button class="builder-btn builder-btn-cancel" onclick="togglePetBuilder(${index})">Cancel</button>
+            <button class="builder-btn builder-btn-save" onclick="savePet(${index})">Save</button>
+            <button type="button" class="builder-btn" onclick="removePetSlot(${index})" style="background:#7a1f1f;color:#fff;">Dismiss</button>
         </div>
     `;
 
-    // Assign the name and size safely via direct property assignment
-    document.getElementById("pet-setup-name").value = rawName;
-    document.getElementById("pet-setup-size").value = pet.size || "A";
+    document.getElementById(`pet-setup-name-${index}`).value = rawName;
 };
 
-window.savePet = function() {
-    const size = document.getElementById("pet-setup-size").value;
-    const nameVal = document.getElementById("pet-setup-name").value.trim();
-    
-    if (size === "None") {
-        characterChoicesState.pet.isConfigured = false;
-        characterChoicesState.pet.size = "None";
-    } else {
-        characterChoicesState.pet = {
-            isConfigured: true,
-            name: nameVal || "Companion",
-            size: size,
-            pace: parseInt(document.getElementById("pet-setup-pace").value) || 22,
-            dex: parseInt(document.getElementById("pet-setup-dex").value) || 6,
-            hel: parseInt(document.getElementById("pet-setup-hel").value) || 3,
-            str: parseInt(document.getElementById("pet-setup-str").value) || 5,
-            act: parseInt(document.getElementById("pet-setup-act").value) || 4,
-            int: parseInt(document.getElementById("pet-setup-int").value) || 2,
-            ver: parseInt(document.getElementById("pet-setup-ver").value) || 2,
-            hap: parseInt(document.getElementById("pet-setup-hap").value) || 3,
-            vitalityMax: parseInt(document.getElementById("pet-setup-vit").value) || 19,
-            vitalityLost: characterChoicesState.pet.vitalityLost || 0,
-            manaMax: parseInt(document.getElementById("pet-setup-mana").value) || 16,
-            manaLost: characterChoicesState.pet.manaLost || 0,
-            luckMax: 3,
-            luckSpent: characterChoicesState.pet.luckSpent || 0,
-            avoidance: document.getElementById("pet-setup-avoid").value || "6d",
-            run: document.getElementById("pet-setup-run").value || "6d",
-            initiative: document.getElementById("pet-setup-init").value || "4d",
-            attack1Name: document.getElementById("pet-setup-atk1-name").value || "",
-            attack1Roll: document.getElementById("pet-setup-atk1-roll").value || "",
-            attack2Name: document.getElementById("pet-setup-atk2-name").value || "",
-            attack2Roll: document.getElementById("pet-setup-atk2-roll").value || ""
-        };
-    }
+window.savePet = function(index) {
+    if (!characterChoicesState.pets[index]) return;
 
-    document.getElementById("builder-pet").style.display = "none";
+    const size = document.getElementById(`pet-setup-size-${index}`).value.trim() || "A";
+    const nameVal = document.getElementById(`pet-setup-name-${index}`).value.trim();
+
+    characterChoicesState.pets[index] = {
+        isConfigured: true,
+        name: nameVal || `Pet #${index + 1}`,
+        size: size,
+        pace: parseInt(document.getElementById(`pet-setup-pace-${index}`).value) || 22,
+        dex: parseInt(document.getElementById(`pet-setup-dex-${index}`).value) || 6,
+        hel: parseInt(document.getElementById(`pet-setup-hel-${index}`).value) || 3,
+        str: parseInt(document.getElementById(`pet-setup-str-${index}`).value) || 5,
+        act: parseInt(document.getElementById(`pet-setup-act-${index}`).value) || 4,
+        int: parseInt(document.getElementById(`pet-setup-int-${index}`).value) || 2,
+        ver: parseInt(document.getElementById(`pet-setup-ver-${index}`).value) || 2,
+        hap: parseInt(document.getElementById(`pet-setup-hap-${index}`).value) || 3,
+        vitalityMax: parseInt(document.getElementById(`pet-setup-vit-${index}`).value) || 19,
+        vitalityLost: characterChoicesState.pets[index].vitalityLost || 0,
+        manaMax: parseInt(document.getElementById(`pet-setup-mana-${index}`).value) || 16,
+        manaLost: characterChoicesState.pets[index].manaLost || 0,
+        luckMax: 3,
+        luckSpent: characterChoicesState.pets[index].luckSpent || 0,
+        avoidance: document.getElementById(`pet-setup-avoid-${index}`).value || "6d",
+        run: document.getElementById(`pet-setup-run-${index}`).value || "6d",
+        initiative: document.getElementById(`pet-setup-init-${index}`).value || "4d",
+        attack1Name: document.getElementById(`pet-setup-atk1-name-${index}`).value || "",
+        attack1Roll: document.getElementById(`pet-setup-atk1-roll-${index}`).value || "",
+        attack2Name: document.getElementById(`pet-setup-atk2-name-${index}`).value || "",
+        attack2Roll: document.getElementById(`pet-setup-atk2-roll-${index}`).value || ""
+    };
+
+    document.getElementById(`builder-pet-${index}`).style.display = "none";
     if (typeof calculateSheet === "function") calculateSheet();
 };
 
-window.deletePet = function() {
-    const p = characterChoicesState.pet;
-    if (p) {
-        p.isConfigured = false;
-        p.name = ""; p.size = "None"; p.pace = 0;
-        p.dex = 0; p.hel = 0; p.str = 0; p.act = 0; p.int = 0; p.ver = 0; p.hap = 0;
-        p.vitalityMax = 0; p.manaMax = 0; p.luckMax = 0;
-        p.avoidance = ""; p.run = ""; p.initiative = "";
-        p.attack1Name = ""; p.attack1Roll = ""; p.attack2Name = ""; p.attack2Roll = "";
-    }
-    const panel = document.getElementById("builder-pet");
-    if (panel) panel.style.display = "none";
-    if (typeof calculateSheet === "function") calculateSheet();
-};
-
-window.renderPetMiniSheet = function() {
-    const container = document.getElementById("pet-mini-sheet-container");
-    if (!container) return;
-
-    const pet = characterChoicesState.pet;
-
-    if (!pet || !pet.isConfigured) {
-        container.innerHTML = `
-            <div style="box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: center; border: 1px dashed #c8be9c; border-radius: 6px; background: #faf7f2; padding: 12px; color: #7c6f64; font-size: 0.72rem; text-align: center; font-style: italic; line-height: 1.4;">
-                No companion/pet configured. Click "Catalog" or "Custom" above to register your pet's properties.
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = `
-        <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 8px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);">
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 2px; margin-bottom: 6px;">
-                <span style="font-weight: bold; font-size: 0.82rem; color: #5c1d1d;">${pet.name}</span>
-                <span style="font-size: 0.72rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${pet.size} | Pace ${pet.pace}</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
-                <span>DEX: ${pet.dex}</span>
-                <span>HEL: ${pet.hel}</span>
-                <span>STR: ${pet.str}</span>
-                <span>ACT: ${pet.act}</span>
-                <span>INT: ${pet.int}</span>
-                <span>VER: ${pet.ver}</span>
-                <span>HAP: ${pet.hap}</span>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; border-bottom: 1px dashed #decdaf; padding-bottom: 4px;">
-                <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
-                    <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
-                    <span style="font-weight: bold;">${pet.vitalityMax}</span>
-                    <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${pet.vitalityLost}" onchange="characterChoicesState.pet.vitalityLost = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
-                </div>
-                <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
-                    <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
-                    <span style="font-weight: bold;">${pet.manaMax}</span>
-                    <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Lost:</label>
-                    <input type="number" value="${pet.manaLost}" onchange="characterChoicesState.pet.manaLost = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
-                </div>
-                <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
-                    <span style="font-weight: bold; color: #b7791f;">LUCK:</span>
-                    <span style="font-weight: bold;">${pet.luckMax}</span>
-                    <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Spent:</label>
-                    <input type="number" value="${pet.luckSpent}" onchange="characterChoicesState.pet.luckSpent = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 4px;">
-                <div>
-                    <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoid:</span> <span style="font-weight: bold; color: #1b6b55;">${pet.avoidance}</span>
-                    <span style="font-weight: bold; color: #4a3f35; margin-left: 8px; margin-right: 4px;">Run:</span> <span style="font-weight: bold; color: #1b6b55;">${pet.run}</span>
-                    <span style="font-weight: bold; color: #4a3f35; margin-left: 8px; margin-right: 4px;">Init:</span> <span style="font-weight: bold; color: #1b6b55;">${pet.initiative}</span>
-                </div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 2px; font-size: 0.7rem;">
-                ${pet.attack1Name && pet.attack1Roll !== "" ? `<div><strong>${pet.attack1Name}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${pet.attack1Roll}</span></div>` : ''}
-                ${pet.attack2Name && pet.attack2Roll !== "" ? `<div><strong>${pet.attack2Name}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${pet.attack2Roll}</span></div>` : ''}
-            </div>
-
-        </div>
-    `;
-};
-
-window.togglePetCatalogModal = function() {
+window.togglePetCatalogModal = function(index) {
     let modal = document.getElementById("pet-catalog-modal");
     if (!modal) {
         modal = document.createElement("div");
@@ -27080,13 +27004,12 @@ window.togglePetCatalogModal = function() {
         modal.className = "modal-overlay";
         modal.style.display = "flex";
         
-        let optionsHtml = `<option value="None">-- Select Official Pet / Companion --</option>`;
+        let optionsHtml = `<option value="None">-- Select Pet --</option>`;
         const sourceCats = ["Animal", "Beast"];
 
         sourceCats.forEach(cat => {
             if (compendiumRegistry[cat]) {
-                const petWhitelist = []; // Empty = allow all animals and beasts
-                
+                const petWhitelist = [];
                 const petList = compendiumRegistry[cat].filter(c => {
                     if (petWhitelist.length === 0) return true;
                     return petWhitelist.includes(c.name);
@@ -27105,38 +27028,35 @@ window.togglePetCatalogModal = function() {
         modal.innerHTML = `
             <div class="char-modal">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: var(--primary-red);">Select Official Pet</h3>
+                    <h3 style="margin: 0; color: var(--primary-red);">Select Pet</h3>
                     <button onclick="document.getElementById('pet-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
                 </div>
                 <div class="builder-group" style="margin-bottom: 15px;">
-                    <label>Choose Companion</label>
+                    <label>Choose Pet</label>
                     <select id="catalog-pet-select" style="width: 100%; padding: 2px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
                         ${optionsHtml}
                     </select>
                 </div>
-                <div class="builder-actions" style="display: flex; justify-content: space-between;">
-                    <button type="button" class="builder-btn" onclick="deletePet(); document.getElementById('pet-catalog-modal').style.display='none';" style="background:#7a1f1f; color:#fff;">Delete</button>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="builder-btn builder-btn-cancel" onclick="document.getElementById('pet-catalog-modal').style.display='none'">Cancel</button>
-                        <button class="builder-btn builder-btn-save" onclick="applySelectedCatalogPet()">Select</button>
-                    </div>
+                <div class="builder-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
+                    <button class="builder-btn builder-btn-cancel" onclick="document.getElementById('pet-catalog-modal').style.display='none'">Cancel</button>
+                    <button class="builder-btn builder-btn-save" onclick="applySelectedCatalogPet()">Select</button>
                 </div>
             </div>
         `;
         document.body.appendChild(modal);
     } else {
         modal.style.display = "flex";
-        const sel = document.getElementById("catalog-pet-select");
-        if (sel && characterChoicesState.pet && characterChoicesState.pet.isConfigured) {
-            sel.value = characterChoicesState.pet.name;
-        }
     }
+
+    modal.setAttribute("data-target-index", index);
 };
 
 window.applySelectedCatalogPet = function() {
+    const modal = document.getElementById("pet-catalog-modal");
     const sel = document.getElementById("catalog-pet-select");
-    if (!sel || sel.value === "None") return;
-    
+    if (!modal || !sel || sel.value === "None") return;
+
+    const index = parseInt(modal.getAttribute("data-target-index"), 10);
     const petName = sel.value;
     let foundCreature = null;
     
@@ -27152,7 +27072,11 @@ window.applySelectedCatalogPet = function() {
     const paceMatch = (foundCreature.pace || "22").match(/\d+/);
     const parsedPace = paceMatch ? parseInt(paceMatch[0], 10) : 22;
 
-    characterChoicesState.pet = {
+    if (!characterChoicesState.pets[index]) {
+        characterChoicesState.pets[index] = {};
+    }
+
+    characterChoicesState.pets[index] = {
         isConfigured: true,
         name: foundCreature.name,
         size: foundCreature.size || "A",
@@ -27179,8 +27103,92 @@ window.applySelectedCatalogPet = function() {
         attack2Roll: foundCreature.attacks?.[1] ? foundCreature.attacks[1].split(":").slice(1).join(":").trim() : ""
     };
 
-    document.getElementById("pet-catalog-modal").style.display = "none";
+    modal.style.display = "none";
     if (typeof calculateSheet === "function") calculateSheet();
+};
+
+window.renderPetMiniSheet = function() {
+    const container = document.getElementById("pets-master-container");
+    const countDisplay = document.getElementById("pet-count-display");
+    
+    if (!container) return;
+    
+    const pets = characterChoicesState.pets || [];
+    if (countDisplay) countDisplay.innerText = pets.length;
+
+    if (pets.length === 0) {
+        container.innerHTML = `
+            <div style="box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: center; border: 1px dashed #c8be9c; border-radius: 6px; background: #faf7f2; padding: 12px; color: #7c6f64; font-size: 0.72rem; text-align: center; font-style: italic; line-height: 1.4;">
+                No pets configured. Click "+ Add Pet" above to register a pet.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = pets.map((pet, index) => {
+        return `
+            <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 8px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); position: relative;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 2px; margin-bottom: 6px;">
+                    <span style="font-weight: bold; font-size: 0.82rem; color: #5c1d1d;">${escapeHtml(pet.name)}</span>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.72rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(pet.size)} | Pace ${pet.pace}</span>
+                        <div style="display: flex; gap: 4px;">
+                            <button class="pnp-edit-btn" onclick="window.togglePetCatalogModal(${index})" style="font-size:0.68rem;">Catalog</button>
+                            <button class="pnp-edit-btn" onclick="window.togglePetBuilder(${index})" style="font-size:0.68rem;">Custom</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="builder-panel" id="builder-pet-${index}" style="display: none; width: 100%; box-sizing: border-box; margin-bottom: 8px;"></div>
+
+                <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
+                    <span>DEX: ${pet.dex}</span>
+                    <span>HEL: ${pet.hel}</span>
+                    <span>STR: ${pet.str}</span>
+                    <span>ACT: ${pet.act}</span>
+                    <span>INT: ${pet.int}</span>
+                    <span>VER: ${pet.ver}</span>
+                    <span>HAP: ${pet.hap}</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; border-bottom: 1px dashed #decdaf; padding-bottom: 4px;">
+                    <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
+                        <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
+                        <span style="font-weight: bold;">${pet.vitalityMax}</span>
+                        <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Lost:</label>
+                        <input type="number" value="${pet.vitalityLost}" onchange="characterChoicesState.pets[${index}].vitalityLost = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
+                        <span style="font-weight: bold; color: #2b6cb0;">MANA:</span>
+                        <span style="font-weight: bold;">${pet.manaMax}</span>
+                        <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Lost:</label>
+                        <input type="number" value="${pet.manaLost}" onchange="characterChoicesState.pets[${index}].manaLost = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
+                        <span style="font-weight: bold; color: #b7791f;">LUCK:</span>
+                        <span style="font-weight: bold;">${pet.luckMax}</span>
+                        <label style="font-size: 0.6rem; color: #7c6f64; margin: 0;">Spent:</label>
+                        <input type="number" value="${pet.luckSpent}" onchange="characterChoicesState.pets[${index}].luckSpent = Math.max(0, parseInt(this.value) || 0); calculateSheet();" style="width: 28px; padding: 1px; text-align: center; font-size: 0.7rem; border: 1px solid #bdae93; border-radius: 3px;">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 4px;">
+                    <div>
+                        <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoid:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(pet.avoidance)}</span>
+                        <span style="font-weight: bold; color: #4a3f35; margin-left: 8px; margin-right: 4px;">Run:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(pet.run)}</span>
+                        <span style="font-weight: bold; color: #4a3f35; margin-left: 8px; margin-right: 4px;">Init:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(pet.initiative)}</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px; font-size: 0.7rem;">
+                    ${pet.attack1Name && pet.attack1Roll !== "" ? `<div><strong>${escapeHtml(pet.attack1Name)}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${escapeHtml(pet.attack1Roll)}</span></div>` : ''}
+                    ${pet.attack2Name && pet.attack2Roll !== "" ? `<div><strong>${escapeHtml(pet.attack2Name)}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${escapeHtml(pet.attack2Roll)}</span></div>` : ''}
+                </div>
+
+            </div>
+        `;
+    }).join('');
 };
 
 </script>
