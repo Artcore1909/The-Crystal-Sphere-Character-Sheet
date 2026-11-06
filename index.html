@@ -3346,6 +3346,8 @@ details[open] #skills-collapsed-summary {
                 <ul>
                     <li><strong>Attack:</strong> Move up to 1 Hex and make an attack. Your attack hits if your attack roll exceeds the target's Avoidance roll.</li>
 <br>
+                    <li><strong>Called Shot:</strong> Called shots allow the defender to roll with Advantage, but if successful, allow the attacker to activate one of the following effects depending on the nature of the attack: ignore the defender's Damage Reduction; apply Advantage to the attack after determining whether it hit; inflict a combat condition; or maim the target.</li>
+<br>
                     <li><strong>Cast:</strong> Spend Mana to weave ætherial effects. You must be able to speak to cast.</li>
 <br>
                     <li><strong>Free:</strong> Actions that require little to no time. These include Words and are only limited by LM discretion.</li>
@@ -6937,7 +6939,7 @@ Object.entries(compendiumMountConfigs).forEach(([name, cfg]) => {
         "cavalry_blade": {name: "Cavalry Blade", description: "When used from beastback in a charge, add +1cc.", allowedTags: ["weapon"] },
         "flexible": { name: "Flexible", description: "This armor inflicts no penalty to Balance, Climb, or Jump checks.", allowedTags: ["armor"] },
         "tailor_fit": { name: "Tailor-fit", description: "This suit can only be worn by the combatant for whom it was designed without inflicting disadvantage to all combat and Athleticism checks.", allowedTags: ["armor"] },
-        "piercing": { name: "Piercing", description: "When used in a grapple or against a foe who is not actively avoiding the strike, two <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> may be spent to deny the defender his Bonus.", allowedTags: ["weapon"] },
+        "piercing": { name: "Piercing", description: "When used in a grapple or against a foe who is not actively avoiding the strike, two <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> may be spent to deny the defender his Bonus.", allowedTags: ["weapon"] },
         "recumbent_shot": { name: "Recumbent Shot", description: "This weapon can be used either prone or supine without disadvantage.", allowedTags: ["weapon"] },
         "resilient": { name: "Resilient", description: "Whenever rolling Hap to determine whether the item is damaged, reroll blanks once.", allowedTags: ["any"] },
         "shield_hook": { name: "Shield Hook", description: "Attacks ignore the opponents shield.", allowedTags: ["weapon"] },
@@ -7361,7 +7363,7 @@ const enchantmentRegistry = {
         allowedTags: ["weapon", "ammo", "ring", "amulet"],
         cost: 2000,
         rarity: 3,
-        description: "The weapon bursts into flames upon striking, dealing an additional 2d fire damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain."
+        description: "The weapon bursts into flames upon striking, dealing an additional 2d fire damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain."
     },
     "fortitude": {
         name: "Fortitude",
@@ -7375,7 +7377,7 @@ const enchantmentRegistry = {
         allowedTags: ["weapon", "ammo", "ring", "amulet"],
         cost: 2000,
         rarity: 3,
-        description: "The weapon freezes the target upon striking, dealing an additional 2d frost damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflcit Numb."
+        description: "The weapon freezes the target upon striking, dealing an additional 2d frost damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflcit Numb."
     },
     "health": {
         name: "Health",
@@ -7445,7 +7447,7 @@ const enchantmentRegistry = {
         allowedTags: ["armor", "helmet", "jewelry"],
         cost: 18000,
         rarity: 4,
-        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to your Avoidance check."
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to your Avoidance check."
     },
     "sapping": {
         name: "Sapping",
@@ -7459,7 +7461,7 @@ const enchantmentRegistry = {
         allowedTags: ["weapon", "ammo", "ring", "amulet"],
         cost: 2000,
         rarity: 3,
-        description: "Weapon emits burst of radiation upon striking, dealing an additional 2d light damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> Blind."
+        description: "Weapon emits burst of radiation upon striking, dealing an additional 2d light damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Blind."
     },
     "skill": {
         name: "Skill",
@@ -7473,14 +7475,14 @@ const enchantmentRegistry = {
         allowedTags: ["weapon", "ammo", "ring", "amulet"],
         cost: 2000,
         rarity: 3,
-        description: "Weapon creates shockwave upon striking, dealing an additional 2d thunder damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+        description: "Weapon creates shockwave upon striking, dealing an additional 2d thunder damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
     },
     "static": {
         name: "Static",
         allowedTags: ["weapon", "ammo", "ring", "amulet"],
         cost: 2000,
         rarity: 3,
-        description: "Weapon shocks target upon striking, dealing an additional 2d lightning damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Weakness."
+        description: "Weapon shocks target upon striking, dealing an additional 2d lightning damage. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Weakness."
     },
     "surestrike": {
         name: "Surestrike",
@@ -7560,7 +7562,7 @@ const tooltipRegistry = {
   },
   "keen_sniffer": {
     title: "Keen Sniffer",
-    description: "You gain +1 <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Smell and Tracking Checks."
+    description: "You gain +1 <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Smell and Tracking Checks."
   },
   "small": {
     title: "Small",
@@ -7828,11 +7830,11 @@ const tooltipRegistry = {
     },
     "deadly_bite": {
         title: "Deadly Bite",
-        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to bite attacks."
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to bite attacks."
     },
     "deadly_sting": {
         title: "Deadly Sting",
-        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to specified sting attacks."
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to specified sting attacks."
     },
     "devour": {
         title: "Devour",
@@ -7840,11 +7842,11 @@ const tooltipRegistry = {
     },
     "divine_salvation": {
         title: "Divine Salvation",
-        description: "The creature is granted a free <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Avoidance checks."
+        description: "The creature is granted a free <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Avoidance checks."
     },
     "elusive": {
         title: "Elusive",
-        description: "When rolling Avoidance, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, in addition to their normal effect, negate <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> made against you."
+        description: "When rolling Avoidance, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, in addition to their normal effect, negate <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> made against you."
     },
     "enthral": {
         title: "Enthral",
@@ -8083,11 +8085,11 @@ const tooltipRegistry = {
   // ═══════════════════════════════════════════════════════════════════════
  "proficiency": {
     title: "Proficiency",
-    description: "You can change up to your Rank Skill Results to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> once per check."
+    description: "You can change up to your Rank <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> once per check."
   },  
 "alertness": {
     title: "Alertness",
-    description: "Add a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Surprise and Initiative Checks."
+    description: "Add a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Surprise and Initiative Checks."
   },
   "appraise": {
     title: "Appraise",
@@ -8185,7 +8187,7 @@ const tooltipRegistry = {
   },
   "crushing_blow": {
     title: "Crushing Blow",
-    description: "Using a brutal weapon, you can change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but Skill Results cannot be modified. When you use this skill, your attack is limited to one strike."
+    description: "Using a brutal weapon, you can change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cannot be modified. When you use this skill, your attack is limited to one strike."
   },
   "dual_wielding": {
     title: "Dual-Wielding",
@@ -8260,7 +8262,7 @@ const tooltipRegistry = {
   },
   "level_headed": {
     title: "Level Headed",
-    description: "Add a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Verve Saves against Panic."
+    description: "Add a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Verve Saves against Panic."
   },
   "discern_lie": {
     title: "Discern Lie",
@@ -8329,7 +8331,7 @@ const tooltipRegistry = {
   },
   "backstab": {
     title: "Backstab",
-    description: "When you strike a relatively still foe that is unaware of your presence, change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. When you use this skill, your attack is limited to one strike."
+    description: "When you strike a relatively still foe that is unaware of your presence, change up to your Rank <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. When you use this skill, your attack is limited to one strike."
   },
   "geography": {
     title: "Geography",
@@ -8718,22 +8720,22 @@ const tooltipRegistry = {
   "orb_of_darkness": {
     title: "Orb of Darkness",
     actionType: "Cast + Attack",
-    description: "You can shoot an orb of darkness at a target dealing Verve + Rank dice of darkness damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You can shoot an orb of darkness at a target dealing Verve + Rank dice of darkness damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "dark_mantle": {
     title: "Dark Mantle",
     actionType: "Cast",
-    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "ball_of_darkness": {
     title: "Ball of Darkness",
     actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with blinding darkness dealing Verve + Rank dice of darkness damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You blast a five-hex diameter circle with blinding darkness dealing Verve + Rank dice of darkness damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
   },
   "veil_of_darkness": {
     title: "Veil of Darkness",
     actionType: "Cast + Attack",
-    description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
   },
   "tendril_of_darkness": {
@@ -9493,7 +9495,7 @@ const tooltipRegistry = {
     },
     "luck_is_what_you_make_it": {
         title: "Luck Is What You Make It",
-        description: "TN 2: Targets can change Wyrd Results to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free."
+        description: "TN 2: Targets can change all <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for free."
     },
     "luck_be_with_you": {
         title: "Luck Be With You",
@@ -9691,7 +9693,7 @@ const tooltipRegistry = {
   "true_lightning": {
     title: "True Lightning",
     actionType: "Cast + Attack",
-    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Weakness.",
+    description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Weakness.",
     extras: [{"label":"Bonus Spells","text":"Static Discharge; Static Aura"}]
   },
   "pillar_of_flame": {
@@ -9703,7 +9705,7 @@ const tooltipRegistry = {
   "thunderous_roar": {
     title: "Thunderous Roar",
     actionType: "Cast + Attack",
-    description: "You let forth a thunderous roar, dazing all valid targets within Verve hexes. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    description: "You let forth a thunderous roar, dazing all valid targets within Verve hexes. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
     extras: [{"label":"Bonus Spells","text":"Transient Noise; Shroud of Thunder"}]
   },
   "blizzard": {
@@ -9721,7 +9723,7 @@ const tooltipRegistry = {
   "immolate": {
     title: "Immolate",
     actionType: "Cast + Attack",
-    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. Skill Results are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
   "entomb": {
@@ -9876,7 +9878,7 @@ const tooltipRegistry = {
   },
   "true_abjuration": {
     title: "True Abjuration",
-    description: "Abjure Energy and Abjure Wounds now provide immunity to their respective damage types, and Abjure Death now grants the target an additional <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Avoidance rolls."
+    description: "Abjure Energy and Abjure Wounds now provide immunity to their respective damage types, and Abjure Death now grants the target an additional <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Avoidance rolls."
   },
   "improved_force": {
     title: "Improved Force",
@@ -9888,27 +9890,27 @@ const tooltipRegistry = {
   },
   "true_force": {
     title: "True Force",
-    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
+    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
 "hailfire": {
         title: "Hailfire",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and numb the target."
+        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and numb the target."
     },
     "solar_tempest": {
         title: "Solar Tempest",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target."
+        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target."
     },
     "firestorm": {
         title: "Firestorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and weaken the target."
+        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and weaken the target."
     },
     "pyroclasm": {
         title: "Pyroclasm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and inflict Daze."
+        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and inflict Daze."
     },
     "whiteout_blizzard": {
         title: "Whiteout Blizzard",
@@ -9980,7 +9982,7 @@ const tooltipRegistry = {
   },
   "hailstorm": {
     title: "Hailstorm",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent hailstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent hailstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
     extras: [{ label: "Rite", text: "The effect is permanent." }]
   },
   "living_fog": {
@@ -10024,38 +10026,38 @@ const tooltipRegistry = {
     "daylight": {
         title: "Daylight",
         actionType: "Cast + Skill Check [Verve]",
-        description: "You call forth a sphere of daylight and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This light impairs all Darkfolk, shadow pnuemons, and all creatures with Darkvision as their primary method of espying by Verve number of dice.\n● Attack: The sphere can be thrown and will explode, dealing Verve + Rank dice of light damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.\n● Set: By being thrown upward, the ball will provide daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
+        description: "You call forth a sphere of daylight and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This light impairs all Darkfolk, shadow pnuemons, and all creatures with Darkvision as their primary method of espying by Verve number of dice.\n● Attack: The sphere can be thrown and will explode, dealing Verve + Rank dice of light damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.\n● Set: By being thrown upward, the ball will provide daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
         extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
     },
     "true_darkness": {
         title: "True Darkness",
         actionType: "Cast + Skill Check [Verve]",
-        description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons Save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
+        description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons Save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
         extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
     },
     "vernal_warrior": {
         title: "Vernal Warrior",
-        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts lightning damage. Weapons blessed in the name of Ver and enchanted to deal lightning damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, your Dismiss Undead skill can be used to heal all allies within range 2/Pulse points of Vitality."
+        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts lightning damage. Weapons blessed in the name of Ver and enchanted to deal lightning damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, your Dismiss Undead skill can be used to heal all allies within range 2/Pulse points of Vitality."
     },
     "aestival_warrior": {
         title: "Æstival Warrior",
-        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts fire damage. Weapons blessed in the name of Aestas and enchanted to deal fire damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, vivacious undead that resist your Dismiss Undead skill still take half damage."
+        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts fire damage. Weapons blessed in the name of Aestas and enchanted to deal fire damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, vivacious undead that resist your Dismiss Undead skill still take half damage."
     },
     "autumnal_warrior": {
         title: "Autumnal Warrior",
-        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts thunder damage. Weapons blessed in the name of Autumnus and enchanted to deal thunder damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, double your Verve when using your Dismiss Undead skill."
+        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts thunder damage. Weapons blessed in the name of Autumnus and enchanted to deal thunder damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, double your Verve when using your Dismiss Undead skill."
     },
     "brumal_warrior": {
         title: "Brumal Warrior",
-        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts frost damage. Weapons blessed in the name of Hiems and enchanted to deal frost damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, your Dismiss Undead skill can be used to Command or Charm undead instead (per their Bewitchment descriptions)."
+        description: "You are granted a bonus amount of dice equal to your Rank with any attack that inflicts frost damage. Weapons blessed in the name of Hiems and enchanted to deal frost damage allow you to add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking. Also, your Dismiss Undead skill can be used to Command or Charm undead instead (per their Bewitchment descriptions)."
     },
     "salt_sprayed_warrior": {
         title: "Salt-sprayed Warrior",
-        description: "Your Arcane Armor allows you to breathe, fight, and move underwater without penalty and at full pace—swimming or walking (medium and heavy armor still prohibit swimming per normal). <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Sea Lord inflict the sensation of drowning upon your target, sending them into a panic."
+        description: "Your Arcane Armor allows you to breathe, fight, and move underwater without penalty and at full pace—swimming or walking (medium and heavy armor still prohibit swimming per normal). <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Sea Lord inflict the sensation of drowning upon your target, sending them into a panic."
     },
     "burning_warrior": {
         title: "Burning Warrior",
-        description: "Your Arcane Armor makes you immune to fire attacks. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Fire God immolate the target, inflicting pain, TN Rank, for an amount of rounds equal to the damage dealt."
+        description: "Your Arcane Armor makes you immune to fire attacks. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Fire God immolate the target, inflicting pain, TN Rank, for an amount of rounds equal to the damage dealt."
     },
     "stonefist_warrior": {
         title: "Stonefist Warrior",
@@ -10103,7 +10105,7 @@ const tooltipRegistry = {
   },
   "daze": {
     title: "Daze",
-    description: "While dual-wielding, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "While dual-wielding, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
   },
   "dervish": {
     title: "Dervish",
@@ -10139,7 +10141,7 @@ const tooltipRegistry = {
   },
   "martial_prowess": {
     title: "Martial Prowess",
-    description: "You can change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while using Trip and Grapple."
+    description: "You can change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while using Trip and Grapple."
   },
   "viper_strike": {
     title: "Viper Strike",
@@ -10151,7 +10153,7 @@ const tooltipRegistry = {
   },
   "quick_witted": {
     title: "Quick-Witted",
-    description: "You can change one Skill Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when making non-cast Acuity, Intellect, or Verve based skill checks."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when making non-cast Acuity, Intellect, or Verve based skill checks."
   },
   "polyglot": {
     title: "Polyglot",
@@ -10167,11 +10169,11 @@ const tooltipRegistry = {
   },
   "shield_mastery": {
     title: "Shield Mastery",
-    description: "You can change one Skill Avoidance Result to a <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while wielding a shield."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while rolling Avoidance wielding a shield."
   },
   "skill_mastery": {
     title: "Skill Mastery",
-    description: "You can add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a chosen skill for which you have acquired Extra Training. You can take this skill multiple times, each time for a different skill."
+    description: "You can add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a chosen skill for which you have acquired Extra Training. You can take this skill multiple times, each time for a different skill."
   },
   "improved_possess_other": {
     title: "Improved Possess Other",
@@ -24254,6 +24256,30 @@ const compendiumRegistry = {
             abilities: []
         },
         {
+            name: "Ettin [Etunaz]",
+            description: "Ettins are multi-headed giants that comprise a brute, the Etunaz, and one or more wizard heads, Witōndiz, joined at the shoulders. The Etunaz controls the entire body and each Witōndz, just one head.",
+            size: "D",
+            pace: "24",
+            vit: 90,
+            mana: 25,
+            avoid: "5d",
+            aspects: { dex: 5, hel: 18, str: 18, act: 3, int: 6, ver: 6 },
+            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Cudgel [Giant]: 6d+15; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            abilities: []
+        },
+        {
+            name: "Ettin [Witōndz]",
+            description: "A Witōndz head of an ettin is an incredibly powerful caster. He protects, buffs, and heals his head-brothers and himself while chucking offensive spells into the fray. So long as the Etunaz of the ettin is conscious, the Witōndz is protected by Called Shot mechanics.",
+            size: "B",
+            pace: "—",
+            vit: 21,
+            mana: 50,
+            avoid: "—",
+            aspects: { hel: 5, str: 3, act: 10, int: 8, ver: 10 },
+            attacks: [],
+            abilities: []
+        },
+        {
             name: "Giant, Fire",
             description: "Fire Giants live throughout the Desert of the Jann and along the southern arc of the Moonveil mountains. They have a ruddy complexion, green eyes, and fiery red hair.",
             size: "D",
@@ -24436,16 +24462,28 @@ const compendiumRegistry = {
             abilities: ["Guano Spray [rear facing]: TN 4 Health save"]
         },
         {
-            name: "Hydra",
-            description: "The hydra is a many-headed, long-necked, swamp dwelling beast with venomous bites. When disturbed, the hydra attempts to face as many of its foe as possible, snapping at each one. A hydra’s venom glands are highly sought after as they are necessary to create the proper antivenom. A hydra can only be killed by cutting off or crushing its many heads then burning the corpse. A hydra’s heads evenly occupy the three threatened hexes of the hydra and threaten 3 hexes each of their own.",
+            name: "Hydra [body]",
+            description: "The hydra is a many-headed, long-necked, swamp dwelling beast with venomous bites. When disturbed, the hydra attempts to face as many of its foe as possible, snapping at each one. A hydra’s venom glands are highly sought after as they are necessary to create the proper antivenom. A hydra can only be killed by cutting off or crushing its many heads then burning the corpse.",
             size: "2C",
             pace: "26",
-            vit: "26 per head",
-            mana: "12 per head",
-            avoid: "6d+8; cc4",
-            aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 2, ver: 2 },
-            attacks: ["Bite: 6d+4; Crush & Envenom", "Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash", "Venom: 3d; Pain"],
-            abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save"]
+            vit: "68",
+            mana: "34",
+            avoid: "5d+4; cc4",
+            aspects: { dex: 5, hel: 16, str: 10, act: 10, int: 2, ver: 2 },
+            attacks: ["Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash"],
+            abilities: ["Hide Suit", "Regenerate"]
+        },
+        {
+            name: "Hydra [head]",
+            description: "A hydra’s heads evenly occupy the three threatened hexes of the hydra and threaten 3 hexes each of their own.",
+            size: "B",
+            pace: "—",
+            vit: "16",
+            mana: "34",
+            avoid: "6d+8; cc2",
+            aspects: { dex: 16, hel: 3, str: 4, act: 10, int: 2, ver: 2 },
+            attacks: ["Bite: 6d+4; Crush & Envenom", "Venom: 3d; Pain"],
+            abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save", "Elusive"]
         },
         {
             name: "Leviathan",
@@ -25368,7 +25406,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Egregore, Transcendent", 
-            description: "Eachtime an Egregore transcends, its Acuity, Verve, and Thrall Limit increase by one. Although it is still incapable of defending itself, if it suffers as much as a single point of damage, its thralls will defend it with their lives.",
+            description: "Each time an Egregore transcends, its Acuity, Verve, and Thrall Limit increase by one. Although it is still incapable of defending itself, if it suffers as much as a single point of damage, its thralls will defend it with their lives.",
             size: "D", 
             pace: "—", 
             vit: "—", 
@@ -25672,6 +25710,11 @@ window.renderCompendiumMiniSheet = function(creatureName) {
                 <span style="font-size: 0.78rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(creature.size || 'B')} | Pace ${escapeHtml(creature.pace || '8')}</span>
             </div>
 
+            <!-- Row 1.5: Description / Details -->
+            <div style="font-size: 0.8rem; font-style: italic; color: #5c1d1d; line-height: 1.25; margin-bottom: 8px;">
+                ${escapeHtml(creature.description)}
+            </div>
+
             <!-- Row 2: Aspect Strip -->
             <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; color: #5c1d1d; margin-bottom: 8px;">
                 <span>DEX: ${asp.dex ?? '—'}</span>
@@ -25738,7 +25781,7 @@ const encounterChartsRegistry = {
     "Barrowlands": {
         minor: ["Boar", "Kobold", "Rat, Giant", "Raven, Wise"],
         moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Goblin", "Jorōgumo", "Leonthrope", "Lupine", "Snow Leopard", "Weftlings [Arctic Wolf Spider]"],
-        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Giant, Hill", "Thura", "Troll, Frost", "Wight", "Wyrm, Frost-"]
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Giant, Hill", "Thura", "Troll, Frost", "Wight", "Wyrm, Frost-"]
     },
     "Cliffs of the Verdant Straight": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Eagle, Screeching", "Raven, Wise", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Wasps, Giant"],
@@ -25748,17 +25791,17 @@ const encounterChartsRegistry = {
     "Coast of the Frosinlands": {
         minor: ["Boar", "Crab, Lightning", "Horse [Belgian Draft]", "Pony", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Fishfolk", "Jorōgumo", "Leonthrope", "Lupine", "Orc", "Polyps", "Snow Leopard", "Weftlings [Arctic Wolf Spider]", "Werewolf", "Wolf [Grey]", "Wolf, Frost"],
-        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
     },
     "Cordillera": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Bobcat]", "Gnole", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Recluse]", "Werebat", "Werewolf", "Wolf"],
-        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar Between the mountains and the river": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Granas", "Hawk, Fire", "Horse [Mustang]", "Pony", "Kobold", "Rat, Giant", "Sheep", "Snake, Constrictor [Boa]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Cougar]", "Goblin", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Orc", "Raven, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Wererat", "Werewolf", "Wolf"],
-        major: ["Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Ettin", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar Delta": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Granas", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
@@ -25768,7 +25811,7 @@ const encounterChartsRegistry = {
     "Daar Mountains": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Eagle, Screeching", "Hawk, Fire", "Horse [Altai Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Bullsnake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Faeries", "Felivir [Cougar]", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Werehyena", "Werewolf", "Wolf"],
-        major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar River & its riparian forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]"],
@@ -25783,7 +25826,7 @@ const encounterChartsRegistry = {
     "Depths of the Sculpted Darkness": {
         minor: ["Beetle, Fire", "Serpent Vine", "Zombie, Kindorei"],
         moderate: ["Bear, Glow", "Boar, Glow", "Camasotz", "Derro", "Hellhound", "Hyena, Six-paw", "Jorōgumo", "Minotaur [Lycanthropic]", "Scorpionfolk [Deathstalker]", "Spider, Giant", "Weftlings [Black Widow]", "Wereboar"],
-        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ifrit", "Kathonid", "Ogre", "Oldra", "Troll", "Wyrm [Sarpa]"]
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ettin", "Ifrit", "Kathonid", "Ogre", "Oldra", "Troll", "Wyrm [Sarpa]"]
     },
     "Desert of the Jann": {
         minor: ["Beetle, Fire", "Camel", "Hawk, Fire", "Kobold", "Phoenix", "Rat, Giant", "Snake, Venomous [Sand Viper]"],
@@ -25813,12 +25856,12 @@ const encounterChartsRegistry = {
     "Forests of the Frosinlands": {
         minor: ["Boar", "Brownies", "Dryad", "Kobold", "Naiad", "Pegasus", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Unicorn", "Weeping Willow"],
         moderate: ["Antaeon", "Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Felivir [Snow Leopard]", "Goblin", "Jorōgumo", "Leonthrope", "Lupine", "Shadowcat", "Snow Leopard", "Spider, Giant", "Weftlings [Long-jawed Orb Weaver]", "Wendigo", "Werebat"],
-        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Giant, Frost", "Troll, Frost", "Wight", "Wyrm, Frost-"]
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Troll, Frost", "Wight", "Wyrm, Frost-"]
     },
     "God’s Throne Mountains": {
         minor: ["Brownies", "Dryad", "Eagle, Screeching", "Kobold", "Naiad", "Pixie", "Raven, Wise"],
         moderate: ["Bear [Grizzly]", "Canivir [Tundra Wolf]", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Felivir [Snow Leopard]", "Goblin", "Gryphon", "Jorōgumo", "Leonthrope", "Lupine", "Raven, Giant", "Snow Leopard", "Spider, Giant", "Ursanthrope", "Weftlings [Arctic Wolf Spider]", "Werebat", "Werewolf", "Wolf [Arctic]", "Wolf, Frost"],
-        major: ["Badgerknight [Roaming]", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
+        major: ["Badgerknight [Roaming]", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Ettin", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
     },
     "Grasslands": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Boa]", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
@@ -25828,12 +25871,12 @@ const encounterChartsRegistry = {
     "Great Forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Pony [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Unicorn", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Goblin", "Jorōgumo", "Naga [Asp]", "Scorpionfolk [Yellow-tailed]", "Shadowcat", "Spider, Giant", "Weftlings [Black Tunnelweb Spider]", "Wendigo", "Werebat", "Werewolf", "Wolf [Grey]"],
-        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wyrm, Cloud-"]
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Ettin", "Nagaraja", "Troll", "Wyrm, Cloud-"]
     },
     "Great Slough and its swamp": {
         minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck [Terror Bird]", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
+        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Ettin", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Hidden Vale": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Dog [Shiba Inu]", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Urox", "Wasps, Giant", "Weeping Willow"],
@@ -25843,12 +25886,12 @@ const encounterChartsRegistry = {
     "Hill Country": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Eagle, Giant", "Felivir [Cougar]", "Gnole", "Goblin", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Naga [Diamondback]", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Tarantula]", "Werebat", "Werewolf", "Wolf"],
-        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Ettin", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Imperial coast": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
-        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Ettin", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
     },
     "Imperial city/town": {
         minor: ["Dog", "Horse", "Pony", "Rat, Giant"],
@@ -25868,7 +25911,7 @@ const encounterChartsRegistry = {
     "Isle of Ver": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Kobold", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Kodiac]", "Canivir [Dhole]", "Eagle, Giant", "Felivir [Iberian Lynx]", "Goblin", "Harpy", "Hawk, Giant", "Jorōgumo", "Leonthrope", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Orcanthrope", "Raven, Giant", "Weftlings [Mediterranean Recluse]", "Werebat"],
-        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Cyclops", "Dragon, Azure", "Drake, Blue", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Cyclops", "Dragon, Azure", "Drake, Blue", "Ettin", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
     },
     "Kassani Delta": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Pony", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
@@ -25893,12 +25936,12 @@ const encounterChartsRegistry = {
     "Moon Veil Mountains, East": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Unicorn", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Jorōgumo", "Orc", "Raven, Giant", "Spider, Giant", "Weftlings [Brown Recluse]", "Werebat", "Wolf"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Azure", "Dragon, Or", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Giant, Hill", "Giant, Island", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Azure", "Dragon, Or", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Ettin", "Giant, Hill", "Giant, Island", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
     },
     "Moon Veil Mountains, North": {
         minor: ["Eagle, Screeching", "Raven, Wise"],
         moderate: ["Bear [Grizzly]", "Eagle, Giant", "Gryphon", "Jorōgumo", "Lupine", "Orc", "Raven, Giant", "Snow Leopard", "Spider, Giant", "Weftlings [Clubiona]", "Wolf [Arctic]", "Wolf, Frost"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Argent", "Dragon, Or", "Drake, White", "Ettin", "Giant, Frost", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll, Frost", "Wyrm, Frost-"]
     },
     "Moon Veil Mountains, South": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
@@ -25908,7 +25951,7 @@ const encounterChartsRegistry = {
     "Moon Veil Mountains, West": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Unicorn", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Kitsune", "Orc", "Raven, Giant", "Spider, Giant", "Vulpivir", "Werebat", "Wolf"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Ettin", "Giant, Hill", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
     },
     "Oobar": {
         minor: ["Dog [Painted]", "Hawk, Fire", "Wasps, Giant"],
@@ -25923,7 +25966,7 @@ const encounterChartsRegistry = {
     "Rim of the Sculpted Darkness": {
         minor: ["Beetle, Fire", "Kobold", "Zombie, Kindorei"],
         moderate: ["Bear, Glow", "Boar, Glow", "Goblin", "Hellhound", "Hyena, Six-paw", "Jorōgumo", "Minotaur [Lycanthropic]", "Scorpionfolk [Vietbocap Canhi]", "Spider, Giant", "Weftlings [Black Widow]", "Werebat"],
-        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ifrit", "Ogre", "Oldra", "Thura", "Troll", "Wyrm, Fire-"]
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Dragon, Sable", "Drake, Black", "Ettin", "Ifrit", "Ogre", "Oldra", "Thura", "Troll", "Wyrm, Fire-"]
     },
     "Sea": {
         minor: ["Crab, Lightning", "Snake, Venomous [Yellow Sea Snake]"],
@@ -26228,6 +26271,11 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
                 <span style="font-size: 0.78rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(creature.size || 'B')} | Pace ${escapeHtml(creature.pace || '8')}</span>
             </div>
 
+            <!-- Row 1.5: Description / Details -->
+            <div style="font-size: 0.8rem; font-style: italic; color: #5c1d1d; line-height: 1.25; margin-bottom: 8px;">
+                ${escapeHtml(creature.description)}
+            </div>
+
             <!-- Row 2: Aspect Strip -->
             <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; color: #5c1d1d; margin-bottom: 8px;">
                 <span>DEX: ${asp.dex ?? '—'}</span>
@@ -26280,7 +26328,10 @@ window.renderCompendiumMiniSheet = function(creatureName, index = 0) {
                 </div>
                 <div>
                     <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
-                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                    ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => {
+                        const tooltipKey = typeof getAbilityTooltipKey === "function" ? getAbilityTooltipKey(ab) : "";
+                        return `<div style="margin-bottom: 2px; color: var(--text-dark);"><span data-tooltip="${tooltipKey}" style="cursor: help;">• ${escapeHtml(ab)}</span></div>`;
+                    }).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
                     ${inspectorDefensesHtml}
                 </div>
             </div>
