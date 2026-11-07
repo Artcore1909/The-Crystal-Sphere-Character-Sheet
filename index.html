@@ -2212,7 +2212,7 @@ details[open] #skills-collapsed-summary {
           <input type="text" id="char-native-lang" readonly value=""> 
         </div> 
         <div class="form-group span-6"> 
-          <label for="char-pidgin-select">Second Language <span style="font-weight: normal; font-size: 0.8rem; color: var(--text-muted);">(Requires Intellect > 2)</span></label> 
+          <label for="char-pidgin-select">Second Language</label> 
           <select id="char-pidgin-select" onchange="this.dataset.savedPidgin = this.value; calculateSheet()" disabled> 
             <option value="None">Intellect too low for second language...</option> 
           </select> 
@@ -3157,84 +3157,257 @@ details[open] #skills-collapsed-summary {
                     <li>All characters begin with 108 Exp. to invest in Aspects and Skills. At creation, starting Aspects are set to three plus an unmodified two-dice roll (<img src="images/Hitenc.png" alt="Hit" class = "inline-icon"> count as one, and <img src="images/Critenc.png" alt="Crit" class="inline-icon"> count as two), except Hap which is determined by rolling four dice (rerolling Blank, <img src='images/Skillenc.png' alt='Skill' class='inline-icon'>, and <img src='images/Wyrdenc.png' alt='Wyrd' class='inline-icon'> once each).</li>
                 </ul>
                 <br>
-                <strong>Sex Adjustments:</strong>
-                <ul>
-                    <li><strong>Males:</strong> Gain a +1 to assign to Health, Strength, or Verve.</li>
-<br>
-                    <li><strong>Females:</strong> Gain a +1 to assign to Dexterity, Acuity, or Verve.</li>
-                </ul>
+<!-- 📊 SEX ADJUSTMENTS TABLE -->
+                <div class="table-container" style="margin: 15px 0 20px 0;">
+                    <table class="game-data racial-table">
+                        <thead>
+                            <tr>
+                                <th colspan="7" style="text-align: center !important; letter-spacing: 0.5px; font-size: 0.9rem;">SEX ADJUSTMENTS</th>
+                            </tr>
+                            <tr>
+                                <th style="width: 15%;">Sex</th>
+                                <th>Hel</th>
+                                <th>Str</th>
+                                <th>Ver</th>
+                                <th>Dex</th>
+                                <th>Act</th>
+                                <th>Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Male</td>
+                                <td colspan="3" class="racial-bonus">+1 to assign</td>
+                                <td colspan="3" class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Female</td>
+                                <td colspan="3" class="racial-neutral">—</td>
+                                <td colspan="3" class="racial-bonus">+1 to assign</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <br>
-                <strong>Racial Pace & Customizations:</strong>
+<!-- 📊 RACIAL ADJUSTMENTS TABLE -->
+                <div class="table-container" style="margin: 15px 0 20px 0;">
+                    <style>
+                        .racial-table th, .racial-table td {
+                            text-align: center !important;
+                            padding: 8px 6px !important;
+                            font-size: 0.82rem !important;
+                            vertical-align: middle !important;
+                        }
+                        .racial-table th:first-child, .racial-table td:first-child {
+                            text-align: left !important;
+                            padding-left: 12px !important;
+                        }
+                        .racial-bonus {
+                            color: #1b6b55;
+                            background-color: #edf7f4;
+                            font-weight: 600;
+                        }
+                        .racial-penalty {
+                            color: #b82c2c;
+                            background-color: #fdf2f2;
+                            font-weight: 600;
+                        }
+                        .racial-neutral {
+                            color: #a39580;
+                        }
+                    </style>
+                    <table class="game-data racial-table">
+                        <thead>
+                            <tr>
+                                <th colspan="10" style="text-align: center !important; letter-spacing: 0.5px; font-size: 0.9rem;">RACIAL ADJUSTMENTS</th>
+                            </tr>
+                            <tr>
+                                <th>Race</th>
+                                <th>Size</th>
+                                <th>Pace</th>
+                                <th>Dex</th>
+                                <th>Hel</th>
+                                <th>Str</th>
+                                <th>Act</th>
+                                <th>Int</th>
+                                <th>Ver</th>
+                                <th>Hap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Canivir</td>
+                                <td>B</td>
+                                <td>9</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-bonus">+2 to assign</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-penalty">-1 to assign</td>
+                                <td class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Dwarf</td>
+                                <td>B</td>
+                                <td>7</td>
+                                <td class="racial-penalty">-1</td>
+                                <td colspan="2" class="racial-bonus">+2 to allocate</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-penalty">-1 to assign</td>
+                                <td class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Elf</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td class="racial-bonus">+1</td>
+                                <td colspan="2" class="racial-penalty">-2 to allocate</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-bonus">+1 to assign</td>
+                                <td class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Felivir</td>
+                                <td>B</td>
+                                <td>10</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-bonus">+2 to allocate</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-penalty">-2 to allocate</td>
+                                <td class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Half-Elf</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td class="racial-bonus">+1</td>
+                                <td colspan="2" class="racial-penalty">-1 to assign</td>
+                                <td colspan="4" class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Half-Orc</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-bonus">+2 to allocate</td>
+                                <td colspan="2" class="racial-neutral">—</td>
+                                <td colspan="2" class="racial-penalty">-2 to allocate</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Hanyo</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td colspan="3" class="racial-bonus">+2 to allocate</td>
+                                <td colspan="3" class="racial-penalty">-1 to assign</td>
+                                <td class="racial-penalty">-1</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Haubid</td>
+                                <td>B</td>
+                                <td>7</td>
+                                <td class="racial-bonus">+1</td>
+                                <td colspan="2" class="racial-penalty">-2 to allocate</td>
+                                <td class="racial-bonus">+1</td>
+                                <td class="racial-neutral">—</td>
+                                <td class="racial-neutral">—</td>
+                                <td class="racial-bonus">+1</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Human</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td colspan="7" class="racial-neutral" style="text-align: center !important;">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Nuss-Janni</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td colspan="3" class="racial-bonus">+1 to assign</td>
+                                <td colspan="3" class="racial-penalty">-1 to assign</td>
+                                <td class="racial-neutral">—</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Vulpivir</td>
+                                <td>B</td>
+                                <td>8</td>
+                                <td class="racial-bonus">+1</td>
+                                <td colspan="2" class="racial-penalty">-2 to allocate</td>
+                                <td class="racial-bonus">+1</td>
+                                <td colspan="3" class="racial-neutral">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+<strong>Racial Distinctions & Abilities:</strong>
                 <ul>
-                    <li><strong>Canivir:</strong> Canine anthropoids possessing an acute sense of smell, a vicious bite, distinct dog-like hind legs, and a tail.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Keen Sniffer.</li>
-                </ul>
-                            </li>
-<br>
-                    <li><strong>Dwarf:</strong> Shorter than humans but far more muscular, recognized by their long, proudly braided and decorated beards.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Earthray Vision; Weapon Affinity [Brutal].</li>
-                </ul>
-                            </li>
-<br>
-                    <li><strong>Elf:</strong> Tall, slender, and seemingly ageless folk who originate from either the Gloaming or the Great Forests.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Inexhaustible Mana; Nimble Athlete; Battlemagic Affinity.</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Felivir:</strong> Feline anthropoids whose specific big- or small-cat traits reflect the region they call home.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Natural Acrobat; Starlight Vision; Weapon Affinity [Pugilism].</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Half-elf:</strong> Nearly indistinguishable from humans, save for the subtle, elegant point of their ears.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Half-Human; Starlight Vision; Weapon Affinity [Shrewd & Arc-bow].</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Half-orc:</strong> Often cast out due to the nature of their birth, marked by leathery skin and prominent lower tusks from a strong underbite.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Half-Human; Sinuous Athlete; Starlight Vision; Weapon Affinity [Two-Handed Brutal & Shrewd].</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.</li>
-                <ul>
-                            <li><em>Earth Hanyo:</em> Earthray Vision, Hardy</li>
-                            <li><em>Fire Hanyo:</em> Fire Resistance</li>
-                            <li><em>Shadow Hanyo:</em> Darkvision, Enshadowed</li>
-                           <li><em>Water Hanyo:</em> Lightning Resistance</li>
-                           <li><em>Wind Hanyo:</em> Frost Resistance</li>
-                </ul>
-                   </li>
-<br>
-                    <li><strong>Haubid:</strong> Small, childlike folk who make their homes alongside human communities.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Light-Footed; Small; Weapon Affinity [One-Handed Common].</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Human:</strong> Divided largely into two roots: the settled Imperials of the Empire and the resilient Gurzim of the Wildlands.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Human Curiosity.</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Nuss-janni:</strong> Tall, sun-hardened desert folk bearing the distinct bloodline of the Jann.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Half-Human; Half-Jann.</li>
-                 </ul>
-                            </li>
-<br>
-                    <li><strong>Vulpivir:</strong> Small, fox-like anthropoids living mostly among the elves, coated in varied fur with sharp claws, pointed teeth, and bushy tails.</li>
-                <ul>
-                            <li><em>Special Abilities:</em> Keen Sniffer; Light-Footed; Small; Starlight Vision; Weapon Affinity [Crossbow].</li>
-                 </ul>
-                            </li>
+                    <li><strong>Canivir:</strong> Canine anthropoids possessing an acute sense of smell, a vicious bite, distinct dog-like hind legs, and a tail.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="keen_sniffer" class="skill-title">Keen Sniffer</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Dwarf:</strong> Shorter than humans but far more muscular, recognized by their long, proudly braided and decorated beards.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="earthray_vision" class="skill-title">Earthray Vision</span>; <span data-tooltip="weapon_affinity_dwarf_brutal" class="skill-title">Weapon Affinity [Brutal]</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Elf:</strong> Tall, slender, and seemingly ageless folk who originate from either the Gloaming or the Great Forests.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="inexhaustible_mana" class="skill-title">Inexhaustible Mana</span>; <span data-tooltip="nimble_athlete" class="skill-title">Nimble Athlete</span>; <span data-tooltip="weapon_affinity_elf_battlemagic" class="skill-title">Battlemagic Affinity</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Felivir:</strong> Feline anthropoids whose specific big- or small-cat traits reflect the region they call home.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="natural_acrobat" class="skill-title">Natural Acrobat</span>; <span data-tooltip="starlight_vision" class="skill-title">Starlight Vision</span>; <span data-tooltip="weapon_affinity_felivir_pugilism" class="skill-title">Weapon Affinity [Pugilism]</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Half-elf:</strong> Nearly indistinguishable from humans, save for the subtle, elegant point of their ears.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="half_human" class="skill-title">Half-Human</span>; <span data-tooltip="starlight_vision" class="skill-title">Starlight Vision</span>; <span data-tooltip="weapon_affinity_halfelf_shrewd_arcbow" class="skill-title">Weapon Affinity [Shrewd & Arc-bow]</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Half-orc:</strong> Often cast out due to the nature of their birth, marked by leathery skin and prominent lower tusks from a strong underbite.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="half_human" class="skill-title">Half-Human</span>; <span data-tooltip="sinuous_athlete" class="skill-title">Sinuous Athlete</span>; <span data-tooltip="starlight_vision" class="skill-title">Starlight Vision</span>; <span data-tooltip="weapon_affinity_halforc_twohanded_brutal_shrewd" class="skill-title">Weapon Affinity [Two-Handed Brutal & Shrewd]</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Hanyo:</strong> Human-born offspring of a Pneumon, usually bearing faint telltale marks like slit pupils or unusual eye and hair colors. Those with starker physical traits rarely survive infancy.
+                        <ul>
+                            <li><em>Earth Hanyo:</em> <span data-tooltip="earthray_vision" class="skill-title">Earthray Vision</span>, <span data-tooltip="hardy" class="skill-title">Hardy</span></li>
+                            <li><em>Fire Hanyo:</em> <span data-tooltip="fire_resistance" class="skill-title">Fire Resistance</span></li>
+                            <li><em>Shadow Hanyo:</em> <span data-tooltip="darkvision" class="skill-title">Darkvision</span>, <span data-tooltip="enshadowed" class="skill-title">Enshadowed</span></li>
+                           <li><em>Water Hanyo:</em> <span data-tooltip="lightning_resistance" class="skill-title">Lightning Resistance</span></li>
+                           <li><em>Wind Hanyo:</em> <span data-tooltip="frost_resistance" class="skill-title">Frost Resistance</span></li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Haubid:</strong> Small, childlike folk who make their homes alongside human communities.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="light_footed" class="skill-title">Light-Footed</span>; <span data-tooltip="small" class="skill-title">Small</span>; <span data-tooltip="weapon_affinity_haubid_onehanded_common" class="skill-title">Weapon Affinity [One-Handed Common]</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Human:</strong> Divided largely into two roots: the settled Imperials of the Empire and the resilient Gurzim of the Wildlands.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="human_curiosity" class="skill-title">Human Curiosity</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Nuss-janni:</strong> Tall, sun-hardened desert folk bearing the distinct bloodline of the Jann.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="half_human" class="skill-title">Half-Human</span>; <span data-tooltip="half_jann" class="skill-title">Half-Jann</span>.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li><strong>Vulpivir:</strong> Small, fox-like anthropoids living mostly among the elves, coated in varied fur with sharp claws, pointed teeth, and bushy tails.
+                        <ul>
+                            <li><em>Special Abilities:</em> <span data-tooltip="keen_sniffer" class="skill-title">Keen Sniffer</span>; <span data-tooltip="light_footed" class="skill-title">Light-Footed</span>; <span data-tooltip="small" class="skill-title">Small</span>; <span data-tooltip="starlight_vision" class="skill-title">Starlight Vision</span>; <span data-tooltip="weapon_affinity_vulpivir_crossbow" class="skill-title">Weapon Affinity [Crossbow]</span>.</li>
+                        </ul>
+                    </li>
                 </ul>
                 <br>
                 <strong>Culture & Language Fluency:</strong>
@@ -4754,7 +4927,7 @@ const itemRegistry = {
         damageType: "trample",
         bonusDamageText: "0",
         range: "Engaged",
-        description: "So long as you are entitled to a charge bonus, you can make a trample attack against all targets smaller than yourself on your path. Once you veer, you must regain your charge bonus before you can trample again."
+        description: "So long as you are entitled to a Charge Bonus, you can make a trample attack against all targets smaller than yourself on your path. Once you veer, you must regain your Charge Bonus before you can trample again."
     },
     "quarterstaff_close": {
         name: "Quarterstaff",
@@ -7644,7 +7817,7 @@ const tooltipRegistry = {
   },
   "small": {
     title: "Small",
-    description: "Your Charge bonus while afoot is reduced to 3, and you cannot wield weapons or shields with the special quality Heavy 5 or greater."
+    description: "Your Charge Bonus while afoot is reduced to 3, and you cannot wield weapons or shields with the special quality Heavy 5 or greater."
   },
   "half_human": {
     title: "Half-Human",
@@ -7656,7 +7829,7 @@ const tooltipRegistry = {
   },
   "half_jann": {
     title: "Half-Jann",
-    description: "As a word (costing six Mana), you can cast one of the following: Fire Corona, Frostshield, Static Aura, or Stone Fist."
+    description: "As a word only, you can cast one of the following: Fire Corona, Frostshield, Static Aura, or Stone Fist."
   },
   "weapon_affinity_dwarf_brutal": {
     title: "Weapon Affinity (Brutal Weapons)",
@@ -14597,7 +14770,7 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
          pidginSelect.dataset.lastLangTracking = "";
      } else if (finalInt <= 2) {
          pidginSelect.disabled = true;
-         pidginSelect.innerHTML = '<option value="None">Intellect must be > 2 to upgrade a Pidgin...</option>';
+         pidginSelect.innerHTML = '<option value="None">Intellect must be greater than two to upgrade a Pidgin...</option>';
          pidginSelect.dataset.lastLangTracking = "";
      } else {
          pidginSelect.disabled = false;
