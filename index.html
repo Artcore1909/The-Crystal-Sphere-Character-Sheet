@@ -8393,6 +8393,10 @@ const tooltipRegistry = {
     actionType: "Skill Check [Strength]",
     description: "You can maintain balance for ¼ of your pace plus a number of hexes equal to your Skill Check result."
   },
+  "battle_magic__any": {
+    title: "Battle Magic: Any",
+    description: "You can weave one or more elements from the Aether."
+  },
   "battle_magic__fire": {
     title: "Battle Magic: Fire",
     description: "You can weave fire from the Aether."
@@ -24537,15 +24541,15 @@ const compendiumRegistry = {
         },
         {
             name: "Ettin [Witōndz]",
-            description: "A Witōndz head of an ettin is an incredibly powerful caster. He protects, buffs, and heals his head-brothers and himself while chucking offensive spells into the fray. So long as the Etunaz of the ettin is conscious, the Witōndz is protected by Called Shot mechanics.",
+            description: "A Witōndz head of an ettin is an incredibly powerful caster. He protects, buffs, and heals his head-brothers and himself while chucking offensive spells into the fray. So long as the Etunaz of the ettin is conscious, the Witōndz benefits from the Etunaz's Avoidance and is protected by Called Shot mechanics.",
             size: "B",
             pace: "—",
             vit: 21,
             mana: 50,
-            avoid: "—",
-            aspects: { hel: 5, str: 3, act: 10, int: 8, ver: 10 },
+            avoid: "2d",
+            aspects: { dex: 2, hel: 5, str: 3, act: 10, int: 8, ver: 10 },
             attacks: [],
-            abilities: []
+            abilities: ["Abjuration", "Battle Magic: Any", "Illusion", "Arcane Force", "Druidism"]
         },
         {
             name: "Giant, Fire",
@@ -26326,13 +26330,23 @@ if (typeof window.escapeHtml !== "function") {
 window.getAbilityTooltipKey = function(abilityStr) {
     if (!abilityStr) return "";
     let clean = abilityStr.replace(/^[†‡⹋⸸\*\s]+/g, "");
-    clean = clean.split(/[:\[]/)[0].trim();
+    clean = clean.split(/\[/)[0].trim();
+    
+    // 🧠 UPGRADED KEY NORMALIZATION:
+    // 1. Convert "Battle Magic: Fire" -> "battle_magic__fire"
+    // 2. Convert standard names to snake_case safely
     let key = clean.toLowerCase()
+        .replace(/:\s*/g, "__")          // Converts colon + space to double underscore "__" (matches "battle_magic__fire")
         .replace(/&/g, "and")
-        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/[^a-z0-9_]+/g, "_")    // Keeps underscores intact
         .replace(/^_+|_+$/g, "");
     
     const explicitMapping = {
+        "battle_magic_fire": "battle_magic__fire",
+        "battle_magic_frost": "battle_magic__frost",
+        "battle_magic_light": "battle_magic__light",
+        "battle_magic_lightning": "battle_magic__lightning",
+        "battle_magic_thunder": "battle_magic__thunder",
         "venom": "venom",
         "poison": "venom",
         "breath": "corrupting_breath",
