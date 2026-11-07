@@ -78,6 +78,20 @@
         #conditional-modifiers .form-group {
             flex: 1 1 100%;
         }
+
+#conditional-modifiers:not(:empty) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-warm);
+    background: #fdfbf7;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-warm);
+}
+
 /* =========================================================================
            ASPECTS GRID & CARD ENGINE
 ========================================================================= */
@@ -1035,6 +1049,7 @@ table.wyrd-table .table-icon {
     flex-direction: column;
 }
 
+
 /* --- 🛡️ DYNAMIC DOUBLE-COLUMN CONFIGURATOR BREAKOUTS --- */
 
 /* 1. When the Armor builder is active: */
@@ -1981,9 +1996,10 @@ details[open] #skills-collapsed-summary {
   <!-- Collapsible Section: Character Information -->
   <details open class="collapsible-section">
     <summary class="section-header">Character Information</summary> 
-    <div class="section-content">
+    <div class="section-content" style="padding: 10px 0;">
       
       <div class="form-grid"> 
+        <!-- Row 1: Core Identity -->
         <div class="form-group span-6"> 
           <label for="char-name">Character Name</label> 
           <input type="text" id="char-name" placeholder="Enter name..." oninput="calculateSheet()"> 
@@ -1992,29 +2008,29 @@ details[open] #skills-collapsed-summary {
           <label for="char-sex">Sex</label> 
           <select id="char-sex" onchange="calculateSheet()"> 
             <option value="None">Select Sex...</option> 
-            <option value="Male">Male (+1 to Hel, Str, or Ver)</option> 
-            <option value="Female">Female (+1 to Dex, Act, or Ver)</option> 
+            <option value="Male">Male</option> 
+            <option value="Female">Female</option> 
           </select> 
         </div> 
         <div class="form-group span-3"> 
           <label for="char-race">Race</label> 
-<select id="char-race" onchange="calculateSheet()"> 
-    <option value="Human">Human</option> 
-    <option value="Canivir">Canivir</option> 
-    <option value="Dwarf">Dwarf</option> 
-    <option value="Elf">Elf</option> 
-    <option value="Felivir">Felivir</option> 
-    <option value="Half-elf">Half-Elf</option> 
-    <option value="Half-orc">Half-Orc</option> 
-    <option value="Hanyo (Earth)">Hanyo (Earth)</option> 
-    <option value="Hanyo (Fire)">Hanyo (Fire)</option> 
-    <option value="Hanyo (Shadow)">Hanyo (Shadow)</option> 
-    <option value="Hanyo (Water)">Hanyo (Water)</option> 
-    <option value="Hanyo (Wind)">Hanyo (Wind)</option> 
-    <option value="Haubid">Haubid</option> 
-    <option value="Nuss-janni">Nuss-Janni</option> 
-    <option value="Vulpivir">Vulpivir</option> 
-    <option disabled>────────── (LM / Other Anthropoids) ──────────</option>
+          <select id="char-race" onchange="calculateSheet()"> 
+            <option value="Human">Human</option> 
+            <option value="Canivir">Canivir</option> 
+            <option value="Dwarf">Dwarf</option> 
+            <option value="Elf">Elf</option> 
+            <option value="Felivir">Felivir</option> 
+            <option value="Half-elf">Half-Elf</option> 
+            <option value="Half-orc">Half-Orc</option> 
+            <option value="Hanyo (Earth)">Hanyo (Earth)</option> 
+            <option value="Hanyo (Fire)">Hanyo (Fire)</option> 
+            <option value="Hanyo (Shadow)">Hanyo (Shadow)</option> 
+            <option value="Hanyo (Water)">Hanyo (Water)</option> 
+            <option value="Hanyo (Wind)">Hanyo (Wind)</option> 
+            <option value="Haubid">Haubid</option> 
+            <option value="Nuss-janni">Nuss-Janni</option> 
+            <option value="Vulpivir">Vulpivir</option> 
+            <option disabled>────────── (LM / Other Anthropoids) ──────────</option>
             <option value="Anpu">Anpu</option>
             <option value="Antaeon">Antaeon</option>
             <option value="Brownies">Brownies</option>
@@ -2061,8 +2077,10 @@ details[open] #skills-collapsed-summary {
             <option value="Troll">Troll</option>
             <option value="Troll, Frost">Troll, Frost</option>
             <option value="Weftlings">Weftlings</option>
-</select>
+          </select> 
         </div> 
+
+        <!-- Row 2: Origin & Environment -->
         <div class="form-group span-4"> 
           <label for="char-ethnos">Ethnos (Culture)</label> 
           <select id="char-ethnos" onchange="calculateSheet()"> 
@@ -2130,6 +2148,8 @@ details[open] #skills-collapsed-summary {
             <option value="Wild">Wild</option> 
           </select> 
         </div> 
+
+        <!-- Row 3: Upbringing & Languages -->
         <div class="form-group span-8"> 
           <label for="char-upbringing">Upbringing & Guild Affiliation</label> 
           <select id="char-upbringing" onchange="calculateSheet()"> 
@@ -2152,21 +2172,22 @@ details[open] #skills-collapsed-summary {
           <label for="char-native-lang">Native Language</label> 
           <input type="text" id="char-native-lang" readonly value="Imperial"> 
         </div> 
+
         <div class="form-group span-12"> 
-          <label for="char-pidgin-select">Second Language (Requires Int > 2)</label> 
+          <label for="char-pidgin-select">Second Language <span style="font-weight: normal; font-size: 0.8rem; color: var(--text-muted);">(Requires Intellect > 2)</span></label> 
           <select id="char-pidgin-select" onchange="this.dataset.savedPidgin = this.value; calculateSheet()" disabled> 
             <option value="None">Intellect too low for second language...</option> 
           </select> 
         </div> 
       </div> <!-- Close form-grid -->
 
-      <!-- Conditional Modifiers Grid -->
-      <div class="grid-3" id="conditional-modifiers" style="margin-top: 15px;"> 
+      <!-- Conditional Modifiers Sub-Panel (Cleanly Grouped) -->
+      <div id="conditional-modifiers" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-warm);"> 
         <div class="form-group" id="sex-bonus-group" style="display:none;"> 
           <label for="sex-bonus-choice">Assign Sex Bonus (+1)</label> 
           <select id="sex-bonus-choice" onchange="calculateSheet()"></select> 
         </div> 
-        <div class="form-group span-12">
+        <div class="form-group">
           <label for="upbringing-bonus-choice">Assign Upbringing Bonus (+1)</label>
           <select id="upbringing-bonus-choice" onchange="calculateSheet()">
             <option value="none">-- Select Aspect --</option>
@@ -7628,6 +7649,11 @@ const tooltipRegistry = {
     "affinity": {
         title: "Affinity",
         description: "The creature gains a 1d bonus with the specified skill or weapon."
+    },
+    "alter_path": {
+        title: "Alter Path",
+        actionType: "Skill Check [Verve]",
+        description: "The creature forges and erases paths through the woods by magically and socially manipulating the flora and fauna. This skill is confronted by Survival, Direction Sense, Observation, & Tracking."
     },
     "asphyxiation": {
         title: "Asphyxiation",
@@ -24692,6 +24718,19 @@ const compendiumRegistry = {
             abilities: ["Constrict", "Rooted"] 
         },
         { 
+            name: "Stalkweed", 
+            description: "Stalkweed is some of the strangest flora of the Crystal Sphere. The countryfolk have a deep and superstitious respect for the Great Forest, and those who dare venture within invariably claim the woods wax labyrinthine. Stalkweed is the likely culprit as it always on the prowl for unsuspecting victims, forging trails and leading them into deadly encounters after which they feast upon the carion.",
+            size: "A", 
+            pace: "7", 
+            vit: 5, 
+            mana: "30", 
+            avoid: "1d", 
+            aspects: { dex: 1, hel: 1, str: 1, act: 6, int: 3, ver: 6 }, 
+            attacks: [], 
+            immunities: ["Curse", "Disease"],
+            abilities: ["Druidism", "Alter Path"] 
+        },
+        { 
             name: "Weeping Willow", 
             description: "The weeping willow uses illusion magic to lure its victims. When an opportune moment arises, the weeping willow will stuff its prey into the hollow of its trunk using either its branches or roots, then close the hollow up to digest its meal. Unless rescued, the victim will die in a few days and be fully digested in a few weeks.\n\n“He lifted his heavy eyes and saw leaning over him a huge willow-tree, old and hoary. Enormous it looked, its sprawling branches going up like reaching arms with many long-fingered hands, its knotted and twisted trunk gaping in wide fissures that creaked faintly as the boughs moved. The leaves fluttering against the bright sky dazzled him, and he toppled over, lying where he fell upon the grass.”\n\nThe Fellowship of the Ring by J.R.R. Tolkien",
             size: "7D x 16", 
@@ -25783,7 +25822,7 @@ window.renderCompendiumMiniSheet = function(creatureName) {
 // Master Encounter Charts Registry compiled from the Creature Compendium
 const encounterChartsRegistry = {
     "Bahr an-Jann & its riparian forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Camel", "Crab, Lightning", "Hawk, Fire", "Kobold", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Camel", "Crab, Lightning", "Hawk, Fire", "Kobold", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor", "Snake, Venomous [Gaboon Viper]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Bear, Sun", "Eagle, Giant", "Hellhound", "Polyps", "Wolf [Egyptian Wolf]", "Antlion", "Bear [Gobi]", "Crocodile [Nile]", "Fishfolk", "Lizardfolk [Nile Crocodile]", "Naga [Gaboon Viper]", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Golden Orb Weaver]", "Wereboar", "Werehyena", "Jorōgumo", "Kappa"],
         major: ["Badgerknight", "Jann", "Undine", "Aqrabu", "Basilisk", "Drake, Yellow", "Giant, Fire", "Hydra", "Manticore", "Nagaraja", "Troll", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
@@ -25823,7 +25862,7 @@ const encounterChartsRegistry = {
         major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar River & its riparian forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]", "Stalkweed"],
         moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [American]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Hellhound", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc"],
         major: ["Badgerknight", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Hydra", "Nagaraja", "Quadricorn", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
@@ -25863,7 +25902,7 @@ const encounterChartsRegistry = {
         major: ["Dragon, Vert", "Drake, Green"]
     },
     "Forests of the Frosinlands": {
-        minor: ["Boar", "Brownies", "Dryad", "Kobold", "Naiad", "Pegasus", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Unicorn", "Weeping Willow"],
+        minor: ["Boar", "Brownies", "Dryad", "Kobold", "Naiad", "Pegasus", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Stalkweed", "Unicorn", "Weeping Willow"],
         moderate: ["Antaeon", "Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Felivir [Snow Leopard]", "Goblin", "Jorōgumo", "Leonthrope", "Lupine", "Shadowcat", "Snow Leopard", "Spider, Giant", "Weftlings [Long-jawed Orb Weaver]", "Wendigo", "Werebat"],
         major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Troll, Frost", "Wight", "Wyrm, Frost-"]
     },
@@ -25878,12 +25917,12 @@ const encounterChartsRegistry = {
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Quadricorn", "Wight", "Wyrm, Cloud-", "Wyvern"]
     },
     "Great Forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Pony [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Unicorn", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Pony [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Stalkweed", "Unicorn", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Eagle, Giant", "Ent", "Faeries", "Goblin", "Jorōgumo", "Naga [Asp]", "Scorpionfolk [Yellow-tailed]", "Shadowcat", "Spider, Giant", "Weftlings [Black Tunnelweb Spider]", "Wendigo", "Werebat", "Werewolf", "Wolf [Grey]"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Ettin", "Nagaraja", "Troll", "Wyrm, Cloud-"]
     },
     "Great Slough and its swamp": {
-        minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck [Terror Bird]", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
         major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Ettin", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
@@ -25928,7 +25967,7 @@ const encounterChartsRegistry = {
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Kassani River & its riparian forest": {
-        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Wasps, Giant", "Weeping Willow"],
+        minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [Siamese]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Orb Weaver]", "Wererat", "Werewolf", "Wolf"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Glow-"]
     },
