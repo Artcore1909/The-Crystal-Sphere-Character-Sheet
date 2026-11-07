@@ -12236,7 +12236,7 @@ window.updateResourceStatusDisplays = function(finalHel, finalAct) {
                 container.innerHTML = `<span style="color: #7d3c1b; font-weight: bold; font-size: 0.8rem;">Unconscious due to ${deathMsg} loss.</span>`;
             } else {
                 container.innerHTML = `
-                    <div style="color: #b82c2c; font-weight: bold; font-size: 0.78rem; margin-bottom: 4px;">Actively Dying: Pass Diff 0 ${saveName} save each turn to live.</div>
+                    <div style="color: #b82c2c; font-weight: bold; font-size: 0.78rem; margin-bottom: 4px;">Actively Dying: Pass TN 1 ${saveName} save each turn to live.</div>
                     <button class="pnp-edit-btn" onclick="stabilizePool('${poolType}')" style="background:#b82c2c; color:#fff; border:1px solid #b82c2c; border-radius:3px; padding:2px 6px; cursor:pointer;">Stabilize</button>
                 `;
             }
@@ -24133,7 +24133,7 @@ const compendiumRegistry = {
             mana: 25,
             avoid: "6d+11; cc4",
             aspects: { dex: 13, hel: 13, str: 13, act: 5, int: 5, ver: 5 },
-            attacks: ["Bite [Oldra]: 6d+9; cc3", "Rend: 6d+7", "Slam [Oldra]: 6d+8; Bash, cc3", "Odachi [Oldra]: 6d+16; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+9; Thrust, cc4"],
+            attacks: ["Bite [Size C]: 6d+9; cc3", "Rend: 6d+7", "Slam [Size C]: 6d+8; Bash, cc3", "Odachi [Size C]: 6d+16; Slash or Thrust, +1cc", "Yumi Bow [Size C]: 6d+9; Thrust, cc4"],
             abilities: ["Darkvision", "Hide Suit", "Rend"]
         },
         {
@@ -24145,7 +24145,7 @@ const compendiumRegistry = {
             mana: 50,
             avoid: "6d+16; cc4",
             aspects: { dex: 10, hel: 10, str: 10, act: 10, int: 10, ver: 10 },
-            attacks: ["Odachi [Oldra]: 6d+12; Slash or Thrust, +1cc", "Yumi Bow [Oldra]: 6d+6; Thrust, cc4"],
+            attacks: ["Odachi [Size C]: 6d+12; Slash or Thrust, +1cc", "Yumi Bow [Size C]: 6d+6; Thrust, cc4"],
             abilities: ["Darkvision", "Heavy Suit"]
         },
         {
@@ -24208,7 +24208,7 @@ const compendiumRegistry = {
             mana: 19,
             avoid: "6d+4; cc4",
             aspects: { dex: 6, hel: 16, str: 16, act: 3, int: 2, ver: 5 },
-            attacks: ["Bite [Oldra]: 6d+6; Crush; cc3", "Claw [Oldra]: 6d+6; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
+            attacks: ["Bite [Size C]: 6d+6; Crush; cc3", "Claw [Size C]: 6d+6; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
             vulnerabilities: ["Fire"],
             abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
         },
@@ -24221,7 +24221,7 @@ const compendiumRegistry = {
             mana: 28,
             avoid: "6d+6; cc4",
             aspects: { dex: 8, hel: 16, str: 16, act: 6, int: 2, ver: 5 },
-            attacks: ["Bite [Oldra]: 6d+7; Crush; cc3", "Claw [Oldra]: 6d+7; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
+            attacks: ["Bite [Size C]: 6d+7; Crush; cc3", "Claw [Size C]: 6d+7; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
             resistances: ["Frost"],
             vulnerabilities: ["Fire"],
             abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
@@ -24261,7 +24261,7 @@ const compendiumRegistry = {
             mana: 18,
             avoid: "5d",
             aspects: { dex: 5, hel: 18, str: 18, act: 2, int: 3, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Cudgel [Giant]: 6d+15; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            attacks: ["Slam [Size D]: 6d+14; Bash, cc4", "Cudgel [Size D]: 6d+15; Bash, cc4", "Sling [Size D]: 3d+1; Bash, cc4"],
             abilities: []
         },
         {
@@ -24273,7 +24273,7 @@ const compendiumRegistry = {
             mana: 25,
             avoid: "5d",
             aspects: { dex: 5, hel: 18, str: 18, act: 3, int: 6, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Cudgel [Giant]: 6d+15; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            attacks: ["Slam [Size D]: 6d+14; Bash, cc4", "Cudgel [Size D]: 6d+15; Bash, cc4", "Sling [Size D]: 3d+1; Bash, cc4"],
             abilities: []
         },
         {
@@ -24297,7 +24297,7 @@ const compendiumRegistry = {
             mana: 30,
             avoid: "6d",
             aspects: { dex: 6, hel: 18, str: 12, act: 6, int: 5, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+8; Bash; cc4", "Cudgel [Giant]: 6d+9; Bash; cc4", "Greatbow [Giant]: 5d+7; Thrust, cc5"],
+            attacks: ["Slam [Size D]: 6d+8; Bash; cc4", "Cudgel [Size D]: 6d+9; Bash; cc4", "Greatbow [Size D]: 5d+7; Thrust, cc5"],
             resistances: ["Fire"],
             abilities: ["Great Bow Affinity"]
         },
@@ -24310,7 +24310,7 @@ const compendiumRegistry = {
             mana: 36,
             avoid: "6d",
             aspects: { dex: 6, hel: 12, str: 12, act: 8, int: 5, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+10; Bash; cc4", "Battleaxe [Giant]: 6d+16; Slash; cc4", "Sling [Giant]: 4d+3; Bash; cc4"],
+            attacks: ["Slam [Size D]: 6d+10; Bash; cc4", "Battleaxe [Size D]: 6d+16; Slash; cc4", "Sling [Size D]: 4d+3; Bash; cc4"],
             resistances: ["Frost"],
             abilities: ["Battleaxe Affinity"]
         },
@@ -24323,7 +24323,7 @@ const compendiumRegistry = {
             mana: 30,
             avoid: "5d",
             aspects: { dex: 5, hel: 18, str: 18, act: 6, int: 5, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Quarterstaff [Giant]: 6d+25; Bash, cc4", "Sling [Giant]: 3d+1; Bash, cc4"],
+            attacks: ["Slam [Size D]: 6d+14; Bash, cc4", "Quarterstaff [Size D]: 6d+25; Bash, cc4", "Sling [Size D]: 3d+1; Bash, cc4"],
             abilities: ["Quarterstaff Affinity"]
         },
         {
@@ -24335,7 +24335,7 @@ const compendiumRegistry = {
             mana: 36,
             avoid: "5d",
             aspects: { dex: 5, hel: 12, str: 18, act: 8, int: 5, ver: 6 },
-            attacks: ["Slam [Giant]: 6d+14; Bash, cc4", "Atgeir [Giant]: 5d+3; Thrust, cc5", "Atgeir [Butt; Giant]: 6d+16; Bash, cc4"],
+            attacks: ["Slam [Size D]: 6d+14; Bash, cc4", "Atgeir [Size D]: 5d+3; Thrust, cc5", "Atgeir [Butt; Giant]: 6d+16; Bash, cc4"],
             resistances: ["Thunder", "Lightning"],
             abilities: ["Atgeir Affinity"]
         }
@@ -24503,7 +24503,7 @@ const compendiumRegistry = {
             mana: 16,
             avoid: "3d+8; cc4",
             aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
-            attacks: ["Bite [Giant]: 6d+8; Crush, cc3", "Slam [Giant]: 6d+18; Bash & Sunder, cc3"],
+            attacks: ["Bite [Size D]: 6d+8; Crush, cc3", "Slam [Size D]: 6d+18; Bash & Sunder, cc3"],
             abilities: ["Blubar Suit", "Devour"]
         },
         {
@@ -24527,7 +24527,7 @@ const compendiumRegistry = {
             mana: 16,
             avoid: "3d+12; cc4",
             aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
-            attacks: ["Gore [Oldra]: 6d+5; Thrust, cc4", "Kick [Oldra]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"],
+            attacks: ["Gore [Size C]: 6d+5; Thrust, cc4", "Kick [Size C]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"],
             abilities: ["Hide Suit"]
         },
         {
@@ -24539,7 +24539,7 @@ const compendiumRegistry = {
             mana: 22,
             avoid: "6d+4; cc4",
             aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 },
-            attacks: ["Bite [Giant]: 6d+7; Crush, cc4", "Talon [Giant]: 6d+7; Crush, cc4"],
+            attacks: ["Bite [Size D]: 6d+7; Crush, cc4", "Talon [Size D]: 6d+7; Crush, cc4"],
             abilities: ["Devour", "Feather Suit"]
         },
         {
@@ -24551,7 +24551,7 @@ const compendiumRegistry = {
             mana: 98,
             avoid: "6d+14; cc5",
             aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 },
-            attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"],
+            attacks: ["Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"],
             immunities: ["Curse", "Disease", "Poison"],
             abilities: ["Poison Cloud: TN4 Health save", "Wyrm Scale Suit"]
         },
@@ -24564,7 +24564,7 @@ const compendiumRegistry = {
             mana: 92,
             avoid: "6d+14; cc5",
             aspects: { dex: 8, hel: 16, str: 22, act: 16, int: 6, ver: 22 },
-            attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"],
+            attacks: ["Bite [Size C]: 6d+10; Crush, cc3", "Claw [Size C]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"],
             immunities: ["Curse", "Disease", "Fire"],
             vulnerabilities: ["Frost"],
             abilities: ["Fire Corona", "Wyrm Scale Suit"]
@@ -24578,7 +24578,7 @@ const compendiumRegistry = {
             mana: 80,
             avoid: "6d+14; cc5",
             aspects: { dex: 8, hel: 22, str: 22, act: 16, int: 6, ver: 16 },
-            attacks: ["Bite [Oldra]: 6d+10; Crush, cc3", "Claw [Oldra]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"],
+            attacks: ["Bite [Size C]: 6d+10; Crush, cc3", "Claw [Size C]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"],
             immunities: ["Curse", "Disease", "Frost"],
             vulnerabilities: ["Fire"],
             abilities: ["Frost Corona", "Wyrm Scale Suit"]
@@ -24592,7 +24592,7 @@ const compendiumRegistry = {
             mana: 110,
             avoid: "6d+14; cc5",
             aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 },
-            attacks: ["Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"],
+            attacks: ["Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"],
             immunities: ["Curse", "Disease", "Lightning", "Thunder"],
             abilities: ["Lightning Cloud", "Wyrm Scale Suit"]
         },
@@ -24605,7 +24605,7 @@ const compendiumRegistry = {
             mana: 92,
             avoid: "6d+14; cc5",
             aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 },
-            attacks: ["Acid: 6d+16; Sunder", "Bite [Oldra]: 6d+7; Crush, cc3", "Claw [Oldra]: 6d+5; Crush or Slash, +1cc"],
+            attacks: ["Acid: 6d+16; Sunder", "Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc"],
             immunities: ["Acid", "Curse", "Disease"],
             abilities: ["Acid Cloud", "Wyrm Scale Suit"]
         },
@@ -24646,9 +24646,9 @@ const compendiumRegistry = {
     "mana": 15, 
     "avoid": "5d+24; cc4", 
     "aspects": { dex: 5, str: 26, act: 5 }, 
-    "attacks": ["Fire: 6d; Pain", "Morningstar [Giant]: 6d+23; Bash & Thrust; cc5", "Stomp [Giant]: 6d+20; Bash & Crush; cc4"], 
+    "attacks": ["Fire: 6d; Pain", "Morningstar [Size D]: 6d+23; Bash & Thrust; cc5", "Stomp [Size D]: 6d+20; Bash & Crush; cc4"], 
     "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Fire Breath", "Iron Suit [Giant]"]
+    "abilities": ["Fire Breath", "Iron Suit [Size D]"]
 },
 { 
     "name": "Golem, Stone", 
@@ -24659,9 +24659,9 @@ const compendiumRegistry = {
     "mana": 15, 
     "avoid": "5d+18; cc4", 
     "aspects": { dex: 5, str: 26, act: 5 }, 
-    "attacks": ["Slam [Giant]: 6d+21; Bash; cc4"], 
+    "attacks": ["Slam [Size D]: 6d+21; Bash; cc4"], 
     "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Stone Suit [Giant]"]
+    "abilities": ["Stone Suit [Size D]"]
 }
     ],
     "Plant": [
@@ -24968,7 +24968,7 @@ const compendiumRegistry = {
             mana: 77, 
             avoid: "6d+13", 
             aspects: { dex: 19, hel: 8, str: 13, act: 13, int: 8, ver: 19 }, 
-            attacks: ["Arcane Force: 6d+13; Pain", "Flaming Sword [Oldra]: 6d+10; Pain; Slash or Thrust; +1cc", "Flaming Whip [Oldra]: 6d+11; Pain; Grapple or Slash; cc3"], 
+            attacks: ["Arcane Force: 6d+13; Pain", "Flaming Sword [Size C]: 6d+10; Pain; Slash or Thrust; +1cc", "Flaming Whip [Size C]: 6d+11; Pain; Grapple or Slash; cc3"], 
             immunities: ["Curse", "Disease", "Fire", "Umbral"],
             vulnerabilities: ["Frost"],
             abilities: ["Umbral Shroud"] 
@@ -25141,7 +25141,7 @@ const compendiumRegistry = {
             mana: 25, 
             avoid: "6d+2; cc4", 
             aspects: { dex: 8, hel: 12, str: 12, act: 5, int: 2, ver: 5 }, 
-            attacks: ["Bite [Oldra]: 6d+14; cc3", "Constrict: 6d+18"], 
+            attacks: ["Bite [Size C]: 6d+14; cc3", "Constrict: 6d+18"], 
             immunities: ["Curse", "Disease"],
             aversions: ["Silver"],
             vulnerabilities: ["Frost"],
@@ -25342,10 +25342,10 @@ const compendiumRegistry = {
             mana: 38,
             avoid: "6d+25; cc4",
             aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 4, ver: 4 },
-            attacks: ["Morningstar [Oldra]: 6d+16; Bash & Thrust, cc4", "Full Shield [Oldra]: 6d+13; Bash, cc3", "Dive: +12d"],
+            attacks: ["Morningstar [Size C]: 6d+16; Bash & Thrust, cc4", "Full Shield [Size C]: 6d+13; Bash, cc3", "Dive: +12d"],
             immunities: ["Curse", "Disease", "Summoning"],
             resistances: ["Magic", "Physical"],
-            abilities: ["Divine Salvation", "Full Shield [Oldra]", "Heavy Suit [Oldra]"]
+            abilities: ["Divine Salvation", "Full Shield [Size C]", "Heavy Suit [Size C]"]
         }
     ],
     "Living Spirit": [
