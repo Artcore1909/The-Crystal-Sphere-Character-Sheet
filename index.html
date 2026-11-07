@@ -2653,8 +2653,8 @@ details[open] #skills-collapsed-summary {
 <span class="pnp-col-header pnp-charge-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
     <span>CHARGE BONUS</span>
     <div style="display: flex; gap: 8px;">
-        <button class="pnp-edit-btn" onclick="toggleMountCatalogModal()">Catalog</button>
-        <button class="pnp-edit-btn" onclick="toggleMountBuilder()">Custom</button>
+        <button class="pnp-edit-btn" onclick="toggleMountCatalogModal()">Browse</button>
+        <button class="pnp-edit-btn" onclick="toggleMountBuilder()">Edit</button>
     </div>
 </span>
                 
@@ -26438,7 +26438,7 @@ const compendiumCategoryDescriptions = {
     "Lycanthrope":" Each of the six gods blessed a chosen tribe and their descendants to serve them in perpetuity. The Orcanthrope serve Ver; the Leonthropes, Aestas; the Kitsune, Autumnus; the Lupine, Hiems; the Camasotz, Night; and the Ursanthropes, Day. Incidentally, from these chosen tribes sprang the curse of lycanthropy.",
     "Pneumon": "Pneumons, so named because they are merely “breath” or spirit with no body except that which they can conjure, were created by the lesser gods to be their servants. Since the passing of the Epoch of Creation, however, the gods have been, more or less, in a state of quiessence; their servants, not made to be idle, have therefore busied themselves with the dealings of the Crystal Sphere. When they are not assisting souls in the process of transmigration, pneumons are seeking ways to increase the number of souls and the amount of worship their masters receive. Whether by cutting deals, providing boons, plotting, scheming, or simply harvesting souls, they usually make poor use of their mortal playthings and have, over the years, made for themselves an abysmal reputation.",
     "Living Spirit":"Living spirits are ill-understood incorporeal creatures that seem to originate from, or at least be attracted to, social disorder. They subsist on the minds of anthropoids and sometimes transcend their incorporeality.",
-    "Undead":""
+    "Undead":"The undead come in many varieties. One way to classify the undead is by their origin: true undead are naturally occuring and result from a spirit unable to transmigrate whereas false undead are the product of necromancy and may or may not contain a spirit. A further division can be made as to whether the undead are vivacious, which are inteligent undead that excercise self preservation. A final division is the matter of their corporeality: corporeal undead have a physical body whereas incorporeal undead do not."
 };
 
 function generateCompendiumTab() {
@@ -26877,8 +26877,14 @@ window.addPetSlot = function() {
         avoidance: "6d",
         run: "6d",
         initiative: "4d",
-        attack1Name: "Bite", attack1Roll: "5d; Crush",
-        attack2Name: "", attack2Roll: ""
+        attacks: [
+            { name: "Bite", roll: "5d; Crush" }
+        ],
+        abilities: [],
+        immunities: [],
+        resistances: [],
+        vulnerabilities: [],
+        notes: ""
     });
 
     if (typeof calculateSheet === "function") calculateSheet();
@@ -26900,24 +26906,24 @@ window.togglePetBuilder = function(index) {
         return;
     }
 
-    // Close other builders
     document.querySelectorAll(".builder-panel[id^='builder-pet-']").forEach(p => p.style.display = "none");
     panel.style.display = "block";
 
     const pet = characterChoicesState.pets[index] || {};
     const rawName = pet.name || "";
+    const attacks = pet.attacks || [{ name: "Bite", roll: "5d; Crush" }];
 
     panel.innerHTML = `
         <h4 style="margin-top:0; color:#5c1d1d;">Edit Pet/Thrall #${index + 1}</h4>
         
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-            <div class="builder-group"><label>Pet/Thrall Name</label><input type="text" id="pet-setup-name-${index}" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
+            <div class="builder-group"><label>Name</label><input type="text" id="pet-setup-name-${index}" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
             <div class="builder-group"><label>Size</label><input type="text" id="pet-setup-size-${index}" value="${escapeHtml(pet.size || 'A')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
             <div class="builder-group"><label>Pace</label><input type="number" id="pet-setup-pace-${index}" value="${pet.pace ?? 22}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;">
-            <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">DEX</label><input type="number" id="pet-setup-dex-${index}" value="${pet.dex ?? 6}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
+            <div class="builder-group"><label style="text-align:center; font-size: 0.65nsrem;">DEX</label><input type="number" id="pet-setup-dex-${index}" value="${pet.dex ?? 6}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
             <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">HEL</label><input type="number" id="pet-setup-hel-${index}" value="${pet.hel ?? 3}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
             <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">STR</label><input type="number" id="pet-setup-str-${index}" value="${pet.str ?? 5}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
             <div class="builder-group"><label style="text-align:center; font-size: 0.65rem;">ACT</label><input type="number" id="pet-setup-act-${index}" value="${pet.act ?? 4}" style="padding:2px; text-align:center; font-size:0.8rem;"></div>
@@ -26938,15 +26944,23 @@ window.togglePetBuilder = function(index) {
             <div class="builder-group"><label>Initiative</label><input type="text" id="pet-setup-init-${index}" value="${escapeHtml(pet.initiative || '4d')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
-            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
-                <div class="builder-group" style="margin:0;"><label>Attack 1 Name</label><input type="text" id="pet-setup-atk1-name-${index}" value="${escapeHtml(pet.attack1Name || 'Bite')}" style="padding:4px; font-size:0.8rem;"></div>
-                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk1-roll-${index}" value="${escapeHtml(pet.attack1Roll || '5d; Crush')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
+        <!-- Dynamic Attacks Builder Section -->
+        <div class="builder-group" style="margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <label style="font-size: 0.75rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Attacks</label>
+                <button type="button" class="pnp-edit-btn" onclick="window.addPetBuilderAttackRow(${index})" style="color: var(--accent-gold); font-weight: bold; font-size: 0.75rem;">+ Add Attack</button>
             </div>
-            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:8px;">
-                <div class="builder-group" style="margin:0;"><label>Attack 2 Name</label><input type="text" id="pet-setup-atk2-name-${index}" value="${escapeHtml(pet.attack2Name || '')}" style="padding:4px; font-size:0.8rem;"></div>
-                <div class="builder-group" style="margin:0;"><label>Roll / Type</label><input type="text" id="pet-setup-atk2-roll-${index}" value="${escapeHtml(pet.attack2Roll || '')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
-            </div>
+            <div id="pet-attacks-container-${index}" style="display: flex; flex-direction: column;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+            <div class="builder-group"><label>Immunities (comma sep.)</label><input type="text" id="pet-setup-immunities-${index}" value="${escapeHtml((pet.immunities || []).join(', '))}" style="padding:4px; font-size:0.8rem;"></div>
+            <div class="builder-group"><label>Resistances (comma sep.)</label><input type="text" id="pet-setup-resistances-${index}" value="${escapeHtml((pet.resistances || []).join(', '))}" style="padding:4px; font-size:0.8rem;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+            <div class="builder-group"><label>Vulnerabilities (comma sep.)</label><input type="text" id="pet-setup-vulnerabilities-${index}" value="${escapeHtml((pet.vulnerabilities || []).join(', '))}" style="padding:4px; font-size:0.8rem;"></div>
+            <div class="builder-group"><label>Special Abilities (comma sep.)</label><input type="text" id="pet-setup-abilities-${index}" value="${escapeHtml((pet.abilities || []).join(', '))}" style="padding:4px; font-size:0.8rem;"></div>
         </div>
 
         <div class="builder-actions">
@@ -26957,6 +26971,11 @@ window.togglePetBuilder = function(index) {
     `;
 
     document.getElementById(`pet-setup-name-${index}`).value = rawName;
+    
+    // Populate dynamic attack rows
+    attacks.forEach(atk => {
+        window.addPetBuilderAttackRow(index, atk.name, atk.roll);
+    });
 };
 
 window.savePet = function(index) {
@@ -26964,6 +26983,17 @@ window.savePet = function(index) {
 
     const size = document.getElementById(`pet-setup-size-${index}`).value.trim() || "A";
     const nameVal = document.getElementById(`pet-setup-name-${index}`).value.trim();
+
+    // Gather dynamic attacks
+    const attackRows = document.querySelectorAll(`#pet-attacks-container-${index} .pet-attack-row`);
+    const attacks = [];
+    attackRows.forEach(row => {
+        const name = row.querySelector('.pet-atk-name').value.trim();
+        const roll = row.querySelector('.pet-atk-roll').value.trim();
+        if (name || roll) attacks.push({ name: name || "Attack", roll: roll || "—" });
+    });
+
+    const parseCommaList = (str) => (str ? str.split(',').map(s => s.trim()).filter(Boolean) : []);
 
     characterChoicesState.pets[index] = {
         isConfigured: true,
@@ -26986,70 +27016,35 @@ window.savePet = function(index) {
         avoidance: document.getElementById(`pet-setup-avoid-${index}`).value || "6d",
         run: document.getElementById(`pet-setup-run-${index}`).value || "6d",
         initiative: document.getElementById(`pet-setup-init-${index}`).value || "4d",
-        attack1Name: document.getElementById(`pet-setup-atk1-name-${index}`).value || "",
-        attack1Roll: document.getElementById(`pet-setup-atk1-roll-${index}`).value || "",
-        attack2Name: document.getElementById(`pet-setup-atk2-name-${index}`).value || "",
-        attack2Roll: document.getElementById(`pet-setup-atk2-roll-${index}`).value || ""
+        attacks: attacks,
+        immunities: parseCommaList(document.getElementById(`pet-setup-immunities-${index}`).value),
+        resistances: parseCommaList(document.getElementById(`pet-setup-resistances-${index}`).value),
+        vulnerabilities: parseCommaList(document.getElementById(`pet-setup-vulnerabilities-${index}`).value),
+        abilities: parseCommaList(document.getElementById(`pet-setup-abilities-${index}`).value),
+        notes: characterChoicesState.pets[index].notes || ""
     };
 
     document.getElementById(`builder-pet-${index}`).style.display = "none";
     if (typeof calculateSheet === "function") calculateSheet();
 };
 
-window.togglePetCatalogModal = function(index) {
-    let modal = document.getElementById("pet-catalog-modal");
-    if (!modal) {
-        modal = document.createElement("div");
-        modal.id = "pet-catalog-modal";
-        modal.className = "modal-overlay";
-        modal.style.display = "flex";
-        
-        let optionsHtml = `<option value="None">-- Select Pet/Thrall --</option>`;
-        const sourceCats = ["Animal", "Beast"];
-
-        sourceCats.forEach(cat => {
-            if (compendiumRegistry[cat]) {
-                const petWhitelist = [];
-                const petList = compendiumRegistry[cat].filter(c => {
-                    if (petWhitelist.length === 0) return true;
-                    return petWhitelist.includes(c.name);
-                });
-                
-                if (petList.length > 0) {
-                    optionsHtml += `<optgroup label="${cat}">`;
-                    petList.forEach(c => {
-                        optionsHtml += `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`;
-                    });
-                    optionsHtml += `</optgroup>`;
-                }
-            }
-        });
-
-        modal.innerHTML = `
-            <div class="char-modal">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: var(--primary-red);">Select Pet/Thrall</h3>
-                    <button onclick="document.getElementById('pet-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
-                </div>
-                <div class="builder-group" style="margin-bottom: 15px;">
-                    <label>Choose Pet/Thrall</label>
-                    <select id="catalog-pet-select" style="width: 100%; padding: 2px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
-                        ${optionsHtml}
-                    </select>
-                </div>
-                <div class="builder-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
-                    <button class="builder-btn builder-btn-cancel" onclick="document.getElementById('pet-catalog-modal').style.display='none'">Cancel</button>
-                    <button class="builder-btn builder-btn-save" onclick="applySelectedCatalogPet()">Select</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-    } else {
-        modal.style.display = "flex";
-    }
-
-    modal.setAttribute("data-target-index", index);
+window.addPetBuilderAttackRow = function(index, name = "", roll = "") {
+    const container = document.getElementById(`pet-attacks-container-${index}`);
+    if (!container) return;
+    const rowId = Date.now() + Math.random();
+    
+    const div = document.createElement("div");
+    div.className = "pet-attack-row";
+    div.style.cssText = "display: grid; grid-template-columns: 2fr 2fr 30px; gap: 6px; align-items: center; margin-bottom: 4px;";
+    div.innerHTML = `
+        <input type="text" class="pet-atk-name" value="${escapeHtml(name)}" placeholder="Attack Name" style="padding: 4px; font-size: 0.8rem;">
+        <input type="text" class="pet-atk-roll" value="${escapeHtml(roll)}" placeholder="Roll / Type" style="padding: 4px; font-size: 0.8rem; text-align: center;">
+        <button type="button" class="pnp-edit-btn" onclick="this.closest('.pet-attack-row').remove()" style="color: #b82c2c; font-size: 1rem; font-weight: bold;">&times;</button>
+    `;
+    container.appendChild(div);
 };
+
+
 
 window.applySelectedCatalogPet = function() {
     const modal = document.getElementById("pet-catalog-modal");
@@ -27126,22 +27121,36 @@ window.renderPetMiniSheet = function() {
     }
 
     container.innerHTML = pets.map((pet, index) => {
+        const attacksList = pet.attacks || (pet.attack1Name ? [{name: pet.attack1Name, roll: pet.attack1Roll}] : []);
+        
+        let defensesHtml = '';
+        const defenseParts = [];
+        if (pet.immunities && pet.immunities.length > 0) defenseParts.push(`<strong>Immunities:</strong> ${pet.immunities.join(", ")}`);
+        if (pet.resistances && pet.resistances.length > 0) defenseParts.push(`<strong>Resistances:</strong> ${pet.resistances.join(", ")}`);
+        if (pet.vulnerabilities && pet.vulnerabilities.length > 0) defenseParts.push(`<strong>Vulnerabilities:</strong> ${pet.vulnerabilities.join(", ")}`);
+
+        if (defenseParts.length > 0) {
+            defensesHtml = `<div style="font-size: 0.72rem; color: #4a3f35; border-top: 1px dotted #decdaf; padding-top: 3px; margin-top: 4px;">${defenseParts.join("<br>")}</div>`;
+        }
+
         return `
-            <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 8px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); position: relative;">
+            <div style="box-sizing: border-box; width: 100%; background: #fffcf7; border: 1px solid #c8be9c; border-radius: 6px; padding: 10px; font-family: 'Segoe UI', sans-serif; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); position: relative;">
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 2px; margin-bottom: 6px;">
-                    <span style="font-weight: bold; font-size: 0.82rem; color: #5c1d1d;">${escapeHtml(pet.name)}</span>
+                <!-- Row 1: Header Name & Actions (Catalog & Custom Restored) -->
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #5c1d1d; padding-bottom: 3px; margin-bottom: 6px;">
+                    <span style="font-weight: bold; font-size: 0.88rem; color: #5c1d1d;">${escapeHtml(pet.name)}</span>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span style="font-size: 0.72rem; color: #7c6f64; font-weight: bold; text-transform: uppercase;">Size ${escapeHtml(pet.size)} | Pace ${pet.pace}</span>
                         <div style="display: flex; gap: 4px;">
-                            <button class="pnp-edit-btn" onclick="window.togglePetCatalogModal(${index})" style="font-size:0.68rem;">Catalog</button>
-                            <button class="pnp-edit-btn" onclick="window.togglePetBuilder(${index})" style="font-size:0.68rem;">Custom</button>
+                            <button class="pnp-edit-btn" onclick="window.togglePetCatalogModal(${index})" style="font-size:0.68rem;">Browse</button>
+                            <button class="pnp-edit-btn" onclick="window.togglePetBuilder(${index})" style="font-size:0.68rem;">Edit</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="builder-panel" id="builder-pet-${index}" style="display: none; width: 100%; box-sizing: border-box; margin-bottom: 8px;"></div>
 
+                <!-- Row 2: Aspects Strip -->
                 <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
                     <span>DEX: ${pet.dex}</span>
                     <span>HEL: ${pet.hel}</span>
@@ -27152,6 +27161,7 @@ window.renderPetMiniSheet = function() {
                     <span>HAP: ${pet.hap}</span>
                 </div>
 
+                <!-- Row 3: Resources & Lost Trackers -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; border-bottom: 1px dashed #decdaf; padding-bottom: 4px;">
                     <div style="display: flex; align-items: center; gap: 4px; font-size: 0.7rem;">
                         <span style="font-weight: bold; color: #1b6b55;">VIT:</span>
@@ -27173,7 +27183,8 @@ window.renderPetMiniSheet = function() {
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 4px;">
+                <!-- Row 4: Movement and Core Combat Stats -->
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-bottom: 1px dashed #decdaf; padding-bottom: 4px; margin-bottom: 6px;">
                     <div>
                         <span style="font-weight: bold; color: #4a3f35; margin-right: 4px;">Avoid:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(pet.avoidance)}</span>
                         <span style="font-weight: bold; color: #4a3f35; margin-left: 8px; margin-right: 4px;">Run:</span> <span style="font-weight: bold; color: #1b6b55;">${escapeHtml(pet.run)}</span>
@@ -27181,14 +27192,159 @@ window.renderPetMiniSheet = function() {
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 2px; font-size: 0.7rem;">
-                    ${pet.attack1Name && pet.attack1Roll !== "" ? `<div><strong>${escapeHtml(pet.attack1Name)}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${escapeHtml(pet.attack1Roll)}</span></div>` : ''}
-                    ${pet.attack2Name && pet.attack2Roll !== "" ? `<div><strong>${escapeHtml(pet.attack2Name)}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${escapeHtml(pet.attack2Roll)}</span></div>` : ''}
+                <!-- Row 5: Attacks & Abilities Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.72rem; margin-bottom: 4px;">
+                    <div>
+                        <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 2px; text-transform: uppercase; font-size: 0.68rem; border-bottom: 1px dotted #decdaf;">Attacks</div>
+                        ${attacksList.length > 0 ? attacksList.map(a => `<div style="margin-bottom: 2px; color: var(--text-dark);"><strong>${escapeHtml(a.name)}:</strong> <span style="color: #5c1d1d; font-weight: bold;">${escapeHtml(a.roll)}</span></div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                    </div>
+                    <div>
+                        <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 2px; text-transform: uppercase; font-size: 0.68rem; border-bottom: 1px dotted #decdaf;">Special Abilities</div>
+                        ${pet.abilities && pet.abilities.length > 0 ? pet.abilities.map(ab => {
+                            const tooltipKey = typeof getAbilityTooltipKey === "function" ? getAbilityTooltipKey(ab) : "";
+                            return `<div style="margin-bottom: 2px; color: var(--text-dark);"><span data-tooltip="${tooltipKey}" style="cursor: help;">• ${escapeHtml(ab)}</span></div>`;
+                        }).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
+                        ${defensesHtml}
+                    </div>
+                </div>
+
+                <!-- Row 6: Combat Conditions / Notes Field -->
+                <div style="margin-top: 6px; border-top: 1px dashed #decdaf; padding-top: 6px;">
+                    <textarea placeholder="Combat conditions / notes..." rows="1" oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; characterChoicesState.pets[${index}].notes = this.value;" style="width: 100%; box-sizing: border-box; padding: 4px 6px; font-size: 0.75rem; border: 1px solid #bdae93; border-radius: 3px; background: #fff; resize: none; overflow: hidden; line-height: 1.3;">${escapeHtml(pet.notes || '')}</textarea>
                 </div>
 
             </div>
         `;
     }).join('');
+
+    container.querySelectorAll('textarea').forEach(ta => {
+        ta.style.height = 'auto';
+        ta.style.height = ta.scrollHeight + 'px';
+    });
+};
+
+window.togglePetCatalogModal = function(index) {
+    let modal = document.getElementById("pet-catalog-modal");
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "pet-catalog-modal";
+        modal.className = "modal-overlay";
+        modal.style.display = "flex";
+        
+        let optionsHtml = `<option value="None">-- Select Pet/Thrall --</option>`;
+        const sourceCats = ["Aberration", "Animal", "Anthropoid", "Beast", "Construct", "Genie", "Giant", "Pneumon", "Living Spirit", "Undead"];
+
+        sourceCats.forEach(cat => {
+            if (compendiumRegistry[cat]) {
+                const petList = compendiumRegistry[cat];
+                if (petList.length > 0) {
+                    optionsHtml += `<optgroup label="${cat}">`;
+                    petList.forEach(c => {
+                        optionsHtml += `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`;
+                    });
+                    optionsHtml += `</optgroup>`;
+                }
+            }
+        });
+
+        modal.innerHTML = `
+            <div class="char-modal">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: var(--primary-red);">Select Pet/Thrall from Catalog</h3>
+                    <button onclick="document.getElementById('pet-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+                </div>
+                <div class="builder-group" style="margin-bottom: 15px;">
+                    <label>Choose Creature</label>
+                    <select id="catalog-pet-select" style="width: 100%; padding: 4px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
+                        ${optionsHtml}
+                    </select>
+                </div>
+                <div class="builder-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
+                    <button class="builder-btn builder-btn-cancel" onclick="document.getElementById('pet-catalog-modal').style.display='none'">Cancel</button>
+                    <button class="builder-btn builder-btn-save" onclick="applySelectedCatalogPet()">Select</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    } else {
+        modal.style.display = "flex";
+    }
+
+    modal.setAttribute("data-target-index", index);
+};
+
+window.applySelectedCatalogPet = function() {
+    const modal = document.getElementById("pet-catalog-modal");
+    const sel = document.getElementById("catalog-pet-select");
+    if (!modal || !sel || sel.value === "None") return;
+
+    const index = parseInt(modal.getAttribute("data-target-index"), 10);
+    const petName = sel.value;
+    let foundCreature = null;
+    
+    Object.values(compendiumRegistry).forEach(catList => {
+        if (Array.isArray(catList)) {
+            const match = catList.find(c => c.name === petName);
+            if (match) foundCreature = match;
+        }
+    });
+
+    if (!foundCreature) return;
+
+    const paceMatch = (foundCreature.pace || "22").match(/\d+/);
+    const parsedPace = paceMatch ? parseInt(paceMatch[0], 10) : 22;
+    const asp = foundCreature.aspects || {};
+
+    // Map all attacks from the compendium array into the object array format
+    const mappedAttacks = [];
+    if (foundCreature.attacks && foundCreature.attacks.length > 0) {
+        foundCreature.attacks.forEach(atkStr => {
+            const parts = atkStr.split(":");
+            if (parts.length >= 2) {
+                mappedAttacks.push({ name: parts[0].trim(), roll: parts.slice(1).join(":").trim() });
+            } else {
+                mappedAttacks.push({ name: "Attack", roll: atkStr.trim() });
+            }
+        });
+    } else {
+        mappedAttacks.push({ name: "Bite", roll: "5d; Crush" });
+    }
+
+    if (!characterChoicesState.pets[index]) {
+        characterChoicesState.pets[index] = {};
+    }
+
+    characterChoicesState.pets[index] = {
+        isConfigured: true,
+        name: foundCreature.name,
+        size: foundCreature.size || "A",
+        pace: parsedPace,
+        dex: asp.dex ?? 6,
+        hel: asp.hel ?? 3,
+        str: asp.str ?? 5,
+        act: asp.act ?? 4,
+        int: asp.int ?? 2,
+        ver: asp.ver ?? 2,
+        hap: asp.hap ?? 3,
+        vitalityMax: parseInt(foundCreature.vit) || 19,
+        vitalityLost: 0,
+        manaMax: parseInt(foundCreature.mana) || 16,
+        manaLost: 0,
+        luckMax: 3,
+        luckSpent: 0,
+        avoidance: foundCreature.avoid || "6d",
+        run: "6d",
+        initiative: "4d",
+        attacks: mappedAttacks,
+        immunities: foundCreature.immunities || [],
+        resistances: foundCreature.resistances || [],
+        vulnerabilities: foundCreature.vulnerabilities || [],
+        abilities: foundCreature.abilities || [],
+        notes: characterChoicesState.pets[index].notes || ""
+    };
+
+    modal.style.display = "none";
+    if (typeof calculateSheet === "function") calculateSheet();
 };
 
 </script>
