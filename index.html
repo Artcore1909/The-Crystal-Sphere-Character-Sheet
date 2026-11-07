@@ -81,15 +81,31 @@
 
 #conditional-modifiers:not(:empty) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(12, 1fr);
     gap: 15px;
     margin-top: 15px;
-    padding-top: 15px;
+    padding: 15px;
     border-top: 1px dashed var(--border-warm);
     background: #fdfbf7;
-    padding: 12px;
     border-radius: 6px;
     border: 1px solid var(--border-warm);
+}
+
+#conditional-modifiers .form-group {
+    grid-column: span 3; /* Forces each item to take up exactly 3 columns (4 items total per row) */
+    margin-bottom: 0 !important;
+}
+
+@media (max-width: 900px) {
+    #conditional-modifiers .form-group {
+        grid-column: span 6 !important; /* Drops to 2 columns on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    #conditional-modifiers .form-group {
+        grid-column: span 12 !important; /* Stacks vertically on small mobile screens */
+    }
 }
 
 /* =========================================================================
@@ -1993,12 +2009,12 @@ details[open] #skills-collapsed-summary {
 <!-- TAB 1: CHARACTER CREATION --> 
 <div id="tab-creation" class="tab-content active"> 
 
-  <!-- Collapsible Section: Character Information -->
+<!-- Collapsible Section: Character Information -->
   <details open class="collapsible-section">
     <summary class="section-header">Character Information</summary> 
     <div class="section-content" style="padding: 10px 0;">
       
-      <div class="form-grid"> 
+<div class="form-grid"> 
         <!-- Row 1: Core Identity -->
         <div class="form-group span-6"> 
           <label for="char-name">Character Name</label> 
@@ -2015,6 +2031,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-3"> 
           <label for="char-race">Race</label> 
           <select id="char-race" onchange="calculateSheet()"> 
+            <option value="None" selected disabled>Select Race</option> 
             <option value="Human">Human</option> 
             <option value="Canivir">Canivir</option> 
             <option value="Dwarf">Dwarf</option> 
@@ -2082,8 +2099,9 @@ details[open] #skills-collapsed-summary {
 
         <!-- Row 2: Origin & Environment -->
         <div class="form-group span-4"> 
-          <label for="char-ethnos">Ethnos (Culture)</label> 
+          <label for="char-ethnos">Select Ethnos</label> 
           <select id="char-ethnos" onchange="calculateSheet()"> 
+            <option value="None" selected disabled>Select Ethnos</option>
             <option value="Aquoi">Aquoi</option> 
             <option value="Dwarven">Dwarven</option> 
             <option value="Euskal">Euskal</option> 
@@ -2129,8 +2147,9 @@ details[open] #skills-collapsed-summary {
           </select> 
         </div> 
         <div class="form-group span-4"> 
-          <label for="char-milieu">Character Milieu</label> 
+          <label for="char-milieu">Select Milieu</label> 
           <select id="char-milieu" onchange="calculateSheet()"> 
+            <option value="None" selected disabled>Select Milieu</option>
             <option value="Commoner">Commoner</option> 
             <option value="Noble">Noble</option> 
             <option value="Outsider">Outsider</option> 
@@ -2139,8 +2158,9 @@ details[open] #skills-collapsed-summary {
           </select> 
         </div> 
         <div class="form-group span-4"> 
-          <label for="char-setting">Character Setting</label> 
+          <label for="char-setting">Select Setting</label> 
           <select id="char-setting" onchange="calculateSheet()"> 
+            <option value="None" selected disabled>Select Setting</option>
             <option value="Coastal">Coastal</option>            
             <option value="Urban">Urban</option> 
             <option value="Rural">Rural</option> 
@@ -2149,10 +2169,11 @@ details[open] #skills-collapsed-summary {
           </select> 
         </div> 
 
-        <!-- Row 3: Upbringing & Languages -->
-        <div class="form-group span-8"> 
-          <label for="char-upbringing">Upbringing & Guild Affiliation</label> 
+        <!-- Group 3: Upbringing, Faith & Linguistics -->
+        <div class="form-group span-6"> 
+          <label for="char-upbringing">Select Upbringing/Guild</label> 
           <select id="char-upbringing" onchange="calculateSheet()"> 
+            <option value="None" selected disabled>Select Upbringing/Guild</option>
             <option value="Artisan">Artisan</option> 
             <option value="College Initiate">College Initiate</option> 
             <option value="Laborer">Laborer</option>
@@ -2168,12 +2189,29 @@ details[open] #skills-collapsed-summary {
             <option value="Wild">Wild</option>  
           </select> 
         </div> 
-        <div class="form-group span-4"> 
-          <label for="char-native-lang">Native Language</label> 
-          <input type="text" id="char-native-lang" readonly value="Imperial"> 
+        <div class="form-group span-6"> 
+          <label for="char-deity">Select Patron Deity</label> 
+          <select id="char-deity" onchange="characterChoicesState.patronDeity = this.value; calculateSheet();">
+            <option value="None">None / Secular</option>
+            <option value="Day">Day</option>
+            <option value="Night">Night</option>
+            <option value="Ver">Ver</option>
+            <option value="Aestas">Aestas</option>
+            <option value="Autumnus">Autumnus</option>
+            <option value="Hiems">Hiems</option>
+            <option value="Sea Lord">Sea Lord</option>
+            <option value="Fire God">Fire God</option>
+            <option value="Earth Goddess">Earth Goddess</option>
+            <option value="Wind Goddess">Wind Goddess</option>
+            <option value="Shadow King">Shadow King</option>
+          </select> 
         </div> 
 
-        <div class="form-group span-12"> 
+        <div class="form-group span-6"> 
+          <label for="char-native-lang">Native Language</label> 
+          <input type="text" id="char-native-lang" readonly value=""> 
+        </div> 
+        <div class="form-group span-6"> 
           <label for="char-pidgin-select">Second Language <span style="font-weight: normal; font-size: 0.8rem; color: var(--text-muted);">(Requires Intellect > 2)</span></label> 
           <select id="char-pidgin-select" onchange="this.dataset.savedPidgin = this.value; calculateSheet()" disabled> 
             <option value="None">Intellect too low for second language...</option> 
@@ -2181,25 +2219,31 @@ details[open] #skills-collapsed-summary {
         </div> 
       </div> <!-- Close form-grid -->
 
-      <!-- Conditional Modifiers Sub-Panel (Cleanly Grouped) -->
-      <div id="conditional-modifiers" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-warm);"> 
-        <div class="form-group" id="sex-bonus-group" style="display:none;"> 
+<!-- Conditional Modifiers Sub-Panel (Strict 4-Column Layout) -->
+      <div id="conditional-modifiers"> 
+        <div class="form-group span-3" id="sex-bonus-group" style="display:none;"> 
           <label for="sex-bonus-choice">Assign Sex Bonus</label> 
-          <select id="sex-bonus-choice" onchange="calculateSheet()"></select> 
+          <select id="sex-bonus-choice" onchange="calculateSheet()">
+            <option value="none">-- Select Aspect --</option>
+          </select> 
         </div> 
-        <div class="form-group">
+        <div class="form-group span-3" id="upbringing-bonus-group">
           <label for="upbringing-bonus-choice">Assign Upbringing Bonus</label>
           <select id="upbringing-bonus-choice" onchange="calculateSheet()">
             <option value="none">-- Select Aspect --</option>
           </select>
         </div>
-        <div class="form-group" id="race-bonus-group" style="display:none;"> 
+        <div class="form-group span-3" id="race-bonus-group" style="display:none;"> 
           <label id="race-bonus-label" for="race-bonus-choice">Racial Bonus Selection</label> 
-          <select id="race-bonus-choice" onchange="calculateSheet()"></select> 
+          <select id="race-bonus-choice" onchange="calculateSheet()">
+            <option value="none">-- Select Aspect --</option>
+          </select> 
         </div> 
-        <div class="form-group" id="race-penalty-group" style="display:none;"> 
+        <div class="form-group span-3" id="race-penalty-group" style="display:none;"> 
           <label id="race-penalty-label" for="race-penalty-choice">Racial Penalty Selection</label> 
-          <select id="race-penalty-choice" onchange="calculateSheet()"></select> 
+          <select id="race-penalty-choice" onchange="calculateSheet()">
+            <option value="none">-- Select Aspect --</option>
+          </select> 
         </div> 
       </div> <!-- Close conditional-modifiers -->
       
@@ -11389,7 +11433,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Human": { size: "B", pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
         "Canivir": { size: "B", pace: 9, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
         "Dwarf": { size: "B", pace: 7, dex: -1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
-        "Elf": { size: "B", pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 1, hap: 0 },
+        "Elf": { size: "B", pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
         "Felivir": { size: "B", pace: 10, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
         "Half-elf": { size: "B", pace: 8, dex: 1, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
         "Half-orc": { size: "B", pace: 8, dex: 0, hel: 0, str: 0, act: 0, int: 0, ver: 0, hap: 0 },
@@ -12032,18 +12076,18 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         if (sex === "Male") {
             sexGroup.style.display = "flex";
             if(sexChoice.dataset.current !== "Male") {
-                sexChoice.innerHTML = '<option value="hel">Health (+1)</option><option value="str">Strength (+1)</option><option value="ver">Verve (+1)</option>';
+                sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel">Health</option><option value="str">Strength</option><option value="ver">Verve</option>';
                 sexChoice.dataset.current = "Male";
             }
         } else if (sex === "Female") {
             sexGroup.style.display = "flex";
             if(sexChoice.dataset.current !== "Female") {
-                sexChoice.innerHTML = '<option value="dex">Dexterity (+1)</option><option value="act">Acuity (+1)</option><option value="ver">Verve (+1)</option>';
+                sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="act">Acuity</option><option value="ver">Verve</option>';
                 sexChoice.dataset.current = "Female";
             }
         } else {
             sexGroup.style.display = "none";
-            sexChoice.innerHTML = "";
+            sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option>';
             sexChoice.dataset.current = "";
         }
         if (curSex && Array.from(sexChoice.options).some(o => o.value === curSex)) {
@@ -12057,104 +12101,114 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         if (race === "Canivir") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Assign +2 Bonus:";
-            rBonusChoice.innerHTML = '<option value="dex">Dexterity (+2)</option><option value="hel">Health (+2)</option><option value="str">Strength (+2)</option>';
+            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="int">Intellect (-1)</option><option value="ver">Verve (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         } 
         else if (race === "Dwarf") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
-            rBonusChoice.innerHTML = '<option value="hel2">Health (+2)</option><option value="str2">Strength (+2)</option><option value="split">Health (+1) & Strength (+1)</option>';
+            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="act">Acuity (-1)</option><option value="int">Intellect (-1)</option><option value="ver">Verve (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         } 
         else if (race === "Elf") {
+            rBonusGroup.style.display = "flex";
+            rBonusLabel.innerText = "Assign +1 Bonus:";
+            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="int">Intellect</option><option value="ver">Verve</option>';
+            
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="hel2">Health (-2)</option><option value="str2">Strength (-2)</option><option value="split">Health (-1) & Strength (-1)</option>';
-        } 
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health (-2)</option><option value="str2">Strength (-2)</option><option value="split">Health (-1) & Strength (-1)</option>';
+        }
         else if (race === "Felivir") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
             rBonusChoice.innerHTML = `
-                <option value="dex">Dexterity (+2)</option>
-                <option value="hel">Health (+2)</option>
-                <option value="str">Strength (+2)</option>
-                <option value="act">Acuity (+2)</option>
-                <option value="split_dh">Dexterity (+1) & Health (+1)</option>
-                <option value="split_ds">Dexterity (+1) & Strength (+1)</option>
-                <option value="split_da">Dexterity (+1) & Acuity (+1)</option>
-                <option value="split_hs">Health (+1) & Strength (+1)</option>
-                <option value="split_ha">Health (+1) & Acuity (+1)</option>
-                <option value="split_sa">Strength (+1) & Acuity (+1)</option>
+                <option value="none">-- Select Aspect --</option>
+                <option value="dex">Dexterity</option>
+                <option value="hel">Health</option>
+                <option value="str">Strength</option>
+                <option value="act">Acuity</option>
+                <option value="split_dh">Dexterity & Health</option>
+                <option value="split_ds">Dexterity & Strength</option>
+                <option value="split_da">Dexterity & Acuity</option>
+                <option value="split_hs">Health & Strength</option>
+                <option value="split_ha">Health & Acuity</option>
+                <option value="split_sa">Strength & Acuity</option>
             `;
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
             rPenaltyChoice.innerHTML = `
-                <option value="int">Intellect (-2)</option>
-                <option value="ver">Verve (-2)</option>
-                <option value="split">Intellect (-1) & Verve (-1)</option>
+                <option value="none">-- Select Aspect --</option>
+                <option value="int">Intellect</option>
+                <option value="ver">Verve</option>
+                <option value="split">Intellect & Verve</option>
             `;
         }  
         else if (race === "Half-elf") {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="hel">Health (-1)</option><option value="str">Strength (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel">Health</option><option value="str">Strength</option>';
         } 
         else if (race === "Half-orc") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
             rBonusChoice.innerHTML = `
-                <option value="hel2">Health (+2)</option>
-                <option value="str2">Strength (+2)</option>
-                <option value="split">Health (+1) & Strength (+1)</option>
+                <option value="none">-- Select Aspect --</option>
+                <option value="hel2">Health</option>
+                <option value="str2">Strength</option>
+                <option value="split">Health & Strength</option>
             `;
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
             rPenaltyChoice.innerHTML = `
-                <option value="int2">Intellect (-2)</option>
-                <option value="ver2">Verve (-2)</option>
-                <option value="split">Intellect (-1) & Verve (-1)</option>
+                <option value="none">-- Select Aspect --</option>
+                <option value="int2">Intellect</option>
+                <option value="ver2">Verve</option>
+                <option value="split">Intellect & Verve</option>
             `;
         } 
         else if (race.startsWith("Hanyo")) { 
           rBonusGroup.style.display = "flex"; 
           rBonusLabel.innerText = "Allocate +2 Bonus:"; 
           rBonusChoice.innerHTML = ` 
-            <option value="dex2">Dexterity (+2)</option> 
-            <option value="hel2">Health (+2)</option> 
-            <option value="str2">Strength (+2)</option> 
-            <option value="split_dh">Dexterity (+1) & Health (+1)</option> 
-            <option value="split_ds">Dexterity (+1) & Strength (+1)</option> 
-            <option value="split_hs">Health (+1) & Strength (+1)</option> 
+            <option value="none">-- Select Aspect --</option>
+            <option value="dex2">Dexterity</option> 
+            <option value="hel2">Health</option> 
+            <option value="str2">Strength</option> 
+            <option value="split_dh">Dexterity & Health</option> 
+            <option value="split_ds">Dexterity & Strength</option> 
+            <option value="split_hs">Health & Strength</option> 
           `; 
           rPenaltyGroup.style.display = "flex"; 
           rPenaltyLabel.innerText = "Assign -1 Penalty:"; 
           rPenaltyChoice.innerHTML = ` 
-            <option value="act">Acuity (-1)</option> 
-            <option value="int">Intellect (-1)</option> 
-            <option value="ver">Verve (-1)</option> 
+            <option value="none">-- Select Aspect --</option>
+            <option value="act">Acuity</option> 
+            <option value="int">Intellect</option> 
+            <option value="ver">Verve</option> 
           `; 
         }
         else if (race === "Haubid" || race === "Vulpivir") {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="hel2">Health (-2)</option><option value="str2">Strength (-2)</option><option value="split">Health (-1) & Strength (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
         } 
         else if (race === "Nuss-janni") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Assign +1 Bonus:";
-            rBonusChoice.innerHTML = '<option value="dex">Dexterity (+1)</option><option value="hel">Health (+1)</option><option value="str">Strength (+1)</option>';
+            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="act">Acuity (-1)</option><option value="int">Intellect (-1)</option><option value="ver">Verve (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         }
 
         // Restore values if valid options exist
@@ -12165,7 +12219,6 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
             rPenaltyChoice.value = curPenalty;
         }
 
-        // Keep tracking key in sync so calculateSheet doesn't re-trigger setup and reset dropdowns
         if (raceSelect) {
             raceSelect.dataset.lastTracking = sex + "-" + race;
         }
@@ -12555,6 +12608,10 @@ function calculateSheet() {
         if (rBonus === "dex") dex += bAmt;
         if (rBonus === "hel") hel += bAmt;
         if (rBonus === "str") str += bAmt;
+    } else if (race === "Elf") {
+        let bAmt = 1; // Or adjust if the elf bonus is +1 or +2 based on your rules
+        if (rBonus === "int") int += bAmt;
+        else if (rBonus === "ver") ver += bAmt;
     }
 
     if (race === "Felivir") {
@@ -13112,7 +13169,7 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
         alertCheckbox.checked = (obsLevel >= 7);
     }
 
-// ==========================================
+        // ==========================================
         // RENDER VISUAL BREAKDOWN LABELS
         // ==========================================
         let nDex = [], nHel = [], nStr = [], nAct = [], nInt = [], nVer = [], nHap = [];
@@ -13128,6 +13185,9 @@ document.getElementById("pnp-display-rank").innerText = `Rank ${currentCharacter
             if (rBonus === "dex") nDex.push("Race: +2"); else if (rBonus === "hel") nHel.push("Race: +2"); else if (rBonus === "str") nStr.push("Race: +2"); else if (rBonus === "act") nAct.push("Race: +2");
             else if (rBonus === "split_dh") { nDex.push("Race: +1"); nHel.push("Race: +1"); } else if (rBonus === "split_ds") { nDex.push("Race: +1"); nStr.push("Race: +1"); } else if (rBonus === "split_da") { nDex.push("Race: +1"); nAct.push("Race: +1"); } else if (rBonus === "split_hs") { nHel.push("Race: +1"); nStr.push("Race: +1"); } else if (rBonus === "split_ha") { nHel.push("Race: +1"); nAct.push("Race: +1"); } else if (rBonus === "split_sa") { nStr.push("Race: +1"); nAct.push("Race: +1"); }
             if (rPenalty === "int") nInt.push("Race: -2"); else if (rPenalty === "ver") nVer.push("Race: -2"); else if (rPenalty === "split") { nInt.push("Race: -1"); nVer.push("Race: -1"); }
+        } else if (race === "Elf") {
+            if (rBonus === "int") nInt.push("Race: +1");
+            else if (rBonus === "ver") nVer.push("Race: +1");
         } else if (["Dwarf", "Half-orc"].includes(race) || race.startsWith("Hanyo")) {
             if (rBonus === "dex2") nDex.push("Race: +2");
             else if (rBonus === "hel2") nHel.push("Race: +2"); 
@@ -14509,57 +14569,63 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
  // ==========================================
  // DYNAMIC CULTURE & FLUENCY CHOICES ENGINE
  // ==========================================
- const currentEthnos = document.getElementById("char-ethnos").value;
+ const ethnosSelect = document.getElementById("char-ethnos");
+ const currentEthnos = ethnosSelect ? ethnosSelect.value : "None";
  const nativeBox = document.getElementById("char-native-lang");
  const pidginSelect = document.getElementById("char-pidgin-select");
 
- // 1. Output mandatory native tongue from master map data
-const defaultEthnosData = { native: currentEthnos, pidgins: [] };
-const langData = ethnosLanguages[currentEthnos] || defaultEthnosData;
- nativeBox.value = langData ? langData.native : "None";
+ let langData = null;
 
- // 2. Validate Intellect threshold (Must be strictly greater than 2)
-const hasPidgins = langData && Array.isArray(langData.pidgins) && langData.pidgins.length > 0;
+ if (currentEthnos === "None" || currentEthnos.includes("Select") || !ethnosLanguages[currentEthnos]) {
+     if (nativeBox) nativeBox.value = "";
+     if (pidginSelect) {
+         pidginSelect.disabled = true;
+         pidginSelect.innerHTML = '<option value="None">Select an Ethnos first...</option>';
+         pidginSelect.dataset.lastLangTracking = "";
+     }
+ } else {
+     langData = ethnosLanguages[currentEthnos] || { native: currentEthnos, pidgins: [] };
+     if (nativeBox) nativeBox.value = langData.native;
 
-if (!hasPidgins) {
-    // 1. Superceding condition: Culture has no pidgins available
-    pidginSelect.disabled = true;
-    pidginSelect.innerHTML = '<option value="None">No pidgin languages available...</option>';
-    pidginSelect.dataset.lastLangTracking = "";
-} else if (finalInt <= 2) {
-    // 2. Intellect requirement condition
-    pidginSelect.disabled = true;
-    pidginSelect.innerHTML = '<option value="None">Intellect must be > 2 to upgrade a Pidgin...</option>';
-    pidginSelect.dataset.lastLangTracking = "";
-} else {
-    // 3. Valid state: Intellect > 2 AND pidgins exist
-    pidginSelect.disabled = false;
-    const trackingKey = "lang-" + currentEthnos;
-    
-// Save current selection before potentially overwriting innerHTML
-    const currentPidginVal = (pidginSelect.dataset.savedPidgin && pidginSelect.dataset.savedPidgin !== "None")
-        ? pidginSelect.dataset.savedPidgin
-        : pidginSelect.value;
+     // 2. Validate Intellect threshold (Must be strictly greater than 2)
+     const hasPidgins = Array.isArray(langData.pidgins) && langData.pidgins.length > 0;
+     const finalInt = parseInt(document.getElementById("total-int")?.value) || 3;
 
-    if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
-        let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
-        langData.pidgins.forEach(p => {
-            const fluentName = p.toLowerCase().replace("pidgin-", "").replace("pidgin", "").trim();
-            const capitalizedName = fluentName.charAt(0).toUpperCase() + fluentName.slice(1);
-            optionsHtml += `<option value="${p}">${capitalizedName}</option>`;
-        });
-        pidginSelect.innerHTML = optionsHtml;
-        pidginSelect.dataset.lastLangTracking = trackingKey;
-    }
+     if (!hasPidgins) {
+         pidginSelect.disabled = true;
+         pidginSelect.innerHTML = '<option value="None">No pidgin languages available...</option>';
+         pidginSelect.dataset.lastLangTracking = "";
+     } else if (finalInt <= 2) {
+         pidginSelect.disabled = true;
+         pidginSelect.innerHTML = '<option value="None">Intellect must be > 2 to upgrade a Pidgin...</option>';
+         pidginSelect.dataset.lastLangTracking = "";
+     } else {
+         pidginSelect.disabled = false;
+         const trackingKey = "lang-" + currentEthnos;
+         
+         const currentPidginVal = (pidginSelect.dataset.savedPidgin && pidginSelect.dataset.savedPidgin !== "None")
+             ? pidginSelect.dataset.savedPidgin
+             : pidginSelect.value;
 
-    // Restore selected value if it exists in the options list
-    if (currentPidginVal && currentPidginVal !== "None" && Array.from(pidginSelect.options).some(opt => opt.value === currentPidginVal)) {
-        pidginSelect.value = currentPidginVal;
-        pidginSelect.dataset.savedPidgin = currentPidginVal;
-    } else if (pidginSelect.value === "None") {
-        pidginSelect.dataset.savedPidgin = "None";
-    }
-}
+         if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
+             let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
+             langData.pidgins.forEach(p => {
+                 const fluentName = p.toLowerCase().replace("pidgin-", "").replace("pidgin", "").trim();
+                 const capitalizedName = fluentName.charAt(0).toUpperCase() + fluentName.slice(1);
+                 optionsHtml += `<option value="${p}">${capitalizedName}</option>`;
+             });
+             pidginSelect.innerHTML = optionsHtml;
+             pidginSelect.dataset.lastLangTracking = trackingKey;
+         }
+
+         if (currentPidginVal && currentPidginVal !== "None" && Array.from(pidginSelect.options).some(opt => opt.value === currentPidginVal)) {
+             pidginSelect.value = currentPidginVal;
+             pidginSelect.dataset.savedPidgin = currentPidginVal;
+         } else if (pidginSelect.value === "None") {
+             pidginSelect.dataset.savedPidgin = "None";
+         }
+     }
+ }
 
  // 3. Build and format Tab 4 dynamic badges summary
  const langContainer = document.getElementById("sages-languages-tab4-card");
@@ -16316,9 +16382,6 @@ else if (tree.key === "guild: temple") {
         
         // Injects both banner panel prompts right at the peak of the card container layout
         interactiveControlsHtml = `
-        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; background: #eae6df; padding: 6px 10px; border-radius: 4px; margin-bottom: 5px; color: #5c1d1d;">
-            <strong style="white-space: nowrap;">Patron Deity:</strong> ${selectHtml}
-        </div>
         <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; background: #eae6df; padding: 6px 10px; border-radius: 4px; margin-bottom: 5px; color: #5c1d1d;">
             <strong style="white-space: nowrap;">Acolyte Language:</strong> ${languageSelectHtml}
         </div>`;
@@ -21824,7 +21887,7 @@ function exportCharacterData() {
 
     // Gather standard inputs (including Language and Bonus/Penalty selections)
     const inputIds = [
-        "char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing",
+        "char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-deity",
         "char-rank-input-xp", "char-xp-awarded",
         "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap",
         "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver",
@@ -21897,7 +21960,7 @@ function importCharacterData(data) {
 
     // 3. Restore Core Identity Inputs first (so char-upbringing, char-race, etc. are set in DOM)
     if (data.inputs) {
-        ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current", "char-native-lang", "char-pidgin-select"].forEach(id => {
+        ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-deity", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current", "char-native-lang", "char-pidgin-select"].forEach(id => {
             const el = document.getElementById(id);
             if (el && data.inputs[id] !== undefined) el.value = data.inputs[id];
         });
@@ -22947,26 +23010,24 @@ function updateUpbringingOptions(preferredVal) {
 
     const currentVal = preferredVal !== undefined ? preferredVal : choiceSelect.value;
     
-    // Map of Upbringings to allowed Aspect options
     const optionsMap = {
-        "Artisan": [{ val: "dex", label: "Dexterity (+1)" }, { val: "act", label: "Acuity (+1)" }],
-        "College Initiate": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
-        "Laborer": [{ val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }],
-        "Merchant": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
-        "Military": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }, { val: "act", label: "Acuity (+1)" }],
-        "Politician": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
-        "Sage": [{ val: "act", label: "Acuity (+1)" }, { val: "int", label: "Intellect (+1)" }],
-        "Servant": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "act", label: "Acuity (+1)" }],
-        "Temple Acolyte": [{ val: "int", label: "Intellect (+1)" }, { val: "ver", label: "Verve (+1)" }],
-        "Thief": [{ val: "dex", label: "Dexterity (+1)" }, { val: "act", label: "Acuity (+1)" }],
-        "Tradesman": [{ val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }],
-        "Troupe Neophyte": [{ val: "dex", label: "Dexterity (+1)" }, { val: "ver", label: "Verve (+1)" }],
-        "Wild": [{ val: "dex", label: "Dexterity (+1)" }, { val: "hel", label: "Health (+1)" }, { val: "str", label: "Strength (+1)" }, { val: "act", label: "Acuity (+1)" }]
+        "Artisan": [{ val: "dex", label: "Dexterity" }, { val: "act", label: "Acuity" }],
+        "College Initiate": [{ val: "act", label: "Acuity" }, { val: "int", label: "Intellect" }, { val: "ver", label: "Verve" }],
+        "Laborer": [{ val: "hel", label: "Health" }, { val: "str", label: "Strength" }],
+        "Merchant": [{ val: "act", label: "Acuity" }, { val: "int", label: "Intellect" }, { val: "ver", label: "Verve" }],
+        "Military": [{ val: "dex", label: "Dexterity" }, { val: "hel", label: "Health" }, { val: "str", label: "Strength" }, { val: "act", label: "Acuity" }],
+        "Politician": [{ val: "act", label: "Acuity" }, { val: "int", label: "Intellect" }, { val: "ver", label: "Verve" }],
+        "Sage": [{ val: "act", label: "Acuity" }, { val: "int", label: "Intellect" }],
+        "Servant": [{ val: "dex", label: "Dexterity" }, { val: "hel", label: "Health" }, { val: "act", label: "Acuity" }],
+        "Temple Acolyte": [{ val: "int", label: "Intellect" }, { val: "ver", label: "Verve" }],
+        "Thief": [{ val: "dex", label: "Dexterity" }, { val: "act", label: "Acuity" }],
+        "Tradesman": [{ val: "hel", label: "Health" }, { val: "str", label: "Strength" }],
+        "Troupe Neophyte": [{ val: "dex", label: "Dexterity" }, { val: "ver", label: "Verve" }],
+        "Wild": [{ val: "dex", label: "Dexterity" }, { val: "hel", label: "Health" }, { val: "str", label: "Strength" }, { val: "act", label: "Acuity" }]
     };
 
     const allowed = optionsMap[upbringing] || [];
 
-    // Only rebuild the options if the upbringing category changed or options are empty
     if (choiceSelect.dataset.currentUpbringing !== upbringing || choiceSelect.options.length <= 1) {
         choiceSelect.innerHTML = '<option value="none">-- Select Aspect --</option>';
         allowed.forEach(opt => {
@@ -22978,7 +23039,6 @@ function updateUpbringingOptions(preferredVal) {
         choiceSelect.dataset.currentUpbringing = upbringing;
     }
 
-    // Keep or set current selection if valid for the selected Upbringing
     if (currentVal && allowed.some(a => a.val === currentVal)) {
         choiceSelect.value = currentVal;
     } else if (!allowed.some(a => a.val === choiceSelect.value)) {
