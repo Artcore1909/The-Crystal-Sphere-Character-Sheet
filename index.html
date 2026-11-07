@@ -2678,11 +2678,11 @@ details[open] #skills-collapsed-summary {
                 </div>
             </div>
 
-<!-- 🐾 COMPANIONS & PETS CONTAINER -->
+<!-- 🐾 PETS & THRALLS CONTAINER -->
             <div class="pnp-weapon-slot-row pnp-charge-slot" style="margin-top: 15px; display: flex; flex-direction: column; gap: 15px;">
                 <span class="pnp-col-header pnp-charge-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                    <span>PETS (<span id="pet-count-display">0</span>)</span>
-                    <button class="pnp-edit-btn" onclick="window.addPetSlot()" style="background:#7d3c1b; color:#fff; border-radius:3px; padding:2px 8px; font-size:0.75rem;">+ Add Pet</button>
+                    <span>PETS & THRALLS (<span id="pet-count-display">0</span>)</span>
+                    <button class="pnp-edit-btn" onclick="window.addPetSlot()" style="background:#7d3c1b; color:#fff; border-radius:3px; padding:2px 8px; font-size:0.75rem;">+ Add Pet/Thrall</button>
                 </span>
                 
                 <div id="pets-master-container" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
@@ -26867,7 +26867,7 @@ if (!characterChoicesState.pets) {
 window.addPetSlot = function() {
     characterChoicesState.pets.push({
         isConfigured: true,
-        name: `Pet #${characterChoicesState.pets.length + 1}`,
+        name: `Pet/Thrall #${characterChoicesState.pets.length + 1}`,
         size: "A",
         pace: 22,
         dex: 6, hel: 3, str: 5, act: 4, int: 2, ver: 2, hap: 3,
@@ -26885,7 +26885,7 @@ window.addPetSlot = function() {
 };
 
 window.removePetSlot = function(index) {
-    if (confirm("Are you sure you want to dismiss this pet?")) {
+    if (confirm("Are you sure you want to dismiss this pet/thrall?")) {
         characterChoicesState.pets.splice(index, 1);
         if (typeof calculateSheet === "function") calculateSheet();
     }
@@ -26908,10 +26908,10 @@ window.togglePetBuilder = function(index) {
     const rawName = pet.name || "";
 
     panel.innerHTML = `
-        <h4 style="margin-top:0; color:#5c1d1d;">Edit Pet #${index + 1}</h4>
+        <h4 style="margin-top:0; color:#5c1d1d;">Edit Pet/Thrall #${index + 1}</h4>
         
         <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-            <div class="builder-group"><label>Pet Name</label><input type="text" id="pet-setup-name-${index}" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
+            <div class="builder-group"><label>Pet/Thrall Name</label><input type="text" id="pet-setup-name-${index}" style="padding:4px; font-size:0.8rem; border:1px solid #bdae93; border-radius:4px;"></div>
             <div class="builder-group"><label>Size</label><input type="text" id="pet-setup-size-${index}" value="${escapeHtml(pet.size || 'A')}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
             <div class="builder-group"><label>Pace</label><input type="number" id="pet-setup-pace-${index}" value="${pet.pace ?? 22}" style="padding:4px; font-size:0.8rem; text-align:center;"></div>
         </div>
@@ -26967,7 +26967,7 @@ window.savePet = function(index) {
 
     characterChoicesState.pets[index] = {
         isConfigured: true,
-        name: nameVal || `Pet #${index + 1}`,
+        name: nameVal || `Pet/Thrall #${index + 1}`,
         size: size,
         pace: parseInt(document.getElementById(`pet-setup-pace-${index}`).value) || 22,
         dex: parseInt(document.getElementById(`pet-setup-dex-${index}`).value) || 6,
@@ -27004,7 +27004,7 @@ window.togglePetCatalogModal = function(index) {
         modal.className = "modal-overlay";
         modal.style.display = "flex";
         
-        let optionsHtml = `<option value="None">-- Select Pet --</option>`;
+        let optionsHtml = `<option value="None">-- Select Pet/Thrall --</option>`;
         const sourceCats = ["Animal", "Beast"];
 
         sourceCats.forEach(cat => {
@@ -27028,11 +27028,11 @@ window.togglePetCatalogModal = function(index) {
         modal.innerHTML = `
             <div class="char-modal">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-red); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: var(--primary-red);">Select Pet</h3>
+                    <h3 style="margin: 0; color: var(--primary-red);">Select Pet/Thrall</h3>
                     <button onclick="document.getElementById('pet-catalog-modal').style.display='none'" style="background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);">&times;</button>
                 </div>
                 <div class="builder-group" style="margin-bottom: 15px;">
-                    <label>Choose Pet</label>
+                    <label>Choose Pet/Thrall</label>
                     <select id="catalog-pet-select" style="width: 100%; padding: 2px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff; font-weight: bold;">
                         ${optionsHtml}
                     </select>
@@ -27119,7 +27119,7 @@ window.renderPetMiniSheet = function() {
     if (pets.length === 0) {
         container.innerHTML = `
             <div style="box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: center; border: 1px dashed #c8be9c; border-radius: 6px; background: #faf7f2; padding: 12px; color: #7c6f64; font-size: 0.72rem; text-align: center; font-style: italic; line-height: 1.4;">
-                No pets configured. Click "+ Add Pet" above to register a pet.
+                No pets configured. Click "+ Add Pet/Thrall" above to register a pet/thrall.
             </div>
         `;
         return;
