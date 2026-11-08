@@ -2031,7 +2031,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-3"> 
           <label for="char-race">Race</label> 
           <select id="char-race" onchange="calculateSheet()"> 
-            <option value="None" selected disabled>Select Race</option> 
+            <option value="None" selected disabled>Select Race...</option> 
             <option value="Human">Human</option> 
             <option value="Canivir">Canivir</option> 
             <option value="Dwarf">Dwarf</option> 
@@ -2101,7 +2101,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-4"> 
           <label for="char-ethnos">Select Ethnos</label> 
           <select id="char-ethnos" onchange="calculateSheet()"> 
-            <option value="None" selected disabled>Select Ethnos</option>
+            <option value="None" selected disabled>Select Ethnos...</option>
             <option value="Aquoi">Aquoi</option> 
             <option value="Dwarven">Dwarven</option> 
             <option value="Euskal">Euskal</option> 
@@ -2149,7 +2149,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-4"> 
           <label for="char-milieu">Select Milieu</label> 
           <select id="char-milieu" onchange="calculateSheet()"> 
-            <option value="None" selected disabled>Select Milieu</option>
+            <option value="None" selected disabled>Select Milieu...</option>
             <option value="Commoner">Commoner</option> 
             <option value="Noble">Noble</option> 
             <option value="Outsider">Outsider</option> 
@@ -2160,7 +2160,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-4"> 
           <label for="char-setting">Select Setting</label> 
           <select id="char-setting" onchange="calculateSheet()"> 
-            <option value="None" selected disabled>Select Setting</option>
+            <option value="None" selected disabled>Select Setting...</option>
             <option value="Coastal">Coastal</option>            
             <option value="Urban">Urban</option> 
             <option value="Rural">Rural</option> 
@@ -2173,7 +2173,7 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-6"> 
           <label for="char-upbringing">Select Upbringing/Guild</label> 
           <select id="char-upbringing" onchange="calculateSheet()"> 
-            <option value="None" selected disabled>Select Upbringing/Guild</option>
+            <option value="None" selected disabled>Select Upbringing/Guild...</option>
             <option value="Artisan">Artisan</option> 
             <option value="College Initiate">College Initiate</option> 
             <option value="Laborer">Laborer</option>
@@ -2189,10 +2189,11 @@ details[open] #skills-collapsed-summary {
             <option value="Wild">Wild</option>  
           </select> 
         </div> 
-        <div class="form-group span-6"> 
+<div class="form-group span-6"> 
           <label for="char-deity">Select Patron Deity</label> 
           <select id="char-deity" onchange="characterChoicesState.patronDeity = this.value; calculateSheet();">
-            <option value="None">None / Secular</option>
+            <option value="None" selected disabled>Select Patron Deity...</option>
+            <option value="None / Secular">None / Secular</option>
             <option value="Day">Day</option>
             <option value="Night">Night</option>
             <option value="Ver">Ver</option>
@@ -2205,7 +2206,7 @@ details[open] #skills-collapsed-summary {
             <option value="Wind Goddess">Wind Goddess</option>
             <option value="Shadow King">Shadow King</option>
           </select> 
-        </div> 
+        </div>
 
         <div class="form-group span-6"> 
           <label for="char-native-lang">Native Language</label> 
@@ -2224,25 +2225,25 @@ details[open] #skills-collapsed-summary {
         <div class="form-group span-3" id="sex-bonus-group" style="display:none;"> 
           <label for="sex-bonus-choice">Assign Sex Bonus</label> 
           <select id="sex-bonus-choice" onchange="calculateSheet()">
-            <option value="none">-- Select Aspect --</option>
+            <option value="none">Select Aspect...</option>
           </select> 
         </div> 
         <div class="form-group span-3" id="upbringing-bonus-group">
           <label for="upbringing-bonus-choice">Assign Upbringing Bonus</label>
           <select id="upbringing-bonus-choice" onchange="calculateSheet()">
-            <option value="none">-- Select Aspect --</option>
+            <option value="none">Select Aspect...</option>
           </select>
         </div>
         <div class="form-group span-3" id="race-bonus-group" style="display:none;"> 
           <label id="race-bonus-label" for="race-bonus-choice">Racial Bonus Selection</label> 
           <select id="race-bonus-choice" onchange="calculateSheet()">
-            <option value="none">-- Select Aspect --</option>
+            <option value="none">Select Aspect...</option>
           </select> 
         </div> 
         <div class="form-group span-3" id="race-penalty-group" style="display:none;"> 
           <label id="race-penalty-label" for="race-penalty-choice">Racial Penalty Selection</label> 
           <select id="race-penalty-choice" onchange="calculateSheet()">
-            <option value="none">-- Select Aspect --</option>
+            <option value="none">Select Aspect...</option>
           </select> 
         </div> 
       </div> <!-- Close conditional-modifiers -->
@@ -12574,18 +12575,18 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         if (sex === "Male") {
             sexGroup.style.display = "flex";
             if(sexChoice.dataset.current !== "Male") {
-                sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel">Health</option><option value="str">Strength</option><option value="ver">Verve</option>';
+                sexChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="hel">Health</option><option value="str">Strength</option><option value="ver">Verve</option>';
                 sexChoice.dataset.current = "Male";
             }
         } else if (sex === "Female") {
             sexGroup.style.display = "flex";
             if(sexChoice.dataset.current !== "Female") {
-                sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="act">Acuity</option><option value="ver">Verve</option>';
+                sexChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="dex">Dexterity</option><option value="act">Acuity</option><option value="ver">Verve</option>';
                 sexChoice.dataset.current = "Female";
             }
         } else {
             sexGroup.style.display = "none";
-            sexChoice.innerHTML = '<option value="none">-- Select Aspect --</option>';
+            sexChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option>';
             sexChoice.dataset.current = "";
         }
         if (curSex && Array.from(sexChoice.options).some(o => o.value === curSex)) {
@@ -12599,35 +12600,35 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         if (race === "Canivir") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Assign +2 Bonus:";
-            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
+            rBonusChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="int">Intellect</option><option value="ver">Verve</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         } 
         else if (race === "Dwarf") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
-            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
+            rBonusChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         } 
         else if (race === "Elf") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Assign +1 Bonus:";
-            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="int">Intellect</option><option value="ver">Verve</option>';
+            rBonusChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="int">Intellect</option><option value="ver">Verve</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health (-2)</option><option value="str2">Strength (-2)</option><option value="split">Health (-1) & Strength (-1)</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="hel2">Health (-2)</option><option value="str2">Strength (-2)</option><option value="split">Health (-1) & Strength (-1)</option>';
         }
         else if (race === "Felivir") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
             rBonusChoice.innerHTML = `
-                <option value="none">-- Select Aspect --</option>
+                <option value="none" selected disabled>Select Aspect...</option>
                 <option value="dex">Dexterity</option>
                 <option value="hel">Health</option>
                 <option value="str">Strength</option>
@@ -12643,7 +12644,7 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
             rPenaltyChoice.innerHTML = `
-                <option value="none">-- Select Aspect --</option>
+                <option value="none" selected disabled>Select Aspect...</option>
                 <option value="int">Intellect</option>
                 <option value="ver">Verve</option>
                 <option value="split">Intellect & Verve</option>
@@ -12652,13 +12653,13 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         else if (race === "Half-elf") {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel">Health</option><option value="str">Strength</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="hel">Health</option><option value="str">Strength</option>';
         } 
         else if (race === "Half-orc") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Allocate +2 Bonus:";
             rBonusChoice.innerHTML = `
-                <option value="none">-- Select Aspect --</option>
+                <option value="none" selected disabled>Select Aspect...</option>
                 <option value="hel2">Health</option>
                 <option value="str2">Strength</option>
                 <option value="split">Health & Strength</option>
@@ -12667,7 +12668,7 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
             rPenaltyChoice.innerHTML = `
-                <option value="none">-- Select Aspect --</option>
+                <option value="none" selected disabled>Select Aspect...</option>
                 <option value="int2">Intellect</option>
                 <option value="ver2">Verve</option>
                 <option value="split">Intellect & Verve</option>
@@ -12677,7 +12678,7 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
           rBonusGroup.style.display = "flex"; 
           rBonusLabel.innerText = "Allocate +2 Bonus:"; 
           rBonusChoice.innerHTML = ` 
-            <option value="none">-- Select Aspect --</option>
+            <option value="none" selected disabled>Select Aspect...</option>
             <option value="dex2">Dexterity</option> 
             <option value="hel2">Health</option> 
             <option value="str2">Strength</option> 
@@ -12688,7 +12689,7 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
           rPenaltyGroup.style.display = "flex"; 
           rPenaltyLabel.innerText = "Assign -1 Penalty:"; 
           rPenaltyChoice.innerHTML = ` 
-            <option value="none">-- Select Aspect --</option>
+            <option value="none" selected disabled>Select Aspect...</option>
             <option value="act">Acuity</option> 
             <option value="int">Intellect</option> 
             <option value="ver">Verve</option> 
@@ -12697,16 +12698,16 @@ function setupConditionalDropdowns(preferredBonus, preferredPenalty, preferredSe
         else if (race === "Haubid" || race === "Vulpivir") {
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Allocate -2 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="hel2">Health</option><option value="str2">Strength</option><option value="split">Health & Strength</option>';
         } 
         else if (race === "Nuss-janni") {
             rBonusGroup.style.display = "flex";
             rBonusLabel.innerText = "Assign +1 Bonus:";
-            rBonusChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
+            rBonusChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="dex">Dexterity</option><option value="hel">Health</option><option value="str">Strength</option>';
             
             rPenaltyGroup.style.display = "flex";
             rPenaltyLabel.innerText = "Assign -1 Penalty:";
-            rPenaltyChoice.innerHTML = '<option value="none">-- Select Aspect --</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
+            rPenaltyChoice.innerHTML = '<option value="none" selected disabled>Select Aspect...</option><option value="act">Acuity</option><option value="int">Intellect</option><option value="ver">Verve</option>';
         }
 
         // Restore values if valid options exist
@@ -15106,7 +15107,7 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
              : pidginSelect.value;
 
          if (pidginSelect.dataset.lastLangTracking !== trackingKey) {
-             let optionsHtml = '<option value="None">Select a pidgin to make fluent...</option>';
+             let optionsHtml = '<option value="None" selected disabled>Select a pidgin to make fluent...</option>';
              langData.pidgins.forEach(p => {
                  const fluentName = p.toLowerCase().replace("pidgin-", "").replace("pidgin", "").trim();
                  const capitalizedName = fluentName.charAt(0).toUpperCase() + fluentName.slice(1);
@@ -23527,7 +23528,7 @@ function updateUpbringingOptions(preferredVal) {
     const allowed = optionsMap[upbringing] || [];
 
     if (choiceSelect.dataset.currentUpbringing !== upbringing || choiceSelect.options.length <= 1) {
-        choiceSelect.innerHTML = '<option value="none">-- Select Aspect --</option>';
+        choiceSelect.innerHTML = '<option value="none" selected disabled>Select Aspect...</option>';
         allowed.forEach(opt => {
             const el = document.createElement("option");
             el.value = opt.val;
