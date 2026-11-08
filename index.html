@@ -3107,17 +3107,17 @@ details[open] #skills-collapsed-summary {
     <div class="skill-body">
         <strong>Primary Aspects:</strong>
         <ul>
-            <li><strong>Dexterity (Dex):</strong> The character’s ability to move and physically react to things. It is used for Dexterity saves, Avoidance, and governs or contributes to Shrewd and Thrust Attacks.</li>
+            <li><strong>Dexterity (Dex):</strong> The character’s ability to move and physically react to things. It is used for Dexterity Saves, Avoidance, and governs or contributes to Shrewd and Thrust Attacks.</li>
 <br>
-            <li><strong>Health (Hel):</strong> The character’s ability to withstand the maelstrom which is life. It is thrice added to the character’s Vitality, and it is used for Health saves and Vitality regeneration.</li>
+            <li><strong>Health (Hel):</strong> The character’s ability to withstand the maelstrom which is life. It is thrice added to the character’s Vitality, and it is used for Health Saves and Vitality regeneration.</li>
 <br>
-            <li><strong>Strength (Str):</strong> The character’s ability to physically manipulate his surroundings. It is twice added to the character’s Vitality, and it is used for Strength saves, Athleticism skills, and governs or contributes to Brutal and Slash attacks. </li>
+            <li><strong>Strength (Str):</strong> The character’s ability to physically manipulate his surroundings. It is twice added to the character’s Vitality, and it is used for Strength Saves, Athleticism skills, and governs or contributes to Brutal and Slash attacks. </li>
 <br>
-            <li><strong>Acuity (Act):</strong> The character’s focus and awareness. It is thrice added to the character’s Mana, and it is used for Acuity saves, Observation skills, and Mana regeneration.</li>
+            <li><strong>Acuity (Act):</strong> The character’s focus and awareness. It is thrice added to the character’s Mana, and it is used for Acuity Saves, Observation skills, and Mana regeneration.</li>
 <br>
-            <li><strong>Intellect (Int):</strong> The character’s ability to learn and retain information. It is used for Intellect saves and lore skills, and as a prerequisite for certain Cast Skills.</li>
+            <li><strong>Intellect (Int):</strong> The character’s ability to learn and retain information. It is used for Intellect Saves and lore skills, and as a prerequisite for certain Cast Skills.</li>
 <br>
-            <li><strong>Verve (Ver):</strong> The character’s ability to either magically or socially manipulate his surroundings. It is twice added to the character’s Mana and it is used for Verve saves and most cast skills.</li>
+            <li><strong>Verve (Ver):</strong> The character’s ability to either magically or socially manipulate his surroundings. It is twice added to the character’s Mana and it is used for Verve Saves and most cast skills.</li>
 <br>
             <li><strong>Hap:</strong> Hap is used when neither skill nor ability is at play, determines your Luck, and can be used to determine the target of an attack.</li>
         </ul>
@@ -3593,48 +3593,221 @@ details[open] #skills-collapsed-summary {
                     <li><em>Move Actions and Incantations</em> resolve at the end of the Pulse in initiative order.</li>
                 </ul>
                 <br>
-                <strong>Types of Actions:</strong>
-                <ul>
-                    <li><strong>Attack:</strong> Move up to 1 Hex and make an attack. Your attack hits if your attack roll exceeds the target's Avoidance roll.</li>
-<br>
-                    <li><strong>Called Shot:</strong> Called shots allow the defender to roll with Advantage, but if successful, allow the attacker to activate one of the following effects depending on the nature of the attack: ignore the defender's Damage Reduction; apply Advantage to the attack after determining whether it hit; inflict a combat condition; or maim the target.</li>
-<br>
-                    <li><strong>Cast:</strong> Spend Mana to weave ætherial effects. You must be able to speak to cast.</li>
-<br>
-                    <li><strong>Free:</strong> Actions that require little to no time. These include Words and are only limited by LM discretion.</li>
-<br>
-                    <li><strong>Move:</strong> Move up to your Pace + an amount of Hexes equal to your Run Check.</li>
-<br>
-                    <li><strong>Skill Check:</strong> Details vary.</li>
-<br>
-                    <li><strong>Hold:</strong> Delay your action. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</li>
-<br>
-                    <em>Simultaneous Actions:</em> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.
-<br>
-<br>
-                <em>Right of Firststrike:</em> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.
-                </ul>
+<strong>Types of Actions:</strong>
+                <p class="hint" style="margin-top: 4px; margin-bottom: 10px;">Each Pulse, combatants initiate actions in initiative order. Words, Free Actions, and Attacks resolve immediately, while Move Actions and Incantations resolve at the end of the Pulse.</p>
+                
+                <table class="game-data" style="margin-bottom: 15px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Action Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Attack</strong></td>
+                            <td>Move up to 1 Hex and make an attack. Your attack hits if your attack roll exceeds the target's Avoidance roll.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Called Shot</strong></td>
+                            <td>Allows the defender to roll with Advantage, but if successful, allows the attacker to activate one of the following effects: ignore the defender's Damage Reduction; apply Advantage to the attack after determining whether it hit; inflict a combat condition; or maim the target.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cast</strong></td>
+                            <td>Spend Mana to weave ætherial effects. You must be able to speak to cast.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Free</strong></td>
+                            <td>Actions that require little to no time. These include Words and are only limited by LM discretion.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Move</strong></td>
+                            <td>Move up to your Pace + an amount of Hexes equal to your Run Check.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skill Check</strong></td>
+                            <td>Details vary depending on the skill being performed.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hold</strong></td>
+                            <td>Delay your action. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+                    <div><strong>Simultaneous Actions:</strong> When sharing initiative, both combatants resolve their respective actions fully, although incantations and move actions can be interrupted.</div>
+                    <div><strong>Right of Firststrike:</strong> When your melee range is breached, you can immediately attack the approaching combatant so long as you are neither engaged nor grappled. Your target must pass a Verve Save against the damage dealt to engage or move past you.</div>
+                </div>
             </div>
         </div>
 
-        <!-- Category 5: Combat Conditions Index -->
+<!-- Category 5: Combat Conditions Index -->
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">5. Combat Conditions Index ▾</div>
             <div class="skill-body">
                 <strong>Combat Conditions:</strong>
                 <p class="hint">Conditions limit a character's ability to act. Unless specified, the Save TN is 3. Re-inflicting an active condition increases its Save TN by 1.</p>
+                
+                <!-- Quick Reference Summary Table -->
+                <table class="game-data" style="margin: 12px 0 16px 0;">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Condition</th>
+                            <th style="width: 20%; text-align: center;">Save</th>
+                            <th style="width: 25%; text-align: center;">Other Remedies</th>
+                            <th>Effect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Actively Dying</strong></td>
+                            <td style="text-align: center;">HEL: TN 1 or ACT: TN 4</td>
+                            <td style="text-align: center;">Healing, Stabilize, Survival, or Street Smarts</td>
+                            <td>Pass Save each Pulse or die.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blind</strong></td>
+                            <td style="text-align: center;">HEL: TN 3</td>
+                            <td style="text-align: center;">Encaenium of Cure Wounds</td>
+                            <td>Attacks & Avoidance at Disadvantage. DEX Saves fail.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bound & Gagged</strong></td>
+                            <td style="text-align: center;">STR: TN 3</td>
+                            <td style="text-align: center;">Escape</td>
+                            <td>Cannot attack; Avoidance at disadvantage; attacks made against you are at Advantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Confused</strong></td>
+                            <td style="text-align: center;">ACT: TN 3</td>
+                            <td style="text-align: center;">Command</td>
+                            <td>Act and move at random.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dazed</strong></td>
+                            <td style="text-align: center;">ACT: TN 3</td>
+                            <td style="text-align: center;">Stabilize</td>
+                            <td>Takes no action and cannot modify Avoidance.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Envenomed / Poisoned</strong></td>
+                            <td style="text-align: center;">HEL: TN 3</td>
+                            <td style="text-align: center;">Antivenom/-dote</td>
+                            <td>Cannot be healed and suffer reccuring damage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exhausted</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Rest</td>
+                            <td>Cumulative -1 Dice Limit penalty on all rolls.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fatigued</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Sleep</td>
+                            <td>Cumulative -1 Dice Limit penalty on all rolls.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grappled / Pinned</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Escape/Grapple</td>
+                            <td>Restricted actions and Avoid at Disadvantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grievously Wounded</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Encaenium of Cure Wounds / Fully recovered</td>
+                            <td>Recover only 1 Vitality per day.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Impaired</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Cure Wounds</td>
+                            <td>Cumulative -1 Dice Limit penalty to Dex/Str Skills and Saves.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nauseated</strong></td>
+                            <td style="text-align: center;">HEL: TN 1</td>
+                            <td style="text-align: center;">Roll zero on your Health Save and vomit or roll six or higher and be cured.</td>
+                            <td>Must pass Health Save before taking any action.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Off-balance</strong></td>
+                            <td style="text-align: center;">DEX: TN 3</td>
+                            <td style="text-align: center;">Balance Check</td>
+                            <td>Takes no action until recovered. At Disadvantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pained</strong></td>
+                            <td style="text-align: center;">VER: TN 3</td>
+                            <td style="text-align: center;">Cure Wounds</td>
+                            <td>Must pass Verve Save before action. At disadvantage; attacks made against you are at Advantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Panicked</strong></td>
+                            <td style="text-align: center;">VER: TN 3</td>
+                            <td style="text-align: center;">ACT: TN 3</td>
+                            <td>Must flee, run past enemy, or cower. Drop held items on failed Hap Save, TN 2.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Paralyzed</strong></td>
+                            <td style="text-align: center;">STR: TN 3</td>
+                            <td style="text-align: center;">Encaenium of Cure Wounds</td>
+                            <td>Takes no actions. Attacks made against you are at Advantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Petrified</strong></td>
+                            <td style="text-align: center;">VER: TN 3</td>
+                            <td style="text-align: center;">Command</td>
+                            <td>Takes no actions. Attacks made against you are at Advantage.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prone & Supine</strong></td>
+                            <td style="text-align: center;">—</td>
+                            <td style="text-align: center;">Move Action</td>
+                            <td>Avoid & Attack at Disadvantage. Takes 1 Pulse to return to feet.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Numbed</strong></td>
+                            <td style="text-align: center;">HEL: TN 3</td>
+                            <td style="text-align: center;">Cure Wounds or Fire Damage</td>
+                            <td>Pace and Dexterity are reduced by half.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Unconscious / Asleep</strong></td>
+                            <td style="text-align: center;">HAP: TN 2</td>
+                            <td style="text-align: center;">Contact / Damage / Smell / Listen</td>
+                            <td>You cannot Avoid and attacks made against you are at Advantage. Wake checks each ¼ phase.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Surprised</strong></td>
+                            <td style="text-align: center;">ACT: TN 3</td>
+                            <td style="text-align: center;">Command</td>
+                            <td>Unable to act until the next Pulse.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weakened</strong></td>
+                            <td style="text-align: center;">STR: TN 3</td>
+                            <td style="text-align: center;">Cure Wounds</td>
+                            <td>Strength reduced by half.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <strong style="display: block; margin-top: 15px; margin-bottom: 8px;">Detailed Conditions Reference:</strong>
                 <ul>
-                    <li><strong>Actively Dying:</strong> Actively dying combatants must pass a TN 1 Health or Acuity Save (determined by whether they were felled by Vitality or Asphyxiation for Health, or Mana damage for Acuity) each Pulse or die. If the cause of their condition is Vitality loss, they can be stabilized by healing of any kind, a TN 4 Street Smarts or Survival Skill Check, or the Stabilize spell. If the cause is Mana loss, only the stabilize spell will work. And if the cause is asphyxiation or drowning, a TN 4 Street Smarts or Survival Skill Check or the Stabilize spell is necessary to remove the obstruction.</li>
+                    <li><strong>Actively Dying:</strong> Actively dying combatants must pass a TN 1 Health or Acuity Save (determined by whether they were felled by Vitality or Asphyxiation for Health, or Mana damage for Acuity) each Pulse or die. If the cause of their condition is Vitality loss, they can be stabilized by healing of any kind, a TN 4 Street Smarts or Survival skill check, or the Stabilize spell. If the cause is Mana loss, only the stabilize spell will work. And if the cause is asphyxiation or drowning, a TN 4 Street Smarts or Survival skill check or the Stabilize spell is necessary to remove the obstruction.</li>
 <br>
-                    <li><strong>Blind:</strong> A blind attack is any kind of attack upon an enemy who the combatant cannot see. The attack is made at disadvantage, and only magical effects can modify their roll. A blind avoidance roll is made when a combatant is attempting to avoid an attack from a foe they cannot see. The Avoidance is made at disadvantage, and only magical effects can modify their roll. Blind Dexterity saves automatically fail, but other saves are only affected if the LM deems it fitting. To regain their sight, a blinded combatant is entitled to a Health save each Pulse.</li>
+                    <li><strong>Blind:</strong> A blind attack is any kind of attack upon an enemy who the combatant cannot see. The attack is made at disadvantage, and only magical effects can modify their roll. A blind avoidance roll is made when a combatant is attempting to avoid an attack from a foe they cannot see. The Avoidance is made at disadvantage, and only magical effects can modify their roll. Blind Dexterity Saves automatically fail, but other Saves are only affected if the LM deems it fitting. To regain their sight, a blinded combatant is entitled to a Health Save each Pulse.</li>
 <br>
-                    <li><strong>Bound & Gagged/Entangled:</strong> Bound or Entangled combatants cannot attack, are at disadvantage for the purpose of rolling avoidance, and attacks made against them are at advantage. They can cast words and speak freely so long as they are not gagged. To escape, the target must either pass a Strength save or an Escape Check.</li>
+                    <li><strong>Bound & Gagged/Entangled:</strong> Bound or Entangled combatants cannot attack, are at disadvantage for the purpose of rolling avoidance, and attacks made against them are at advantage. They can cast words and speak freely so long as they are not gagged. To escape, the target must either pass a Strength Save or an Escape check.</li>
 <br>
-                    <li><strong>Confused:</strong> Confused combatants cannot tell friend from foe and are easily startled. Whether they fight or flee and whom they attack or which direction they run is random. To regain their senses, a confused combatant is entitled to an Acuity save each Pulse.</li>
+                    <li><strong>Confused:</strong> Confused combatants cannot tell friend from foe and are easily startled. Whether they fight or flee and whom they attack or which direction they run is random. To regain their senses, a confused combatant is entitled to an Acuity Save each Pulse.</li>
 <br>
-                    <li><strong>Dazed:</strong> When a combatant becomes dazed, they can take no action nor can they modify their Avoidance. To regain their senses, a dazed combatant is entitled to an Acuity save each Pulse.</li>
+                    <li><strong>Dazed:</strong> When a combatant becomes dazed, they can take no action nor can they modify their Avoidance. To regain their senses, a dazed combatant is entitled to an Acuity Save each Pulse.</li>
 <br>
-                    <li><strong>Envenomed/Poisoned:</strong> Once a target has either been poisoned or envenomed, he can no longer receive healing until the toxin is neutralized or has been fought off. The target is entitled to a Health save each time he would suffer damage to fight off the effect of the toxin.</li>
+                    <li><strong>Envenomed/Poisoned:</strong> Once a target has either been poisoned or envenomed, he can no longer receive healing until the toxin is neutralized or has been fought off. The target is entitled to a Health Save each time he would suffer damage to fight off the effect of the toxin.</li>
 <br>
                     <li><strong>Engaged:</strong> Combatants who are engaged with one another may attack each other with melee and pugil weapons. Any ranged attack on a foe that is engaged has a chance to hit one of the other combatants with whom they are engaged: if the shot or throw misses its intended target, randomly select a new target and roll a blind attack against their blind Avoidance. Unless you have the Melee Shot skill, all ranged attacks you make while you are engaged are at disadvantage.</li>
 <br>
@@ -3642,15 +3815,15 @@ details[open] #skills-collapsed-summary {
 <br>
                     <li><strong>Grappled/Pinned:</strong> Grappled combatants are in physical contact with one another. At any given time, only one combatant is in control of the grapple. He is able to do the following: make a one-handed attack, perform a reasonable Check, drag or carry the grapplee at ½ pace so long as that target is their size or smaller, or end the grapple. Either combatant can make a non-move, non-attack free action, cast a word spell, or confront the grapple. The grapplee may attempt an Escape versus Grapple Confrontation to slip free. Striking a grappled or pinned foe incurs no penalty, however, a miss incurs an attack at disadvantage against the other combatant.  Either combatant in a grapple or a pin attempting to avoid a strike is at disadvantage. Pinned opponents may have more or fewer restrictions as determined by the LM.</li>
 <br>
-                    <li><strong>Grievously Wounded:</strong> You can only recover one Vitality per day and only if your wounds are treated by a TN 3 Survival Check. This effect is removed by the Cure Wounds encænium.</li>
+                    <li><strong>Grievously Wounded:</strong> You can only recover one Vitality per day and only if your wounds are treated by a TN 3 Survival check. This effect is removed by the Cure Wounds encænium.</li>
 <br>
-                    <li><strong>Impaired:</strong> Impairment is a -1 dice limit penalty to all Dexterity or Strength based skills and to all Dexterity and Strength saves. Impairment is cumulative and all levels of impairment are removed once the cause of the impairment is removed.</li>
+                    <li><strong>Impaired:</strong> Impairment is a -1 dice limit penalty to all Dexterity or Strength based skills and to all Dexterity and Strength Saves. Impairment is cumulative and all levels of impairment are removed once the cause of the impairment is removed.</li>
 <br>
-                    <li><strong>Nauseated:</strong> A nauseated combatant must pass a Health save before taking any action. If he rolls a zero, he vomits as a Move Action and is no longer nauseated; if rolls a six, he is also no longer nauseated.</li>
+                    <li><strong>Nauseated:</strong> A nauseated combatant must pass a Health Save before taking any action. If he rolls a zero, he vomits as a Move Action and is no longer nauseated; if rolls a six, he is also no longer nauseated.</li>
 <br>
                     <li><strong>Off-balance:</strong> The combatant can take no action until he either recovers or falls. He can regain his balance by passing either a Balance Check or a Dexterity Save though if he fails by 2 or more, he falls. So long as he is off-balanced, he is at disadvantage.</li>
 <br>
-                    <li><strong>Pained:</strong> A pained combatant must pass a Verve save before taking any action. While writhing in pain, a target is at disadvantage and attacks made against them are at advantage.</li>
+                    <li><strong>Pained:</strong> A pained combatant must pass a Verve Save before taking any action. While writhing in pain, a target is at disadvantage and attacks made against them are at advantage.</li>
 <br>
                     <li><strong>Panicked:</strong> Panicked combatants must flee if they can. If they can’t, they must attempt to either run past the enemy or cower. In anycase, a panicked combatant must pass a Hap Save, TN 2, or drop whatever is in his hands. To regain his composure, a panicked combatant is entitled to an Acuity Save each Pulse.</li>
 <br>
@@ -3660,11 +3833,11 @@ details[open] #skills-collapsed-summary {
 <br>
                     <li><strong>Numbed:</strong> Numbed combatants have their pace and Dexterity reduced by half. To regain their sensation and mobility, a numbed combatant is entitled to a Health Save each Pulse.</li>
 <br>
-                    <li><strong>Unconscious/Asleep:</strong> When striking an unconscious or sleeping foe, do so with advantage. Sleeping players can be roused by physical contact or by passing a Listen or Smell Check when any sound  or smell out of the ordinary is made or every ¼ phase after two phases of rest. The roll to wake from a magically induced sleep is a Confrontation instead made against the caster’s Verve; any damage suffered by the target adds one to his roll bonus. An unconscious player is entitled to a Hap save, TN 2, each ¼ phase to wake.</li>
+                    <li><strong>Unconscious/Asleep:</strong> When striking an unconscious or sleeping foe, do so with advantage. Sleeping players can be roused by physical contact or by passing a Listen or Smell check when any sound  or smell out of the ordinary is made or every ¼ phase after two phases of rest. The roll to wake from a magically induced sleep is a Confrontation instead made against the caster’s Verve; any damage suffered by the target adds one to his roll bonus. An unconscious player is entitled to a Hap Save, TN 2, each ¼ phase to wake.</li>
 <br>
-                    <li><strong>Surprised:</strong> A surprise Check is made at the beginning of combat for all combatants ignorant of the imminent attack. Each combatant will roll an Acuity Save. If they fail, they are unable to act until the following Pulse.</li>
+                    <li><strong>Surprised:</strong> A surprise check is made at the beginning of combat for all combatants ignorant of the imminent attack. Each combatant will roll an Acuity Save. If they fail, they are unable to act until the following Pulse.</li>
 <br>
-                    <li><strong>Weakened:</strong> A weakened opponent has their Strength reduced by half. To regain their strength, a weakened combatant is entitled to a Health save each Pulse.</li>
+                    <li><strong>Weakened:</strong> A weakened opponent has their Strength reduced by half. To regain their strength, a weakened combatant is entitled to a Strength Save each Pulse.</li>
                 </ul>
             </div>
         </div>
