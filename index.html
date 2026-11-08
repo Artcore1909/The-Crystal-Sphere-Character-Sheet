@@ -2978,47 +2978,128 @@ details[open] #skills-collapsed-summary {
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">1. Core Mechanics & Dice Rolling ▾</div>
             <div class="skill-body">
-<strong>Attacks & Avoidance:</strong>
-<ol>
-    <li>Determine the number of dice you are entitled to roll and your Dice Limit (default is six).</li>
-    <li>If you are entitled to more dice than your Dice Limit, convert the excess dice into Bonus Damage or Damage Reduction.</li>
-    <li>Determine your total Bonus Damage or Damage Reduction.</li>
-    <li>Roll the newly constructed dice pool, counting <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> as one and <img src='images/Critenc.png' alt='Crit' class='inline-icon'> as your Crit Count (default is two).</li>
-    <li>If you roll more than one <img src='images/Critenc.png' alt='Crit' class='inline-icon'>, multiply your roll by that amount.</li>
-    <li>Compare your result with your foe's roll. The attack hits if the Attack roll exceeds the Avoidance roll.</li>
-    <li>If the attack hits, the attacker adds their Bonus Damage, and the defender adds their Damage Reduction.</li>
-</ol>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th style="width: 18%;">Roll</th>
+            <th style="width: 27%;">Step 1: Construct Pool</th>
+            <th style="width: 28%;">Step 2: Roll &amp; Modify</th>
+            <th style="width: 27%;">Step 3: Resolve Roll</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- ATTACK -->
+        <tr>
+            <td><strong>Attack</strong></td>
+            <td rowspan="5" style="vertical-align: middle;">
+                <ol style="margin: 0; padding-left: 18px; line-height: 1.6;">
+                    <li>Determine the number of dice you are entitled to roll and your Dice Limit (default is six).</li>
+                    <li>Convert excess dice into your Bonus or DR.</li>
+                </ol>
+            </td>
+            <td rowspan="2" style="vertical-align: middle;">
+                <ol start="3" style="margin: 0; padding-left: 18px; line-height: 1.5; margin-bottom: 6px;">
+                    <li>Roll the pool, counting <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> as 1 and <img src='images/Critenc.png' alt='Crit' class='inline-icon'> as your Crit Count (default: 2).</li>
+                    <li>If you roll more than one <img src='images/Critenc.png' alt='Crit' class='inline-icon'>, multiply your roll by that amount.</li>
+                </ol>
+            </td>
+            <td>
+                <div style="font-size: 0.82rem; margin-bottom: 4px;"><strong>If attack exceeds Avoidance...</strong></div>
+                <div style="font-size: 0.85rem; border-top: 1px solid var(--border-warm); padding-top: 4px;">
+                    (5) Add Bonus Damage
+                </div>
+            </td>
+        </tr>
+
+        <!-- AVOIDANCE -->
+        <tr>
+            <td><strong>Avoidance</strong></td>
+            <!-- Step 1 spanned -->
+            <!-- Step 2 spanned -->
+            <td>
+                <div style="font-size: 0.82rem; margin-bottom: 4px;"><strong>If attack exceeds Avoidance...</strong></div>
+                <div style="font-size: 0.85rem; border-top: 1px solid var(--border-warm); padding-top: 4px;">
+                    (6) Add Damage Reduction
+                </div>
+            </td>
+        </tr>
+
+        <!-- CHECK -->
+        <tr>
+            <td><strong>Check</strong></td>
+            <!-- Step 1 spanned -->
+            <td rowspan="3" style="vertical-align: middle;">
+                <ol start="3" style="margin: 0; padding-left: 18px; line-height: 1.5; margin-bottom: 4px;">
+                    <li>Roll the pool, counting <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> as 1 and <img src='images/Critenc.png' alt='Crit' class='inline-icon'> as your Crit Count (default: 2).</li>
+                    <li>Add your Bonus.</li>
+                </ol>
+                <div style="font-size: 0.78rem; font-style: italic; color: var(--text-muted);">(Skip multiplication step)</div>
+            </td>
+            <td rowspan="2" style="vertical-align: middle;">
+                <strong style="color: var(--success-green);">Success:</strong> Total exceeds TN
+            </td>
+        </tr>
+
+        <!-- SAVE -->
+        <tr>
+            <td><strong>Save</strong></td>
+            <!-- Step 1 spanned -->
+            <!-- Step 2 spanned -->
+        </tr>
+
+        <!-- CONFRONTATION -->
+        <tr>
+            <td><strong>Confrontation</strong></td>
+            <!-- Step 1 spanned -->
+            <!-- Step 2 spanned -->
+            <td>
+                <strong style="color: var(--success-green);">Success:</strong> Total exceeds the opposed roll; ties go to the non-aggressor
+            </td>
+        </tr>
+    </tbody>
+</table>
 <br>
-<strong>Checks, Saves, & Confrontations:</strong>
-<ul>
-    <li><strong>Checks & Saves:</strong> Follow the same rolling mechanic as Attacks and Avoidance, but skip the multiplication step and add your bonus <em>before</em> determining success. You succeed if your final total meets or exceeds the Target Number (TN) set by the LM.</li>
-<br>
-    <li><strong>Confrontations:</strong> When rolling against an active opponent's Skill Check or Save, your roll must exceed your opponent's to succeed. In the case of a tie, the Aggressor fails. All Observation skills are considered aggressive.</li>
-<br>
-    <li><strong>Hidden Checks:</strong> These can be rolled secretly by the LM in your stead (such as Smuggling or Thievery) to preserve character ignorance.</li>
-<br>
-    <li><strong>Assisted Checks:</strong> When assisting an ally, add your bonus directly to their Check.</li>
-</ul>
-<br>
-<strong>Advantage & Disadvantage:</strong>
-<ul>
-    <li><strong>Advantage:</strong> Convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to <img src='images/Critenc.png' alt='Crit' class='inline-icon'>.</li>
-<br>
-    <li><strong>Disadvantage:</strong> Convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to Blanks.</li>
-</ul>
-<br>
-<strong>Proficiency, Extra Training, Mastery, & Resilience:</strong>
-<ul>
-    <li><strong>Untrained:</strong> You can attempt non-cast skills without training; however, Untrained rolls cannot be modified and are made at Disadvantage.</li>
-<br>
-    <li><strong>Proficient:</strong> You can change up to your Rank <img src='images/Skillenc.png' alt='Skill' class='inline-icon'> to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> whenever rolling for a Proficient skill.</li>
-<br>
-    <li><strong>Extra Training:</strong> You can reroll Blank Results once.</li>
-<br>
-    <li><strong>Mastery:</strong> Add one <img src="images/Critenc.png" alt="Crit" class="inline-icon"> to your roll.</li>
-<br>
-    <li><strong>Resilience:</strong> You can convert all Blank Results to <img src='images/Skillenc.png' alt='Skill' class='inline-icon'>.</li>
-</ul>
+<table class="game-data">
+<thead>
+<tr>
+<th colspan="2" style="text-align: center;">Roll Modifications</th>
+</tr>
+<tr>
+<th style="width: 25%;">Modification</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Advantage</strong></td>
+<td>Convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to <img src='images/Critenc.png' alt='Crit' class='inline-icon'>.</td>
+</tr>
+<tr>
+<td><strong>Disadvantage</strong></td>
+<td>Convert all <img src='images/Hitenc.png' alt='Hit' class='inline-icon'> to Blanks.</td>
+</tr>
+<tr>
+<td><strong>Untrained</strong></td>
+<td>You can attempt all non-cast skills without training; however, untrained rolls cannot be modified and may suffer Disadvantage.</td>
+</tr>
+<tr>
+<td><strong>Proficient</strong></td>
+<td>You can change up to your Rank <img src='images/Skillenc.png' alt='Skill' class='inline-icon'> to <img src='images/Hitenc.png' alt='Hit' class='inline-icon'>.</td>
+</tr>
+<tr>
+<td><strong>Extra Training</strong></td>
+<td>You can reroll all Blank Results once.</td>
+</tr>
+<tr>
+<td><strong>Mastery</strong></td>
+<td>Add one <img src="images/Critenc.png" alt="Crit" class="inline-icon"> to your roll.</td>
+</tr>
+<tr>
+<td><strong>Resilience</strong></td>
+<td>You can convert one or more Blank Results to <img src='images/Skillenc.png' alt='Skill' class='inline-icon'>.</td>
+</tr>
+</tbody>
+</table>
 <br>
 <strong>Size Differential</strong>
 <ul>
@@ -3105,7 +3186,7 @@ details[open] #skills-collapsed-summary {
 <div class="skill-item">
     <div class="skill-header" onclick="toggleSkill(this)">2. Aspects & Derived Stats ▾</div>
     <div class="skill-body">
-        <strong>Primary Aspects:</strong>
+        <strong>Aspects:</strong>
         <ul>
             <li><strong>Dexterity (Dex):</strong> The character’s ability to move and physically react to things. It is used for Dexterity Saves, Avoidance, and governs or contributes to Shrewd and Thrust Attacks.</li>
 <br>
@@ -3122,24 +3203,44 @@ details[open] #skills-collapsed-summary {
             <li><strong>Hap:</strong> Hap is used when neither skill nor ability is at play, determines your Luck, and can be used to determine the target of an attack.</li>
         </ul>
         <br>
-        <strong>Derived Stats:</strong>
-        <ul>
-            <li><strong>Vitality:</strong> (3 × Health) + (2 × Strength)</li>
-<br>
-            <li><strong>Vitality Regen:</strong> 1d × Health</li>
-<br>
-            <li><strong>Mana:</strong> (3 × Acuity) + (2 × Verve)</li>
-<br>
-            <li><strong>Mana Regen:</strong> 1d × Acuity</li>
-<br>
-            <li><strong>Luck:</strong> 1 × Hap</li>
-<br>
-            <li><strong>Luck Regen:</strong> Completely regenerates at Lore Master (LM) discretion.</li>
-<br>
-            <li><strong>Initiative:</strong> 1d x (Dexterity + Acuity)</li>
-<br>
-            <li><strong>Pace:</strong> How many Hexes (yards) you can cover in a Pulse. Sub-Paces default to 1/4 Pace rounded down.</li>
-        </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th>Derived Stat</th>
+            <th>Formula</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Vitality</strong></td>
+            <td>(3 × Health) + (2 × Strength)</td>
+        </tr>
+        <tr>
+            <td><strong>Vitality Regen</strong></td>
+            <td>1d × Health</td>
+        </tr>
+        <tr>
+            <td><strong>Mana</strong></td>
+            <td>(3 × Acuity) + (2 × Verve)</td>
+        </tr>
+        <tr>
+            <td><strong>Mana Regen</strong></td>
+            <td>1d × Acuity</td>
+        </tr>
+        <tr>
+            <td><strong>Luck</strong></td>
+            <td>1 × Hap</td>
+        </tr>
+        <tr>
+            <td><strong>Luck Regen</strong></td>
+            <td>Completely regenerates at Lore Master (LM) discretion.</td>
+        </tr>
+        <tr>
+            <td><strong>Initiative</strong></td>
+            <td>1d × (Dexterity + Acuity)</td>
+        </tr>
+    </tbody>
+</table>
         <br>
         <strong>Regeneration & Rest:</strong>
         <ul>
@@ -3593,9 +3694,6 @@ details[open] #skills-collapsed-summary {
                     <li><em>Move Actions and Incantations</em> resolve at the end of the Pulse in initiative order.</li>
                 </ul>
                 <br>
-<strong>Types of Actions:</strong>
-                <p class="hint" style="margin-top: 4px; margin-bottom: 10px;">Each Pulse, combatants initiate actions in initiative order. Words, Free Actions, and Attacks resolve immediately, while Move Actions and Incantations resolve at the end of the Pulse.</p>
-                
                 <table class="game-data" style="margin-bottom: 15px;">
                     <thead>
                         <tr>
@@ -3617,20 +3715,32 @@ details[open] #skills-collapsed-summary {
                             <td>Spend Mana to weave ætherial effects. You must be able to speak to cast.</td>
                         </tr>
                         <tr>
+                            <td><strong>Channel</strong></td>
+                            <td>Spend one Mana per Pulse to maintain an ongoing spell.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Charge</strong></td>
+                            <td>Charge at a target at least three Hexes away to add a momentum bonus to your attack.</td>
+                        </tr>
+                        <tr>
                             <td><strong>Free</strong></td>
                             <td>Actions that require little to no time. These include Words and are only limited by LM discretion.</td>
                         </tr>
                         <tr>
+                            <td><strong>Hold</strong></td>
+                            <td>Delay your action. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</td>
+                        </tr>
+                        <tr>
                             <td><strong>Move</strong></td>
-                            <td>Move up to your Pace + an amount of Hexes equal to your Run Check.</td>
+                            <td>Move up to your Pace + an amount of Hexes (yards) equal to your Run Check.</td>
                         </tr>
                         <tr>
                             <td><strong>Skill Check</strong></td>
                             <td>Details vary depending on the skill being performed.</td>
                         </tr>
                         <tr>
-                            <td><strong>Hold</strong></td>
-                            <td>Delay your action. Attempts to interrupt another combatant require that you pass an Initiative Confrontation.</td>
+                            <td><strong>Skill Check, Assist</strong></td>
+                            <td>Add your Bonus to the roll.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -3845,18 +3955,36 @@ details[open] #skills-collapsed-summary {
         <!-- Category 6: Equipment, Customization & Sundering -->
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">6. Equipment & Sundering ▾</div>
-            <div class="skill-body">
-                <strong>Critical Effects by Damage Type:</strong>
-                <ul>
-                    <li><strong>Bash:</strong> Daze.</li>
-                    <li><strong>Slash:</strong> Impair.</li>
-                    <li><strong>Crush:</strong> Grapple.</li>
-                    <li><strong>Thrust:</strong> Gains +1 to its Crit Count (cc).</li>
-                </ul>
+            <div class="skill-body"><table class="game-data">
+    <thead>
+        <tr>
+            <th>Damage Type</th>
+            <th>Critical Effect</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Bash</strong></td>
+            <td>Daze</td>
+        </tr>
+        <tr>
+            <td><strong>Slash</strong></td>
+            <td>Impair</td>
+        </tr>
+        <tr>
+            <td><strong>Crush</strong></td>
+            <td>Grapple</td>
+        </tr>
+        <tr>
+            <td><strong>Thrust</strong></td>
+            <td>Gains +1 to its Crit Count (cc)</td>
+        </tr>
+    </tbody>
+</table>
                 <br>
                 <strong>Armor & Shields:</strong>
                 <ul>
-                    <li> Armor increases the wearer's Crit Count (default 1), and provides Damage Reduction (DR). Sleeping in armor cuts regeneration in half and inflicts Fatigue.</li>
+                    <li> Armor increases the wearer's Crit Count (default 1), and provides Damage Reduction (DR). Sleeping in armor cuts regeneration in half and inflicts Fatigue unless the character passes a Health Save, TN 3.</li>
 <br>
                     <li>Shields add dice to the bearer's Avoidance and can be used to attack.</li>
                 </ul>
@@ -3877,7 +4005,7 @@ details[open] #skills-collapsed-summary {
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
-                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself (make a Hap Save relative to the material: Wood TN 2, Metal TN 3, Stone TN 4).</li>
+                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself. Use the following chart to determine the TN Hap save requred to avoid damaging your tool.</li>
                 </ul>
 <table class="game-data">
     <thead>
@@ -3886,41 +4014,29 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <th>Damage to Target</th>
-            <th>Wood</th>
-            <th>Metal</th>
-            <th>Stone</th>
+            <th>Hap Save</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>None</strong></td>
             <td>TN 1</td>
+        </tr>
+        <tr>
+            <td><strong>1 HP</strong></td>
             <td>TN 2</td>
-            <td>TN 3</td>
         </tr>
         <tr>
-            <td><strong>Minor</strong></td>
-            <td>TN 3</td>
+            <td><strong>2 HP</strong></td>
             <td>TN 4</td>
-            <td>TN 5</td>
         </tr>
         <tr>
-            <td><strong>Moderate</strong></td>
-            <td>TN 5</td>
+            <td><strong>3 HP</strong></td>
             <td>TN 6</td>
-            <td>TN 7</td>
         </tr>
         <tr>
-            <td><strong>Major</strong></td>
-            <td>TN 7</td>
+            <td><strong>4 HP</strong></td>
             <td>TN 8</td>
-            <td>TN 9</td>
-        </tr>
-        <tr>
-            <td><strong>Catastrophic</strong></td>
-            <td>TN 9</td>
-            <td>TN 10</td>
-            <td>TN 11</td>
         </tr>
     </tbody>
 </table>
@@ -3928,58 +4044,55 @@ details[open] #skills-collapsed-summary {
 <table class="game-data">
     <thead>
         <tr>
-            <th colspan="5" style="text-align: center;">Sundering</th>
-        </tr>
-        <tr>
-            <th>Material</th>
-            <th>Minor</th>
-            <th>Moderate</th>
-            <th>Major</th>
-            <th>Catastrophic</th>
+            <th>Target</th>
+            <th>Damage x1</th>
+            <th>Damage x2</th>
+            <th>Damage x3</th>
+            <th>Damage x4</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>Fabric</strong></td>
+            <td><strong>Fabric; Flint; Obsidian</strong></td>
             <td>1–6</td>
             <td>7–12</td>
             <td>13–18</td>
             <td>19–24</td>
         </tr>
         <tr>
+            <td><strong>Hardened Leather; Weftling Silk; Star-glass</strong></td>
+            <td>7–12</td>
+            <td>13–18</td>
+            <td>19–24</td>
+            <td>25–30</td>
+        </tr>
+        <tr>
             <td><strong>Wood</strong></td>
-            <td>19–30</td>
+            <td>13–18</td>
+            <td>19–24</td>
+            <td>25–30</td>
+            <td>31–36</td>
+        </tr>
+        <tr>
+            <td><strong>Drakebone/-hide; Ironwood</strong></td>
+            <td>19–24</td>
+            <td>25–30</td>
+            <td>31–36</td>
+            <td>37–42</td>
+        </tr>
+        <tr>
+            <td><strong>Stone; Metal; Wyrmscale</strong></td>
+            <td>25–30</td>
             <td>31–36</td>
             <td>37–42</td>
             <td>43–48</td>
         </tr>
         <tr>
-            <td><strong>Stone</strong></td>
-            <td>37–54</td>
-            <td>55–66</td>
-            <td>67–72</td>
-            <td>73–78</td>
-        </tr>
-        <tr>
-            <td><strong>Metal</strong></td>
-            <td>55–78</td>
-            <td>79–90</td>
-            <td>91–96</td>
-            <td>97–102</td>
-        </tr>
-        <tr>
-            <td><strong>Mythral</strong></td>
-            <td>73–96</td>
-            <td>97–108</td>
-            <td>109–114</td>
-            <td>115–120</td>
-        </tr>
-        <tr>
-            <td><strong>Orichalcum</strong></td>
-            <td>79–102</td>
-            <td>103–114</td>
-            <td>115–126</td>
-            <td>127–132</td>
+            <td><strong>Mythral; Orichalcum; Adamantine; Dragonbone/-hide</strong></td>
+            <td>31–36</td>
+            <td>37–42</td>
+            <td>43–48</td>
+            <td>49–54</td>
         </tr>
     </tbody>
 </table>
@@ -3990,24 +4103,59 @@ details[open] #skills-collapsed-summary {
         <div class="skill-item">
             <div class="skill-header" onclick="toggleSkill(this)">7. Skills & Magic Systems ▾</div>
             <div class="skill-body">
-                <strong>Action Types & Time Requirements:</strong>
-                <ul>
-                    <li><strong>Words:</strong> Resolve instantly. Cost 6 Mana to cast.</li>
-                    <li><strong>Incantations:</strong> Resolve 1 Pulse after declaration. Cost 3 Mana. Can be interrupted (requires an Acuity Save against damage taken).</li>
-                    <li><strong>Encænia:</strong> Take longer to perform. Practical only outside combat. Cost 1 Mana.</li>
-                    <li><strong>Rites:</strong> Take one full phase of the day (1/6th of a day). Cost 72 Mana and require a specific focus (usually blood).</li>
-                </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Time</th>
+            <th>Cost</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Word</strong></td>
+            <td>None</td>
+            <td>6 Mana</td>
+            <td>May be cast at any point, regardless of initiative or whether you have acted.</td>
+        </tr>
+        <tr>
+            <td><strong>Channel</strong></td>
+            <td>None</td>
+            <td>1 Mana/Pulse</td>
+            <td>Used to prevent a spell from expiring.</td>
+        </tr>
+        <tr>
+            <td><strong>Incantation</strong></td>
+            <td>1 Pulse</td>
+            <td>3 Mana</td>
+            <td>Can be interrupted (requires an Acuity Save against damage taken).</td>
+        </tr>
+        <tr>
+            <td><strong>Encænium</strong></td>
+            <td>Several Rounds</td>
+            <td>1 Mana</td>
+            <td>Requires material components and setting-up.</td>
+        </tr>
+        <tr>
+            <td><strong>Rite</strong></td>
+            <td>1 Phase (1/6th of a day)</td>
+            <td>72 Mana</td>
+            <td>Requires a specific focus (usually blood).</td>
+        </tr>
+    </tbody>
+</table>
                 <br>
                 <strong>Cast Skills (Spells):</strong>
                 <ul>
-                    <li>Spells require Intellect to learn and Mana to cast. Channeling costs 1 Mana per Pulse. Intellect requirements to learn spells scale progressively based on their position in the skill tree (first slot requires 1, second requires 2, eighth requires 8).</li>
+                    <li>All spells except those belonging to the Temple or Innate Sorcery skill trees require Intellect to learn, and all spells require Mana to cast. Intellect requirements to learn spells scale progressively based on their position in the skill tree (first slot requires 1, second requires 2, eighth requires 8).</li>
                     <li>Unless specified, all spells have a maximum range equal to 6 times the caster's Verve in Hexes.</li>
                 </ul>
                 <br>
                 <strong>Temple Spells & Sage Skills:</strong>
                 <ul>
                     <li><em>Temple spells</em> require a Holy Symbol and do not work against fellow worshippers of the same deity.</li>
-                    <li><em>Sage skills</em> require Intellect. The total number of Sage skills you possess can never exceed your Intellect.</li>
+                    <li>The total number of <em>Sage skills</em> you possess can never exceed your Intellect.</li>
                 </ul>
             </div>
         </div>
