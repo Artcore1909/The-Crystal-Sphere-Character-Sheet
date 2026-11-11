@@ -26,6 +26,319 @@
         }
 
         /* =========================================================================
+           0. COLOR THEMES
+           ========================================================================= */
+
+:root {
+            /* Default: Classic Warm Theme */
+            --primary-red: #5c1d1d;
+            --accent-gold: #7d3c1b;
+            --border-warm: #d3c4a8;
+            --border-light: #e2d7c5;
+            --border-dark: #bdae93;
+            --bg-cream: #faf8f5;
+            --bg-cream-dark: #f4f1ea;
+            --bg-card: #fdfbf7;
+            --text-dark: #2c251e;
+            --text-muted: #7c6f64;
+            --success-green: #1b6b55;
+            --success-bg: #edf7f4;
+            --success-border: #c2e2d9;
+            --danger-red: #b82c2c;
+            --overlay-dark: #2c251e;
+            --container-bg: #fff;
+        }
+/* =========================================================================
+           🌙 SCOPED LAYERED DARK THEME
+           ========================================================================= */
+        body.theme-dark {
+            background-color: #121212 !important;
+            color: #e2d7c5 !important;
+            --dark-bg-deep: #121212;
+            --dark-bg-base: #181412;
+            --dark-bg-card: #221c19;
+            --dark-bg-hover: #2e2622;
+            --dark-border: #423730;
+            --dark-text: #e2d7c5;
+            --dark-text-muted: #9e9182;
+            --dark-accent: #d97706;
+            scrollbar-color: var(--dark-border) var(--dark-bg-deep);
+        }
+
+        /* 1. Major Containers & Panels (Base Layer) */
+        body.theme-dark .container,
+        body.theme-dark .builder-panel,
+        body.theme-dark .skills-tab-container,
+        body.theme-dark .char-modal,
+        body.theme-dark #sheet-settings-dropdown {
+            background-color: var(--dark-bg-base) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
+        body.theme-dark [id^="compendium-inspector-card-"],
+        body.theme-dark [id^="compendium-creature-sheet-container-"],
+        body.theme-dark #compendium-inspector-wrapper div[style*="background"] {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+
+        /* 2. Cards, Items, & Components (Pop Layer) */
+        body.theme-dark .aspect-card,
+        body.theme-dark .enchant-group-box,
+        body.theme-dark .inventory-column-card,
+        body.theme-dark .pnp-resource-card,
+        body.theme-dark .pnp-offensive-skills-card,
+        body.theme-dark table.game-data,
+        body.theme-dark .skill-item,
+        body.theme-dark .skill-body,
+        body.theme-dark .pnp-header-bar,
+        body.theme-dark .pnp-sub-defenses-panel,
+        body.theme-dark .pnp-weapon-slot-row,
+        body.theme-dark .pnp-gear-slot-row,
+        body.theme-dark .pnp-subpace-field,
+        body.theme-dark .locus-slot-card,
+        body.theme-dark .placeholder-card,
+        body.theme-dark .mount-sheet-wrapper > div,
+        body.theme-dark #pets-master-container > div,
+        body.theme-dark .extra-training-box,
+        body.theme-dark [id^="compendium-inspector-card-"],
+        body.theme-dark .compendium-accordion .skill-item,
+        body.theme-dark .compendium-accordion .skill-body,
+        body.theme-dark #encounter-charts-section,
+        body.theme-dark #encounter-charts-section .skill-body,
+        body.theme-dark #encounter-display-grid > div,
+        body.theme-dark .locus-builder,
+        body.theme-dark [id^="compendium-creature-sheet-container-"],
+        body.theme-dark .tab-btn {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15) !important;
+        }
+        body.theme-dark #compendium-inspector-wrapper button,
+        body.theme-dark .compendium-accordion button {
+            background-color: var(--dark-bg-card) !important;
+            border: 1px solid var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        
+        body.theme-dark #compendium-inspector-wrapper button:hover,
+        body.theme-dark .compendium-accordion button:hover {
+            background-color: var(--dark-bg-hover) !important;
+            color: var(--dark-accent) !important;
+        }
+/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
+        body.theme-dark .aspect-card div[style*="background"],
+        body.theme-dark .skill-item div[style*="background"] {
+            background-color: var(--dark-bg-deep) !important;
+            color: var(--dark-text) !important;
+            border-color: var(--dark-border) !important;
+        }
+
+        /* Specific catch for language badges/pills if they use a class */
+        body.theme-dark span[style*="background"],
+        body.theme-dark div[style*="background: #eae6df"] {
+            background-color: var(--dark-bg-input) !important;
+            color: var(--dark-text) !important;
+            border-color: var(--dark-border) !important;
+        }
+/* 2c. Weapon rows and Locus tags */
+        body.theme-dark .pnp-static-row {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+
+        body.theme-dark .locus-ench-tag {
+            background-color: var(--dark-bg-input) !important;
+            border: 1px solid var(--dark-border) !important;
+            color: var(--dark-text-muted) !important;
+        }
+
+        /* 3. Inputs & Form Controls */
+        body.theme-dark input:not([readonly]),
+        body.theme-dark select,
+        body.theme-dark textarea,
+        body.theme-dark .roll-input,
+        body.theme-dark .pnp-gear-dropdown,
+        body.theme-dark .pnp-pool-input,
+        body.theme-dark .locus-builder-select,
+        body.theme-dark #theme-selector,
+        body.theme-dark .builder-btn,
+        body.theme-dark .builder-btn-cancel,
+        body.theme-dark input[readonly],
+        body.theme-dark .aspect-card input[readonly] {
+            background-color: var(--dark-bg-deep) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+/* Override inline-styled buttons inside the settings dropdown */
+        body.theme-dark #sheet-settings-dropdown button,
+        body.theme-dark .pnp-edit-btn  {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+
+        body.theme-dark #sheet-settings-dropdown button:hover,
+        body.theme-dark .pnp-edit-btn:hover {
+            background-color: var(--dark-bg-hover) !important;
+            color: var(--dark-accent) !important;
+        }
+
+        /* 4. Hovers & Active Interactive States */
+        body.theme-dark table.game-data th,
+        body.theme-dark .skill-header,
+        body.theme-dark .skill-header:hover,
+        body.theme-dark .tab-btn:hover,
+        body.theme-dark .tab-btn.active,
+        body.theme-dark button[title="Sheet Settings"]:hover,
+        body.theme-dark #sheet-settings-dropdown button:hover,
+        body.theme-dark div[style*="background: #faf3e8"],
+        body.theme-dark [id^="compendium-inspector-card-"] button,
+        body.theme-dark .compendium-accordion .skill-header,
+        body.theme-dark #encounter-charts-section .skill-header,
+        body.theme-dark .builder-btn:hover,
+        body.theme-dark .builder-btn-cancel:hover,
+        body.theme-dark .builder-btn-save:hover {
+            background-color: var(--dark-bg-hover) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-accent) !important;
+        }
+
+        body.theme-dark .builder-btn-save {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+
+        /* 5. Tables & Utility Rows */
+        body.theme-dark .char-list-item {
+            background-color: var(--dark-bg-card) !important;
+            border-bottom-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .char-list-item:nth-child(even),
+        body.theme-dark table.game-data tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02) !important;
+        }
+        body.theme-dark table.game-data tr:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+        body.theme-dark .sticky-xp-footer {
+            background-color: rgba(22, 18, 16, 0.9) !important;
+            border-color: var(--dark-border) !important;
+        }
+        body.theme-dark .racial-bonus,
+        body.theme-dark .racial-penalty {
+            background-color: var(--dark-bg-card) !important;
+            color: var(--dark-text) !important;
+            border-color: var(--dark-border) !important;
+        }
+        body.theme-dark button[title="Sheet Settings"],
+        body.theme-dark .btn-sm {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+        }
+        body.theme-dark #conditional-modifiers:not(:empty) {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+        }
+        body.theme-dark .pnp-section-divider,
+        body.theme-dark .pnp-octagon {
+            border-color: var(--dark-border) !important;
+            background-color: var(--dark-bg-card) !important;
+            color: var(--dark-text) !important;
+        }
+
+        /* 6. Typography & Text Hierarchy */
+        body.theme-dark label,
+        body.theme-dark span,
+        body.theme-dark div,
+        body.theme-dark p,
+        body.theme-dark h1,
+        body.theme-dark h2,
+        body.theme-dark h3,
+        body.theme-dark h4,
+        body.theme-dark li,
+        body.theme-dark table.game-data td,
+        body.theme-dark table.game-data th,
+        body.theme-dark .pnp-header-field span,
+        body.theme-dark .pnp-aspect-label,
+        body.theme-dark .pnp-pool-val,
+        body.theme-dark .pnp-subpace-field span,
+        body.theme-dark .skill-title,
+        body.theme-dark .dice-pool-output,
+        body.theme-dark .skill-name-lbl,
+        body.theme-dark .skills-section-header span,
+        body.theme-dark .pnp-resource-header,
+        body.theme-dark .pnp-col-header,
+        body.theme-dark .pnp-section-title,
+        body.theme-dark .aspect-static,
+        body.theme-dark .char-modal h3 {
+            color: var(--dark-text) !important;
+        }
+
+        body.theme-dark .hint,
+        body.theme-dark .pnp-empty-line,
+        body.theme-dark .pnp-resource-field label,
+        body.theme-dark .pnp-subpace-field label,
+        body.theme-dark .pnp-header-field label,
+        body.theme-dark .placeholder-card,
+        body.theme-dark #active-unlocked-skills-column .aspect-card,
+        body.theme-dark .aspect-card .hint,
+        body.theme-dark #tab-bazaar li div span:last-child {
+            color: var(--dark-text-muted) !important;
+        }
+
+        /* 7. Scoped Dark Theme Checkboxes & Scrollbars */
+        body.theme-dark ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        body.theme-dark ::-webkit-scrollbar-track {
+            background: var(--dark-bg-deep);
+        }
+        body.theme-dark ::-webkit-scrollbar-thumb {
+            background: var(--dark-border);
+            border-radius: 4px;
+        }
+        body.theme-dark input[type="checkbox"] {
+            width: 13px !important;
+            height: 13px !important;
+            min-width: 13px !important;
+            min-height: 13px !important;
+            background-color: var(--dark-bg-deep) !important;
+            border: 1px solid var(--dark-border) !important;
+            border-radius: 2px !important;
+            margin: 0 4px !important;
+            vertical-align: middle !important;
+            cursor: pointer;
+            /* Filters the native checkbox to match dark mode aesthetics */
+            filter: invert(1) hue-rotate(180deg) brightness(0.7);
+        }
+        body.theme-dark input[type="checkbox"]:checked {
+            background-color: var(--dark-bg-hover) !important;
+            border-color: var(--dark-accent) !important;
+            accent-color: var(--dark-accent);
+        }
+        body.theme-dark input[type="checkbox"]:checked::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 3px;
+            height: 7px;
+            border: solid var(--dark-text);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* =========================================================================
            1. BASE STYLES & LAYOUT CONTAINERS
            ========================================================================= */
         .container {
@@ -1989,10 +2302,28 @@ details[open] #skills-collapsed-summary {
 </head>
 <body>
 <div class="container">
+<div style="position: relative;">
+    <!-- Top-Right Settings Gear Icon & Dropdown Menu -->
     <div style="position: relative;">
-        <button onclick="openCharacterManager()" style="position: absolute; right: 0; top: 10px; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); z-index: 10; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Manage Characters</button>
-        <h1>The Crystal Sphere Character Sheet</h1>
+        <button type="button" onclick="toggleSettingsMenu(event)" title="Sheet Settings" style="position: absolute; right: 0; top: 10px; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); z-index: 10; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Manage Sheet</button>
+        
+        <!-- Dropdown Panel -->
+        <div id="sheet-settings-dropdown" style="display: none; position: absolute; right: 0; top: 38px; background: #fff; border: 1px solid var(--border-dark); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 12px; width: 220px; box-sizing: border-box; z-index: 101;">
+            
+            <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
+                <option value="light">Light Theme</option>
+                <option value="dark">Dark Theme</option>
+            </select>
+
+            <button onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
+                Manage Characters
+            </button>
+            
+        </div>
     </div>
+    
+    <h1>The Crystal Sphere Character Sheet</h1>
+</div>
     
 <!-- Tab Navigation Buttons --> 
 <div class="tab-navigation"> 
@@ -2054,6 +2385,7 @@ details[open] #skills-collapsed-summary {
             <option value="Canivir, Wild">Canivir, Wild</option>
             <option value="Centaur">Centaur</option>
             <option value="Derro">Derro</option>
+            <option value="Dhampir">Dhampir</option>
             <option value="Dragon, Argent">Dragon, Argent</option>
             <option value="Dragon, Azure">Dragon, Azure</option>
             <option value="Dragon, Gules">Dragon, Gules</option>
@@ -4006,8 +4338,50 @@ details[open] #skills-collapsed-summary {
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
-                    <li>Attacking environmental targets or equipment (sundering) is processed using the Sundering table. Sunder targets require appropriate tools. Using an improper tool risks sundering the tool itself. Use the following chart to determine the TN Hap save requred to avoid damaging your tool.</li>
+                    <li>When a player attacks an object, structure, or the environment, they roll their Attack as a Check with Advantage instead (skipping the multiplication step). Before consulting the sundering charts, however, the LM must determine whether the attack has the capability to render any damage. An arrow, for example, will never sunder a stone wall.</li>
+<br>
+                    <li>Additionally, an improper tool used to sunder is itself at risk of being sundered. The character must pass a Hap Save after any attempt to sunder an object with an improper tool, or the tool itself suffers an amount of Minor damage equal to the amount by which the character failed the Hap save.</li>
                 </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="4" style="text-align: center;">Damage Defined</th>
+        </tr>
+        <tr>
+            <th>Damage</th>
+            <th>Objects/Gear</th>
+            <th>Structures/Vehicles</th>
+            <th style="text-align: center;">Conversion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Minor</strong></td>
+            <td>A deep nick in a blade, hairline fracture in a shield boss, or dented helm plate; <strong>-1 Bonus</strong></td>
+            <td>Surface scoring, shallow gouges, splintered outer planks.</td>
+            <td style="text-align: center;">—</td>
+        </tr>
+        <tr>
+            <td><strong>Moderate</strong></td>
+            <td>A severe bend in the blade, cracked crossguard, or deeply compromised haft; <strong>-2 Bonus</strong></td>
+            <td>Partial penetration, internal damage, and large chips/dents.</td>
+            <td style="text-align: center;">Minor x2</td>
+        </tr>
+        <tr>
+            <td><strong>Major</strong></td>
+            <td>A heavily fractured weapon on the verge of snapping, loose blade tang, or shattered shield face; <strong>-4 Bonus</strong></td>
+            <td>Substantial cracking/splintering and deformation, large chunks removed, </td>
+            <td style="text-align: center;">Moderate x2</td>
+        </tr>
+        <tr>
+            <td><strong>Catastrophic</strong></td>
+            <td>The item snaps, shatters, or breaks entirely.</td>
+            <td>Total structural collapse of the Hex.</td>
+            <td style="text-align: center;">Major x2</td>
+        </tr>
+    </tbody>
+</table>
+<br>
 <table class="game-data">
     <thead>
         <tr>
@@ -4024,19 +4398,19 @@ details[open] #skills-collapsed-summary {
             <td>TN 1</td>
         </tr>
         <tr>
-            <td><strong>1 HP</strong></td>
+            <td><strong>Minor</strong></td>
             <td>TN 2</td>
         </tr>
         <tr>
-            <td><strong>2 HP</strong></td>
+            <td><strong>Moderate</strong></td>
             <td>TN 4</td>
         </tr>
         <tr>
-            <td><strong>3 HP</strong></td>
+            <td><strong>Major</strong></td>
             <td>TN 6</td>
         </tr>
         <tr>
-            <td><strong>4 HP</strong></td>
+            <td><strong>Catastrophic</strong></td>
             <td>TN 8</td>
         </tr>
     </tbody>
@@ -4045,55 +4419,79 @@ details[open] #skills-collapsed-summary {
 <table class="game-data">
     <thead>
         <tr>
+            <th colspan="5" style="text-align: center;">Target Number to Sunder (Skill Check)</th>
+        </tr>
+        <tr>
             <th>Target</th>
-            <th>Damage x1</th>
-            <th>Damage x2</th>
-            <th>Damage x3</th>
-            <th>Damage x4</th>
+            <th style="text-align: center;">Minor</th>
+            <th style="text-align: center;">Moderate</th>
+            <th style="text-align: center;">Major</th>
+            <th style="text-align: center;">Catastrophic</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>Fabric; Flint; Obsidian</strong></td>
-            <td>1–6</td>
-            <td>7–12</td>
-            <td>13–18</td>
-            <td>19–24</td>
+            <td style="text-align: center;">TN 1</td>
+            <td style="text-align: center;">TN 4</td>
+            <td style="text-align: center;">TN 7</td>
+            <td style="text-align: center;">TN 10</td>
         </tr>
         <tr>
             <td><strong>Hardened Leather; Weftling Silk; Star-glass</strong></td>
-            <td>7–12</td>
-            <td>13–18</td>
-            <td>19–24</td>
-            <td>25–30</td>
+            <td style="text-align: center;">TN 4</td>
+            <td style="text-align: center;">TN 7</td>
+            <td style="text-align: center;">TN 10</td>
+            <td style="text-align: center;">TN 13</td>
         </tr>
         <tr>
             <td><strong>Wood</strong></td>
-            <td>13–18</td>
-            <td>19–24</td>
-            <td>25–30</td>
-            <td>31–36</td>
+            <td style="text-align: center;">TN 7</td>
+            <td style="text-align: center;">TN 10</td>
+            <td style="text-align: center;">TN 13</td>
+            <td style="text-align: center;">TN 16</td>
         </tr>
         <tr>
-            <td><strong>Drakebone/-hide; Ironwood</strong></td>
-            <td>19–24</td>
-            <td>25–30</td>
-            <td>31–36</td>
-            <td>37–42</td>
+            <td><strong>Drakebone/-hide; Iron; Ironwood</strong></td>
+            <td style="text-align: center;">TN 10</td>
+            <td style="text-align: center;">TN 13</td>
+            <td style="text-align: center;">TN 16</td>
+            <td style="text-align: center;">TN 19</td>
         </tr>
         <tr>
-            <td><strong>Stone; Metal; Wyrmscale</strong></td>
-            <td>25–30</td>
-            <td>31–36</td>
-            <td>37–42</td>
-            <td>43–48</td>
+            <td><strong>Steel; Wyrmscale</strong></td>
+            <td style="text-align: center;">TN 13</td>
+            <td style="text-align: center;">TN 16</td>
+            <td style="text-align: center;">TN 19</td>
+            <td style="text-align: center;">TN 22</td>
         </tr>
         <tr>
-            <td><strong>Mythral; Orichalcum; Adamantine; Dragonbone/-hide</strong></td>
-            <td>31–36</td>
-            <td>37–42</td>
-            <td>43–48</td>
-            <td>49–54</td>
+            <td><strong>Stone</strong></td>
+            <td style="text-align: center;">TN 16</td>
+            <td style="text-align: center;">TN 19</td>
+            <td style="text-align: center;">TN 22</td>
+            <td style="text-align: center;">TN 25</td>
+        </tr>
+        <tr>
+            <td><strong>Mythral; Dragonbone/-hide</strong></td>
+            <td style="text-align: center;">TN 19</td>
+            <td style="text-align: center;">TN 22</td>
+            <td style="text-align: center;">TN 25</td>
+            <td style="text-align: center;">TN 29</td>
+        </tr>
+        <tr>
+            <td><strong>Orichalcum</strong></td>
+            <td style="text-align: center;">TN 22</td>
+            <td style="text-align: center;">TN 25</td>
+            <td style="text-align: center;">TN 29</td>
+            <td style="text-align: center;">TN 33</td>
+        </tr>
+        <tr>
+            <td><strong>Adamantine</strong></td>
+            <td style="text-align: center;">TN 25</td>
+            <td style="text-align: center;">TN 29</td>
+            <td style="text-align: center;">TN 33</td>
+            <td style="text-align: center;">TN 37</td>
         </tr>
     </tbody>
 </table>
@@ -7461,6 +7859,7 @@ const compendiumMountConfigs = {
     "Raven, Giant": { cost: 7000 },
     "Eagle, Giant": { cost: 8000 },
     "Quadricorn": { cost: 8000 },
+    "Urox [Juggernaut]": {cost: 8000 }, 
     "Manticore": { cost: 14000 },
     "Pegasus": { cost: 15000 },
     "Wyvern": { cost: 16000 },
@@ -8410,9 +8809,21 @@ const tooltipRegistry = {
         title: "Deadly Bite",
         description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to bite attacks."
     },
+    "deadly_charge": {
+        title: "Deadly Charge",
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to charge attacks."
+    },
+    "deadly_gore": {
+        title: "Deadly Gore",
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to gore attacks."
+    },
     "deadly_sting": {
         title: "Deadly Sting",
         description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to specified sting attacks."
+    },
+    "deadly_trample": {
+        title: "Deadly Trample",
+        description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to trample attacks."
     },
     "devour": {
         title: "Devour",
@@ -8557,6 +8968,10 @@ const tooltipRegistry = {
     "rot": {
         title: "Rot",
         description: "The target’s total Vitality is lowered by the amount rolled, and he suffers a penalty to all Dexterity, Health, and Strength based skills & saves. This effect recurs every week until the creature has no vitality remaining, at which point he dies and becomes a zombie. TN 5 to purify."
+    },
+    "sense_undead": {
+        title: "Sense Undead",
+        description: "The creature can feel whether any undead is within 36 miles. The sensation grows stronger the nearer it is."
     },
     "share_senses": {
         title: "Share Senses",
@@ -11950,6 +12365,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "Canivir, Wild": { size: "B", pace: 9,  dex: 1,  hel: 0,  str: 1,  act: 0,  int: -1, ver: 0,  hap: 0 },
         "Centaur": { size: "2B", pace: 22, dex: 3,  hel: 3,  str: 3,  act: 1,  int: 1,  ver: 1,  hap: 0 },
         "Derro": { size: "B", pace: 8,  dex: 0,  hel: 0,  str: 1,  act: 0,  int: 0,  ver: -1, hap: 0 },
+        "Dhampir": { size: "B", pace: 12,  dex: 3,  hel: -2,  str: 3,  act: 3,  int: 0,  ver: 3, hap: 0 },
         "Dragon, Argent": { size: "2D", pace: 50, dex: 11, hel: 17, str: 11, act: 11, int: 11, ver: 11, hap: 0 },
         "Dragon, Azure":  { size: "2D", pace: 50, dex: 5,  hel: 17, str: 11, act: 17, int: 11, ver: 11, hap: 0 },
         "Dragon, Gules":  { size: "2D", pace: 50, dex: 5,  hel: 17, str: 17, act: 11, int: 17, ver: 17, hap: 0 },
@@ -15976,6 +16392,7 @@ window.racialSkillsMap = {
     "Canivir, Wild":              ["keen_sniffer"],
     "Centaur":                    ["creature_curse_disease_immunity", "starlight_vision"],
     "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
+    "Dhampir":                      ["darkvision", "creature_curse_disease_immunity", "creature_silver_aversion", "creature_light_aversion", "sense_undead"],
     "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "dragonhide_suit", "creature_frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
     "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "dragonhide_suit", "creature_lightning_arc", "creature_magic_resistance", "creature_thunderous_roar"],
     "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "dragonhide_suit", "creature_fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
@@ -23778,6 +24195,18 @@ const compendiumRegistry = {
             abilities: [] 
         },
         { 
+            name: "Boar-croc", 
+            description: "Boar-crocs are incredibly dangerous ambush predators who dwell in rivers and swamps, but are able to sprint on land.",
+            size: "3B", 
+            pace: "15 swim; 26 land", 
+            vit: 40, 
+            mana: 8, 
+            avoid: "3d", 
+            aspects: { dex: 8, hel: 8, str: 8, act: 2, int: 1, ver: 1 }, 
+            attacks: ["Bite: 6d+2; Crush", "Tample: 6d+12; Bash"], 
+            abilities: [] 
+        },
+        { 
             name: "Camel", 
             description: "Camels live in the Desert of the Jann and can go many days with neither food nor drink.",
             size: "2B", 
@@ -24260,6 +24689,18 @@ const compendiumRegistry = {
             abilities: ["Hide Suit"] 
         },
         { 
+            name: "Urox [Juggernaut]", 
+            description: "The Juggernaut bull is a rare, fire-breathing, Club-horned kine that possesses the supernatural ability to charge with such force that it can sunder stone.",
+            size: "2B", 
+            pace: "37", 
+            vit: 65, 
+            mana: 31, 
+            avoid: "6d+4; cc4", 
+            aspects: { dex: 6, hel: 13, str: 13, act: 5, int: 2, ver: 8 }, 
+            attacks: ["Gore: 6d+3; Bash", "Kick: 6d+7; Bash", "Trample: 6d+6; Bash", "Fire: 6d+2; Pain"], 
+            abilities: ["Deadly Charge", "Deadly Trample", "Fire Breath", "Hide Suit"] 
+        },
+        { 
             name: "Wasps, Giant", 
             description: "Giant wasps live throughout the Crystal Sphere except where it is permanently cold and are often enthralled by Antaeons and other druids. They are very aggressive and seemingly unaware of danger.",
             size: "A", 
@@ -24374,6 +24815,19 @@ const compendiumRegistry = {
             abilities: ["Earthray Vision", "Brutal Weapons Affinity"]
         },
         {
+            name: "Dhampir",
+            description: "The Dhampir are the mortal offspring of male, vivacious undead. They live among their mortal kindred and, due to their ability to sense the undead, they tend to excel as at hunting them.",
+            size: "B",
+            pace: "12",
+            vit: 27,
+            mana: 23,
+            avoid: "5d",
+            aspects: { dex: 8, hel: 3, str: 8, act: 8, int: 5, ver: 8 },
+            attacks: ["Rapier [Argent-steel]: 6d+3; Thrust", "Crossbow [Argent-steel]: 6d+3; Thrust"],
+            abilities: ["Curse", "Disease", "Darkvision", "Sense Undead"],
+            aversions: ["Silver", "Light"]
+        },
+        {
             name: "Dryad",
             description: "Dryads, being a type of nymph, are incredibly beautiful and sometimes lure lustful men into compromising situations to slit their throats–though only if she believes that they are a threat to her tree—the subject of her life bond.",
             size: "B",
@@ -24462,7 +24916,6 @@ const compendiumRegistry = {
             vulnerabilities: ["Frost"],
             abilities: []
         },
-
         {
             name: "Gnole",
             description: "Gnoles are a long-snouted beastfolk that resemble bipedal hyenas. They live throughout the hill country surrounding the Cordillera and in caves and cliff dwellings throughout the Cordillera itself. They are firmly allied with the Oldrae and have just as firmly made themselves the scourge of the Ringi. Gnoles affected by the Curse of Lycanthropy permanently transform into Anpu: an elite warrior class of their society.",
@@ -24477,7 +24930,7 @@ const compendiumRegistry = {
         },
         {
             name: "Goblin",
-            description: "Goblins are small, grotesque Darkfolk that live in caves relatively close to the surface. Their engineering is second only to that of the Dwarves—yet by appearances, it is crude.",
+            description: "Goblins are small, grotesque Darkfolk that live in caves relatively close to the surface. Their engineering is second only to that of the Dwarves, yet by appearances, it is crude.",
             size: "B",
             pace: "7",
             vit: 20,
@@ -24962,6 +25415,56 @@ const compendiumRegistry = {
             attacks: ["Bite: 5d; Envenom", "Breath: 5d; Envenom", "Gaze: 5d", "Venom: 3d; Pain"],
             abilities: ["Corrupting Breath [Verve]", "Deadly", "Mortal Gaze", "Squishy", "Inept", "Venom: TN 3 Health save"]
         },
+        { 
+            name: "Chimera [Body]", 
+            description: "Chimeras have the head and forepaws of a lion, the head and rear of a goat, and the head of a venomous snake in lieu of a tail.",
+            size: "2B", 
+            pace: "37", 
+            vit: 60, 
+            mana: 22, 
+            avoid: "6d+8; cc4", 
+            aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, 
+            attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Trample: 6d+6; Bash"],
+            abilities: ["Hide Suit"]
+        },
+        { 
+            name: "Chimera [Lion Head]", 
+            description: "The head of a fire lion. So long as the body is conscious, the head benefits from the body's Avoidance and is protected by Called Shot mechanics.",
+            size: "1B", 
+            pace: "—", 
+            vit: 30, 
+            mana: 34, 
+            avoid: "6d; cc4", 
+            aspects: { dex: 2, hel: 6, str: 12, act: 6, int: 2, ver: 8 }, 
+            attacks: ["Bite: 6d+1; Crush", "Fire: 6d+2; Pain"],
+            immunities: ["Fire"],
+            abilities: ["Deadly Bite", "Fire Breath", "Hide Suit"]
+        },
+        { 
+            name: "Chimera [Ram's Head]", 
+            description: "The head of a ram and the source of the chimera's Abjuration. So long as the body is conscious, the head benefits from the body's Avoidance and is protected by Called Shot mechanics.",
+            size: "1A", 
+            pace: "—", 
+            vit: 15, 
+            mana: 40, 
+            avoid: "6d; cc4", 
+            aspects: { dex: 2, hel: 3, str: 3, act: 8, int: 6, ver: 8 }, 
+            attacks: ["Ram: 3d; Bash"], 
+            immunities: ["Magic"],
+            abilities: ["Hide Suit", "Abjuration", "Zoomancy"] 
+        },
+        {
+            name: "Chimera [Snake Head]",
+            description: "The venomous, snapping tail of a chimera. So long as the body is conscious, the head benefits from the body's Avoidance and is protected by Called Shot mechanics.",
+            size: "3B",
+            pace: "—",
+            vit: "16",
+            mana: "34",
+            avoid: "6d+10; cc2",
+            aspects: { dex: 16, hel: 3, str: 4, act: 10, int: 2, ver: 2 },
+            attacks: ["Bite: 6d+4; Crush & Envenom", "Venom: 2d; Pain"],
+            abilities: ["Deadly Bite", "Venom: TN 2 Health save", "Elusive"]
+        },
         {
             name: "Drake, Black",
             description: "Black drakes tend to live in swampy areas or deep underground. Instead of living in stony caves, black drakes live in burrows, which are often completely concealed by swampy water.",
@@ -25074,7 +25577,7 @@ const compendiumRegistry = {
             pace: "—",
             vit: "16",
             mana: "34",
-            avoid: "6d+8; cc2",
+            avoid: "6d+14; cc4",
             aspects: { dex: 16, hel: 3, str: 4, act: 10, int: 2, ver: 2 },
             attacks: ["Bite: 6d+4; Crush & Envenom", "Venom: 3d; Pain"],
             abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save", "Elusive"]
@@ -25113,7 +25616,7 @@ const compendiumRegistry = {
             avoid: "3d+12; cc4",
             aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
             attacks: ["Gore [Size C]: 6d+5; Thrust, cc4", "Kick [Size C]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"],
-            abilities: ["Hide Suit"]
+            abilities: ["Deadly Trample", "Hide Suit"]
         },
         {
             name: "Roc",
@@ -25278,7 +25781,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Stalkweed", 
-            description: "Stalkweed is some of the strangest flora of the Crystal Sphere. The countryfolk have a deep and superstitious respect for the Great Forest, and those who dare venture within invariably claim the woods wax labyrinthine. Stalkweed is the likely culprit as it always on the prowl for unsuspecting victims, forging trails and leading them into deadly encounters after which they feast upon the carion.",
+            description: "Stalkweed is one of the strangest specimen flora of the Crystal Sphere. The countryfolk have a deep and superstitious respect for the Great Forest, and those who dare venture within invariably claim the woods wax labyrinthine. Stalkweed is the likely culprit as it always on the prowl for unsuspecting victims, forging trails and leading them into deadly encounters after which they feast upon the carion.",
             size: "A", 
             pace: "7", 
             vit: 5, 
@@ -26382,8 +26885,8 @@ window.renderCompendiumMiniSheet = function(creatureName) {
 const encounterChartsRegistry = {
     "Bahr an-Jann & its riparian forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Camel", "Crab, Lightning", "Hawk, Fire", "Kobold", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor", "Snake, Venomous [Gaboon Viper]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Bear, Sun", "Eagle, Giant", "Hellhound", "Polyps", "Wolf [Egyptian Wolf]", "Antlion", "Bear [Gobi]", "Crocodile [Nile]", "Fishfolk", "Lizardfolk [Nile Crocodile]", "Naga [Gaboon Viper]", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Golden Orb Weaver]", "Wereboar", "Werehyena", "Jorōgumo", "Kappa"],
-        major: ["Badgerknight", "Jann", "Undine", "Aqrabu", "Basilisk", "Drake, Yellow", "Giant, Fire", "Hydra", "Manticore", "Nagaraja", "Troll", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+        moderate: ["Bear, Sun", "Boar-croc", "Eagle, Giant", "Hellhound", "Polyps", "Wolf [Egyptian Wolf]", "Antlion", "Bear [Gobi]", "Crocodile [Nile]", "Fishfolk", "Lizardfolk [Nile Crocodile]", "Naga [Gaboon Viper]", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Golden Orb Weaver]", "Wereboar", "Werehyena", "Jorōgumo", "Kappa"],
+        major: ["Badgerknight", "Chimera", "Jann", "Undine", "Aqrabu", "Basilisk", "Drake, Yellow", "Giant, Fire", "Hydra", "Manticore", "Nagaraja", "Troll", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
     "Barrowlands": {
         minor: ["Boar", "Kobold", "Rat, Giant", "Raven, Wise"],
@@ -26393,37 +26896,37 @@ const encounterChartsRegistry = {
     "Cliffs of the Verdant Straight": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Eagle, Screeching", "Raven, Wise", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Wasps, Giant"],
         moderate: ["Bear [Eurasian Brown]", "Eagle, Giant", "Fishfolk", "Harpy", "Hawk, Giant", "Jorōgumo", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Polyps", "Raven, Giant", "Weftlings [Sulpher Cave Spider]"],
-        major: ["Dragon, Azure", "Drake, Blue", "Manticore", "Nagaraja", "Roc", "Thura", "Undine", "Wyrm, Glow-", "Wyvern"]
+        major: ["Chimera", "Dragon, Azure", "Drake, Blue", "Manticore", "Nagaraja", "Roc", "Thura", "Undine", "Wyrm, Glow-", "Wyvern"]
     },
     "Coast of the Frosinlands": {
         minor: ["Boar", "Crab, Lightning", "Horse [Belgian Draft]", "Pony", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Antlion", "Bear [Grizzly]", "Canivir [Grey Wolf]", "Felivir [Snow Leopard]", "Fishfolk", "Jorōgumo", "Leonthrope", "Lupine", "Orc", "Polyps", "Snow Leopard", "Weftlings [Arctic Wolf Spider]", "Werewolf", "Wolf [Grey]", "Wolf, Frost"],
-        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
+        major: ["Badgerknight", "Dragon, Argent", "Drake, White", "Ettin", "Giant, Frost", "Roc", "Troll, Frost", "Undine", "Urox [Juggernaut]", "Wight", "Wyrm, Frost-", "Wyrm, Glow-"]
     },
     "Cordillera": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Bobcat]", "Gnole", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Recluse]", "Werebat", "Werewolf", "Wolf"],
-        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Chimera", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Ogre", "Oldra", "Roc", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar Between the mountains and the river": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Granas", "Hawk, Fire", "Horse [Mustang]", "Pony", "Kobold", "Rat, Giant", "Sheep", "Snake, Constrictor [Boa]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Cougar]", "Goblin", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Orc", "Raven, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Wererat", "Werewolf", "Wolf"],
-        major: ["Ettin", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Eagle, Giant", "Felivir [Cougar]", "Goblin", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Orc", "Raven, Giant", "Urox [Juggernaut]", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Wererat", "Werewolf", "Wolf"],
+        major: ["Chimera", "Ettin", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar Delta": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Granas", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Crocodile [Alligator]", "Felivir [Jaguar]", "Fishfolk", "Hawk, Giant", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc", "Polyps", "Weftlings [Fishing Spider]", "Wereboar", "Werewolf"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-", "Wyvern"]
+        moderate: ["Antlion", "Bear [Black]", "Boar-croc", "Crocodile [Alligator]", "Felivir [Jaguar]", "Fishfolk", "Hawk, Giant", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc", "Polyps", "Weftlings [Fishing Spider]", "Wereboar", "Werewolf"],
+        major: ["Badgerknight", "Basilisk", "Chimera", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-", "Wyvern"]
     },
     "Daar Mountains": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Eagle, Screeching", "Hawk, Fire", "Horse [Altai Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Bullsnake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Faeries", "Felivir [Cougar]", "Goblin", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Mountain", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Weftlings [Huntsman]", "Werebat", "Wereboar", "Werehyena", "Werewolf", "Wolf"],
-        major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Chimera", "Djinn", "Dragon, Gules", "Drake, Red", "Ettin", "Giant, Fire", "Giant, Hill", "Thura", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Daar River & its riparian forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Granas", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Boa]", "Snake, Venomous [Cottonmouth]", "Stalkweed"],
-        moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [American]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Hellhound", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc"],
-        major: ["Badgerknight", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Hydra", "Nagaraja", "Quadricorn", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+        moderate: ["Antaeon", "Antlion", "Bear [Black]", "Bear, Sun", "Boar-croc", "Centaur", "Crocodile [American]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Hellhound", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Alligator]", "Naga [Cottonmouth]", "Orc"],
+        major: ["Badgerknight", "Basilisk", "Chimera", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Hydra", "Nagaraja", "Quadricorn", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
     "Dark Mandate": {
         minor: ["Kobold"],
@@ -26438,7 +26941,7 @@ const encounterChartsRegistry = {
     "Desert of the Jann": {
         minor: ["Beetle, Fire", "Camel", "Hawk, Fire", "Kobold", "Phoenix", "Rat, Giant", "Snake, Venomous [Sand Viper]"],
         moderate: ["Antlion", "Bear [Gobi]", "Canivir [Painted Dog]", "Felivir [Caracal]", "Hellhound", "Jorōgumo", "Leonthrope", "Lion, Fire", "Scorpionfolk [Emperor]", "Weftlings [Six-eyed Sand Spider]", "Wereboar", "Werehyena", "Wolf [Arabian]"],
-        major: ["Aqrabu", "Basilisk", "Dragon, Gules", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Jann", "Manticore", "Quadricorn", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
+        major: ["Aqrabu", "Basilisk", "Chimera", "Dragon, Gules", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Jann", "Manticore", "Quadricorn", "Wyrm, Fire-", "Wyrm, Glow-", "Wyvern"]
     },
     "Desolation": {
         minor: [],
@@ -26446,7 +26949,7 @@ const encounterChartsRegistry = {
         major: ["Banshee", "Wraith"]
     },
     "Euskalian Garths": {
-        minor: ["Dog [Husky]", "Hawk, Fire", "Pony [Shetland]", "Rat, Giant", "Sheep", "Urox"],
+        minor: ["Anthropoid", "Dog [Husky]", "Hawk, Fire", "Pony [Shetland]", "Rat, Giant", "Sheep", "Urox"],
         moderate: ["Wolf [Grey]", "Wolf, Frost"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent"]
     },
@@ -26472,8 +26975,8 @@ const encounterChartsRegistry = {
     },
     "Grasslands": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Rat, Giant", "Serpent Vine", "Sheep", "Snake, Constrictor [Boa]", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Urox", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Felivir [Lion]", "Goblin", "Jorōgumo", "Leonthrope", "Lion", "Lion, Fire", "Naga [Copperhead]", "Scorpionfolk [Thicktail]", "Spider, Giant", "Ursanthrope", "Weftlings [Lynx Spider]", "Werebat", "Wererat", "Werewolf", "Wolf [Maned Wolf]"],
-        major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Quadricorn", "Wight", "Wyrm, Cloud-", "Wyvern"]
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Felivir [Lion]", "Goblin", "Jorōgumo", "Leonthrope", "Lion", "Lion, Fire", "Naga [Copperhead]", "Scorpionfolk [Thicktail]", "Spider, Giant", "Urox [Juggernaut]", "Ursanthrope", "Weftlings [Lynx Spider]", "Werebat", "Wererat", "Werewolf", "Wolf [Maned Wolf]"],
+        major: ["Aqrabu", "Badgerknight", "Basilisk", "Chimera", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Giant, Hill", "Nagaraja", "Quadricorn", "Wight", "Wyrm, Cloud-", "Wyvern"]
     },
     "Great Forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Pony [Exmoor Pony]", "Kobold", "Naiad", "Pegasus", "Phoenix", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Caspian Whipsnake]", "Snake, Venomous [Asp]", "Stalkweed", "Unicorn", "Wasps, Giant", "Weeping Willow"],
@@ -26482,32 +26985,32 @@ const encounterChartsRegistry = {
     },
     "Great Slough and its swamp": {
         minor: ["Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Keck", "Keck, Bloodbeak", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Anaconda]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck [Terror Bird]", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
+        moderate: ["Antlion", "Bear [Black]", "Boar-croc", "Centaur", "Crocodile [Saltwater]", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Keck [Terror Bird]", "Leonthrope", "Lizardfolk [Crocodile]", "Naga [Anaconda]", "Orc", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
         major: ["Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Ettin", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Hidden Vale": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Dog [Shiba Inu]", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Urox", "Wasps, Giant", "Weeping Willow"],
         moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Shiba Inu]", "Eagle, Giant", "Hawk, Giant", "Hellhound", "Hobgoblin", "Jorōgumo", "Scorpionfolk [Southern Devil]", "Weftlings [Jorō]", "Wolf", "Hobgoblin [Docile]"],
-        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Chimera", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Aqrabu", "Badgerknight", "Dragon, Gules", "Drake, Red", "Thura", "Troll", "Wyrm, Fire-"]
     },
     "Hill Country": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Hawk, Fire", "Horse [Mustang]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Phoenix", "Rat, Giant", "Raven, Wise", "Sheep", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Eagle, Giant", "Felivir [Cougar]", "Gnole", "Goblin", "Hawk, Giant", "Hellhound", "Hyena", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Lion, Mountain", "Naga [Diamondback]", "Raven, Giant", "Scorpionfolk [Striped Bark Scorpion]", "Spider, Giant", "Tarantula, Giant", "Weftlings [Brown Tarantula]", "Werebat", "Werewolf", "Wolf"],
-        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Ettin", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
+        major: ["Anpu", "Aqrabu", "Badgerknight [Roaming]", "Basilisk", "Chimera", "Dragon, Gules", "Dragon, Vert", "Drake, Green", "Drake, Red", "Ettin", "Giant, Hill", "Nagaraja", "Ogre", "Oldra", "Troll", "Wight", "Wyrm, Cloud-", "Wyrm, Fire-", "Wyvern"]
     },
     "Imperial coast": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Quarter Horse]", "Pony", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Indigo Snake]", "Snake, Venomous [Cottonmouth]", "Urox", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Ent", "Faeries", "Felivir", "Fishfolk", "Goblin", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Salt Water Crocodile]", "Naga [Cottonmouth]", "Orc", "Polyps", "Scorpionfolk [Black Sand Scorpion]", "Urox [Juggernaut]", "Weftlings [Beach Wolf Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Ettin", "Giant, Hill", "Nagaraja", "Roc", "Troll", "Undine", "Wight", "Wyrm, Glow-"]
     },
     "Imperial city/town": {
-        minor: ["Dog", "Horse", "Pony", "Rat, Giant"],
+        minor: ["Anthropoid", "Dog", "Horse", "Pony", "Rat, Giant"],
         moderate: ["Canivir", "Dwarf", "Elf", "Felivir", "Half-elf", "Half-orc", "Hanyo", "Haubid", "Human", "Nuss-janni", "Vulpivir"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", ]
     },
     "Imperial rolling plains": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Dryad", "Hawk, Fire", "Horse [Shire Horse]", "Pony", "Keck", "Keck, Bloodbeak", "Kobold", "Naiad", "Pixie", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [King Snake]", "Snake, Venomous [Coral Snake]", "Urox", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Naga [Coral Snake]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Canivir [Coyote]", "Centaur", "Ent", "Faeries", "Felivir [Bobcat]", "Goblin", "Jorōgumo", "Keck [Terror Bird]", "Leonthrope", "Naga [Coral Snake]", "Urox [Juggernaut]", "Weftlings [Crab Spider]", "Werebat", "Wererat", "Werewolf", "Wolf"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Nagaraja", "Troll", "Wight", "Wyrm, Cloud-"]
     },
     "Isle of Twilight’s Harbor": {
@@ -26517,17 +27020,17 @@ const encounterChartsRegistry = {
     },
     "Isle of Ver": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Kobold", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Sheep", "Snake, Constrictor [Leopard Snake]", "Snake, Venomous [Nose-horned Viper]", "Urox", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Kodiac]", "Canivir [Dhole]", "Eagle, Giant", "Felivir [Iberian Lynx]", "Goblin", "Harpy", "Hawk, Giant", "Jorōgumo", "Leonthrope", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Orcanthrope", "Raven, Giant", "Weftlings [Mediterranean Recluse]", "Werebat"],
+        moderate: ["Antlion", "Bear [Kodiac]", "Canivir [Dhole]", "Eagle, Giant", "Felivir [Iberian Lynx]", "Goblin", "Harpy", "Hawk, Giant", "Jorōgumo", "Leonthrope", "Minotaur", "Naga [Nose-horned Viper]", "Orc", "Orcanthrope", "Raven, Giant", "Urox [Juggernaut]", "Weftlings [Mediterranean Recluse]", "Werebat"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Cyclops", "Dragon, Azure", "Drake, Blue", "Ettin", "Giant, Hill", "Giant, Island", "Nagaraja", "Roc", "Thura", "Troll"]
     },
     "Kassani Delta": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Horse [Camargue Horse]", "Pony", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Cottonmouth]", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Crocodile [Siamese]", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
+        moderate: ["Antlion", "Bear [Black]", "Boar-croc", "Crocodile [Siamese]", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Shadowcat", "Spider, Giant", "Weftlings [Fishing Spider]", "Werewolf"],
         major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Badgerknight", "Basilisk", "Dragon, Sable", "Drake, Black", "Hydra", "Nagaraja", "Roc", "Undine", "Wyrm [Sarpa]", "Wyrm, Glow-"]
     },
     "Kassani River & its riparian forest": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Brownies", "Crab, Lightning", "Dryad", "Hawk, Fire", "Horse [Konik Horse]", "Pony", "Kobold", "Naiad", "Phoenix", "Pixie", "Python, Great", "Rat, Giant", "Raven, Wise", "Serpent Vine", "Snake, Constrictor [Python]", "Snake, Venomous [Nikolsky's Adder]", "Stalkweed", "Wasps, Giant", "Weeping Willow"],
-        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Centaur", "Crocodile [Siamese]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Orb Weaver]", "Wererat", "Werewolf", "Wolf"],
+        moderate: ["Antlion", "Bear [Black]", "Bear, Sun", "Boar-croc", "Centaur", "Crocodile [Siamese]", "Eagle, Giant", "Ent", "Faeries", "Felivir [Jaguar]", "Fishfolk", "Jaguar", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Gharial]", "Naga [Nikolsky's Adder]", "Polyps", "Scorpionfolk [Emperor]", "Shadowcat", "Spider, Giant", "Weftlings [Orb Weaver]", "Wererat", "Werewolf", "Wolf"],
         major: ["Aqrabu", "Badgerknight", "Basilisk", "Dragon, Vert", "Drake, Green", "Hydra", "Nagaraja", "Troll", "Undine", "Wyrm, Cloud-", "Wyrm, Glow-"]
     },
     "Lakes of the Sculpted Darkness": {
@@ -26543,7 +27046,7 @@ const encounterChartsRegistry = {
     "Moon Veil Mountains, East": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Diamondback]", "Unicorn", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Jorōgumo", "Orc", "Raven, Giant", "Spider, Giant", "Weftlings [Brown Recluse]", "Werebat", "Wolf"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Azure", "Dragon, Or", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Ettin", "Giant, Hill", "Giant, Island", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Chimera", "Djinn", "Dragon, Azure", "Dragon, Or", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Ettin", "Giant, Hill", "Giant, Island", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
     },
     "Moon Veil Mountains, North": {
         minor: ["Eagle, Screeching", "Raven, Wise"],
@@ -26553,12 +27056,12 @@ const encounterChartsRegistry = {
     "Moon Veil Mountains, South": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Phoenix", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
         moderate: ["Bear [Gobi]", "Bear, Sun", "Eagle, Giant", "Gryphon", "Hawk, Giant", "Hellhound", "Jorōgumo", "Lion, Fire", "Orc", "Raven, Giant", "Spider, Giant", "Weftlings [Desert Recluse]", "Wolf [Arabian]"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Gules", "Dragon, Or", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Ifrit", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Fire-"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Chimera", "Djinn", "Dragon, Gules", "Dragon, Or", "Drake, Red", "Drake, Yellow", "Giant, Fire", "Ifrit", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Fire-"]
     },
     "Moon Veil Mountains, West": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Eagle, Screeching", "Hawk, Fire", "Kobold", "Pegasus", "Phoenix", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Rat Snake]", "Snake, Venomous [Copperhead]", "Unicorn", "Wasps, Giant"],
         moderate: ["Bear [Black]", "Bear, Sun", "Eagle, Giant", "Goblin", "Gryphon", "Hawk, Giant", "Kitsune", "Orc", "Raven, Giant", "Spider, Giant", "Vulpivir", "Werebat", "Wolf"],
-        major: ["Badgerknight [Roaming]", "Basilisk", "Djinn", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Ettin", "Giant, Hill", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
+        major: ["Badgerknight [Roaming]", "Basilisk", "Chimera", "Djinn", "Dragon, Or", "Dragon, Vert", "Drake, Green", "Ettin", "Giant, Hill", "Roc", "The Guardians of the Crystal Sphere", "Thura", "Troll", "Wyrm, Cloud-", "Wyvern"]
     },
     "Oobar": {
         minor: ["Dog [Painted]", "Hawk, Fire", "Wasps, Giant"],
@@ -26567,7 +27070,7 @@ const encounterChartsRegistry = {
     },
     "Orkipelago": {
         minor: ["Beetle, Fire", "Blood Hornet", "Boar", "Crab, Lightning", "Hawk, Fire", "Phoenix", "Python, Great", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [King Cobra]", "Wasps, Giant"],
-        moderate: ["Antlion", "Bear [Panda]", "Crocodile [Boar Crocodile]", "Eagle, Giant", "Felivir [Tiger]", "Fishfolk", "Gorilla", "Goritaur", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Komodo Dragon]", "Naga [King Cobra]", "Orc", "Shadowcat", "Spider, Giant", "Tarantula, Giant", "Tiger", "Weftlings [Tarantula]"],
+        moderate: ["Antlion", "Bear [Panda]", "Boar-croc", "Crocodile [Saltwater]", "Eagle, Giant", "Felivir [Tiger]", "Fishfolk", "Gorilla", "Goritaur", "Jorōgumo", "Kappa", "Leonthrope", "Lizardfolk [Komodo Dragon]", "Naga [King Cobra]", "Orc", "Shadowcat", "Spider, Giant", "Tarantula, Giant", "Tiger", "Weftlings [Tarantula]"],
         major: ["Badgerknight", "Basilisk", "Dragon, Azure", "Dragon, Vert", "Drake, Blue", "Drake, Green", "Giant, Island", "Nagaraja", "Roc", "Troll", "Undine", "Wyrm [Sarpa]", "Wyrm, Cloud-", "Wyrm, Glow-"]
     },
     "Rim of the Sculpted Darkness": {
@@ -26582,8 +27085,8 @@ const encounterChartsRegistry = {
     },
     "Valley of the Jann": {
         minor: ["Blood Hornet", "Boar", "Crab, Lightning", "Dog [Painted]", "Hawk, Fire", "Rat, Giant", "Raven, Wise", "Snake, Constrictor [Python]", "Snake, Venomous [Gaboon Viper]", "Wasps, Giant"],
-        moderate: ["Crocodile [Nile]", "Hellhound", "Werehyena", "Wolf [Arabian]"],
-        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Drake, Yellow", "Jann", "Wyrm, Fire-", "Wyrm, Glow-"]
+        moderate: ["Boar-croc", "Crocodile [Nile]", "Hellhound", "Werehyena", "Wolf [Arabian]"],
+        major: ["Aether-Wraith", "Aether-Wraith, Transcendent", "Chimera", "Doppelgänger", "Doppelgänger, Transcendent", "Egregore", "Egregore, Transcendent", "Drake, Yellow", "Jann", "Wyrm, Fire-", "Wyrm, Glow-"]
     }
 };
 
@@ -27363,7 +27866,7 @@ window.toggleMountCatalogModal = function() {
         let optionsHtml = `<option value="None">-- Select Mount --</option>`;
         const sourceCats = ["Animal", "Beast"];
         
-const knownMounts = ["Bear", "Bear, Sun", "Boar", "Camel", "Crocodile", "Dog", "Eagle, Giant", "Goat, War", "Granas", "Gryphon", "Hawk, Giant", "Hellhound", "Horse", "Hyena", "Hyena, Six-paw", "Jaguar", "Keck", "Keck [Terror Bird]", "Lion", "Lion, Fire", "Lion, Mountain", "Pony", "Pegasus", "Raven, Giant", "Shadowcat", "Sheep", "Snow Leopard", "Spider, Giant", "Tarantula, Giant", "Tiger", "Unicorn", "Urox", "Wolf", "Wolf, Frost", "Badgerknight", "Drake, Black", "Drake, Blue", "Drake, Green", "Drake, Red", "Drake, White", "Drake, Yellow", "Manticore", "Quadricorn", "Roc", "Wyrm, Cloud", "Wyrm, Fire", "Wyrm, Frost", "Wyrm, Glow", "Wyrm [Sarpa]", "Wyvern"];
+const knownMounts = ["Bear", "Bear, Sun", "Boar", "Boar-croc", "Camel", "Crocodile", "Dog", "Eagle, Giant", "Goat, War", "Granas", "Gryphon", "Hawk, Giant", "Hellhound", "Horse", "Hyena", "Hyena, Six-paw", "Jaguar", "Keck", "Keck [Terror Bird]", "Lion", "Lion, Fire", "Lion, Mountain", "Pony", "Pegasus", "Raven, Giant", "Shadowcat", "Sheep", "Snow Leopard", "Spider, Giant", "Tarantula, Giant", "Tiger", "Unicorn", "Urox", "Urox [Juggernaut]", "Wolf", "Wolf, Frost", "Badgerknight", "Drake, Black", "Drake, Blue", "Drake, Green", "Drake, Red", "Drake, White", "Drake, Yellow", "Manticore", "Quadricorn", "Roc", "Wyrm, Cloud", "Wyrm, Fire", "Wyrm, Frost", "Wyrm, Glow", "Wyrm [Sarpa]", "Wyvern"];
 
         sourceCats.forEach(cat => {
             if (compendiumRegistry[cat]) {
@@ -27954,6 +28457,40 @@ window.applySelectedCatalogPet = function() {
     modal.style.display = "none";
     if (typeof calculateSheet === "function") calculateSheet();
 };
+
+function toggleSettingsMenu(event) {
+    if (event) event.stopPropagation();
+    const dropdown = document.getElementById("sheet-settings-dropdown");
+    if (!dropdown) return;
+    
+    const isVisible = dropdown.style.display === "block";
+    dropdown.style.display = isVisible ? "none" : "block";
+}
+
+// Close the dropdown automatically if the user clicks outside of it
+document.addEventListener("click", (e) => {
+    const dropdown = document.getElementById("sheet-settings-dropdown");
+    if (dropdown && dropdown.style.display === "block") {
+        if (!e.target.closest("#sheet-settings-dropdown") && !e.target.closest("button[title='Sheet Settings']")) {
+            dropdown.style.display = "none";
+        }
+    }
+});
+
+function switchTheme(themeName) {
+    document.body.classList.remove('theme-dark');
+    if (themeName === 'dark') {
+        document.body.classList.add('theme-dark');
+    }
+    localStorage.setItem('cscs_theme', themeName);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem('cscs_theme') || 'light';
+    const selector = document.getElementById("theme-selector");
+    if (selector) selector.value = savedTheme;
+    switchTheme(savedTheme);
+});
 
 </script>
 <!-- Character Manager Modal -->
