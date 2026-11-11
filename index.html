@@ -8933,6 +8933,98 @@ const tooltipRegistry = {
         title: "Mortal Gaze",
         description: "The target is entitled to an Acuity save to perceive the threat and break eye contact. If they fail, they must pass a Verve confrontation or die."
     },
+    "light_hide": {
+        title: "Light Hide",
+        description: "DR+4; cc4"
+    },
+    "silk_hauberk": {
+        title: "Silk Hauberk",
+        description: "DR+4; cc3"
+    },
+    "light_breastplate": {
+        title: "Light Breastplate",
+        description: "DR+4; cc2"
+    },
+    "light_hauberk": {
+        title: "Light Hauberk",
+        description: "DR+4; cc3"
+    },
+    "light_suit": {
+        title: "Light Suit",
+        description: "DR+4; cc4"
+    },
+    "dwarven_light_suit_dwarven": {
+        title: "Dwarven Light Suit",
+        description: "DR+6; cc4"
+    },
+    "thick_hide": {
+        title: "Thick Hide",
+        description: "DR+8; cc4"
+    },
+    "clay": {
+        title: "Clay",
+        description: "DR+8; cc4"
+    },
+    "shell": {
+        title: "Shell",
+        description: "DR+8; cc4"
+    },
+    "medium_breastplate": {
+        title: "Medium Breastplate",
+        description: "DR+8; cc2"
+    },
+    "medium_hauberk": {
+        title: "Medium Hauberk",
+        description: "DR+8; cc3"
+    },
+    "medium_suit": {
+        title: "Medium Suit",
+        description: "DR+8; cc4"
+    },
+    "elven_medium_suit": {
+        title: "Elven Medium Suit",
+        description: "DR+9; cc4"
+    },
+    "elven_round_shield": {
+        title: "Elven Round Shield",
+        description: "+3d Avoidance"
+    },
+    "claw_shield": {
+        title: "Claw Shield",
+        description: "+2d Avoidance"
+    },
+    "plate": {
+        title: "Plate",
+        description: "DR+12; cc4"
+    },
+    "bark": {
+        title: "Bark",
+        description: "DR+12; cc4"
+    },
+    "heavy_breastplate": {
+        title: "Heavy Breastplate",
+        description: "DR+12; cc2"
+    },
+    "heavy_hauberk": {
+        title: "Heavy Hauberk",
+        description: "DR+12; cc3"
+    },
+    "heavy_suit": {
+        title: "Heavy Suit",
+        description: "DR+12; cc4"
+    },
+    "stone_suit": {
+        title: "Stone Suit",
+        description: "DR+18; cc4"
+    },
+    "guardian_armor": {
+        title: "Guardian Armor",
+        description: "DR+20; cc4"
+    },
+    "ironclad": {
+        title: "Ironclad",
+        description: "DR+24; cc4"
+    },
     "obscure_self": {
         title: "Obscure Self",
         description: "All who look upon you must pass a TN Acuity save when they turn away or lose all memory of you."
@@ -8963,7 +9055,7 @@ const tooltipRegistry = {
     },
     "rooted": {
         title: "Rooted",
-        description: "The creature cannot move. It cannot avoid, and any pace it has only dictates how quickly it can move its extremities."
+        description: "The creature cannot move or avoid."
     },
     "rot": {
         title: "Rot",
@@ -16393,12 +16485,12 @@ window.racialSkillsMap = {
     "Centaur":                    ["creature_curse_disease_immunity", "starlight_vision"],
     "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
     "Dhampir":                      ["darkvision", "creature_curse_disease_immunity", "creature_silver_aversion", "creature_light_aversion", "sense_undead"],
-    "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "dragonhide_suit", "creature_frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
-    "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "dragonhide_suit", "creature_lightning_arc", "creature_magic_resistance", "creature_thunderous_roar"],
-    "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "dragonhide_suit", "creature_fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
-    "Dragon, Or": ["creature_curse_disease_immunity", "creature_light_immunity", "creature_darkness_aversion", "creature_umbra_aversion", "dragonhide_suit", "creature_magic_resistance", "creature_searing_light_breath"],
-    "Dragon, Sable": ["creature_acid_breath", "creature_acid_immunity", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbra_immunity", "dragonhide_suit", "creature_light_aversion", "creature_magic_resistance"],
-    "Dragon, Vert": ["creature_curse_disease_immunity", "creature_poison_immunity", "creature_venom_immunity", "dragonhide_suit", "creature_magic_resistance", "creature_petrifying_gaze", "creature_poison_breath"],
+    "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "medium_natural_armor", "creature_frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
+    "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "medium_natural_armor", "creature_lightning_arc", "creature_magic_resistance", "creature_thunderous_roar"],
+    "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "medium_natural_armor", "creature_fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
+    "Dragon, Or": ["creature_curse_disease_immunity", "creature_light_immunity", "creature_darkness_aversion", "creature_umbra_aversion", "medium_natural_armor", "creature_magic_resistance", "creature_searing_light_breath"],
+    "Dragon, Sable": ["creature_acid_breath", "creature_acid_immunity", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbra_immunity", "medium_natural_armor", "creature_light_aversion", "creature_magic_resistance"],
+    "Dragon, Vert": ["creature_curse_disease_immunity", "creature_poison_immunity", "creature_venom_immunity", "medium_natural_armor", "creature_magic_resistance", "creature_petrifying_gaze", "creature_poison_breath"],
     "Doppelgänger, Transcendent": ["unhinging_jaw"],
     "Dryad":                      ["creature_curse_disease_immunity", "meld", "life_bond"],
     "Ent":                        ["creature_curse_disease_immunity", "creature_light_immunity", "creature_thunder_immunity", "creature_lightning_immunity", "creature_fire_vulnerability"],
@@ -24168,7 +24260,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 5d; Crush", "Fire: 5d; Pain"], 
             immunities: ["Fire"],
             vulnerabilities: ["Frost"],
-            abilities: ["Chitin Suit", "Fire Spray"] 
+            abilities: ["Shell", "Fire Spray"] 
         },
         { 
             name: "Blood Hornet", 
@@ -24229,7 +24321,7 @@ const compendiumRegistry = {
             aspects: { dex: 1, hel: 1, str: 5, act: 1, int: 1, ver: 2 }, 
             attacks: ["Pinch: 5d; Crush", "Lightning: 2d; Weaken"], 
             immunities: ["Lightning"],
-            abilities: ["Static Discharge", "Chitin Suit"] 
+            abilities: ["Static Discharge", "Thick Hide"] 
         },
         { 
             name: "Crocodile", 
@@ -24301,7 +24393,7 @@ const compendiumRegistry = {
             avoid: "4d+4; cc4", 
             aspects: { dex: 4, hel: 8, str: 13, act: 4, int: 2, ver: 4 }, 
             attacks: ["Bite: 6d+7; Crush", "Rend: 6d+7; Maim", "Slam: 6d+7; Bash"], 
-            abilities: ["Hide Suit", "Rend"] 
+            abilities: ["Light Hide", "Rend"] 
         },
         { 
             name: "Granas", 
@@ -24313,7 +24405,7 @@ const compendiumRegistry = {
             avoid: "3d+8; cc4", 
             aspects: { dex: 3, hel: 16, str: 16, act: 4, int: 4, ver: 2 }, 
             attacks: ["Gore: 6d+2; Thrust", "Kick: 6d+10; Bash", "Trample: 6d+18; Bash & Crush"], 
-            abilities: ["Hide Suit"] 
+            abilities: ["Thick Hide"] 
         },
         { 
             name: "Gryphon", 
@@ -24686,7 +24778,7 @@ const compendiumRegistry = {
             avoid: "6d+4; cc4", 
             aspects: { dex: 6, hel: 13, str: 13, act: 5, int: 2, ver: 2 }, 
             attacks: ["Gore: 6d+3; Thrust", "Kick: 6d+7; Bash", "Trample: 6d+6; Crush"], 
-            abilities: ["Hide Suit"] 
+            abilities: ["Light Hide"] 
         },
         { 
             name: "Urox [Juggernaut]", 
@@ -24695,10 +24787,10 @@ const compendiumRegistry = {
             pace: "37", 
             vit: 65, 
             mana: 31, 
-            avoid: "6d+4; cc4", 
+            avoid: "6d+12; cc4", 
             aspects: { dex: 6, hel: 13, str: 13, act: 5, int: 2, ver: 8 }, 
             attacks: ["Gore: 6d+3; Bash", "Kick: 6d+7; Bash", "Trample: 6d+6; Bash", "Fire: 6d+2; Pain"], 
-            abilities: ["Deadly Charge", "Deadly Trample", "Fire Breath", "Hide Suit"] 
+            abilities: ["Deadly Charge", "Deadly Trample", "Fire Breath", "Plate"] 
         },
         { 
             name: "Wasps, Giant", 
@@ -24876,7 +24968,7 @@ const compendiumRegistry = {
             attacks: ["Slam: 6d+16; Bash"],
             immunities: ["Curse", "Disease", "Light", "Lightning", "Thunder"],
             vulnerabilities: ["Fire"],
-            abilities: ["Barkskin suit"]
+            abilities: ["Bark"]
         },
         {
             name: "Faeries",
@@ -24950,7 +25042,7 @@ const compendiumRegistry = {
             avoid: "5d+4; cc4",
             aspects: { dex: 5, hel: 13, str: 13, act: 5, int: 5, ver: 5 },
             attacks: ["Rend: 6d+7; Maim", "Slam: 6d+7; Bash", "Trample: 6d+6; Crush or Bash", "Atgeir: 6d+4; Thrust", "Atgeir [Butt]: 6d+8; Bash"],
-            abilities: ["Hide Suit", "Rend", "Starlight Vision"]
+            abilities: ["Light Hide", "Rend", "Starlight Vision"]
         },
         {
             name: "Half-Elf",
@@ -25122,7 +25214,7 @@ const compendiumRegistry = {
             avoid: "5d+4; cc4",
             aspects: { dex: 5, hel: 7, str: 7, act: 5, int: 5, ver: 5 },
             attacks: ["Gore: 6d; Thrust", "Battlexe: 6d+7; Slash"],
-            abilities: ["Hide Suit"]
+            abilities: ["Light Hide"]
         },
         {
             name: "Naga",
@@ -25172,7 +25264,7 @@ const compendiumRegistry = {
             avoid: "6d+11; cc4",
             aspects: { dex: 13, hel: 13, str: 13, act: 5, int: 5, ver: 5 },
             attacks: ["Bite [Size C]: 6d+9; cc3", "Rend: 6d+7", "Slam [Size C]: 6d+8; Bash, cc3", "Odachi [Size C]: 6d+16; Slash or Thrust, +1cc", "Yumi Bow [Size C]: 6d+9; Thrust, cc4"],
-            abilities: ["Darkvision", "Hide Suit", "Rend"]
+            abilities: ["Darkvision", "Light Hide", "Rend"]
         },
         {
             name: "Oldra",
@@ -25235,7 +25327,7 @@ const compendiumRegistry = {
             avoid: "6d+6; cc4",
             aspects: { dex: 6, hel: 6, str: 6, act: 5, int: 5, ver: 5 },
             attacks: ["Claw: 6d; Crush", "Flint Spear: 6d+2; Thrust, 2cc", "Flint Spear [Butt]: 6d+1; Bash", "Sting: 6d; Thrust & Envenom", "Venom: 1d; Pain"],
-            abilities: ["Chitin Suit", "Claw Shield: +2d", "Deadly Sting", "Venom: TN2 Health save"]
+            abilities: ["Shell", "Claw Shield", "Deadly Sting", "Venom: TN2 Health save"]
         },
         {
             name: "Troll",
@@ -25248,7 +25340,7 @@ const compendiumRegistry = {
             aspects: { dex: 6, hel: 16, str: 16, act: 3, int: 2, ver: 5 },
             attacks: ["Bite [Size C]: 6d+6; Crush; cc3", "Claw [Size C]: 6d+6; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
             vulnerabilities: ["Fire"],
-            abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
+            abilities: ["Darkvision", "Firststrike", "Light Hide", "Rend", "Regenerate"]
         },
         {
             name: "Troll, Frost",
@@ -25262,7 +25354,7 @@ const compendiumRegistry = {
             attacks: ["Bite [Size C]: 6d+7; Crush; cc3", "Claw [Size C]: 6d+7; Crush or Slash; cc3", "Rend: 6d+10; Slash; cc3"],
             resistances: ["Frost"],
             vulnerabilities: ["Fire"],
-            abilities: ["Darkvision", "Firststrike", "Hide Suit", "Rend", "Regenerate"]
+            abilities: ["Darkvision", "Firststrike", "Light Hide", "Rend", "Regenerate"]
         },
         {
             name: "Vulpivir",
@@ -25401,7 +25493,7 @@ const compendiumRegistry = {
             avoid: "2d+12; cc4",
             aspects: { dex: 2, hel: 13, str: 13, act: 3, int: 1, ver: 1 },
             attacks: ["Bite: 6d+7; Crush", "Claw: 6d+7; Slash", "Pounce: 6d+7; Crush", "Erupt: 6d+7"],
-            abilities: ["Exoskeletal Suit", "Vibrotactile Perception"]
+            abilities: ["Plate", "Vibrotactile Perception"]
         },
         {
             name: "Basilisk",
@@ -25425,7 +25517,7 @@ const compendiumRegistry = {
             avoid: "6d+8; cc4", 
             aspects: { dex: 10, hel: 12, str: 12, act: 6, int: 2, ver: 2 }, 
             attacks: ["Claw: 6d+5; Bash, Crush, or Slash", "Trample: 6d+6; Bash"],
-            abilities: ["Hide Suit"]
+            abilities: ["Light Hide"]
         },
         { 
             name: "Chimera [Lion Head]", 
@@ -25434,24 +25526,24 @@ const compendiumRegistry = {
             pace: "—", 
             vit: 30, 
             mana: 34, 
-            avoid: "6d; cc4", 
+            avoid: "2d+4; cc4", 
             aspects: { dex: 2, hel: 6, str: 12, act: 6, int: 2, ver: 8 }, 
             attacks: ["Bite: 6d+1; Crush", "Fire: 6d+2; Pain"],
             immunities: ["Fire"],
-            abilities: ["Deadly Bite", "Fire Breath", "Hide Suit"]
+            abilities: ["Deadly Bite", "Fire Breath", "Light Hide"]
         },
         { 
-            name: "Chimera [Ram's Head]", 
+            name: "Chimera [Ram Head]", 
             description: "The head of a ram and the source of the chimera's Abjuration. So long as the body is conscious, the head benefits from the body's Avoidance and is protected by Called Shot mechanics.",
             size: "1A", 
             pace: "—", 
             vit: 15, 
             mana: 40, 
-            avoid: "6d; cc4", 
+            avoid: "2d+4; cc4", 
             aspects: { dex: 2, hel: 3, str: 3, act: 8, int: 6, ver: 8 }, 
             attacks: ["Ram: 3d; Bash"], 
             immunities: ["Magic"],
-            abilities: ["Hide Suit", "Abjuration", "Zoomancy"] 
+            abilities: ["Light Hide", "Abjuration", "Zoomancy"] 
         },
         {
             name: "Chimera [Snake Head]",
@@ -25460,7 +25552,7 @@ const compendiumRegistry = {
             pace: "—",
             vit: "16",
             mana: "34",
-            avoid: "6d+10; cc2",
+            avoid: "6d+10",
             aspects: { dex: 16, hel: 3, str: 4, act: 10, int: 2, ver: 2 },
             attacks: ["Bite: 6d+4; Crush & Envenom", "Venom: 2d; Pain"],
             abilities: ["Deadly Bite", "Venom: TN 2 Health save", "Elusive"]
@@ -25476,7 +25568,7 @@ const compendiumRegistry = {
             aspects: { dex: 10, hel: 16, str: 10, act: 10, int: 16, ver: 16 },
             attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Acid: 6d+10; Sunder"],
             immunities: ["Acid", "Curse", "Disease"],
-            abilities: ["Acid Breath", "Drakehide Suit"]
+            abilities: ["Acid Breath", "Light Hide"]
         },
         {
             name: "Drake, Blue",
@@ -25489,7 +25581,7 @@ const compendiumRegistry = {
             aspects: { dex: 10, hel: 16, str: 10, act: 16, int: 10, ver: 10 },
             attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Lightning: 6d+4; Weaken"],
             immunities: ["Curse", "Disease", "Lightning", "Thunder"],
-            abilities: ["Drakehide Suit", "Lightning Arc"]
+            abilities: ["Light Hide", "Lightning Arc"]
         },
         {
             name: "Drake, Green",
@@ -25502,7 +25594,7 @@ const compendiumRegistry = {
             aspects: { dex: 16, hel: 16, str: 10, act: 16, int: 10, ver: 10 },
             attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Petrify: 6d+10"],
             immunities: ["Curse", "Disease"],
-            abilities: ["Drakehide Suit", "Petrifying Gaze"]
+            abilities: ["Light Hide", "Petrifying Gaze"]
         },
         {
             name: "Drake, Red",
@@ -25516,7 +25608,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Fire: 6d+10; Pain"],
             immunities: ["Curse", "Disease", "Fire"],
             vulnerabilities: ["Frost"],
-            abilities: ["Drakehide Suit", "Fire Jet"]
+            abilities: ["Light Hide", "Fire Jet"]
         },
         {
             name: "Drake, White",
@@ -25530,7 +25622,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+18; Crush", "Frost: 6d+4; Numb"],
             immunities: ["Curse", "Disease", "Frost"],
             vulnerabilities: ["Fire"],
-            abilities: ["Drakehide Suit", "Ice Jet"]
+            abilities: ["Light Hide", "Ice Jet"]
         },
         {
             name: "Drake, Yellow",
@@ -25544,7 +25636,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+4; Crush", "Claw: 6d+4; Slash", "Tail: 6d+4; Bash", "Trample: 6d+18; Crush", "Light: 6d+10; Blind"],
             immunities: ["Curse", "Disease", "Light"],
             vulnerabilities: ["Darkness", "Umbra"],
-            abilities: ["Beam of Light", "Drakehide Suit"]
+            abilities: ["Beam of Light", "Light Hide"]
         },
         {
             name: "Harpy",
@@ -25568,7 +25660,7 @@ const compendiumRegistry = {
             avoid: "5d+4; cc4",
             aspects: { dex: 5, hel: 16, str: 10, act: 10, int: 2, ver: 2 },
             attacks: ["Claw: 6d+4; Slash", "Tail Bash: 6d+4; Bash"],
-            abilities: ["Hide Suit", "Regenerate"]
+            abilities: ["Light Hide", "Regenerate"]
         },
         {
             name: "Hydra [head]",
@@ -25580,7 +25672,7 @@ const compendiumRegistry = {
             avoid: "6d+14; cc4",
             aspects: { dex: 16, hel: 3, str: 4, act: 10, int: 2, ver: 2 },
             attacks: ["Bite: 6d+4; Crush & Envenom", "Venom: 3d; Pain"],
-            abilities: ["Deadly Bite", "Hide Suit", "Regenerate", "Venom: TN 3 Health save", "Elusive"]
+            abilities: ["Deadly Bite", "Light Hide", "Regenerate", "Venom: TN 3 Health save", "Elusive"]
         },
         {
             name: "Leviathan",
@@ -25592,7 +25684,7 @@ const compendiumRegistry = {
             avoid: "3d+8; cc4",
             aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
             attacks: ["Bite [Size D]: 6d+8; Crush, cc3", "Slam [Size D]: 6d+18; Bash & Sunder, cc3"],
-            abilities: ["Blubar Suit", "Devour"]
+            abilities: ["Thick Hide", "Devour"]
         },
         {
             name: "Manticore",
@@ -25616,7 +25708,7 @@ const compendiumRegistry = {
             avoid: "3d+12; cc4",
             aspects: { dex: 3, hel: 22, str: 22, act: 4, int: 2, ver: 2 },
             attacks: ["Gore [Size C]: 6d+5; Thrust, cc4", "Kick [Size C]: 6d+17; Bash, cc3", "Trample: 6d+18; Crush"],
-            abilities: ["Deadly Trample", "Hide Suit"]
+            abilities: ["Deadly Trample", "Natural Armor [Fur]"]
         },
         {
             name: "Roc",
@@ -25628,7 +25720,7 @@ const compendiumRegistry = {
             avoid: "6d+4; cc4",
             aspects: { dex: 6, hel: 10, str: 16, act: 6, int: 2, ver: 2 },
             attacks: ["Bite [Size D]: 6d+7; Crush, cc4", "Talon [Size D]: 6d+7; Crush, cc4"],
-            abilities: ["Devour", "Feather Suit"]
+            abilities: ["Devour", "Light Hide"]
         },
         {
             name: "Wyrm, Cloud-",
@@ -25641,7 +25733,7 @@ const compendiumRegistry = {
             aspects: { dex: 8, hel: 22, str: 16, act: 22, int: 6, ver: 16 },
             attacks: ["Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc", "Poison: 4d"],
             immunities: ["Curse", "Disease", "Poison"],
-            abilities: ["Poison Cloud: TN4 Health save", "Wyrm Scale Suit"]
+            abilities: ["Poison Cloud: TN4 Health save", "Plate"]
         },
         {
             name: "Wyrm, Fire-",
@@ -25655,7 +25747,7 @@ const compendiumRegistry = {
             attacks: ["Bite [Size C]: 6d+10; Crush, cc3", "Claw [Size C]: 6d+8; Crush or Slash, +1cc", "Fire: 6d+16; Pain"],
             immunities: ["Curse", "Disease", "Fire"],
             vulnerabilities: ["Frost"],
-            abilities: ["Fire Corona", "Wyrm Scale Suit"]
+            abilities: ["Fire Corona", "Plate"]
         },
         {
             name: "Wyrm, Frost-",
@@ -25669,7 +25761,7 @@ const compendiumRegistry = {
             attacks: ["Bite [Size C]: 6d+10; Crush, cc3", "Claw [Size C]: 6d+8; Crush or Slash, +1cc", "Frost: 6d+10; Numb"],
             immunities: ["Curse", "Disease", "Frost"],
             vulnerabilities: ["Fire"],
-            abilities: ["Frost Corona", "Wyrm Scale Suit"]
+            abilities: ["Frost Corona", "Plate"]
         },
         {
             name: "Wyrm, Glow-",
@@ -25682,7 +25774,7 @@ const compendiumRegistry = {
             aspects: { dex: 8, hel: 16, str: 16, act: 22, int: 6, ver: 22 },
             attacks: ["Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc", "Lightning: 6d+16; Weaken"],
             immunities: ["Curse", "Disease", "Lightning", "Thunder"],
-            abilities: ["Lightning Cloud", "Wyrm Scale Suit"]
+            abilities: ["Lightning Cloud", "Plate"]
         },
         {
             name: "Wyrm [Sarpa]",
@@ -25695,7 +25787,7 @@ const compendiumRegistry = {
             aspects: { dex: 8, hel: 22, str: 16, act: 16, int: 6, ver: 22 },
             attacks: ["Acid: 6d+16; Sunder", "Bite [Size C]: 6d+7; Crush, cc3", "Claw [Size C]: 6d+5; Crush or Slash, +1cc"],
             immunities: ["Acid", "Curse", "Disease"],
-            abilities: ["Acid Cloud", "Wyrm Scale Suit"]
+            abilities: ["Acid Cloud", "Plate"]
         },
         {
             name: "Wyvern",
@@ -25723,7 +25815,7 @@ const compendiumRegistry = {
     "attacks": ["Slam: 6d+8; Bash"], 
     "immunities": ["Curse", "Critical Effect", "Disease", "Thrust"],
     "vulnerabilities": ["Fire", "Frost"],
-    "abilities": ["Earthen Suit"]
+    "abilities": ["Clay"]
 },
 { 
     "name": "Golem, Iron", 
@@ -25749,14 +25841,14 @@ const compendiumRegistry = {
     "aspects": { dex: 5, str: 26, act: 5 }, 
     "attacks": ["Slam [Size D]: 6d+21; Bash; cc4"], 
     "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Stone Suit [Size D]"]
+    "abilities": ["Stone Suit"]
 }
     ],
     "Plant": [
         { 
             name: "Polyps", 
             description: "“Beyond it her house lay in the middle of a weird forest, where all the trees and shrubs were polyps, half animal and half plant. They looked like hundred-headed snakes growing out of the soil. All their branches were long, slimy arms, with fingers like wriggling worms. They squirmed, joint by joint, from their roots to their outermost tentacles, and whatever they could lay hold of they twined around and never let go.”\n\nThe Little Sea-Maid by Hans Christain Anderson",
-            size: "9A (tall)", 
+            size: "A", 
             pace: "9", 
             vit: 25, 
             mana: "—", 
@@ -25793,18 +25885,31 @@ const compendiumRegistry = {
             abilities: ["Druidism", "Alter Path"] 
         },
         { 
-            name: "Weeping Willow", 
+            name: "Weeping Willow [Trunk]", 
             description: "The weeping willow uses illusion magic to lure its victims. When an opportune moment arises, the weeping willow will stuff its prey into the hollow of its trunk using either its branches or roots, then close the hollow up to digest its meal. Unless rescued, the victim will die in a few days and be fully digested in a few weeks.\n\n“He lifted his heavy eyes and saw leaning over him a huge willow-tree, old and hoary. Enormous it looked, its sprawling branches going up like reaching arms with many long-fingered hands, its knotted and twisted trunk gaping in wide fissures that creaked faintly as the boughs moved. The leaves fluttering against the bright sky dazzled him, and he toppled over, lying where he fell upon the grass.”\n\nThe Fellowship of the Ring by J.R.R. Tolkien",
-            size: "7D x 16", 
-            pace: "16", 
-            vit: 65, 
+            size: "D", 
+            pace: "—", 
+            vit: 80, 
             mana: 31, 
-            avoid: "12; cc4", 
-            aspects: { dex: 8, hel: 16, str: 16, act: 5, int: 3, ver: 8 }, 
+            avoid: "0d+12; cc4", 
+            aspects: { hel: 16, str: 16, act: 5, int: 3, ver: 8 }, 
             attacks: ["Casting: 6d+2", "Grapple: 6d+10"], 
             immunities: ["Light", "Thunder"],
             vulnerabilities: ["Fire"],
-            abilities: ["Bark Suit", "Rooted", "Bewitchment & Illusion"] 
+            abilities: ["Bark", "Rooted", "Bewitchment", "Illusion"] 
+        },
+        { 
+            name: "Weeping Willow [Switch]", 
+            description: "The switches of the weeping willow have one purpose. Grapple whomever they can and feed the trunk. ",
+            size: "16A",
+            pace: "16", 
+            vit: 13, 
+            mana: 31, 
+            avoid: "6d+2", 
+            aspects: { dex: 8, hel: 1, str: 5, act: 5, int: 3, ver: 8 }, 
+            attacks: ["Swat: 6d+2; Grapple", "Grapple: 6d+2"], 
+            immunities: ["Light", "Thunder"],
+            vulnerabilities: ["Fire"]
         }
     ],
     "Dragon": [
@@ -25822,7 +25927,7 @@ const compendiumRegistry = {
             immunities: ["Curse", "Disease", "Frost"],
             aversions: ["Fire"],
             resistances: ["Magic"],
-            abilities: ["Dragonhide Suit", "Frost Breath"] 
+            abilities: ["Thick Hide", "Frost Breath"] 
         },
         { 
             name: "Dragon, Azure", 
@@ -25836,7 +25941,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Lightning: 6d+10; Weaken", "Thunder: 6d+10; Daze"], 
             immunities: ["Curse", "Disease", "Lightning", "Thunder"],
             resistances: ["Magic"],
-            abilities: ["Dragonhide Suit", "Lightning Arc", "Thunderous Roar"] 
+            abilities: ["Thick Hide", "Lightning Arc", "Thunderous Roar"] 
         },
         { 
             name: "Dragon, Gules", 
@@ -25851,7 +25956,7 @@ const compendiumRegistry = {
             immunities: ["Curse", "Disease", "Fire"],
             aversions: ["Frost"],
             resistances: ["Magic"],
-            abilities: ["Dragonhide Suit", "Fire Breath"] 
+            abilities: ["Thick Hide", "Fire Breath"] 
         },
         { 
             name: "Dragon, Or", 
@@ -25866,7 +25971,7 @@ const compendiumRegistry = {
             immunities: ["Curse", "Disease", "Light"],
             aversions: ["Darkness", "Umbral"],
             resistances: ["Magic"],
-            abilities: ["Dragonhide Suit", "Searing Light [Breath]"] 
+            abilities: ["Thick Hide", "Searing Light [Breath]"] 
         },
         { 
             name: "Dragon, Sable", 
@@ -25881,7 +25986,7 @@ const compendiumRegistry = {
             immunities: ["Acid", "Curse", "Darkness", "Disease", "Umbral"],
             aversions: ["Light"],
             resistances: ["Magic"],
-            abilities: ["Acid Breath", "Dragonhide Suit"] 
+            abilities: ["Acid Breath", "Thick Hide"] 
         },
         { 
             name: "Dragon, Vert", 
@@ -25895,7 +26000,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Petrify: 6d+16", "Poison: 5d"], 
             immunities: ["Curse", "Disease", "Poison", "Venom"],
             resistances: ["Magic"],
-            abilities: ["Dragonhide Suit", "Petrifying Gaze: Acuity confronts", "Poison Breath: TN 5"] 
+            abilities: ["Thick Hide", "Petrifying Gaze: Acuity confronts", "Poison Breath: TN 5"] 
         }
     ],
     "Elemental": [
@@ -25919,11 +26024,11 @@ const compendiumRegistry = {
             pace: "22 burrow; 12 land", 
             vit: 65, 
             mana: 30, 
-            avoid: "6d; cc2", 
+            avoid: "6d+8; cc4", 
             aspects: { dex: 6, hel: 13, str: 13, act: 6, ver: 6 }, 
             attacks: ["Slam: 6d+7; Bash", "Crush: 6d+7; Crush"], 
             immunities: ["Curse", "Disease", "Light", "Lightning", "Physical", "Thunder"],
-            abilities: [] 
+            abilities: ["Clay"] 
         },
         { 
             name: "Elemental, Dirt", 
@@ -26015,7 +26120,7 @@ const compendiumRegistry = {
             aspects: { dex: 4, hel: 19, str: 19, act: 4, ver: 6 }, 
             attacks: ["Slam: 6d+13; Bash", "Crush: 6d+13; Crush"], 
             immunities: ["Battle Magic", "Curse", "Disease", "Physical"],
-            abilities: ["Stone suit"] 
+            abilities: ["Stone Suit"] 
         },
         { 
             name: "Elemental, Water", 
@@ -26123,7 +26228,7 @@ const compendiumRegistry = {
             pace: "23", 
             vit: 50, 
             mana: 18, 
-            avoid: "6d+8; cc7", 
+            avoid: "6d+8; cc3", 
             aspects: { dex: 10, hel: 10, str: 10, act: 4, int: 2, ver: 3 }, 
             attacks: ["Bite: 6d+4; Crush & Slash", "Spear: 6d+6; Thrust", "Spear [Butt]: 6d+5; Bash"], 
             immunities: ["Curse", "Disease"],
@@ -26137,12 +26242,12 @@ const compendiumRegistry = {
             pace: "8", 
             vit: 50, 
             mana: 20, 
-            avoid: "6d+10; cc8", 
+            avoid: "6d+12; cc4", 
             aspects: { dex: 10, hel: 10, str: 10, act: 4, int: 4, ver: 4 }, 
             attacks: ["Claw: 6d+4; Crush", "Flint Spear: 6d+6; Thrust, cc2", "Flint Spear [Butt]: 6d+5; Bash", "Sting: 6d+4; Thrust & Envenom", "Venom: 1d; Pain"], 
             immunities: ["Curse", "Disease"],
             aversions: ["Silver"],
-            abilities: ["Chitin Suit", "Claw Shield: +2d", "Deadly Sting", "Divine Salvation", "Venom: TN2 Health save"] 
+            abilities: ["Shell", "Claw Shield: +2d", "Deadly Sting", "Divine Salvation", "Venom: TN2 Health save"] 
         },
         { 
             name: "Camasotz", 
@@ -26166,7 +26271,7 @@ const compendiumRegistry = {
             pace: "24", 
             vit: 45, 
             mana: 25, 
-            avoid: "4d+8; cc7", 
+            avoid: "4d+8; cc3", 
             aspects: { dex: 4, hel: 9, str: 9, act: 5, int: 5, ver: 5 }, 
             attacks: ["Bite: 6d; Envenom", "Venom: 4d; Paralyze", "Web: 5d; Entangle"], 
             immunities: ["Curse", "Disease"],
@@ -26180,12 +26285,12 @@ const compendiumRegistry = {
             pace: "8 land; 9 swim", 
             vit: 60, 
             mana: 20, 
-            avoid: "6d+6; cc4", 
+            avoid: "6d+8; cc4", 
             aspects: { dex: 10, hel: 12, str: 12, act: 4, int: 4, ver: 4 }, 
             attacks: ["Bite: 6d+5; Crush or Slash", "Flint Spear: 6d+6; Thrust; cc2", "Flint Spear [Butt]: 6d+8; Bash", "Poison: 4d"], 
             immunities: ["Curse", "Disease"],
             aversions: ["Silver"],
-            abilities: ["Divine Salvation", "Shell Breastplate", "Quick Acting Vitality Poison: TN 6"] 
+            abilities: ["Divine Salvation", "Light Hide", "Quick Acting Vitality Poison: TN 6"] 
         },
         { 
             name: "Kitsune", 
@@ -26255,13 +26360,13 @@ const compendiumRegistry = {
             pace: "26 swim", 
             vit: 80, 
             mana: 26, 
-            avoid: "6d+8; cc8", 
+            avoid: "6d+8; cc4", 
             aspects: { dex: 6, hel: 16, str: 16, act: 6, int: 4, ver: 4 }, 
             attacks: ["Bite: 6d+10; Crush or Slash", "Slam: 6d+10; Bash"], 
             resistances: ["Frost"],
             aversions: ["Silver"],
             vulnerabilities: ["Thunder"],
-            abilities: ["Blubar Suit", "Divine Salvation", "Lycanthropic Bite"] 
+            abilities: ["Thick Hide", "Divine Salvation", "Lycanthropic Bite"] 
         },
         { 
             name: "Ursanthrope", 
@@ -26270,12 +26375,12 @@ const compendiumRegistry = {
             pace: "26", 
             vit: 50, 
             mana: 20, 
-            avoid: "6d+4; cc8", 
+            avoid: "6d+4; cc4", 
             aspects: { dex: 6, hel: 10, str: 10, act: 4, int: 6, ver: 4 }, 
             attacks: ["Bite: 6d+2; Crush", "Claw: 6d+4; Bash & Slash", "Trample: 6d+6; Crush"], 
             immunities: ["Curse", "Disease"],
             aversions: ["Silver"],
-            abilities: ["Divine Salvation", "Hide Suit", "Lycanthropic Bite"] 
+            abilities: ["Divine Salvation", "Light Hide", "Lycanthropic Bite"] 
         },
         { 
             name: "Wendigo", 
@@ -26441,7 +26546,7 @@ const compendiumRegistry = {
             pace: "37 fly; 12 land",
             vit: 80,
             mana: 38,
-            avoid: "6d+25; cc4",
+            avoid: "6d+24; cc4",
             aspects: { dex: 10, hel: 16, str: 16, act: 10, int: 4, ver: 4 },
             attacks: ["Morningstar [Size C]: 6d+16; Bash & Thrust, cc4", "Full Shield [Size C]: 6d+13; Bash, cc3", "Dive: +12d"],
             immunities: ["Curse", "Disease", "Summoning"],
