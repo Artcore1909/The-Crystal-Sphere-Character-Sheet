@@ -4073,7 +4073,7 @@ details[open] #skills-collapsed-summary {
                         </tr>
                         <tr>
                             <td><strong>Skill Check, Assist</strong></td>
-                            <td>Add your Bonus to the roll.</td>
+                            <td>So long as your roll is greater than zero, add your Bonus to the roll.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -9495,7 +9495,7 @@ const tooltipRegistry = {
   "jump": {
     title: "Jump",
     actionType: "Skill Check [Strength]",
-    description: "You can jump up to ¼ of your pace vertically, and thrice that amount horizontally, with a Target Number (TN) equal to the hexes attempted. When jumping down from a height, your Skill Check result is the number of hexes you safely descend; if your roll is less than the height, you suffer fall damage normally. You suffer a -2d penalty to Jump when wearing medium or heavy armor."
+    description: "You can jump up to ¼ of your pace vertically, and thrice that amount horizontally, with a Target Number (TN) equal to the hexes attempted. When jumping down from a height, your Skill Check result is the number of hexes you safely descend; if your roll is less than the height, you suffer fall damage normally. You suffer a -2 dice limit penalty to Jump when wearing medium or heavy armor."
   },
   "lie": {
     title: "Lie",
@@ -9582,7 +9582,7 @@ const tooltipRegistry = {
   "run": {
     title: "Run",
     actionType: "Skill Check [Strength] + Move",
-    description: "Gain a number of hexes equal to your Skill Check to run in a relatively straight line. After Health rounds of running, you gain one level of fatigue and one level of fatigue for each additional round. You suffer a -2d penalty to Run while wearing medium or heavy armor. Regardless of initiative, all participants of a chase move simultaneously."
+    description: "Gain a number of hexes equal to your Skill Check to run in a relatively straight line. After Health rounds of running, you gain one level of fatigue and one level of fatigue for each additional round. You suffer a -2 dice limit penalty to Run while wearing medium or heavy armor. Regardless of initiative, all participants of a chase move simultaneously."
   },
   "sail_boat": {
     title: "Sail Boat",
@@ -25651,7 +25651,7 @@ const compendiumRegistry = {
             abilities: ["Guano Spray [rear facing]: TN 4 Health save"]
         },
         {
-            name: "Hydra [body]",
+            name: "Hydra [Body]",
             description: "The hydra is a many-headed, long-necked, swamp dwelling beast with venomous bites. When disturbed, the hydra attempts to face as many of its foe as possible, snapping at each one. A hydra’s venom glands are highly sought after as they are necessary to create the proper antivenom. A hydra can only be killed by cutting off or crushing its many heads then burning the corpse.",
             size: "2C",
             pace: "26",
@@ -25663,7 +25663,7 @@ const compendiumRegistry = {
             abilities: ["Light Hide", "Regenerate"]
         },
         {
-            name: "Hydra [head]",
+            name: "Hydra [Head]",
             description: "A hydra’s heads evenly occupy the three threatened hexes of the hydra and threaten 3 hexes each of their own.",
             size: "B",
             pace: "—",
