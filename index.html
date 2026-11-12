@@ -176,10 +176,30 @@
         }
 /* Override inline-styled buttons inside the settings dropdown */
         body.theme-dark #sheet-settings-dropdown button,
-        body.theme-dark .pnp-edit-btn  {
+        body.theme-dark .pnp-edit-btn,
+        body.theme-dark .builder-group div[style*="background"],
+        body.theme-dark .builder-panel div[style*="background"],
+        body.theme-dark div[style*="background: #fff"],
+        body.theme-dark div[style*="background:#fff"],
+        body.theme-dark div[style*="background: #ffffff"],
+        body.theme-dark div[style*="background:#ffffff"],
+        body.theme-dark .builder-group,
+        body.theme-dark .builder-group,
+        body.theme-dark .qualities-checklist {
             background-color: var(--dark-bg-card) !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
+        }
+
+        body.theme-dark .builder-group {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+
+        body.theme-dark #custom-weapon-fields-weapon-0 div[style*="border"],
+        body.theme-dark [id^="custom-weapon-fields-"] div[style*="border"] {
+            border-color: var(--dark-border) !important;
         }
 
         body.theme-dark #sheet-settings-dropdown button:hover,
@@ -292,6 +312,19 @@
         body.theme-dark #active-unlocked-skills-column .aspect-card,
         body.theme-dark .aspect-card .hint,
         body.theme-dark #tab-bazaar li div span:last-child {
+            color: var(--dark-text-muted) !important;
+        }
+
+/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
+        body.theme-dark strong[style*="color"],
+        body.theme-dark span[style*="color"],
+        body.theme-dark div[style*="color"] {
+            color: var(--dark-text) !important;
+        }
+
+        /* If specific labels need to stay muted/accented */
+        body.theme-dark span[style*="color: #7c6f64"],
+        body.theme-dark strong[style*="color: #5c1d1d"] {
             color: var(--dark-text-muted) !important;
         }
 
@@ -16267,7 +16300,7 @@ window.verifyRank3PrerequisitesMet = function(advancedTreeKey) {
         case "paragon: paladin":
             // FIXED: Integrated updated Defense Level 1 and Temple Level 1 constraints rules
             let pWeapon = getTreeLvl("brutal-weapons") >= 5 || getTreeLvl("shrewd-weapons") >= 6;
-            return getTreeLvl("defense", 4) >= 1 && getTreeLvl("guild-temple") >= 1 && pWeapon;
+            return getTreeLvl("defense", 4) >= 1 && getTreeLvl("guild-temple", 5) >= 1 && pWeapon;
 
         default:
             return true;
