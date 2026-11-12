@@ -19771,7 +19771,8 @@ function updatePnpWriteInCards() {
     const el = document.getElementById("sk-xp-" + id);
     const pts = el ? (parseInt(el.value) || 0) : 0;
     
-    let dictKey = id.replace(/-/g, " ");
+let dictKey = id.replace(/-/g, " ");
+    if (dictKey.startsWith("guild ")) dictKey = dictKey.replace("guild ", "guild: ");
     if (dictKey.startsWith("mastery ")) dictKey = dictKey.replace("mastery ", "mastery: ");
     if (dictKey.startsWith("paragon ")) dictKey = dictKey.replace("paragon ", "paragon: ");
     if (dictKey.startsWith("occult ") && dictKey !== "occult base") dictKey = dictKey.replace("occult ", "occult: ");
