@@ -49,8 +49,8 @@
             --container-bg: #fff;
         }
 /* =========================================================================
-           🌙 SCOPED LAYERED DARK THEME
-           ========================================================================= */
+🌙 SCOPED LAYERED DARK THEME
+========================================================================= */
         body.theme-dark {
             background-color: #121212 !important;
             color: #e2d7c5 !important;
@@ -61,7 +61,7 @@
             --dark-border: #423730;
             --dark-text: #e2d7c5;
             --dark-text-muted: #9e9182;
-            --dark-accent: #d97706;
+            --dark-accent: #d4a359;
             scrollbar-color: var(--dark-border) var(--dark-bg-deep);
         }
 
@@ -93,6 +93,7 @@
         body.theme-dark table.game-data,
         body.theme-dark .skill-item,
         body.theme-dark .skill-body,
+        body.theme-dark .skill-header,
         body.theme-dark .pnp-header-bar,
         body.theme-dark .pnp-sub-defenses-panel,
         body.theme-dark .pnp-weapon-slot-row,
@@ -104,19 +105,33 @@
         body.theme-dark #pets-master-container > div,
         body.theme-dark .extra-training-box,
         body.theme-dark [id^="compendium-inspector-card-"],
-        body.theme-dark .compendium-accordion .skill-item,
-        body.theme-dark .compendium-accordion .skill-body,
         body.theme-dark #encounter-charts-section,
+        body.theme-dark #encounter-charts-section .skill-item,
         body.theme-dark #encounter-charts-section .skill-body,
+        body.theme-dark #encounter-charts-section .skill-header,
+        body.theme-dark #tab-bazaar .bazaar-accordion .skill-item,
+        body.theme-dark #tab-bazaar .bazaar-accordion .skill-body,
+        body.theme-dark #tab-bazaar .bazaar-accordion .skill-header,
+        body.theme-dark #tab-skills .skill-accordion .skill-item,
+        body.theme-dark #tab-skills .skill-accordion .skill-body,
+        body.theme-dark #tab-skills .skill-accordion .skill-header,
+        body.theme-dark #tab-compendium .skill-accordion .skill-item,
+        body.theme-dark #tab-compendium .skill-accordion .skill-body,
+        body.theme-dark #tab-compendium .skill-accordion .skill-header,
         body.theme-dark #encounter-display-grid > div,
         body.theme-dark .locus-builder,
-        body.theme-dark [id^="compendium-creature-sheet-container-"],
         body.theme-dark .tab-btn {
             background-color: var(--dark-bg-card) !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15) !important;
         }
+
+        body.theme-dark #compendium-creature-select option {
+            background-color: var(--dark-bg-card) !important;
+            color: var(--dark-text) !important;
+        }
+
         body.theme-dark #compendium-inspector-wrapper button,
         body.theme-dark .compendium-accordion button {
             background-color: var(--dark-bg-card) !important;
@@ -128,6 +143,21 @@
         body.theme-dark .compendium-accordion button:hover {
             background-color: var(--dark-bg-hover) !important;
             color: var(--dark-accent) !important;
+        }
+/* 1b. Floating Windows, Tooltips & Popups */
+        body.theme-dark .tcs-tooltip,
+        body.theme-dark .tcs-floating-window,
+        body.theme-dark [id^="tcs-"] {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .tcs-title {
+            color: var(--dark-accent) !important;
+        }
+        body.theme-dark .tcs-meta,
+        body.theme-dark .tcs-desc {
+            color: var(--dark-text) !important;
         }
 /* 2b. Catch language pills / tags and hardcoded inline backgrounds */
         body.theme-dark .aspect-card div[style*="background"],
@@ -210,7 +240,6 @@
 
         /* 4. Hovers & Active Interactive States */
         body.theme-dark table.game-data th,
-        body.theme-dark .skill-header,
         body.theme-dark .skill-header:hover,
         body.theme-dark .tab-btn:hover,
         body.theme-dark .tab-btn.active,
@@ -218,8 +247,6 @@
         body.theme-dark #sheet-settings-dropdown button:hover,
         body.theme-dark div[style*="background: #faf3e8"],
         body.theme-dark [id^="compendium-inspector-card-"] button,
-        body.theme-dark .compendium-accordion .skill-header,
-        body.theme-dark #encounter-charts-section .skill-header,
         body.theme-dark .builder-btn:hover,
         body.theme-dark .builder-btn-cancel:hover,
         body.theme-dark .builder-btn-save:hover {
@@ -299,7 +326,8 @@
         body.theme-dark .pnp-col-header,
         body.theme-dark .pnp-section-title,
         body.theme-dark .aspect-static,
-        body.theme-dark .char-modal h3 {
+        body.theme-dark .char-modal h3,
+        body.theme-dark .section-header {
             color: var(--dark-text) !important;
         }
 
@@ -2346,6 +2374,8 @@ details[open] #skills-collapsed-summary {
             <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="light">Light Theme</option>
                 <option value="dark">Dark Theme</option>
+                <option value="crystalline">Crystalline Theme</option>
+                <option value="paladinic">Paladinic Theme</option>
             </select>
 
             <button onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
@@ -28617,15 +28647,20 @@ document.addEventListener("click", (e) => {
 });
 
 function switchTheme(themeName) {
-    document.body.classList.remove('theme-dark');
-    if (themeName === 'dark') {
-        document.body.classList.add('theme-dark');
+    // 1. Remove all possible theme classes
+    document.body.classList.remove('theme-dark', 'theme-crystalline', 'theme-paladinic');
+    
+    // 2. Add the selected theme class if it's not the default
+    if (themeName && themeName !== 'default') {
+        document.body.classList.add(`theme-${themeName}`);
     }
+    
+    // 3. Save preference
     localStorage.setItem('cscs_theme', themeName);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem('cscs_theme') || 'light';
+    const savedTheme = localStorage.getItem('cscs_theme') || 'default';
     const selector = document.getElementById("theme-selector");
     if (selector) selector.value = savedTheme;
     switchTheme(savedTheme);
