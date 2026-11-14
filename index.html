@@ -3053,6 +3053,7 @@ details[open] #skills-collapsed-summary {
 <div style="display: flex; gap: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; color: #433827;">
     <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-arcane-armor" onchange="calculateSheet()"> Arcane Armor</label>
     <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-barkskin" onchange="calculateSheet()"> Barkskin</label>
+    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-spatial-awareness" onchange="calculateSheet()"> Spatial Awareness</label>
 </div>
             <div class="pnp-col-header" style="margin-bottom: 8px;">DEFENSIVE SKILLS & SPELLS</div>
             <div class="pnp-offensive-writein-list" id="card-view-active-defenses"></div>
@@ -3415,7 +3416,7 @@ details[open] #skills-collapsed-summary {
             <td>
                 <div style="font-size: 0.82rem; margin-bottom: 4px;"><strong>If attack exceeds Avoidance...</strong></div>
                 <div style="font-size: 0.85rem; border-top: 1px solid var(--border-warm); padding-top: 4px;">
-                    (6) Add Damage Reduction
+                    (6) Add Damage Reduction (DR)
                 </div>
             </td>
         </tr>
@@ -4104,7 +4105,7 @@ details[open] #skills-collapsed-summary {
                         </tr>
                         <tr>
                             <td><strong>Called Shot</strong></td>
-                            <td>Allows the defender to roll with Advantage, but if successful, allows the attacker to activate one of the following effects: ignore the defender's Damage Reduction; apply Advantage to the attack after determining whether it hit; inflict a combat condition; or maim the target.</td>
+                            <td>Allows the defender to roll with Advantage, but if successful, allows the attacker to activate one of the following effects: ignore the defender's DR; apply Advantage to the attack after determining whether it hit; inflict a combat condition; or maim the target.</td>
                         </tr>
                         <tr>
                             <td><strong>Cast</strong></td>
@@ -8468,7 +8469,7 @@ const enchantmentRegistry = {
         allowedTags: ["armor", "jewelry", "arms", "cloak", "torso", "waist", "legs"],
         cost: 4000,
         rarity: 3,
-        description: "+3 Damage Reduction."
+        description: "+3 DR."
     },
     "returning": {
         name: "Returning",
@@ -8573,7 +8574,7 @@ const tooltipRegistry = {
   },
   "hardy": {
     title: "Hardy",
-    description: "You gain +2 to your Damage Reduction."
+    description: "You gain +2 to your DR."
   },
   "inexhaustible_mana": {
     title: "Inexhaustible Mana",
@@ -9262,10 +9263,23 @@ const tooltipRegistry = {
     title: "Melee Shot",
     description: "You can shoot targets at melee range without disadvantage."
   },
+  "arc_bow_tactics": {
+    title: "Arc-bow Tactics",
+    description: "You can choose one of the following fighting styles when attacking with an arc-bow.",
+    includes: ["longshot", "rapid_shot", "steady_shot"]
+  },
   "longshot": {
     title: "Longshot",
-    description: "You can use all arc-bows at up to double their normal range without disadvantage."
+    description: "You can shoot at up to double your normal range without disadvantage."
   },
+  "rapid_shot": {
+    title: "Rapid Shot",
+    description: "Add one shot to your Attack."
+  },
+  "steady_shot": {
+    title: "Steady Shot",
+    description: "You can change up to your DEX <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/WyrdencWhite.png' alt='Wyrd' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are removed from the roll."
+},
   "architecture": {
     title: "Architecture",
     actionType: "Skill Check [Intellect]",
@@ -9335,11 +9349,24 @@ const tooltipRegistry = {
   },
   "parry_ripost": {
     title: "Parry & Ripost",
-    description: "You can use the dice pool of a melee attack of your choice in lieu of your Avoidance. If you are hit, only your Damage Reduction can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike against your opponent. The number of parries you can make per round is limited by your Dexterity."
+    description: "You can use the dice pool of a melee attack of your choice in lieu of your Avoidance. If you are hit, only your DR can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike against your opponent. The number of parries you can make per round is limited by your Dexterity."
+  },
+  "brutal_tactics": {
+    title: "Brutal Tactics",
+    summary: "You can choose one of the following bonuses when attacking with a brutal weapon.",
+    includes: ["crushing_blow", "flurry", "lunge"]
   },
   "crushing_blow": {
     title: "Crushing Blow",
-    description: "Using a brutal weapon, you can change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cannot be modified. When you use this skill, your attack is limited to one strike."
+    description: "You can change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cannot be modified. When you use this skill, your attack is limited to one strike."
+  },
+  "flurry": {
+    title: "Flurry",
+    description: "Add one strike to your Attack. This cannot be applied to Charge Attacks."
+  },
+  "lunge": {
+    title: "Lunge",
+    description: "Increase the range of your attack by one hex. When you use this skill, your attack is limited to one strike."
   },
   "dual_wielding": {
     title: "Dual-Wielding",
@@ -9670,7 +9697,7 @@ const tooltipRegistry = {
   "shield_bash": {
     title: "Shield Bash",
     actionType: "Attack + Attack",
-    description: "You can use medium and heavy shields as weapons to create an opening against your foe. If you daze or knock down your target with a Shield Bash, you are granted a free strike with your main hand. Alternatively, in lieu of rolling Avoidance against an attack from a frontal hex, you can choose to use a Shield Bash as your avoidance. If you are hit, only your Damage Reduction can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike with your main hand."
+    description: "You can use medium and heavy shields as weapons to create an opening against your foe. If you daze or knock down your target with a Shield Bash, you are granted a free strike with your main hand. Alternatively, in lieu of rolling Avoidance against an attack from a frontal hex, you can choose to use a Shield Bash as your avoidance. If you are hit, only your DR can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike with your main hand."
   },
   "shrewd_weapons": {
     title: "Shrewd Weapons",
@@ -9680,6 +9707,11 @@ const tooltipRegistry = {
   "accuracy": {
     title: "Accuracy",
     description: "You gain +1d to your attack."
+  },
+  "shrewd_tactics": {
+    title: "Brutal Tactics",
+    summary: "You can choose one of the following bonuses when attacking with a shrewd weapon.",
+    includes: ["calculated_strike", "flurry", "lunge"]
   },
   "calculated_strike": {
     title: "Calculated Strike",
@@ -10399,7 +10431,7 @@ const tooltipRegistry = {
   "barkskin": {
     title: "Barkskin",
     actionType: "Cast",
-    description: "Thick bark covers your body increasing your Damage Reduction by your Verve for 12 rounds.",
+    description: "Thick bark covers your body increasing your DR by your Verve for 12 rounds.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."}]
   },
   "enthrall_animal": {
@@ -10514,7 +10546,7 @@ const tooltipRegistry = {
   "charging_overrun": {
     title: "Charging Overrun",
     actionType: "Move + Attack(s)",
-    description: "You can run down enemies from beastback. When you declare that you are charging, you targets must pass an immediate Verve Confrontation or become panicked. If they fail, they must attempt a Jump or Run Check confronted by your Equestrianism to escape your trajectory. If they passes, the attack is negated and you ride past them; if they fail, you and your beast are granted single strikes each for which the targets are at disadvantage.If they pass the Verve Confrontation, and regardless of whether they have already acted, they can invoke Total Defense, stand their ground, or otherwise act however they wish."
+    description: "You can run down enemies from beastback. When you declare that you are charging, you targets must pass an immediate Verve Confrontation or become panicked. If they fail, they must attempt a Jump or Run Check confronted by your Equestrianism to escape your trajectory. If they pass, the attack is negated and you ride past them; if they fail, you and your beast are granted a single strike each for which the targets are at disadvantage. If they pass the Verve Confrontation, and regardless of whether they have already acted, they can invoke Total Defense, stand their ground, or otherwise act however they wish."
   },
   "patron_deity": {
     title: "Patron Deity",
@@ -10744,7 +10776,7 @@ const tooltipRegistry = {
   "arcane_armor": {
     title: "Arcane Armor",
     actionType: "Cast",
-    description: "You are fully enveloped in magical force that adds your Verve to your Damage Reduction and your Rank to your Crit Count for Verve rounds."
+    description: "You are fully enveloped in magical force that adds your Verve to your DR and your Rank to your Crit Count for Verve rounds."
   },
   "picket_line": {
     title: "Picket Line",
@@ -11253,7 +11285,7 @@ const tooltipRegistry = {
   },
   "fencer": {
     title: "Fencer",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while attacking dual-wielding."
+    description: "Add one strike to all attacks while dual-wielding."
   },
   "daze": {
     title: "Daze",
@@ -11287,9 +11319,9 @@ const tooltipRegistry = {
     actionType: "Cast + Attack",
     description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
-  "bullseye": {
-    title: "Bullseye",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while shooting an Arc-bow."
+  "burst_shot": {
+    title: "Burst Shot",
+    description: "Your Rapid Shot bonus is increased to two."
   },
   "martial_prowess": {
     title: "Martial Prowess",
@@ -11297,7 +11329,7 @@ const tooltipRegistry = {
   },
   "viper_strike": {
     title: "Viper Strike",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for Pugil Strikes."
+    description: "Add one strike to all Pugil Strikes."
   },
   "learned": {
     title: "Learned",
@@ -11311,18 +11343,49 @@ const tooltipRegistry = {
     title: "Polyglot",
     description: "You can speak enough of all known languages to roughly communicate."
   },
-  "deflect_strike": {
-    title: "Deflect Strike",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on Avoidance Checks."
+  "shield_tactics": {
+    title: "Shield Tactics",
+    summary: "You can activate one of the following skills while wielding a one-handed weapon and a shield.",
+    includes: ["knock_down", "drive_back", "bind_weapon"]
   },
   "knock_down": {
     title: "Knock Down",
     description: "After you Shield Bash a bipedal opponent of your size or smaller, he must pass a Balance Check or be knocked down."
   },
+  "drive_back": {
+    title: "Drive Back",
+    actionType: "Move + Attack(s)",
+    description: "You can make up to your STR number of Shield Bashes to drive an opponent back a number of hexes equal to the number of hits they suffer."
+   },
+  "bind_weapon": {
+    title: "Bind Weapon",
+    description: "You can catch an enemy's strike with you shield and weapon in an attempt to control their weapon by rolling your Shield Bash in lieu of your Avoidance. If the attack misses, roll a DEX confrontation to control longblades and a STR confrontation to control heavy or hafted weapons each round to prevent your target from using that weapon. If the attack hits, only your DR can mitigate the damage."
+   },
+  "spatial_awareness": {
+    title: "Spatial Awareness",
+    description: "So long as you are not surprised and are wielding a shield, add a number of dice equal to your ACT to your Avoidance."
+   },
   "shield_mastery": {
     title: "Shield Mastery",
     description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while rolling Avoidance wielding a shield."
   },
+  "two_hander_tactics": {
+    title: "Two-hander Tactics",
+    summary: "You can activate one of the following skills depending on your weapon.",
+    includes: ["wall_of_steel", "molinetto", "sweep_attack"]
+  },
+  "wall_of_steel": {
+    title: "Wall of Steel",
+   extras: [{"label": "Zweihänder & Odachi only", "text": "You continuously weave a figure-eight shaped wall of steel, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Wall of Steel can be maintained for STR rounds."}]
+},
+  "molinetto": {
+    title: "Molinetto",
+   extras: [{"label": "Long-haft Weapons", "text": "You continuously spin your weapon creating a figure-eight shaped wall, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Molinetto can be maintained for DEX rounds."}]
+},
+  "sweep_attack": {
+    title: "Sweep Attack",
+   extras: [{"label": "Two-handed Weapons", "text": "You control your three frontal hexes out to close range with a massive sweeping attack. All targets roll avoidance at once. Those who avoid are pushed backwards outside of your range if possible. If an enemy fails to avoid, retroactively apply Advantage to the roll before adding your Bonus. If more than one enemy fail to avoid, only the first such enemy in your arc suffers damage, and the rest avoid instead."}]
+},
   "skill_mastery": {
     title: "Skill Mastery",
     description: "You can add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a chosen skill for which you have acquired Extra Training. You can take this skill multiple times, each time for a different skill."
@@ -11348,9 +11411,9 @@ const tooltipRegistry = {
     actionType: "Cast",
     description: "Your target may move and/or attack during the third pulse of combat."
   },
-  "deathstrike": {
-    title: "Deathstrike",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> while attacking with a brutal or shrewd two-handed weapon."
+  "quick_strike": {
+    title: "Quick Strike",
+    description: "Add one strike to all attacks with two-handed melee weapons."
   },
   "fortitudinous": {
     title: "Fortitudinous",
@@ -12035,13 +12098,13 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "arc-bows": {
         description: "The mastery and handling of all manner of bows and firearms.",
         levels:    [
-        "Arc-bows", "Aim", "Melee Shot", "Aim", "Longshot"
+        "Arc-bows", "Aim", "Melee Shot", "Aim", "Arc-bow Tactics"
     ]
 },
     "brutal weapons": {
         description: "Mastery of heavy impact and bludgeoning arms, relying on sheer force over precision.",
         levels:    [
-        "Brutal Weapons", "Extra Damage", "Parry & Ripost", "Extra Damage", "Crushing Blow"
+        "Brutal Weapons", "Extra Damage", "Parry & Ripost", "Extra Damage", "Brutal Tactics"
     ]
 },
     "defense": {
@@ -12071,7 +12134,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "shrewd weapons": {
         description: "Mastery of all that is long and sharp and the art of knowing where and how to stick it.",
         levels:    [
-        "Shrewd Weapons", "Accuracy", "Parry & Ripost", "Extra Damage", "Calculated Strike"
+        "Shrewd Weapons", "Accuracy", "Parry & Ripost", "Extra Damage", "Shrewd Tactics"
     ]
 },
     "skill training": {
@@ -12261,7 +12324,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "mastery: jäger": {
         description: "Mastery of the bow to the point of legendary prowess.",
-        levels:    ["Multi-shot", "Ghost Arrow", "Bullseye"
+        levels:    ["Multi-shot", "Ghost Arrow", "Burst Shot"
     ]
 },
     "mastery: pugilist": {
@@ -12276,7 +12339,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "mastery: scutifer": {
         description: "You really know how to keep your head on your shoulders.",
-        levels:    ["Deflect Strike", "Knock Down", "Shield Mastery"
+        levels:    ["Shield Tactics", "Spatial Awareness", "Shield Mastery"
     ]
 },
     "mastery: summoner": {
@@ -12291,7 +12354,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "mastery: zweihänder": {
         description: "In-depth mastery of the art of swinging a really big weapon.",
-        levels:    ["Deflect Strike", "Deathstrike", "Fortitudinous"
+        levels:    ["Two-hander Tactics", "Quick Strike", "Fortitudinous"
     ]
 },
     "mastery: skill training": {
@@ -15515,12 +15578,17 @@ let finalAvoidDice = baseAvoidDice + shieldAvoidDiceMod;
 let finalArmorDR = baseDr + armorDrMod + shieldDrMod + getMaxEnchant("protection", true, true) * 3; 
 const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
 const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
+const hasSpatialAwareness = document.getElementById("chk-spatial-awareness")?.checked || false;
 if (hasArcaneArmor) {
     finalArmorDR += finalVer;
 }
 if (hasBarkskin) {
     finalArmorDR += finalVer;
 }
+if (hasSpatialAwareness) {
+    finalAvoidDice += finalAct;
+}
+
 let maxUnifiedLimit = 6 + shieldLimitDiceBonus + enshadowedBonus + getMaxEnchant("defending", true, true); 
 
 // Process uniform Unified dice overflow to DR conversion 
@@ -20040,10 +20108,10 @@ const finalDexVal = parseInt(document.getElementById("total-dex")?.value) || 3;
     if (getLvl("stealth") >= 8) attacks.push("Backstab");
 
     if (getLvl("arc-bows") >= 3) attacks.push("Melee Shot");
-    if (getLvl("arc-bows") >= 5) attacks.push("Longshot");
+    if (getLvl("arc-bows") >= 5) attacks.push("Arc-bow Tactics");
 
     if (getLvl("brutal-weapons") >= 3 || getLvl("shrewd-weapons") >= 3) defenses.push("Parry & Ripost");
-    if (getLvl("brutal-weapons") >= 5) attacks.push("Crushing Blow");
+    if (getLvl("brutal-weapons") >= 5) attacks.push("Brutal Tactics");
 
     if (getLvl("defense") >= 1) defenses.push("Avoidance");
     if (getLvl("defense") >= 1) defenses.push("Total Defense");
@@ -20059,7 +20127,7 @@ const finalDexVal = parseInt(document.getElementById("total-dex")?.value) || 3;
     if (getLvl("pugilism") >= 4) attacks.push("Trip");
     if (getLvl("pugilism") >= 5) attacks.push("Opportune Strike");
 
-    if (getLvl("shrewd-weapons") >= 5) attacks.push("Calculated Strike");
+    if (getLvl("shrewd-weapons") >= 5) attacks.push("Shrewd Tactics");
 
     if (getLvl("guild-temple") >= 2) attacks.push("Dismiss Undead");
     if (getLvl("guild-temple") >= 3) attacks.push("Wraithstrike");
@@ -20364,14 +20432,15 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
 
     if (getLvl("mastery-j-ger") >= 1) attacks.push("Multi-shot");
     if (getLvl("mastery-j-ger") >= 2) attacks.push("Ghost Arrow");
-    if (getLvl("mastery-j-ger") >= 3) attacks.push("Bullseye");
+    if (getLvl("mastery-j-ger") >= 3) attacks.push("Burst Shot");
 
     if (getLvl("mastery-pugilist") >= 1) defenses.push("Elusive");
     if (getLvl("mastery-pugilist") >= 2) attacks.push("Martial Prowess");
     if (getLvl("mastery-pugilist") >= 3) attacks.push("Viper Strike");
 
-    if (getLvl("mastery-scutifer") >= 1) defenses.push("Deflect Strike");
-    if (getLvl("mastery-scutifer") >= 2) attacks.push("Knock Down");
+    if (getLvl("mastery-scutifer") >= 1) defenses.push("Shield Tactics");
+    if (getLvl("mastery-scutifer") >= 1) attacks.push("Shield Tactics");
+    if (getLvl("mastery-scutifer") >= 2) defensess.push("Spacial Awareness");
     if (getLvl("mastery-scutifer") >= 3) defenses.push("Shield Mastery");
 
     if (getLvl("mastery-summoner") >= 1) attacks.push("Improved Possess Other");
@@ -20381,8 +20450,9 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
     if (getLvl("mastery-thaumaturgist") >= 2) attacks.push("Glyph");
     if (getLvl("mastery-thaumaturgist") >= 3) defenses.push("Haste");
 
-    if (getLvl("mastery-zweih-nder") >= 1) defenses.push("Deflect Strike");
-    if (getLvl("mastery-zweih-nder") >= 2) attacks.push("Deathstrike");
+    if (getLvl("mastery-zweih-nder") >= 1) defenses.push("Two-hander Tactics");
+    if (getLvl("mastery-zweih-nder") >= 1) attacks.push("Two-hander Tactics");
+    if (getLvl("mastery-zweih-nder") >= 2) attacks.push("Quick Strike");
     if (getLvl("mastery-zweih-nder") >= 3) defenses.push("Fortitudinous");
 
     if (getLvl("occult-necromancer") >= 2) attacks.push("Enthrall Undead");
