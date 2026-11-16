@@ -4574,41 +4574,47 @@ details[open] #skills-collapsed-summary {
     <thead>
         <tr>
             <th>Type</th>
-            <th>Time</th>
-            <th>Cost</th>
-            <th>Notes</th>
+            <th style="text-align: center;">Time</th>
+            <th style="text-align: center;">Cost</th>
+            <th style="text-align: center;">Notes</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>Word</strong></td>
-            <td>None</td>
-            <td>6 Mana</td>
-            <td>May be cast at any point, regardless of initiative or whether you have acted.</td>
-        </tr>
-        <tr>
-            <td><strong>Channel</strong></td>
-            <td>None</td>
-            <td>1 Mana/Pulse</td>
-            <td>Used to prevent a spell from expiring.</td>
+            <td style="text-align: center;">None</td>
+            <td style="text-align: center;">6 Mana</td>
+            <td style="text-align: center;">May be cast at any point, regardless of initiative or whether you have acted.</td>
         </tr>
         <tr>
             <td><strong>Incantation</strong></td>
-            <td>1 Pulse</td>
-            <td>3 Mana</td>
-            <td>Can be interrupted (requires an Acuity Save against damage taken).</td>
+            <td style="text-align: center;">1 Pulse</td>
+            <td style="text-align: center;">3 Mana</td>
+            <td style="text-align: center;">Can be interrupted (requires an Acuity Save against damage taken).</td>
         </tr>
         <tr>
             <td><strong>Encænium</strong></td>
-            <td>Several Rounds</td>
-            <td>1 Mana</td>
-            <td>Requires material components and setting-up.</td>
+            <td style="text-align: center;">Several Rounds</td>
+            <td style="text-align: center;">1 Mana</td>
+            <td style="text-align: center;">Requires material components and setting-up.</td>
         </tr>
         <tr>
             <td><strong>Rite</strong></td>
-            <td>1 Phase (1/6th of a day)</td>
-            <td>72 Mana</td>
-            <td>Requires a specific focus (usually blood).</td>
+            <td style="text-align: center;">1 Phase (1/6th of a day)</td>
+            <td style="text-align: center;">72 Mana</td>
+            <td style="text-align: center;">Requires a specific focus (usually blood).</td>
+        </tr>
+        <tr>
+            <td><strong>Channel</strong></td>
+            <td style="text-align: center;">None</td>
+            <td style="text-align: center;">1 Mana/Pulse</td>
+            <td style="text-align: center;">Used to prevent a spell from expiring.</td>
+        </tr>
+        <tr>
+            <td><strong>Surge</strong></td>
+            <td style="text-align: center;">—</td>
+            <td style="text-align: center;">+6/Rank Increase</td>
+            <td style="text-align: center;">By expending extra Mana, you increase the effective Rank of your spell.</td>
         </tr>
     </tbody>
 </table>
@@ -9939,7 +9945,7 @@ const tooltipRegistry = {
   },
   "foreboding_darkness": {
     title: "Foreboding Darkness",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Darkness skills."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Darkness skills."
   },
   "living_darkness": {
     title: "Living Darkness",
@@ -9981,7 +9987,7 @@ const tooltipRegistry = {
   },
   "intense_flames": {
     title: "Intense Flames",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Fire skills."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Fire skills."
   },
   "living_flame": {
     title: "Living Flame",
@@ -10023,7 +10029,7 @@ const tooltipRegistry = {
   },
   "intense_cold": {
     title: "Intense Cold",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Frost skills."
+    description: "You can change You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Frost skills."
   },
   "living_frost": {
     title: "Living Frost",
@@ -10065,7 +10071,7 @@ const tooltipRegistry = {
   },
   "searing_light": {
     title: "Searing Light",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Light skills."
+    description: "You can change You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Light skills."
   },
   "living_light": {
     title: "Living Light",
@@ -10107,7 +10113,7 @@ const tooltipRegistry = {
   },
   "high_voltage": {
     title: "High Voltage",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Lightning skills."
+    description: "You can change You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Lightning skills."
   },
   "living_lightning": {
     title: "Living Lightning",
@@ -10149,7 +10155,7 @@ const tooltipRegistry = {
   },
   "deafening_thunder": {
     title: "Deafening Thunder",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Battle Magic: Thunder skills."
+    description: "You can change You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Battle Magic: Thunder skills."
   },
   "living_thunder": {
     title: "Living Thunder",
@@ -10744,7 +10750,7 @@ const tooltipRegistry = {
   "spellstorm": {
     title: "Spellstorm",
     summary: "You have mastered the art of mixing your battle magics. All Spellstorms must be channeled and cover a column whose height and diameter is equal to three-hexes. For the purposes of vulnerabilities, immunities, and resistances, each damage type accounts for ½ of the damage.",
-    includes: ["hailfire", "solar_tempest", "firestorm", "pyroclasm", "whiteout_blizzard", "froststorm", "avalanche", "fulgent_tempest", "photic_storm", "thunderstorm"]
+    includes: ["cinder_storm", "blackout_blizzard", "eclipse", "voidstorm", "gloomthunder", "hailfire", "solar_tempest", "firestorm", "pyroclasm", "whiteout_blizzard", "froststorm", "avalanche", "fulgent_tempest", "photic_storm", "thunderstorm"]
   },
   "spell_fusion": {
     title: "Spell Fusion",
@@ -11076,6 +11082,31 @@ const tooltipRegistry = {
     title: "True Force",
     description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
+"cinder_storm": {
+        title: "Cinder Storm",
+        action_type: "Cast",
+        description: "All within suffer Verve + Rank dice of darkness/fire damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target."
+    },
+"blackout_blizzard": {
+        title: "Blackout Blizzard",
+        action_type: "Cast",
+        description: "All within suffer Verve + Rank dice of darkness/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind and numb the target."
+    },
+"eclipse": {
+        title: "Eclipse",
+        action_type: "Cast",
+        description: "All within suffer Verve + Rank dice of darkness/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind and panic the target."
+    },
+"voidstorm": {
+        title: "Voidstorm",
+        action_type: "Cast",
+        description: "All within suffer Verve + Rank dice of darkness/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind and weaken the target."
+    },
+"gloomthunder": {
+        title: "Gloomthunder",
+        action_type: "Cast",
+        description: "All within suffer Verve + Rank dice of darkness/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind and daze the target."
+    },
 "hailfire": {
         title: "Hailfire",
         action_type: "Cast",
@@ -11813,6 +11844,7 @@ const nonCastSkillsData = [
 const castSkillsData = [
   { name: "Abjuration", aspect: "VER" },
   { name: "Arcane Force", aspect: "VER" },
+  { name: "Battle Magic: Darkness", aspect: "VER" },
   { name: "Battle Magic: Fire", aspect: "VER" },
   { name: "Battle Magic: Frost", aspect: "VER" },
   { name: "Battle Magic: Light", aspect: "VER" },
@@ -11910,6 +11942,7 @@ const masterTreeAutoCheckMap = {
   // Individual Casting Trees
   "abjuration": [["Abjuration"]],
   "arcane force": [["Arcane Force"]],
+  "battle magic: darkness": [["Battle Magic: Darkness"]],
   "battle magic: fire": [["Battle Magic: Fire"]],
   "battle magic: frost": [["Battle Magic: Frost"]],
   "battle magic: light": [["Battle Magic: Light"]],
@@ -12186,7 +12219,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "battle magic: darkness": {
         description: "The school of magic concerned with weaving darkness from the Aether. Produces charcoal light when divined.",
         levels:    [
-        "Orb of Darkness", "Shadow Cloak", "Ball of Darkness", "Veil of Darkness", "Tendril of Darkness", "Dark Strike", "Foreboding Darkness", "Living Darkness"
+        "Orb of Darkness", "Dark Mantle", "Ball of Darkness", "Veil of Darkness", "Tendril of Darkness", "Dark Strike", "Foreboding Darkness", "Living Darkness"
     ]
 },
     "battle magic: fire": {
@@ -12419,6 +12452,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
         "guild: troupe":           { maxLevel: 3,  isPackage: false, costPerLevel: 6 },
         "abjuration":              { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "arcane force":            { maxLevel: 4,  isPackage: false, costPerLevel: 6 },
+        "battle magic: darkness": { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "battle magic: fire":      { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "battle magic: frost":     { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
         "battle magic: light":     { maxLevel: 8,  isPackage: false, costPerLevel: 6 },
@@ -12499,7 +12533,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     // Array of Guild and Magic classifications tracked as fixed checkmarks or custom fields
     const specializedMagicGuildTrees = [
         "Guild: Esoteric", "Guild: Sages", "Guild: Temple", "Guild: Troupe",
-        "Abjuration", "Arcane Force", "Battle Magic: Fire", "Battle Magic: Frost",
+        "Abjuration", "Arcane Force", "Battle Magic: Darkness", "Battle Magic: Fire", "Battle Magic: Frost",
         "Battle Magic: Light", "Battle Magic: Lightning", "Battle Magic: Thunder",
         "Bewitchment", "Conjuration", "Divination", "Druidism", "Illusion",
         "Innate Sorcery", "Summoning", "Thaumaturgy", "Zoomancy"
@@ -12644,6 +12678,7 @@ const guildControlAccessRegistry = {
     collegeInitiateRequired: [
         "guild: esoteric",
         "arcane force",
+        "battle magic: darkness",
         "battle magic: fire",
         "battle magic: frost",
         "battle magic: light",
@@ -12784,7 +12819,7 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
     // -------------------------------------------------------------
     const intellectThrottledTrees = [
         "guild: esoteric", "guild: temple", "guild: troupe", "guild: sages", "guild_sages",
-        "abjuration", "arcane force", "battle magic: fire", "battle magic: frost",
+        "abjuration", "arcane force", "battle magic: darkness", "battle magic: fire", "battle magic: frost",
         "battle magic: light", "battle magic: lightning", "battle magic: thunder",
         "bewitchment", "conjuration", "divination", "esoteric", "druidism",
         "illusion", "summoning", "thaumaturgy", "temple", "zoomancy", "occult: necromancer"
@@ -12924,7 +12959,7 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
     }
 
     if (prereq.structuralFlag === "battle_magic_dual_five") {
-        const schools = ["battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
+        const schools = ["battle magic: darkness", "battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
         let countFive = 0;
         schools.forEach(s => { if (getSkillTreeLevel(s) >= 5) countFive++; });
         if (countFive < 2) return { permitted: false, reason: "Requires ANY TWO BATTLE MAGIC (5)" };
@@ -12976,7 +13011,7 @@ function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
 
     // Check Battle Magic Level Requirements
     if (prereq.battleMagicLevel) {
-        const schools = ["battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
+        const schools = ["battle magic: darkness", "battle magic: fire", "battle magic: frost", "battle magic: light", "battle magic: lightning", "battle magic: thunder"];
         const passedBM = schools.some(s => getSkillTreeLevel(s) >= prereq.battleMagicLevel);
         if (!passedBM) {
             failedPrereqs.push(`ANY BATTLE MAGIC (${prereq.battleMagicLevel})`);
@@ -16701,7 +16736,7 @@ window.RACIAL_BONUSES_BY_RACE = {
         { skills: ["brutal_weapons"], amount: 1 },
     ],
     "Elf": [
-        { skills: ["battle_magic__fire","battle_magic__frost","battle_magic__light","battle_magic__lightning","battle_magic__thunder"], amount: 1 }, // Weapon Affinity (Battle Magic)
+        { skills: ["battle_magic__darkness","battle_magic__fire","battle_magic__frost","battle_magic__light","battle_magic__lightning","battle_magic__thunder"], amount: 1 }, // Weapon Affinity (Battle Magic)
     ],
     "Felivir": [
         { skills: ["pugil_weapons"], amount: 1 },
@@ -17776,10 +17811,18 @@ if (characterChoicesState.patronDeity !== "None") {
                 return f ? Math.floor((parseInt(f.value) || 0) / 6) >= 5 : false;
             };
 
-            const fire = checkLvl("battle-magic-fire"), frost = checkLvl("battle-magic-frost");
-            const light = checkLvl("battle-magic-light"), lightning = checkLvl("battle-magic-lightning");
+            const darkness = checkLvl("battle-magic-darkness");
+            const fire = checkLvl("battle-magic-fire");
+            const frost = checkLvl("battle-magic-frost");
+            const light = checkLvl("battle-magic-light");
+            const lightning = checkLvl("battle-magic-lightning");
             const thunder = checkLvl("battle-magic-thunder");
 
+            if (darkness && fire) activeStorms.push("Cinder Storm");
+            if (darkness && frost) activeStorms.push("Blackout Blizzard");
+            if (darkness && light) activeStorms.push("Eclipse");
+            if (darkness && lightning) activeStorms.push("Voidstorm");
+            if (darkness && thunder) activeStorms.push("Gloomthunder");
             if (fire && frost) activeStorms.push("Hailfire");
             if (fire && light) activeStorms.push("Solar Tempest");
             if (fire && lightning) activeStorms.push("Firestorm");
@@ -18744,6 +18787,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return f ? Math.floor((parseInt(f.value) || 0) / 6) >= 5 : false;
                 };
 
+                const darkness = checkLvl("battle-magic-darkness");
                 const fire = checkLvl("battle-magic-fire");
                 const frost = checkLvl("battle-magic-frost");
                 const light = checkLvl("battle-magic-light");
@@ -18751,6 +18795,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const thunder = checkLvl("battle-magic-thunder");
 
                 const eligibilityMap = {
+                    "cinder_storm": darkness && fire,
+                    "blackout_blizzard": darkness && frost,
+                    "eclipse": darkness && light,
+                    "voidstorm": darkness && lightning,
+                    "gloomthunder": darkness && thunder,
                     "hailfire": fire && frost,
                     "solar_tempest": fire && light,
                     "firestorm": fire && lightning,
@@ -20200,6 +20249,14 @@ if (localWrath) {
     if (getLvl("arcane-force") >= 4) defenses.push("Arcane Wall");
     if (getLvl("arcane-force") >= 5) attacks.push("Arcane Vortex");
 
+    const darknessLvl = getLvl("battle-magic-darkness");
+    if (darknessLvl >= 1) attacks.push("Orb of Darkness");
+    if (darknessLvl >= 2) attacks.push("Dark Mantle");
+    if (darknessLvl >= 3) attacks.push("Ball of Darkness");
+    if (darknessLvl >= 4) attacks.push("Veil of Darkness");
+    if (darknessLvl >= 5) attacks.push("Tendril of Darkness");
+    if (darknessLvl >= 6) attacks.push("Dark Strike");
+
     const fireLvl = getLvl("battle-magic-fire");
     if (fireLvl >= 1) attacks.push("Fire Sting");
     if (fireLvl >= 2) attacks.push("Fire Corona");
@@ -20322,6 +20379,7 @@ if (getLvl("mastery-battlemage") >= 1) {
     return f ? Math.floor((parseInt(f.value) || 0) / 6) >= 5 : false;
   };
 
+  const darkness      = checkElementLvl("battle-magic-darkness");
   const fire      = checkElementLvl("battle-magic-fire");
   const frost     = checkElementLvl("battle-magic-frost");
   const light     = checkElementLvl("battle-magic-light");
@@ -20329,6 +20387,11 @@ if (getLvl("mastery-battlemage") >= 1) {
   const thunder   = checkElementLvl("battle-magic-thunder");
 
   const stormMapping = [
+    { eligible: darkness && fire,       name: "Cinder Storm" },
+    { eligible: darkness && frost,       name: "Blackout Blizzard" },
+    { eligible: darkness && light,       name: "Eclipse" },
+    { eligible: darkness && lightning,   name: "Voidstorm" },
+    { eligible: darkness && thunder,     name: "Gloomthunder" },
     { eligible: fire && frost,       name: "Hailfire" },
     { eligible: fire && light,       name: "Solar Tempest" },
     { eligible: fire && lightning,   name: "Firestorm" },
