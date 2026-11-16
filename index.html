@@ -3587,11 +3587,11 @@ details[open] #skills-collapsed-summary {
         <ul>
             <li><strong>Dexterity (Dex):</strong> The character’s ability to move and physically react to things. It is used for Dexterity Saves, Avoidance, and governs or contributes to Shrewd and Thrust Attacks.</li>
 <br>
-            <li><strong>Health (Hel):</strong> The character’s ability to withstand the maelstrom which is life. It is thrice added to the character’s Vitality, and it is used for Health Saves and Vitality regeneration.</li>
+            <li><strong>Health (Hel):</strong> The character’s ability to withstand the maelstrom which is life. It is thrice added to the character’s Vitality, and it is used for Health Saves and Vitality Regen.</li>
 <br>
             <li><strong>Strength (Str):</strong> The character’s ability to physically manipulate his surroundings. It is twice added to the character’s Vitality, and it is used for Strength Saves, Athleticism skills, and governs or contributes to Brutal and Slash attacks. </li>
 <br>
-            <li><strong>Acuity (Act):</strong> The character’s focus and awareness. It is thrice added to the character’s Mana, and it is used for Acuity Saves, Observation skills, and Mana regeneration.</li>
+            <li><strong>Acuity (Act):</strong> The character’s focus and awareness. It is thrice added to the character’s Mana, and it is used for Acuity Saves, Observation skills, and Mana Regen.</li>
 <br>
             <li><strong>Intellect (Int):</strong> The character’s ability to learn and retain information. It is used for Intellect Saves and lore skills, and as a prerequisite for certain Cast Skills.</li>
 <br>
@@ -7613,7 +7613,7 @@ const itemRegistry = {
         itemSlot: "Charm",
         cost: 2000,
         rarity: 3,
-        description: "Grants one point of Regen when resting by a fire."
+        description: "Grants one point of Vitality and Mana Regen when resting by a fire."
     },
     "fons_lucas": {
         name: "Fons Lucas",
@@ -9875,7 +9875,7 @@ const tooltipRegistry = {
   },
   "ki_strike": {
     title: "Ki Strike",
-    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve Save to ignore the effect."
+    description: "You can throw a fistfull of ki at a target dealing Verve + Rank dice of damage; Crit results daze the target. You may channel this spell for up to a number of pulses equal to your Rank. If you do so, and if the attack hits, retroactively increase the Crit Multiplier by one per pulse channeled."
   },
   "necromancy": {
     title: "Necromancy",
@@ -10572,7 +10572,7 @@ const tooltipRegistry = {
   },
   "indomitable": {
     title: "Indomitable",
-    description: "Reroll all Blank Results once for all Verve saves and Confrontations."
+    description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Verve saves and Confrontations."
   },
   "true_abjuration": {
     title: "True Abjuration",
@@ -10985,7 +10985,7 @@ const tooltipRegistry = {
   "private_sanctum": {
     title: "Private Sanctum",
     actionType: "Cast",
-    description: "You can summon a doorway to your private sanctum. Only you can enter your private sanctum, and nothing not originally belonging to your private sanctum can be stored there. Likewise, nothing belonging to your private sanctum can be removed. Your private sanctum is primarily used for uninterrupted rest, doubling the amount of dice you roll for mana regeneration. Your private sanctum is dismissed the moment you leave it."
+    description: "You can summon a doorway to your private sanctum. Only you can enter your private sanctum, and nothing not originally belonging to your private sanctum can be stored there. Likewise, nothing belonging to your private sanctum can be removed. Your private sanctum is primarily used for uninterrupted rest, doubling the amount of dice you roll for Mana regeneration. Your private sanctum is dismissed the moment you leave it."
   },
   "phantom_steed": {
     title: "Phantom Steed",
@@ -11056,25 +11056,21 @@ const tooltipRegistry = {
     title: "Improved Sanctum",
     description: "Foes can no longer attempt a Verve save to attack you."
   },
-  "indomitable": {
-    title: "Indomitable",
-    description: "Reroll all Blank Results once for all Verve Saves and Confrontations."
-  },
   "true_abjuration": {
     title: "True Abjuration",
     description: "Abjure Energy and Abjure Wounds now provide immunity to their respective damage types, and Abjure Death now grants the target an additional <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to all Avoidance rolls."
   },
   "improved_force": {
     title: "Improved Force",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when casting Dispel Magic, Arcane Dart, Arcane Lock, Shockwave, or Arcane Vortex."
+    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
   "inexhaustible": {
     title: "Inexhaustible",
-    description: "You can reroll all Blank Results once on all Acuity Saves."
+    description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Mana Regen and all Acuity Saves to stay concious."
   },
   "true_force": {
     title: "True Force",
-    description: "You no longer change <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
+    description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with Arcane Dart or Vortex."
   },
 "hailfire": {
         title: "Hailfire",
@@ -11136,7 +11132,7 @@ const tooltipRegistry = {
   },
   "disciplined_caster": {
     title: "Disciplined Caster",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> for all Conjuration Skill Checks and attack rolls."
+    description: ""
   },
    "caustic_fog": {
     title: "Caustic Fog",
@@ -11271,13 +11267,13 @@ const tooltipRegistry = {
   "beast_form": {
     title: "Beast Form",
     actionType: "Cast",
-    description: "You transform into your beast form for one phase or until dismissed taking on all physical Aspects of that beast, but retaining your mental Aspects. The form you have, and will have throughout the game, is determined when you acquire this skill. Since casting requires speaking and sometimes gesticulating, the only beast forms capable of casting are those capable of speech, and they are limited to Words only.",
-    extras: [{"label": "Encænium", "text": "You transform into the dire version of your beast form (max physical Aspects)."}]
+    description: "You transform into your beast form for one phase or until dismissed taking on all physical Aspects of that beast, but retaining your mental Aspects. The form you have, and will have throughout the game, is determined when you acquire this skill. Since casting requires speaking and sometimes gesticulating, the only beast forms capable of casting are those capable of speech, and they are limited to Words only."
   },
   "telepathy": {
     title: "Telepathy",
     actionType: "Cast",
-    description: "You can insinuate your thoughts into the target’s mind."
+    description: "You can insinuate your thoughts into the target’s mind for anumber of rounds equal to your VER.",
+    extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
   },
   "keen": {
     title: "Keen",
@@ -11298,7 +11294,7 @@ const tooltipRegistry = {
   "obscuration": {
     title: "Obscuration",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You make a person or object immune to Detect Magic, Locate, and Analyze for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
+    description: "You make a person, object, or spell immune to Divination for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
     extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
   },
   "obscured_casting": {
@@ -11312,7 +11308,7 @@ const tooltipRegistry = {
   },
   "multi_shot": {
     title: "Multi-shot",
-    description: "You can loose up to four arrows at up to an equal number of hexes. Roll to shoot each arrow separately, and only one shot can be modified."
+    description: "You can loose up to four arrows at up to an equal number of hexes per arc-bow attack."
   },
   "ghost_arrow": {
     title: "Ghost Arrow",
@@ -11329,7 +11325,7 @@ const tooltipRegistry = {
   },
   "viper_strike": {
     title: "Viper Strike",
-    description: "Add one strike to all Pugil Strikes."
+    description: "Add one strike to all Pugil Attacks."
   },
   "learned": {
     title: "Learned",
@@ -11384,7 +11380,7 @@ const tooltipRegistry = {
 },
   "sweep_attack": {
     title: "Sweep Attack",
-   extras: [{"label": "Two-handed Weapons", "text": "You control your three frontal hexes out to close range with a massive sweeping attack. All targets roll avoidance at once. Those who avoid are pushed backwards outside of your range if possible. If an enemy fails to avoid, retroactively apply Advantage to the roll before adding your Bonus. If more than one enemy fail to avoid, only the first such enemy in your arc suffers damage, and the rest avoid instead."}]
+   extras: [{"label": "Two-handed Weapons", "text": "You control your three frontal hexes out to close range with a massive sweeping attack. All targets roll avoidance at once. Those who avoid are pushed backwards outside of your range if possible. If on or more enemies fail to avoid, retroactively change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> before adding your Bonus, and split the damage between the affected targets however you wish."}]
 },
   "skill_mastery": {
     title: "Skill Mastery",
@@ -11404,7 +11400,7 @@ const tooltipRegistry = {
   },
   "glyph": {
     title: "Glyph",
-    description: "You can cast all word spells as glyphs. A glyph is a magically inscribed Draconic symbol that glows faintly to the naked eye. You can place a glyph no farther than thrice your Verve hexes from you, and it is triggered the moment a target occupies its hex."
+    description: "You can cast all word spells as glyphs. A glyph is a magically inscribed Draconic symbol that glows faintly to the naked eye. You can place a glyph no farther than six times your Verve hexes from you, and it is triggered the moment a target occupies its hex."
   },
   "haste": {
     title: "Haste",
@@ -11417,17 +11413,16 @@ const tooltipRegistry = {
   },
   "fortitudinous": {
     title: "Fortitudinous",
-    description: "You can reroll all Blank Results once on all Health Saves."
+    description: "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Vitality Regen and all Health Saves to stay consious."
   },
   "mana_sickness": {
     title: "Mana Sickness",
-    description: "Upon acquisition of this skill and each time you Rank up—or every six experience points above Rank VI—deduct one point each from Dexterity, Health, Strength, and Intellect, and gain that many points of Verve. When your Strength, Dexterity, Health, or Intellect reaches zero, lose that aspect; when all four reach zero, you become a Manathrall."
+    description: "Upon acquisition of this skill, and every week thereafter unless treated, deduct one point each from Dexterity, Health, Strength, and Intellect, and gain that many points of Verve. When your Strength, Dexterity, Health, or Intellect reaches zero, lose that aspect; when all four reach zero, you become a Manathrall."
   },
   "animate_dead": {
     title: "Animate Dead",
     actionType: "Cast",
-    description: "You can animate the dead by channeling an amount of Mana into one or more corpses. You decide how to distribute a number of Aspect Points equal to the Mana channeled between the Dexterity, Strength, and Acuity Aspects of the animated dead. The undead you raise understand your simple commands and are loyal to you until they are destroyed. You can control a number of undead no greater than your Rank at any given time.",
-    extras: [{"label": "Description [Encænium]", "text": "You can animate the dead by channeling an amount of Mana into one or more corpses..."}]
+    extras: [{"label": "Encænium", "text": "You can animate the dead by channeling an amount of Mana into one or more corpses. You decide how to distribute a number of Aspect Points equal to the Mana channeled between the Dexterity, Strength, and Acuity Aspects of the animated dead. The undead you raise understand your simple commands and are loyal to you until they are destroyed. You can control a number of undead no greater than your Rank at any given time."}]
   },
   "enthrall_undead": {
     title: "Enthrall Undead",
@@ -11442,12 +11437,11 @@ const tooltipRegistry = {
   "rend_soul": {
     title: "Rend Soul",
     actionType: "Cast",
-    description: "You can split your soul and prevent the disembodied half from returning by trapping it in the soulstone then binding it to the animated corpse. Then, upon the release of your soul from your body, you will awaken in control of your new vessel. The caster retains his three spiritual Aspects but takes on the Strength and Dexterity of his new form.",
-    extras: [{"label": "Description [Rite]", "text": "You have mastered death. To bring this skill into effect you must secure an empty soulstone and animate a corpse..."}]
+    extras: [{"label": "Rite", "text": "You can split your soul and prevent the disembodied half from returning by trapping it in the soulstone then binding it to the animated corpse. Then, upon the release of your soul from your body, you will awaken in control of your new vessel. The caster retains his three spiritual Aspects but takes on the Strength and Dexterity of his new form."}]
   },
   "beguiling": {
     title: "Beguiling",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Verve Checks."
+    description: ""
   },
 "curse_of_the_evil_eye": {
     title: "Curse of the Evil Eye [Word]",
@@ -11522,7 +11516,7 @@ const tooltipRegistry = {
   },
   "martial_training": {
     title: "Martial Training",
-    description: "You can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> when attacking with one-handed Brutal or Shrewd weapons."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all non-cast attacks."
   },
   "meditative_healing": {
     title: "Meditative Healing [Encænium]",
@@ -11549,7 +11543,8 @@ const tooltipRegistry = {
   },
   "supreme_training": {
     title: "Supreme Training",
-    description: "Evocati can change all Blank Results to <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all melee attacks and Avoidance rolls."
+    summary: "Evocati gain all of the following combat skills:",
+    includes: ["fortitudinous", "killing_machine", "martial_training", "spatial_awareness", "wraithguard"],
   },
   "dissever": {
     title: "Dissever",
