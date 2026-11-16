@@ -11165,9 +11165,11 @@ const tooltipRegistry = {
     title: "Largest Effect",
     description: "The diameter and height of your spellstorm increases to seven-hexes."
   },
-  "disciplined_caster": {
-    title: "Disciplined Caster",
-    description: ""
+  "transmutation": {
+    title: "Transmutation",
+    actionType: "Cast",
+    description: "You can change up to your Rank pounds of non-living and non-magical matter into the matter of one of your Disciplines.",
+    extras: [{ label: "Rite", text: "You affect up to your Rank Hexes of matter." }]
   },
    "caustic_fog": {
     title: "Caustic Fog",
@@ -12326,7 +12328,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "mastery: conjuror": {
         description: "In-depth mastery of weaving matter from the Aether.",
-        levels:    ["Disciplined Caster", "Spell Fusion"
+        levels:    ["Spell Fusion", "Transmutation"
     ]
 },
     "mastery: deific boon": {
@@ -17884,7 +17886,7 @@ else if (tree.key === "mastery: conjuror") {
         ? ` ${activeFusionsList[0]}` 
         : "Spell Fusion (Choose your conjuration disciplines)";
 
-    const conjSkills = ["Disciplined Caster", activeFusionText];
+    const conjSkills = [activeFusionText, "Transmutation"];
 
     for (let i = 0; i < tree.level; i++) {
         itemsListHtml += `<li style="margin-bottom: 4px; font-size: 0.88rem; color: #4e3e33; font-weight: 500; list-style-type: square;"><span style="color: #7d3c1b; font-weight: bold; font-size: 0.75rem; margin-right: 4px;">[Lvl ${i + 1}]</span> ${conjSkills[i]}</li>`;
@@ -20419,9 +20421,10 @@ if (getLvl("mastery-battlemage") >= 1) {
     if (getLvl("mastery-battlemage") == 2) attacks.push("Larger Effect");
     if (getLvl("mastery-battlemage") >= 3) attacks.push("Largest Effect");
 
-    if (getLvl("mastery-conjuror") >= 1) attacks.push("Disciplined Caster");
-    if (getLvl("mastery-conjuror") >= 2) {
+    if (getLvl("mastery-conjuror") >= 1) {
       let localFusion = "Spell Fusion";
+    if (getLvl("mastery-conjuror") >= 2) attacks.push("Transmutation");
+
 
   const dList = characterChoicesState?.conjurationDisciplines || ["None", "None"];
   const elementA = dList[0] ? dList[0].trim() : "None";
