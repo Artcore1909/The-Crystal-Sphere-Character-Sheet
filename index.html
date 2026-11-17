@@ -51,29 +51,47 @@
 /* =========================================================================
 🌙 SCOPED LAYERED DARK THEME
 ========================================================================= */
-        body.theme-dark {
+body.theme-dark {
             background-color: #121212 !important;
             color: #e2d7c5 !important;
             --dark-bg-deep: #121212;
             --dark-bg-base: #181412;
             --dark-bg-card: #221c19;
+            --dark-bg-input: #121212;
             --dark-bg-hover: #2e2622;
             --dark-border: #423730;
             --dark-text: #e2d7c5;
             --dark-text-muted: #9e9182;
             --dark-accent: #d4a359;
+            --primary-red: #423730;
+            --border-light: #423730;
+            --border-dark: #423730;
+            --accent-gold: #d4a359;
             scrollbar-color: var(--dark-border) var(--dark-bg-deep);
         }
 
         /* 1. Major Containers & Panels (Base Layer) */
         body.theme-dark .container,
-        body.theme-dark .builder-panel,
         body.theme-dark .skills-tab-container,
         body.theme-dark .char-modal,
         body.theme-dark #sheet-settings-dropdown {
             background-color: var(--dark-bg-base) !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
+        }
+        body.theme-dark .builder-panel {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .aspect-card .builder-panel {
+            background-color: var(--dark-bg-hover) !important;
+        }
+        body.theme-dark .char-modal > div:first-child button {
+            color: var(--dark-text-muted) !important;
+        }
+        body.theme-dark .char-modal > div:first-child button:hover {
+            color: var(--dark-accent) !important;
         }
 /* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
         body.theme-dark [id^="compendium-inspector-card-"],
@@ -82,6 +100,46 @@
             background-color: var(--dark-bg-card) !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
+        }
+/* 1b. Floating Windows, Tooltips & Popups */
+        body.theme-dark .tcs-tooltip,
+        body.theme-dark .tcs-floating-window,
+        body.theme-dark [id^="tcs-"] {
+            background-color: var(--dark-bg-card) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .tcs-member {
+            background-color: var(--dark-bg-base) !important;
+            border-color: var(--dark-border) !important;
+            border-left-color: var(--dark-accent) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .tcs-close-btn {
+            background-color: var(--dark-bg-deep) !important;
+            border-color: var(--dark-border) !important;
+            color: var(--dark-text) !important;
+        }
+        body.theme-dark .tcs-close-btn:hover {
+            background-color: var(--dark-bg-hover) !important;
+            color: var(--dark-accent) !important;
+        }
+        body.theme-dark .tcs-title {
+            color: var(--dark-accent) !important;
+            border-color: var(--dark-border) !important;
+        }
+        body.theme-dark .tcs-member-title,
+        body.theme-dark .tcs-meta,
+        body.theme-dark .tcs-desc,
+        body.theme-dark .tcs-extra {
+            color: var(--dark-text) !important;
+            border-color: var(--dark-border) !important;
+        }
+        body.theme-dark .tcs-tooltip strong,
+        body.theme-dark .tcs-floating-window strong,
+        body.theme-dark .tcs-meta strong,
+        body.theme-dark .tcs-extra strong {
+            color: var(--dark-accent) !important;
         }
 
         /* 2. Cards, Items, & Components (Pop Layer) */
@@ -98,9 +156,7 @@
         body.theme-dark .pnp-sub-defenses-panel,
         body.theme-dark .pnp-weapon-slot-row,
         body.theme-dark .pnp-gear-slot-row,
-        body.theme-dark .pnp-subpace-field,
         body.theme-dark .locus-slot-card,
-        body.theme-dark .placeholder-card,
         body.theme-dark .mount-sheet-wrapper > div,
         body.theme-dark #pets-master-container > div,
         body.theme-dark .extra-training-box,
@@ -127,6 +183,16 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15) !important;
         }
 
+        body.theme-dark .tab-navigation {
+            border-color: var(--dark-border) !important;
+        }
+
+        body.theme-dark .pnp-subpace-field {
+            background-color: transparent !important;
+            border-color: var(--dark-border) !important;
+            box-shadow: none !important;
+        }
+
         body.theme-dark #compendium-creature-select option {
             background-color: var(--dark-bg-card) !important;
             color: var(--dark-text) !important;
@@ -143,21 +209,6 @@
         body.theme-dark .compendium-accordion button:hover {
             background-color: var(--dark-bg-hover) !important;
             color: var(--dark-accent) !important;
-        }
-/* 1b. Floating Windows, Tooltips & Popups */
-        body.theme-dark .tcs-tooltip,
-        body.theme-dark .tcs-floating-window,
-        body.theme-dark [id^="tcs-"] {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .tcs-title {
-            color: var(--dark-accent) !important;
-        }
-        body.theme-dark .tcs-meta,
-        body.theme-dark .tcs-desc {
-            color: var(--dark-text) !important;
         }
 /* 2b. Catch language pills / tags and hardcoded inline backgrounds */
         body.theme-dark .aspect-card div[style*="background"],
@@ -187,6 +238,13 @@
             color: var(--dark-text-muted) !important;
         }
 
+        body.theme-dark .placeholder-card,
+        body.theme-dark #active-unlocked-skills-column .aspect-card {
+            background-color: var(--dark-bg-base) !important;
+            border-color: var(--dark-border) !important;
+            box-shadow: none !important;
+        }
+
         /* 3. Inputs & Form Controls */
         body.theme-dark input:not([readonly]),
         body.theme-dark select,
@@ -206,23 +264,30 @@
         }
 /* Override inline-styled buttons inside the settings dropdown */
         body.theme-dark #sheet-settings-dropdown button,
-        body.theme-dark .pnp-edit-btn,
         body.theme-dark .builder-group div[style*="background"],
         body.theme-dark .builder-panel div[style*="background"],
         body.theme-dark div[style*="background: #fff"],
         body.theme-dark div[style*="background:#fff"],
         body.theme-dark div[style*="background: #ffffff"],
         body.theme-dark div[style*="background:#ffffff"],
-        body.theme-dark .builder-group,
-        body.theme-dark .builder-group,
         body.theme-dark .qualities-checklist {
             background-color: var(--dark-bg-card) !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
         }
 
+        body.theme-dark .pnp-edit-btn {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: var(--dark-text-muted) !important;
+        }
+        body.theme-dark .pnp-edit-btn:hover {
+            background-color: transparent !important;
+            color: var(--dark-accent) !important;
+        }
+
         body.theme-dark .builder-group {
-            background-color: var(--dark-bg-card) !important;
+            background-color: transparent !important;
             border-color: var(--dark-border) !important;
             color: var(--dark-text) !important;
         }
@@ -232,8 +297,7 @@
             border-color: var(--dark-border) !important;
         }
 
-        body.theme-dark #sheet-settings-dropdown button:hover,
-        body.theme-dark .pnp-edit-btn:hover {
+        body.theme-dark #sheet-settings-dropdown button:hover {
             background-color: var(--dark-bg-hover) !important;
             color: var(--dark-accent) !important;
         }
@@ -301,19 +365,18 @@
             background-color: var(--dark-bg-card) !important;
             color: var(--dark-text) !important;
         }
+        body.theme-dark .pnp-offensive-writein-list > div,
+        body.theme-dark #pnp-writein-attacks > div {
+            border-color: var(--dark-border) !important;
+        }
 
         /* 6. Typography & Text Hierarchy */
         body.theme-dark label,
         body.theme-dark span,
         body.theme-dark div,
         body.theme-dark p,
-        body.theme-dark h1,
-        body.theme-dark h2,
-        body.theme-dark h3,
-        body.theme-dark h4,
         body.theme-dark li,
         body.theme-dark table.game-data td,
-        body.theme-dark table.game-data th,
         body.theme-dark .pnp-header-field span,
         body.theme-dark .pnp-aspect-label,
         body.theme-dark .pnp-pool-val,
@@ -321,14 +384,24 @@
         body.theme-dark .skill-title,
         body.theme-dark .dice-pool-output,
         body.theme-dark .skill-name-lbl,
+        body.theme-dark .aspect-static {
+            color: var(--dark-text) !important;
+        }
+
+        body.theme-dark h1,
+        body.theme-dark h2,
+        body.theme-dark h3,
+        body.theme-dark h4,
         body.theme-dark .skills-section-header span,
         body.theme-dark .pnp-resource-header,
         body.theme-dark .pnp-col-header,
         body.theme-dark .pnp-section-title,
-        body.theme-dark .aspect-static,
         body.theme-dark .char-modal h3,
-        body.theme-dark .section-header {
-            color: var(--dark-text) !important;
+        body.theme-dark .section-header,
+        body.theme-dark .enchant-group-title,
+        body.theme-dark .inventory-column-title {
+            color: var(--dark-accent) !important;
+            border-color: var(--dark-border) !important;
         }
 
         body.theme-dark .hint,
@@ -341,6 +414,10 @@
         body.theme-dark .aspect-card .hint,
         body.theme-dark #tab-bazaar li div span:last-child {
             color: var(--dark-text-muted) !important;
+        }
+
+        body.theme-dark .pnp-empty-line {
+            border-color: var(--dark-border) !important;
         }
 
 /* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
@@ -402,6 +479,879 @@
         body.theme-dark img[src$="Critenc.png"]  { content: url("images/CritencWhite.png"); }
         body.theme-dark img[src$="Skillenc.png"] { content: url("images/SkillencWhite.png"); }
         body.theme-dark img[src$="Wyrdenc.png"]  { content: url("images/WyrdencWhite.png"); }
+
+/* =========================================================================
+ SCOPED LAYERED CRYSTALLINE THEME
+========================================================================= */
+body.theme-crystalline {
+            background-color: #121e2e !important;
+            color: #edf5fc !important;
+            --crystalline-bg-deep: #121e2e;
+            --crystalline-bg-base: #18273b;
+            --crystalline-bg-card: #1f334d;
+            --crystalline-bg-input: #121e2e;
+            --crystalline-bg-hover: #2a4466;
+            --crystalline-border: #4d729e;
+            --crystalline-text: #edf5fc;
+            --crystalline-text-muted: #a8c3df;
+            --crystalline-accent: #8fd3f4;
+            --primary-red: #4d729e;
+            --border-light: #4d729e;
+            --border-dark: #4d729e;
+            --accent-gold: #8fd3f4;
+            scrollbar-color: var(--crystalline-border) var(--crystalline-bg-deep);
+        }
+
+        /* 1. Major Containers & Panels (Base Layer) */
+        body.theme-crystalline .container,
+        body.theme-crystalline .skills-tab-container,
+        body.theme-crystalline .char-modal,
+        body.theme-crystalline #sheet-settings-dropdown {
+            background-color: var(--crystalline-bg-base) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .builder-panel {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .aspect-card .builder-panel {
+            background-color: var(--crystalline-bg-hover) !important;
+        }
+body.theme-crystalline .char-modal > div:first-child button {
+            color: var(--crystalline-text-muted) !important;
+        }
+        body.theme-crystalline .char-modal > div:first-child button:hover {
+            color: var(--crystalline-accent) !important;
+        }
+/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
+        body.theme-crystalline [id^="compendium-inspector-card-"],
+        body.theme-crystalline [id^="compendium-creature-sheet-container-"],
+        body.theme-crystalline #compendium-inspector-wrapper div[style*="background"] {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+/* 1b. Floating Windows, Tooltips & Popups */
+        body.theme-crystalline .tcs-tooltip,
+        body.theme-crystalline .tcs-floating-window,
+        body.theme-crystalline [id^="tcs-"] {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .tcs-member {
+            background-color: var(--crystalline-bg-base) !important;
+            border-color: var(--crystalline-border) !important;
+            border-left-color: var(--crystalline-accent) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .tcs-close-btn {
+            background-color: var(--crystalline-bg-deep) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .tcs-close-btn:hover {
+            background-color: var(--crystalline-bg-hover) !important;
+            color: var(--crystalline-accent) !important;
+        }
+        body.theme-crystalline .tcs-title {
+            color: var(--crystalline-accent) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+        body.theme-crystalline .tcs-member-title,
+        body.theme-crystalline .tcs-meta,
+        body.theme-crystalline .tcs-desc,
+        body.theme-crystalline .tcs-extra {
+            color: var(--crystalline-text) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+        body.theme-crystalline .tcs-tooltip strong,
+        body.theme-crystalline .tcs-floating-window strong,
+        body.theme-crystalline .tcs-meta strong,
+        body.theme-crystalline .tcs-extra strong {
+            color: var(--crystalline-accent) !important;
+        }
+
+        /* 2. Cards, Items, & Components (Pop Layer) */
+        body.theme-crystalline .aspect-card,
+        body.theme-crystalline .enchant-group-box,
+        body.theme-crystalline .inventory-column-card,
+        body.theme-crystalline .pnp-resource-card,
+        body.theme-crystalline .pnp-offensive-skills-card,
+        body.theme-crystalline table.game-data,
+        body.theme-crystalline .skill-item,
+        body.theme-crystalline .skill-body,
+        body.theme-crystalline .skill-header,
+        body.theme-crystalline .pnp-header-bar,
+        body.theme-crystalline .pnp-sub-defenses-panel,
+        body.theme-crystalline .pnp-weapon-slot-row,
+        body.theme-crystalline .pnp-gear-slot-row,
+        body.theme-crystalline .locus-slot-card,
+        body.theme-crystalline .mount-sheet-wrapper > div,
+        body.theme-crystalline #pets-master-container > div,
+        body.theme-crystalline .extra-training-box,
+        body.theme-crystalline [id^="compendium-inspector-card-"],
+        body.theme-crystalline #encounter-charts-section,
+        body.theme-crystalline #encounter-charts-section .skill-item,
+        body.theme-crystalline #encounter-charts-section .skill-body,
+        body.theme-crystalline #encounter-charts-section .skill-header,
+        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-item,
+        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-body,
+        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-header,
+        body.theme-crystalline #tab-skills .skill-accordion .skill-item,
+        body.theme-crystalline #tab-skills .skill-accordion .skill-body,
+        body.theme-crystalline #tab-skills .skill-accordion .skill-header,
+        body.theme-crystalline #tab-compendium .skill-accordion .skill-item,
+        body.theme-crystalline #tab-compendium .skill-accordion .skill-body,
+        body.theme-crystalline #tab-compendium .skill-accordion .skill-header,
+        body.theme-crystalline #encounter-display-grid > div,
+        body.theme-crystalline .locus-builder,
+        body.theme-crystalline .tab-btn {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+            box-shadow: 0 4px 6px -1px rgba(8, 16, 28, 0.4), 0 2px 4px -1px rgba(143, 211, 244, 0.12) !important;
+        }
+
+        body.theme-crystalline .tab-navigation {
+            border-color: var(--crystalline-border) !important;
+        }
+
+        body.theme-crystalline .pnp-subpace-field {
+            background-color: transparent !important;
+            border-color: var(--crystalline-border) !important;
+            box-shadow: none !important;
+        }
+
+        body.theme-crystalline #compendium-creature-select option {
+            background-color: var(--crystalline-bg-card) !important;
+            color: var(--crystalline-text) !important;
+        }
+
+        body.theme-crystalline #compendium-inspector-wrapper button,
+        body.theme-crystalline .compendium-accordion button {
+            background-color: var(--crystalline-bg-card) !important;
+            border: 1px solid var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        
+        body.theme-crystalline #compendium-inspector-wrapper button:hover,
+        body.theme-crystalline .compendium-accordion button:hover {
+            background-color: var(--crystalline-bg-hover) !important;
+            color: var(--crystalline-accent) !important;
+        }
+/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
+        body.theme-crystalline .aspect-card div[style*="background"],
+        body.theme-crystalline .skill-item div[style*="background"] {
+            background-color: var(--crystalline-bg-deep) !important;
+            color: var(--crystalline-text) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+
+        /* Specific catch for language badges/pills if they use a class */
+        body.theme-crystalline span[style*="background"],
+        body.theme-crystalline div[style*="background: #eae6df"] {
+            background-color: var(--crystalline-bg-input) !important;
+            color: var(--crystalline-text) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+/* 2c. Weapon rows and Locus tags */
+        body.theme-crystalline .pnp-static-row {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+
+        body.theme-crystalline .locus-ench-tag {
+            background-color: var(--crystalline-bg-input) !important;
+            border: 1px solid var(--crystalline-border) !important;
+            color: var(--crystalline-text-muted) !important;
+        }
+
+        body.theme-crystalline .placeholder-card,
+        body.theme-crystalline #active-unlocked-skills-column .aspect-card {
+            background-color: var(--crystalline-bg-base) !important;
+            border-color: var(--crystalline-border) !important;
+            box-shadow: none !important;
+        }
+
+        /* 3. Inputs & Form Controls */
+        body.theme-crystalline input:not([readonly]),
+        body.theme-crystalline select,
+        body.theme-crystalline textarea,
+        body.theme-crystalline .roll-input,
+        body.theme-crystalline .pnp-gear-dropdown,
+        body.theme-crystalline .pnp-pool-input,
+        body.theme-crystalline .locus-builder-select,
+        body.theme-crystalline #theme-selector,
+        body.theme-crystalline .builder-btn,
+        body.theme-crystalline .builder-btn-cancel,
+        body.theme-crystalline input[readonly],
+        body.theme-crystalline .aspect-card input[readonly] {
+            background-color: var(--crystalline-bg-deep) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+/* Override inline-styled buttons inside the settings dropdown */
+        body.theme-crystalline #sheet-settings-dropdown button,
+        body.theme-crystalline .builder-group div[style*="background"],
+        body.theme-crystalline .builder-panel div[style*="background"],
+        body.theme-crystalline div[style*="background: #fff"],
+        body.theme-crystalline div[style*="background:#fff"],
+        body.theme-crystalline div[style*="background: #ffffff"],
+        body.theme-crystalline div[style*="background:#ffffff"],
+        body.theme-crystalline .qualities-checklist {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+
+        body.theme-crystalline .pnp-edit-btn {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: var(--crystalline-text-muted) !important;
+        }
+        body.theme-crystalline .pnp-edit-btn:hover {
+            background-color: transparent !important;
+            color: var(--crystalline-accent) !important;
+        }
+
+        body.theme-crystalline .builder-group {
+            background-color: transparent !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+
+        body.theme-crystalline #custom-weapon-fields-weapon-0 div[style*="border"],
+        body.theme-crystalline [id^="custom-weapon-fields-"] div[style*="border"] {
+            border-color: var(--crystalline-border) !important;
+        }
+
+        body.theme-crystalline #sheet-settings-dropdown button:hover {
+            background-color: var(--crystalline-bg-hover) !important;
+            color: var(--crystalline-accent) !important;
+        }
+
+        /* 4. Hovers & Active Interactive States */
+        body.theme-crystalline table.game-data th,
+        body.theme-crystalline .skill-header:hover,
+        body.theme-crystalline .tab-btn:hover,
+        body.theme-crystalline .tab-btn.active,
+        body.theme-crystalline button[title="Sheet Settings"]:hover,
+        body.theme-crystalline #sheet-settings-dropdown button:hover,
+        body.theme-crystalline div[style*="background: #faf3e8"],
+        body.theme-crystalline [id^="compendium-inspector-card-"] button,
+        body.theme-crystalline .builder-btn:hover,
+        body.theme-crystalline .builder-btn-cancel:hover,
+        body.theme-crystalline .builder-btn-save:hover {
+            background-color: var(--crystalline-bg-hover) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-accent) !important;
+        }
+
+        body.theme-crystalline .builder-btn-save {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+
+        /* 5. Tables & Utility Rows */
+        body.theme-crystalline .char-list-item {
+            background-color: var(--crystalline-bg-card) !important;
+            border-bottom-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+        }
+        body.theme-crystalline .char-list-item:nth-child(even),
+        body.theme-crystalline table.game-data tr:nth-child(even) {
+            background-color: rgba(200, 226, 250, 0.04) !important;
+        }
+        body.theme-crystalline table.game-data tr:hover {
+            background-color: rgba(143, 211, 244, 0.1) !important;
+        }
+        body.theme-crystalline .sticky-xp-footer {
+            background-color: rgba(24, 39, 59, 0.9) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+        body.theme-crystalline .racial-bonus,
+        body.theme-crystalline .racial-penalty {
+            background-color: var(--crystalline-bg-card) !important;
+            color: var(--crystalline-text) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+        body.theme-crystalline button[title="Sheet Settings"],
+        body.theme-crystalline .btn-sm {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+            color: var(--crystalline-text) !important;
+            box-shadow: 0 1px 3px rgba(8, 16, 28, 0.4) !important;
+        }
+        body.theme-crystalline #conditional-modifiers:not(:empty) {
+            background-color: var(--crystalline-bg-card) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+        body.theme-crystalline .pnp-section-divider,
+        body.theme-crystalline .pnp-octagon {
+            border-color: var(--crystalline-border) !important;
+            background-color: var(--crystalline-bg-card) !important;
+            color: var(--crystalline-text) !important;
+        }
+body.theme-crystalline .pnp-offensive-writein-list > div,
+        body.theme-crystalline #pnp-writein-attacks > div {
+            border-color: var(--crystalline-border) !important;
+        }
+
+        /* 6. Typography & Text Hierarchy */
+        body.theme-crystalline label,
+        body.theme-crystalline span,
+        body.theme-crystalline div,
+        body.theme-crystalline p,
+        body.theme-crystalline li,
+        body.theme-crystalline table.game-data td,
+        body.theme-crystalline .pnp-header-field span,
+        body.theme-crystalline .pnp-aspect-label,
+        body.theme-crystalline .pnp-pool-val,
+        body.theme-crystalline .pnp-subpace-field span,
+        body.theme-crystalline .skill-title,
+        body.theme-crystalline .dice-pool-output,
+        body.theme-crystalline .skill-name-lbl,
+        body.theme-crystalline .aspect-static {
+            color: var(--crystalline-text) !important;
+        }
+
+        body.theme-crystalline h1,
+        body.theme-crystalline h2,
+        body.theme-crystalline h3,
+        body.theme-crystalline h4,
+        body.theme-crystalline .skills-section-header span,
+        body.theme-crystalline .pnp-resource-header,
+        body.theme-crystalline .pnp-col-header,
+        body.theme-crystalline .pnp-section-title,
+        body.theme-crystalline .char-modal h3,
+        body.theme-crystalline .section-header,
+        body.theme-crystalline .pnp-empty-line,
+       body.theme-crystalline .enchant-group-title,
+        body.theme-crystalline .inventory-column-title {
+            color: var(--crystalline-accent) !important;
+            border-color: var(--crystalline-border) !important;
+        }
+
+        body.theme-crystalline .hint,
+        body.theme-crystalline .pnp-empty-line,
+        body.theme-crystalline .pnp-resource-field label,
+        body.theme-crystalline .pnp-subpace-field label,
+        body.theme-crystalline .pnp-header-field label,
+        body.theme-crystalline .placeholder-card,
+        body.theme-crystalline #active-unlocked-skills-column .aspect-card,
+        body.theme-crystalline .aspect-card .hint,
+        body.theme-crystalline #tab-bazaar li div span:last-child {
+            color: var(--crystalline-text-muted) !important;
+        }
+
+/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
+        body.theme-crystalline strong[style*="color"],
+        body.theme-crystalline span[style*="color"],
+        body.theme-crystalline div[style*="color"] {
+            color: var(--crystalline-text) !important;
+        }
+
+        /* If specific labels need to stay muted/accented */
+        body.theme-crystalline span[style*="color: #7c6f64"],
+        body.theme-crystalline strong[style*="color: #5c1d1d"] {
+            color: var(--crystalline-text-muted) !important;
+        }
+
+        /* 7. Scoped Dark Theme Checkboxes & Scrollbars */
+        body.theme-crystalline ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        body.theme-crystalline ::-webkit-scrollbar-track {
+            background: var(--crystalline-bg-deep);
+        }
+        body.theme-crystalline ::-webkit-scrollbar-thumb {
+            background: var(--crystalline-border);
+            border-radius: 4px;
+        }
+        body.theme-crystalline input[type="checkbox"] {
+            width: 13px !important;
+            height: 13px !important;
+            min-width: 13px !important;
+            min-height: 13px !important;
+            background-color: var(--crystalline-bg-deep) !important;
+            border: 1px solid var(--crystalline-border) !important;
+            border-radius: 2px !important;
+            margin: 0 4px !important;
+            vertical-align: middle !important;
+            cursor: pointer;
+            /* Filters the native checkbox to match dark mode aesthetics */
+            filter: invert(1) hue-rotate(180deg) brightness(0.7);
+        }
+        body.theme-crystalline input[type="checkbox"]:checked {
+            background-color: var(--crystalline-bg-hover) !important;
+            border-color: var(--crystalline-accent) !important;
+            accent-color: var(--crystalline-accent);
+        }
+        body.theme-crystalline input[type="checkbox"]:checked::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 3px;
+            height: 7px;
+            border: solid var(--crystalline-text);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        body.theme-crystalline img[src$="Hitenc.png"]   { content: url("images/HitencWhite.png"); }
+        body.theme-crystalline img[src$="Critenc.png"]  { content: url("images/CritencWhite.png"); }
+        body.theme-crystalline img[src$="Skillenc.png"] { content: url("images/SkillencWhite.png"); }
+        body.theme-crystalline img[src$="Wyrdenc.png"]  { content: url("images/WyrdencWhite.png"); }
+
+/* =========================================================================
+ SCOPED LAYERED PALADINIC THEME
+========================================================================= */
+body.theme-paladinic {
+            background-color: #b8c2ce !important;
+            color: #1e242b !important;
+            --paladinic-bg-deep: #b8c2ce;
+            --paladinic-bg-base: #d0d8e2;
+            --paladinic-bg-card: #e3e9f0;
+            --paladinic-bg-row: #edf1f6;
+            --paladinic-bg-input: #f7f9fc;
+            --paladinic-bg-hover: #efe6cd;
+            --paladinic-border: #b88e32;
+            --paladinic-text: #1e242b;
+            --paladinic-text-muted: #4d5764;
+            --paladinic-accent: #8f6610;
+            --primary-red: #b88e32;
+            --border-light: #b88e32;
+            --border-dark: #b88e32;
+            --accent-gold: #8f6610;
+            scrollbar-color: var(--paladinic-border) var(--paladinic-bg-deep);
+        }
+
+        /* 1. Major Containers & Panels (Base Layer) */
+        body.theme-paladinic .container,
+        body.theme-paladinic .skills-tab-container,
+        body.theme-paladinic .char-modal,
+        body.theme-paladinic #sheet-settings-dropdown {
+            background-color: var(--paladinic-bg-base) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+body.theme-paladinic .builder-panel {
+            background-color: var(--paladinic-bg-card) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .aspect-card .builder-panel {
+            background-color: var(--paladinic-bg-row) !important;
+        }
+body.theme-paladinic .char-modal > div:first-child button {
+            color: var(--paladinic-text-muted) !important;
+        }
+        body.theme-paladinic .char-modal > div:first-child button:hover {
+            color: var(--paladinic-accent) !important;
+        }
+/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
+        body.theme-paladinic [id^="compendium-inspector-card-"],
+        body.theme-paladinic [id^="compendium-creature-sheet-container-"],
+        body.theme-paladinic #compendium-inspector-wrapper div[style*="background"] {
+            background-color: var(--paladinic-bg-card) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+/* 1b. Floating Windows, Tooltips & Popups */
+        body.theme-paladinic .tcs-tooltip,
+        body.theme-paladinic .tcs-floating-window,
+        body.theme-paladinic [id^="tcs-"] {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .tcs-member {
+            background-color: var(--paladinic-bg-card) !important;
+            border-color: var(--paladinic-border) !important;
+            border-left-color: var(--paladinic-accent) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .tcs-close-btn {
+            background-color: var(--paladinic-bg-input) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .tcs-close-btn:hover {
+            background-color: var(--paladinic-bg-hover) !important;
+            color: var(--paladinic-accent) !important;
+        }
+        body.theme-paladinic .tcs-title {
+            color: var(--paladinic-accent) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+        body.theme-paladinic .tcs-member-title,
+        body.theme-paladinic .tcs-meta,
+        body.theme-paladinic .tcs-desc,
+        body.theme-paladinic .tcs-extra {
+            color: var(--paladinic-text) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+        body.theme-paladinic .tcs-tooltip strong,
+        body.theme-paladinic .tcs-floating-window strong,
+        body.theme-paladinic .tcs-meta strong,
+        body.theme-paladinic .tcs-extra strong {
+            color: var(--paladinic-accent) !important;
+        }
+        /* 2. Cards, Items, & Components (Pop Layer) */
+        body.theme-paladinic .aspect-card,
+        body.theme-paladinic .enchant-group-box,
+        body.theme-paladinic .inventory-column-card,
+        body.theme-paladinic .pnp-resource-card,
+        body.theme-paladinic .pnp-offensive-skills-card,
+        body.theme-paladinic table.game-data,
+        body.theme-paladinic .skill-item,
+        body.theme-paladinic .skill-body,
+        body.theme-paladinic .skill-header,
+        body.theme-paladinic .pnp-header-bar,
+        body.theme-paladinic .pnp-sub-defenses-panel,
+        body.theme-paladinic .locus-slot-card,
+        body.theme-paladinic .placeholder-card,
+        body.theme-paladinic .mount-sheet-wrapper > div,
+        body.theme-paladinic #pets-master-container > div,
+        body.theme-paladinic .extra-training-box,
+        body.theme-paladinic [id^="compendium-inspector-card-"],
+        body.theme-paladinic #encounter-charts-section,
+        body.theme-paladinic #encounter-charts-section .skill-item,
+        body.theme-paladinic #encounter-charts-section .skill-body,
+        body.theme-paladinic #encounter-charts-section .skill-header,
+        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-item,
+        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-body,
+        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-header,
+        body.theme-paladinic #tab-skills .skill-accordion .skill-item,
+        body.theme-paladinic #tab-skills .skill-accordion .skill-body,
+        body.theme-paladinic #tab-skills .skill-accordion .skill-header,
+        body.theme-paladinic #tab-compendium .skill-accordion .skill-item,
+        body.theme-paladinic #tab-compendium .skill-accordion .skill-body,
+        body.theme-paladinic #tab-compendium .skill-accordion .skill-header,
+        body.theme-paladinic #encounter-display-grid > div,
+        body.theme-paladinic .locus-builder,
+        body.theme-paladinic .tab-btn {
+            background-color: var(--paladinic-bg-card) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 3px 6px -1px rgba(30, 36, 43, 0.14), 0 1px 3px rgba(184, 142, 50, 0.16) !important;
+        }
+
+body.theme-paladinic .tab-navigation { border-color: var(--paladinic-border) !important; }
+
+        /* Foreground Silver Slot Rows inside Cards */
+        body.theme-paladinic .pnp-weapon-slot-row,
+        body.theme-paladinic .pnp-gear-slot-row {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(30, 36, 43, 0.08) !important;
+        }
+
+body.theme-paladinic .pnp-subpace-field {
+            background-color: transparent !important;
+            border-color: var(--paladinic-border) !important;
+            box-shadow: none !important;
+        }
+
+        body.theme-paladinic #compendium-creature-select option {
+            background-color: var(--paladinic-bg-input) !important;
+            color: var(--paladinic-text) !important;
+        }
+
+        body.theme-paladinic #compendium-inspector-wrapper button,
+        body.theme-paladinic .compendium-accordion button {
+            background-color: var(--paladinic-bg-row) !important;
+            border: 1px solid var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        
+        body.theme-paladinic #compendium-inspector-wrapper button:hover,
+        body.theme-paladinic .compendium-accordion button:hover {
+            background-color: var(--paladinic-bg-hover) !important;
+            color: var(--paladinic-accent) !important;
+        }
+
+/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
+        body.theme-paladinic .aspect-card div[style*="background"],
+        body.theme-paladinic .skill-item div[style*="background"] {
+            background-color: var(--paladinic-bg-row) !important;
+            color: var(--paladinic-text) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+
+        /* Specific catch for language badges/pills if they use a class */
+        body.theme-paladinic span[style*="background"],
+        body.theme-paladinic div[style*="background: #eae6df"] {
+            background-color: var(--paladinic-bg-input) !important;
+            color: var(--paladinic-text) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+/* 2c. Weapon rows and Locus tags */
+        body.theme-paladinic .pnp-static-row {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+
+        body.theme-paladinic .locus-ench-tag {
+            background-color: var(--paladinic-bg-input) !important;
+            border: 1px solid var(--paladinic-border) !important;
+            color: var(--paladinic-text-muted) !important;
+        }
+body.theme-paladinic .placeholder-card,
+        body.theme-paladinic #active-unlocked-skills-column .aspect-card {
+            background-color: #e3e9f0 !important;
+            box-shadow: none !important;
+        }
+        /* 3. Inputs & Form Controls */
+        body.theme-paladinic input:not([readonly]),
+        body.theme-paladinic select,
+        body.theme-paladinic textarea,
+        body.theme-paladinic .roll-input,
+        body.theme-paladinic .pnp-gear-dropdown,
+        body.theme-paladinic .pnp-pool-input,
+        body.theme-paladinic .locus-builder-select,
+        body.theme-paladinic #theme-selector {
+            background-color: var(--paladinic-bg-input) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .builder-btn,
+        body.theme-paladinic .builder-btn-cancel,
+        body.theme-paladinic input[readonly],
+        body.theme-paladinic .aspect-card input[readonly] {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+/* Override inline-styled buttons inside the settings dropdown */
+        body.theme-paladinic #sheet-settings-dropdown button,
+        body.theme-paladinic .builder-group div[style*="background"],
+        body.theme-paladinic .builder-panel div[style*="background"],
+        body.theme-paladinic div[style*="background: #fff"],
+        body.theme-paladinic div[style*="background:#fff"],
+        body.theme-paladinic div[style*="background: #ffffff"],
+        body.theme-paladinic div[style*="background:#ffffff"],
+        body.theme-paladinic .builder-group,
+        body.theme-paladinic .builder-group,
+        body.theme-paladinic .qualities-checklist {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+
+body.theme-paladinic .pnp-edit-btn {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: var(--paladinic-text-muted) !important;
+        }
+        body.theme-paladinic .pnp-edit-btn:hover {
+            background-color: transparent !important;
+            color: var(--paladinic-accent) !important;
+        }
+
+body.theme-paladinic .builder-group {
+            background-color: transparent !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+
+        body.theme-paladinic #custom-weapon-fields-weapon-0 div[style*="border"],
+        body.theme-paladinic [id^="custom-weapon-fields-"] div[style*="border"] {
+            border-color: var(--paladinic-border) !important;
+        }
+
+        body.theme-paladinic #sheet-settings-dropdown button:hover {
+            background-color: var(--paladinic-bg-hover) !important;
+            color: var(--paladinic-accent) !important;
+        }
+
+        /* 4. Hovers & Active Interactive States */
+        body.theme-paladinic .skill-header:hover,
+        body.theme-paladinic .tab-btn:hover,
+        body.theme-paladinic .tab-btn.active,
+        body.theme-paladinic button[title="Sheet Settings"]:hover,
+        body.theme-paladinic #sheet-settings-dropdown button:hover,
+        body.theme-paladinic div[style*="background: #faf3e8"],
+        body.theme-paladinic [id^="compendium-inspector-card-"] button,
+        body.theme-paladinic .builder-btn:hover,
+        body.theme-paladinic .builder-btn-cancel:hover,
+        body.theme-paladinic .builder-btn-save:hover {
+            background-color: var(--paladinic-bg-hover) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-accent) !important;
+        }
+
+body.theme-paladinic table.game-data th {
+            background-color: var(--paladinic-bg-base) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-accent) !important; /* or var(--paladinic-text) for dark iron */
+        }
+
+        body.theme-paladinic .builder-btn-save {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+
+        /* 5. Tables & Utility Rows */
+        body.theme-paladinic .char-list-item {
+            background-color: var(--paladinic-bg-row) !important;
+            border-bottom-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+        }
+        body.theme-paladinic .char-list-item:nth-child(even),
+        body.theme-paladinic table.game-data tr:nth-child(even) {
+            background-color: rgba(30, 36, 43, 0.04) !important;
+        }
+        body.theme-paladinic table.game-data tr:hover {
+            background-color: rgba(184, 142, 50, 0.14) !important;
+        }
+        body.theme-paladinic .sticky-xp-footer {
+            background-color: rgba(203, 212, 223, 0.94) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+        body.theme-paladinic .racial-bonus,
+        body.theme-paladinic .racial-penalty {
+            background-color: var(--paladinic-bg-row) !important;
+            color: var(--paladinic-text) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+        body.theme-paladinic button[title="Sheet Settings"],
+        body.theme-paladinic .btn-sm {
+            background-color: var(--paladinic-bg-row) !important;
+            border-color: var(--paladinic-border) !important;
+            color: var(--paladinic-text) !important;
+            box-shadow: 0 1px 3px rgba(30, 36, 43, 0.15) !important;
+        }
+        body.theme-paladinic #conditional-modifiers:not(:empty) {
+            background-color: var(--paladinic-bg-card) !important;
+            border-color: var(--paladinic-border) !important;
+        }
+        body.theme-paladinic .pnp-section-divider,
+        body.theme-paladinic .pnp-octagon {
+            border-color: var(--paladinic-border) !important;
+            background-color: var(--paladinic-bg-row) !important;
+            color: var(--paladinic-text) !important;
+        }
+body.theme-paladinic .pnp-offensive-writein-list > div,
+        body.theme-paladinic #pnp-writein-attacks > div {
+            border-color: var(--paladinic-border) !important;
+        }
+
+        /* 6. Typography & Text Hierarchy */
+        body.theme-paladinic label,
+        body.theme-paladinic span,
+        body.theme-paladinic div,
+        body.theme-paladinic p,
+        body.theme-paladinic li,
+        body.theme-paladinic table.game-data td,
+        body.theme-paladinic table.game-data th,
+        body.theme-paladinic .pnp-header-field span,
+        body.theme-paladinic .pnp-aspect-label,
+        body.theme-paladinic .pnp-pool-val,
+        body.theme-paladinic .pnp-subpace-field span,
+        body.theme-paladinic .skill-title,
+        body.theme-paladinic .dice-pool-output,
+        body.theme-paladinic .skill-name-lbl,
+        body.theme-paladinic .aspect-static {
+            color: var(--paladinic-text) !important;
+        }
+
+/* Metallic Gold Accent Headers & Section Titles */
+        body.theme-paladinic h1,
+        body.theme-paladinic h2,
+        body.theme-paladinic h3,
+        body.theme-paladinic h4,
+        body.theme-paladinic .skills-section-header span,
+        body.theme-paladinic .pnp-resource-header,
+        body.theme-paladinic .pnp-col-header,
+        body.theme-paladinic .pnp-section-title,
+        body.theme-paladinic .char-modal h3,
+        body.theme-paladinic .section-header,
+        body.theme-paladinic .enchant-group-title,
+        body.theme-paladinic .inventory-column-title {
+            color: var(--paladinic-accent) !important;
+            text-shadow: 0 1px 0 rgba(255, 250, 232, 0.75), 0 1px 2px rgba(24, 30, 38, 0.25);
+            border-color: var(--paladinic-border) !important;
+        }
+
+        body.theme-paladinic .hint,
+        body.theme-paladinic .pnp-empty-line,
+        body.theme-paladinic .pnp-resource-field label,
+        body.theme-paladinic .pnp-subpace-field label,
+        body.theme-paladinic .pnp-header-field label,
+        body.theme-paladinic .placeholder-card,
+        body.theme-paladinic #active-unlocked-skills-column .aspect-card,
+        body.theme-paladinic .aspect-card .hint,
+        body.theme-paladinic #tab-bazaar li div span:last-child {
+            color: var(--paladinic-text-muted) !important;
+        }
+
+body.theme-paladinic .pnp-empty-line {
+            border-color: var(--paladinic-border) !important;
+        }
+
+/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
+        body.theme-paladinic strong[style*="color"],
+        body.theme-paladinic span[style*="color"],
+        body.theme-paladinic div[style*="color"] {
+            color: var(--paladinic-text) !important;
+        }
+
+        /* If specific labels need to stay muted/accented */
+        body.theme-paladinic span[style*="color: #7c6f64"],
+        body.theme-paladinic strong[style*="color: #5c1d1d"] {
+            color: var(--paladinic-text-muted) !important;
+        }
+
+        /* 7. Scoped Checkboxes & Scrollbars */
+        body.theme-paladinic ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        body.theme-paladinic ::-webkit-scrollbar-track {
+            background: var(--paladinic-bg-deep);
+        }
+        body.theme-paladinic ::-webkit-scrollbar-thumb {
+            background: var(--paladinic-border);
+            border-radius: 4px;
+        }
+        body.theme-paladinic input[type="checkbox"] {
+            width: 13px !important;
+            height: 13px !important;
+            min-width: 13px !important;
+            min-height: 13px !important;
+            background-color: var(--paladinic-bg-input) !important;
+            border: 1px solid var(--paladinic-border) !important;
+            border-radius: 2px !important;
+            margin: 0 4px !important;
+            vertical-align: middle !important;
+            cursor: pointer;
+        }
+        body.theme-paladinic input[type="checkbox"]:checked {
+            background-color: var(--paladinic-bg-hover) !important;
+            border-color: var(--paladinic-accent) !important;
+            accent-color: var(--paladinic-accent);
+        }
+        body.theme-paladinic input[type="checkbox"]:checked::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 3px;
+            height: 7px;
+            border: solid var(--paladinic-text);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
 
         /* =========================================================================
            1. BASE STYLES & LAYOUT CONTAINERS
