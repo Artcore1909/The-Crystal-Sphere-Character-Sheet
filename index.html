@@ -49,1309 +49,675 @@
             --container-bg: #fff;
         }
 /* =========================================================================
-🌙 SCOPED LAYERED DARK THEME
-========================================================================= */
+   1. THEME PALETTES
+   Add new themes by copying a Dark or Light palette block below,
+   then adding its class name to the :where(...) and :is(...) lists in Sections 2 & 3.
+   ========================================================================= */
+
+/* --- Dark Theme --- */
 body.theme-dark {
-            background-color: #121212 !important;
-            color: #e2d7c5 !important;
-            --dark-bg-deep: #121212;
-            --dark-bg-base: #181412;
-            --dark-bg-card: #221c19;
-            --dark-bg-input: #121212;
-            --dark-bg-hover: #2e2622;
-            --dark-border: #423730;
-            --dark-text: #e2d7c5;
-            --dark-text-muted: #9e9182;
-            --dark-accent: #d4a359;
-            --primary-red: #423730;
-            --border-light: #423730;
-            --border-dark: #423730;
-            --accent-gold: #d4a359;
-            scrollbar-color: var(--dark-border) var(--dark-bg-deep);
-        }
+    --theme-bg-deep: #121212;
+    --theme-bg-base: #181412;
+    --theme-bg-card: #221c19;
+    --theme-bg-input: #121212;
+    --theme-bg-hover: #2e2622;
+    --theme-bg-footer: rgba(22, 18, 16, 0.9);
+    --theme-border: #423730;
+    --theme-text: #e2d7c5;
+    --theme-text-muted: #9e9182;
+    --theme-accent: #d4a359;
+    --theme-row-even: rgba(255, 255, 255, 0.02);
+    --theme-row-hover: rgba(255, 255, 255, 0.05);
+    --theme-shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    --theme-shadow-btn: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
 
-        /* 1. Major Containers & Panels (Base Layer) */
-        body.theme-dark .container,
-        body.theme-dark .skills-tab-container,
-        body.theme-dark .char-modal,
-        body.theme-dark #sheet-settings-dropdown {
-            background-color: var(--dark-bg-base) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .builder-panel {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .aspect-card .builder-panel {
-            background-color: var(--dark-bg-hover) !important;
-        }
-        body.theme-dark .char-modal > div:first-child button {
-            color: var(--dark-text-muted) !important;
-        }
-        body.theme-dark .char-modal > div:first-child button:hover {
-            color: var(--dark-accent) !important;
-        }
-/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
-        body.theme-dark [id^="compendium-inspector-card-"],
-        body.theme-dark [id^="compendium-creature-sheet-container-"],
-        body.theme-dark #compendium-inspector-wrapper div[style*="background"] {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-/* 1b. Floating Windows, Tooltips & Popups */
-        body.theme-dark .tcs-tooltip,
-        body.theme-dark .tcs-floating-window,
-        body.theme-dark [id^="tcs-"] {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .tcs-member {
-            background-color: var(--dark-bg-base) !important;
-            border-color: var(--dark-border) !important;
-            border-left-color: var(--dark-accent) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .tcs-close-btn {
-            background-color: var(--dark-bg-deep) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .tcs-close-btn:hover {
-            background-color: var(--dark-bg-hover) !important;
-            color: var(--dark-accent) !important;
-        }
-        body.theme-dark .tcs-title {
-            color: var(--dark-accent) !important;
-            border-color: var(--dark-border) !important;
-        }
-        body.theme-dark .tcs-member-title,
-        body.theme-dark .tcs-meta,
-        body.theme-dark .tcs-desc,
-        body.theme-dark .tcs-extra {
-            color: var(--dark-text) !important;
-            border-color: var(--dark-border) !important;
-        }
-        body.theme-dark .tcs-tooltip strong,
-        body.theme-dark .tcs-floating-window strong,
-        body.theme-dark .tcs-meta strong,
-        body.theme-dark .tcs-extra strong {
-            color: var(--dark-accent) !important;
-        }
+/* --- Cosmic Theme --- */
+body.theme-cosmic {
+    --theme-bg-deep: #11102b;
+    --theme-bg-base: #1a1840;
+    --theme-bg-card: #242258;
+    --theme-bg-elevated: #242258;
+    --theme-bg-panel-nested: #561e55;
+    --theme-bg-input: #11102b;
+    --theme-bg-hover: #561e55;
+    --theme-bg-th: #205375;
+    --theme-th-text: #B5996C;
+    --theme-bg-footer: rgba(26, 24, 64, 0.92);
+    --theme-border: #178896;
+    --theme-text: #eef6f8;
+    --theme-text-muted: #72c4b0;
+    --theme-accent: #B5996C;
+    --theme-row-even: rgba(66, 158, 136, 0.06);
+    --theme-row-hover: rgba(23, 136, 150, 0.22);
+    --theme-shadow-card: 0 4px 8px -1px rgba(8, 7, 24, 0.6), 0 2px 6px -1px rgba(23, 136, 150, 0.22);
+    --theme-shadow-btn: 0 1px 3px rgba(8, 7, 24, 0.55);
+}
 
-        /* 2. Cards, Items, & Components (Pop Layer) */
-        body.theme-dark .aspect-card,
-        body.theme-dark .enchant-group-box,
-        body.theme-dark .inventory-column-card,
-        body.theme-dark .pnp-resource-card,
-        body.theme-dark .pnp-offensive-skills-card,
-        body.theme-dark table.game-data,
-        body.theme-dark .skill-item,
-        body.theme-dark .skill-body,
-        body.theme-dark .skill-header,
-        body.theme-dark .pnp-header-bar,
-        body.theme-dark .pnp-sub-defenses-panel,
-        body.theme-dark .pnp-weapon-slot-row,
-        body.theme-dark .pnp-gear-slot-row,
-        body.theme-dark .locus-slot-card,
-        body.theme-dark .mount-sheet-wrapper > div,
-        body.theme-dark #pets-master-container > div,
-        body.theme-dark .extra-training-box,
-        body.theme-dark [id^="compendium-inspector-card-"],
-        body.theme-dark #encounter-charts-section,
-        body.theme-dark #encounter-charts-section .skill-item,
-        body.theme-dark #encounter-charts-section .skill-body,
-        body.theme-dark #encounter-charts-section .skill-header,
-        body.theme-dark #tab-bazaar .bazaar-accordion .skill-item,
-        body.theme-dark #tab-bazaar .bazaar-accordion .skill-body,
-        body.theme-dark #tab-bazaar .bazaar-accordion .skill-header,
-        body.theme-dark #tab-skills .skill-accordion .skill-item,
-        body.theme-dark #tab-skills .skill-accordion .skill-body,
-        body.theme-dark #tab-skills .skill-accordion .skill-header,
-        body.theme-dark #tab-compendium .skill-accordion .skill-item,
-        body.theme-dark #tab-compendium .skill-accordion .skill-body,
-        body.theme-dark #tab-compendium .skill-accordion .skill-header,
-        body.theme-dark #encounter-display-grid > div,
-        body.theme-dark .locus-builder,
-        body.theme-dark .tab-btn {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        body.theme-dark .tab-navigation {
-            border-color: var(--dark-border) !important;
-        }
-
-        body.theme-dark .pnp-subpace-field {
-            background-color: transparent !important;
-            border-color: var(--dark-border) !important;
-            box-shadow: none !important;
-        }
-
-        body.theme-dark #compendium-creature-select option {
-            background-color: var(--dark-bg-card) !important;
-            color: var(--dark-text) !important;
-        }
-
-        body.theme-dark #compendium-inspector-wrapper button,
-        body.theme-dark .compendium-accordion button {
-            background-color: var(--dark-bg-card) !important;
-            border: 1px solid var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        
-        body.theme-dark #compendium-inspector-wrapper button:hover,
-        body.theme-dark .compendium-accordion button:hover {
-            background-color: var(--dark-bg-hover) !important;
-            color: var(--dark-accent) !important;
-        }
-/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
-        body.theme-dark .aspect-card div[style*="background"],
-        body.theme-dark .skill-item div[style*="background"] {
-            background-color: var(--dark-bg-deep) !important;
-            color: var(--dark-text) !important;
-            border-color: var(--dark-border) !important;
-        }
-
-        /* Specific catch for language badges/pills if they use a class */
-        body.theme-dark span[style*="background"],
-        body.theme-dark div[style*="background: #eae6df"] {
-            background-color: var(--dark-bg-input) !important;
-            color: var(--dark-text) !important;
-            border-color: var(--dark-border) !important;
-        }
-/* 2c. Weapon rows and Locus tags */
-        body.theme-dark .pnp-static-row {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-
-        body.theme-dark .locus-ench-tag {
-            background-color: var(--dark-bg-input) !important;
-            border: 1px solid var(--dark-border) !important;
-            color: var(--dark-text-muted) !important;
-        }
-
-        body.theme-dark .placeholder-card,
-        body.theme-dark #active-unlocked-skills-column .aspect-card {
-            background-color: var(--dark-bg-base) !important;
-            border-color: var(--dark-border) !important;
-            box-shadow: none !important;
-        }
-
-        /* 3. Inputs & Form Controls */
-        body.theme-dark input:not([readonly]),
-        body.theme-dark select,
-        body.theme-dark textarea,
-        body.theme-dark .roll-input,
-        body.theme-dark .pnp-gear-dropdown,
-        body.theme-dark .pnp-pool-input,
-        body.theme-dark .locus-builder-select,
-        body.theme-dark #theme-selector,
-        body.theme-dark .builder-btn,
-        body.theme-dark .builder-btn-cancel,
-        body.theme-dark input[readonly],
-        body.theme-dark .aspect-card input[readonly] {
-            background-color: var(--dark-bg-deep) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-/* Override inline-styled buttons inside the settings dropdown */
-        body.theme-dark #sheet-settings-dropdown button,
-        body.theme-dark .builder-group div[style*="background"],
-        body.theme-dark .builder-panel div[style*="background"],
-        body.theme-dark div[style*="background: #fff"],
-        body.theme-dark div[style*="background:#fff"],
-        body.theme-dark div[style*="background: #ffffff"],
-        body.theme-dark div[style*="background:#ffffff"],
-        body.theme-dark .qualities-checklist {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-
-        body.theme-dark .pnp-edit-btn {
-            background-color: transparent !important;
-            border-color: transparent !important;
-            color: var(--dark-text-muted) !important;
-        }
-        body.theme-dark .pnp-edit-btn:hover {
-            background-color: transparent !important;
-            color: var(--dark-accent) !important;
-        }
-
-        body.theme-dark .builder-group {
-            background-color: transparent !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-
-        body.theme-dark #custom-weapon-fields-weapon-0 div[style*="border"],
-        body.theme-dark [id^="custom-weapon-fields-"] div[style*="border"] {
-            border-color: var(--dark-border) !important;
-        }
-
-        body.theme-dark #sheet-settings-dropdown button:hover {
-            background-color: var(--dark-bg-hover) !important;
-            color: var(--dark-accent) !important;
-        }
-
-        /* 4. Hovers & Active Interactive States */
-        body.theme-dark table.game-data th,
-        body.theme-dark .skill-header:hover,
-        body.theme-dark .tab-btn:hover,
-        body.theme-dark .tab-btn.active,
-        body.theme-dark button[title="Sheet Settings"]:hover,
-        body.theme-dark #sheet-settings-dropdown button:hover,
-        body.theme-dark div[style*="background: #faf3e8"],
-        body.theme-dark [id^="compendium-inspector-card-"] button,
-        body.theme-dark .builder-btn:hover,
-        body.theme-dark .builder-btn-cancel:hover,
-        body.theme-dark .builder-btn-save:hover {
-            background-color: var(--dark-bg-hover) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-accent) !important;
-        }
-
-        body.theme-dark .builder-btn-save {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-
-        /* 5. Tables & Utility Rows */
-        body.theme-dark .char-list-item {
-            background-color: var(--dark-bg-card) !important;
-            border-bottom-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .char-list-item:nth-child(even),
-        body.theme-dark table.game-data tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.02) !important;
-        }
-        body.theme-dark table.game-data tr:hover {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-        }
-        body.theme-dark .sticky-xp-footer {
-            background-color: rgba(22, 18, 16, 0.9) !important;
-            border-color: var(--dark-border) !important;
-        }
-        body.theme-dark .racial-bonus,
-        body.theme-dark .racial-penalty {
-            background-color: var(--dark-bg-card) !important;
-            color: var(--dark-text) !important;
-            border-color: var(--dark-border) !important;
-        }
-        body.theme-dark button[title="Sheet Settings"],
-        body.theme-dark .btn-sm {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-            color: var(--dark-text) !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
-        }
-        body.theme-dark #conditional-modifiers:not(:empty) {
-            background-color: var(--dark-bg-card) !important;
-            border-color: var(--dark-border) !important;
-        }
-        body.theme-dark .pnp-section-divider,
-        body.theme-dark .pnp-octagon {
-            border-color: var(--dark-border) !important;
-            background-color: var(--dark-bg-card) !important;
-            color: var(--dark-text) !important;
-        }
-        body.theme-dark .pnp-offensive-writein-list > div,
-        body.theme-dark #pnp-writein-attacks > div {
-            border-color: var(--dark-border) !important;
-        }
-
-        /* 6. Typography & Text Hierarchy */
-        body.theme-dark label,
-        body.theme-dark span,
-        body.theme-dark div,
-        body.theme-dark p,
-        body.theme-dark li,
-        body.theme-dark table.game-data td,
-        body.theme-dark .pnp-header-field span,
-        body.theme-dark .pnp-aspect-label,
-        body.theme-dark .pnp-pool-val,
-        body.theme-dark .pnp-subpace-field span,
-        body.theme-dark .skill-title,
-        body.theme-dark .dice-pool-output,
-        body.theme-dark .skill-name-lbl,
-        body.theme-dark .aspect-static {
-            color: var(--dark-text) !important;
-        }
-
-        body.theme-dark h1,
-        body.theme-dark h2,
-        body.theme-dark h3,
-        body.theme-dark h4,
-        body.theme-dark .skills-section-header span,
-        body.theme-dark .pnp-resource-header,
-        body.theme-dark .pnp-col-header,
-        body.theme-dark .pnp-section-title,
-        body.theme-dark .char-modal h3,
-        body.theme-dark .section-header,
-        body.theme-dark .enchant-group-title,
-        body.theme-dark .inventory-column-title {
-            color: var(--dark-accent) !important;
-            border-color: var(--dark-border) !important;
-        }
-
-        body.theme-dark .hint,
-        body.theme-dark .pnp-empty-line,
-        body.theme-dark .pnp-resource-field label,
-        body.theme-dark .pnp-subpace-field label,
-        body.theme-dark .pnp-header-field label,
-        body.theme-dark .placeholder-card,
-        body.theme-dark #active-unlocked-skills-column .aspect-card,
-        body.theme-dark .aspect-card .hint,
-        body.theme-dark #tab-bazaar li div span:last-child {
-            color: var(--dark-text-muted) !important;
-        }
-
-        body.theme-dark .pnp-empty-line {
-            border-color: var(--dark-border) !important;
-        }
-
-/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
-        body.theme-dark strong[style*="color"],
-        body.theme-dark span[style*="color"],
-        body.theme-dark div[style*="color"] {
-            color: var(--dark-text) !important;
-        }
-
-        /* If specific labels need to stay muted/accented */
-        body.theme-dark span[style*="color: #7c6f64"],
-        body.theme-dark strong[style*="color: #5c1d1d"] {
-            color: var(--dark-text-muted) !important;
-        }
-
-        /* 7. Scoped Dark Theme Checkboxes & Scrollbars */
-        body.theme-dark ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        body.theme-dark ::-webkit-scrollbar-track {
-            background: var(--dark-bg-deep);
-        }
-        body.theme-dark ::-webkit-scrollbar-thumb {
-            background: var(--dark-border);
-            border-radius: 4px;
-        }
-        body.theme-dark input[type="checkbox"] {
-            width: 13px !important;
-            height: 13px !important;
-            min-width: 13px !important;
-            min-height: 13px !important;
-            background-color: var(--dark-bg-deep) !important;
-            border: 1px solid var(--dark-border) !important;
-            border-radius: 2px !important;
-            margin: 0 4px !important;
-            vertical-align: middle !important;
-            cursor: pointer;
-            /* Filters the native checkbox to match dark mode aesthetics */
-            filter: invert(1) hue-rotate(180deg) brightness(0.7);
-        }
-        body.theme-dark input[type="checkbox"]:checked {
-            background-color: var(--dark-bg-hover) !important;
-            border-color: var(--dark-accent) !important;
-            accent-color: var(--dark-accent);
-        }
-        body.theme-dark input[type="checkbox"]:checked::after {
-            content: "";
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 3px;
-            height: 7px;
-            border: solid var(--dark-text);
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
-        body.theme-dark img[src$="Hitenc.png"]   { content: url("images/HitencWhite.png"); }
-        body.theme-dark img[src$="Critenc.png"]  { content: url("images/CritencWhite.png"); }
-        body.theme-dark img[src$="Skillenc.png"] { content: url("images/SkillencWhite.png"); }
-        body.theme-dark img[src$="Wyrdenc.png"]  { content: url("images/WyrdencWhite.png"); }
-
-/* =========================================================================
- SCOPED LAYERED CRYSTALLINE THEME
-========================================================================= */
+/* --- Crystalline Theme --- */
 body.theme-crystalline {
-            background-color: #121e2e !important;
-            color: #edf5fc !important;
-            --crystalline-bg-deep: #121e2e;
-            --crystalline-bg-base: #18273b;
-            --crystalline-bg-card: #1f334d;
-            --crystalline-bg-input: #121e2e;
-            --crystalline-bg-hover: #2a4466;
-            --crystalline-border: #4d729e;
-            --crystalline-text: #edf5fc;
-            --crystalline-text-muted: #a8c3df;
-            --crystalline-accent: #8fd3f4;
-            --primary-red: #4d729e;
-            --border-light: #4d729e;
-            --border-dark: #4d729e;
-            --accent-gold: #8fd3f4;
-            scrollbar-color: var(--crystalline-border) var(--crystalline-bg-deep);
-        }
+    --theme-bg-deep: #121e2e;
+    --theme-bg-base: #18273b;
+    --theme-bg-card: #1f334d;
+    --theme-bg-input: #121e2e;
+    --theme-bg-hover: #2a4466;
+    --theme-bg-footer: rgba(24, 39, 59, 0.9);
+    --theme-border: #4d729e;
+    --theme-text: #edf5fc;
+    --theme-text-muted: #a8c3df;
+    --theme-accent: #8fd3f4;
+    --theme-row-even: rgba(200, 226, 250, 0.04);
+    --theme-row-hover: rgba(143, 211, 244, 0.1);
+    --theme-shadow-card: 0 4px 6px -1px rgba(8, 16, 28, 0.4), 0 2px 4px -1px rgba(143, 211, 244, 0.12);
+    --theme-shadow-btn: 0 1px 3px rgba(8, 16, 28, 0.4);
+}
 
-        /* 1. Major Containers & Panels (Base Layer) */
-        body.theme-crystalline .container,
-        body.theme-crystalline .skills-tab-container,
-        body.theme-crystalline .char-modal,
-        body.theme-crystalline #sheet-settings-dropdown {
-            background-color: var(--crystalline-bg-base) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .builder-panel {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .aspect-card .builder-panel {
-            background-color: var(--crystalline-bg-hover) !important;
-        }
-body.theme-crystalline .char-modal > div:first-child button {
-            color: var(--crystalline-text-muted) !important;
-        }
-        body.theme-crystalline .char-modal > div:first-child button:hover {
-            color: var(--crystalline-accent) !important;
-        }
-/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
-        body.theme-crystalline [id^="compendium-inspector-card-"],
-        body.theme-crystalline [id^="compendium-creature-sheet-container-"],
-        body.theme-crystalline #compendium-inspector-wrapper div[style*="background"] {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-/* 1b. Floating Windows, Tooltips & Popups */
-        body.theme-crystalline .tcs-tooltip,
-        body.theme-crystalline .tcs-floating-window,
-        body.theme-crystalline [id^="tcs-"] {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .tcs-member {
-            background-color: var(--crystalline-bg-base) !important;
-            border-color: var(--crystalline-border) !important;
-            border-left-color: var(--crystalline-accent) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .tcs-close-btn {
-            background-color: var(--crystalline-bg-deep) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .tcs-close-btn:hover {
-            background-color: var(--crystalline-bg-hover) !important;
-            color: var(--crystalline-accent) !important;
-        }
-        body.theme-crystalline .tcs-title {
-            color: var(--crystalline-accent) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-        body.theme-crystalline .tcs-member-title,
-        body.theme-crystalline .tcs-meta,
-        body.theme-crystalline .tcs-desc,
-        body.theme-crystalline .tcs-extra {
-            color: var(--crystalline-text) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-        body.theme-crystalline .tcs-tooltip strong,
-        body.theme-crystalline .tcs-floating-window strong,
-        body.theme-crystalline .tcs-meta strong,
-        body.theme-crystalline .tcs-extra strong {
-            color: var(--crystalline-accent) !important;
-        }
+/* --- Forest Theme --- */
+body.theme-forest {
+    --theme-bg-deep: #141e18;
+    --theme-bg-base: #1d2b22;
+    --theme-bg-card: #283728;
+    --theme-bg-elevated: #283728;
+    --theme-bg-panel-nested: #3e2a1c;
+    --theme-bg-input: #141e18;
+    --theme-bg-hover: #3a4a2f;
+    --theme-bg-th: #5a3b26;
+    --theme-th-text: #b8a77a;
+    --theme-bg-footer: rgba(29, 43, 34, 0.92);
+    --theme-border: #6f6a3b;
+    --theme-text: #eee8d8;
+    --theme-text-muted: #b8a77a;
+    --theme-accent: #b8a77a;
+    --theme-row-even: rgba(184, 167, 122, 0.05);
+    --theme-row-hover: rgba(111, 106, 59, 0.22);
+    --theme-shadow-card: 0 4px 6px -1px rgba(10, 16, 12, 0.5), 0 2px 4px -1px rgba(90, 59, 38, 0.2);
+    --theme-shadow-btn: 0 1px 3px rgba(10, 16, 12, 0.5);
+}
 
-        /* 2. Cards, Items, & Components (Pop Layer) */
-        body.theme-crystalline .aspect-card,
-        body.theme-crystalline .enchant-group-box,
-        body.theme-crystalline .inventory-column-card,
-        body.theme-crystalline .pnp-resource-card,
-        body.theme-crystalline .pnp-offensive-skills-card,
-        body.theme-crystalline table.game-data,
-        body.theme-crystalline .skill-item,
-        body.theme-crystalline .skill-body,
-        body.theme-crystalline .skill-header,
-        body.theme-crystalline .pnp-header-bar,
-        body.theme-crystalline .pnp-sub-defenses-panel,
-        body.theme-crystalline .pnp-weapon-slot-row,
-        body.theme-crystalline .pnp-gear-slot-row,
-        body.theme-crystalline .locus-slot-card,
-        body.theme-crystalline .mount-sheet-wrapper > div,
-        body.theme-crystalline #pets-master-container > div,
-        body.theme-crystalline .extra-training-box,
-        body.theme-crystalline [id^="compendium-inspector-card-"],
-        body.theme-crystalline #encounter-charts-section,
-        body.theme-crystalline #encounter-charts-section .skill-item,
-        body.theme-crystalline #encounter-charts-section .skill-body,
-        body.theme-crystalline #encounter-charts-section .skill-header,
-        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-item,
-        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-body,
-        body.theme-crystalline #tab-bazaar .bazaar-accordion .skill-header,
-        body.theme-crystalline #tab-skills .skill-accordion .skill-item,
-        body.theme-crystalline #tab-skills .skill-accordion .skill-body,
-        body.theme-crystalline #tab-skills .skill-accordion .skill-header,
-        body.theme-crystalline #tab-compendium .skill-accordion .skill-item,
-        body.theme-crystalline #tab-compendium .skill-accordion .skill-body,
-        body.theme-crystalline #tab-compendium .skill-accordion .skill-header,
-        body.theme-crystalline #encounter-display-grid > div,
-        body.theme-crystalline .locus-builder,
-        body.theme-crystalline .tab-btn {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-            box-shadow: 0 4px 6px -1px rgba(8, 16, 28, 0.4), 0 2px 4px -1px rgba(143, 211, 244, 0.12) !important;
-        }
+/* --- Magmatic Theme --- */
+body.theme-magmatic {
+    --theme-bg-deep: #140908;
+    --theme-bg-base: #1c0d0c;
+    --theme-bg-card: #261210;
+    --theme-bg-input: #140908;
+    --theme-bg-hover: #381b18;
+    --theme-bg-footer: rgba(28, 13, 12, 0.9);
+    --theme-border: #7d3426;
+    --theme-text: #fdf0e8;
+    --theme-text-muted: #cf9e8e;
+    --theme-accent: #b74738;
+    --theme-row-even: rgba(255, 215, 195, 0.04);
+    --theme-row-hover: rgba(255, 142, 43, 0.1);
+    --theme-shadow-card: 0 4px 6px -1px rgba(12, 4, 3, 0.5), 0 2px 4px -1px rgba(255, 142, 43, 0.14);
+    --theme-shadow-btn: 0 1px 3px rgba(12, 4, 3, 0.5);
+}
 
-        body.theme-crystalline .tab-navigation {
-            border-color: var(--crystalline-border) !important;
-        }
+/* --- Paladinic Theme (Light) --- */
+body.theme-paladinic {
+    --theme-bg-deep: #b8c2ce;
+    --theme-bg-base: #d0d8e2;
+    --theme-bg-card: #e3e9f0;
+    --theme-bg-elevated: #edf1f6;
+    --theme-bg-input: #f7f9fc;
+    --theme-bg-hover: #efe6cd;
+    --theme-bg-footer: rgba(203, 212, 223, 0.94);
+    --theme-border: #b88e32;
+    --theme-text: #1e242b;
+    --theme-text-muted: #4d5764;
+    --theme-accent: #1e242b;
+    --theme-row-even: rgba(30, 36, 43, 0.04);
+    --theme-row-hover: rgba(184, 142, 50, 0.14);
+    --theme-shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 3px 6px -1px rgba(30, 36, 43, 0.14), 0 1px 3px rgba(184, 142, 50, 0.16);
+    --theme-shadow-row: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(30, 36, 43, 0.08);
+    --theme-shadow-btn: 0 1px 3px rgba(30, 36, 43, 0.15);
+    --theme-header-shadow: 0 1px 0 rgba(255, 250, 232, 0.75), 0 1px 2px rgba(24, 30, 38, 0.25);
 
-        body.theme-crystalline .pnp-subpace-field {
-            background-color: transparent !important;
-            border-color: var(--crystalline-border) !important;
-            box-shadow: none !important;
-        }
+    /* Light-mode surface & control mappings */
+    --theme-bg-readonly: var(--theme-bg-elevated);
+    --theme-bg-panel-nested: var(--theme-bg-elevated);
+    --theme-bg-placeholder: var(--theme-bg-card);
+    --theme-bg-tcs-member: var(--theme-bg-card);
+    --theme-bg-tcs-close: var(--theme-bg-input);
+    --theme-bg-select-option: var(--theme-bg-input);
+    --theme-bg-th: var(--theme-bg-base);
+    --theme-th-text: var(--theme-text);
+    --theme-checkbox-filter: none;
+    --theme-icon-hit: normal;
+    --theme-icon-crit: normal;
+    --theme-icon-skill: normal;
+    --theme-icon-wyrd: normal;
+}
 
-        body.theme-crystalline #compendium-creature-select option {
-            background-color: var(--crystalline-bg-card) !important;
-            color: var(--crystalline-text) !important;
-        }
+/* --- Rose Gold Theme (Light) --- */
+body.theme-rose-gold {
+    --theme-bg-deep: #fdf7f5;
+    --theme-bg-base: #f7ede9;
+    --theme-bg-card: #efe4e3;
+    --theme-bg-elevated: #f7f0ef;
+    --theme-bg-input: #fdf7f5;
+    --theme-bg-hover: #f2dedb;
+    --theme-bg-footer: rgba(218, 198, 196, 0.94);
+    --theme-border: #b07375;
+    --theme-text: #291c1e;
+    --theme-text-muted: #634b4e;
+    --theme-accent: #43302e;
+    --theme-row-even: rgba(41, 28, 30, 0.04);
+    --theme-row-hover: rgba(176, 115, 117, 0.14);
+    --theme-shadow-card: inset 0 1px 0 rgba(255, 248, 247, 0.75), 0 3px 6px -1px rgba(41, 28, 30, 0.14), 0 1px 3px rgba(176, 115, 117, 0.18);
+    --theme-shadow-row: inset 0 1px 0 rgba(255, 248, 247, 0.75), 0 1px 2px rgba(41, 28, 30, 0.08);
+    --theme-shadow-btn: 0 1px 3px rgba(41, 28, 30, 0.15);
+    --theme-header-shadow: 0 1px 0 rgba(255, 246, 245, 0.75), 0 1px 2px rgba(41, 28, 30, 0.25);
 
-        body.theme-crystalline #compendium-inspector-wrapper button,
-        body.theme-crystalline .compendium-accordion button {
-            background-color: var(--crystalline-bg-card) !important;
-            border: 1px solid var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        
-        body.theme-crystalline #compendium-inspector-wrapper button:hover,
-        body.theme-crystalline .compendium-accordion button:hover {
-            background-color: var(--crystalline-bg-hover) !important;
-            color: var(--crystalline-accent) !important;
-        }
-/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
-        body.theme-crystalline .aspect-card div[style*="background"],
-        body.theme-crystalline .skill-item div[style*="background"] {
-            background-color: var(--crystalline-bg-deep) !important;
-            color: var(--crystalline-text) !important;
-            border-color: var(--crystalline-border) !important;
-        }
+    /* Light-mode surface & control mappings */
+    --theme-bg-readonly: var(--theme-bg-elevated);
+    --theme-bg-panel-nested: var(--theme-bg-elevated);
+    --theme-bg-placeholder: var(--theme-bg-card);
+    --theme-bg-tcs-member: var(--theme-bg-card);
+    --theme-bg-tcs-close: var(--theme-bg-input);
+    --theme-bg-select-option: var(--theme-bg-input);
+    --theme-bg-th: var(--theme-bg-base);
+    --theme-th-text: var(--theme-text);
+    --theme-checkbox-filter: none;
+    --theme-checkbox-after: none;
+    --theme-icon-hit: normal;
+    --theme-icon-crit: normal;
+    --theme-icon-skill: normal;
+    --theme-icon-wyrd: normal;
+}
 
-        /* Specific catch for language badges/pills if they use a class */
-        body.theme-crystalline span[style*="background"],
-        body.theme-crystalline div[style*="background: #eae6df"] {
-            background-color: var(--crystalline-bg-input) !important;
-            color: var(--crystalline-text) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-/* 2c. Weapon rows and Locus tags */
-        body.theme-crystalline .pnp-static-row {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-
-        body.theme-crystalline .locus-ench-tag {
-            background-color: var(--crystalline-bg-input) !important;
-            border: 1px solid var(--crystalline-border) !important;
-            color: var(--crystalline-text-muted) !important;
-        }
-
-        body.theme-crystalline .placeholder-card,
-        body.theme-crystalline #active-unlocked-skills-column .aspect-card {
-            background-color: var(--crystalline-bg-base) !important;
-            border-color: var(--crystalline-border) !important;
-            box-shadow: none !important;
-        }
-
-        /* 3. Inputs & Form Controls */
-        body.theme-crystalline input:not([readonly]),
-        body.theme-crystalline select,
-        body.theme-crystalline textarea,
-        body.theme-crystalline .roll-input,
-        body.theme-crystalline .pnp-gear-dropdown,
-        body.theme-crystalline .pnp-pool-input,
-        body.theme-crystalline .locus-builder-select,
-        body.theme-crystalline #theme-selector,
-        body.theme-crystalline .builder-btn,
-        body.theme-crystalline .builder-btn-cancel,
-        body.theme-crystalline input[readonly],
-        body.theme-crystalline .aspect-card input[readonly] {
-            background-color: var(--crystalline-bg-deep) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-/* Override inline-styled buttons inside the settings dropdown */
-        body.theme-crystalline #sheet-settings-dropdown button,
-        body.theme-crystalline .builder-group div[style*="background"],
-        body.theme-crystalline .builder-panel div[style*="background"],
-        body.theme-crystalline div[style*="background: #fff"],
-        body.theme-crystalline div[style*="background:#fff"],
-        body.theme-crystalline div[style*="background: #ffffff"],
-        body.theme-crystalline div[style*="background:#ffffff"],
-        body.theme-crystalline .qualities-checklist {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-
-        body.theme-crystalline .pnp-edit-btn {
-            background-color: transparent !important;
-            border-color: transparent !important;
-            color: var(--crystalline-text-muted) !important;
-        }
-        body.theme-crystalline .pnp-edit-btn:hover {
-            background-color: transparent !important;
-            color: var(--crystalline-accent) !important;
-        }
-
-        body.theme-crystalline .builder-group {
-            background-color: transparent !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-
-        body.theme-crystalline #custom-weapon-fields-weapon-0 div[style*="border"],
-        body.theme-crystalline [id^="custom-weapon-fields-"] div[style*="border"] {
-            border-color: var(--crystalline-border) !important;
-        }
-
-        body.theme-crystalline #sheet-settings-dropdown button:hover {
-            background-color: var(--crystalline-bg-hover) !important;
-            color: var(--crystalline-accent) !important;
-        }
-
-        /* 4. Hovers & Active Interactive States */
-        body.theme-crystalline table.game-data th,
-        body.theme-crystalline .skill-header:hover,
-        body.theme-crystalline .tab-btn:hover,
-        body.theme-crystalline .tab-btn.active,
-        body.theme-crystalline button[title="Sheet Settings"]:hover,
-        body.theme-crystalline #sheet-settings-dropdown button:hover,
-        body.theme-crystalline div[style*="background: #faf3e8"],
-        body.theme-crystalline [id^="compendium-inspector-card-"] button,
-        body.theme-crystalline .builder-btn:hover,
-        body.theme-crystalline .builder-btn-cancel:hover,
-        body.theme-crystalline .builder-btn-save:hover {
-            background-color: var(--crystalline-bg-hover) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-accent) !important;
-        }
-
-        body.theme-crystalline .builder-btn-save {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-
-        /* 5. Tables & Utility Rows */
-        body.theme-crystalline .char-list-item {
-            background-color: var(--crystalline-bg-card) !important;
-            border-bottom-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-        }
-        body.theme-crystalline .char-list-item:nth-child(even),
-        body.theme-crystalline table.game-data tr:nth-child(even) {
-            background-color: rgba(200, 226, 250, 0.04) !important;
-        }
-        body.theme-crystalline table.game-data tr:hover {
-            background-color: rgba(143, 211, 244, 0.1) !important;
-        }
-        body.theme-crystalline .sticky-xp-footer {
-            background-color: rgba(24, 39, 59, 0.9) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-        body.theme-crystalline .racial-bonus,
-        body.theme-crystalline .racial-penalty {
-            background-color: var(--crystalline-bg-card) !important;
-            color: var(--crystalline-text) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-        body.theme-crystalline button[title="Sheet Settings"],
-        body.theme-crystalline .btn-sm {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-            color: var(--crystalline-text) !important;
-            box-shadow: 0 1px 3px rgba(8, 16, 28, 0.4) !important;
-        }
-        body.theme-crystalline #conditional-modifiers:not(:empty) {
-            background-color: var(--crystalline-bg-card) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-        body.theme-crystalline .pnp-section-divider,
-        body.theme-crystalline .pnp-octagon {
-            border-color: var(--crystalline-border) !important;
-            background-color: var(--crystalline-bg-card) !important;
-            color: var(--crystalline-text) !important;
-        }
-body.theme-crystalline .pnp-offensive-writein-list > div,
-        body.theme-crystalline #pnp-writein-attacks > div {
-            border-color: var(--crystalline-border) !important;
-        }
-
-        /* 6. Typography & Text Hierarchy */
-        body.theme-crystalline label,
-        body.theme-crystalline span,
-        body.theme-crystalline div,
-        body.theme-crystalline p,
-        body.theme-crystalline li,
-        body.theme-crystalline table.game-data td,
-        body.theme-crystalline .pnp-header-field span,
-        body.theme-crystalline .pnp-aspect-label,
-        body.theme-crystalline .pnp-pool-val,
-        body.theme-crystalline .pnp-subpace-field span,
-        body.theme-crystalline .skill-title,
-        body.theme-crystalline .dice-pool-output,
-        body.theme-crystalline .skill-name-lbl,
-        body.theme-crystalline .aspect-static {
-            color: var(--crystalline-text) !important;
-        }
-
-        body.theme-crystalline h1,
-        body.theme-crystalline h2,
-        body.theme-crystalline h3,
-        body.theme-crystalline h4,
-        body.theme-crystalline .skills-section-header span,
-        body.theme-crystalline .pnp-resource-header,
-        body.theme-crystalline .pnp-col-header,
-        body.theme-crystalline .pnp-section-title,
-        body.theme-crystalline .char-modal h3,
-        body.theme-crystalline .section-header,
-        body.theme-crystalline .pnp-empty-line,
-       body.theme-crystalline .enchant-group-title,
-        body.theme-crystalline .inventory-column-title {
-            color: var(--crystalline-accent) !important;
-            border-color: var(--crystalline-border) !important;
-        }
-
-        body.theme-crystalline .hint,
-        body.theme-crystalline .pnp-empty-line,
-        body.theme-crystalline .pnp-resource-field label,
-        body.theme-crystalline .pnp-subpace-field label,
-        body.theme-crystalline .pnp-header-field label,
-        body.theme-crystalline .placeholder-card,
-        body.theme-crystalline #active-unlocked-skills-column .aspect-card,
-        body.theme-crystalline .aspect-card .hint,
-        body.theme-crystalline #tab-bazaar li div span:last-child {
-            color: var(--crystalline-text-muted) !important;
-        }
-
-/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
-        body.theme-crystalline strong[style*="color"],
-        body.theme-crystalline span[style*="color"],
-        body.theme-crystalline div[style*="color"] {
-            color: var(--crystalline-text) !important;
-        }
-
-        /* If specific labels need to stay muted/accented */
-        body.theme-crystalline span[style*="color: #7c6f64"],
-        body.theme-crystalline strong[style*="color: #5c1d1d"] {
-            color: var(--crystalline-text-muted) !important;
-        }
-
-        /* 7. Scoped Dark Theme Checkboxes & Scrollbars */
-        body.theme-crystalline ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        body.theme-crystalline ::-webkit-scrollbar-track {
-            background: var(--crystalline-bg-deep);
-        }
-        body.theme-crystalline ::-webkit-scrollbar-thumb {
-            background: var(--crystalline-border);
-            border-radius: 4px;
-        }
-        body.theme-crystalline input[type="checkbox"] {
-            width: 13px !important;
-            height: 13px !important;
-            min-width: 13px !important;
-            min-height: 13px !important;
-            background-color: var(--crystalline-bg-deep) !important;
-            border: 1px solid var(--crystalline-border) !important;
-            border-radius: 2px !important;
-            margin: 0 4px !important;
-            vertical-align: middle !important;
-            cursor: pointer;
-            /* Filters the native checkbox to match dark mode aesthetics */
-            filter: invert(1) hue-rotate(180deg) brightness(0.7);
-        }
-        body.theme-crystalline input[type="checkbox"]:checked {
-            background-color: var(--crystalline-bg-hover) !important;
-            border-color: var(--crystalline-accent) !important;
-            accent-color: var(--crystalline-accent);
-        }
-        body.theme-crystalline input[type="checkbox"]:checked::after {
-            content: "";
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 3px;
-            height: 7px;
-            border: solid var(--crystalline-text);
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
-        body.theme-crystalline img[src$="Hitenc.png"]   { content: url("images/HitencWhite.png"); }
-        body.theme-crystalline img[src$="Critenc.png"]  { content: url("images/CritencWhite.png"); }
-        body.theme-crystalline img[src$="Skillenc.png"] { content: url("images/SkillencWhite.png"); }
-        body.theme-crystalline img[src$="Wyrdenc.png"]  { content: url("images/WyrdencWhite.png"); }
 
 /* =========================================================================
- SCOPED LAYERED PALADINIC THEME
-========================================================================= */
-body.theme-paladinic {
-            background-color: #b8c2ce !important;
-            color: #1e242b !important;
-            --paladinic-bg-deep: #b8c2ce;
-            --paladinic-bg-base: #d0d8e2;
-            --paladinic-bg-card: #e3e9f0;
-            --paladinic-bg-row: #edf1f6;
-            --paladinic-bg-input: #f7f9fc;
-            --paladinic-bg-hover: #efe6cd;
-            --paladinic-border: #b88e32;
-            --paladinic-text: #1e242b;
-            --paladinic-text-muted: #4d5764;
-            --paladinic-accent: #8f6610;
-            --primary-red: #b88e32;
-            --border-light: #b88e32;
-            --border-dark: #b88e32;
-            --accent-gold: #8f6610;
-            scrollbar-color: var(--paladinic-border) var(--paladinic-bg-deep);
-        }
+   2. SHARED DEFAULTS (Zero specificity so palettes always win)
+   ========================================================================= */
+body:where(.theme-dark, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
+    --theme-bg-elevated: var(--theme-bg-card);
+    --theme-bg-readonly: var(--theme-bg-deep);
+    --theme-bg-panel-nested: var(--theme-bg-hover);
+    --theme-bg-placeholder: var(--theme-bg-base);
+    --theme-bg-tcs-member: var(--theme-bg-base);
+    --theme-bg-tcs-close: var(--theme-bg-deep);
+    --theme-bg-select-option: var(--theme-bg-card);
+    --theme-bg-th: var(--theme-bg-hover);
+    --theme-th-text: var(--theme-accent);
+    --theme-shadow-row: var(--theme-shadow-card);
+    --theme-header-shadow: none;
+    --theme-checkbox-filter: invert(1) hue-rotate(180deg) brightness(0.7);
+    --theme-checkbox-after: "";
+    --theme-icon-hit: url("images/HitencWhite.png");
+    --theme-icon-crit: url("images/CritencWhite.png");
+    --theme-icon-skill: url("images/SkillencWhite.png");
+    --theme-icon-wyrd: url("images/WyrdencWhite.png");
+}
 
-        /* 1. Major Containers & Panels (Base Layer) */
-        body.theme-paladinic .container,
-        body.theme-paladinic .skills-tab-container,
-        body.theme-paladinic .char-modal,
-        body.theme-paladinic #sheet-settings-dropdown {
-            background-color: var(--paladinic-bg-base) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-body.theme-paladinic .builder-panel {
-            background-color: var(--paladinic-bg-card) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .aspect-card .builder-panel {
-            background-color: var(--paladinic-bg-row) !important;
-        }
-body.theme-paladinic .char-modal > div:first-child button {
-            color: var(--paladinic-text-muted) !important;
-        }
-        body.theme-paladinic .char-modal > div:first-child button:hover {
-            color: var(--paladinic-accent) !important;
-        }
-/* Override hardcoded yellow/cream compendium inspector cards & inner sheets */
-        body.theme-paladinic [id^="compendium-inspector-card-"],
-        body.theme-paladinic [id^="compendium-creature-sheet-container-"],
-        body.theme-paladinic #compendium-inspector-wrapper div[style*="background"] {
-            background-color: var(--paladinic-bg-card) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-/* 1b. Floating Windows, Tooltips & Popups */
-        body.theme-paladinic .tcs-tooltip,
-        body.theme-paladinic .tcs-floating-window,
-        body.theme-paladinic [id^="tcs-"] {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .tcs-member {
-            background-color: var(--paladinic-bg-card) !important;
-            border-color: var(--paladinic-border) !important;
-            border-left-color: var(--paladinic-accent) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .tcs-close-btn {
-            background-color: var(--paladinic-bg-input) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .tcs-close-btn:hover {
-            background-color: var(--paladinic-bg-hover) !important;
-            color: var(--paladinic-accent) !important;
-        }
-        body.theme-paladinic .tcs-title {
-            color: var(--paladinic-accent) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-        body.theme-paladinic .tcs-member-title,
-        body.theme-paladinic .tcs-meta,
-        body.theme-paladinic .tcs-desc,
-        body.theme-paladinic .tcs-extra {
-            color: var(--paladinic-text) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-        body.theme-paladinic .tcs-tooltip strong,
-        body.theme-paladinic .tcs-floating-window strong,
-        body.theme-paladinic .tcs-meta strong,
-        body.theme-paladinic .tcs-extra strong {
-            color: var(--paladinic-accent) !important;
-        }
-        /* 2. Cards, Items, & Components (Pop Layer) */
-        body.theme-paladinic .aspect-card,
-        body.theme-paladinic .enchant-group-box,
-        body.theme-paladinic .inventory-column-card,
-        body.theme-paladinic .pnp-resource-card,
-        body.theme-paladinic .pnp-offensive-skills-card,
-        body.theme-paladinic table.game-data,
-        body.theme-paladinic .skill-item,
-        body.theme-paladinic .skill-body,
-        body.theme-paladinic .skill-header,
-        body.theme-paladinic .pnp-header-bar,
-        body.theme-paladinic .pnp-sub-defenses-panel,
-        body.theme-paladinic .locus-slot-card,
-        body.theme-paladinic .placeholder-card,
-        body.theme-paladinic .mount-sheet-wrapper > div,
-        body.theme-paladinic #pets-master-container > div,
-        body.theme-paladinic .extra-training-box,
-        body.theme-paladinic [id^="compendium-inspector-card-"],
-        body.theme-paladinic #encounter-charts-section,
-        body.theme-paladinic #encounter-charts-section .skill-item,
-        body.theme-paladinic #encounter-charts-section .skill-body,
-        body.theme-paladinic #encounter-charts-section .skill-header,
-        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-item,
-        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-body,
-        body.theme-paladinic #tab-bazaar .bazaar-accordion .skill-header,
-        body.theme-paladinic #tab-skills .skill-accordion .skill-item,
-        body.theme-paladinic #tab-skills .skill-accordion .skill-body,
-        body.theme-paladinic #tab-skills .skill-accordion .skill-header,
-        body.theme-paladinic #tab-compendium .skill-accordion .skill-item,
-        body.theme-paladinic #tab-compendium .skill-accordion .skill-body,
-        body.theme-paladinic #tab-compendium .skill-accordion .skill-header,
-        body.theme-paladinic #encounter-display-grid > div,
-        body.theme-paladinic .locus-builder,
-        body.theme-paladinic .tab-btn {
-            background-color: var(--paladinic-bg-card) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 3px 6px -1px rgba(30, 36, 43, 0.14), 0 1px 3px rgba(184, 142, 50, 0.16) !important;
-        }
 
-body.theme-paladinic .tab-navigation { border-color: var(--paladinic-border) !important; }
+/* =========================================================================
+   3. SHARED THEME ENGINE
+   ========================================================================= */
+body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
+    --primary-red: var(--theme-border);
+    --border-light: var(--theme-border);
+    --border-dark: var(--theme-border);
+    --accent-gold: var(--theme-accent);
+    background-color: var(--theme-bg-deep) !important;
+    color: var(--theme-text) !important;
+    scrollbar-color: var(--theme-border) var(--theme-bg-deep);
 
-        /* Foreground Silver Slot Rows inside Cards */
-        body.theme-paladinic .pnp-weapon-slot-row,
-        body.theme-paladinic .pnp-gear-slot-row {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(30, 36, 43, 0.08) !important;
-        }
+    /* 1. Major Containers & Panels (Base Layer) */
+    & .container,
+    & .skills-tab-container,
+    & .char-modal,
+    & #sheet-settings-dropdown {
+        background-color: var(--theme-bg-base) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-body.theme-paladinic .pnp-subpace-field {
-            background-color: transparent !important;
-            border-color: var(--paladinic-border) !important;
-            box-shadow: none !important;
-        }
+    & .builder-panel {
+        background-color: var(--theme-bg-card) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-        body.theme-paladinic #compendium-creature-select option {
-            background-color: var(--paladinic-bg-input) !important;
-            color: var(--paladinic-text) !important;
-        }
+    & .aspect-card .builder-panel {
+        background-color: var(--theme-bg-panel-nested) !important;
+    }
 
-        body.theme-paladinic #compendium-inspector-wrapper button,
-        body.theme-paladinic .compendium-accordion button {
-            background-color: var(--paladinic-bg-row) !important;
-            border: 1px solid var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        
-        body.theme-paladinic #compendium-inspector-wrapper button:hover,
-        body.theme-paladinic .compendium-accordion button:hover {
-            background-color: var(--paladinic-bg-hover) !important;
-            color: var(--paladinic-accent) !important;
-        }
+    & .char-modal > div:first-child button {
+        color: var(--theme-text-muted) !important;
+    }
 
-/* 2b. Catch language pills / tags and hardcoded inline backgrounds */
-        body.theme-paladinic .aspect-card div[style*="background"],
-        body.theme-paladinic .skill-item div[style*="background"] {
-            background-color: var(--paladinic-bg-row) !important;
-            color: var(--paladinic-text) !important;
-            border-color: var(--paladinic-border) !important;
-        }
+    & .char-modal > div:first-child button:hover {
+        color: var(--theme-accent) !important;
+    }
 
-        /* Specific catch for language badges/pills if they use a class */
-        body.theme-paladinic span[style*="background"],
-        body.theme-paladinic div[style*="background: #eae6df"] {
-            background-color: var(--paladinic-bg-input) !important;
-            color: var(--paladinic-text) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-/* 2c. Weapon rows and Locus tags */
-        body.theme-paladinic .pnp-static-row {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
+    /* Override hardcoded compendium inspector cards & inner sheets */
+    & [id^="compendium-inspector-card-"],
+    & [id^="compendium-creature-sheet-container-"],
+    & #compendium-inspector-wrapper div[style*="background"] {
+        background-color: var(--theme-bg-card) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-        body.theme-paladinic .locus-ench-tag {
-            background-color: var(--paladinic-bg-input) !important;
-            border: 1px solid var(--paladinic-border) !important;
-            color: var(--paladinic-text-muted) !important;
-        }
-body.theme-paladinic .placeholder-card,
-        body.theme-paladinic #active-unlocked-skills-column .aspect-card {
-            background-color: #e3e9f0 !important;
-            box-shadow: none !important;
-        }
-        /* 3. Inputs & Form Controls */
-        body.theme-paladinic input:not([readonly]),
-        body.theme-paladinic select,
-        body.theme-paladinic textarea,
-        body.theme-paladinic .roll-input,
-        body.theme-paladinic .pnp-gear-dropdown,
-        body.theme-paladinic .pnp-pool-input,
-        body.theme-paladinic .locus-builder-select,
-        body.theme-paladinic #theme-selector {
-            background-color: var(--paladinic-bg-input) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .builder-btn,
-        body.theme-paladinic .builder-btn-cancel,
-        body.theme-paladinic input[readonly],
-        body.theme-paladinic .aspect-card input[readonly] {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-/* Override inline-styled buttons inside the settings dropdown */
-        body.theme-paladinic #sheet-settings-dropdown button,
-        body.theme-paladinic .builder-group div[style*="background"],
-        body.theme-paladinic .builder-panel div[style*="background"],
-        body.theme-paladinic div[style*="background: #fff"],
-        body.theme-paladinic div[style*="background:#fff"],
-        body.theme-paladinic div[style*="background: #ffffff"],
-        body.theme-paladinic div[style*="background:#ffffff"],
-        body.theme-paladinic .builder-group,
-        body.theme-paladinic .builder-group,
-        body.theme-paladinic .qualities-checklist {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
+& #compendium-inspector-wrapper div[style*="border"],
+    & .compendium-accordion div[style*="border"],
+    & #tab-skills .skill-accordion div[style*="border"],
+    & .compendium-cat-desc {
+        border-color: var(--theme-border) !important;
+    }
 
-body.theme-paladinic .pnp-edit-btn {
-            background-color: transparent !important;
-            border-color: transparent !important;
-            color: var(--paladinic-text-muted) !important;
-        }
-        body.theme-paladinic .pnp-edit-btn:hover {
-            background-color: transparent !important;
-            color: var(--paladinic-accent) !important;
-        }
+    /* 1b. Floating Windows, Tooltips & Popups */
+    & .tcs-tooltip,
+    & .tcs-floating-window,
+    & [id^="tcs-"] {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-body.theme-paladinic .builder-group {
-            background-color: transparent !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
+    & .tcs-member {
+        background-color: var(--theme-bg-tcs-member) !important;
+        border-color: var(--theme-border) !important;
+        border-left-color: var(--theme-accent) !important;
+        color: var(--theme-text) !important;
+    }
 
-        body.theme-paladinic #custom-weapon-fields-weapon-0 div[style*="border"],
-        body.theme-paladinic [id^="custom-weapon-fields-"] div[style*="border"] {
-            border-color: var(--paladinic-border) !important;
-        }
+    & .tcs-close-btn {
+        background-color: var(--theme-bg-tcs-close) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-        body.theme-paladinic #sheet-settings-dropdown button:hover {
-            background-color: var(--paladinic-bg-hover) !important;
-            color: var(--paladinic-accent) !important;
-        }
+    & .tcs-close-btn:hover {
+        background-color: var(--theme-bg-hover) !important;
+        color: var(--theme-accent) !important;
+    }
 
-        /* 4. Hovers & Active Interactive States */
-        body.theme-paladinic .skill-header:hover,
-        body.theme-paladinic .tab-btn:hover,
-        body.theme-paladinic .tab-btn.active,
-        body.theme-paladinic button[title="Sheet Settings"]:hover,
-        body.theme-paladinic #sheet-settings-dropdown button:hover,
-        body.theme-paladinic div[style*="background: #faf3e8"],
-        body.theme-paladinic [id^="compendium-inspector-card-"] button,
-        body.theme-paladinic .builder-btn:hover,
-        body.theme-paladinic .builder-btn-cancel:hover,
-        body.theme-paladinic .builder-btn-save:hover {
-            background-color: var(--paladinic-bg-hover) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-accent) !important;
-        }
+    & .tcs-title {
+        color: var(--theme-accent) !important;
+        border-color: var(--theme-border) !important;
+    }
 
-body.theme-paladinic table.game-data th {
-            background-color: var(--paladinic-bg-base) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-accent) !important; /* or var(--paladinic-text) for dark iron */
-        }
+    & .tcs-member-title,
+    & .tcs-meta,
+    & .tcs-desc,
+    & .tcs-extra {
+        color: var(--theme-text) !important;
+        border-color: var(--theme-border) !important;
+    }
 
-        body.theme-paladinic .builder-btn-save {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
+    & .tcs-tooltip strong,
+    & .tcs-floating-window strong,
+    & .tcs-meta strong,
+    & .tcs-extra strong {
+        color: var(--theme-accent) !important;
+    }
 
-        /* 5. Tables & Utility Rows */
-        body.theme-paladinic .char-list-item {
-            background-color: var(--paladinic-bg-row) !important;
-            border-bottom-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-        }
-        body.theme-paladinic .char-list-item:nth-child(even),
-        body.theme-paladinic table.game-data tr:nth-child(even) {
-            background-color: rgba(30, 36, 43, 0.04) !important;
-        }
-        body.theme-paladinic table.game-data tr:hover {
-            background-color: rgba(184, 142, 50, 0.14) !important;
-        }
-        body.theme-paladinic .sticky-xp-footer {
-            background-color: rgba(203, 212, 223, 0.94) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-        body.theme-paladinic .racial-bonus,
-        body.theme-paladinic .racial-penalty {
-            background-color: var(--paladinic-bg-row) !important;
-            color: var(--paladinic-text) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-        body.theme-paladinic button[title="Sheet Settings"],
-        body.theme-paladinic .btn-sm {
-            background-color: var(--paladinic-bg-row) !important;
-            border-color: var(--paladinic-border) !important;
-            color: var(--paladinic-text) !important;
-            box-shadow: 0 1px 3px rgba(30, 36, 43, 0.15) !important;
-        }
-        body.theme-paladinic #conditional-modifiers:not(:empty) {
-            background-color: var(--paladinic-bg-card) !important;
-            border-color: var(--paladinic-border) !important;
-        }
-        body.theme-paladinic .pnp-section-divider,
-        body.theme-paladinic .pnp-octagon {
-            border-color: var(--paladinic-border) !important;
-            background-color: var(--paladinic-bg-row) !important;
-            color: var(--paladinic-text) !important;
-        }
-body.theme-paladinic .pnp-offensive-writein-list > div,
-        body.theme-paladinic #pnp-writein-attacks > div {
-            border-color: var(--paladinic-border) !important;
-        }
+    /* 2. Cards, Items, & Components (Pop Layer) */
+    & .aspect-card,
+    & .enchant-group-box,
+    & .inventory-column-card,
+    & .pnp-resource-card,
+    & .pnp-offensive-skills-card,
+    & table.game-data,
+    & .skill-item,
+    & .skill-body,
+    & .skill-header,
+    & .pnp-header-bar,
+    & .pnp-sub-defenses-panel,
+    & .locus-slot-card,
+    & .mount-sheet-wrapper > div,
+    & #pets-master-container > div,
+    & .extra-training-box,
+    & [id^="compendium-inspector-card-"],
+    & #encounter-charts-section,
+    & #encounter-charts-section .skill-item,
+    & #encounter-charts-section .skill-body,
+    & #encounter-charts-section .skill-header,
+    & #tab-bazaar .bazaar-accordion .skill-item,
+    & #tab-bazaar .bazaar-accordion .skill-body,
+    & #tab-bazaar .bazaar-accordion .skill-header,
+    & #tab-skills .skill-accordion .skill-item,
+    & #tab-skills .skill-accordion .skill-body,
+    & #tab-skills .skill-accordion .skill-header,
+    & #tab-compendium .skill-accordion .skill-item,
+    & #tab-compendium .skill-accordion .skill-body,
+    & #tab-compendium .skill-accordion .skill-header,
+    & #encounter-display-grid > div,
+    & .locus-builder,
+    & .tab-btn {
+        background-color: var(--theme-bg-card) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+        box-shadow: var(--theme-shadow-card) !important;
+    }
 
-        /* 6. Typography & Text Hierarchy */
-        body.theme-paladinic label,
-        body.theme-paladinic span,
-        body.theme-paladinic div,
-        body.theme-paladinic p,
-        body.theme-paladinic li,
-        body.theme-paladinic table.game-data td,
-        body.theme-paladinic table.game-data th,
-        body.theme-paladinic .pnp-header-field span,
-        body.theme-paladinic .pnp-aspect-label,
-        body.theme-paladinic .pnp-pool-val,
-        body.theme-paladinic .pnp-subpace-field span,
-        body.theme-paladinic .skill-title,
-        body.theme-paladinic .dice-pool-output,
-        body.theme-paladinic .skill-name-lbl,
-        body.theme-paladinic .aspect-static {
-            color: var(--paladinic-text) !important;
-        }
+    & .tab-navigation {
+        border-color: var(--theme-border) !important;
+    }
 
-/* Metallic Gold Accent Headers & Section Titles */
-        body.theme-paladinic h1,
-        body.theme-paladinic h2,
-        body.theme-paladinic h3,
-        body.theme-paladinic h4,
-        body.theme-paladinic .skills-section-header span,
-        body.theme-paladinic .pnp-resource-header,
-        body.theme-paladinic .pnp-col-header,
-        body.theme-paladinic .pnp-section-title,
-        body.theme-paladinic .char-modal h3,
-        body.theme-paladinic .section-header,
-        body.theme-paladinic .enchant-group-title,
-        body.theme-paladinic .inventory-column-title {
-            color: var(--paladinic-accent) !important;
-            text-shadow: 0 1px 0 rgba(255, 250, 232, 0.75), 0 1px 2px rgba(24, 30, 38, 0.25);
-            border-color: var(--paladinic-border) !important;
-        }
+    & .pnp-weapon-slot-row,
+    & .pnp-gear-slot-row {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+        box-shadow: var(--theme-shadow-row) !important;
+    }
 
-        body.theme-paladinic .hint,
-        body.theme-paladinic .pnp-empty-line,
-        body.theme-paladinic .pnp-resource-field label,
-        body.theme-paladinic .pnp-subpace-field label,
-        body.theme-paladinic .pnp-header-field label,
-        body.theme-paladinic .placeholder-card,
-        body.theme-paladinic #active-unlocked-skills-column .aspect-card,
-        body.theme-paladinic .aspect-card .hint,
-        body.theme-paladinic #tab-bazaar li div span:last-child {
-            color: var(--paladinic-text-muted) !important;
-        }
+    & .pnp-subpace-field {
+        background-color: transparent !important;
+        border-color: var(--theme-border) !important;
+        box-shadow: none !important;
+    }
 
-body.theme-paladinic .pnp-empty-line {
-            border-color: var(--paladinic-border) !important;
-        }
+    & #compendium-creature-select option {
+        background-color: var(--theme-bg-select-option) !important;
+        color: var(--theme-text) !important;
+    }
 
-/* 6b. Catch inline-colored text elements (e.g., armor/weapon cards) */
-        body.theme-paladinic strong[style*="color"],
-        body.theme-paladinic span[style*="color"],
-        body.theme-paladinic div[style*="color"] {
-            color: var(--paladinic-text) !important;
-        }
+    & #compendium-inspector-wrapper button,
+    & .compendium-accordion button {
+        background-color: var(--theme-bg-elevated) !important;
+        border: 1px solid var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
 
-        /* If specific labels need to stay muted/accented */
-        body.theme-paladinic span[style*="color: #7c6f64"],
-        body.theme-paladinic strong[style*="color: #5c1d1d"] {
-            color: var(--paladinic-text-muted) !important;
-        }
+    & #compendium-inspector-wrapper button:hover,
+    & .compendium-accordion button:hover {
+        background-color: var(--theme-bg-hover) !important;
+        color: var(--theme-accent) !important;
+    }
 
-        /* 7. Scoped Checkboxes & Scrollbars */
-        body.theme-paladinic ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        body.theme-paladinic ::-webkit-scrollbar-track {
-            background: var(--paladinic-bg-deep);
-        }
-        body.theme-paladinic ::-webkit-scrollbar-thumb {
-            background: var(--paladinic-border);
-            border-radius: 4px;
-        }
-        body.theme-paladinic input[type="checkbox"] {
-            width: 13px !important;
-            height: 13px !important;
-            min-width: 13px !important;
-            min-height: 13px !important;
-            background-color: var(--paladinic-bg-input) !important;
-            border: 1px solid var(--paladinic-border) !important;
-            border-radius: 2px !important;
-            margin: 0 4px !important;
-            vertical-align: middle !important;
-            cursor: pointer;
-        }
-        body.theme-paladinic input[type="checkbox"]:checked {
-            background-color: var(--paladinic-bg-hover) !important;
-            border-color: var(--paladinic-accent) !important;
-            accent-color: var(--paladinic-accent);
-        }
-        body.theme-paladinic input[type="checkbox"]:checked::after {
-            content: "";
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 3px;
-            height: 7px;
-            border: solid var(--paladinic-text);
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
+    /* 2b. Language pills / tags and hardcoded inline backgrounds */
+    & .aspect-card div[style*="background"],
+    & .skill-item div[style*="background"] {
+        background-color: var(--theme-bg-readonly) !important;
+        color: var(--theme-text) !important;
+        border-color: var(--theme-border) !important;
+    }
+
+    & span[style*="background"],
+    & div[style*="background: #eae6df"] {
+        background-color: var(--theme-bg-input) !important;
+        color: var(--theme-text) !important;
+        border-color: var(--theme-border) !important;
+    }
+
+    /* 2c. Weapon rows, Locus tags & Placeholders */
+    & .pnp-static-row {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .locus-ench-tag {
+        background-color: var(--theme-bg-input) !important;
+        border: 1px solid var(--theme-border) !important;
+        color: var(--theme-text-muted) !important;
+    }
+
+    & .placeholder-card,
+    & #active-unlocked-skills-column .aspect-card {
+        background-color: var(--theme-bg-placeholder) !important;
+        border-color: var(--theme-border) !important;
+        box-shadow: none !important;
+    }
+
+    /* 3. Inputs & Form Controls */
+    & input:not([readonly]),
+    & select,
+    & textarea,
+    & .roll-input,
+    & .pnp-gear-dropdown,
+    & .pnp-pool-input,
+    & .locus-builder-select,
+    & #theme-selector {
+        background-color: var(--theme-bg-input) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .builder-btn,
+    & .builder-btn-cancel,
+    & input[readonly],
+    & .aspect-card input[readonly] {
+        background-color: var(--theme-bg-readonly) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & #sheet-settings-dropdown button,
+    & .builder-group div[style*="background"],
+    & .builder-panel div[style*="background"],
+    & div[style*="background: #fff"],
+    & div[style*="background:#fff"],
+    & div[style*="background: #ffffff"],
+    & div[style*="background:#ffffff"],
+    & .qualities-checklist {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .pnp-edit-btn {
+        background-color: transparent !important;
+        border-color: transparent !important;
+        color: var(--theme-text-muted) !important;
+    }
+
+    & .pnp-edit-btn:hover {
+        background-color: transparent !important;
+        color: var(--theme-accent) !important;
+    }
+
+    & .builder-group {
+        background-color: transparent !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & #custom-weapon-fields-weapon-0 div[style*="border"],
+    & [id^="custom-weapon-fields-"] div[style*="border"] {
+        border-color: var(--theme-border) !important;
+    }
+
+    /* 4. Hovers & Active Interactive States */
+    & .skill-header:hover,
+    & .tab-btn:hover,
+    & .tab-btn.active,
+    & button[title="Sheet Settings"]:hover,
+    & #sheet-settings-dropdown button:hover,
+    & div[style*="background: #faf3e8"],
+    & [id^="compendium-inspector-card-"] button,
+    & .builder-btn:hover,
+    & .builder-btn-cancel:hover,
+    & .builder-btn-save:hover {
+        background-color: var(--theme-bg-hover) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-accent) !important;
+    }
+
+    & table.game-data th {
+        background-color: var(--theme-bg-th) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-th-text) !important;
+    }
+
+    & .builder-btn-save {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    /* 5. Tables & Utility Rows */
+    & .char-list-item {
+        background-color: var(--theme-bg-elevated) !important;
+        border-bottom-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .char-list-item:nth-child(even),
+    & table.game-data tr:nth-child(even) {
+        background-color: var(--theme-row-even) !important;
+    }
+
+    & table.game-data tr:hover {
+        background-color: var(--theme-row-hover) !important;
+    }
+
+    & .sticky-xp-footer {
+        background-color: var(--theme-bg-footer) !important;
+        border-color: var(--theme-border) !important;
+    }
+
+    & .racial-bonus,
+    & .racial-penalty {
+        background-color: var(--theme-bg-elevated) !important;
+        color: var(--theme-text) !important;
+        border-color: var(--theme-border) !important;
+    }
+
+    & button[title="Sheet Settings"],
+    & .btn-sm {
+        background-color: var(--theme-bg-elevated) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+        box-shadow: var(--theme-shadow-btn) !important;
+    }
+
+    & #conditional-modifiers:not(:empty) {
+        background-color: var(--theme-bg-card) !important;
+        border-color: var(--theme-border) !important;
+    }
+
+    & .pnp-section-divider,
+    & .pnp-octagon {
+        border-color: var(--theme-border) !important;
+        background-color: var(--theme-bg-elevated) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .pnp-offensive-writein-list > div,
+    & #pnp-writein-attacks > div {
+        border-color: var(--theme-border) !important;
+    }
+
+    /* 6. Typography & Text Hierarchy */
+    & label,
+    & span,
+    & div,
+    & p,
+    & li,
+    & table.game-data td,
+    & .pnp-header-field span,
+    & .pnp-aspect-label,
+    & .pnp-pool-val,
+    & .pnp-subpace-field span,
+    & .skill-title,
+    & .dice-pool-output,
+    & .skill-name-lbl,
+    & .aspect-static {
+        color: var(--theme-text) !important;
+    }
+
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & .skills-section-header span,
+    & .pnp-resource-header,
+    & .pnp-col-header,
+    & .pnp-section-title,
+    & .char-modal h3,
+    & .section-header,
+    & .enchant-group-title,
+    & .inventory-column-title {
+        color: var(--theme-accent) !important;
+        text-shadow: var(--theme-header-shadow);
+        border-color: var(--theme-border) !important;
+    }
+
+    & .hint,
+    & .pnp-empty-line,
+    & .pnp-resource-field label,
+    & .pnp-subpace-field label,
+    & .pnp-header-field label,
+    & .placeholder-card,
+    & #active-unlocked-skills-column .aspect-card,
+    & .aspect-card .hint,
+    & #tab-bazaar li div span:last-child {
+        color: var(--theme-text-muted) !important;
+    }
+
+    & .pnp-empty-line {
+        border-color: var(--theme-border) !important;
+    }
+
+    /* 6b. Inline-colored text elements */
+    & strong[style*="color"],
+    & span[style*="color"],
+    & div[style*="color"] {
+        color: var(--theme-text) !important;
+    }
+
+    & span[style*="color: #7c6f64"],
+    & strong[style*="color: #5c1d1d"] {
+        color: var(--theme-text-muted) !important;
+    }
+
+    /* 7. Scrollbars, Checkboxes & Icons */
+    & ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    & ::-webkit-scrollbar-track {
+        background: var(--theme-bg-deep);
+    }
+
+    & ::-webkit-scrollbar-thumb {
+        background: var(--theme-border);
+        border-radius: 4px;
+    }
+
+    & input[type="checkbox"] {
+        width: 13px !important;
+        height: 13px !important;
+        min-width: 13px !important;
+        min-height: 13px !important;
+        background-color: var(--theme-bg-input) !important;
+        border: 1px solid var(--theme-border) !important;
+        border-radius: 2px !important;
+        margin: 0 4px !important;
+        vertical-align: middle !important;
+        cursor: pointer;
+        accent-color: var(--theme-accent);
+        filter: var(--theme-checkbox-filter);
+    }
+
+    & input[type="checkbox"]:checked {
+        background-color: var(--theme-bg-hover) !important;
+        border-color: var(--theme-accent) !important;
+        accent-color: var(--theme-accent);
+    }
+
+    & input[type="checkbox"]:checked::after {
+        content: var(--theme-checkbox-after);
+        position: absolute;
+        left: 4px;
+        top: 1px;
+        width: 3px;
+        height: 7px;
+        border: solid var(--theme-text);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    & img[src$="Hitenc.png"]   { content: var(--theme-icon-hit); }
+    & img[src$="Critenc.png"]  { content: var(--theme-icon-crit); }
+    & img[src$="Skillenc.png"] { content: var(--theme-icon-skill); }
+    & img[src$="Wyrdenc.png"]  { content: var(--theme-icon-wyrd); }
+}
 
         /* =========================================================================
            1. BASE STYLES & LAYOUT CONTAINERS
@@ -3322,19 +2688,28 @@ details[open] #skills-collapsed-summary {
     <div style="position: relative;">
         <button type="button" onclick="toggleSettingsMenu(event)" title="Sheet Settings" style="position: absolute; right: 0; top: 10px; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); z-index: 10; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Manage Sheet</button>
         
-        <!-- Dropdown Panel -->
+<!-- Dropdown Panel -->
         <div id="sheet-settings-dropdown" style="display: none; position: absolute; right: 0; top: 38px; background: #fff; border: 1px solid var(--border-dark); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 12px; width: 220px; box-sizing: border-box; z-index: 101;">
             
             <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="light">Light Theme</option>
                 <option value="dark">Dark Theme</option>
+                <option value="cosmic">Cosmic Theme</option>
                 <option value="crystalline">Crystalline Theme</option>
+                <option value="forest">Forest Theme</option>
+                <option value="magmatic">Magmatic Theme</option>
                 <option value="paladinic">Paladinic Theme</option>
+                <option value="rose-gold">Rose Gold Theme</option>
             </select>
 
-            <button onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
+            <button type="button" onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; margin-bottom: 12px; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
                 Manage Characters
             </button>
+
+<label class="btn-sm" style="display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; margin-bottom: 0; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
+                <input type="checkbox" id="bypass-prerequisites-toggle" onchange="setPrerequisiteBypass(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
+                <span>Ignore Skill Prerequisites</span>
+            </label>
             
         </div>
     </div>
@@ -10690,13 +10065,14 @@ const tooltipRegistry = {
     "transfer_mana": {
         title: "Transfer Mana",
         action_type: "Cast",
-        description: "You can channel Mana into or from another Mana pool."
+        description: "You can channel Mana into or from another Mana pool.",
+        extras: [{"label": "Surge", "text": "You can transfer a desired amount of Mana at once at a cost of two to one."}]
     },
     "dispel_magic": {
         title: "Dispel Magic",
         action_type: "Cast + Skill Check [Verve]",
         description: "You can dispel ephemeral, non-temple magical effects or channel the spell to suppress the magic on enchanted objects. This spell is confronted by a Verve Save.",
-        extras: [{"label": "Encænium", "text": "Against non-ceremonial spells, you roll to dispel twice and take the better result."},{"label": "Rite [Disenchantment]", "text": "You can break permanent magical effects."}]
+        extras: [{"label": "Rite [Disenchantment]", "text": "You can break permanent magical effects."}, {"label": "Surge", "text": "Your cc is increased by one per six additional Mana spent."}]
     },
     "tongues": {
         title: "Tongues",
@@ -11736,7 +11112,8 @@ const tooltipRegistry = {
   "arcane_armor": {
     title: "Arcane Armor",
     actionType: "Cast",
-    description: "You are fully enveloped in magical force that adds your Verve to your DR and your Rank to your Crit Count for Verve rounds."
+    description: "You are fully enveloped in magical force that adds your Verve to your DR and your Rank to your Crit Count for Verve rounds.",
+    extras: [{"label": "Surge", "text": "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "picket_line": {
     title: "Picket Line",
@@ -11748,7 +11125,7 @@ const tooltipRegistry = {
     title: "Sanctum",
     actionType: "Cast + Skill Check [Verve]",
     description: "You prevent all foes from attacking you for Verve rounds unless they pass a Verve save. Directly attacking a foe breaks the effect.",
-    extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}]
+    extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}, {"label": "Surge", "text": "The cc of Turn Blade is increased by one per six additional Mana spent."}]
   },
   "abjure_creature": {
     title: "Abjure Creature",
@@ -11760,28 +11137,31 @@ const tooltipRegistry = {
     title: "Abjure Energy",
     actionType: "Cast",
     description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to a specified battle magic energy type for Verve rounds. You can cast this spell multiple times per target, but a new energy type must be chosen.",
-    extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}]
+    extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}, {"label": "Surge", "text": "The conferred Resistance is increased to Immunity for one Pulse per six additional Mana spent."}]
   },
   "abjure_wound": {
     title: "Abjure Wound",
     actionType: "Cast",
     description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to physical damage for Verve rounds.",
-    extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}]
+    extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}, {"label": "Surge", "text": "The conferred Resistance is increased to Immunity for one Pulse per six additional Mana spent."}]
   },
   "arcane_seal": {
     title: "Arcane Seal",
     actionType: "Cast + Skill Check [Verve]",
-    description: "Your target, who must be within thrice your Verve hexes of you, cannot spend any mana. The target is entitled to a Verve save each Round to negate."
+    description: "Your target, who must be within thrice your Verve hexes of you, cannot spend any mana. The target is entitled to a Verve save each Round to negate.",
+    extras: [{"label": "Surge", "text": "Your cc is increased by one per each six additional Mana spent."}]
   },
   "abjure_death": {
     title: "Abjure Death",
     actionType: "Cast",
-    description: "You enchant a Manastone such that if worn, it will stabilize the wearer and heal them an amount of Vitality equal to its stored Mana upon them suffering damage that would have killed them. After taking effect, roll a Hap save, TN 1 per three Mana spent; if you fail, the Manastone explodes."
+    description: "For Verve Pulses, if your target suffers mortal damage, they are instead stabilized at Rank points away from death. This happens only once.",
+    extras: [{"label": "Rite", "text": "You enchant a Manastone such that if worn, it will stabilize the wearer and heal them an amount of Vitality equal to its stored Mana upon them suffering damage that would have killed them. After taking effect, roll a Hap save, TN 1 per three Mana spent; if you fail, the Manastone explodes."}, {"label": "Surge", "text": "Your target is stabilized at an additional Rank points away from death per six additional Mana spent."}]
   },
   "arcane_dart": {
     title: "Arcane Dart",
     actionType: "Cast + Attack",
-    description: "You can throw a fistfull of arcane force at a target dealing Verve + Rank dice of damage; change all <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result."
+    description: "You can throw a fistfull of arcane force at a target dealing Verve + Rank dice of damage; change all rolled <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result.",
+    extras: [{"label": "Surge", "text": "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per each six additional Mana spent."}]
   },
   "arcane_lock": {
     title: "Arcane Lock",
@@ -11792,7 +11172,8 @@ const tooltipRegistry = {
   "shockwave": {
     title: "Shockwave",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You shove all targets within Verve hexes directly away from you to the point that they are no closer than Verve hexes from you. Any damage suffered because of this spell is considered a calamity. Targets who fail a Dexterity Save are knocked down, whether prone or supine is determined by the LM."
+    description: "You shove all size C or smaller targets within Verve hexes directly away from you to the point that they are no closer than Verve hexes from you. Any damage suffered because of this spell is considered a calamity. Targets who fail a Dexterity Save are knocked down, whether prone or supine is determined by the LM.",
+    extras: [{"label": "Surge", "text": "Targets suffer Verve + Rank dice of damage per six additional Mana spent."}]
   },
   "arcane_wall": {
     title: "Arcane Wall",
@@ -11803,7 +11184,8 @@ const tooltipRegistry = {
   "arcane_vortex": {
     title: "Arcane Vortex",
     actionType: "Cast + Attack",
-    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled."
+    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled.",
+    extras: [{"label": "Surge", "text": "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per each six additional Mana spent."}]
   },
   "dismiss_undead": {
     title: "Dismiss Undead",
@@ -13647,6 +13029,51 @@ const xpCosts = {
         50: 7650
     };
 
+if (typeof characterChoicesState !== "undefined" && characterChoicesState.bypassPrerequisites === undefined) {
+    characterChoicesState.bypassPrerequisites = false;
+}
+
+window.isPrerequisiteBypassActive = function() {
+    if (typeof characterChoicesState !== "undefined" && characterChoicesState.bypassPrerequisites !== undefined) {
+        const isActive = !!characterChoicesState.bypassPrerequisites;
+        const checkbox = document.getElementById("bypass-prerequisites-toggle");
+        if (checkbox && checkbox.checked !== isActive) {
+            checkbox.checked = isActive;
+        }
+        return isActive;
+    }
+    const checkbox = document.getElementById("bypass-prerequisites-toggle");
+    return !!(checkbox && checkbox.checked);
+};
+
+window.setPrerequisiteBypass = function(enabled) {
+    const isEnabled = !!enabled;
+    if (typeof characterChoicesState !== "undefined") {
+        characterChoicesState.bypassPrerequisites = isEnabled;
+    }
+
+    const checkbox = document.getElementById("bypass-prerequisites-toggle");
+    if (checkbox) {
+        checkbox.checked = isEnabled;
+    }
+
+    // Clear any existing Intellect cap warnings immediately when enabled
+    if (isEnabled) {
+        document.querySelectorAll(".intellect-cap-warning").forEach(el => el.remove());
+    }
+
+    // Re-run sheet calculations/UI updates so unlocked guild & Rank 3+ cards refresh
+if (typeof calculateSheet?.flush === "function") {
+        calculateSheet.flush();
+    } else if (typeof calculateSheet === "function") {
+        calculateSheet();
+    }
+};
+
+window.togglePrerequisiteBypass = function() {
+    window.setPrerequisiteBypass(!window.isPrerequisiteBypassActive());
+};
+
     // Master dictionary mapping specialized skill tracks straight to their Upbringing/Guild prerequisites
 const guildControlAccessRegistry = {
     collegeInitiateRequired: [
@@ -13679,7 +13106,7 @@ function getUnlockedGuildControls(upbringing, race) {
     // Check if either parameter contains "dragon" to guard against swapped arguments
     const isDragon = strArg1.includes("dragon") || strArg2.includes("dragon");
 
-    if (isDragon) {
+    if (isDragon || (typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive())) {
         return Object.values(guildControlAccessRegistry).flat();
     }
 
@@ -13764,6 +13191,17 @@ function getSkillTreeLevel(treeId) {
 }
 
 function checkPrerequisiteAccess(sanitizedKey, currentUpbringing) {
+    if (typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive()) {
+        const normalizedKey = sanitizedKey.toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
+        const inputEl = document.getElementById("sk-xp-" + normalizedKey);
+        if (inputEl) {
+            const cardContainer = inputEl.closest(".aspect-card") || inputEl.parentElement;
+            const warningEl = cardContainer?.querySelector(".intellect-cap-warning");
+            if (warningEl) warningEl.remove();
+        }
+        return { permitted: true };
+    }
+
     // 1. Fetch live Rank Exp. spent to check character rank tier
     let rankXp = 0;
     if (typeof rankXpSpent !== 'undefined') {
@@ -14973,16 +14411,17 @@ const processSkillList = (skillArray, defaultCost, isGuildCastGroup) => {
         const inputElement = document.getElementById(fieldId);
         const currentUpbringing = document.getElementById("char-upbringing") ? document.getElementById("char-upbringing").value.toLowerCase() : "";
 
-        // Check if character race is a dragon
+// Check if character race is a dragon
         const raceSelect = document.getElementById("char-race");
         const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
         const isDragon = currentRace.includes("dragon");
+        const bypassActive = typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive();
 
         let isAccessPermitted = true;
         let accessDenialReason = "";
 
-        // Only enforce guild/upbringing restrictions if NOT a dragon
-        if (isGuildCastGroup && !isDragon) {
+        // Only enforce guild/upbringing restrictions if NOT a dragon and bypass is OFF
+        if (isGuildCastGroup && !isDragon && !bypassActive) {
             if (guildControlAccessRegistry.collegeInitiateRequired.includes(sanitizedKey) && currentUpbringing !== "college initiate") {
                 if (sanitizedKey.startsWith("battle magic:")) {
                     const currentXp = inputElement ? parseInt(inputElement.value) || 0 : 0;
@@ -17160,7 +16599,8 @@ function renderRank3Cards() {
     const rankInput = document.getElementById("char-rank-input-xp") || document.getElementById("rank-xp") || document.querySelector("input[id*='rank']");
     const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
 
-    const isUnlocked = rankXp >= 18;
+    const bypassActive = typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive();
+    const isUnlocked = rankXp >= 18 || bypassActive;
     restrictedGrid.style.opacity = isUnlocked ? "1" : "0.6";
 
     // TRACK STATE: Check if the grid's lock status matches the actual state to avoid rendering loops
@@ -17274,6 +16714,10 @@ function toggleRank3Unlock(checked) {
 
   // Global verification rule function allowing Tab 4 to see if a Guild or Cast skill tree's current level is locked out by controls
 window.isGuildAccessBlockedForLevel = function(treeKey, targetLevel) {
+    if (typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive()) {
+        return false;
+    }
+
     // Dragons bypass all guild/upbringing skill blockade levels entirely
     const raceSelect = document.getElementById("char-race");
     const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
@@ -17302,6 +16746,9 @@ window.isGuildAccessBlockedForLevel = function(treeKey, targetLevel) {
   
   // Master engine checking if a character meets the strict rulebook prerequisites for Rank 3+ tracks
 window.verifyRank3PrerequisitesMet = function(advancedTreeKey) {
+    if (typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive()) {
+        return true;
+    }
     // 1. All Rank 3+ tracks fundamentally require Character Rank 3+ via Section 6
     const rankInputField = document.getElementById("char-rank-input-xp");
     const rankXp = rankInputField ? parseInt(rankInputField.value) || 0 : 0;
@@ -21532,23 +20979,25 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
                 .replace(/[^a-z0-9]+/g, "_")
                 .replace(/^_+|_+$/g, "");
                 
-// Redirect natural attacks to their base keys for tooltip registry mapping
-            if (cleanKey.startsWith("bite_canivir")) cleanKey = "bite_canivir";
-            else if (cleanKey.startsWith("bite_felivir")) cleanKey = "bite_felivir";
-            else if (cleanKey.startsWith("bite_vulpivir")) cleanKey = "bite_vulpivir";
-            else if (cleanKey.startsWith("bite_crush_slash")) cleanKey = "bite_crush_slash";
-            else if (cleanKey.startsWith("bite_envenom")) cleanKey = "bite_envenom";
-            else if (cleanKey.startsWith("bite")) cleanKey = "bite";
-            else if (cleanKey.startsWith("punch")) cleanKey = "punch";
-            else if (cleanKey.startsWith("kick")) cleanKey = "kick";
-            else if (cleanKey.startsWith("trample")) cleanKey = "trample";
-            else if (cleanKey.startsWith("gore_thrust")) cleanKey = "gore_thrust";
-            else if (cleanKey.startsWith("gore")) cleanKey = "gore";
-            else if (cleanKey.startsWith("sting")) cleanKey = "sting";
-            else if (cleanKey.startsWith("rend_maim")) cleanKey = "rend_maim";
-            else if (cleanKey.startsWith("rend")) cleanKey = "rend";
-            else if (cleanKey.startsWith("slam")) cleanKey = "slam";
-            else if (cleanKey.startsWith("claw")) cleanKey = "claw_crush";
+// Only fall back to natural-attack base keys if cleanKey isn't already an exact registry entry
+            if (typeof tooltipRegistry === "undefined" || !tooltipRegistry[cleanKey]) {
+                if (cleanKey.startsWith("bite_canivir")) cleanKey = "bite_canivir";
+                else if (cleanKey.startsWith("bite_felivir")) cleanKey = "bite_felivir";
+                else if (cleanKey.startsWith("bite_vulpivir")) cleanKey = "bite_vulpivir";
+                else if (cleanKey.startsWith("bite_crush_slash")) cleanKey = "bite_crush_slash";
+                else if (cleanKey.startsWith("bite_envenom")) cleanKey = "bite_envenom";
+                else if (cleanKey.startsWith("bite")) cleanKey = "bite";
+                else if (cleanKey.startsWith("punch")) cleanKey = "punch";
+                else if (cleanKey.startsWith("kick")) cleanKey = "kick";
+                else if (cleanKey.startsWith("trample")) cleanKey = "trample";
+                else if (cleanKey.startsWith("gore_thrust")) cleanKey = "gore_thrust";
+                else if (cleanKey.startsWith("gore")) cleanKey = "gore";
+                else if (cleanKey.startsWith("sting")) cleanKey = "sting";
+                else if (cleanKey.startsWith("rend_maim")) cleanKey = "rend_maim";
+                else if (cleanKey.startsWith("rend")) cleanKey = "rend";
+                else if (cleanKey.startsWith("slam")) cleanKey = "slam";
+                else if (cleanKey.startsWith("claw")) cleanKey = "claw_crush";
+            }
 
             let displayItem = item;
             
@@ -24138,6 +23587,13 @@ function importCharacterData(data) {
         Object.assign(characterChoicesState, JSON.parse(JSON.stringify(data.state)));
     }
 
+if (data.state) {
+        Object.assign(characterChoicesState, JSON.parse(JSON.stringify(data.state)));
+        if (data.state.bypassPrerequisites === undefined) {
+            characterChoicesState.bypassPrerequisites = false;
+        }
+    }
+
     // 3. Restore Core Identity Inputs first (so char-upbringing, char-race, etc. are set in DOM)
     if (data.inputs) {
         ["char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-deity", "char-rank-input-xp", "char-xp-awarded", "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap", "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver", "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current", "char-native-lang", "char-pidgin-select"].forEach(id => {
@@ -24500,7 +23956,8 @@ function validateTalentSelections() {
 }
 
 function validateRankLock(rankXp) {
-    const isRank3Plus = rankXp >= 18;
+    const bypassActive = typeof window.isPrerequisiteBypassActive === "function" && window.isPrerequisiteBypassActive();
+    const isRank3Plus = rankXp >= 18 || bypassActive;
     if (!isRank3Plus) {
         // Clear all restricted/mastery XP inputs when Rank drops below 3
         if (typeof restrictedPostCreationTrees !== 'undefined') {
@@ -24992,8 +24449,9 @@ function renderCustomSkillBuilderForm(idx, skill) {
             </div>
         </div>
         <div class="builder-actions" style="margin-top: 10px;">
-            <button type="button" class="builder-btn builder-btn-cancel" onclick="toggleCustomSkillBuilder(${idx})">Close</button>
-            <button type="button" class="builder-btn builder-btn-save" onclick="saveCustomSkill(${idx})">Save</button>
+            <button type="button" class="builder-btn" onclick="toggleCustomSkillBuilder(${idx})">Close</button>
+            <button type="button" class="builder-btn" onclick="saveCustomSkill(${idx})">Save</button>
+            <button type="button" class="builder-btn" onclick="deleteCustomSkill(${idx})">Delete</button>
         </div>
     `;
 }
@@ -25079,6 +24537,43 @@ function registerCustomSkillsTooltips() {
         };
     });
 }
+
+window.deleteCustomSkill = function(idx) {
+    if (!Array.isArray(characterChoicesState.customSkills) || !characterChoicesState.customSkills[idx]) {
+        return;
+    }
+
+    const skillToDelete = characterChoicesState.customSkills[idx];
+    if (!confirm(`Delete custom skill "${skillToDelete.name}"?`)) {
+        return;
+    }
+
+    const oldKey = skillToDelete.name.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+
+    // Remove the skill and re-index remaining IDs
+    characterChoicesState.customSkills.splice(idx, 1);
+    characterChoicesState.customSkills.forEach((s, i) => {
+        s.id = i;
+    });
+
+    // Clean up tooltip & training state if no other custom skill uses the same key
+    const keyStillInUse = characterChoicesState.customSkills.some(
+        s => s.name.toLowerCase().replace(/[^a-z0-9]+/g, "_") === oldKey
+    );
+    if (!keyStillInUse) {
+        if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[oldKey]) {
+            delete tooltipRegistry[oldKey];
+        }
+        if (characterChoicesState.extraTrainingSelections?.[oldKey]) {
+            delete characterChoicesState.extraTrainingSelections[oldKey];
+        }
+    }
+
+    renderCustomSkillsManager();
+    registerCustomSkillsTooltips();
+    if (typeof refreshCustomSkillRows === "function") refreshCustomSkillRows();
+    if (typeof calculateSheet === "function") calculateSheet();
+};
 
 window.refreshCustomSkillRows = function() {
     const customSkills = (typeof window.getCustomSkills === "function") ? window.getCustomSkills() : [];
@@ -29756,7 +29251,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-crystalline', 'theme-paladinic');
+    document.body.classList.remove('theme-dark', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-magmatic', 'theme-paladinic', 'theme-rose-gold');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
