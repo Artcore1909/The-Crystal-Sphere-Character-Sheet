@@ -118,10 +118,10 @@ body.theme-forest {
     --theme-bg-base: #1d2b22;
     --theme-bg-card: #283728;
     --theme-bg-elevated: #283728;
-    --theme-bg-panel-nested: #3e2a1c;
+    --theme-bg-panel-nested: ##283728;
     --theme-bg-input: #141e18;
     --theme-bg-hover: #3a4a2f;
-    --theme-bg-th: #5a3b26;
+    --theme-bg-th: #2F3C2C;
     --theme-th-text: #b8a77a;
     --theme-bg-footer: rgba(29, 43, 34, 0.92);
     --theme-border: #6f6a3b;
@@ -256,6 +256,7 @@ body:where(.theme-dark, .theme-crystalline, .theme-forest, .theme-magmatic, .the
 body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
+    --border-warm: var(--theme-border);
     --border-dark: var(--theme-border);
     --accent-gold: var(--theme-accent);
     background-color: var(--theme-bg-deep) !important;
@@ -302,6 +303,8 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
 & #compendium-inspector-wrapper div[style*="border"],
     & .compendium-accordion div[style*="border"],
     & #tab-skills .skill-accordion div[style*="border"],
+    & #mount-mini-sheet-container div[style*="border"],
+    & #pets-master-container div[style*="border"],
     & .compendium-cat-desc {
         border-color: var(--theme-border) !important;
     }
@@ -355,6 +358,7 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
 
     /* 2. Cards, Items, & Components (Pop Layer) */
     & .aspect-card,
+    & .creation-skill-drawer,
     & .enchant-group-box,
     & .inventory-column-card,
     & .pnp-resource-card,
@@ -541,6 +545,11 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
         background-color: var(--theme-bg-th) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-th-text) !important;
+    }
+
+& table.game-data td,
+    & table.game-data div[style*="border"] {
+        border-color: var(--theme-border) !important;
     }
 
     & .builder-btn-save {
@@ -1296,7 +1305,6 @@ table.wyrd-table .table-icon {
 
         .skill-title {
             cursor: help !important;
-            text-decoration: underline dotted var(--border-warm) !important;
         }
 
         .skill-title:hover {
@@ -1420,7 +1428,6 @@ table.wyrd-table .table-icon {
 
         .skill-row {
             padding: 6px 0;
-            border-bottom: 1px dashed #f4f1ea;
         }
 
         .skill-row:last-child {
@@ -2679,6 +2686,56 @@ details[open] #skills-collapsed-summary {
   vertical-align: -0.25em; /* Nudges the icon down to straddle the baseline */
   display: inline-block;
 }
+
+#grid-active-creation-trees,
+#grid-magic-guild-disciplines,
+#grid-restricted-paragon-paths {
+    align-items: start;
+}
+
+#grid-active-creation-trees .aspect-card,
+#grid-magic-guild-disciplines .aspect-card,
+#grid-restricted-paragon-paths .aspect-card {
+    height: auto;
+    position: relative;
+}
+
+.aspect-card.drawer-open {
+    z-index: 200;
+    border-bottom: none !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Keep the open drawer fully opaque even on locked Rank 3+ cards */
+#grid-restricted-paragon-paths:has(.drawer-open) {
+    opacity: 1 !important;
+}
+#grid-restricted-paragon-paths:has(.drawer-open) .aspect-card:not(.drawer-open) {
+    opacity: 0.6;
+}
+
+.creation-skill-drawer {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    width: calc(100% + 2px);
+    max-height: 340px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    z-index: 201;
+    background: #faf7f2;
+    border: 1px solid var(--border-warm);
+    border-top: none !important;
+    border-radius: 0 0 6px 6px;
+    padding: 4px 10px 10px 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35) !important;
+    text-align: left;
+}
+
+.aspect-card.drawer-open:hover .creation-skill-drawer {
+    border-color: var(--accent-gold);
+}
     </style>
 </head>
 <body>
@@ -2710,7 +2767,16 @@ details[open] #skills-collapsed-summary {
                 <input type="checkbox" id="bypass-prerequisites-toggle" onchange="setPrerequisiteBypass(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
                 <span>Ignore Skill Prerequisites</span>
             </label>
-            
+
+<select id="tooltip-delay-selector" onchange="setTooltipDelay(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-top: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
+                <option value="0">Tooltip: Instant (0ms)</option>
+                <option value="250">Tooltip: Quick (250ms)</option>
+                <option value="450" selected>Tooltip: Normal (450ms)</option>
+                <option value="800">Tooltip: Slow (800ms)</option>
+                <option value="1200">Tooltip: Very Slow (1200ms)</option>
+                <option value="-1">Tooltip: Off (Dbl-Click)</option>
+            </select>            
+
         </div>
     </div>
     
@@ -16513,6 +16579,153 @@ if (helCard) {
 // ==========================================
 // INITIALIZATION CARD BUILD ENGINE TEMPLATES
 // ==========================================
+
+function buildCreationCardSkillsDrawer(treeName) {
+    if (!treeName || treeName === "Custom Skills") return "";
+
+    const sanitizedKey = treeName.toLowerCase();
+    const treeData = (typeof skillAbilitiesRegistry !== "undefined" && skillAbilitiesRegistry[sanitizedKey]) || [];
+
+    let levelNames = [];
+    let treeDesc = "";
+
+    if (Array.isArray(treeData)) {
+        levelNames = treeData;
+    } else if (treeData && typeof treeData === "object") {
+        levelNames = treeData.levels || [];
+        treeDesc = treeData.description || "";
+    }
+
+    if (!treeDesc && typeof tooltipRegistry !== "undefined") {
+        const cleanName = sanitizedKey.replace(/^(mastery|occult|paragon|restricted|guild)[:\s]+/g, "").trim();
+        const possibleTreeKeys = [
+            cleanName.replace(/[^a-z0-9]+/g, "_"),
+            sanitizedKey.replace(/[^a-z0-9]+/g, "_"),
+            cleanName,
+            sanitizedKey
+        ];
+        for (const tk of possibleTreeKeys) {
+            if (tooltipRegistry[tk]) {
+                treeDesc = tooltipRegistry[tk].description || tooltipRegistry[tk].summary || "";
+                if (treeDesc) break;
+            }
+        }
+    }
+
+    const lowerTree = sanitizedKey;
+    const baseKey = sanitizedKey.replace(/[^a-z0-9]+/g, "_");
+    let itemsHtml = "";
+
+    if (levelNames.length === 0) {
+        itemsHtml = `<li style="list-style: none; color: var(--text-muted); font-style: italic;">No set levels for this skill.</li>`;
+    } else {
+        levelNames.forEach((lvlName, index) => {
+            const levelNum = index + 1;
+            const cleaned = lvlName.replace(/<[^>]*>/g, " ");
+            const nameVariants = [
+                cleaned.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                cleaned.toLowerCase().replace(/&/g, "amp").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""),
+                cleaned.toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
+            ];
+            const possibleKeys = [
+                ...nameVariants,
+                `${baseKey}_${levelNum}`,
+                baseKey,
+                `${baseKey}_overview`,
+                baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, ""),
+                `${baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, "")}_${levelNum}`,
+                `${baseKey.replace(/^(mastery|occult|paragon|restricted|guild)_/, "")}_overview`
+            ];
+            if (baseKey === "occult_necromancer") possibleKeys.push("necromancy");
+            if (baseKey === "paragon_paladin") possibleKeys.push("holy_radiance");
+            if (baseKey === "paragon_ki_master") possibleKeys.push("ki_strike");
+
+            let resolvedTooltipKey = "";
+            if (typeof tooltipRegistry !== "undefined") {
+                for (const k of possibleKeys) {
+                    if (k && tooltipRegistry[k]) {
+                        resolvedTooltipKey = k;
+                        break;
+                    }
+                }
+            }
+
+            const tooltipAttr = resolvedTooltipKey ? `data-tooltip="${resolvedTooltipKey}"` : "";
+            const showLevelTag = !(
+                lowerTree === "background" ||
+                lowerTree === "interlocution" ||
+                lowerTree === "guild: sages" ||
+                lowerTree === "guild:sages" ||
+                lowerTree === "skill training" ||
+                lowerTree === "mastery: skill training" ||
+                (lowerTree === "conjuration" && levelNum >= 5 && levelNum <= 10)
+            );
+
+            const lvlBadge = showLevelTag
+                ? `[Lvl ${levelNum}]`
+                : `[Lvl <i style="font-family: 'Times New Roman', Times, serif; font-style: italic;">x</i>]`;
+
+            itemsHtml += `
+                <li ${tooltipAttr} style="margin-bottom: 4px; font-size: 0.78rem; font-weight: 600; list-style-type: square; cursor: help; text-align: left;">
+                    <span style="color: var(--accent-gold); font-weight: bold; font-size: 0.72rem; margin-right: 4px;">${lvlBadge}</span>${escapeHtml(lvlName)}
+                </li>
+            `;
+        });
+    }
+
+return `
+        <button type="button" class="btn-sm" onclick="toggleCreationCardSkills(this, event)" style="margin-top: 8px; padding: 3px 8px; font-size: 0.72rem; font-weight: bold; cursor: pointer; width: 100%;">
+            Skills ▾
+        </button>
+        <div class="creation-skill-drawer" style="display: none;">
+            <div style="border-top: 1px dashed var(--border-dark); padding-top: 8px;">
+                ${treeDesc ? `<div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dotted var(--border-dark); line-height: 1.35;">${escapeHtml(treeDesc)}</div>` : ''}
+                <ul style="margin: 0; padding-left: 16px; line-height: 1.35;">
+                    ${itemsHtml}
+                </ul>
+            </div>
+        </div>
+    `;
+}
+
+window.toggleCreationCardSkills = function(btn, event) {
+    if (event) event.stopPropagation();
+    const card = btn.closest(".aspect-card");
+    if (!card) return;
+    const drawer = card.querySelector(".creation-skill-drawer");
+    if (!drawer) return;
+
+    const isOpen = drawer.style.display === "block";
+
+    document.querySelectorAll(".creation-skill-drawer").forEach(d => {
+        d.style.display = "none";
+        const parentCard = d.closest(".aspect-card");
+        if (parentCard) parentCard.classList.remove("drawer-open");
+        const parentBtn = parentCard?.querySelector("button[onclick*='toggleCreationCardSkills']");
+        if (parentBtn) parentBtn.textContent = "Skills ▾";
+    });
+
+    if (!isOpen) {
+        drawer.style.display = "block";
+        card.classList.add("drawer-open");
+        btn.textContent = "Skills ▴";
+    }
+};
+
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".creation-skill-drawer") && !e.target.closest("button[onclick*='toggleCreationCardSkills']")) {
+        document.querySelectorAll(".creation-skill-drawer").forEach(d => {
+            if (d.style.display === "block") {
+                d.style.display = "none";
+                const parentCard = d.closest(".aspect-card");
+                if (parentCard) parentCard.classList.remove("drawer-open");
+                const parentBtn = parentCard?.querySelector("button[onclick*='toggleCreationCardSkills']");
+                if (parentBtn) parentBtn.textContent = "Skills ▾";
+            }
+        });
+    }
+});
+
 // Automatically builds interactive numerical investment cards for the creation tab
 function generateOfficialSkillGridCards() {
     const activeGrid = document.getElementById("grid-active-creation-trees");
@@ -16536,13 +16749,14 @@ function generateOfficialSkillGridCards() {
             initialHint = `Level 0 (${config.costPerLevel} Exp. to next / No Cap)`;
         }
         
-        activeHtml += `
+activeHtml += `
         <div class="aspect-card">
             <div class="aspect-name" style="font-size:0.9rem; min-height:2.2rem; display:flex; align-items:center; justify-content:center; text-align:center;">${tree}</div>
             <div class="form-group" style="margin-bottom:2px;">
                 <input type="number" id="${fId}" value="0" min="0" max="${maxPointsAllowed}" oninput="calculateSheet()" style="text-align:center; padding:4px;">
             </div>
             <div class="hint" id="${hId}" style="text-align:center; font-weight:bold; font-size:0.75rem; color:#7d3c1b;">${initialHint}</div>
+            ${buildCreationCardSkillsDrawer(tree)}
         </div>
         `;
     });
@@ -16575,13 +16789,14 @@ function generateOfficialSkillGridCards() {
             initialHint = `Level 0 (${config.costPerLevel} Exp. to next / No Cap)`;
         }
         
-        magicHtml += `
+magicHtml += `
         <div class="aspect-card">
             <div class="aspect-name" style="font-size:0.9rem; min-height:2.2rem; display:flex; align-items:center; justify-content:center; text-align:center;">${tree}</div>
             <div class="form-group" style="margin-bottom:2px;">
                 <input type="number" id="${fId}" value="0" min="0" max="${maxPointsAllowed}" oninput="calculateSheet()" style="text-align:center; padding:4px;">
             </div>
             <div class="hint" id="${hId}" style="text-align:center; font-weight:bold; font-size:0.75rem; color:#7d3c1b;">${initialHint}</div>
+            ${buildCreationCardSkillsDrawer(tree)}
         </div>
         `;
     });
@@ -16615,7 +16830,7 @@ function renderRank3Cards() {
             const fId = "sk-xp-" + sanitizedKey.replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
             const hId = "sk-hint-" + sanitizedKey.replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
 
-            if (isUnlocked) {
+if (isUnlocked) {
                 const config = commonSkillLevelCaps[sanitizedKey] || { maxLevel: 3, costPerLevel: 12 };
                 const maxPointsAllowed = config.maxLevel === Infinity ? 999 : (config.maxLevel * config.costPerLevel);
                 
@@ -16626,12 +16841,14 @@ function renderRank3Cards() {
                         <input type="number" id="${fId}" value="0" min="0" max="${maxPointsAllowed}" oninput="calculateSheet()" style="text-align:center; padding:4px;">
                     </div>
                     <div class="hint" id="${hId}" style="text-align:center; font-weight:bold; font-size:0.75rem; color:#7d3c1b;">Level 0 (${config.costPerLevel} Exp. to next)</div>
+                    ${buildCreationCardSkillsDrawer(tree)}
                 </div>`;
             } else {
                 restrictedHtml += `
                 <div class="aspect-card">
                     <div class="aspect-name" style="font-size:0.85rem; color:#7c6f64; min-height:2.2rem; display:flex; align-items:center; justify-content:center;">${tree}</div>
                     <div class="hint" style="color:#b82c2c; font-weight:bold; font-size:0.75rem;">Locked (Rank &lt; 3)</div>
+                    ${buildCreationCardSkillsDrawer(tree)}
                 </div>`;
             }
         });
@@ -19552,6 +19769,27 @@ function formatTextContent(text) {
         });
     }
 
+let hoverDelayMs = 450;
+    let hoverTimer = null;
+    let pendingTrigger = null;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    (function loadTooltipDelay() {
+        const saved = localStorage.getItem("cscs_tooltip_delay");
+        if (saved !== null && saved !== "") {
+            const parsed = parseInt(saved, 10);
+            if (!isNaN(parsed)) hoverDelayMs = parsed;
+        }
+    })();
+
+    window.setTooltipDelay = function(ms) {
+        const parsed = parseInt(ms, 10);
+        hoverDelayMs = isNaN(parsed) ? 450 : parsed;
+        localStorage.setItem("cscs_tooltip_delay", String(hoverDelayMs));
+        hide();
+    };
+
     function show(key, x, y, anchor) {
         const entry = lookup(key, anchor);
         if (!entry) return;
@@ -19562,6 +19800,11 @@ function formatTextContent(text) {
     }
 
     function hide() {
+        if (hoverTimer) {
+            clearTimeout(hoverTimer);
+            hoverTimer = null;
+        }
+        pendingTrigger = null;
         const el = getRoot();
         el.classList.remove("tcs-visible");
     }
@@ -19638,18 +19881,45 @@ function formatTextContent(text) {
         return null;
     }
 
-    function onMouseOver(ev) {
+function onMouseOver(ev) {
         const trig = findTrigger(ev.target);
         if (!trig) return;
         const key = getKey(trig);
         if (!key) return;
-        show(key, ev.clientX, ev.clientY, trig);
+
+        // Off mode (-1): skip hover tooltips (double-click windows still work)
+        if (hoverDelayMs < 0) return;
+
+        lastMouseX = ev.clientX;
+        lastMouseY = ev.clientY;
+
+        // Don't restart the timer when moving across child elements of the same trigger
+        if (pendingTrigger === trig) return;
+
+        hide();
+        pendingTrigger = trig;
+
+        if (hoverDelayMs === 0) {
+            show(key, lastMouseX, lastMouseY, trig);
+            return;
+        }
+
+        hoverTimer = setTimeout(() => {
+            hoverTimer = null;
+            if (pendingTrigger === trig && document.body.contains(trig)) {
+                show(key, lastMouseX, lastMouseY, trig);
+            }
+        }, hoverDelayMs);
     }
+
     function onMouseMove(ev) {
+        lastMouseX = ev.clientX;
+        lastMouseY = ev.clientY;
         const el = getRoot();
         if (!el.classList.contains("tcs-visible")) return;
         positionAt(ev.clientX, ev.clientY);
     }
+
     function onMouseOut(ev) {
         const trig = findTrigger(ev.target);
         if (!trig) return;
@@ -19851,17 +20121,20 @@ function formatTextContent(text) {
     };
     window.Tooltip = Tooltip;
 
-    function boot() {
+function boot() {
         injectStyles();
         bind();
         autoAttach();
         observe();
+        const delaySel = document.getElementById("tooltip-delay-selector");
+        if (delaySel) delaySel.value = String(hoverDelayMs);
     }
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", boot);
     } else {
         boot();
     }
+
 })();
 
 
@@ -21018,7 +21291,7 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
                 });
             }
 
-            return `<div style="border-bottom: 1px dashed #decdaf; color: #433827; font-weight: 600; font-size: 0.8rem; padding: 4px 0; cursor: help;" data-tooltip="${cleanKey}">${displayItem}</div>`;
+            return `<div style="font-weight: 600; font-size: 0.8rem; padding: 4px 0; cursor: help;" data-tooltip="${cleanKey}">${displayItem}</div>`;
         }).join("");
     };
 
@@ -23012,7 +23285,7 @@ window.renderMountMiniSheet = function() {
             </div>
 
             <!-- Row 2: Tight Aspect Strip -->
-            <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
+            <div style="display: flex; justify-content: space-between; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
                 <span>DEX: ${mount.dex}</span>
                 <span>HEL: ${mount.hel}</span>
                 <span>STR: ${mount.str}</span>
@@ -27639,11 +27912,11 @@ window.renderCompendiumMiniSheet = function(creatureName) {
             <!-- Row 5: Attacks & Abilities Columns -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.75rem;">
                 <div>
-                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Attacks</div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; padding-bottom: 2px;">Attacks</div>
                     ${creature.attacks && creature.attacks.length > 0 ? creature.attacks.map(a => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(a)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
                 </div>
                 <div>
-                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem; border-bottom: 1px dotted #decdaf; padding-bottom: 2px;">Special Abilities</div>
+                    <div style="font-weight: bold; color: #5c1d1d; margin-bottom: 3px; text-transform: uppercase; font-size: 0.7rem;">Special Abilities</div>
                     ${creature.abilities && creature.abilities.length > 0 ? creature.abilities.map(ab => `<div style="margin-bottom: 2px; color: var(--text-dark);">• ${escapeHtml(ab)}</div>`).join('') : '<div style="color:var(--text-muted); font-style:italic;">None</div>'}
                 </div>
             </div>
@@ -29034,7 +29307,7 @@ window.renderPetMiniSheet = function() {
                 <div class="builder-panel" id="builder-pet-${index}" style="display: none; width: 100%; box-sizing: border-box; margin-bottom: 8px;"></div>
 
                 <!-- Row 2: Aspects Strip -->
-                <div style="display: flex; justify-content: space-between; background: #faf3e8; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
+                <div style="display: flex; justify-content: space-between; border-radius: 4px; padding: 2px 6px; font-size: 0.7rem; font-weight: bold; color: #5c1d1d; margin-bottom: 6px;">
                     <span>DEX: ${pet.dex}</span>
                     <span>HEL: ${pet.hel}</span>
                     <span>STR: ${pet.str}</span>
