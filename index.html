@@ -81,7 +81,7 @@ body.theme-cosmic {
     --theme-bg-panel-nested: #561e55;
     --theme-bg-input: #11102b;
     --theme-bg-hover: #561e55;
-    --theme-bg-th: #205375;
+    --theme-bg-th: #242258;
     --theme-th-text: #B5996C;
     --theme-bg-footer: rgba(26, 24, 64, 0.92);
     --theme-border: #178896;
@@ -229,7 +229,7 @@ body.theme-rose-gold {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-readonly: var(--theme-bg-deep);
     --theme-bg-panel-nested: var(--theme-bg-hover);
@@ -11190,7 +11190,7 @@ const tooltipRegistry = {
     title: "Sanctum",
     actionType: "Cast + Skill Check [Verve]",
     description: "You prevent all foes from attacking you for Verve rounds unless they pass a Verve save. Directly attacking a foe breaks the effect.",
-    extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}, {"label": "Surge", "text": "The cc of Turn Blade is increased by one per six additional Mana spent."}]
+    extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}, {"label": "Surge", "text": "Your cc is increased by one per six additional Mana spent."}]
   },
   "abjure_creature": {
     title: "Abjure Creature",
@@ -11220,7 +11220,7 @@ const tooltipRegistry = {
     title: "Abjure Death",
     actionType: "Cast",
     description: "For Verve Pulses, if your target suffers mortal damage, they are instead stabilized at Rank points away from death. This happens only once.",
-    extras: [{"label": "Rite", "text": "You enchant a Manastone such that if worn, it will stabilize the wearer and heal them an amount of Vitality equal to its stored Mana upon them suffering damage that would have killed them. After taking effect, roll a Hap save, TN 1 per three Mana spent; if you fail, the Manastone explodes."}, {"label": "Surge", "text": "Your target is stabilized at an additional Rank points away from death per six additional Mana spent."}]
+    extras: [{"label": "Rite", "text": "You enchant a Manastone such that if worn, it will stabilize the wearer and heal them an amount of Vitality equal to its stored Mana upon them suffering damage that would have killed them. After taking effect, roll a Hap save, TN 1 per three Mana spent; if you fail, the Manastone explodes."}, {"label": "Surge", "text": "Your effective Rank is double per six additional Mana spent."}]
   },
   "arcane_dart": {
     title: "Arcane Dart",
