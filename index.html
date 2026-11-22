@@ -3444,10 +3444,23 @@ details[open] #skills-collapsed-summary {
 
         <!-- Defensive Skills mirroring the Offensive Skills card -->
         <div class="pnp-offensive-skills-card" style="flex: 1; align-self: stretch;">
-<div style="display: flex; gap: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; color: #433827;">
-    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-arcane-armor" onchange="calculateSheet()"> Arcane Armor</label>
-    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-barkskin" onchange="calculateSheet()"> Barkskin</label>
-    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;"><input type="checkbox" id="chk-spatial-awareness" onchange="calculateSheet()"> Spatial Awareness</label>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin-bottom: 8px; font-size: 0.8rem; font-weight: bold; color: #433827;">
+    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+        <input type="checkbox" id="chk-arcane-armor" onchange="calculateSheet()"> Arcane Armor
+    </label>
+    <div style="display: flex; flex-direction: column;">
+        <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+            <input type="checkbox" id="chk-barkskin" onchange="toggleBarkskinSurge(); calculateSheet()"> Barkskin/Ice Armor
+        </label>
+        <div id="barkskin-surge-container" style="display: none; align-items: center; gap: 4px; margin-top: 2px; padding-left: 18px; font-size: 0.75rem;">
+            <label for="barkskin-surge-cc" style="margin: 0; font-size: 0.75rem;">Surge</label>
+            <input type="number" id="barkskin-surge-cc" class="pnp-pool-input" value="0" min="0" placeholder="0" title="CC Bonus" oninput="calculateSheet()" style="width: 40px; padding: 1px 3px; font-size: 0.78rem;">
+            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: normal;">cc</span>
+        </div>
+    </div>
+    <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+        <input type="checkbox" id="chk-spatial-awareness" onchange="calculateSheet()"> Spatial Awareness
+    </label>
 </div>
             <div class="pnp-col-header" style="margin-bottom: 8px;">DEFENSIVE SKILLS & SPELLS</div>
             <div class="pnp-offensive-writein-list" id="card-view-active-defenses"></div>
@@ -5003,8 +5016,8 @@ details[open] #skills-collapsed-summary {
         <tr>
             <td><strong>Surge</strong></td>
             <td style="text-align: center;">—</td>
-            <td style="text-align: center;">+6/Rank Increase</td>
-            <td style="text-align: center;">By expending extra Mana, you increase the effective Rank of your spell.</td>
+            <td style="text-align: center;">Var.</td>
+            <td style="text-align: center;">Effects Vary</td>
         </tr>
     </tbody>
 </table>
@@ -10575,35 +10588,37 @@ const tooltipRegistry = {
   "charm_person": {
     title: "Charm Person",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You insinuate romantic or fraternal feelings towards yourself into the target anthropoid’s mind for Verve rounds. The target is allowed a Verve Save to resist if asked to do something against their interest.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."}]
+    description: "You insinuate romantic or fraternal feelings towards yourself into the target anthropoid’s mind for Verve Pulses. The target is allowed a Verve Save to resist if asked to do something against their interest.",
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "confusion": {
     title: "Confusion",
     actionType: "Cast; Skill Check [Verve]",
     description: "You confuse the target. This spell either affects one target for a number of rounds equal to your Verve or Verve targets for one round.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "drain_vitality": {
     title: "Drain Vitality",
     actionType: "Cast",
     description: "Through steady, skin-on-skin contact, you are able to steal 1d/Rank Vitality from your target per Pulse that you channel the spell.",
-    extras: [{"label":"Word","text":"This spell no longer requires contact."}]
+    extras: [{"label":"Word","text":"This spell no longer requires contact."},{"label":"Surge","text":"You drain a desired amount of Vitality at once at a cost of two to one."}]
   },
   "command": {
     title: "Command",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve Save to ignore any given command."
+    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve Save to ignore any given command.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "sleep": {
     title: "Sleep",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead."
+    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "geas": {
-    title: "Geas [Rite]",
+    title: "Geas",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You force the target anthropoid, of whom you must have a blood effigy, to perform some task for you. This task must be possible and mustn’t cause direct harm to the target. The Target suffers a cumulative -6 penalty to their Vitality or Mana for each week that they ignore the task. If this reduces their Vitality or Mana to 0, they die. The target is guided towards what they must do, whether by dream, whispers, or some other mechanism the LM decides, and the effect lasts until the task is complete. There is no range limit for this spell."
+    extras: [{"label":"Rite","text":"You force the target anthropoid, of whom you must have a blood effigy, to perform some task for you. This task must be possible and mustn’t cause direct harm to the target. The Target suffers a cumulative -6 penalty to their Vitality or Mana for each week that they ignore the task. If this reduces their Vitality or Mana to 0, they die. The target is guided towards what they must do, whether by dream, whispers, or some other mechanism the LM decides, and the effect lasts until the task is complete. There is no range limit for this spell."}]
   },
   "conjured_light": {
     title: "Conjured Light",
@@ -10619,28 +10634,32 @@ const tooltipRegistry = {
   "cobweb": {
     title: "Cobweb",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You cover a three-hex diameter circle with sticky cobwebs of preternatural strength. Targets caught within the cobwebs are considered bound."
+    description: "You cover a three-hex diameter circle with sticky cobwebs of preternatural strength. Targets caught within the cobwebs are considered bound.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "darkness": {
     title: "Darkness [Encænium]",
     actionType: "Cast; Skill Check [Verve]",
     description: "You conjure darkness to obscure things and cause fear. When a person encounters conjured darkness, they must pass a Verve Save to take any further action regarding it. Once a person looks away from conjured darkness, they must pass an Acuity Save or they forget about it. You can conjure enough darkness to cover Verve hexes.",
-    extras: [{"label":"Rite","text":"When a creature Saves against your conjured darkness, they roll twice and take the worse roll."}]
+    extras: [{"label":"Rite","text":"When a creature Saves against your conjured darkness, they roll twice and take the worse roll."}, {"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "acid_splash": {
     title: "Acid Splash",
     actionType: "Cast; Attack",
-    description: "You can throw a fistful of conjured acid at a target dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Splash deals -1d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
+    description: "You can throw a fistful of conjured acid at a target dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Splash deals -1d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "acid_spray": {
     title: "Acid Spray",
     actionType: "Cast; Attack",
-    description: "You can spray a caustic fog on all within a nine-hex diamond originating from a hex threatened by you dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Spray deals -2d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
+    description: "You can spray a caustic fog on all within a nine-hex diamond originating from a hex threatened by you dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Spray deals -2d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "acid_rain": {
     title: "Acid Rain",
     actionType: "Cast; Attack",
-    description: "You can conjure an amount of acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Acid Rain deals -3d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
+    description: "You can conjure an amount of acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Acid Rain deals -3d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "commodity_acid": {
     title: "Commodity: Acid [Encænium]",
@@ -10650,25 +10669,26 @@ const tooltipRegistry = {
   "bubble": {
     title: "Bubble",
     actionType: "Cast",
-    description: "You can conjure up to Verve + Rank bubbles of air to allow for breathing in otherwise asphyxiating conditions for ¼ phase per bubble. For ¼ phase of breathing, a size A creature requires one bubble; size B, two; C, three; and D, four."
+    description: "You can conjure up to Verve + Rank bubbles of air to allow for breathing in otherwise asphyxiating conditions for ¼ phase per bubble. For ¼ phase of breathing, a size A creature requires one bubble; size B, two; C, three; and D, four.",
+    extras: [{"label":"Surge","text":"The number of bubbles doubles per six additional Mana spent."}]
   },
   "down_draft": {
     title: "Down Draft",
     actionType: "Cast",
-    description: "You can create a column of wind Verve + Rank hexes in diameter that grounds size A or smaller flying creatures and prevents size B or smaller projectiles from being effective. Size A and B flying creatures will avoid the area if they can. The column must be channeled to maintain.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
+    description: "You can create a column of wind Verve + Rank hexes in diameter, extending upward until it reaches a celing that grounds size A or smaller flying creatures and prevents size B or smaller projectiles from being effective. The column must be channeled to maintain.",
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"The size of affected objects and creatures and the channeling cost is increased by one per six additional Mana spent."}]
   },
   "gust_of_wind": {
     title: "Gust Of Wind",
     actionType: "Cast; Skill Check [Verve]",
     description: "You send forth a gust of wind one hex in diameter which knocks over or out of the sky all size B or smaller creatures unless they pass a Balance Confrontation. Their position, prone or supine, is determined by the LM. The gust lasts for one pulse, but can be channeled to maintain.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"The size of affected objects and creatures and the channeling cost is increased by one per six additional Mana spent."}]
   },
   "wall_of_wind": {
     title: "Wall Of Wind",
     actionType: "Cast; Attack",
-    description: "You create a hemisphere of tornadic wind around an area up to Verve + Rank hexes in radius and one hex wide that prevents projectiles from entering and deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it. The hemisphere must be channeled to maintain.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
+    description: "You create a hemisphere of tornadic wind around an area up to Verve + Rank hexes in radius and one hex wide that prevents projectiles from entering and deals Verve + Rank dice of damage for each Pulse to all those caught within or attempting to pass through it. The hemisphere must be channeled to maintain.",
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}, {"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "living_air": {
     title: "Living Air [Encænium]",
@@ -10678,12 +10698,14 @@ const tooltipRegistry = {
   "stone_fist": {
     title: "Stone Fist",
     actionType: "Cast; Attack; Skill Check [Verve]",
-    description: "A stone fist erupts from the earth dealing Verve + Rank dice of damage to all within a three-hex diameter circle. Targets must pass a Balance Check or fall; their position, prone or supine, is determined by the LM."
+    description: "A stone fist erupts from the earth dealing Verve + Rank dice of damage to all within a three-hex diameter circle. Targets must pass a Balance Check or fall; their position, prone or supine, is determined by the LM.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "rend_earth": {
     title: "Rend Earth",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You can cause the earth to split over an area 12 + Verve hexes long and four hexes wide. The chasm is Verve + Rank hexes deep and creatures in the area are entitled to a Dexterity save to avoid falling in. If they save, the side of the chasm they end up on is determined by the LM. This spell cannot affect worked stone."
+    description: "You can cause the earth to split over an area 12 + Verve hexes long and four hexes wide. The chasm is Verve + Rank hexes deep and creatures in the area are entitled to a Dexterity save to avoid falling in. If they save, the side of the chasm they end up on is determined by the LM. This spell cannot affect worked stone.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "stone_wall": {
     title: "Stone Wall",
@@ -10703,19 +10725,20 @@ const tooltipRegistry = {
   "icicle": {
     title: "Icicle",
     actionType: "Cast; Attack",
-    description: "You can throw a frozen spear at a target which deals Verve + Rank dice of damage."
+    description: "You can throw a frozen spear at a target which deals Verve + Rank dice of damage.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "ice_armor": {
     title: "Ice Armor",
     actionType: "Cast",
-    description: "You cover yourself in a frozen suit of armor which provides an amount of bonus Avoidance dice equal to your Verve. Ice Armor is weak to fire damage but conveys frost immunity and lasts until it either melts or suffers thrice your Verve points of damage.",
-    extras: [{"label":"Encænium","text":"The damage required to sunder your Ice Armor is doubled."}]
+    description: "You cover yourself in a frozen suit of armor, increasing your DR by an amount equal to your Verve. Ice Armor lasts until it melts.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "ice_wall": {
     title: "Ice Wall",
     actionType: "Cast",
     description: "You erect a wall of ice that is two hexes tall and 12 + Verve hexes long. Your ice wall lasts until it melts (2-4 weeks).",
-    extras: [{"label":"Rite","text":"You Ice Wall does not melt."}]
+    extras: [{"label":"Rite","text":"Your Ice Wall does not melt."}]
   },
   "commodity_ice": {
     title: "Commodity: Ice [Encænium]",
@@ -10724,51 +10747,53 @@ const tooltipRegistry = {
   },
   "umbral_blade": {
     title: "Umbral Blade",
-    actionType: "Cast",
-    description: "You can conjure an umbral blade for ¼ phase with which you can pierce either the shadow of a specific living creature or the creature itself. To pierce their shadow, you must be able to distinguish it; when attacking the creature, the attack of an umbral blade is confronted by a Dexterity save. The umbral blade deals Verve + Rank dice of Vitality and Mana damage. The shadow damage cannot be healed but is erased instantly when the blade expires or is dismissed.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    actionType: "Cast; Attack(s)",
+    description: "You can conjure an umbral blade for Verve Pulses with which you can pierce either the shadow of a specific living creature or the creature itself. To pierce their shadow, you must be able to distinguish it; when attacking the creature, the attack of an umbral blade is confronted by an unarmored defense. The umbral blade deals Verve + Rank dice of Vitality and Mana damage. The shadow damage cannot be healed but is erased instantly when the blade expires or is dismissed.",
+    extras: [{"label":"Encaenium","text":"The effect lasts for Verve Phases."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "malignant_shade": {
     title: "Malignant Shade",
     actionType: "Cast",
-    description: "You conjure a shadow that will bind itself to the shadow of a specific living creature for ¼ phase. To do so, you must be able to distinguish that creature’s shadow from its surroundings. The creature will suffer a -2d penalty to all actions and saves until the shadow leaves it.",
-    extras: [{"label":"Encænium","text":"The penalty is increased to -4d."},{"label":"Rite","text":"The penalty is increased to -4d and the effect is permanent."}]
+    description: "You conjure a shadow that will bind itself to the shadow of a specific living creature for Verve Pulses. To do so, you must be able to distinguish that creature’s shadow from its surroundings. The creature will suffer a -2d penalty to all actions and saves until the shadow leaves it.",
+    extras: [{"label":"Encænium","text":"The penalty is increased to -4d."},{"label":"Rite","text":"The penalty is increased to -4d and the effect is permanent."},{"label":"Surge","text":"The target loses one Vitality and Mana per Pulse per six additional Mana spent."}]
   },
   "umbral_passage": {
-    title: "Umbral Passage [Encænium]",
+    title: "Umbral Passage",
     actionType: "Cast",
     description: "The caster can meld into and reappear anywhere no farther than thrice your Verve hexes away within a contiguous shadow. Distance should be calculated along the surface of the shadow. For example, one hex over and three hexes up a cliff would equal four hexes of distance.",
     extras: [{"label":"Encænium","text":"The range of the spell is increased to one day’s travel."}]
   },
   "living_shadow": {
-    title: "Living Shadow [Encænium]",
+    title: "Living Shadow",
     actionType: "Cast",
     extras: [{"label":"Encaenium","text":"You bring into being a living shadow for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "commodity_shade": {
-    title: "Commodity: Shade [Encænium]",
+    title: "Commodity: Shade",
     actionType: "Cast",
-    description: "Through the use of ritual stones, you can cover a circular area up to thrice your Verve hexes in diameter in conjured shade for ¼ phase. The spell typically pays thrice your Verve Laria."
+    extras: [{"label":"encænium","text":"Through the use of ritual stones, you can cover a circular area up to thrice your Verve hexes in diameter in conjured shade for ¼ phase. The spell typically pays thrice your Verve Laria."}]
   },
   "jetstream": {
     title: "Jet Stream",
     actionType: "Cast; Attack",
-    description: "You conjure a fistful of water which can be shot at high pressure dealing Verve + Rank points of damage to every target in a direct line. It may damage the same target more than once in the case of multi-hex creatures. Each time the jet passes through a hex of a target it loses three points of damage from the initial rolled amount."
+    description: "You conjure a fistful of water which can be shot at high pressure dealing Verve + Rank points of damage to every target in a direct line. It may damage the same target more than once in the case of multi-hex creatures. Each time the jet passes through a hex of a target it loses three points of damage from the initial rolled amount.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "water_shield": {
     title: "Water Shield",
     actionType: "Cast",
-    description: "You can envelop yourself in a cocoon of rushing water which allows you to change up to two Blank Results to Evade Results and makes you immune to arrows, fire, acid, and frost attacks. Frost attacks, however, will freeze part of the shield, breaking the spell."
+    description: "You envelop yourself in a cocoon of rushing water which allows you to change Blank Results to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> and makes you immune to Fire, Acid, and Frost attacks for Verve Pulses.",
+    extras: [{"label":"Surge","text":"Change up to one Blank Result to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> instead per six additional Mana spent."}]
   },
   "commodity_water": {
-    title: "Commodity: Water [Encænium]",
+    title: "Commodity: Water",
     actionType: "Cast",
-    description: "You can create an amount of potable water worth thrice your Verve Laria."
+    extras: [{"label":"encænium","text":"You can create an amount of potable water worth thrice your Verve Laria."}]
   },
   "living_water": {
-    title: "Living Water [Encænium]",
+    title: "Living Water",
     actionType: "Cast",
-    extras: [{"label":"Encaenium","text":"You bring into being a water elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encænium","text":"You bring into being a water elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "detect_magic": {
     title: "Detect Magic",
@@ -10777,19 +10802,18 @@ const tooltipRegistry = {
   "detect_thoughts": {
     title: "Detect Thoughts",
     actionType: "Cast; Skill Check [Acuity]",
-    description: "You make a Skill Check against an intelligent target. The better the Check, the more you learn.\n\n●Their current mood (TN 1)\n●Isolated, single-word, conscious thoughts (TN 2)\n●Isolated, single-phrase, conscious thoughts (TN 3)\n●Their complete conscious thoughts (TN 4)\n●Subconscious thoughts and desires (TN 5\n●A random memory (TN 6)\n●A memory of your choosing (TN 7)"
+    description: "You make a Skill Check against an intelligent target. The better the Check, the more you learn.\n\n●Their current mood (TN 1)\n●Isolated, single-word, conscious thoughts (TN 2)\n●Isolated, single-phrase, conscious thoughts (TN 3)\n●Their complete conscious thoughts (TN 4)\n●Subconscious thoughts and desires (TN 5\n●A random memory (TN 6)\n●A memory of your choosing (TN 7)",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "locate": {
-    title: "Locate [Encænium]",
+    title: "Locate",
     actionType: "Cast; Hidden Check [Acuity]",
-    description: "This spell uses either the magical Law of Contagion (Once together, always together) or that of Sympathy (extreme similarity) to determine the existence or location of some-body/-thing. You must have in your possession an item (focus) that is somehow intimately related to what you are seeking (target). The weaker the relationship between your focus & your target, the harder it is to find the target. If successful, the LM will tell you in which direction (including up and down) the target is from you and whether it is within one campaign hex—one day’s travel—of you. A small portion of the focus is destroyed by the spell.",
-    extras: [{"label":"Rite","text":"You are given the exact distance to your target anywhere in the Crystal Sphere."}]
+    extras: [{"label":"Encænium","text":"This spell uses either the magical Law of Contagion (Once together, always together) or that of Sympathy (extreme similarity) to determine the existence or location of some-body/-thing. You must have in your possession an item (focus) that is somehow intimately related to what you are seeking (target). The weaker the relationship between your focus & your target, the harder it is to find the target. If successful, the LM will tell you in which direction (including up and down) the target is from you and whether it is within one campaign hex—one day’s travel—of you. A small portion of the focus is destroyed by the spell."},{"label":"Rite","text":"You are given the exact distance to your target anywhere in the Crystal Sphere."}]
   },
   "analyze": {
-    title: "Analyze [Encænium]",
+    title: "Analyze",
     actionType: "Cast; Skill Check [Acuity]",
-    description: "You make a Skill Check on a single item. The better the Check, the more you learn.\n\n●Number of Virtues (TN 1)\n●School of Magic (TN 2)\n●Virtue Name (TN 3)\n●Effects (TN 4)\n●Command Words (TN 5)\n●Arcane Signature (TN 6)",
-    extras: [{"label":"Rite","text":"You learn the entire history of the object."}]
+    extras: [{"label":"Encaenium","text":"You make a Skill Check on a single item. The better the Check, the more you learn.\n\n●Number of Virtues (TN 1)\n●School of Magic (TN 2)\n●Virtue Name (TN 3)\n●Effects (TN 4)\n●Command Words (TN 5)\n●Arcane Signature (TN 6)"},{"label":"Rite","text":"You learn the entire history of the object."}]
   },
   "augury": {
     title: "Augury",
@@ -10830,12 +10854,14 @@ const tooltipRegistry = {
   "whispering_leaves": {
     title: "Whispering Leaves",
     actionType: "Cast; Skill Check [Verve]",
-    description: "By listening to the surrounding plants for several rounds, you know about springs, caves, villages, etc. within one day’s travel. For specific knowledge, roll against a TN determined by your LM."
+    description: "By listening to the surrounding plants for several rounds, you know about springs, caves, villages, etc. within one day’s travel. For specific knowledge, roll against a TN determined by your LM.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "summon_animal": {
     title: "Summon Animal",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You call to you an animal of some kind or one of your enthralled animals. For a specific type of animal that is not already enthralled, roll against a TN determined by your LM."
+    description: "You call to you an animal of some kind or one of your enthralled animals. For a specific type of animal that is not already enthralled, roll against a TN determined by your LM.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "speak_with_animal": {
     title: "Speak With Animal",
@@ -10847,7 +10873,7 @@ const tooltipRegistry = {
     title: "Barkskin",
     actionType: "Cast",
     description: "Thick bark covers your body increasing your DR by your Verve for 12 rounds.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."}]
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "enthrall_animal": {
     title: "Enthrall Animal",
@@ -10979,7 +11005,7 @@ const tooltipRegistry = {
   "opportune_strike": {
     title: "Opportune Strike",
     actionType: "Move",
-    description: "By holding your initiative, you can wait for your opponent to mistep before striking. If your opponent misses you, you are granted an attack or Skill Check. For every point your Avoidance exceeded your opponent's strike, add 1 <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to your roll."
+    description: "By holding your initiative, you can wait for your opponent to mistep before striking. If your opponent misses you, you are granted an attack or Skill Check. For every point your Avoidance exceeded your opponent's strike, add one <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to your roll."
   },
   "improved_sanctum": {
     title: "Improved Sanctum",
@@ -14187,6 +14213,18 @@ function modTip(id) {
     return `<span data-tooltip="${key}" style="cursor:help;">${name}</span>`;
 }
 
+window.toggleBarkskinSurge = function() {
+    const chk = document.getElementById("chk-barkskin");
+    const container = document.getElementById("barkskin-surge-container");
+    const surgeInput = document.getElementById("barkskin-surge-cc");
+    if (container && chk) {
+        container.style.display = chk.checked ? "flex" : "none";
+        if (!chk.checked && surgeInput) {
+            surgeInput.value = 0;
+        }
+    }
+};
+
 function calculateSheet() {
 
     // ── 1. VALIDATE RANK & REDRAW DOM CARDS INSTANTLY ──
@@ -14210,6 +14248,7 @@ function calculateSheet() {
         updateBiteAttackVirtues();
     }    
 
+    if (typeof window.toggleBarkskinSurge === "function") window.toggleBarkskinSurge();
     if (typeof window.updateEquipmentCardViews === "function") window.updateEquipmentCardViews();
     if (typeof window.resetSkillBonusRegistry === "function") window.resetSkillBonusRegistry();
     if (typeof window.renderSpecialAbilitiesCard === "function") window.renderSpecialAbilitiesCard();
@@ -23017,18 +23056,23 @@ window.updateEquipmentCardViews = function() {
             if (slotData.makerId === "darkfolk") {
                 activeCc += 1;
             }
-const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
-if (hasArcaneArmor) {
-    const rankInput = document.getElementById("char-rank-input-xp");
-    const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
-    let charRank = 1;
-    if (rankXp >= 90) charRank = 6;
-    else if (rankXp >= 60) charRank = 5;
-    else if (rankXp >= 36) charRank = 4;
-    else if (rankXp >= 18) charRank = 3;
-    else if (rankXp >= 6) charRank = 2;
-    activeCc += charRank;
-}
+            const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
+            if (hasArcaneArmor) {
+                const rankInput = document.getElementById("char-rank-input-xp");
+                const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
+                let charRank = 1;
+                if (rankXp >= 90) charRank = 6;
+                else if (rankXp >= 60) charRank = 5;
+                else if (rankXp >= 36) charRank = 4;
+                else if (rankXp >= 18) charRank = 3;
+                else if (rankXp >= 6) charRank = 2;
+                activeCc += charRank;
+            }
+            const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
+            if (hasBarkskin) {
+                const barkskinSurgeCc = Math.max(0, parseInt(document.getElementById("barkskin-surge-cc")?.value, 10) || 0);
+                activeCc += barkskinSurgeCc;
+            }
             ccDisplayHtml = `<strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>`;
         }
 
@@ -23042,10 +23086,37 @@ if (hasArcaneArmor) {
         // =========================================================================
     };
 
-    const armorHtml = renderCardText(equip.armor);
-    document.getElementById("card-view-armor").innerHTML = armorHtml || '<div class="pnp-empty-line">Empty Armor Slot</div>';
-};
+const armorHtml = renderCardText(equip.armor);
+    if (armorHtml) {
+        document.getElementById("card-view-armor").innerHTML = armorHtml;
+    } else {
+        const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
+        const barkskinSurgeCc = hasBarkskin ? Math.max(0, parseInt(document.getElementById("barkskin-surge-cc")?.value, 10) || 0) : 0;
+        const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
 
+        if ((hasBarkskin && barkskinSurgeCc > 0) || hasArcaneArmor) {
+            let activeCc = 1 + barkskinSurgeCc;
+            if (hasArcaneArmor) {
+                const rankInput = document.getElementById("char-rank-input-xp");
+                const rankXp = rankInput ? parseInt(rankInput.value) || 0 : 0;
+                let charRank = 1;
+                if (rankXp >= 90) charRank = 6;
+                else if (rankXp >= 60) charRank = 5;
+                else if (rankXp >= 36) charRank = 4;
+                else if (rankXp >= 18) charRank = 3;
+                else if (rankXp >= 6) charRank = 2;
+                activeCc += charRank;
+            }
+            document.getElementById("card-view-armor").innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <div class="pnp-empty-line" style="flex: 1;">Empty Armor Slot</div>
+                    <strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>
+                </div>`;
+        } else {
+            document.getElementById("card-view-armor").innerHTML = '<div class="pnp-empty-line">Empty Armor Slot</div>';
+        }
+    }
+};
 // =========================================================================
 // 🎒 STEP 5: UTILITY GEAR DROPDOWN INITIALIZATION & STATE EVENT HANDLING
 // =========================================================================
@@ -23876,15 +23947,22 @@ function exportCharacterData() {
     }
 
     // Gather standard inputs (including Language and Bonus/Penalty selections)
-    const inputIds = [
+const inputIds = [
         "char-name", "char-sex", "char-race", "char-ethnos", "char-milieu", "char-setting", "char-upbringing", "char-deity",
         "char-rank-input-xp", "char-xp-awarded",
         "roll-dex", "roll-hel", "roll-str", "roll-act", "roll-int", "roll-ver", "base-hap",
         "xp-dex", "xp-hel", "xp-str", "xp-act", "xp-int", "xp-ver",
         "tracker-vitality-current", "tracker-mana-current", "tracker-luck-current",
-        "char-native-lang", "char-pidgin-select", "sex-bonus-choice", "upbringing-bonus-choice", "race-bonus-choice", "race-penalty-choice"
+        "char-native-lang", "char-pidgin-select", "sex-bonus-choice", "upbringing-bonus-choice", "race-bonus-choice", "race-penalty-choice",
+        "barkskin-surge-cc"
     ];
     
+    data.checkboxes = {
+    "chk-arcane-armor": document.getElementById("chk-arcane-armor")?.checked || false,
+    "chk-barkskin": document.getElementById("chk-barkskin")?.checked || false,
+    "chk-spatial-awareness": document.getElementById("chk-spatial-awareness")?.checked || false
+};
+
     // Dynamically grab all skill XP inputs
     document.querySelectorAll("input[id^='sk-xp-']").forEach(el => inputIds.push(el.id));
     
@@ -23926,6 +24004,8 @@ function importCharacterData(data) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             targetTab.classList.add('active');
         }
+
+if (typeof toggleBarkskinSurge === "function") toggleBarkskinSurge();
         document.querySelectorAll('.tab-btn').forEach(btn => {
             const match = btn.getAttribute('onclick')?.match(/switchTab\('([^']+)'/);
             if (match && match[1] === data.activeTabId) {
@@ -23954,6 +24034,24 @@ if (data.state) {
             characterChoicesState.bypassPrerequisites = false;
         }
     }
+
+if (data.checkboxes) {
+    Object.entries(data.checkboxes).forEach(([id, checked]) => {
+        const el = document.getElementById(id);
+        if (el) el.checked = !!checked;
+    });
+}
+
+// Restore defensive checkboxes (outside of `if (data.activeTabId)`)
+    ["chk-arcane-armor", "chk-barkskin", "chk-spatial-awareness"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.checked = !!(data.checkboxes && data.checkboxes[id]);
+    });
+    const surgeInput = document.getElementById("barkskin-surge-cc");
+    if (surgeInput && (!data.inputs || data.inputs["barkskin-surge-cc"] === undefined)) {
+        surgeInput.value = 0;
+    }
+    if (typeof toggleBarkskinSurge === "function") toggleBarkskinSurge();
 
     // 3. Restore Core Identity Inputs first (so char-upbringing, char-race, etc. are set in DOM)
     if (data.inputs) {
