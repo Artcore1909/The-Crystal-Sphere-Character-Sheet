@@ -12591,7 +12591,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     ]
 },
     "skill training": {
-        description: "",
+        description: "In-depth training of one specific skill, spell, or attack.",
         levels:    [
         "Extra Training"
     ]
@@ -12600,6 +12600,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     // --- Guild & Cast Skills ---
     "guild: esoteric": {
         description: "The school of magic concerned with the flow of Aether. Produces indigo light when divined.",
+        requirements: "College Initiate",
         levels:    [
         "Arcana & New Language", "Arcane Mark", "Transfer Mana", "Dispel Magic", "Tongues", "Teleport"
     ]
@@ -12615,12 +12616,14 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "guild: temple": {
         description: "Foundational training for all servants of the pantheon. Produces alabaster light when divined.",
+        requirements: "Temple Acolyte",
         levels:    [
         "Theology, Patron Deity, Mandatum Divinum, Bless, & New Language", "Dismiss Undead", "Wraithstrike", "Divine Judgement", "Divine Wrath", "Commune"
     ]
 },
     "guild: troupe": {
         description: "The prerequisite skillset and the resultant benefits of living on the road and from the patron's purse",
+        requirements: "Troupe Neophyte",
         levels:    [
         "Performance", "Bardic Knowledge", "Wyrdsinger"
     ]
@@ -12633,42 +12636,49 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
 },
     "arcane force": {
         description: "The school of magic concerned with weaving explosive and impenatrable force from the Aether. Produces white light when divined.",
+        requirements: "College Initiate",
         levels:    [
         "Arcane Dart", "Shockwave", "Arcane Wall", "Arcane Vortex"
     ]
 },
     "battle magic: darkness": {
         description: "The school of magic concerned with weaving darkness from the Aether. Produces charcoal light when divined.",
+        requirements: "College Initiate (Lvl 3+); Ethnos: Darkfolk",
         levels:    [
         "Orb of Darkness", "Dark Mantle", "Ball of Darkness", "Veil of Darkness", "Tendril of Darkness", "Dark Strike", "Foreboding Darkness", "Living Darkness"
     ]
 },
     "battle magic: fire": {
         description: "The school of magic concerned with weaving fire from the Aether. Produces crimson light when divined.",
+        requirements: "College Initiate (Lvl 3+)",
         levels:    [
         "Fire Sting", "Fire Corona", "Fireball", "Fire Wall", "Firebolt", "Fire Strike", "Intense Flames", "Living Flame"
     ]
 },
     "battle magic: frost": {
         description: "The school of magic concerned with weaving frost from the Aether. Produces ice blue light when divined.",
+        requirements: "College Initiate (Lvl 3+)",
         levels:    [
         "Frostbite", "Frostshield", "Frost Blast", "Frost Wall", "Coldsnap", "Frost Strike", "Intense Cold", "Living Frost"
     ]
 },
     "battle magic: light": {
         description: "The school of magic concerned with weaving light from the Aether. Produces gold light when divined.",
+        requirements: "College Initiate (Lvl 3+)",
         levels:    [
         "Arrow of Light", "Halo", "Flashbang", "Wall of Light", "Flash of Light", "Light Strike", "Searing Light", "Living Light"
     ]
 },
     "battle magic: lightning": {
         description: "The school of magic concerned with weaving lightning from the Aether. Produces cyan light when divined.",
+        requirements: "College Initiate (Lvl 3+)",
         levels:    [
         "Static Discharge", "Static Aura", "Lightning Blast", "Wall of Lightning", "Lightning Bolt", "Lightning Strike", "High Voltage", "Living Lightning"
     ]
 },
     "battle magic: thunder": {
         description: "The school of magic concerned with weaving thunder from the Aether. Produces slate grey light when divined.",
+        requirements: "College Initiate (Lvl 3+)",
         levels:    [
         "Transient Noise", "Shroud of Thunder", "Sonic Boom", "Wall of Thunder", "Rolling Thunder", "Thunder Strike", "Deafening Thunder", "Living Thunder"
     ]
@@ -12732,133 +12742,159 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     // --- Rank 3+ Masteries ---
     "mastery: abjuror": {
         description: "In-depth mastery of the abjurative arts indicative of deep, contemplative study.",
+        requirements: "Rank 3+; Abjuration (8)",
         levels:    ["Improved Sanctum", "Indomitable", "True Abjuration"
     ]
 },
     "mastery: arcanist": {
         description: "In-depth mastery of the gross manipulation of vis arcana.",
+        requirements: "Rank 3+; Arcane Force (5); Guild: Esoteric (6)",
         levels:    ["Improved Force", "Inexhaustible", "True Force"
     ]
 },
     "mastery: battlemage": {
         description: "In-depth mastery of Aetherial energy.",
+        requirements: "Rank 3+; Any Two Battle Magics (5)",
         levels:    ["Spellstorm", "Larger Effect", "Largest Effect"
     ]
 },
     "mastery: conjuror": {
         description: "In-depth mastery of weaving matter from the Aether.",
+        requirements: "Rank 3+; Conjuration (10)",
         levels:    ["Spell Fusion", "Transmutation"
     ]
 },
     "mastery: deific boon": {
         description: "The elevation of a lay priest into a conduit of his God.",
+        requirements: "Rank 3+; Guild: Temple (6)",
         levels:    ["Deific Boon", "Break Curse"
     ]
 },
     "mastery: druid": {
         description: "In-depth mastery of the natural and primative magics.",
+        requirements: "Rank 3+; Druidism (8)",
         levels:    ["Beast Whisperer", "Improved Animal Form", "Beast Form"
     ]
 },
     "mastery: diviner": {
         description: "In-depth mastery of the art of divination.",
+        requirements: "Rank 3+; Divination (5)",
         levels:    ["Telepathy", "Keen", "Inexhaustible"
     ]
 },
     "mastery: dual-wielder": {
         description: "The tornadic mastery of dual-wielding.",
+        requirements: "Rank 3+; Dual-Wielding (3)",
         levels:    ["Fencer", "Daze", "Dervish"
     ]
 },
     "mastery: illusionist": {
         description: "In-depth mastery of the art of making things appear other than they are.",
+        requirements: "Rank 3+; Illusion (8)",
         levels:    ["Obscuration", "Obscured Casting", "Illusory Spell"
     ]
 },
     "mastery: jäger": {
         description: "Mastery of the bow to the point of legendary prowess.",
+        requirements: "Rank 3+; Arc-Bows (5)",
         levels:    ["Multi-shot", "Ghost Arrow", "Burst Shot"
     ]
 },
     "mastery: pugilist": {
         description: "In-depth mastery of the martial arts.",
+        requirements: "Rank 3+; Pugilism (5)",
         levels:    ["Elusive", "Martial Prowess", "Viper Strike"
     ]
 },
     "mastery: professor": {
         description: "In-depth mastery of many fields of study.",
+        requirements: "Rank 3+; Sage; Guild: Sages (8)",
         levels:    ["Dazzle 'Em", "Baffle 'Em", "Polyglot"
     ]
 },
     "mastery: scutifer": {
         description: "You really know how to keep your head on your shoulders.",
+        requirements: "Rank 3+; Defense (1)",
         levels:    ["Shield Tactics", "Spatial Awareness", "Shield Mastery"
     ]
 },
     "mastery: summoner": {
         description: "In-depth mastery of the spirit.",
+        requirements: "Rank 3+; Summoning (8)",
         levels:    ["Improved Possess Other", "Indomitable", "Improved Summoning"
     ]
 },
     "mastery: thaumaturgist": {
         description: "In-depth mastery of the fine manipulation of vis arcana.",
+        requirements: "Rank 3+; Thaumaturgy (8)",
         levels:    ["Improved Levitation", "Glyph", "Haste"
     ]
 },
     "mastery: zweihänder": {
         description: "In-depth mastery of the art of swinging a really big weapon.",
+        requirements: "Rank 3+; Butal or Shrewd Weapons (5)",
         levels:    ["Two-hander Tactics", "Quick Strike", "Fortitudinous"
     ]
 },
     "mastery: skill training": {
-        description: "",
+        description: "In-depth mastery of a specific skill, spell, or attack.",
+        requirements: "Rank 3+; Skill Training: Any",
         levels:    ["Skill Mastery"
     ]
 },
 
     // --- Occult & Paragon Paths ---
-    "occult: manathrall": {
+    "mandatory: manathrall": {
         description: "The unfortunate end for all sorcerors.",
+        requirements: "Rank 3+; Innate Sorcery (4)",
         levels:    ["Mana Sickness"
     ]
 },
     "occult: necromancer": {
         description: "The product of a lifelong search for eternal life: put your soul in a dead body because you can't die if you're already dead (well, you can, but there are lots of dead bodies lying around).",
+        requirements: "Rank 3+; Zoomancy (5); Summoning (6)",
         levels:    ["Animate Dead", "Enthrall Undead", "Rend Life", "Rend Soul"
     ]
 },
     "occult: woodswitch": {
         description: "Another adit to immortality and immense power, the path of the woodswitch is nightmarishly brutal.",
+        requirements: "Rank 3+; Bewitchment (6)",
         levels:    ["Curse", "Beguiling", "Undying"
     ]
 },
     "paragon: arcane warrior": {
         description: "A fusion of battle magic and old fashioned fighting, arcane warriors are the elite fighting force of the Guild Esoteric.",
+        requirements: "Rank 3+; Abjuration (1); Illusion (1); Battle Magic: Any (2)",
         levels:    ["Elemental Weapon", "Arcane Warrior", "Arcane Surge"
     ]
 },
     "paragon: assassin": {
         description: "Nobody likes you (but you're really good at killing them, so there's that).",
+        requirements: "Rank 3+; Stealth (8)",
         levels:    ["Improved Stealth", "Trained Assassin", "Sniper"
     ]
 },
     "paragon: ki master": {
         description: "In seeming defiance of all the Guild Esoteric knows of the Aether, instead of weaving it, you weave yourself into and through it to great effect.",
+        requirements: "Rank 3+; Athleticism (5); Observation (7); Pugilism (5)",
         levels:    ["Ki Strike", "Bukūjutsu", "Wu Xiang"
     ]
 },
     "paragon: knight": {
         description: "You have followed the path of immense discipline and now reap the benefits of unparalled combat prowess.",
+        requirements: "Rank 3+; Brutal or Shrewd Weapons (5); Arc-Bow (1); Defense (1); Equestrianism (3)",
         levels:    ["Martial Training", "Meditative Healing", "Killing Machine"
     ]
 },
     "paragon: paladin": {
         description: "The warriors of the Temple and enforcers of the Ecclesiastical Peace, keeping pneumons, the undead, and michieveous spirits at bay.",
+        requirements: "Rank 3+; Brutal or Shrewd Weapons (5); Defense (1); Temple (1); Patron Deity: Any",
         levels:    ["Holy Strike", "Wraithguard", "Holy Radiance"
     ]
 },
     "restricted: evocatus": {
         description: "The elite wariors of the empire, hand chosen by the Emperor and affirmed by both the Ecclesiarch and the Grand Arcanist.",
+        requirements: "Rank 3+; ",
         levels:    ["Obedience", "Supreme Training", "Dissever"
     ]
 },
@@ -13214,10 +13250,10 @@ const rank3SkillPrerequisitesRegistry = {
     "occult: manathrall":     { tree: "innate sorcery", requiredLevel: 4 },
     "occult: necromancer":    { tree: "zoomancy", requiredLevel: 5, secondaryTree: "summoning", secondaryRequiredLevel: 6 },
     "occult: woodswitch":     { tree: "bewitchment", requiredLevel: 6 },
-    "paragon: arcane warrior":{ alternatePrimaryTrees: [{ tree: "arc-bows", lvl: 5 }, { tree: "brutal weapons", lvl: 5 }, { tree: "shrewd weapons", lvl: 5 }], multiSecondaryTrees: [{ tree: "abjuration", lvl: 1 }, { tree: "illusion", lvl: 1 }], battleMagicLevel: 2 },
+    "paragon: arcane warrior":{multiSecondaryTrees: [{ tree: "abjuration", lvl: 1 }, { tree: "illusion", lvl: 1 }], battleMagicLevel: 2 },
     "paragon: assassin":      { tree: "stealth", requiredLevel: 8 },
     "paragon: ki master":     { tree: "athleticism", requiredLevel: 5, multiSecondaryTrees: [{ tree: "observation", lvl: 7 }, { tree: "pugilism", lvl: 5 }] },
-    "paragon: knight":        { alternatePrimaryTrees: [{ tree: "brutal weapons", lvl: 5 }, { tree: "shrewd weapons", lvl: 5 }], multiSecondaryTrees: [{ tree: "defense", lvl: 1 }, { tree: "equestrianism", lvl: 3 }] },
+    "paragon: knight":        { alternatePrimaryTrees: [{ tree: "brutal weapons", lvl: 5 }, { tree: "shrewd weapons", lvl: 5 }], multiSecondaryTrees: [{ tree: "arc-bows", lvl: 1 }, { tree: "defense", lvl: 1 }, { tree: "equestrianism", lvl: 3 }] },
     "paragon: paladin":       { alternatePrimaryTrees: [{ tree: "brutal weapons", lvl: 5 }, { tree: "shrewd weapons", lvl: 5 }], multiSecondaryTrees: [{ tree: "defense", lvl: 1 }, { tree: "guild: temple", lvl: 1 }] },
     "restricted: evocatus":   { structuralFlag: "loremaster_permission" }
 };
@@ -16587,15 +16623,17 @@ function buildCreationCardSkillsDrawer(treeName) {
 
     let levelNames = [];
     let treeDesc = "";
+    let treeReqs = "";
 
-    if (Array.isArray(treeData)) {
+if (Array.isArray(treeData)) {
         levelNames = treeData;
     } else if (treeData && typeof treeData === "object") {
         levelNames = treeData.levels || [];
-        treeDesc = treeData.description || "";
+        treeDesc = treeData.description || treeData.summary || "";
+        treeReqs = treeData.requirements || "";
     }
 
-    if (!treeDesc && typeof tooltipRegistry !== "undefined") {
+    if ((!treeDesc || !treeReqs) && typeof tooltipRegistry !== "undefined") {
         const cleanName = sanitizedKey.replace(/^(mastery|occult|paragon|restricted|guild)[:\s]+/g, "").trim();
         const possibleTreeKeys = [
             cleanName.replace(/[^a-z0-9]+/g, "_"),
@@ -16604,12 +16642,21 @@ function buildCreationCardSkillsDrawer(treeName) {
             sanitizedKey
         ];
         for (const tk of possibleTreeKeys) {
-            if (tooltipRegistry[tk]) {
-                treeDesc = tooltipRegistry[tk].description || tooltipRegistry[tk].summary || "";
-                if (treeDesc) break;
+            const entry = tooltipRegistry[tk];
+            if (entry) {
+                if (!treeDesc) {
+                    treeDesc = entry.description || entry.summary || "";
+                }
+                if (!treeReqs) {
+                    treeReqs = Array.isArray(entry.requirements)
+                        ? entry.requirements.join(", ")
+                        : (entry.requirements || "");
+                }
+                if (treeDesc && treeReqs) break;
             }
         }
     }
+
 
     const lowerTree = sanitizedKey;
     const baseKey = sanitizedKey.replace(/[^a-z0-9]+/g, "_");
@@ -16679,6 +16726,7 @@ return `
         <div class="creation-skill-drawer" style="display: none;">
             <div style="border-top: 1px dashed var(--border-dark); padding-top: 8px;">
                 ${treeDesc ? `<div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dotted var(--border-dark); line-height: 1.35;">${escapeHtml(treeDesc)}</div>` : ''}
+                ${treeReqs ? `<div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dotted var(--border-dark); line-height: 1.35;"><strong>Requirements:</strong> ${escapeHtml(treeReqs)}</div>` : ''}
                 <ul style="margin: 0; padding-left: 16px; line-height: 1.35;">
                     ${itemsHtml}
                 </ul>
@@ -17055,17 +17103,17 @@ window.verifyRank3PrerequisitesMet = function(advancedTreeKey) {
 
         // --- PARAGON PATHS ---
         case "paragon: arcane warrior":
-            let weaponValid = getTreeLvl("arc-bows") >= 5 || getTreeLvl("brutal-weapons") >= 5 || getTreeLvl("shrewd-weapons") >= 5;
             let spellValid = allBattleMagics.some(lvl => lvl >= 2);
-            return weaponValid && getTreeLvl("abjuration") >= 1 && spellValid && getTreeLvl("illusion") >= 1;
+            return getTreeLvl("abjuration") >= 1 && spellValid && getTreeLvl("illusion") >= 1;
         case "paragon: assassin":
             return getTreeLvl("stealth") >= 8; // FIXED: Adjusted to Stealth level 8
         case "paragon: ki master":
             return getTreeLvl("athleticism") >= 5 && getTreeLvl("observation") >= 7 && getTreeLvl("pugilism") >= 5;
         case "paragon: knight":
             // FIXED: Integrated updated Defense Level 1 and Shrewd Level 6 constraints rules
-            let kWeapon = getTreeLvl("brutal-weapons") >= 5 || getTreeLvl("shrewd-weapons") >= 6;
-            return getTreeLvl("defense", 4) >= 1 && getTreeLvl("equestrianism") >= 3 && kWeapon;
+            let kWeapon = getTreeLvl("brutal-weapons") >= 5 || getTreeLvl("shrewd-weapons") >= 5;
+            let bWeapon = getTreeLvl("arc-bows") >= 1;
+            return getTreeLvl("defense", 4) >= 1 && getTreeLvl("equestrianism") >= 3 && kWeapon && bWeapon;
         case "paragon: paladin":
             // FIXED: Integrated updated Defense Level 1 and Temple Level 1 constraints rules
             let pWeapon = getTreeLvl("brutal-weapons") >= 5 || getTreeLvl("shrewd-weapons") >= 6;
@@ -20302,6 +20350,7 @@ function generateSkillCodex() {
         // Dual-purpose resolver: supports both plain arrays and { description, levels } objects
         let levelNames = [];
         let treeDesc = "";
+        let treeReqs = "";
 
         if (Array.isArray(treeData)) {
             levelNames = treeData;
@@ -20310,8 +20359,20 @@ function generateSkillCodex() {
             treeDesc = treeData.description || "";
         }
 
-        // Fallback: Check tooltipRegistry if no description was defined in skillAbilitiesRegistry
-        if (!treeDesc) {
+if (Array.isArray(treeData)) {
+            levelNames = treeData;
+        } else if (treeData && typeof treeData === 'object') {
+            levelNames = treeData.levels || [];
+            treeDesc = treeData.description || "";
+            treeReqs = treeData.requirements || treeData.reqs || "";
+        }
+
+if (Array.isArray(treeReqs)) {
+            treeReqs = treeReqs.join(", ");
+        }
+
+// Fallback: Check tooltipRegistry if no description/requirements were defined in skillAbilitiesRegistry
+        if (!treeDesc || !treeReqs) {
             const cleanName = sanitizedKey
                 .replace(/^(mastery|occult|paragon|restricted|guild)[:\s]+/g, "")
                 .trim();
@@ -20324,8 +20385,9 @@ function generateSkillCodex() {
             for (const tk of possibleTreeKeys) {
                 if (typeof tooltipRegistry !== "undefined" && tooltipRegistry[tk]) {
                     const regEntry = tooltipRegistry[tk];
-                    treeDesc = regEntry.description || regEntry.summary || "";
-                    if (treeDesc) break;
+                    if (!treeDesc) treeDesc = regEntry.description || regEntry.summary || "";
+                    if (!treeReqs) treeReqs = regEntry.requirements || regEntry.reqs || "";
+                    if (treeDesc && treeReqs) break;
                 }
             }
         }
@@ -20397,8 +20459,13 @@ function generateSkillCodex() {
                 <div class="skill-header" onclick="toggleSkill(this)" style="background: #faf7f2; padding: 12px; font-weight: bold; color: #7d3c1b; cursor: pointer; user-select: none;">
                     ${treeName} ▾
                 </div>
-                <div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
-                    ${treeDesc ? `<div style="font-size: 0.9rem; color: #4a3f35; font-style: italic; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">${escapeHtml(treeDesc)}</div>` : ''}
+<div class="skill-body" style="display: none; padding: 12px; background: #fff; border-top: 1px solid #e2d7c5;">
+                    ${(treeDesc || treeReqs) ? `
+                        <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dotted #decdaf; line-height: 1.4;">
+                            ${treeDesc ? `<div style="font-size: 0.9rem; color: #4a3f35; font-style: italic;">${escapeHtml(treeDesc)}</div>` : ''}
+                            ${treeReqs ? `<div style="font-size: 0.85rem; color: #4a3f35; margin-top: ${treeDesc ? '6px' : '0'};"><strong style="color: #7d3c1b;">Requirements:</strong> ${escapeHtml(treeReqs)}</div>` : ''}
+                        </div>
+                    ` : ''}
                     <ul style="margin: 0; padding-left: 18px; line-height: 1.45;">
                         ${itemsHtml}
                     </ul>
