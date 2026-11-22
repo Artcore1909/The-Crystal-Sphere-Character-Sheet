@@ -8591,7 +8591,7 @@ const materialRegistry = {
         costMultiplier: 6,
         allowedTags: ["metal_shield", "wood_shield", "metal_weapon", "wood_weapon", "ammo"],
         bonus: "+2; +3d Avoidance; Apposite elemental resistance; +3 bonus on apposite elemental attacks; -2 Heavy",
-        description: "Drakebone armor grants immunity to elemental attacks matching the drake's breath weapon and drakebone weaponry adds +3 when used to inflict such attacks."
+        description: "Drakebone armor grants immunity to elemental attacks matching the drake's breath weapon and drakebone weaponry adds +3 when used to inflict such attacks (not calculated)."
     },
     "wyrm_scale": {
         name: "Wyrmscale",
@@ -8607,7 +8607,7 @@ const materialRegistry = {
         costMultiplier: 12,
         allowedTags: ["hide_armor", "hide_shield", "hide_weapon"],
         bonus: "+4; Apposite elemental immunity; +6 bonus on apposite elemental attacks",
-        description: "Dragonhide accoutrements can be triple enchanted. Dragonhide armor grants immunity to elemental attacks matching the dragon's breath weapon and dragonhide weaponry adds +6 when used to inflict such attacks."
+        description: "Dragonhide accoutrements can be triple enchanted. Dragonhide armor grants immunity to elemental attacks matching the dragon's breath weapon and dragonhide weaponry adds +6 when used to inflict such attacks (not calculated)."
     },
     "dragon_bone": {
         name: "Dragonbone",
@@ -8615,7 +8615,7 @@ const materialRegistry = {
         costMultiplier: 15,
         allowedTags: ["metal_armor", "wood_armor", "metal_shield", "wood_shield", "metal_weapon", "wood_weapon", "shrewd", "ammunition"],
         bonus: "+4; +4d Avoidance; Apposite elemental immunity; Allows triple enchanting; -1 Heavy",
-        description: "Dragonbone accoutrements can be triple enchanted. Dragonbone armor grants immunity to elemental attacks matching the dragon's breath weapon and dragonbone weaponry adds +6 when used to inflict such attacks."
+        description: "Dragonbone accoutrements can be triple enchanted. Dragonbone armor grants immunity to elemental attacks matching the dragon's breath weapon and dragonbone weaponry adds +6 when used to inflict such attacks (not calculated)."
     },
     "ironwood": {
         name: "Ironwood",
@@ -10135,7 +10135,7 @@ const tooltipRegistry = {
     },
     "dispel_magic": {
         title: "Dispel Magic",
-        action_type: "Cast + Skill Check [Verve]",
+        action_type: "Cast; Skill Check [Verve]",
         description: "You can dispel ephemeral, non-temple magical effects or channel the spell to suppress the magic on enchanted objects. This spell is confronted by a Verve Save.",
         extras: [{"label": "Rite [Disenchantment]", "text": "You can break permanent magical effects."}, {"label": "Surge", "text": "Your cc is increased by one per six additional Mana spent."}]
     },
@@ -10146,7 +10146,7 @@ const tooltipRegistry = {
     },
     "teleport": {
         title: "Teleport",
-        action_type: "Cast + Skill Check [Verve]",
+        action_type: "Cast; Skill Check [Verve]",
         description: "You can instantaneously travel to a target hex anywhere within the Crystal Sphere. The more familiar you are to the location, the Lower the TN. For every point you roll below the TN, you are teleported one week’s travel in a random direction from your target.",
         extras: [{"label": "Rite", "text": "Up to your Verve targets may accompany you."}]
     },
@@ -10304,35 +10304,39 @@ const tooltipRegistry = {
   // ═══════════════════════════════════════════════════════════════════════
   "orb_of_darkness": {
     title: "Orb of Darkness",
-    actionType: "Cast + Attack",
-    description: "You can shoot an orb of darkness at a target dealing Verve + Rank dice of darkness damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic."
+    actionType: "Cast; Attack",
+    description: "You can shoot an orb of darkness at a target dealing Verve + Rank dice of darkness damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "dark_mantle": {
     title: "Dark Mantle",
     actionType: "Cast",
-    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic."
+    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "ball_of_darkness": {
     title: "Ball of Darkness",
-    actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with blinding darkness dealing Verve + Rank dice of darkness damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic."
+    actionType: "Cast; Attack",
+    description: "You blast a five-hex diameter circle with blinding darkness dealing Verve + Rank dice of darkness damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "veil_of_darkness": {
     title: "Veil of Darkness",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "tendril_of_darkness": {
     title: "Tendril of Darkness",
-    actionType: "Cast + Verve",
-    description: "You send out a piercing tendril of darkness which passes through all targets up to Verve hexes away in a straight line, dealing Verve + Rank dice of darkness damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic."
+    actionType: "Cast; Skill Check [Verve]",
+    description: "You send out a piercing tendril of darkness which passes through all targets up to Verve hexes away in a straight line, dealing Verve + Rank dice of darkness damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "dark_strike": {
     title: "Dark Strike",
     actionType: "Cast",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of darkness damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "foreboding_darkness": {
     title: "Foreboding Darkness",
@@ -10341,40 +10345,43 @@ const tooltipRegistry = {
   "living_darkness": {
     title: "Living Darkness",
     actionType: "Cast",
-    description: "You bring into being a darkness elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a darkness elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "fire_sting": {
     title: "Fire Sting",
-    actionType: "Cast + Attack",
-    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    actionType: "Cast; Attack",
+    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_corona": {
     title: "Fire Corona",
     actionType: "Cast",
-    description: "You surround yourself in flames for Verve rounds dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    description: "You surround yourself in flames for Verve rounds dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fireball": {
     title: "Fireball",
-    actionType: "Cast + Attack",
-    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    actionType: "Cast; Attack",
+    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_wall": {
     title: "Fire Wall",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of fire two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of fire damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "firebolt": {
     title: "Firebolt",
-    actionType: "Cast + Attack",
-    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt."
+    actionType: "Cast; Attack",
+    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_strike": {
     title: "Fire Strike",
     actionType: "Cast",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of fire damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "intense_flames": {
     title: "Intense Flames",
@@ -10383,40 +10390,43 @@ const tooltipRegistry = {
   "living_flame": {
     title: "Living Flame",
     actionType: "Cast",
-    description: "You bring into being a fire elemental for Verve phases whose rank equals your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a fire elemental for Verve phases whose rank equals your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "frostbite": {
     title: "Frostbite",
-    actionType: "Cast + Attack",
-    description: "You can throw a fistfull of intense cold at a target dealing Verve + Rank dice of frost damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    actionType: "Cast; Attack",
+    description: "You can throw a fistfull of intense cold at a target dealing Verve + Rank dice of frost damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "frostshield": {
     title: "Frostshield",
     actionType: "Cast",
-    description: "You surround yourself in extreme cold for Verve rounds dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    description: "You surround yourself in extreme cold for Verve rounds dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "frost_blast": {
     title: "Frost Blast",
-    actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with intense cold dealing Verve + Rank dice of frost damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    actionType: "Cast; Attack",
+    description: "You blast a five-hex diameter circle with intense cold dealing Verve + Rank dice of frost damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "frost_wall": {
     title: "Frost Wall",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of frost two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of frost damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "coldsnap": {
     title: "Coldsnap",
-    actionType: "Cast + Attack",
-    description: "You send out an intense stream of frost which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of frost damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target."
+    actionType: "Cast; Attack",
+    description: "You send out an intense stream of frost which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of frost damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "frost_strike": {
     title: "Frost Strike",
     actionType: "Cast",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of frost damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "intense_cold": {
     title: "Intense Cold",
@@ -10425,40 +10435,43 @@ const tooltipRegistry = {
   "living_frost": {
     title: "Living Frost",
     actionType: "Cast",
-    description: "You bring into being a frost elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a frost elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "arrow_of_light": {
     title: "Arrow Of Light",
-    actionType: "Cast + Attack",
-    description: "You can shoot an arrow of light at a target dealing Verve + Rank dice of light damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    actionType: "Cast; Attack",
+    description: "You can shoot an arrow of light at a target dealing Verve + Rank dice of light damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "halo": {
     title: "Halo",
     actionType: "Cast",
-    description: "You surround yourself in extreme brightness for Verve rounds dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    description: "You surround yourself in extreme brightness for Verve rounds dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "flashbang": {
     title: "Flashbang",
-    actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with blinding light dealing Verve + Rank dice of light damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    actionType: "Cast; Attack",
+    description: "You blast a five-hex diameter circle with blinding light dealing Verve + Rank dice of light damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "wall_of_light": {
     title: "Wall Of Light",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of light two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of light damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "flash_of_light": {
     title: "Flash Of Light",
-    actionType: "Cast + Verve",
-    description: "You send out an intense flash of light which passes through all targets within a hemisphere whose radius is Verve hexes dealing Verve + Rank dice of light damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target."
+    actionType: "Cast; Verve",
+    description: "You send out an intense flash of light which passes through all targets within a hemisphere whose radius is Verve hexes dealing Verve + Rank dice of light damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "light_strike": {
     title: "Light Strike",
     actionType: "Cast",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of light damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "searing_light": {
     title: "Searing Light",
@@ -10467,40 +10480,43 @@ const tooltipRegistry = {
   "living_light": {
     title: "Living Light",
     actionType: "Cast",
-    description: "You bring into being a light elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a light elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "static_discharge": {
     title: "Static Discharge",
-    actionType: "Cast + Attack",
-    description: "You can throw an arc of lightning at a target dealing Verve + Rank dice of lightning damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    actionType: "Cast; Attack",
+    description: "You can throw an arc of lightning at a target dealing Verve + Rank dice of lightning damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "static_aura": {
     title: "Static Aura",
     actionType: "Cast",
-    description: "Lightning arcs from your body for Verve rounds dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    description: "Lightning arcs from your body for Verve rounds dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "lightning_blast": {
     title: "Lightning Blast",
-    actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with lightning dealing Verve + Rank dice of lightning damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    actionType: "Cast; Attack",
+    description: "You blast a five-hex diameter circle with lightning dealing Verve + Rank dice of lightning damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "wall_of_lightning": {
     title: "Wall Of Lightning",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of lightning two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of lightning damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "lightning_bolt": {
     title: "Lightning Bolt",
-    actionType: "Cast + Attack",
-    description: "You send out an intense arc of lightning which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of lightning damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target."
+    actionType: "Cast; Attack",
+    description: "You send out an intense arc of lightning which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of lightning damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "lightning_strike": {
     title: "Lightning Strike",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of lightning damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "high_voltage": {
     title: "High Voltage",
@@ -10509,40 +10525,43 @@ const tooltipRegistry = {
   "living_lightning": {
     title: "Living Lightning",
     actionType: "Cast",
-    description: "You bring into being a Lightning elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a Lightning elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "transient_noise": {
     title: "Transient Noise",
-    actionType: "Cast + Attack",
-    description: "You can throw a pocket of sound at a target dealing Verve + Rank dice of damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    actionType: "Cast; Attack",
+    description: "You can throw a pocket of sound at a target dealing Verve + Rank dice of damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "shroud_of_thunder": {
     title: "Shroud Of Thunder",
     actionType: "Cast",
-    description: "Thunder pulsates from your body for Verve rounds dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    description: "Thunder pulsates from your body for Verve rounds dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "sonic_boom": {
     title: "Sonic Boom",
-    actionType: "Cast + Attack",
-    description: "You blast a five-hex diameter circle with thunderous noise dealing Verve + Rank dice of damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    actionType: "Cast; Attack",
+    description: "You blast a five-hex diameter circle with thunderous noise dealing Verve + Rank dice of damage to all targets within; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "wall_of_thunder": {
     title: "Wall Of Thunder",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You erect a wall of thunder two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The wall lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."}]
+    extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "rolling_thunder": {
     title: "Rolling Thunder",
-    actionType: "Cast + Attack",
-    description: "You send out an intense wave of thunder which passes through all targets up to Verve hexes away dealing Verve + Rank dice of damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+    actionType: "Cast; Attack",
+    description: "You send out an intense wave of thunder which passes through all targets up to Verve hexes away dealing Verve + Rank dice of damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "thunder_strike": {
     title: "Thunder Strike",
     actionType: "Cast",
     description: "You enchant a weapon such that it is capable of inflicting Verve dice of thunder damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The enchantment on the weapon lasts for Verve rounds.",
-    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."}]
+    extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "deafening_thunder": {
     title: "Deafening Thunder",
@@ -10551,18 +10570,17 @@ const tooltipRegistry = {
   "living_thunder": {
     title: "Living Thunder",
     actionType: "Cast",
-    description: "You bring into being Living Thunder for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being Living Thunder for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "charm_person": {
     title: "Charm Person",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You insinuate romantic or fraternal feelings towards yourself into the target anthropoid’s mind for Verve rounds. The target is allowed a Verve Save to resist if asked to do something against their interest.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "confusion": {
     title: "Confusion",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You confuse the target. This spell either affects one target for a number of rounds equal to your Verve or Verve targets for one round.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."}]
   },
@@ -10574,17 +10592,17 @@ const tooltipRegistry = {
   },
   "command": {
     title: "Command",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve Save to ignore any given command."
   },
   "sleep": {
     title: "Sleep",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead."
   },
   "geas": {
     title: "Geas [Rite]",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You force the target anthropoid, of whom you must have a blood effigy, to perform some task for you. This task must be possible and mustn’t cause direct harm to the target. The Target suffers a cumulative -6 penalty to their Vitality or Mana for each week that they ignore the task. If this reduces their Vitality or Mana to 0, they die. The target is guided towards what they must do, whether by dream, whispers, or some other mechanism the LM decides, and the effect lasts until the task is complete. There is no range limit for this spell."
   },
   "conjured_light": {
@@ -10600,28 +10618,28 @@ const tooltipRegistry = {
   },
   "cobweb": {
     title: "Cobweb",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You cover a three-hex diameter circle with sticky cobwebs of preternatural strength. Targets caught within the cobwebs are considered bound."
   },
   "darkness": {
     title: "Darkness [Encænium]",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You conjure darkness to obscure things and cause fear. When a person encounters conjured darkness, they must pass a Verve Save to take any further action regarding it. Once a person looks away from conjured darkness, they must pass an Acuity Save or they forget about it. You can conjure enough darkness to cover Verve hexes.",
     extras: [{"label":"Rite","text":"When a creature Saves against your conjured darkness, they roll twice and take the worse roll."}]
   },
   "acid_splash": {
     title: "Acid Splash",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can throw a fistful of conjured acid at a target dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Splash deals -1d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
   },
   "acid_spray": {
     title: "Acid Spray",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can spray a caustic fog on all within a nine-hex diamond originating from a hex threatened by you dealing Verve + Rank dice of acid damage which lingers. Each Pulse, your Acid Spray deals -2d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
   },
   "acid_rain": {
     title: "Acid Rain",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can conjure an amount of acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Acid Rain deals -3d damage until no further damage can be dealt or if the acid is washed away by a substantial amount of water. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap save negates."
   },
   "commodity_acid": {
@@ -10642,30 +10660,29 @@ const tooltipRegistry = {
   },
   "gust_of_wind": {
     title: "Gust Of Wind",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You send forth a gust of wind one hex in diameter which knocks over or out of the sky all size B or smaller creatures unless they pass a Balance Confrontation. Their position, prone or supine, is determined by the LM. The gust lasts for one pulse, but can be channeled to maintain.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "wall_of_wind": {
     title: "Wall Of Wind",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You create a hemisphere of tornadic wind around an area up to Verve + Rank hexes in radius and one hex wide that prevents projectiles from entering and deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it. The hemisphere must be channeled to maintain.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "living_air": {
     title: "Living Air [Encænium]",
     actionType: "Cast",
-    description: "You bring into being living air for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being living air for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "stone_fist": {
     title: "Stone Fist",
-    actionType: "Cast + Attack + Skill Check [Verve]",
+    actionType: "Cast; Attack; Skill Check [Verve]",
     description: "A stone fist erupts from the earth dealing Verve + Rank dice of damage to all within a three-hex diameter circle. Targets must pass a Balance Check or fall; their position, prone or supine, is determined by the LM."
   },
   "rend_earth": {
     title: "Rend Earth",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can cause the earth to split over an area 12 + Verve hexes long and four hexes wide. The chasm is Verve + Rank hexes deep and creatures in the area are entitled to a Dexterity save to avoid falling in. If they save, the side of the chasm they end up on is determined by the LM. This spell cannot affect worked stone."
   },
   "stone_wall": {
@@ -10676,8 +10693,7 @@ const tooltipRegistry = {
   "living_stone": {
     title: "Living Stone [Encænium]",
     actionType: "Cast",
-    description: "You bring into being an earth elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being an earth elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "commodity_earth": {
     title: "Commodity: Earth [Encænium]",
@@ -10686,7 +10702,7 @@ const tooltipRegistry = {
   },
   "icicle": {
     title: "Icicle",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can throw a frozen spear at a target which deals Verve + Rank dice of damage."
   },
   "ice_armor": {
@@ -10727,8 +10743,7 @@ const tooltipRegistry = {
   "living_shadow": {
     title: "Living Shadow [Encænium]",
     actionType: "Cast",
-    description: "You bring into being a living shadow for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a living shadow for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "commodity_shade": {
     title: "Commodity: Shade [Encænium]",
@@ -10737,7 +10752,7 @@ const tooltipRegistry = {
   },
   "jetstream": {
     title: "Jet Stream",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You conjure a fistful of water which can be shot at high pressure dealing Verve + Rank points of damage to every target in a direct line. It may damage the same target more than once in the case of multi-hex creatures. Each time the jet passes through a hex of a target it loses three points of damage from the initial rolled amount."
   },
   "water_shield": {
@@ -10753,8 +10768,7 @@ const tooltipRegistry = {
   "living_water": {
     title: "Living Water [Encænium]",
     actionType: "Cast",
-    description: "You bring into being a water elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Encaenium","text":"You bring into being a water elemental for one phase whose rank cannot exceed your own and who will follow all commands. So long as the effect is active, your Mana is reduced by eight points."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "detect_magic": {
     title: "Detect Magic",
@@ -10762,18 +10776,18 @@ const tooltipRegistry = {
   },
   "detect_thoughts": {
     title: "Detect Thoughts",
-    actionType: "Cast + Skill Check [Acuity]",
+    actionType: "Cast; Skill Check [Acuity]",
     description: "You make a Skill Check against an intelligent target. The better the Check, the more you learn.\n\n●Their current mood (TN 1)\n●Isolated, single-word, conscious thoughts (TN 2)\n●Isolated, single-phrase, conscious thoughts (TN 3)\n●Their complete conscious thoughts (TN 4)\n●Subconscious thoughts and desires (TN 5\n●A random memory (TN 6)\n●A memory of your choosing (TN 7)"
   },
   "locate": {
     title: "Locate [Encænium]",
-    actionType: "Cast + Hidden Check [Acuity]",
+    actionType: "Cast; Hidden Check [Acuity]",
     description: "This spell uses either the magical Law of Contagion (Once together, always together) or that of Sympathy (extreme similarity) to determine the existence or location of some-body/-thing. You must have in your possession an item (focus) that is somehow intimately related to what you are seeking (target). The weaker the relationship between your focus & your target, the harder it is to find the target. If successful, the LM will tell you in which direction (including up and down) the target is from you and whether it is within one campaign hex—one day’s travel—of you. A small portion of the focus is destroyed by the spell.",
     extras: [{"label":"Rite","text":"You are given the exact distance to your target anywhere in the Crystal Sphere."}]
   },
   "analyze": {
     title: "Analyze [Encænium]",
-    actionType: "Cast + Skill Check [Acuity]",
+    actionType: "Cast; Skill Check [Acuity]",
     description: "You make a Skill Check on a single item. The better the Check, the more you learn.\n\n●Number of Virtues (TN 1)\n●School of Magic (TN 2)\n●Virtue Name (TN 3)\n●Effects (TN 4)\n●Command Words (TN 5)\n●Arcane Signature (TN 6)",
     extras: [{"label":"Rite","text":"You learn the entire history of the object."}]
   },
@@ -10815,12 +10829,12 @@ const tooltipRegistry = {
   },
   "whispering_leaves": {
     title: "Whispering Leaves",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "By listening to the surrounding plants for several rounds, you know about springs, caves, villages, etc. within one day’s travel. For specific knowledge, roll against a TN determined by your LM."
   },
   "summon_animal": {
     title: "Summon Animal",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You call to you an animal of some kind or one of your enthralled animals. For a specific type of animal that is not already enthralled, roll against a TN determined by your LM."
   },
   "speak_with_animal": {
@@ -10837,7 +10851,7 @@ const tooltipRegistry = {
   },
   "enthrall_animal": {
     title: "Enthrall Animal",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can make a servant of the target animal through steady, direct contact rendering it loyal until death. If the target passes a Verve save, the spell fails and the animal becomes hostile. You can only enthrall up to your Rank creatures, and enthralled creatures cannot be dismissed, only killed.",
     extras: [{"label":"Word [Calm Animal]","text":"So long as the target animal has not been harmed by you or those it may associate with you, you can lessen the animal’s aggression. If the target passes a Verve save, the spell has no effect."}]
   },
@@ -10849,61 +10863,61 @@ const tooltipRegistry = {
   },
   "wall_of_thorns": {
     title: "Wall Of Thorns",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You call forth the surrounding vegetation to assemble itself into a barrier two-hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. Targets caught within the wall are dealt Verve + Rank dice of damage and are entangled. They are dealt a further Verve + Rank dice of damage each time they attempt to move or escape. The effect lasts for Verve rounds.",
     extras: [{"label":"Channel","text":"Your wall writhes dealing an additional Verve + Rank dice of damage per Pulse to all targets within and entangles all non-entangled targets inside."},{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "entangle": {
     title: "Entangle",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "By laying your hands upon the ground and channeling Mana, you cause the surrounding vegetation to rapidly grow hardy and entangle all targets within a three-hex radius circle. Targets must pass a Dexterity save to avoid becoming entangled. If a disentangled combatant is within the affected area, they must save against the entanglement before taking any action.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "bless": {
     title: "Bless",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You bestow the blessing of your deity upon one item. The effect of the blessing differs on a case by case basis as determined by the LM. Usually, blessed objects have minor curative properties and are anathema to the undead. Blessed soil prevents undead from trespassing unless they pass a Verve save. Blessings last for a number of rounds equal to your Rank.",
     extras: [{"label":"Encænium","text":"Saving throws against your blessing are rolled twice and worse roll is taken. Blessings last a number of phases equal to your Rank."},{"label":"Rite","text":"Your blessing is permanent."}]
   },
   "blur": {
     title: "Blur",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "Your indistinct features and outline make you more difficult to hit, applying disadvantage to all attacks made against you. The effect is only applied if your foe can see you. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "invisibility": {
     title: "Invisibility",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "Upon touch, the target of this spell becomes completely invisible—though it’s magical emanation is still detectable—for Verve rounds. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "change_render_image": {
     title: "Change Render Image",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can create an illusory image contained within a hemisphere of up to Verve hexes in diameter that either exists on its own or disguises something for Verve rounds. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "change_render_sound": {
     title: "Change Render Sound",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can change, silence, create, or contain noise within an hemisphere of up to Verve hexes in diameter for up to Verve rounds.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "fearsome_form": {
     title: "Fearsome Form",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You appear to all onlookers as the thing they most fear for Verve rounds. Affected targets must pass a Verve save or become panicked. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "alluring_form": {
     title: "Alluring Form",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You appear to all onlookers as the thing they most desire for Verve rounds. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "impersonate": {
     title: "Impersonate",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "The target is able to take on the physical features—look, sound, and feel—of another creature within one size category of their own for Verve phases. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Rite","text":"The effect is permanent."}]
   },
@@ -10913,22 +10927,22 @@ const tooltipRegistry = {
   },
   "mirage": {
     title: "Mirage",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You make a large area look how you want it to. To prepare this spell, you must enchant several identical items and then use those items to mark the perimeter. The ritual stones of your perimeter must be no farther than Verve hexes from the next nearest one. The ritual stones can neither be moved nor destroyed until the spell is dispelled. This spell is confronted by Disbelieve Illusion."
   },
   "manaburst": {
     title: "Manaburst [Word; Rank I]",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You send out a shockwave of mana that deals Verve + Rank dice of damage to all targets within one hex of you."
   },
   "mana_sting": {
     title: "Mana Sting [Word; Rank II]",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You imbue your next melee strike with Verve dice of damage. The effect is lost if not used immediately."
   },
   "mana_bullet": {
     title: "Mana Bullet [Word; Rank III]",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You imbue your next ranged strike with Verve dice of damage. The effect is lost if not used immediately."
   },
   "manawall": {
@@ -11070,7 +11084,7 @@ const tooltipRegistry = {
   },
   "wyrdsinger": {
         title: "Wyrdsinger [Incantation]",
-        actionType: "Cast + Skill Check [Verve]",
+        actionType: "Cast; Skill Check [Verve]",
         summary: "Upon making a performance Check, you can activate one or more of the following effects for Verve Rounds. The combined TNs of all effects produced cannot exceed your Skill Check.",
         includes: ["wyrd_control", "luck_is_what_you_make_it", "luck_be_with_you", "lucky_hit", "sucks_to_be_you", "lucky_bastard"]
     },
@@ -11145,7 +11159,7 @@ const tooltipRegistry = {
   },
   "spell_fusion": {
     title: "Spell Fusion",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     summary: "You can cast any of the following spells so long as you have the requisite discipline skills.",
     includes: ["caustic_fog", "stonefist_modified", "icicle_modified", "umbral_blade_modified", "jetstream_modified", "sandstorm", "hailstorm", "living_fog", "hurricane", "permafrost", "malignant_shade_modified", "geyser", "black_ice", "slurry", "quagmire"]
   },
@@ -11156,7 +11170,7 @@ const tooltipRegistry = {
   },
   "curse": {
     title: "Curse",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     summary: "At the cost of aging yourself, you cause your target to suffer from one of the following effects:",
     includes: ["curse_of_the_evil_eye", "curse_of_wandering", "curse_of_animal_form", "curse_of_sleeping", "curse_of_pain", "curse_of_impairment", "curse_of_infatuation"]
   },
@@ -11188,13 +11202,13 @@ const tooltipRegistry = {
   },
   "sanctum": {
     title: "Sanctum",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You prevent all foes from attacking you for Verve rounds unless they pass a Verve save. Directly attacking a foe breaks the effect.",
     extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}, {"label": "Surge", "text": "Your cc is increased by one per six additional Mana spent."}]
   },
   "abjure_creature": {
     title: "Abjure Creature",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You prevent hostile creatures of any kind from crossing your perimeter unless they pass a Verve save. To prepare this spell, you must enchant several ritual stones then use them to create a perimeter such that each stone is within Verve hexes of the next. The ritual stones can neither be moved nor destroyed until the spell is dismissed or dispelled. The effect lasts for Verve phases.",
     extras: [{"label":"Rite","text":"The effect is permanent."}]
   },
@@ -11212,7 +11226,7 @@ const tooltipRegistry = {
   },
   "arcane_seal": {
     title: "Arcane Seal",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "Your target, who must be within thrice your Verve hexes of you, cannot spend any mana. The target is entitled to a Verve save each Round to negate.",
     extras: [{"label": "Surge", "text": "Your cc is increased by one per each six additional Mana spent."}]
   },
@@ -11224,19 +11238,19 @@ const tooltipRegistry = {
   },
   "arcane_dart": {
     title: "Arcane Dart",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can throw a fistfull of arcane force at a target dealing Verve + Rank dice of damage; change all rolled <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result.",
     extras: [{"label": "Surge", "text": "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per each six additional Mana spent."}]
   },
   "arcane_lock": {
     title: "Arcane Lock",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You magically affix one touched surface to another.",
     extras: [{"label":"Encænium & Rite","text":"By virtue of being an Encænium or Rite, your Arcane Lock is harder to dispel."}]
   },
   "shockwave": {
     title: "Shockwave",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You shove all size C or smaller targets within Verve hexes directly away from you to the point that they are no closer than Verve hexes from you. Any damage suffered because of this spell is considered a calamity. Targets who fail a Dexterity Save are knocked down, whether prone or supine is determined by the LM.",
     extras: [{"label": "Surge", "text": "Targets suffer Verve + Rank dice of damage per six additional Mana spent."}]
   },
@@ -11248,7 +11262,7 @@ const tooltipRegistry = {
   },
   "arcane_vortex": {
     title: "Arcane Vortex",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled.",
     extras: [{"label": "Surge", "text": "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per each six additional Mana spent."}]
   },
@@ -11283,25 +11297,25 @@ const tooltipRegistry = {
   },
   "true_lightning": {
     title: "True Lightning",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "A bolt of lightning from the open sky strikes your target, dealing Verve + Rank dice of Lightning damage. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Weakness.",
     extras: [{"label":"Bonus Spells","text":"Static Discharge; Static Aura"}]
   },
   "pillar_of_flame": {
     title: "Pillar of Flame",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You summon a pillar of flame, 3-hexes  in diameter and thrice your Verve hexes tall that lasts for as long as you channel the spell. You can move the pillar up to Verve hexes each Pulse or have it track a valid target.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
   "thunderous_roar": {
     title: "Thunderous Roar",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You let forth a thunderous roar, dazing all valid targets within Verve hexes. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
     extras: [{"label":"Bonus Spells","text":"Transient Noise; Shroud of Thunder"}]
   },
   "blizzard": {
     title: "Blizzard",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "A blizzard swirls around you, numbing all valid targets within a 5-hex radius circle centered on you for as long as you channel the spell.",
     extras: [{"label":"Bonus Spells","text":"Frostbite; Frostshield; Ice Armor; Icicle"}]
   },
@@ -11313,7 +11327,7 @@ const tooltipRegistry = {
   },
   "immolate": {
     title: "Immolate",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
@@ -11325,7 +11339,7 @@ const tooltipRegistry = {
   },
   "tornado": {
     title: "Tornado",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "A 5-hex radius tornado, centered on you and not affecting the hex you are in, spawns causing the following to occur:\nPulse one: the wind begins to pick up;\nPulse two: all valid targets within a 10-hex diameter circle must pass a TN Rank Balance Check or fall;\nPulse three: targets within the affected area must pass a TN Rank Hap save each Pulse or they are struck with debris, dealing Verve + Rank dice of Bashing, Slashing, or Thrusting damage;\nPulse four: affected targets are lifted from the ground and spun about;\nPulse five: affected targets are thrown Verve hexes in a random direction;\nFor each additional Pulse the spell is channeled, valid targets within thrice your Verve hexes of yourself are assailed with debris; targets must pass a TN Rank Hap save or suffer Verve + Rank dice of Slashing, Bashing, or Thrusting damage.",
     extras: [{"label":"Bonus Spells","text":"Down Draft; Gust of Wind"}]
   },
@@ -11368,25 +11382,25 @@ const tooltipRegistry = {
   },
   "summon_spirit": {
     title: "Summon Spirit",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You must first create a summoning circle that prevents the passage of spirits unless they pass a Verve save. Then, you call forth a spirit. What responds to your call–ghost, wraith, or banshee–is determined by the LM. For a specific type of spirit, roll against a TN determined by the LM.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "trap_soul": {
     title: "Trap Soul",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You enchant a soul stone to react to your command word. After an enemy has been slain or rendered unconscious—not sleeping—uttering this command word while the enemy and the soul stone are within one hex of each other traps the soul within the stone. The target is entitled to a Verve save to resist.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "summon_pneumon": {
     title: "Summon Pneumon",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You must first create a circle that prevents the passage of a specific type of pneumon unless they pass a Verve save. Then, you call forth a pneumon of no higher rank than your own. What type responds to your call is determined by the LM. For a specific type and rank of pneumon, roll against a TN determined by the LM.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "bind_pneumon_spirit": {
     title: "Bind Pneumon/Spirit",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You command a pneumon or spirit to serve you for Verve phases. The target is entitled to a Verve save to resist.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
@@ -11426,7 +11440,7 @@ const tooltipRegistry = {
   },
   "levitate": {
     title: "Levitate",
-    actionType: "Cast + Skill Check [Verve] + Move",
+    actionType: "Cast; Skill Check [Verve] + Move",
     description: "You cause yourself or another target to float above the ground. You can raise or lower your target Verve hexes per Move action for 12 rounds. This skill is confronted by Verve."
   },
   "alter_speed": {
@@ -11436,7 +11450,7 @@ const tooltipRegistry = {
   },
   "force_choke": {
     title: "Force Choke",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You telekinetically choke a target dealing Asphyxiation damage (as defined in the Creature Compendium) and prevent the target from moving unless he passes a Strength save, allowing him to move up to ¼ pace."
   },
   "stabilize": {
@@ -11453,17 +11467,17 @@ const tooltipRegistry = {
   },
   "inflict_wounds": {
     title: "Inflict Wounds",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can inflict Verve + Rank dice of damage to a target’s Vitality. This spell is confronted by a Health save."
   },
   "purify": {
     title: "Purify",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You cure a single disease or toxin. Your familiarity with the disease/toxin determines the TN."
   },
   "resurrection": {
     title: "Resurrection",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You bring a dead thing back to life. The longer the creature has been dead, the higher the TN.",
     extras: [{"label":"Word","text":"This spell no longer requires contact."}]
   },
@@ -11610,7 +11624,7 @@ const tooltipRegistry = {
   "living_fog": {
     title: "Living Fog",
     description: "You can cover a column whose diameter and height is equal to seven-hexes with a thick, swirling fog for Verve rounds preventing all within from seeing beyond the hex they occupy. Inside of the fog is a number of living fog equal to your Rank whose Rank cannot exceed your own. They are undetectable so long as they remain inside of the fog. Targets fleeing the fog must pass a Direction Sense Check, TN Rank, to do so and exit from a random point unless their Check is greater than the caster’s Verve.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label:"Rite", text: "The effect is permanent." }]
   },
   "hurricane": {
     title: "Hurricane",
@@ -11647,13 +11661,13 @@ const tooltipRegistry = {
   },
     "daylight": {
         title: "Daylight",
-        actionType: "Cast + Skill Check [Verve]",
+        actionType: "Cast; Skill Check [Verve]",
         description: "You call forth a sphere of daylight and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This light impairs all Darkfolk, shadow pnuemons, and all creatures with Darkvision as their primary method of espying by Verve number of dice.\n● Attack: The sphere can be thrown and will explode, dealing Verve + Rank dice of light damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.\n● Set: By being thrown upward, the ball will provide daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
         extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
     },
     "true_darkness": {
         title: "True Darkness",
-        actionType: "Cast + Skill Check [Verve]",
+        actionType: "Cast; Skill Check [Verve]",
         description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons Save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
         extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
     },
@@ -11695,7 +11709,7 @@ const tooltipRegistry = {
     },
   "break_curse": {
     title: "Break Curse",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You call upon the power of your god to break a curse. This skill is confronted by a Verve Save."
   },
   "beast_whisperer": {
@@ -11735,7 +11749,7 @@ const tooltipRegistry = {
   },
   "obscuration": {
     title: "Obscuration",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You make a person, object, or spell immune to Divination for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
     extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
   },
@@ -11745,7 +11759,7 @@ const tooltipRegistry = {
   },
   "illusory_spell": {
     title: "Illusory Spell",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can cast an illusory version of any spell you have seen. The spell behaves exactly as the spell it is copying, excepting that it cannot permanently affect reality. Affected targets act as though the spell is real, and will even go so far as to lay on the ground as if they were dead. This spell is confronted by Disbelieve Illusion."
   },
   "multi_shot": {
@@ -11754,7 +11768,7 @@ const tooltipRegistry = {
   },
   "ghost_arrow": {
     title: "Ghost Arrow",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "burst_shot": {
@@ -11868,12 +11882,12 @@ const tooltipRegistry = {
   },
   "enthrall_undead": {
     title: "Enthrall Undead",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can make a servant of the target corporeal undead, rendering it loyal until death. If the target passes a Verve Save, the spell fails and the undead becomes hostile. You can control a number of undead no greater than your Rank at any given time.",
   },
   "rend_life": {
     title: "Rend Life",
-    actionType: "Cast + Skill Check [Verve]",
+    actionType: "Cast; Skill Check [Verve]",
     description: "You can sever the animating spirit from a living or undead body effectively killing the creature. The creature is entitled to a Verve Save to negate the effect."
   },
   "rend_soul": {
@@ -11932,7 +11946,7 @@ const tooltipRegistry = {
   },
   "arcane_surge": {
     title: "Arcane Surge [Word]",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "improved_stealth": {
