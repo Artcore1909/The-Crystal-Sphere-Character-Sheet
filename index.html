@@ -11331,7 +11331,7 @@ const tooltipRegistry = {
   },
   "enshadow": {
     title: "Enshadow",
-    actionType: "Cast + Attack",
+    actionType: "Cast; Attack",
     description: "You enshadow a 5-hex diameter area centered on you for as long as you channel the spell, blinding all valid targets within.",
     extras: [{"label":"Bonus Spells","text":"Malignant Shade; Umbral Blade"}]
   },
@@ -11342,7 +11342,8 @@ const tooltipRegistry = {
   },
   "mana_shield": {
     title: "Mana Shield",
-    description: "You suffer only ½ damage from a single incoming spell or magical effect."
+    description: "You suffer only ½ damage from a single incoming spell or magical effect.",
+    extras: [{"label":"Surge","text":"You suffer no damage from incoming spells for one Pulse per six additional Mana spent."}]
   },
   "sense_mana": {
     title: "Sense Mana",
@@ -11350,13 +11351,15 @@ const tooltipRegistry = {
   },
   "rend_mana": {
     title: "Rend Mana",
-    actionType: "Cast + Skill Check [Verve]",
-    description: "You inflict Verve + Rank dice of Mana damage to a target. The target is entitled to a Verve save to negate. Alternatively, you can use this skill to remove a single virtue by removing an amount of Mana equal to its cost."
+    actionType: "Cast; Skill Check [Verve]; Attack",
+    description: "You inflict Verve + Rank dice of Mana damage to a target. The target is entitled to a Verve save to negate. Alternatively, you can use this skill to remove a single virtue by removing an amount of Mana equal to its cost.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "private_hallway": {
     title: "Private Hallway",
     actionType: "Cast",
-    description: "You can create a hallway one hex long through anything except lead, gold, or the Crystal Sphere by laying hands upon it. If the hallway cannot pass through the entire hex, it will not open at all. This hallway can go in any direction and stays open for Verve rounds or until the spell is dismissed. Only you can pass through the hallway. If caught within the hallway when it is collapsed, you are ejected from whichever open side you’re nearest."
+    description: "You can create a hallway one hex long through anything except lead, gold, or the Crystal Sphere by laying hands upon it. This hallway can go in any direction and stays open for Verve rounds or until the spell is dismissed. Only you can pass through the hallway. If caught within the hallway when it is collapsed, targets suffer Verve + Rank points of Vitality damage and are ejected from whichever open side they’re nearest.",
+    extras: [{"label":"Surge","text":"The length is increased by one hex per six additional Mana spent."}]
   },
   "private_chest": {
     title: "Private Chest",
@@ -11366,28 +11369,32 @@ const tooltipRegistry = {
   "summon_spirit": {
     title: "Summon Spirit",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You must first create a summoning circle that prevents the passage of spirits unless they pass a Verve save. Then, you call forth a spirit. What responds to your call–ghost, wraith, or banshee–is determined by the LM. For a specific type of spirit, roll against a TN determined by the LM."
+    description: "You must first create a summoning circle that prevents the passage of spirits unless they pass a Verve save. Then, you call forth a spirit. What responds to your call–ghost, wraith, or banshee–is determined by the LM. For a specific type of spirit, roll against a TN determined by the LM.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "trap_soul": {
     title: "Trap Soul",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You enchant a soul stone to react to your command word. After an enemy has been slain or rendered unconscious—not sleeping—uttering this command word while the enemy and the soul stone are within one hex of each other traps the soul within the stone. The target is entitled to a Verve save to resist."
+    description: "You enchant a soul stone to react to your command word. After an enemy has been slain or rendered unconscious—not sleeping—uttering this command word while the enemy and the soul stone are within one hex of each other traps the soul within the stone. The target is entitled to a Verve save to resist.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "summon_pneumon": {
     title: "Summon Pneumon",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You must first create a circle that prevents the passage of a specific type of pneumon unless they pass a Verve save. Then, you call forth a pneumon of no higher rank than your own. What type responds to your call is determined by the LM. For a specific type and rank of pneumon, roll against a TN determined by the LM."
+    description: "You must first create a circle that prevents the passage of a specific type of pneumon unless they pass a Verve save. Then, you call forth a pneumon of no higher rank than your own. What type responds to your call is determined by the LM. For a specific type and rank of pneumon, roll against a TN determined by the LM.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "bind_pneumon_spirit": {
     title: "Bind Pneumon/Spirit",
     actionType: "Cast + Skill Check [Verve]",
-    description: "You command a pneumon or spirit to serve you for Verve phases. The target is entitled to a Verve save to resist."
+    description: "You command a pneumon or spirit to serve you for Verve phases. The target is entitled to a Verve save to resist.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "possess_other": {
     title: "Possess Other",
-    actionType: "Cast + Skill Check [Verve]",
-    description: "You send your mind and part of your spirit into a living target so as to take control of their body for Verve rounds. You only take with you half of your Mana. Once in control, you may move beyond the range restriction of spells. Your body is considered unconscious for the duration of the spell. The target is entitled to a Verve save each round to expel your spirit.",
-    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases and Verve saves are only made once per phase."}, {"label":"Rite","text":"Your entire mind and spirit enters your target’s body. The target’s mind and spirit are forced out and will enter your former body."}]
+    actionType: "Cast; Skill Check [Verve]",
+    description: "You send your mind and part of your spirit into a living target so as to take control of their body for Verve rounds. You only take with you half of your Mana. Once in control, you may move beyond the range restriction of spells. Your body is considered unconscious for the duration of the spell. The target is entitled to a Verve save each Pulse to expel your spirit.",
+    extras: [{"label":"Encænium","text":"The effect lasts for Verve phases and Verve saves are only made once per phase."}, {"label":"Rite","text":"Your entire mind and spirit enters your target’s body. The target’s mind and spirit are forced out and will enter your former body."}, {"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "private_sanctum": {
     title: "Private Sanctum",
@@ -11398,7 +11405,7 @@ const tooltipRegistry = {
     title: "Phantom Steed",
     actionType: "Cast",
     description: "You create a phantom steed for three phases that only you can ride upon. This steed moves at a pace of 60 and is not slowed by difficult terrain. Your phantom steed cannot attack. So long as the steed is in effect, your Mana is reduced by eight points.",
-    extras: [{"label":"Rite","text":"The effect is permanent."}]
+    extras: [{"label":"Rite","text":"The effect is permanent."}, {"label":"Surge","text":"You summon an additional mount which can be ridden by others per six additional Mana spent."}]
   },
   "cooperative_casting": {
     title: "Cooperative Casting",
@@ -11407,14 +11414,15 @@ const tooltipRegistry = {
   },
   "throw_weapon": {
     title: "Throw Weapon",
-    actionType: "Cast + Attack",
-    description: "You can telepathically launch Verve number of small objects or one large object at one or more targets as if you had thrown them except that your Verve is its Governing Aspect. The objects will continue to attack the targets from all directions for Rank rounds rerolling <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> instead of modifying them."
+    actionType: "Cast; Attack",
+    description: "You can telepathically launch Rank number of weapons or one large object whose Height x Surface Area is no larger than your Rank hexes at one or more targets, using your Verve as the Governing Aspect of the Attack; Large, non-weapon objects have a Bonus of 6 x Hex of material. Weapons will continue to attack the targets from all directions for Verve Pulses rerolling <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> instead of modifying them.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "etch_rune": {
     title: "Etch Rune",
-    actionType: "Cast",
-    description: "You create a rune and charge it with a spell you know by channeling Mana into it. You must channel into it three times the Mana it will output. When you create the rune, you must also scribe into it the triggering condition: command, destruction, manipulation, or proximity. The range that the rune can detect and affect is thrice your Verve hexes from itself.",
-    extras: [{"label":"Rite","text":"The rune recharges over the course of three days."}]
+    actionType: "Cast; Attack",
+    description: "You create a rune and charge it with a spell you know by channeling Mana into it. You must channel into it three times the Mana it will output. When you create the rune, you must also scribe into it the triggering condition: command, destruction, manipulation, or proximity. The range that the rune can detect and affect is six times your Verve hexes from itself, and attacks issuing from the rune reroll <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> instead of modifying them..",
+    extras: [{"label":"Rite","text":"The rune recharges over the course of three days."}, {"label":"Surge","text":"Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Attacks and Checks issued by the rune per 18 additional Mana spent."}]
   },
   "levitate": {
     title: "Levitate",
@@ -16111,7 +16119,7 @@ document.getElementById("sub-def-armor").innerText = `${armorOnlyAvoid}d+${armor
 let shieldOnlyAvoid = baseAvoidDice + shieldAvoidDiceMod; 
 let shieldOnlyDr = baseDr + shieldDrMod + getMaxEnchant("protection", false, true) * 3; 
 // Dynamically expands cap via stacked defending enchantments AND native Enshadowed trait
-let maxShieldOnlyLimit = 6 + shieldLimitDiceBonus + enshadowedBonus + getMaxEnchant("defending", false, true); 
+let maxShieldOnlyLimit = 6 + shieldLimitDiceBonus + enshadowedBonus; 
 
 if (shieldOnlyAvoid > maxShieldOnlyLimit) { 
   shieldOnlyDr += (shieldOnlyAvoid - maxShieldOnlyLimit); 
@@ -16137,7 +16145,7 @@ if (hasSpatialAwareness) {
     finalAvoidDice += finalAct;
 }
 
-let maxUnifiedLimit = 6 + shieldLimitDiceBonus + enshadowedBonus + getMaxEnchant("defending", true, true); 
+let maxUnifiedLimit = 6 + shieldLimitDiceBonus + enshadowedBonus; 
 
 // Process uniform Unified dice overflow to DR conversion 
 if (finalAvoidDice > maxUnifiedLimit) { 
