@@ -740,6 +740,10 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
     & img[src$="Wyrdenc.png"]  { content: var(--theme-icon-wyrd); }
 }
 
+html body.no-theme-bg {
+    background-image: none !important;
+}
+
         /* =========================================================================
            1. BASE STYLES & LAYOUT CONTAINERS
            ========================================================================= */
@@ -2770,6 +2774,11 @@ details[open] #skills-collapsed-summary {
                 <option value="paladinic">Paladinic Theme</option>
                 <option value="rose-gold">Rose Gold Theme</option>
             </select>
+
+<label class="btn-sm" style="display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; margin-bottom: 12px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
+    <input type="checkbox" id="toggle-theme-bg" checked onchange="setThemeBgEnabled(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
+    <span>Show Theme Background</span>
+</label>
 
             <button type="button" onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; margin-bottom: 12px; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
                 Manage Characters
@@ -29767,11 +29776,22 @@ function switchTheme(themeName) {
     localStorage.setItem('cscs_theme', themeName);
 }
 
+function setThemeBgEnabled(enabled) {
+    const isEnabled = !!enabled;
+    document.body.classList.toggle('no-theme-bg', !isEnabled);
+    localStorage.setItem('cscs_theme_bg', isEnabled ? '1' : '0');
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem('cscs_theme') || 'default';
     const selector = document.getElementById("theme-selector");
     if (selector) selector.value = savedTheme;
     switchTheme(savedTheme);
+
+    const bgEnabled = localStorage.getItem('cscs_theme_bg') !== '0';
+    const bgToggle = document.getElementById("toggle-theme-bg");
+    if (bgToggle) bgToggle.checked = bgEnabled;
+    setThemeBgEnabled(bgEnabled);
 });
 
 </script>
