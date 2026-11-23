@@ -11466,18 +11466,21 @@ const tooltipRegistry = {
   },
   "levitate": {
     title: "Levitate",
-    actionType: "Cast; Skill Check [Verve] + Move",
-    description: "You cause yourself or another target to float above the ground. You can raise or lower your target Verve hexes per Move action for 12 rounds. This skill is confronted by Verve."
+    actionType: "Cast",
+    description: "You cause yourself to float above the ground. You can raise or lower up to Verve hexes per Move action for 12 rounds.",
+    extras: [{"label":"Surge","text":"Your Levitate Pace is increased by Verve per six additional Mana spent."}]
   },
   "alter_speed": {
     title: "Alter Speed",
     actionType: "Cast",
-    description: "You increase or decrease the pace of the touched target by up to Verve hexes for 12 rounds. This can also be used to change the rate at which the target falls, increasing or decreasing the damage by a number of dice equal to your Verve."
+    description: "You either inflict Disadvantage or grant Advantage to your target's Run Checks for 12 Rounds, adjusting their Charge bonus by Rank points.",
+    extras: [{"label":"Surge","text":"Double your effective Rank per six additional Mana spent."}]
   },
   "force_choke": {
     title: "Force Choke",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You telekinetically choke a target dealing Asphyxiation damage (as defined in the Creature Compendium) and prevent the target from moving unless he passes a Strength save, allowing him to move up to ¼ pace."
+    description: "You telekinetically choke a target, dealing Asphyxiation damage (as defined in the Creature Compendium) and prevent the target from moving unless he passes a Strength save, which only allows him to move up to ¼ pace. This skill must be channeled.",
+    extras: [{"label":"Surge","text":"Your cc and channel cost are increased by one per six additional Mana spent."}]
   },
   "stabilize": {
     title: "Stabilize",
@@ -11489,23 +11492,24 @@ const tooltipRegistry = {
     title: "Heal Wounds",
     actionType: "Cast",
     description: "Target recovers Verve + Rank points of Vitality.",
-    extras: [{"label":"Encænium","text":"You can heal Verve targets at once so long as they are no farther than thrice your Verve hexes from you."}, {"label":"Rite","text":"The target of your spell recovers one lost Aspect point or one body part."}]
+    extras: [{"label":"Encænium","text":"You can heal Verve targets at once so long as they are no farther than thrice your Verve hexes from you."}, {"label":"Rite","text":"The target of your spell recovers one lost Aspect point or one body part."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "inflict_wounds": {
     title: "Inflict Wounds",
-    actionType: "Cast; Skill Check [Verve]",
-    description: "You can inflict Verve + Rank dice of damage to a target’s Vitality. This spell is confronted by a Health save."
+    actionType: "Cast; Skill Check [Verve]; Attack",
+    description: "You can inflict Verve + Rank dice of damage to a target’s Vitality. This spell is confronted by a Health save.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "purify": {
     title: "Purify",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You cure a single disease or toxin. Your familiarity with the disease/toxin determines the TN."
+    extras: [{"label":"Encænium","text":"You cure a single disease or toxin. Your familiarity with the disease/toxin determines the TN."}]
   },
   "resurrection": {
     title: "Resurrection",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You bring a dead thing back to life. The longer the creature has been dead, the higher the TN.",
-    extras: [{"label":"Word","text":"This spell no longer requires contact."}]
+    description: "You bring a dead thing back to life contingent upon a Verve Save who's TN is equal to the amount of damage beyond death their body suffered. Each phase of rot, the TN is increased by one.",
+    extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "improved_sanctum": {
     title: "Improved Sanctum",
@@ -11530,77 +11534,92 @@ const tooltipRegistry = {
 "cinder_storm": {
         title: "Cinder Storm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/fire damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt and induce Panic."
+        description: "All within suffer Verve + Rank dice of darkness/fire damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt and induce Panic.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "blackout_blizzard": {
         title: "Blackout Blizzard",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target and induce Panic."
+        description: "All within suffer Verve + Rank dice of darkness/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target and induce Panic.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "eclipse": {
         title: "Eclipse",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target and induce Panic."
+        description: "All within suffer Verve + Rank dice of darkness/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target and induce Panic.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "voidstorm": {
         title: "Voidstorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target and induce Panic."
+        description: "All within suffer Verve + Rank dice of darkness/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target and induce Panic.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "gloomthunder": {
         title: "Gloomthunder",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> daze the target and induce Panic."
+        description: "All within suffer Verve + Rank dice of darkness/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> daze the target and induce Panic.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "hailfire": {
         title: "Hailfire",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and numb the target."
+        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and numb the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "solar_tempest": {
         title: "Solar Tempest",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target."
+        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "firestorm": {
         title: "Firestorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and weaken the target."
+        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and weaken the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "pyroclasm": {
         title: "Pyroclasm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and inflict Daze."
+        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and inflict Daze.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "whiteout_blizzard": {
         title: "Whiteout Blizzard",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of frost/light damage per Pulse; Crits numb and blind the target."
+        description: "All within suffer Verve + Rank dice of frost/light damage per Pulse; Crits numb and blind the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "froststorm": {
         title: "Froststorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of frost/lightning damage per Pulse; Crits numb and weaken the target."
+        description: "All within suffer Verve + Rank dice of frost/lightning damage per Pulse; Crits numb and weaken the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "avalanche": {
         title: "Avalanche",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of frost/thunder damage per Pulse; Crits inflict Numb and Daze."
+        description: "All within suffer Verve + Rank dice of frost/thunder damage per Pulse; Crits inflict Numb and Daze.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "fulgent_tempest": {
         title: "Fulgent Tempest",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of light/lightning damage per Pulse; Crits blind and weaken the target."
+        description: "All within suffer Verve + Rank dice of light/lightning damage per Pulse; Crits blind and weaken the target.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "photic_storm": {
         title: "Photic Storm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of light/thunder damage per Pulse; Crits inflict Blind and Daze."
+        description: "All within suffer Verve + Rank dice of light/thunder damage per Pulse; Crits inflict Blind and Daze.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "thunderstorm": {
         title: "Thunderstorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of lightning/thunder damage per Pulse; Crits inflict Weakness and Daze."
+        description: "All within suffer Verve + Rank dice of lightning/thunder damage per Pulse; Crits inflict Weakness and Daze.",
+        extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
   "larger_effect": {
     title: "Larger Effect",
@@ -11619,7 +11638,7 @@ const tooltipRegistry = {
    "caustic_fog": {
     title: "Caustic Fog",
     description: "You can conjure and atomize enough acid to cover all hexes within a column whose height and diameter is equal to seven-hexes dealing Verve + Rank dice of acid damage—which lingers—to all targets within. Each Pulse, your Caustic Fog deals -4d damage until no further damage can be dealt. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "stonefist_modified": {
     title: "Stonefist [Modified]",
@@ -11640,27 +11659,27 @@ const tooltipRegistry = {
   "sandstorm": {
     title: "Sandstorm",
     description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent sandstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse unless they hunker down. When making a move action, the target must choose a random direction and can only traverse one hex. Each subsequent move action, the target must pass a TN Rank Direction Sense Check or randomly choose their direction again.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "hailstorm": {
     title: "Hailstorm",
     description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent hailstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "living_fog": {
     title: "Living Fog",
     description: "You can cover a column whose diameter and height is equal to seven-hexes with a thick, swirling fog for Verve rounds preventing all within from seeing beyond the hex they occupy. Inside of the fog is a number of living fog equal to your Rank whose Rank cannot exceed your own. They are undetectable so long as they remain inside of the fog. Targets fleeing the fog must pass a Direction Sense Check, TN Rank, to do so and exit from a random point unless their Check is greater than the caster’s Verve.",
-    extras: [{ label:"Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "hurricane": {
     title: "Hurricane",
     description: "You can cover a column whose diameter and height is equal to seven-hexes with a raging hurricane for Verve rounds. Inside of the hurricane, flying debris and pelting rain deals Verve + Rank dice of damage per Pulse to all targets therewithin. Hunkering down reduces the damage by ½. Targets must pass a Strength Save to remain afoot and a Balance Save to move; TN Rank for both.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "permafrost": {
     title: "Permafrost",
     description: "You rapidly cover a circular area whose diameter is equal to seven-hexes with enough permafrost to cover the feet of all size C or smaller creatures within. As a Move Action, targets caught are permitted a Strength Save, TN Rank, to break free.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "malignant_shade_modified": {
     title: "Malignant Shade [Modified]",
@@ -11668,34 +11687,35 @@ const tooltipRegistry = {
   },
    "geyser": {
     title: "Geyser",
-    description: "A geyser of boiling water erupts from the earth knocking over all targets within a three-hex diameter circle dealing Verve + Rank dice of damage. The target’s position, prone or supine, is determined by the LM. Soaked targets continue to burn suffering 1d damage per pulse for Verve pulses which cannot be avoided.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    description: "A geyser of boiling water erupts from the earth knocking over all targets within a three-hex diameter circle dealing Verve + Rank dice of damage. The target’s position, prone or supine, is determined by the LM. Soaked targets continue to burn suffering 2d damage per pulse for Verve pulses which cannot be avoided.",
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Burn damage is increased by one per six additional Mana spent."}]
   },
   "black_ice": {
     title: "Black Ice",
     description: "You can cover a circular area whose diameter is equal to seven-hexes with effectively invisible ice causing all who trod upon it to pass a Balance Save, TN Rank, or fall—whether supine or prone is determined by the LM. The ice will last until it melts.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "slurry": {
     title: "Slurry",
-    description: "You can spray a frozen slurry at all targets in a nine-hex diamond dealing Verve + Rank dice of frost damage and freezing them, rendering them incapable of action. Frozen targets suffer an additional Verve + Rank dice of damage per pulse but are immune to all attacks. Targets are freed after their icy shell is dealt thrice your Verve points of damage or half that amount of bashing or fire damage, or after the occupant passes a Strength Save, TN Rank. Once freed, targets suffer two levels of fatigue until they warm up. All affected hexes remain visibly frozen and slick until the ice melts away. Traversing it at a pace faster than one hex requires a TN Rank Balance Check."
+    description: "You can spray a frozen slurry at all targets in a nine-hex diamond dealing Verve + Rank dice of frost damage and freezing them, rendering them incapable of action. Frozen targets suffer an additional Verve + Rank dice of damage per pulse but are immune to all attacks. Targets are freed after their icy shell is dealt thrice your Verve points of damage or half that amount of bashing or fire damage, or after the occupant passes a Strength Save, TN Rank. Once freed, targets suffer two levels of fatigue until they warm up. All affected hexes remain visibly frozen and slick until the ice melts away. Traversing it at a pace faster than one hex requires a TN Rank Balance Check.",
+    extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "quagmire": {
     title: "Quagmire",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for Verve rounds after which the bog collapses unless the spell is refreshed. Targets can hold their breath for Health rounds and then must pass a TN 1 Health Save each round or drown. When making a move action, the target must choose a random direction and can only swim one hex. Each subsequent move action, the target must pass a TN Rank Direction Sense Check or randomly choose their direction again. Drowning targets fall unconscious and suffer -2d damage each Pulse until rescued: This attack cannot be avoided.",
-    extras: [{ label: "Rite", text: "The effect is permanent." }]
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for ¼ Phase. Targets can hold their breath for Health rounds and then must pass a TN 3 Health Save each round or drown, falling unconscious and suffering asphyixation damage each Pulse until rescued. To escape, the target must pass a TN Rank Direction Sense Check each Pulse to swim one hex closer to the edge. Failure places the target in the center of the bog.",
+    extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
     "daylight": {
         title: "Daylight",
         actionType: "Cast; Skill Check [Verve]",
         description: "You call forth a sphere of daylight and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This light impairs all Darkfolk, shadow pnuemons, and all creatures with Darkvision as their primary method of espying by Verve number of dice.\n● Attack: The sphere can be thrown and will explode, dealing Verve + Rank dice of light damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.\n● Set: By being thrown upward, the ball will provide daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
-        extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
+        extras: [{label: "Rite", text: "You can permanently affix the sphere to a location. This provides permanent daylight for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."},{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "true_darkness": {
         title: "True Darkness",
         actionType: "Cast; Skill Check [Verve]",
         description: "You call forth a sphere of darkness and may take one of the following actions:\n\n● Hold: So long as you are holding the sphere, no creature from without can see into the affected area nor can creatures within see out of it. This darkness impairs all non-Darkfolk, all pnuemons Save shadow pnuemons, and all creatures without Darkvision as their primary method of espying by Verve dice.\n● Throw: The sphere can be thrown and will explode, dealing Verve + Rank dice of darkness damage to all creatures within a three-hex radius; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> cause the target to panic.\n● Set: By being thrown upward, it will provide darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes for Verve phases or until dismissed.",
-        extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."}]
+        extras: [{"label": "Rite", "text": "You can permanently affix the sphere to a location. This provides permanent darkness for a circular surface area whose radius is equal to thrice your Verve x Rank hexes."},{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "vernal_warrior": {
         title: "Vernal Warrior",
@@ -11736,7 +11756,8 @@ const tooltipRegistry = {
   "break_curse": {
     title: "Break Curse",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You call upon the power of your god to break a curse. This skill is confronted by a Verve Save."
+    description: "You call upon the power of your god to break a curse. This skill is confronted by a Verve Save.",
+    extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "beast_whisperer": {
     title: "Beast Whisperer",
@@ -11755,7 +11776,7 @@ const tooltipRegistry = {
     title: "Telepathy",
     actionType: "Cast",
     description: "You can insinuate your thoughts into the target’s mind for anumber of rounds equal to your VER.",
-    extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
+    extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."},{ label: "Surge", text: "You inflict Verve + Rank points of Mana damage to the target."}]
   },
   "keen": {
     title: "Keen",
@@ -11777,7 +11798,7 @@ const tooltipRegistry = {
     title: "Obscuration",
     actionType: "Cast; Skill Check [Verve]",
     description: "You make a person, object, or spell immune to Divination for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
-    extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."}]
+    extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."},{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "obscured_casting": {
     title: "Obscured Casting",
@@ -11786,7 +11807,8 @@ const tooltipRegistry = {
   "illusory_spell": {
     title: "Illusory Spell",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You can cast an illusory version of any spell you have seen. The spell behaves exactly as the spell it is copying, excepting that it cannot permanently affect reality. Affected targets act as though the spell is real, and will even go so far as to lay on the ground as if they were dead. This spell is confronted by Disbelieve Illusion."
+    description: "You can cast an illusory version of any spell you have seen. The spell behaves exactly as the spell it is copying, excepting that it cannot permanently affect reality. Affected targets act as though the spell is real, and will even go so far as to lay on the ground as if they were dead. This spell is confronted by Disbelieve Illusion.",
+    extras: [{ label: "Surge", text: "Your illusory cc is increased by one per six additional Mana spent."}]
   },
   "multi_shot": {
     title: "Multi-shot",
@@ -11795,7 +11817,8 @@ const tooltipRegistry = {
   "ghost_arrow": {
     title: "Ghost Arrow",
     actionType: "Cast; Attack",
-    description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
+    description: "You can fire an arrow made of arcane force from your bow. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards.",
+    extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "burst_shot": {
     title: "Burst Shot",
@@ -11878,7 +11901,7 @@ const tooltipRegistry = {
   },
   "improved_levitation": {
     title: "Improved Levitation",
-    description: "You can now move your target laterally."
+    description: "You can now move your target in any direction."
   },
   "glyph": {
     title: "Glyph",
@@ -11887,7 +11910,8 @@ const tooltipRegistry = {
   "haste": {
     title: "Haste",
     actionType: "Cast",
-    description: "Your target may move and/or attack during the third pulse of combat."
+    description: "Your target may move and/or attack during the third pulse of combat.",
+    extras: [{ label: "Surge", text: "The number of affected targets is increased by one per six additional Mana spent."}]
   },
   "quick_strike": {
     title: "Quick Strike",
@@ -11910,11 +11934,13 @@ const tooltipRegistry = {
     title: "Enthrall Undead",
     actionType: "Cast; Skill Check [Verve]",
     description: "You can make a servant of the target corporeal undead, rendering it loyal until death. If the target passes a Verve Save, the spell fails and the undead becomes hostile. You can control a number of undead no greater than your Rank at any given time.",
+    extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "rend_life": {
     title: "Rend Life",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You can sever the animating spirit from a living or undead body effectively killing the creature. The creature is entitled to a Verve Save to negate the effect."
+    description: "You can sever the animating spirit from a living or undead body effectively killing the creature. The creature is entitled to a Verve Save to negate the effect.",
+    extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "rend_soul": {
     title: "Rend Soul",
@@ -11962,18 +11988,18 @@ const tooltipRegistry = {
     title: "Undying",
     description: "You can reverse the effects of aging by eating children."
   },
-  "elemental_weapon": {
-    title: "Elemental Weapon",
-    description: "When you hit, you can immediately cast your first level Battle Magic spell as a Word; its damage cannot be avoided."
+  "arcane_assault": {
+    title: "Arcane Assault",
+    description: "You can change all <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on the burst effect of Battle Magic infused strikes and shots."
   },
-  "arcane_warrior": {
-    title: "Arcane Warrior",
+  "arcane_defense": {
+    title: "Arcane Defense",
     description: "You can cast Arcane Armor and Blur as a single cast action on yourself."
   },
   "arcane_surge": {
     title: "Arcane Surge [Word]",
     actionType: "Cast; Attack",
-    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll one Attack die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all magically improved Avoidance Checks."
   },
   "improved_stealth": {
     title: "Improved Stealth",
@@ -12025,11 +12051,12 @@ const tooltipRegistry = {
   "meditative_healing": {
     title: "Meditative Healing [Encænium]",
     actionType: "Cast",
-    description: "You can channel Mana to heal your Vitality point for point."
+    description: "You can channel Mana to heal your Vitality point for point.",
+    extras: [{ label: "Surge", text: "You can heal the desired amount of Vitality at once at a cost of two to one."}]
   },
   "killing_machine": {
     title: "Killing Machine",
-    description: "You gain a +1cc bonus with all melee weapons."
+    description: "You gain a +1cc bonus with all weapons."
   },
   "holy_strike": {
     title: "Holy Strike",
@@ -12913,7 +12940,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "paragon: arcane warrior": {
         description: "A fusion of battle magic and old fashioned fighting, arcane warriors are the elite fighting force of the Guild Esoteric.",
         requirements: "Rank 3+; Abjuration (1); Illusion (1); Battle Magic: Any (2)",
-        levels:    ["Elemental Weapon", "Arcane Warrior", "Arcane Surge"
+        levels:    ["Arcane Assault", "Arcane Defense", "Arcane Surge"
     ]
 },
     "paragon: assassin": {
@@ -15166,20 +15193,25 @@ const statsMap = { DEX: finalDex, STR: finalStr, INT: finalInt, ACT: finalAct, V
     };
 
 // --- HELPER FUNCTION: WEAPON & SHIELD CRIT COUNT PARSER ---
-    const getWeaponCcDisplay = (damageTypeStr, makerId, materialId, itemTags) => {
-        if (!damageTypeStr || damageTypeStr === "—") return "";
-        
-        let ccMod = 0;
-        const safeTags = Array.isArray(itemTags) ? itemTags : [];
-        
-        // 1. Darkfolk design applies +1cc universally
-        if (makerId === "darkfolk" || makerId === "Darkfolk") ccMod += 1;
-        
-        // 2. Jannic design applies +1cc specifically to Shrewd weapons
-        if ((makerId === "jann" || makerId === "Jann") && safeTags.includes("shrewd")) ccMod += 1;
-        
-        // 3. Obsidian material applies +1cc universally
-        if (materialId === "obsidian" || materialId === "Obsidian") ccMod += 1;
+const hasKillingMachine = getSkillLvl("paragon-knight") >= 3 || getSkillLvl("restricted-evocatus") >= 2;
+
+const getWeaponCcDisplay = (damageTypeStr, makerId, materialId, itemTags, isCastingProfile = false) => {
+    if (!damageTypeStr || damageTypeStr === "—") return "";
+    
+    let ccMod = 0;
+    const safeTags = Array.isArray(itemTags) ? itemTags : [];
+    
+    // 1. Darkfolk design applies +1cc universally
+    if (makerId === "darkfolk" || makerId === "Darkfolk") ccMod += 1;
+    
+    // 2. Jannic design applies +1cc specifically to Shrewd weapons
+    if ((makerId === "jann" || makerId === "Jann") && safeTags.includes("shrewd")) ccMod += 1;
+    
+    // 3. Obsidian material applies +1cc universally
+    if (materialId === "obsidian" || materialId === "Obsidian") ccMod += 1;
+
+    // 4. Killing Machine applies +1cc to all non-casting weapon profiles
+    if (hasKillingMachine && !isCastingProfile) ccMod += 1;
         
         const typeInfo = {
             "bash": { cc: 2, effect: "Daze" },
@@ -15388,10 +15420,11 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                     if (gearSlot.materialId !== "None") ammoMods.push(modTip(gearSlot.materialId));
                     if (gearSlot.makerId !== "None") ammoMods.push(modTip(gearSlot.makerId));
                     const subDetailString = ammoMods.length > 0 ? `<div style="font-size: 0.65rem; color: #7c6f64; margin-top: 1px;">${ammoMods.join(" | ")}</div>` : '';
-
+                    const aspectStr = (profItem.governingAspect || weaponItem.governingAspect || "DEX").toUpperCase().trim();
+                    const isRangedCastingProfile = (aspectStr === "VER + RANK" || aspectStr === "VER+RANK");
                     const rawDamageType = profItem.damageType || weaponItem.damageType || "—";
                     const activeMat = gearSlot.materialId !== "None" ? gearSlot.materialId : (weaponData.materialId || "None");
-                    const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeMat, activeTags);
+                    const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeMat, activeTags, isRangedCastingProfile);
                     const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
 
                     cardHtml += `
@@ -15501,10 +15534,10 @@ if (targetAmmoTag && foundAmmoProfiles.length > 0) {
                     finalWpnDice = maxWeaponLimit;
                 }
 
-                let cleanDmgType = (profItem.damageType || weaponItem.damageType || "—").toUpperCase();
+let cleanDmgType = (profItem.damageType || weaponItem.damageType || "—").toUpperCase();
 
                 const rawDamageType = profItem.damageType || weaponItem.damageType || "—";
-                const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeProfileMaterial, activeTags);
+                const ccDisplayString = getWeaponCcDisplay(rawDamageType, weaponData.makerId, activeProfileMaterial, activeTags, isCastingProfile);
                 const ccHtml = ccDisplayString ? `<div style="font-weight: bold; font-size: 0.75rem; color: #5c1d1d; margin-top: 1px;">${ccDisplayString}</div>` : '';
                 
                 const elements = { flaming: "FIRE", freezing: "FROST", sapping: "MANA", shining: "LIGHT", sounding: "THUNDER", static: "LIGHTNING" };
@@ -21345,8 +21378,8 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
     if (getLvl("occult-woodswitch") >= 1) attacks.push("Curse");
     if (getLvl("occult-woodswitch") >= 2) attacks.push("Beguiling");
 
-    if (getLvl("paragon-arcane-warrior") >= 1) attacks.push("Elemental Weapon");
-    if (getLvl("paragon-arcane-warrior") >= 2) defenses.push("Arcane Warrior");
+    if (getLvl("paragon-arcane-warrior") >= 1) attacks.push("Arcane Assault");
+    if (getLvl("paragon-arcane-warrior") >= 2) defenses.push("Arcane Defense");
     if (getLvl("paragon-arcane-warrior") >= 3) attacks.push("Arcane Surge");
 
     if (getLvl("paragon-assassin") >= 2) attacks.push("Trained Assassin");
