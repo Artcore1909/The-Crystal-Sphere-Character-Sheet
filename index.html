@@ -74,6 +74,7 @@ body.theme-dark {
 
 /* --- Cosmic Theme --- */
 body.theme-cosmic {
+    --theme-bg-image: url("images/Cosmicbg.png");
     --theme-bg-deep: #11102b;
     --theme-bg-base: #1a1840;
     --theme-bg-card: #242258;
@@ -231,6 +232,7 @@ body.theme-rose-gold {
    ========================================================================= */
 body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
+    --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-deep);
     --theme-bg-panel-nested: var(--theme-bg-hover);
     --theme-bg-placeholder: var(--theme-bg-base);
@@ -260,6 +262,11 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
     --border-dark: var(--theme-border);
     --accent-gold: var(--theme-accent);
     background-color: var(--theme-bg-deep) !important;
+    background-image: var(--theme-bg-image) !important;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--theme-text) !important;
     scrollbar-color: var(--theme-border) var(--theme-bg-deep);
 
