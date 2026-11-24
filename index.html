@@ -146,6 +146,8 @@ body.theme-magmatic {
     --theme-bg-card: #261210;
     --theme-bg-input: #140908;
     --theme-bg-hover: #381b18;
+    --theme-bg-th: #261210;
+    --theme-th-text: #cf9e8e;
     --theme-bg-footer: rgba(28, 13, 12, 0.9);
     --theme-border: #7d3426;
     --theme-text: #fdf0e8;
@@ -160,23 +162,23 @@ body.theme-magmatic {
 /* --- Paladinic Theme (Light) --- */
 body.theme-paladinic {
     --theme-bg-image: url("images/Paladinicbg.png");
-    --theme-bg-deep: #b8c2ce;
-    --theme-bg-base: #d0d8e2;
-    --theme-bg-card: #e3e9f0;
-    --theme-bg-elevated: #edf1f6;
-    --theme-bg-input: #f7f9fc;
-    --theme-bg-hover: #efe6cd;
-    --theme-bg-footer: rgba(203, 212, 223, 0.94);
-    --theme-border: #b88e32;
-    --theme-text: #1e242b;
-    --theme-text-muted: #4d5764;
-    --theme-accent: #1e242b;
-    --theme-row-even: rgba(30, 36, 43, 0.04);
-    --theme-row-hover: rgba(184, 142, 50, 0.14);
-    --theme-shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 3px 6px -1px rgba(30, 36, 43, 0.14), 0 1px 3px rgba(184, 142, 50, 0.16);
-    --theme-shadow-row: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(30, 36, 43, 0.08);
-    --theme-shadow-btn: 0 1px 3px rgba(30, 36, 43, 0.15);
-    --theme-header-shadow: 0 1px 0 rgba(255, 250, 232, 0.75), 0 1px 2px rgba(24, 30, 38, 0.25);
+    --theme-bg-deep: #9aa8be;
+    --theme-bg-base: #c2cde0;
+    --theme-bg-card: #dfe5ef;
+    --theme-bg-elevated: #eef1f6;
+    --theme-bg-input: #faf8f2;
+    --theme-bg-hover: #f2e5c6;
+    --theme-bg-footer: rgba(182, 195, 216, 0.92);
+    --theme-border: #c5942e;
+    --theme-text: #161f33;
+    --theme-text-muted: #47546e;
+    --theme-accent: #214086;
+    --theme-row-even: rgba(22, 31, 51, 0.045);
+    --theme-row-hover: rgba(214, 161, 52, 0.16);
+    --theme-shadow-card: inset 0 1px 0 rgba(255, 250, 235, 0.85), 0 4px 10px -2px rgba(15, 23, 42, 0.28), 0 1px 4px rgba(197, 148, 46, 0.22);
+    --theme-shadow-row: inset 0 1px 0 rgba(255, 252, 242, 0.85), 0 1px 2px rgba(15, 23, 42, 0.10);
+    --theme-shadow-btn: 0 1px 3px rgba(15, 23, 42, 0.22), 0 1px 2px rgba(197, 148, 46, 0.15);
+    --theme-header-shadow: 0 1px 0 rgba(255, 246, 214, 0.8), 0 2px 4px rgba(15, 23, 42, 0.35);
 
     /* Light-mode surface & control mappings */
     --theme-bg-readonly: var(--theme-bg-elevated);
@@ -185,7 +187,7 @@ body.theme-paladinic {
     --theme-bg-tcs-member: var(--theme-bg-card);
     --theme-bg-tcs-close: var(--theme-bg-input);
     --theme-bg-select-option: var(--theme-bg-input);
-    --theme-bg-th: var(--theme-bg-base);
+    --theme-bg-th: var(--theme-bg-card);
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
     --theme-icon-hit: normal;
@@ -489,7 +491,7 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
     & .pnp-pool-input,
     & .locus-builder-select,
     & #theme-selector {
-        background-color: var(--theme-bg-input) !important;
+        background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -511,7 +513,7 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
     & div[style*="background: #ffffff"],
     & div[style*="background:#ffffff"],
     & .qualities-checklist {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -600,7 +602,7 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
 
     & button[title="Sheet Settings"],
     & .btn-sm {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-btn) !important;
@@ -4506,6 +4508,146 @@ details[open] #skills-collapsed-summary {
         </tr>
     </tbody>
 </table>
+<br>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="3" style="text-align: center;">Milieu</th>
+        </tr>
+        <tr>
+            <th style="width: 18%;">Milieu</th>
+            <th style="width: 52%;">Description</th>
+            <th style="width: 30%;">Free Skills / Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Commoner</strong></td>
+            <td>You are of the proletariat. You begin your adventure with a small blade, a light mount, or dray beast and cart, a family heirloom, and ₤1000.</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Noble</strong></td>
+            <td>You are of the gentry. Your birth grants you ₤10,000, a family heirloom, and letters of introduction to begin your adventure.</td>
+            <td><strong>Interlocution:</strong> Etiquette<br><span class="hint">(Requires Hap 7+)</span></td>
+        </tr>
+        <tr>
+            <td><strong>Outsider</strong></td>
+            <td>You come from the land out yonder. You begin your adventure with a collection of exotic goods, a light suit, an exotic mount or pet, and a cultural weapon.</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Pariah</strong></td>
+            <td>You begin your adventure despised and rejected by your hometown. All that you own is a small hidden blade, a stolen item of value, and a forged documents or valuable secret.</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><strong>Tribal</strong></td>
+            <td>You come from a taboo society: consult the LM and create a list of Dos and Don’ts by which you must abide. You begin your adventure with a small bag of gems and trade beads, a light suit, an exotic mount or pet, and a cultural weapon.</td>
+            <td>—</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="2" style="text-align: center;">Setting</th>
+        </tr>
+        <tr>
+            <th style="width: 18%;">Setting</th>
+            <th style="width: 30%;">Free Skills</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Coastal</strong></td>
+            <td><strong>Background:</strong> Fish, Sail Boat, Use &amp; Make Rope</td>
+        </tr>
+        <tr>
+            <td><strong>Rural</strong></td>
+            <td><strong>Background:</strong> Butcher &amp; Grow Crops, Drive Cart, Handle Domestic Animal, Survival, Use &amp; Make Rope</td>
+        </tr>
+        <tr>
+            <td><strong>Tribal</strong></td>
+            <td><strong>Background:</strong> Fish, Handle Wild Animal, Hunt &amp; Forage, Survival</td>
+        </tr>
+        <tr>
+            <td><strong>Urban</strong></td>
+            <td><strong>Background:</strong> Street Smarts</td>
+        </tr>
+        <tr>
+            <td><strong>Wild</strong></td>
+            <td><strong>Pugilism:</strong> Pugil Weapons<br><span class="hint">(Also grants Hunt if Background is trained)</span></td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="2" style="text-align: center;">Upbringing / Guild Affiliation</th>
+        </tr>
+        <tr>
+            <th style="width: 20%;">Upbringing / Guild</th>
+            <th style="width: 35%;">Free Skills &amp; Bonuses</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Artisan</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity or Acuity<br><strong>Background:</strong> Craft</td>
+        </tr>
+        <tr>
+            <td><strong>College Initiate</strong></td>
+            <td><strong>Aspect:</strong> +1 Acuity, Intellect, or Verve<br><strong>Access:</strong> Guild: Esoteric, Arcane Force, Battle Magic (3+), Conjuration (5+)</td>
+        </tr>
+        <tr>
+            <td><strong>Laborer</strong></td>
+            <td><strong>Aspect:</strong> +1 Health or Strength<br><strong>Background:</strong> Vim, Vigor, &amp; Vitality</td>
+        </tr>
+        <tr>
+            <td><strong>Merchant</strong></td>
+            <td><strong>Aspect:</strong> +1 Acuity, Intellect, or Verve<br><strong>Background:</strong> Appraise<br><strong>Interlocution:</strong> Haggle</td>
+        </tr>
+        <tr>
+            <td><strong>Military</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity, Health, Strength, or Acuity<br><strong>Background:</strong> Common Weapons<br><strong>Interlocution:</strong> Coerce &amp; Intimidate<br><strong>Defense:</strong> Avoidance, Total Defense, Positioning, &amp; Shield Bash</td>
+        </tr>
+        <tr>
+            <td><strong>Politician</strong></td>
+            <td><strong>Aspect:</strong> +1 Acuity, Intellect, or Verve<br><strong>Interlocution:</strong> Persuade, Orate, Lie</td>
+        </tr>
+        <tr>
+            <td><strong>Sage</strong></td>
+            <td><strong>Aspect:</strong> +1 Acuity or Intellect<br><strong>Background:</strong> Research<br><strong>Access:</strong> Guild: Sages</td>
+        </tr>
+        <tr>
+            <td><strong>Servant</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity, Health, or Acuity<br><strong>Observation:</strong> Listen, Feel, Search, Spot, Smell, &amp; Taste<br><strong>Interlocution:</strong> Etiquette</td>
+        </tr>
+        <tr>
+            <td><strong>Temple Acolyte</strong></td>
+            <td><strong>Aspect:</strong> +1 Intellect or Verve<br><strong>Access:</strong> Guild: Temple</td>
+        </tr>
+        <tr>
+            <td><strong>Thief</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity or Acuity<br><strong>Stealth:</strong> Hide &amp; Sneak<br><strong>Interlocution:</strong> Lie</td>
+        </tr>
+        <tr>
+            <td><strong>Tradesman</strong></td>
+            <td><strong>Aspect:</strong> +1 Health or Strength<br><strong>Background:</strong> Trade</td>
+        </tr>
+        <tr>
+            <td><strong>Troupe Neophyte</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity or Verve<br><strong>Interlocution:</strong> Improvise, Orate<br><strong>Access:</strong> Guild: Troupe</td>
+        </tr>
+        <tr>
+            <td><strong>Wild</strong></td>
+            <td><strong>Aspect:</strong> +1 Dexterity, Health, Strength, or Acuity<br><strong>Pugilism:</strong> Pugil Weapons<br><strong>Defense:</strong> Avoidance, Total Defense, Positioning, &amp; Shield Bash</td>
+        </tr>
+    </tbody>
+</table>
             </div>
         </div>
 
@@ -4815,19 +4957,55 @@ details[open] #skills-collapsed-summary {
                     <li>Shields add dice to the bearer's Avoidance and can be used to attack.</li>
                 </ul>
                 <br>
-                <strong>Grand Bazaar & Enchantments:</strong>
+                <strong>Grand Bazaar & Enchanting:</strong>
                 <ul>
-<li><strong>Pricing Items:</strong>
-    <ul style="margin-top: 4px; margin-bottom: 0;">
-        <li><strong>Step 1:</strong> Multiply Base Cost by your Special Qualities.</li>
-        <li><strong>Step 2:</strong> Add the 1st Virtue at standard price.</li>
-        <li><strong>Step 3:</strong> Add the 2nd Virtue at <strong>double</strong> price.</li>
-        <li><strong>Step 4:</strong> Add the 3rd Virtue at <strong>triple</strong> price.</li>
-    </ul>
-</li>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="2" style="text-align: center;">Pricing Items:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Step 1:</strong></td>
+            <td>Multiply Base Cost by your Special Qualities.</td>
+        </tr>
+        <tr>
+            <td><strong>Step 2:</strong></td>
+            <td>Add the 1st Virtue at standard price.</td>
+        </tr>
+        <tr>
+            <td><strong>Step 3:</strong></td>
+            <td>Add the 2nd Virtue at <strong>double</strong> price.</td>
+        </tr>
+        <tr>
+            <td><strong>Step 4:</strong></td>
+            <td>Add the 3rd Virtue at <strong>triple</strong> price.</td>
+        </tr>
+    </tbody>
+</table>
 <br>
-                    <li><em>Law of Duplicate Effects:</em> Similar magical effects from different items do not stack; only the stronger effect manifests.</li>
-                </ul>
+<table class="game-data">
+    <thead>
+        <tr>
+            <th colspan="2" style="text-align: center;">Ibid's the Remarkable's Laws of Aetherial Binding</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+              <td><strong>Suppression</strong></td>
+               <td>Similar magical effects from different items do not stack; only the stronger effect manifests.</td>
+        </tr>
+        <tr>
+              <td><strong>Sympathy</strong></td>
+               <td>Once together, always together; magic items bear divinic impressions from their creator, every creature who has used or been affected by them, and from every other magic item or place they has been exposed to: the longer the exposure, the deeper the impression.</td>
+        </tr>
+        <tr>
+              <td><strong>Cohesion</strong></td>
+               <td>The arcane script bearing a magical effect must remain unaltered lest the virtue be lost.</td>
+         </tr>
+    </tbody>
+</table>
                 <br>
                 <strong>Sundering & Tool Use:</strong>
                 <ul>
@@ -5019,7 +5197,7 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <td><strong>Encænium</strong></td>
-            <td style="text-align: center;">Several Rounds</td>
+            <td style="text-align: center;">Several Pulses</td>
             <td style="text-align: center;">1 Mana</td>
             <td style="text-align: center;">Requires material components and setting-up.</td>
         </tr>
@@ -7013,7 +7191,7 @@ const itemRegistry = {
         avoidanceBonus: 3,
         critCount: 2,
         cost: 72,
-        donTime: "1 round",
+        donTime: "1 Pulse",
         specialQualities: ["heavy_2", "flexible", "slash_resistance", "inflamable"],
         description: "A light chest wrap of woven rattan and organic fibers. Breathable and buoyant, but highly flammable if exposed to open flame. Grants resistance to Slash damage, but has vulnerability to Fire damage."
     },
@@ -7023,7 +7201,7 @@ const itemRegistry = {
         avoidanceBonus: 3,
         critCount: 2,
         cost: 144,
-        donTime: "1 round",
+        donTime: "1 Pulse",
         specialQualities: ["heavy_3", "flexible", "bash_resistance", "crush_resistance", "inflamable"],
         description: "Dozen of layers of quilted linen stuffed with scrap wool. It is the primary defense against blunt trauma and kinetic shock. Grants resistance to Bash and Crush damage."
     },
@@ -7033,7 +7211,7 @@ const itemRegistry = {
         avoidanceBonus: 4,
         critCount: 2,
         cost: 216,
-        donTime: "1 round",
+        donTime: "1 Pulse",
         specialQualities: ["heavy_3", "tailor_fit", "slash_resistance"],
         description: "Thick ox-hide boiled in wax or oil and molded into a rigid, protective torso shell. Grants resistance to Slash damage."
     },
@@ -7043,7 +7221,7 @@ const itemRegistry = {
         avoidanceBonus: 5,
         critCount: 2,
         cost: 360,
-        donTime: "1 round",
+        donTime: "1 Pulse",
         specialQualities: ["heavy_4", "flexible", "slash_resistance", "inflamable"],
         description: "Lightweight rectangular plates stitched to a fabric backing and linked by mail. It can be collapsed into a compact bundle for travel. Grants resistance to Slash damage."
     },
@@ -7053,7 +7231,7 @@ const itemRegistry = {
         avoidanceBonus: 10,
         critCount: 2,
         cost: 1080,
-        donTime: "1 full round",
+        donTime: "1 Pulse",
         specialQualities: ["heavy_6", "slash_resistance", "thrust_resistance"],
         description: "A classic infantry harness of overlapping iron bands. It offers high vital protection but leaves the limbs relatively exposed. Grants resistance to Slash and Thrust damage."
     },
@@ -7063,7 +7241,7 @@ const itemRegistry = {
         avoidanceBonus: 7,
         critCount: 3,
         cost: 1440,
-        donTime: "2 rounds",
+        donTime: "2 Pulses",
         specialQualities: ["heavy_5", "flexible", "slash_resistance"],
         description: "A shirt of hand-riveted interlocking steel rings worn over light padding. Excellent against edges, but provides no structure against blunt force. Grants resistance to Slash damage."
     },
@@ -7073,7 +7251,7 @@ const itemRegistry = {
         avoidanceBonus: 8,
         critCount: 2,
         cost: 2160,
-        donTime: "2 rounds",
+        donTime: "2 Pulses",
         specialQualities: ["heavy_5", "tailor_fit", "slash_resistance", "thrust_resistance"],
         description: "Elite Star-pattern mail consisting of non-riveted interlocking 'mountain' plates. A complex defense that deflects points with high efficiency. Grants resistance to Slash and Thrust damage."
     },
@@ -7083,7 +7261,7 @@ const itemRegistry = {
         avoidanceBonus: 8,
         critCount: 3,
         cost: 1800,
-        donTime: "2 full rounds",
+        donTime: "2 Pulses",
         specialQualities: ["heavy_5", "tailor_fit", "slash_resistance", "thrust_resistance"],
         description: "Hundreds of small iron scales laced together with silk cords and lacquered heavily to prevent rust in damp or cave environments. Grants resistance to Slash and Thrust damage."
     },
@@ -7093,7 +7271,7 @@ const itemRegistry = {
         avoidanceBonus: 9,
         critCount: 3,
         cost: 2880,
-        donTime: "2 full rounds",
+        donTime: "2 Pulses",
         specialQualities: ["heavy_5", "tailor_fit", "slash_resistance", "thrust_resistance"],
         description: "A robust harness of heavy steel plates riveted to the inside of a premium reinforced fabric or silk jacket. Grants resistance to Slash and Thrust damage."
     },
@@ -7103,7 +7281,7 @@ const itemRegistry = {
         avoidanceBonus: 12,
         critCount: 4,
         cost: 5760,
-        donTime: "3 full rounds",
+        donTime: "3 Pulses",
         specialQualities: ["heavy_6", "tailor_fit", "slash_resistance", "thrust_resistance", "frost_resistance"],
         description: "Fully articulated, fluted steel plates over mail voiders. The pinnacle of late medieval anatomical defense. Grants resistance to Slash, Thrust, and Frost damage, but has vulnerability to Lightning damage."
     },
@@ -7113,7 +7291,7 @@ const itemRegistry = {
         avoidanceBonus: 14,
         critCount: 4,
         cost: 8640,
-        donTime: "3 full rounds and assistance",
+        donTime: "3 Pulse with assistance",
         specialQualities: ["heavy_7", "tailor_fit", "slash_resistance", "thrust_resistance", "bash_resistance", "frost_resistance"],
         description: "Heavily rounded Renaissance plates featuring close fluting designed to disperse blunt impact and deflect even the most precise thrusts. Grants resistance to Slash, Thrust, Bash, and Frost damage, but has vulnerability to Lightning damage."
     },
@@ -7592,7 +7770,7 @@ const itemRegistry = {
         itemSlot: "Cart",
         cost: 36,
         rarity: 1,
-        description: "Deals 6d damage and immobilizes target. Requires full round and TN 5 Strength Save to pry off."
+        description: "Deals 6d damage and immobilizes target. TN 5 Strength Save to pry off."
     },
     "enchanted_purse": {
         name: "Enchanted Purse",
@@ -7768,7 +7946,7 @@ const itemRegistry = {
         itemSlot: "Footwear",
         cost: 6000,
         rarity: 3,
-        description: "These enchanted boots allow the wearer a bonus Move action between Rounds for one Mana per bonus movement."
+        description: "These enchanted boots allow the wearer a bonus Move action between Pulses for one Mana per bonus movement."
     },
     "charm_of_quickness": {
         name: "Charm of Quickness",
@@ -7792,7 +7970,7 @@ const itemRegistry = {
         itemSlot: "Cloak",
         cost: 2000,
         rarity: 3,
-        description: "Allows the wearer to become invisible for 12 rounds once per day."
+        description: "Allows the wearer to become invisible for 12 Pulses once per day."
     },
     "gloves_of_the_whirlwind": {
         name: "Gloves of the Whirlwind",
@@ -7800,7 +7978,7 @@ const itemRegistry = {
         itemSlot: "Gloves",
         cost: 6000,
         rarity: 3,
-        description: "These enchanted gloves allow the wearer a bonus attack action between Rounds for one Mana per bonus attack."
+        description: "These enchanted gloves allow the wearer a bonus attack action between Pulses for one Mana per bonus attack."
     },
     "greaves_of_athleticism": {
         name: "Greaves of Athleticism",
@@ -9784,7 +9962,7 @@ const tooltipRegistry = {
   },
   "parry_ripost": {
     title: "Parry & Ripost",
-    description: "You can use the dice pool of a melee attack of your choice in lieu of your Avoidance. If you are hit, only your DR can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike against your opponent. The number of parries you can make per round is limited by your Dexterity."
+    description: "You can use the dice pool of a melee attack of your choice in lieu of your Avoidance. If you are hit, only your DR can mitigate the damage. So long as you suffer no damage from the attack, you are granted a free basic strike against your opponent. The number of parries you can make per Pulse is limited by your Dexterity."
   },
   "brutal_tactics": {
     title: "Brutal Tactics",
@@ -10107,7 +10285,7 @@ const tooltipRegistry = {
   "run": {
     title: "Run",
     actionType: "Skill Check [Strength] + Move",
-    description: "Gain a number of hexes equal to your Skill Check to run in a relatively straight line. After Health rounds of running, you gain one level of fatigue and one level of fatigue for each additional round. You suffer a -2 dice limit penalty to Run while wearing medium or heavy armor. Regardless of initiative, all participants of a chase move simultaneously."
+    description: "Gain a number of hexes equal to your Skill Check to run in a relatively straight line. After Health Pulses of running, you gain one level of fatigue and one level of fatigue for each additional Pulse. You suffer a -2 dice limit penalty to Run while wearing medium or heavy armor. Regardless of initiative, all participants of a chase move simultaneously."
   },
   "sail_boat": {
     title: "Sail Boat",
@@ -10299,7 +10477,7 @@ const tooltipRegistry = {
   },
   "holy_radiance": {
     title: "Holy Radiance",
-    description: "for Verve rounds, all undead panic at the sight of you. Vivacious undead are permitted a Verve Save to ignore the effect."
+    description: "for Verve Pulses, all undead panic at the sight of you. Vivacious undead are permitted a Verve Save to ignore the effect."
   },
   "illusion": {
     title: "Illusion",
@@ -10346,7 +10524,7 @@ const tooltipRegistry = {
   "dark_mantle": {
     title: "Dark Mantle",
     actionType: "Cast",
-    description: "You surround yourself in darkness for Verve rounds dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
+    description: "You surround yourself in darkness for Verve Pulses dealing Verve + Rank dice of darkness damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "ball_of_darkness": {
@@ -10358,7 +10536,7 @@ const tooltipRegistry = {
   "veil_of_darkness": {
     title: "Veil of Darkness",
     actionType: "Cast; Attack",
-    description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The wall lasts for Verve rounds.",
+    description: "You erect a wall of darkness two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of darkness damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "tendril_of_darkness": {
@@ -10370,7 +10548,7 @@ const tooltipRegistry = {
   "dark_strike": {
     title: "Dark Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of darkness damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of darkness damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> induce Panic. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "foreboding_darkness": {
@@ -10385,37 +10563,37 @@ const tooltipRegistry = {
   "fire_sting": {
     title: "Fire Sting",
     actionType: "Cast; Attack",
-    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "You can throw a fistfull of intense flame at a target dealing Verve + Rank dice of fire damage; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_corona": {
     title: "Fire Corona",
     actionType: "Cast",
-    description: "You surround yourself in flames for Verve rounds dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "You surround yourself in flames for Verve Pulses dealing Verve + Rank dice of fire damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fireball": {
     title: "Fireball",
     actionType: "Cast; Attack",
-    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "You hurl a massive ball of fire which explodes upon impact dealing Verve + Rank dice of fire damage to all targets within a five-hex diameter circle; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_wall": {
     title: "Fire Wall",
     actionType: "Cast; Attack",
-    description: "You erect a wall of fire two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of fire damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The wall lasts for Verve rounds.",
+    description: "You erect a wall of fire two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of fire damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "firebolt": {
     title: "Firebolt",
     actionType: "Cast; Attack",
-    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "You send out an intense jet of flame which passes through all targets up to Verve hexes away in a straight line dealing Verve + Rank dice of fire damage to each target; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "fire_strike": {
     title: "Fire Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of fire damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of fire damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "intense_flames": {
@@ -10436,7 +10614,7 @@ const tooltipRegistry = {
   "frostshield": {
     title: "Frostshield",
     actionType: "Cast",
-    description: "You surround yourself in extreme cold for Verve rounds dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
+    description: "You surround yourself in extreme cold for Verve Pulses dealing Verve + Rank dice of frost damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "frost_blast": {
@@ -10448,7 +10626,7 @@ const tooltipRegistry = {
   "frost_wall": {
     title: "Frost Wall",
     actionType: "Cast; Attack",
-    description: "You erect a wall of frost two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of frost damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of frost two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of frost damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "coldsnap": {
@@ -10460,7 +10638,7 @@ const tooltipRegistry = {
   "frost_strike": {
     title: "Frost Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of frost damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of frost damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> numb the target. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "intense_cold": {
@@ -10481,7 +10659,7 @@ const tooltipRegistry = {
   "halo": {
     title: "Halo",
     actionType: "Cast",
-    description: "You surround yourself in extreme brightness for Verve rounds dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
+    description: "You surround yourself in extreme brightness for Verve Pulses dealing Verve + Rank dice of light damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "flashbang": {
@@ -10493,7 +10671,7 @@ const tooltipRegistry = {
   "wall_of_light": {
     title: "Wall Of Light",
     actionType: "Cast; Attack",
-    description: "You erect a wall of light two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of light damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of light two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of light damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "flash_of_light": {
@@ -10505,7 +10683,7 @@ const tooltipRegistry = {
   "light_strike": {
     title: "Light Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of light damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of light damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> blind the target. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "searing_light": {
@@ -10526,7 +10704,7 @@ const tooltipRegistry = {
   "static_aura": {
     title: "Static Aura",
     actionType: "Cast",
-    description: "Lightning arcs from your body for Verve rounds dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
+    description: "Lightning arcs from your body for Verve Pulses dealing Verve + Rank dice of lightning damage for each Pulse to all those within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "lightning_blast": {
@@ -10538,7 +10716,7 @@ const tooltipRegistry = {
   "wall_of_lightning": {
     title: "Wall Of Lightning",
     actionType: "Cast; Attack",
-    description: "You erect a wall of lightning two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of lightning damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The wall lasts for Verve rounds.",
+    description: "You erect a wall of lightning two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of lightning damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "lightning_bolt": {
@@ -10550,7 +10728,7 @@ const tooltipRegistry = {
   "lightning_strike": {
     title: "Lightning Strike",
     actionType: "Cast; Attack",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of lightning damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of lightning damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> weaken the target. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "high_voltage": {
@@ -10571,7 +10749,7 @@ const tooltipRegistry = {
   "shroud_of_thunder": {
     title: "Shroud Of Thunder",
     actionType: "Cast",
-    description: "Thunder pulsates from your body for Verve rounds dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    description: "Thunder pulsates from your body for Verve Pulses dealing Verve + Rank dice of damage for each Pulse to all within one hex of you; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}],
   },
   "sonic_boom": {
@@ -10583,7 +10761,7 @@ const tooltipRegistry = {
   "wall_of_thunder": {
     title: "Wall Of Thunder",
     actionType: "Cast; Attack",
-    description: "You erect a wall of thunder two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The wall lasts for Verve rounds.",
+    description: "You erect a wall of thunder two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. This wall deals Verve + Rank dice of damage for each Pulse to all those caught within it or attempting to pass through it; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The wall lasts for Verve phases."},{"label":"Rite","text":"The wall is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "rolling_thunder": {
@@ -10595,7 +10773,7 @@ const tooltipRegistry = {
   "thunder_strike": {
     title: "Thunder Strike",
     actionType: "Cast",
-    description: "You enchant a weapon such that it is capable of inflicting Verve dice of thunder damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The enchantment on the weapon lasts for Verve rounds.",
+    description: "You enchant a weapon such that it is capable of inflicting Verve dice of thunder damage per strike; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze. The enchantment on the weapon lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The enchantment on the weapon lasts for Verve phases."},{"label":"Rite","text":"The enchantment on the weapon is permanent."},{"label":"Surge","text":"The number of affected weapons increases by one per six additional Mana spent"}]
   },
   "deafening_thunder": {
@@ -10616,7 +10794,7 @@ const tooltipRegistry = {
   "confusion": {
     title: "Confusion",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You confuse the target. This spell either affects one target for a number of rounds equal to your Verve or Verve targets for one round.",
+    description: "You confuse the target. This spell either affects one target for a number of Pulses equal to your Verve or Verve targets for one Pulse.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases. Saves against the effect are rolled twice, and the worse roll is taken."},{"label":"Rite","text":"The effect is permanent."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "drain_vitality": {
@@ -10628,13 +10806,13 @@ const tooltipRegistry = {
   "command": {
     title: "Command",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve rounds, and the target is allowed a Verve Save to ignore any given command.",
+    description: "You compel a target anthropoid to either “stop” what they are doing, “drop” whatever they are holding, “flee” from your presence, “come” to you, “attack” the nearest person or animal, or whatever else the LM allows so long as the target can hear and understand your command. The command must be easily understood when uttered as a single word. The effect lasts for Verve Pulses, and the target is allowed a Verve Save to ignore any given command.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "sleep": {
     title: "Sleep",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Round with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead.",
+    description: "You cause up to your Rank designated anthropoids to fall asleep for as long as you channel the spell. Targets must be able to hear your song. Targets can fight the effect each Pulse with a Verve Save and wake the moment the caster quits channeling. Targets that fail but are aware of imminent danger suffer two levels of fatigue instead.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "geas": {
@@ -10876,7 +11054,7 @@ const tooltipRegistry = {
   "whispering_leaves": {
     title: "Whispering Leaves",
     actionType: "Cast; Skill Check [Verve]",
-    description: "By listening to the surrounding plants for several rounds, you know about springs, caves, villages, etc. within one day’s travel. For specific knowledge, roll against a TN determined by your LM.",
+    description: "By listening to the surrounding plants for several Pulses, you know about springs, caves, villages, etc. within one day’s travel. For specific knowledge, roll against a TN determined by your LM.",
     extras: [{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "summon_animal": {
@@ -10894,7 +11072,7 @@ const tooltipRegistry = {
   "barkskin": {
     title: "Barkskin",
     actionType: "Cast",
-    description: "Thick bark covers your body increasing your DR by your Verve for 12 rounds.",
+    description: "Thick bark covers your body increasing your DR by your Verve for 12 Pulses.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "enthrall_animal": {
@@ -10912,7 +11090,7 @@ const tooltipRegistry = {
   "wall_of_thorns": {
     title: "Wall Of Thorns",
     actionType: "Cast; Attack",
-    description: "You call forth the surrounding vegetation to assemble itself into a barrier two-hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. Targets caught within the wall are dealt Verve + Rank dice of damage and are entangled. They are dealt a further Verve + Rank dice of damage each time they attempt to move or escape. The effect lasts for Verve rounds.",
+    description: "You call forth the surrounding vegetation to assemble itself into a barrier two-hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. Targets caught within the wall are dealt Verve + Rank dice of damage and are entangled. They are dealt a further Verve + Rank dice of damage each time they attempt to move or escape. The effect lasts for Verve Pulses.",
     extras: [{"label":"Channel","text":"Your wall writhes dealing an additional Verve + Rank dice of damage per Pulse to all targets within and entangles all non-entangled targets inside."},{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "entangle": {
@@ -10924,7 +11102,7 @@ const tooltipRegistry = {
   "bless": {
     title: "Bless",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You bestow the blessing of your deity upon one item. The effect of the blessing differs on a case by case basis as determined by the LM. Usually, blessed objects have minor curative properties and are anathema to the undead. Blessed soil prevents undead from trespassing unless they pass a Verve save. Blessings last for a number of rounds equal to your Rank.",
+    description: "You bestow the blessing of your deity upon one item. The effect of the blessing differs on a case by case basis as determined by the LM. Usually, blessed objects have minor curative properties and are anathema to the undead. Blessed soil prevents undead from trespassing unless they pass a Verve save. Blessings last for a number of Pulses equal to your Rank.",
     extras: [{"label":"Encænium","text":"Saving throws against your blessing are rolled twice and worse roll is taken. Blessings last a number of phases equal to your Rank."},{"label":"Rite","text":"Your blessing is permanent."}]
   },
   "blur": {
@@ -10936,31 +11114,31 @@ const tooltipRegistry = {
   "invisibility": {
     title: "Invisibility",
     actionType: "Cast; Skill Check [Verve]",
-    description: "Upon touch, the target of this spell becomes completely invisible—though it’s magical emanation is still detectable—for Verve rounds. This spell is confronted by Disbelieve Illusion.",
+    description: "Upon touch, the target of this spell becomes completely invisible—though it’s magical emanation is still detectable—for Verve Pulses. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "change_render_image": {
     title: "Change Render Image",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You can create an illusory image contained within a hemisphere of up to Verve hexes in diameter that either exists on its own or disguises something for Verve rounds. This spell is confronted by Disbelieve Illusion.",
+    description: "You can create an illusory image contained within a hemisphere of up to Verve hexes in diameter that either exists on its own or disguises something for Verve Pulses. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "change_render_sound": {
     title: "Change Render Sound",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You can change, silence, create, or contain noise within an hemisphere of up to Verve hexes in diameter for up to Verve rounds.",
+    description: "You can change, silence, create, or contain noise within an hemisphere of up to Verve hexes in diameter for up to Verve Pulses.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "fearsome_form": {
     title: "Fearsome Form",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You appear to all onlookers as the thing they most fear for Verve rounds. Affected targets must pass a Verve save or become panicked. This spell is confronted by Disbelieve Illusion.",
+    description: "You appear to all onlookers as the thing they most fear for Verve Pulses. Affected targets must pass a Verve save or become panicked. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "alluring_form": {
     title: "Alluring Form",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You appear to all onlookers as the thing they most desire for Verve rounds. This spell is confronted by Disbelieve Illusion.",
+    description: "You appear to all onlookers as the thing they most desire for Verve Pulses. This spell is confronted by Disbelieve Illusion.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "impersonate": {
@@ -10996,7 +11174,7 @@ const tooltipRegistry = {
   "manawall": {
     title: "Manawall [Word; Rank IV]",
     actionType: "Cast",
-    description: "You create a hemisphere of mana centered on yourself whose radius is Verve hexes. The Manawall lasts for Verve rounds and moves with you. No creature with Mana or enchanted object can pass through your wall."
+    description: "You create a hemisphere of mana centered on yourself whose radius is Verve hexes. The Manawall lasts for Verve Pulses and moves with you. No creature with Mana or enchanted object can pass through your wall."
   },
   "mounted_attack": {
     title: "Mounted Attack",
@@ -11133,7 +11311,7 @@ const tooltipRegistry = {
   "wyrdsinger": {
         title: "Wyrdsinger [Incantation]",
         actionType: "Cast; Skill Check [Verve]",
-        summary: "Upon making a performance Check, you can activate one or more of the following effects for Verve Rounds. The combined TNs of all effects produced cannot exceed your Skill Check.",
+        summary: "Upon making a performance Check, you can activate one or more of the following effects for Verve Pulses. The combined TNs of all effects produced cannot exceed your Skill Check.",
         includes: ["wyrd_control", "luck_is_what_you_make_it", "luck_be_with_you", "lucky_hit", "sucks_to_be_you", "lucky_bastard"]
     },
     "wyrd_control": {
@@ -11239,7 +11417,7 @@ const tooltipRegistry = {
   "arcane_armor": {
     title: "Arcane Armor",
     actionType: "Cast",
-    description: "You are fully enveloped in magical force that adds your Verve to your DR and your Rank to your Crit Count for Verve rounds.",
+    description: "You are fully enveloped in magical force that adds your Verve to your DR and your Rank to your Crit Count for Verve Pulses.",
     extras: [{"label": "Surge", "text": "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "picket_line": {
@@ -11251,7 +11429,7 @@ const tooltipRegistry = {
   "sanctum": {
     title: "Sanctum",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You prevent all foes from attacking you for Verve rounds unless they pass a Verve save. Directly attacking a foe breaks the effect.",
+    description: "You prevent all foes from attacking you for Verve Pulses unless they pass a Verve save. Directly attacking a foe breaks the effect.",
     extras: [{"label":"Word [Turn Blade]","text":"You can use this skill after you are attacked to automatically avoid. The target must pass a Verve save or suffer Verve + Rank dice of damage."}, {"label": "Surge", "text": "Your cc is increased by one per six additional Mana spent."}]
   },
   "abjure_creature": {
@@ -11263,19 +11441,19 @@ const tooltipRegistry = {
   "abjure_energy": {
     title: "Abjure Energy",
     actionType: "Cast",
-    description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to a specified battle magic energy type for Verve rounds. You can cast this spell multiple times per target, but a new energy type must be chosen.",
+    description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to a specified battle magic energy type for Verve Pulses. You can cast this spell multiple times per target, but a new energy type must be chosen.",
     extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}, {"label": "Surge", "text": "The conferred Resistance is increased to Immunity for one Pulse per six additional Mana spent."}]
   },
   "abjure_wound": {
     title: "Abjure Wound",
     actionType: "Cast",
-    description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to physical damage for Verve rounds.",
+    description: "Your target, who must be within thrice your Verve hexes of you, gains resistance (½ damage) to physical damage for Verve Pulses.",
     extras: [{"label":"Encænium","text":"Your spell affects Verve targets and lasts for one phase."}, {"label": "Surge", "text": "The conferred Resistance is increased to Immunity for one Pulse per six additional Mana spent."}]
   },
   "arcane_seal": {
     title: "Arcane Seal",
     actionType: "Cast; Skill Check [Verve]",
-    description: "Your target, who must be within thrice your Verve hexes of you, cannot spend any mana. The target is entitled to a Verve save each Round to negate.",
+    description: "Your target, who must be within thrice your Verve hexes of you, cannot spend any mana. The target is entitled to a Verve save each Pulse to negate.",
     extras: [{"label": "Surge", "text": "Your cc is increased by one per each six additional Mana spent."}]
   },
   "abjure_death": {
@@ -11305,13 +11483,13 @@ const tooltipRegistry = {
   "arcane_wall": {
     title: "Arcane Wall",
     actionType: "Cast",
-    description: "An Arcane Wall is an impenetrable force field two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. It takes 12 hexes of wall to completely enclose a seven-hex cluster. The wall lasts for Verve rounds.",
+    description: "An Arcane Wall is an impenetrable force field two hexes tall and 12 + Verve hexes long whose furthest point is no further than thrice your Verve hexes away from you. It takes 12 hexes of wall to completely enclose a seven-hex cluster. The wall lasts for Verve Pulses.",
     extras: [{"label":"Encænium","text":"Your Arcane Wall lasts for Verve phases."},{"label":"Rite","text":"Your Arcane Wall is permanent."}]
   },
   "arcane_vortex": {
     title: "Arcane Vortex",
     actionType: "Cast; Attack",
-    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one round but can be channeled.",
+    description: "You create a three-hex radius maelstrom of arcane force centered on you that deals Verve + Rank dice of damage to all creatures except the caster within for each Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>. Only Avoidance dice granted by Arcane Armor can reduce this damage; set each other Avoidance die to a Blank Result. This spell lasts for one Pulse but can be channeled.",
     extras: [{"label": "Surge", "text": "Add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> per each six additional Mana spent."}]
   },
   "dismiss_undead": {
@@ -11322,13 +11500,13 @@ const tooltipRegistry = {
   "wraithstrike": {
     title: "Wraithstrike",
     actionType: "Cast",
-    description: "You bless your weapon such that it is capable of damaging the target’s Mana. This effect lasts Verve rounds.",
+    description: "You bless your weapon such that it is capable of damaging the target’s Mana. This effect lasts Verve Pulses.",
     extras: [{"label":"Encænium","text":"The effect lasts for one phase."},{"label":"Rite","text":"The effect is permanent."}]
   },
   "divine_judgement": {
     title: "Divine Judgement",
     actionType: "Cast",
-    description: "The target gains or loses your Rank number of dice on all Saves for Verve rounds.",
+    description: "The target gains or loses your Rank number of dice on all Saves for Verve Pulses.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases instead."},{"label":"Rite","text":"The effect is permanent."}]
   },
 "blinding_presence": {
@@ -11376,7 +11554,7 @@ const tooltipRegistry = {
   "immolate": {
     title: "Immolate",
     actionType: "Cast; Attack",
-    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt.",
+    description: "Your target bursts into flame, suffering Verve + Rank dice of Fire damage for as long as you channel the spell. <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are discarded, and <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are changed to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, which inflict Pain, TN Rank, for an amount of Pulses equal to the damage dealt.",
     extras: [{"label":"Bonus Spells","text":"Fire Sting; Fire Corona"}]
   },
   "entomb": {
@@ -11420,7 +11598,7 @@ const tooltipRegistry = {
   "private_hallway": {
     title: "Private Hallway",
     actionType: "Cast",
-    description: "You can create a hallway one hex long through anything except lead, gold, or the Crystal Sphere by laying hands upon it. This hallway can go in any direction and stays open for Verve rounds or until the spell is dismissed. Only you can pass through the hallway. If caught within the hallway when it is collapsed, targets suffer Verve + Rank points of Vitality damage and are ejected from whichever open side they’re nearest.",
+    description: "You can create a hallway one hex long through anything except lead, gold, or the Crystal Sphere by laying hands upon it. This hallway can go in any direction and stays open for Verve Pulses or until the spell is dismissed. Only you can pass through the hallway. If caught within the hallway when it is collapsed, targets suffer Verve + Rank points of Vitality damage and are ejected from whichever open side they’re nearest.",
     extras: [{"label":"Surge","text":"The length is increased by one hex per six additional Mana spent."}]
   },
   "private_chest": {
@@ -11455,7 +11633,7 @@ const tooltipRegistry = {
   "possess_other": {
     title: "Possess Other",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You send your mind and part of your spirit into a living target so as to take control of their body for Verve rounds. You only take with you half of your Mana. Once in control, you may move beyond the range restriction of spells. Your body is considered unconscious for the duration of the spell. The target is entitled to a Verve save each Pulse to expel your spirit.",
+    description: "You send your mind and part of your spirit into a living target so as to take control of their body for Verve Pulses. You only take with you half of your Mana. Once in control, you may move beyond the range restriction of spells. Your body is considered unconscious for the duration of the spell. The target is entitled to a Verve save each Pulse to expel your spirit.",
     extras: [{"label":"Encænium","text":"The effect lasts for Verve phases and Verve saves are only made once per phase."}, {"label":"Rite","text":"Your entire mind and spirit enters your target’s body. The target’s mind and spirit are forced out and will enter your former body."}, {"label":"Surge","text":"Your cc is increased by one per six additional Mana spent."}]
   },
   "private_sanctum": {
@@ -11489,13 +11667,13 @@ const tooltipRegistry = {
   "levitate": {
     title: "Levitate",
     actionType: "Cast",
-    description: "You cause yourself to float above the ground. You can raise or lower up to Verve hexes per Move action for 12 rounds.",
+    description: "You cause yourself to float above the ground. You can raise or lower up to Verve hexes per Move action for 12 Pulses.",
     extras: [{"label":"Surge","text":"Your Levitate Pace is increased by Verve per six additional Mana spent."}]
   },
   "alter_speed": {
     title: "Alter Speed",
     actionType: "Cast",
-    description: "You either inflict Disadvantage or grant Advantage to your target's Run Checks for 12 Rounds, adjusting their Charge bonus by Rank points.",
+    description: "You either inflict Disadvantage or grant Advantage to your target's Run Checks for 12 Pulses, adjusting their Charge bonus by Rank points.",
     extras: [{"label":"Surge","text":"Double your effective Rank per six additional Mana spent."}]
   },
   "force_choke": {
@@ -11556,7 +11734,7 @@ const tooltipRegistry = {
 "cinder_storm": {
         title: "Cinder Storm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of darkness/fire damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain, TN Rank, for an amount of rounds equal to the damage dealt and induce Panic.",
+        description: "All within suffer Verve + Rank dice of darkness/fire damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Pain, TN Rank, for an amount of Pulses equal to the damage dealt and induce Panic.",
         extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
 "blackout_blizzard": {
@@ -11586,25 +11764,25 @@ const tooltipRegistry = {
 "hailfire": {
         title: "Hailfire",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and numb the target.",
+        description: "All within suffer Verve + Rank dice of fire/frost damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt and numb the target.",
         extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "solar_tempest": {
         title: "Solar Tempest",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and blind the target.",
+        description: "All within suffer Verve + Rank dice of fire/light damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt and blind the target.",
         extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "firestorm": {
         title: "Firestorm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and weaken the target.",
+        description: "All within suffer Verve + Rank dice of fire/lightning damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt and weaken the target.",
         extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "pyroclasm": {
         title: "Pyroclasm",
         action_type: "Cast",
-        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of rounds equal to the damage dealt and inflict Daze.",
+        description: "All within suffer Verve + Rank dice of fire/thunder damage per Pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict pain, TN Rank, for an amount of Pulses equal to the damage dealt and inflict Daze.",
         extras: [{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
     },
     "whiteout_blizzard": {
@@ -11664,7 +11842,7 @@ const tooltipRegistry = {
   },
   "stonefist_modified": {
     title: "Stonefist [Modified]",
-    description: "Your Stonefist spell melts into a pool of acid after knocking foes over. All targets within the affected area suffer Verve + Rank dice of acid damage per pulse or half that much if they are standing. The pool of acid neutralizes in Verve rounds. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
+    description: "Your Stonefist spell melts into a pool of acid after knocking foes over. All targets within the affected area suffer Verve + Rank dice of acid damage per pulse or half that much if they are standing. The pool of acid neutralizes in Verve Pulses. Each time acid damage is applied, all weapons and gear held or worn by the target are damaged; TN 1 Hap Save negates."
   },
   "icicle_modified": {
     title: "Icicle [Modified]",
@@ -11680,22 +11858,22 @@ const tooltipRegistry = {
   },
   "sandstorm": {
     title: "Sandstorm",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent sandstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse unless they hunker down. When making a move action, the target must choose a random direction and can only traverse one hex. Each subsequent move action, the target must pass a TN Rank Direction Sense Check or randomly choose their direction again.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent sandstorm which lasts for Verve Pulses. All creatures caught within suffer Verve + Rank dice of damage per pulse unless they hunker down. When making a move action, the target must choose a random direction and can only traverse one hex. Each subsequent move action, the target must pass a TN Rank Direction Sense Check or randomly choose their direction again.",
     extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "hailstorm": {
     title: "Hailstorm",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent hailstorm which lasts for Verve rounds. All creatures caught within suffer Verve + Rank dice of damage per pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a violent hailstorm which lasts for Verve Pulses. All creatures caught within suffer Verve + Rank dice of damage per pulse; <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze.",
     extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "living_fog": {
     title: "Living Fog",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a thick, swirling fog for Verve rounds preventing all within from seeing beyond the hex they occupy. Inside of the fog is a number of living fog equal to your Rank whose Rank cannot exceed your own. They are undetectable so long as they remain inside of the fog. Targets fleeing the fog must pass a Direction Sense Check, TN Rank, to do so and exit from a random point unless their Check is greater than the caster’s Verve.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a thick, swirling fog for Verve Pulses preventing all within from seeing beyond the hex they occupy. Inside of the fog is a number of living fog equal to your Rank whose Rank cannot exceed your own. They are undetectable so long as they remain inside of the fog. Targets fleeing the fog must pass a Direction Sense Check, TN Rank, to do so and exit from a random point unless their Check is greater than the caster’s Verve.",
     extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
   "hurricane": {
     title: "Hurricane",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with a raging hurricane for Verve rounds. Inside of the hurricane, flying debris and pelting rain deals Verve + Rank dice of damage per Pulse to all targets therewithin. Hunkering down reduces the damage by ½. Targets must pass a Strength Save to remain afoot and a Balance Save to move; TN Rank for both.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with a raging hurricane for Verve Pulses. Inside of the hurricane, flying debris and pelting rain deals Verve + Rank dice of damage per Pulse to all targets therewithin. Hunkering down reduces the damage by ½. Targets must pass a Strength Save to remain afoot and a Balance Save to move; TN Rank for both.",
     extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "permafrost": {
@@ -11724,7 +11902,7 @@ const tooltipRegistry = {
   },
   "quagmire": {
     title: "Quagmire",
-    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for ¼ Phase. Targets can hold their breath for Health rounds and then must pass a TN 3 Health Save each round or drown, falling unconscious and suffering asphyixation damage each Pulse until rescued. To escape, the target must pass a TN Rank Direction Sense Check each Pulse to swim one hex closer to the edge. Failure places the target in the center of the bog.",
+    description: "You can cover a column whose diameter and height is equal to seven-hexes with an umbral bog for ¼ Phase. Targets can hold their breath for Health Pulses and then must pass a TN 3 Health Save each Pulse or drown, falling unconscious and suffering asphyixation damage each Pulse until rescued. To escape, the target must pass a TN Rank Direction Sense Check each Pulse to swim one hex closer to the edge. Failure places the target in the center of the bog.",
     extras: [{ label: "Rite", text: "The effect is permanent." },{ label: "Surge", text: "Your effective Rank is increased by one per six additional Mana spent."}]
   },
     "daylight": {
@@ -11761,7 +11939,7 @@ const tooltipRegistry = {
     },
     "burning_warrior": {
         title: "Burning Warrior",
-        description: "Your Arcane Armor makes you immune to fire attacks. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Fire God immolate the target, inflicting pain, TN Rank, for an amount of rounds equal to the damage dealt."
+        description: "Your Arcane Armor makes you immune to fire attacks. <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> from any weapon blessed in the name of the Fire God immolate the target, inflicting pain, TN Rank, for an amount of Pulses equal to the damage dealt."
     },
     "stonefist_warrior": {
         title: "Stonefist Warrior",
@@ -11797,7 +11975,7 @@ const tooltipRegistry = {
   "telepathy": {
     title: "Telepathy",
     actionType: "Cast",
-    description: "You can insinuate your thoughts into the target’s mind for anumber of rounds equal to your VER.",
+    description: "You can insinuate your thoughts into the target’s mind for anumber of Pulses equal to your VER.",
     extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."},{ label: "Surge", text: "You inflict Verve + Rank points of Mana damage to the target."}]
   },
   "keen": {
@@ -11819,7 +11997,7 @@ const tooltipRegistry = {
   "obscuration": {
     title: "Obscuration",
     actionType: "Cast; Skill Check [Verve]",
-    description: "You make a person, object, or spell immune to Divination for Verve rounds. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
+    description: "You make a person, object, or spell immune to Divination for Verve Pulses. When your target is looked away from, the onlooker must pass an Acuity Save or forget ever seeing your target.",
     extras: [{"label": "Encænium", "text": "The effect lasts for Verve phases."}, {"label": "Rite", "text": "The effect is permanent."},{ label: "Surge", text: "Your cc is increased by one per six additional Mana spent."}]
   },
   "obscured_casting": {
@@ -11899,11 +12077,11 @@ const tooltipRegistry = {
   },
   "wall_of_steel": {
     title: "Wall of Steel",
-   extras: [{"label": "Zweihänder & Odachi only", "text": "You continuously weave a figure-eight shaped wall of steel, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Wall of Steel can be maintained for STR rounds."}]
+   extras: [{"label": "Zweihänder & Odachi only", "text": "You continuously weave a figure-eight shaped wall of steel, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Wall of Steel can be maintained for STR Pulses."}]
 },
   "molinetto": {
     title: "Molinetto",
-   extras: [{"label": "Long-haft Weapons", "text": "You continuously spin your weapon creating a figure-eight shaped wall, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Molinetto can be maintained for DEX rounds."}]
+   extras: [{"label": "Long-haft Weapons", "text": "You continuously spin your weapon creating a figure-eight shaped wall, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Molinetto can be maintained for DEX Pulses."}]
 },
   "sweep_attack": {
     title: "Sweep Attack",
@@ -11984,22 +12162,22 @@ const tooltipRegistry = {
   },
   "curse_of_animal_form": {
     title: "Curse of Animal Form",
-    description: "the target is transformed into their animal form for Verve rounds.",
+    description: "the target is transformed into their animal form for Verve Pulses.",
     extras: [{ label: "Rite", text: "The curse lasts until it is broken." }]
   },
   "curse_of_sleeping": {
     title: "Curse of Sleeping",
-    description: "The target falls into a deep slumber—a near facsimile to death—for Verve rounds.",
+    description: "The target falls into a deep slumber—a near facsimile to death—for Verve Pulses.",
     extras: [{ label: "Rite", text: "The curse lasts until it is broken." }]
   },
   "curse_of_pain": {
     title: "Curse of Pain",
-    description: "The target is pained, TN Rank, for Verve Rounds.",
+    description: "The target is pained, TN Rank, for Verve Pulses.",
     extras: [{ label: "Rite", text: "The curse lasts until it is broken." }]
   },
   "curse_of_impairment": {
     title: "Curse of Impairment",
-    description: "The target suffers Rank levels of impairment for Verve rounds.",
+    description: "The target suffers Rank levels of impairment for Verve Pulses.",
     extras: [{ label: "Rite", text: "The curse lasts until it is broken." }]
   },
   "curse_of_infatuation": {
@@ -12016,12 +12194,12 @@ const tooltipRegistry = {
   },
   "arcane_defense": {
     title: "Arcane Defense",
-    description: "You can cast Arcane Armor and Blur as a single cast action on yourself."
+    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all magically improved Avoidance Checks."
   },
   "arcane_surge": {
     title: "Arcane Surge [Word]",
     actionType: "Cast; Attack",
-    description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all magically improved Avoidance Checks."
+    description: "You can spend all of your remaining Mana (down to thrice your Acuity below 0) to roll an Attack equal to one die per point of Mana spent. This attack cannot be avoided; the defender must change all <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, and <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to Blank Results after his initial Avoidance roll, and only magical effects can modify the dice afterwards."
   },
   "improved_stealth": {
     title: "Improved Stealth",
@@ -12043,7 +12221,7 @@ const tooltipRegistry = {
   "wu_xiang": {
     title: "Wu Xiang",
     actionType: "Cast",
-    summary: "You can activate a sympathetic state for VER Rounds. Only one state can be active at a time.",
+    summary: "You can activate a sympathetic state for VER Pulses. Only one state can be active at a time.",
     includes: ["one_with_the_earth", "one_with_the_fire", "one_with_the_water", "one_with_the_wind", "one_with_the_void"]
   },
   "one_with_the_earth": {
@@ -12088,7 +12266,7 @@ const tooltipRegistry = {
   "wraithguard": {
     title: "Wraithguard",
     actionType: "Cast",
-    description: "You bless your weapon such that it is capable of damaging the target’s Mana and your armor and shield such that you can roll your Avoidance against the Ghost Touch of incorporeal undead. This effect lasts Verve rounds."
+    description: "You bless your weapon such that it is capable of damaging the target’s Mana and your armor and shield such that you can roll your Avoidance against the Ghost Touch of incorporeal undead. This effect lasts Verve Pulses."
   },
   "obedience": {
     title: "Obedience",
@@ -21999,7 +22177,7 @@ ${type === 'armor' ? `
                 </div>
                 <div class="builder-group" style="margin-bottom:0;">
                     <label>Don Time</label>
-                    <input type="text" id="custom-armor-dontime-${slotId}" value="${(itemRegistry['custom_armor']?.donTime || '1 round').replace(/"/g, '&quot;')}" style="padding:4px; font-size:0.8rem; text-align:center;">
+                    <input type="text" id="custom-armor-dontime-${slotId}" value="${(itemRegistry['custom_armor']?.donTime || '1 Pulse').replace(/"/g, '&quot;')}" style="padding:4px; font-size:0.8rem; text-align:center;">
                 </div>
             </div>
             <div class="builder-group" style="margin-bottom: 8px;">
@@ -22795,7 +22973,7 @@ window.deleteEquipment = function(slotId) {
             avoidanceBonus: 0,
             critCount: 2,
             cost: 0,
-            donTime: "1 round",
+            donTime: "1 Pulse",
             specialQualities: [],
             description: "A custom set of armor."
         };
@@ -22933,7 +23111,7 @@ if (itemId === "custom_armor") {
         const customAvoidance = document.getElementById(`custom-armor-avoidance-${slotId}`) ? parseInt(document.getElementById(`custom-armor-avoidance-${slotId}`).value) || 0 : 0;
         const customCrit = document.getElementById(`custom-armor-crit-${slotId}`) ? parseInt(document.getElementById(`custom-armor-crit-${slotId}`).value) || 2 : 2;
         const customCost = document.getElementById(`custom-armor-cost-${slotId}`) ? parseInt(document.getElementById(`custom-armor-cost-${slotId}`).value) || 0 : 0;
-        const customDonTime = document.getElementById(`custom-armor-dontime-${slotId}`) ? document.getElementById(`custom-armor-dontime-${slotId}`).value.trim() : "1 round";
+        const customDonTime = document.getElementById(`custom-armor-dontime-${slotId}`) ? document.getElementById(`custom-armor-dontime-${slotId}`).value.trim() : "1 Pulse";
         
         const checkedBoxes = document.querySelectorAll(`#builder-${slotId} .custom-quality-checkbox:checked`);
         const customQualities = Array.from(checkedBoxes).map(cb => cb.value);
@@ -23839,7 +24017,7 @@ window.onload = function() {
           avoidanceBonus: 0,
           critCount: 2,
           cost: 0,
-          donTime: "1 round",
+          donTime: "1 Pulse",
           specialQualities: [],
           description: "A custom set of armor."
       };
@@ -25445,7 +25623,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Blood Hornet", 
-            description: "Blood hornets are vicious, flying swarms that gorge upon the blood of their victims. Once a swarm has identified a target, usually the largest creature nearby, they go into a frenzy ignoring all threats until they are sated. A single blood hornet affixes itself to its target if it deals at least 1 point of damage, and is then able to gorge upon its foe ignoring all Avoidance dice. It releases after dealing at least 6 points of damage and then proceeds to flee to digest its meal. The victim can kill and remove a single affixed blood hornet as a full round action.",
+            description: "Blood hornets are vicious, flying swarms that gorge upon the blood of their victims. Once a swarm has identified a target, usually the largest creature nearby, they go into a frenzy ignoring all threats until they are sated. A single blood hornet affixes itself to its target if it deals at least 1 point of damage, and is then able to gorge upon its foe ignoring all Avoidance dice. It releases after dealing at least 6 points of damage and then proceeds to flee to digest its meal. The victim can kill and remove a single affixed blood hornet as an Attack action.",
             size: "A", 
             pace: "37", 
             vit: 1, 
@@ -25506,7 +25684,7 @@ const compendiumRegistry = {
         },
         { 
             name: "Crocodile", 
-            description: "Crocs are incredibly dangerous ambush predators who dwell in rivers and swamps. Once it has an opponent grappled, a crock will perform its death roll attack. The following round, a crock will almost always attempt to drag its target beneath the water to drown it and let it rot.",
+            description: "Crocs are incredibly dangerous ambush predators who dwell in rivers and swamps. Once it has an opponent grappled, a crock will perform its death roll attack. The following Pulse, a crock will almost always attempt to drag its target beneath the water to drown it and let it rot.",
             size: "3B", 
             pace: "15 swim; 6 land", 
             vit: 40, 
