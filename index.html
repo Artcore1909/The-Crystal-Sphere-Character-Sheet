@@ -11184,10 +11184,25 @@ const tooltipRegistry = {
     title: "Beast Attack",
     description: "You can direct your mount to trample, bite, or gore your foe."
   },
+  "equestrian_tactics": {
+    title: "Equestrian Tactics",
+    summary: "You can activate one of the following skills from beastback:",
+    includes: ["caracole", "charging_overrun", "volte"]
+  },
+  "caracole": {
+    title: "Caracole",
+    actionType: "Move; Attack",
+    description: "You can direct your mount with your knees, to circle a target while you fire upon it, denying melee access to yourself or your mount."
+  },
   "charging_overrun": {
     title: "Charging Overrun",
-    actionType: "Move + Attack(s)",
+    actionType: "Move; Attack(s)",
     description: "You can run down enemies from beastback. When you declare that you are charging, you targets must pass an immediate Verve Confrontation or become panicked. If they fail, they must attempt a Jump or Run Check confronted by your Equestrianism to escape your trajectory. If they pass, the attack is negated and you ride past them; if they fail, you and your beast are granted a single strike each for which the targets are at disadvantage. If they pass the Verve Confrontation, and regardless of whether they have already acted, they can invoke Total Defense, stand their ground, or otherwise act however they wish."
+  },
+  "volte": {
+    title: "Volte",
+    actionType: "Move; Attack",
+    description: "You can direct your mount to pivot from a standstill such that you and it can attack a foe at your flank."
   },
   "patron_deity": {
     title: "Patron Deity",
@@ -11982,18 +11997,31 @@ const tooltipRegistry = {
     title: "Keen",
     description: "Change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all Acuity Checks. Additionally, when detecting magic, you can immediately identify the school of magic."
   },
+  "dual_wield_tactics": {
+    title: "Dual-Wield Tactics",
+    summary: "You can activate one of the following skills:",
+    includes: ["bind_blade", "dervish", "wheel_of_blades"]
+  },
   "fencer": {
     title: "Fencer",
     description: "Add one strike to all attacks while dual-wielding."
   },
-  "daze": {
-    title: "Daze",
-    description: "While dual-wielding, <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> inflict Daze."
+  "ambidexter": {
+    title: "Ambidexter",
+    description: "Change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to strikes while dual wielding."
   },
   "dervish": {
     title: "Dervish",
     description: "You can spin and strike each foe engaged with you."
   },
+  "bind_blade": {
+    title: "Bind Blade",
+    description: "You can catch an enemy's blade with one of your weapon's quillions by rolling that weapon's strike in lieu of your Avoidance. If the attack misses, roll a DEX confrontation to maintain control each Pulse to prevent your target from using that weapon. If the attack hits, only your DR can mitigate the damage."
+   },
+  "wheel_of_blades": {
+    title: "Wheel of Blades",
+    extras: [{"label": "Dual longblades only", "text": "You alternatingly weave figure-eight shaped cuts, covering your three frontal hexes. Enemies attempting to attack through it roll against your Attack instead of your Avoidance. If you are hit, only your DR can mitigate the damage. As you march forward, you attack all enemies you press into. Wheel of Blades can be maintained for DEX Pulses."}]
+   },
   "obscuration": {
     title: "Obscuration",
     actionType: "Cast; Skill Check [Verve]",
@@ -12249,7 +12277,7 @@ const tooltipRegistry = {
     description: "You can change one <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> on all non-cast attacks."
   },
   "meditative_healing": {
-    title: "Meditative Healing [Encænium]",
+    title: "Meditative Healing",
     actionType: "Cast",
     description: "You can channel Mana to heal your Vitality point for point.",
     extras: [{ label: "Surge", text: "You can heal the desired amount of Vitality at once at a cost of two to one."}]
@@ -12850,7 +12878,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "equestrianism": {
         description: "Whoever said dog is man's best friend has never tried to saddle up a greyhound. The art of using a mount to cheese the fight.",
         levels:    [
-        "Mounted Attack", "Beast Attack", "Charging Overrun"
+        "Mounted Attack", "Beast Attack", "Equestrian Tactics"
     ]
 },
     "pugilism": {
@@ -13060,7 +13088,7 @@ function syncTreeAllocationToExtraTraining(sanitizedKey, currentLevel) {
     "mastery: dual-wielder": {
         description: "The tornadic mastery of dual-wielding.",
         requirements: "Rank 3+; Dual-Wielding (3)",
-        levels:    ["Fencer", "Daze", "Dervish"
+        levels:    ["Dual-Wield Tactics", "Fencer", "Ambidexter"
     ]
 },
     "mastery: illusionist": {
@@ -21223,7 +21251,7 @@ const finalDexVal = parseInt(document.getElementById("total-dex")?.value) || 3;
     if (getLvl("dual-wielding") >= 3) attacks.push("Gauche Feint");
 
     if (getLvl("equestrianism") >= 2) attacks.push("Beast Attack");
-    if (getLvl("equestrianism") >= 3) attacks.push("Charging Overrun");
+    if (getLvl("equestrianism") >= 3) attacks.push("Equestrian Tactics");
 
     if (getLvl("pugilism") >= 3) attacks.push("Grapple");
     if (getLvl("pugilism") >= 4) attacks.push("Trip");
@@ -21541,9 +21569,10 @@ const deificBoonLevel = getLvl("mastery-deific-boon");
     if (getLvl("mastery-diviner") >= 2) defenses.push("Keen");
     if (getLvl("mastery-diviner") >= 2) defenses.push("Inexhaustible");
 
-    if (getLvl("mastery-dual-wielder") >= 1) attacks.push("Fencer");
-    if (getLvl("mastery-dual-wielder") >= 2) attacks.push("Daze");
-    if (getLvl("mastery-dual-wielder") >= 3) attacks.push("Dervish");
+    if (getLvl("mastery-dual-wielder") >= 1) attacks.push("Dual-Wield Tactics");
+    if (getLvl("mastery-dual-wielder") >= 2) attacks.push("Fencer");
+    if (getLvl("mastery-dual-wielder") >= 3) attacks.push("Ambidexter");
+
 
     if (getLvl("mastery-illusionist") >= 3) attacks.push("Illusory Spell");
 
