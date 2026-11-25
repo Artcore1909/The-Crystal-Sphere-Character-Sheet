@@ -487,13 +487,25 @@ body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-ma
     & select,
     & textarea,
     & .roll-input,
-    & .pnp-gear-dropdown,
     & .pnp-pool-input,
     & .locus-builder-select,
     & #theme-selector {
         background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
+    }
+
+    & .pnp-gear-dropdown,
+    & .locus-direct-select {
+        background-color: transparent;
+        border: none;
+        color: var(--theme-text) !important;
+    }
+
+    & .pnp-gear-dropdown option,
+    & .locus-direct-select option {
+        background-color: var(--theme-bg-select-option);
+        color: var(--theme-text);
     }
 
     & .builder-btn,
@@ -1774,7 +1786,7 @@ table.wyrd-table .table-icon {
 
         .pnp-belt-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(1fr);
             gap: 10px;
             width: 100%;
         }
@@ -1846,15 +1858,28 @@ table.wyrd-table .table-icon {
             padding: 4px 0;
         }
 
-        .pnp-gear-dropdown {
-            width: 100%;
-            padding: 3px;
-            font-size: 0.8rem;
-            border: 1px solid var(--border-dark);
-            border-radius: 4px;
-            background-color: var(--bg-cream);
-            margin-bottom: 4px;
-        }
+.pnp-gear-slot-row {
+    background: #fffbf7;
+    padding: 4px 8px;
+    border: 1px solid var(--border-warm);
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.pnp-gear-dropdown,
+.locus-direct-select {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 2px 0;
+    margin: 0;
+    font-size: 0.8rem;
+    border: none;
+    background: transparent;
+    color: var(--text-dark);
+    outline: none;
+}
 
         .pnp-attack-section {
             display: flex;
@@ -1869,15 +1894,15 @@ table.wyrd-table .table-icon {
             flex: 2;
         }
 
-        .pnp-weapon-slot-row {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-            background: var(--bg-card);
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px dashed #c8be9c;
-        }
+.pnp-weapon-slot-row {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    background: var(--bg-card);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #c8be9c;
+}
 
         .pnp-interlock-container {
             display: flex;
@@ -1892,19 +1917,27 @@ table.wyrd-table .table-icon {
             background: #f8f5eb;
         }
 
-        .pnp-weapon-details-col {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
+.pnp-weapon-details-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    position: relative;
+}
 
-        .pnp-weapon-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 2px;
-            margin-bottom: 5px;
-        }
+.pnp-weapon-meta {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+
+[id^="card-view-weapon-"] .pnp-grips-container > [data-tooltip]:first-child,
+[id^="card-view-weapon-"] .pnp-empty-line {
+    padding-right: 40px;
+}
 
         .pnp-offensive-skills-card {
             flex: 1;
@@ -2754,6 +2787,28 @@ details[open] #skills-collapsed-summary {
 .aspect-card.drawer-open:hover .creation-skill-drawer {
     border-color: var(--accent-gold);
 }
+.locus-badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 6px;
+    max-width: 130px;
+}
+
+.locus-mods-toggle {
+    cursor: pointer !important;
+    user-select: none;
+}
+
+.locus-mods-expanded {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 4px;
+    width: 100%;
+}
     </style>
 </head>
 <body>
@@ -3502,7 +3557,6 @@ details[open] #skills-collapsed-summary {
             <div class="pnp-weapon-slot-row" id="slot-container-weapon-0">
                 <div class="pnp-weapon-details-col">
                     <div class="pnp-weapon-meta">
-                        <span class="pnp-col-header">WEAPON</span>
                         <button class="pnp-edit-btn" onclick="toggleBuilder('weapon-0')">Edit</button>
                     </div>
                     <div class="pnp-col-content" id="card-view-weapon-0">
@@ -3516,7 +3570,6 @@ details[open] #skills-collapsed-summary {
             <div class="pnp-weapon-slot-row" id="slot-container-weapon-1">
                 <div class="pnp-weapon-details-col">
                     <div class="pnp-weapon-meta">
-                        <span class="pnp-col-header">WEAPON</span>
                         <button class="pnp-edit-btn" onclick="toggleBuilder('weapon-1')">Edit</button>
                     </div>
                     <div class="pnp-col-content" id="card-view-weapon-1">
@@ -3530,7 +3583,6 @@ details[open] #skills-collapsed-summary {
             <div class="pnp-weapon-slot-row" id="slot-container-weapon-2">
                 <div class="pnp-weapon-details-col">
                     <div class="pnp-weapon-meta">
-                        <span class="pnp-col-header">WEAPON</span>
                         <button class="pnp-edit-btn" onclick="toggleBuilder('weapon-2')">Edit</button>
                     </div>
                     <div class="pnp-col-content" id="card-view-weapon-2">
@@ -3553,18 +3605,21 @@ details[open] #skills-collapsed-summary {
                 
                 <div class="builder-panel" id="builder-mount" style="display: none; width: 100%; box-sizing: border-box;"></div>
 
-                <div class="pnp-charge-dashboard">
-                    <div class="pnp-charge-octagons">
-                        <!-- Afoot Octagon -->
-                        <div class="pnp-aspect-card pnp-charge-card">
-                            <span class="pnp-aspect-label pnp-charge-label">Afoot</span>
-                            <div class="pnp-octagon pnp-charge-octagon" id="stat-charge-afoot">+6</div>
+<div class="pnp-charge-dashboard">
+                    <div class="pnp-charge-hud" style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+                        <div class="pnp-charge-octagons">
+                            <!-- Afoot Octagon -->
+                            <div class="pnp-aspect-card pnp-charge-card">
+                                <span class="pnp-aspect-label pnp-charge-label">Afoot</span>
+                                <div class="pnp-octagon pnp-charge-octagon" id="stat-charge-afoot">+6</div>
+                            </div>
+                            <!-- Mounted Octagon -->
+                            <div class="pnp-aspect-card pnp-charge-card">
+                                <span class="pnp-aspect-label pnp-charge-label">Mounted</span>
+                                <div class="pnp-octagon pnp-charge-octagon" id="stat-charge-mounted">—</div>
+                            </div>
                         </div>
-                        <!-- Mounted Octagon -->
-                        <div class="pnp-aspect-card pnp-charge-card">
-                            <span class="pnp-aspect-label pnp-charge-label">Mounted</span>
-                            <div class="pnp-octagon pnp-charge-octagon" id="stat-charge-mounted">—</div>
-                        </div>
+                        <div id="charge-badge-container" class="locus-badge-container" style="display: none;"></div>
                     </div>
                     
                     <div id="mount-mini-sheet-container" class="mount-sheet-wrapper"></div>
@@ -3761,7 +3816,7 @@ details[open] #skills-collapsed-summary {
     <p class="hint">Click any category below to browse weapons, armor, and magical enhancements. Hover over items to view their details.</p>
     
 <!-- Item Cost Calculator -->
-    <div class="aspect-card" style="margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;">
+    <div class="aspect-card" style="margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px solid #d97706; text-align: left;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 5px; margin-bottom: 10px;">
             <h3 style="margin: 0; color: var(--primary-red);">Item Cost Calculator</h3>
             <button type="button" class="pnp-edit-btn" onclick="window.clearBazaarCalculator()" style="background: none; border: 1px solid #7c6f64; color: #7c6f64; padding: 2px 8px; border-radius: 3px; cursor: pointer; font-size: 0.75rem;">Clear</button>
@@ -4533,7 +4588,7 @@ details[open] #skills-collapsed-summary {
         </tr>
         <tr>
             <td><strong>Outsider</strong></td>
-            <td>You come from the land out yonder. You begin your adventure with a collection of exotic goods, a light suit, an exotic mount or pet, and a cultural weapon.</td>
+            <td>You come from a land out yonder. You begin your adventure with a collection of exotic goods, a light suit, an exotic mount or pet, and a cultural weapon.</td>
             <td>—</td>
         </tr>
         <tr>
@@ -10330,10 +10385,17 @@ const tooltipRegistry = {
     title: "Calculated Strike",
     description: "Using a shrewd weapon, you can change up to your Rank <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>, but <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> are removed from the roll. When you use this skill, your attack is limited to one strike."
   },
+"extra_training_badge": {
+        title: "Extra Training",
+        includes: ["proficiency", "extra_training"]
+    },
 "extra_training": {
         title: "Extra Training",
-        action_type: "Passive",
-        description: "You can reroll Blank Results once for a chosen skill with which you are proficient. You can take this skill multiple times, each time for a different skill."
+        description: "Reroll Blank Results once for a chosen skill."
+    },
+"proficiency": {
+        title: "Proficiency",
+        description: "Change up to Rank <img src='images/SkillencWhite.png' alt='Skill' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'>."
     },
 "arcane_mark": {
         title: "Arcane Mark",
@@ -12115,9 +12177,13 @@ const tooltipRegistry = {
     title: "Sweep Attack",
    extras: [{"label": "Two-handed Weapons", "text": "You control your three frontal hexes out to close range with a massive sweeping attack. All targets roll avoidance at once. Those who avoid are pushed backwards outside of your range if possible. If one or more enemies fail to avoid, retroactively change up to your Rank <img src='images/HitencWhite.png' alt='Hit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> before adding your Bonus, and split the damage between the affected targets however you wish."}]
 },
+  "skill_mastery_badge": {
+    title: "Skill Mastery",
+    includes: ["proficiency", "extra_training", "skill_mastery"]
+  },
   "skill_mastery": {
     title: "Skill Mastery",
-    description: "You can add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a chosen skill for which you have acquired Extra Training. You can take this skill multiple times, each time for a different skill."
+    description: "You can add one <img src='images/CritencWhite.png' alt='Crit' style='height: 1.3em; width: auto; vertical-align: middle; display: inline-block;'> to a chosen skill."
   },
   "improved_possess_other": {
     title: "Improved Possess Other",
@@ -14581,6 +14647,53 @@ window.toggleBarkskinSurge = function() {
     }
 };
 
+window._expandedModGroups = window._expandedModGroups || {};
+
+window.toggleModBadgeGroup = function(groupId) {
+    window._expandedModGroups[groupId] = !window._expandedModGroups[groupId];
+    if (typeof calculateSheet?.flush === "function") calculateSheet.flush();
+    else if (typeof calculateSheet === "function") calculateSheet();
+};
+
+function renderCompactModBadges(groupId, title, badges) {
+    if (!badges || badges.length === 0) return "";
+
+    const makeTag = (b) =>
+        `<span class="locus-ench-tag" data-tooltip="${b.tooltip}" style="font-size:0.6rem; padding:1px 4px; margin:0;">${b.label}</span>`;
+
+    if (badges.length === 1) {
+        return makeTag(badges[0]);
+    }
+
+    // Flatten nested composite badges (e.g. skill_mastery_badge) so Mods (N) shows full descriptions
+    const expandedIncludes = [];
+    badges.forEach(b => {
+        const entry = typeof tooltipRegistry !== "undefined" ? tooltipRegistry[b.tooltip] : null;
+        if (entry && Array.isArray(entry.includes)) {
+            entry.includes.forEach(subKey => {
+                if (!expandedIncludes.includes(subKey)) expandedIncludes.push(subKey);
+            });
+        } else if (!expandedIncludes.includes(b.tooltip)) {
+            expandedIncludes.push(b.tooltip);
+        }
+    });
+
+    const summaryKey = `mod_summary_${groupId}`;
+    if (typeof tooltipRegistry !== "undefined") {
+        tooltipRegistry[summaryKey] = {
+            title: title,
+            includes: expandedIncludes
+        };
+    }
+
+    const isExpanded = !!window._expandedModGroups[groupId];
+    const toggleBtn = `<span class="locus-ench-tag locus-mods-toggle" data-tooltip="${summaryKey}" onclick="window.toggleModBadgeGroup('${groupId}')" style="font-size:0.6rem; padding:1px 5px; margin:0;">Mods (${badges.length}) ${isExpanded ? "▴" : "▾"}</span>`;
+
+    if (!isExpanded) return toggleBtn;
+
+    return `${toggleBtn}<div class="locus-mods-expanded">${badges.map(makeTag).join("")}</div>`;
+}
+
 function calculateSheet() {
 
     // ── 1. VALIDATE RANK & REDRAW DOM CARDS INSTANTLY ──
@@ -15195,7 +15308,11 @@ let rankXpSpent = 0;
     // ==========================================
     // RENDER ACTIVE CARDS & WRITE-INS (AFTER VALIDATION/CLAMPING)
     // ==========================================
-    renderDynamicActiveTreesFeed();
+    if (typeof renderDynamicActiveTreesFeed?.flush === "function") {
+        renderDynamicActiveTreesFeed.flush();
+    } else {
+        renderDynamicActiveTreesFeed();
+    }
     if (typeof updatePnpWriteInCards === "function") {
         updatePnpWriteInCards();
     }
@@ -15704,9 +15821,13 @@ const modifiedWeaponQualities = getModifiedSpecialQualities(weaponData.itemId, w
             });
         }
         
-        if (isProf) mods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
-        if (isET) mods.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
-        if (isMastery) mods.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
+if (isMastery) {
+            mods.push(`<span data-tooltip="skill_mastery_badge" style="cursor:help;">Mastery</span>`);
+        } else if (isET) {
+            mods.push(`<span data-tooltip="extra_training_badge" style="cursor:help;">Extra Training</span>`);
+        } else if (isProf) {
+            mods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
+        }
         // =========================================================
 
         if (mods.length > 0) { 
@@ -15966,9 +16087,13 @@ let cleanDmgType = (profItem.damageType || weaponItem.damageType || "—").toUpp
             let isSbET = (manEtStates["shield_bash"] && manEtStates["shield_bash"].et) || drEtStates.includes("Shield Bash");
             let isSbM = (manEtStates["shield_bash"] && manEtStates["shield_bash"].m) || drMStates.includes("Shield Bash");
 
-            if (isSbProf) shieldMods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
-            if (isSbET) shieldMods.push(`<span data-tooltip="extra_training" style="cursor:help;">Extra Training</span>`);
-            if (isSbM) shieldMods.push(`<span data-tooltip="skill_mastery" style="cursor:help;">Mastery</span>`);
+if (isSbM) {
+                shieldMods.push(`<span data-tooltip="skill_mastery_badge" style="cursor:help;">Mastery</span>`);
+            } else if (isSbET) {
+                shieldMods.push(`<span data-tooltip="extra_training_badge" style="cursor:help;">Extra Training</span>`);
+            } else if (isSbProf) {
+                shieldMods.push(`<span data-tooltip="proficiency" style="cursor:help;">Proficiency</span>`);
+            }
 
             if (shieldProfiles.length > 0) {
                 shieldHtml = `
@@ -16257,6 +16382,29 @@ let cleanDmgType = (profItem.damageType || weaponItem.damageType || "—").toUpp
     const mountedEl = document.getElementById("stat-charge-mounted");
     if (mountedEl) {
         mountedEl.innerText = mountedText;
+    }
+
+const chargeContainer = document.getElementById("charge-badge-container");
+    if (chargeContainer) {
+        const manualEt = characterChoicesState.extraTrainingSelections || {};
+        const dropEt = Object.values(characterChoicesState.extraTrainingTalentSelections || {});
+        const dropM = Object.values(characterChoicesState.masteryTalentSelections || {});
+
+        const chargePBox = document.querySelector('input[data-skill="charge"][data-type="p"]');
+        const chargeETBox = document.querySelector('input[data-skill="charge"][data-type="et"]');
+        const chargeMBox = document.querySelector('input[data-skill="charge"][data-type="m"]');
+
+        const hasChargeP = (chargePBox && chargePBox.checked) || manualEt["charge"]?.p || (getSkillLvl("athleticism") >= 1);
+        const hasChargeET = (chargeETBox && chargeETBox.checked) || manualEt["charge"]?.et || dropEt.includes("Charge");
+        const hasChargeM = (chargeMBox && chargeMBox.checked) || manualEt["charge"]?.m || dropM.includes("Charge");
+
+        const chargeList = [];
+        if (hasChargeM)       chargeList.push({ label: "Mastery", tooltip: "skill_mastery_badge" });
+        else if (hasChargeET) chargeList.push({ label: "Extra Training", tooltip: "extra_training_badge" });
+        else if (hasChargeP)  chargeList.push({ label: "Proficiency", tooltip: "proficiency" });
+
+        chargeContainer.style.display = chargeList.length ? "flex" : "none";
+        chargeContainer.innerHTML = renderCompactModBadges("charge", "Charge Modifiers", chargeList);
     }
 
     // --- 🟢 DYNAMICALLY RENDER THE MOUNT MINI-SHEET PANEL ---
@@ -16867,41 +17015,32 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
 
     const hasSalvation = activeEnchants["salvation"];
 
-    let avoidBadges = "";
-    if (hasDivineSalvation) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="divine_salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Divine Salvation</span>`;
-    }
-    if (hasSalvation) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="salvation" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Salvation</span>`;
-    }
-    if (activeEnchants["defending"]) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="enchant_defending" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Defending</span>`;
-    }
+const avoidList = [];
+    if (hasDivineSalvation) avoidList.push({ label: "Divine Salvation", tooltip: "divine_salvation" });
+    if (hasSalvation) avoidList.push({ label: "Salvation", tooltip: "salvation" });
+    if (activeEnchants["defending"]) avoidList.push({ label: "Defending", tooltip: "enchant_defending" });
 
-    // Check if Avoidance is Proficient (via Defense tree or manual Extra Training)
     const avoidPBox = document.querySelector('input[data-skill="avoidance"][data-type="p"]');
-    if ((avoidPBox && avoidPBox.checked) || (manualEtStates["avoidance"] && manualEtStates["avoidance"].p)) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="proficiency" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Proficiency</span>`;
-    }
+    const hasAvoidP = (avoidPBox && avoidPBox.checked) || (manualEtStates["avoidance"] && manualEtStates["avoidance"].p);
+    const hasAvoidET = (manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance");
+    const hasAvoidM = (manualEtStates["avoidance"] && manualEtStates["avoidance"].m) || dropMStates.includes("Avoidance");
 
-    if ((manualEtStates["avoidance"] && manualEtStates["avoidance"].et) || dropEtStates.includes("Avoidance")) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="extra_training" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Extra Training</span>`;
-    }
-    if ((manualEtStates["avoidance"] && manualEtStates["avoidance"].m) || dropMStates.includes("Avoidance")) {
-        avoidBadges += `<span class="locus-ench-tag" data-tooltip="skill_mastery" style="font-size:0.6rem; padding:1px 3px; margin:2px;">Mastery</span>`;
-    }
-    const avoidCard = document.getElementById("stat-avoidance-calc")?.parentElement;
-    if (avoidCard) {
-        let badgeDiv = avoidCard.querySelector(".locus-badge-container");
+if (hasAvoidM)       avoidList.push({ label: "Mastery", tooltip: "skill_mastery_badge" });
+    else if (hasAvoidET) avoidList.push({ label: "Extra Training", tooltip: "extra_training_badge" });
+    else if (hasAvoidP)  avoidList.push({ label: "Proficiency", tooltip: "proficiency" });
+
+    const defHud = document.querySelector(".pnp-defenses-hud");
+    if (defHud) {
+        let badgeDiv = defHud.querySelector("#avoid-badge-container");
         if (!badgeDiv) {
             badgeDiv = document.createElement("div");
+            badgeDiv.id = "avoid-badge-container";
             badgeDiv.className = "locus-badge-container";
-            badgeDiv.style.display = "flex";
-            badgeDiv.style.justifyContent = "center";
-            badgeDiv.style.marginTop = "4px";
-            avoidCard.appendChild(badgeDiv);
+            const subPanel = defHud.querySelector(".pnp-sub-defenses-panel");
+            defHud.insertBefore(badgeDiv, subPanel || null);
         }
-        badgeDiv.innerHTML = avoidBadges;
+        badgeDiv.style.display = avoidList.length ? "flex" : "none";
+        badgeDiv.innerHTML = renderCompactModBadges("avoid", "Avoidance Modifiers", avoidList);
     }
 
     // Regeneration Modifiers (Health, Mana)
@@ -16920,35 +17059,27 @@ document.getElementById("pnp-subpace-swim").innerText    = swimPace;
         locus.enchantment3Id === "charm_of_the_hearth"
     );
 
-    let vitRegenBadges = "";
-    if (activeEnchants["health"]) {
-        vitRegenBadges += `<span class="locus-ench-tag" data-tooltip="enchant_health" style="font-size:0.6rem; padding:1px 3px; margin:0;">Health</span>`;
-    }
-    if (hasRegenSkill) {
-        vitRegenBadges += `<span class="locus-ench-tag" data-tooltip="regeneration" style="font-size:0.6rem; padding:1px 3px; margin:0;">Regeneration</span>`;
-    }
-    if (hasHearth) {
-        vitRegenBadges += `<span class="locus-ench-tag" data-tooltip="charm_of_the_hearth" style="font-size:0.6rem; padding:1px 3px; margin:0;">Hearth</span>`;
-    }
-    
+const vitRegenList = [];
+    if (activeEnchants["health"]) vitRegenList.push({ label: "Health", tooltip: "enchant_health" });
+    if (hasRegenSkill) vitRegenList.push({ label: "Regeneration", tooltip: "regeneration" });
+    if (hasHearth) vitRegenList.push({ label: "Hearth", tooltip: "charm_of_the_hearth" });
+
     // Output values into their distinct target fields
     document.getElementById("stat-vitality-regen").innerText = formatRegenDicePool(vitRegenDice);
-    document.getElementById("stat-vitality-regen-badges").innerHTML = vitRegenBadges;
-    
+    document.getElementById("stat-vitality-regen-badges").innerHTML =
+        renderCompactModBadges("vit_regen", "Vitality Regen Modifiers", vitRegenList);
+
     // 3. Check if the Elf 'Inexhaustible Mana' racial skill is active
     const hasInexhaustibleMana = race === "Elf";
 
-    let manaRegenBadges = "";
-    if (activeEnchants["mana"]) {
-        manaRegenBadges += `<span class="locus-ench-tag" data-tooltip="enchant_mana" style="font-size:0.6rem; padding:1px 3px; margin:0;">Mana</span>`;
-    }
-    if (hasInexhaustibleMana) {
-        manaRegenBadges += `<span class="locus-ench-tag" data-tooltip="inexhaustible_mana" style="font-size:0.6rem; padding:1px 3px; margin:0;">Inexhaustible</span>`;
-    }
-    
-// Output values into their distinct target fields
+    const manaRegenList = [];
+    if (activeEnchants["mana"]) manaRegenList.push({ label: "Mana", tooltip: "enchant_mana" });
+    if (hasInexhaustibleMana) manaRegenList.push({ label: "Inexhaustible", tooltip: "inexhaustible_mana" });
+
+    // Output values into their distinct target fields
     document.getElementById("stat-mana-regen").innerText = formatRegenDicePool(finalAct);
-    document.getElementById("stat-mana-regen-badges").innerHTML = manaRegenBadges;
+    document.getElementById("stat-mana-regen-badges").innerHTML =
+        renderCompactModBadges("mana_regen", "Mana Regen Modifiers", manaRegenList);
 
     // =========================================================
     // MILIEU VALIDATION: NOBLE REQUIRES HAP >= 7
@@ -18063,26 +18194,33 @@ window.applyAllBonuses = function () {
  * Synchronizes core mastery choices to the modular Extra Training "M" checkboxes.
  */
 function syncMasteryTalentsToBoxes() {
-  // 1. Clear out previous automated M marks from any boxes that aren't disabled
   const mCheckboxes = document.querySelectorAll('.extra-training-box input[data-type="m"]');
   mCheckboxes.forEach(cb => {
-    cb.checked = false;
-    cb.disabled = false;
+    if (cb.disabled) {
+      cb.checked = false;
+      cb.disabled = false;
+      const sk = cb.dataset.skill;
+      if (sk && characterChoicesState.extraTrainingSelections?.[sk]) {
+          characterChoicesState.extraTrainingSelections[sk].m = false;
+      }
+    }
   });
 
-  // 2. Scan your global choices storage for Mastery talent slot allocations
   if (characterChoicesState.masteryTalentSelections) {
     Object.values(characterChoicesState.masteryTalentSelections).forEach(rawSelection => {
       if (!rawSelection || rawSelection === "None") return;
 
-      // Normalize string text to find its matching data-skill row
       const safeKey = rawSelection.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const targetMBox = document.querySelector(`input[data-skill="${safeKey}"][data-type="m"]`);
 
       if (targetMBox) {
         targetMBox.checked = true;
-        targetMBox.disabled = true; // Lock the checkbox from manual user modification
-        // FIXED: removed synthetic 'change' dispatch — caused infinite recursion through change handler → renderDynamicActiveTreesFeed → here.
+        targetMBox.disabled = true;
+
+        if (!characterChoicesState.extraTrainingSelections[safeKey]) {
+          characterChoicesState.extraTrainingSelections[safeKey] = { p: false, et: false, m: false, aspect: "" };
+        }
+        characterChoicesState.extraTrainingSelections[safeKey].m = true;
       }
     });
   }
@@ -18220,11 +18358,13 @@ function populateFilteredExtraTrainingOptions(currentSelectedValue = "None") {
 function syncExtraTrainingTalentsToBoxes() {
   const etCheckboxes = document.querySelectorAll('.extra-training-box input[data-type="et"]');
   etCheckboxes.forEach(cb => {
-    cb.checked = false;
-    cb.disabled = false;
-    const sk = cb.dataset.skill;
-    if (sk && characterChoicesState.extraTrainingSelections?.[sk]) {
-        characterChoicesState.extraTrainingSelections[sk].et = false;
+    if (cb.disabled) {
+      cb.checked = false;
+      cb.disabled = false;
+      const sk = cb.dataset.skill;
+      if (sk && characterChoicesState.extraTrainingSelections?.[sk]) {
+          characterChoicesState.extraTrainingSelections[sk].et = false;
+      }
     }
   });
 
@@ -18239,7 +18379,6 @@ function syncExtraTrainingTalentsToBoxes() {
         targetETBox.checked = true;
         targetETBox.disabled = true;
         
-        // Ensure state memory registers 'et' as true when selected via dropdown
         if (!characterChoicesState.extraTrainingSelections[safeKey]) {
           characterChoicesState.extraTrainingSelections[safeKey] = { p: false, et: false, m: false, aspect: "" };
         }
@@ -23530,13 +23669,13 @@ window.populateGearDropdowns = function() {
             }
         }
 
-        html += `
-            <div class="pnp-gear-slot-row" style="background: #fffbf7; padding: 6px; border: 1px solid var(--border-warm); border-radius: 4px; box-sizing: border-box; width:100%;">
+html += `
+            <div class="pnp-gear-slot-row">
                 <div style="display: flex; gap: 6px; align-items: center; width: 100%;">
-                    <select class="pnp-gear-dropdown" id="pnp-gear-dropdown-${idx}" onchange="onSpellGearChange(${idx}, this.value)" style="flex: 1; font-size: 0.8rem; padding: 3px; border: 1px solid var(--border-dark); border-radius: 4px; background: #fff;" ${hasValue ? `data-tooltip="${slotData.itemId}"` : ''}>
+                    <select class="pnp-gear-dropdown" id="pnp-gear-dropdown-${idx}" onchange="onSpellGearChange(${idx}, this.value)" ${hasValue ? `data-tooltip="${slotData.itemId}"` : ''}>
                         ${optionsHtml}
                     </select>
-                    ${isAmmo ? `<button class="pnp-edit-btn" onclick="toggleBuilder('gear-${idx}')" style="font-size: 0.7rem; font-weight: bold; cursor: pointer; padding: 2px 4px; border: 1px solid var(--border-warm); border-radius: 4px; background:#faf7f2;">Edit</button>` : ''}
+                    ${isAmmo ? `<button class="pnp-edit-btn" onclick="toggleBuilder('gear-${idx}')">Edit</button>` : ''}
                 </div>
                 ${detailsHtml}
                 <div class="builder-panel" id="builder-gear-${idx}" style="display: none; margin-top: 8px;"></div>
@@ -23995,9 +24134,9 @@ window.renderLocusCardView = function(slotId) {
             });
         }
 
-        card.innerHTML = `
+card.innerHTML = `
             <div style="display: flex; gap: 8px; width: 100%; align-items: center; box-sizing: border-box;">
-                <select id="locus-direct-select-${slotId}" class="locus-builder-select" onchange="window.saveDirectLocusSelection('${slotId}', this.value)" style="height:28px; font-size:0.78rem; padding: 2px; flex: 1; min-width: 0;" ${data.enchant1 !== 'None' ? `data-tooltip="${data.enchant1}"` : ''}>
+                <select id="locus-direct-select-${slotId}" class="locus-direct-select" onchange="window.saveDirectLocusSelection('${slotId}', this.value)" style="height:28px; font-size:0.78rem;" ${data.enchant1 !== 'None' ? `data-tooltip="${data.enchant1}"` : ''}>
                     ${optionsHtml}
                 </select>
                 <button type="button" class="pnp-edit-btn" onclick="window.openLocusBuilder('${slotId}')" style="font-size: 0.65rem; padding: 2px 4px; flex-shrink: 0;">Edit</button>
@@ -28334,7 +28473,7 @@ function renderCompendiumInspectorUI() {
     const inspectorCard = document.createElement("div");
     inspectorCard.id = "compendium-inspector-card";
     inspectorCard.className = "aspect-card";
-    inspectorCard.style.cssText = "margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;";
+    inspectorCard.style.cssText = "margin-bottom: 20px; padding: 15px; background: #fffcf7; border: 1px solid #d97706; text-align: left;";
     
     inspectorCard.innerHTML = `
         <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary-red); border-bottom: 1px solid var(--border-light); padding-bottom: 5px;">Creature Quick Inspector</h3>
@@ -28886,7 +29025,7 @@ function renderInspectorCardHTML(inspector, index) {
     const isOriginal = index === 0;
 
     return `
-        <div id="compendium-inspector-card-${index}" class="aspect-card" style="margin-bottom: 15px; padding: 15px; background: #fffcf7; border: 1px dashed #d97706; text-align: left;">
+        <div id="compendium-inspector-card-${index}" class="aspect-card" style="margin-bottom: 15px; padding: 15px; background: #fffcf7; border: 1px solid #d97706; text-align: left;">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); padding-bottom: 5px; margin-bottom: 10px;">
                 <h3 style="margin: 0; color: var(--primary-red);">Creature Quick Inspector ${index > 0 ? `#${index + 1}` : ''}</h3>
                 ${isOriginal ? `
