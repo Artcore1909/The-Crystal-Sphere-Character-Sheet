@@ -159,6 +159,40 @@ body.theme-magmatic {
     --theme-shadow-btn: 0 1px 3px rgba(12, 4, 3, 0.5);
 }
 
+/* --- Overworld Theme (Light) --- */
+body.theme-overworld {
+    --theme-bg-image: url("images/Overworldbg.png");
+    --theme-bg-deep: #e6dfd0;
+    --theme-bg-base: #f2ece1;
+    --theme-bg-card: #faf7f0;
+    --theme-bg-input: #ffffff;
+    --theme-bg-hover: #ebe3d3;
+    --theme-bg-footer: rgba(242, 236, 225, 0.9);
+    --theme-border: #cfc4ae;
+    --theme-text: #2c2923;
+    --theme-text-muted: #6d6659;
+    --theme-accent: #2574c4;
+    --theme-row-even: rgba(44, 41, 35, 0.03);
+    --theme-row-hover: rgba(37, 116, 196, 0.08);
+    --theme-shadow-card: 0 4px 6px -1px rgba(45, 38, 28, 0.1), 0 2px 4px -1px rgba(45, 38, 28, 0.06);
+    --theme-shadow-btn: 0 1px 3px rgba(45, 38, 28, 0.14);
+
+    /* Light-mode surface & control mappings */
+    --theme-bg-readonly: var(--theme-bg-elevated);
+    --theme-bg-panel-nested: var(--theme-bg-elevated);
+    --theme-bg-placeholder: var(--theme-bg-card);
+    --theme-bg-tcs-member: var(--theme-bg-card);
+    --theme-bg-tcs-close: var(--theme-bg-input);
+    --theme-bg-select-option: var(--theme-bg-input);
+    --theme-bg-th: var(--theme-bg-card);
+    --theme-th-text: var(--theme-text);
+    --theme-checkbox-filter: none;
+    --theme-icon-hit: normal;
+    --theme-icon-crit: normal;
+    --theme-icon-skill: normal;
+    --theme-icon-wyrd: normal;
+}
+
 /* --- Paladinic Theme (Light) --- */
 body.theme-paladinic {
     --theme-bg-image: url("images/Paladinicbg.png");
@@ -238,7 +272,7 @@ body.theme-rose-gold {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-deep);
@@ -263,7 +297,7 @@ body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-paladinic, .theme-rose-gold) {
+body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -2836,6 +2870,7 @@ details[open] #skills-collapsed-summary {
                 <option value="crystalline">Crystalline Theme</option>
                 <option value="forest">Forest Theme</option>
                 <option value="magmatic">Magmatic Theme</option>
+                <option value="overworld">Overworld Theme</option>
                 <option value="paladinic">Paladinic Theme</option>
                 <option value="rose-gold">Rose Gold Theme</option>
             </select>
@@ -30223,7 +30258,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-magmatic', 'theme-paladinic', 'theme-rose-gold');
+    document.body.classList.remove('theme-dark', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-magmatic', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
