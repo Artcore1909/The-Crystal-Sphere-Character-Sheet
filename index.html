@@ -13913,7 +13913,8 @@ function purgeDeactivatedStateChoices() {
         'backgroundSelections', 
         'sagesSelections',
         'scholarTargets',
-        'professorTargets'
+        'professorTargets',
+        'chosenLanguagesPool'
     ];
 
     stateKeys.forEach(stateKey => {
@@ -13934,6 +13935,106 @@ function purgeDeactivatedStateChoices() {
             });
         }
     });
+
+    if (typeof pruneInactiveLanguageChoices === "function") {
+        pruneInactiveLanguageChoices();
+    }
+}
+
+// Prunes Sages/Esoteric/Temple language & target choices when the skill is removed,
+// lowered below the slot's level, blocked by upbringing, or switched off "New Language".
+function pruneInactiveLanguageChoices() {
+    if (typeof characterChoicesState === 'undefined') return;
+
+    const getEffectiveTreeLevel = (treeKey, inputId) => {
+        const el = document.getElementById(inputId);
+        const pts = el ? (parseInt(el.value, 10) || 0) : 0;
+        const config = (typeof guildCastSkillLevelCaps !== "undefined" && guildCastSkillLevelCaps[treeKey]) ||
+                       (typeof commonSkillLevelCaps !== "undefined" && commonSkillLevelCaps[treeKey]);
+
+        let lvl = 0;
+        if (config && config.isPackage && config.progression) {
+            for (let i = 0; i < config.progression.length; i++) {
+                if (pts >= config.progression[i]) lvl = i;
+            }
+        } else {
+            const cost = (config && config.costPerLevel) ? config.costPerLevel : 6;
+            lvl = Math.floor(pts / cost);
+        }
+
+        const free = (typeof window.getFreeLevelsCountForTree === "function")
+            ? window.getFreeLevelsCountForTree(treeKey)
+            : 0;
+        lvl += free;
+
+        if (config && config.maxLevel !== undefined && config.maxLevel !== Infinity && lvl > config.maxLevel) {
+            lvl = config.maxLevel;
+        }
+
+        if (typeof window.isGuildAccessBlockedForLevel === "function" && window.isGuildAccessBlockedForLevel(treeKey, lvl)) {
+            return 0;
+        }
+        return lvl;
+    };
+
+    const templeLvl = getEffectiveTreeLevel("guild: temple", "sk-xp-guild-temple");
+    const esotericLvl = getEffectiveTreeLevel("guild: esoteric", "sk-xp-guild-esoteric");
+    const sagesLvl = getEffectiveTreeLevel("guild: sages", "sk-xp-guild-sages");
+
+    // 1. Prune Sages slot selections above the current Sages level
+    if (characterChoicesState.sagesSelections) {
+        Object.keys(characterChoicesState.sagesSelections).forEach(slotKey => {
+            if (!/^\d+$/.test(slotKey)) return;
+            const slotNum = parseInt(slotKey, 10);
+            if (slotNum < 1 || slotNum > sagesLvl) {
+                delete characterChoicesState.sagesSelections[slotKey];
+            }
+        });
+    }
+
+    if (characterChoicesState.scholarTargets) {
+        Object.keys(characterChoicesState.scholarTargets).forEach(slotKey => {
+            const slotNum = parseInt(slotKey, 10);
+            if (!/^\d+$/.test(slotKey) || slotNum < 1 || slotNum > sagesLvl || characterChoicesState.sagesSelections?.[slotKey] !== "Scholar") {
+                delete characterChoicesState.scholarTargets[slotKey];
+            }
+        });
+    }
+
+    if (characterChoicesState.professorTargets) {
+        Object.keys(characterChoicesState.professorTargets).forEach(slotKey => {
+            const slotNum = parseInt(slotKey, 10);
+            if (!/^\d+$/.test(slotKey) || slotNum < 1 || slotNum > sagesLvl || characterChoicesState.sagesSelections?.[slotKey] !== "Professor") {
+                delete characterChoicesState.professorTargets[slotKey];
+            }
+        });
+    }
+
+    // 2. Prune learned languages for Temple, Esoteric, and Sages
+    if (characterChoicesState.chosenLanguagesPool) {
+        Object.keys(characterChoicesState.chosenLanguagesPool).forEach(key => {
+            const val = characterChoicesState.chosenLanguagesPool[key];
+            if (!val || val === "None") {
+                delete characterChoicesState.chosenLanguagesPool[key];
+                return;
+            }
+
+            if (key === "temple-slot") {
+                if (templeLvl < 1) {
+                    delete characterChoicesState.chosenLanguagesPool[key];
+                }
+            } else if (key === "esoteric-slot") {
+                if (esotericLvl < 1) {
+                    delete characterChoicesState.chosenLanguagesPool[key];
+                }
+            } else if (/^\d+$/.test(key)) {
+                const slotNum = parseInt(key, 10);
+                if (slotNum < 1 || slotNum > sagesLvl || characterChoicesState.sagesSelections?.[slotNum] !== "New Language") {
+                    delete characterChoicesState.chosenLanguagesPool[key];
+                }
+            }
+        });
+    }
 }
 
 /* ===== js/13-tabs-dropdowns.js ===== */ 
@@ -14959,6 +15060,10 @@ if (typeof renderRank3Cards === 'function') {
 if (typeof processSkillList === 'function') {
     processSkillList(specializedMagicGuildTrees, 6, true);
     processSkillList(restrictedPostCreationTrees, 12, false);
+}
+
+if (typeof pruneInactiveLanguageChoices === 'function') {
+    pruneInactiveLanguageChoices();
 }
 
 // 4. Force focus restoration back into the field seamlessly
