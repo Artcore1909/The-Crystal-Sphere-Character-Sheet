@@ -218,6 +218,26 @@ body.theme-magmatic {
     --theme-shadow-btn: 0 1px 3px rgba(12, 4, 3, 0.5);
 }
 
+/* --- Orkipelago Theme --- */
+body.theme-orkipelago {
+    --theme-bg-image: url("images/Orkipelagobg.png");
+    --theme-bg-deep: #11141d;
+    --theme-bg-base: #181c28;
+    --theme-bg-card: #212636;
+    --theme-bg-elevated: #282e42;
+    --theme-bg-input: #131723;
+    --theme-bg-hover: #2e354a;
+    --theme-bg-footer: rgba(24, 28, 40, 0.92);
+    --theme-border: #5a5269;
+    --theme-text: #f3eae2;
+    --theme-text-muted: #9fa4b8;
+    --theme-accent: #f08e4e;
+    --theme-row-even: rgba(243, 234, 226, 0.035);
+    --theme-row-hover: rgba(240, 142, 78, 0.12);
+    --theme-shadow-card: 0 4px 8px -1px rgba(8, 10, 18, 0.55), 0 2px 6px -1px rgba(240, 142, 78, 0.12);
+    --theme-shadow-btn: 0 1px 3px rgba(8, 10, 18, 0.55);
+}
+
 /* --- Overworld Theme (Light) --- */
 body.theme-overworld {
     --theme-bg-image: url("images/Overworldbg.png");
@@ -338,7 +358,7 @@ body.theme-rose-gold {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-deep);
@@ -364,7 +384,7 @@ body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .t
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -2943,6 +2963,7 @@ details[open] #skills-collapsed-summary {
                 <option value="forest">Forest Theme</option>
                 <option value="great-slough">Great Slough Theme</option>
                 <option value="magmatic">Magmatic Theme</option>
+                <option value="orkipelago">Orkipelago Theme</option>
                 <option value="overworld">Overworld Theme</option>
                 <option value="paladinic">Paladinic Theme</option>
                 <option value="rose-gold">Rose Gold Theme</option>
@@ -30331,7 +30352,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
+    document.body.classList.remove('theme-dark', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
