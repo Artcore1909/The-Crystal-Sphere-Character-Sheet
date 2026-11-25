@@ -2819,9 +2819,17 @@ details[open] #skills-collapsed-summary {
         <button type="button" onclick="toggleSettingsMenu(event)" title="Sheet Settings" style="position: absolute; right: 0; top: 10px; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); z-index: 10; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Manage Sheet</button>
         
 <!-- Dropdown Panel -->
-        <div id="sheet-settings-dropdown" style="display: none; position: absolute; right: 0; top: 38px; background: #fff; border: 1px solid var(--border-dark); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 12px; width: 220px; box-sizing: border-box; z-index: 101;">
-            
-            <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
+        <div id="sheet-settings-dropdown" style="display: none; position: absolute; right: 0; top: 38px; background: #fff; border: 1px solid var(--border-dark); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 10px; width: 220px; box-sizing: border-box; z-index: 101;">
+
+            <!-- 1. Primary Action -->
+            <button type="button" onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 7px 10px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: center;">
+                Manage Characters
+            </button>
+
+            <div style="border-top: 1px dashed var(--border-warm); margin: 10px 0;"></div>
+
+            <!-- 2. Appearance -->
+            <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="light">Light Theme</option>
                 <option value="dark">Dark Theme</option>
                 <option value="cosmic">Cosmic Theme</option>
@@ -2832,28 +2840,27 @@ details[open] #skills-collapsed-summary {
                 <option value="rose-gold">Rose Gold Theme</option>
             </select>
 
-<label class="btn-sm" style="display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; margin-bottom: 12px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
-    <input type="checkbox" id="toggle-theme-bg" checked onchange="setThemeBgEnabled(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
-    <span>Background</span>
-</label>
-
-            <button type="button" onclick="openCharacterManager(); toggleSettingsMenu();" style="width: 100%; padding: 6px 12px; font-size: 0.85rem; margin-bottom: 12px; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); font-weight: bold; text-align: left;">
-                Manage Characters
-            </button>
-
-<label class="btn-sm" style="display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; margin-bottom: 0; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
-                <input type="checkbox" id="bypass-prerequisites-toggle" onchange="setPrerequisiteBypass(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
-                <span>Ignore Skill Prerequisites</span>
+            <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
+                <input type="checkbox" id="toggle-theme-bg" checked onchange="setThemeBgEnabled(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
+                <span>Theme Background</span>
             </label>
 
-<select id="tooltip-delay-selector" onchange="setTooltipDelay(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-top: 12px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
+            <div style="border-top: 1px dashed var(--border-warm); margin: 10px 0;"></div>
+
+            <!-- 3. Preferences & Rules -->
+            <select id="tooltip-delay-selector" onchange="setTooltipDelay(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="0">Tooltip: Instant (0ms)</option>
                 <option value="250">Tooltip: Quick (250ms)</option>
                 <option value="450" selected>Tooltip: Normal (450ms)</option>
                 <option value="800">Tooltip: Slow (800ms)</option>
                 <option value="1200">Tooltip: Very Slow (1200ms)</option>
                 <option value="-1">Tooltip: Off (Dbl-Click)</option>
-            </select>            
+            </select>
+
+            <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; margin-bottom: 0; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
+                <input type="checkbox" id="bypass-prerequisites-toggle" onchange="setPrerequisiteBypass(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
+                <span>Ignore Skill Prerequisites</span>
+            </label>
 
         </div>
     </div>
