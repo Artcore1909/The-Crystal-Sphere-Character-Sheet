@@ -105,10 +105,11 @@ body.theme-cordillera {
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
     --theme-checkbox-after: none;
-    --theme-icon-hit: normal;
-    --theme-icon-crit: normal;
-    --theme-icon-skill: normal;
-    --theme-icon-wyrd: normal;
+    --theme-icon-hit: url("images/Hitenc.png");
+    --theme-icon-crit: url("images/Critenc.png");
+    --theme-icon-skill: url("images/Skillenc.png");
+    --theme-icon-wyrd: url("images/Wyrdenc.png");
+    --theme-icon-filter: none;
 }
 
 /* --- Cosmic Theme --- */
@@ -229,10 +230,11 @@ body.theme-overworld {
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
     --theme-checkbox-after: none;
-    --theme-icon-hit: normal;
-    --theme-icon-crit: normal;
-    --theme-icon-skill: normal;
-    --theme-icon-wyrd: normal;
+    --theme-icon-hit: url("images/Hitenc.png");
+    --theme-icon-crit: url("images/Critenc.png");
+    --theme-icon-skill: url("images/Skillenc.png");
+    --theme-icon-wyrd: url("images/Wyrdenc.png");
+    --theme-icon-filter: none;
 }
 
 /* --- Paladinic Theme (Light) --- */
@@ -266,10 +268,11 @@ body.theme-paladinic {
     --theme-bg-th: var(--theme-bg-card);
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
-    --theme-icon-hit: normal;
-    --theme-icon-crit: normal;
-    --theme-icon-skill: normal;
-    --theme-icon-wyrd: normal;
+    --theme-icon-hit: url("images/Hitenc.png");
+    --theme-icon-crit: url("images/Critenc.png");
+    --theme-icon-skill: url("images/Skillenc.png");
+    --theme-icon-wyrd: url("images/Wyrdenc.png");
+    --theme-icon-filter: none;
 }
 
 /* --- Rose Gold Theme (Light) --- */
@@ -304,10 +307,11 @@ body.theme-rose-gold {
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
     --theme-checkbox-after: none;
-    --theme-icon-hit: normal;
-    --theme-icon-crit: normal;
-    --theme-icon-skill: normal;
-    --theme-icon-wyrd: normal;
+    --theme-icon-hit: url("images/Hitenc.png");
+    --theme-icon-crit: url("images/Critenc.png");
+    --theme-icon-skill: url("images/Skillenc.png");
+    --theme-icon-wyrd: url("images/Wyrdenc.png");
+    --theme-icon-filter: none;
 }
 
 
@@ -333,6 +337,7 @@ body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .t
     --theme-icon-crit: url("images/CritencWhite.png");
     --theme-icon-skill: url("images/SkillencWhite.png");
     --theme-icon-wyrd: url("images/WyrdencWhite.png");
+    --theme-icon-filter: none;
 }
 
 
@@ -824,11 +829,14 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         transform: rotate(45deg);
     }
 
-    & img[src$="Hitenc.png"]   { content: var(--theme-icon-hit); }
-    & img[src$="Critenc.png"]  { content: var(--theme-icon-crit); }
-    & img[src$="Skillenc.png"] { content: var(--theme-icon-skill); }
-    & img[src$="Wyrdenc.png"]  { content: var(--theme-icon-wyrd); }
-}
+    & img[src$="Hitenc.png"],
+    & img[src$="HitencWhite.png"]   { content: var(--theme-icon-hit);   filter: var(--theme-icon-filter) !important; }
+    & img[src$="Critenc.png"],
+    & img[src$="CritencWhite.png"]  { content: var(--theme-icon-crit);  filter: var(--theme-icon-filter) !important; }
+    & img[src$="Skillenc.png"],
+    & img[src$="SkillencWhite.png"] { content: var(--theme-icon-skill); filter: var(--theme-icon-filter) !important; }
+    & img[src$="Wyrdenc.png"],
+    & img[src$="WyrdencWhite.png"]  { content: var(--theme-icon-wyrd);  filter: var(--theme-icon-filter) !important; }
 
 html body.no-theme-bg {
     background-image: none !important;
