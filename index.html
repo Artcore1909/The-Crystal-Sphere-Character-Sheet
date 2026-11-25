@@ -73,6 +73,44 @@ body.theme-dark {
     --theme-shadow-btn: 0 1px 3px rgba(4, 6, 14, 0.6);
 }
 
+/* --- Cordillera Theme (Light) --- */
+body.theme-cordillera {
+    --theme-bg-image: url("images/Cordillerabg.png");
+    --theme-bg-deep: #d9e2ec;
+    --theme-bg-base: #e7edf4;
+    --theme-bg-card: #f3f6fa;
+    --theme-bg-elevated: #fafcfe;
+    --theme-bg-input: #ffffff;
+    --theme-bg-hover: #dde5ef;
+    --theme-bg-footer: rgba(231, 237, 244, 0.9);
+    --theme-border: #b4c2d1;
+    --theme-text: #1c2630;
+    --theme-text-muted: #526273;
+    --theme-accent: #a65d10;
+    --theme-row-even: rgba(28, 38, 48, 0.03);
+    --theme-row-hover: rgba(166, 93, 16, 0.09);
+    --theme-shadow-card: 0 4px 6px -1px rgba(24, 36, 50, 0.1), 0 2px 4px -1px rgba(24, 36, 50, 0.06);
+    --theme-shadow-row: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 1px 2px rgba(24, 36, 50, 0.06);
+    --theme-shadow-btn: 0 1px 3px rgba(24, 36, 50, 0.14);
+    --theme-header-shadow: 0 1px 0 rgba(255, 255, 255, 0.85), 0 1px 2px rgba(24, 36, 50, 0.18);
+
+    /* Light-mode surface & control mappings */
+    --theme-bg-readonly: var(--theme-bg-elevated);
+    --theme-bg-panel-nested: var(--theme-bg-elevated);
+    --theme-bg-placeholder: var(--theme-bg-card);
+    --theme-bg-tcs-member: var(--theme-bg-card);
+    --theme-bg-tcs-close: var(--theme-bg-input);
+    --theme-bg-select-option: var(--theme-bg-input);
+    --theme-bg-th: var(--theme-bg-card);
+    --theme-th-text: var(--theme-text);
+    --theme-checkbox-filter: none;
+    --theme-checkbox-after: none;
+    --theme-icon-hit: normal;
+    --theme-icon-crit: normal;
+    --theme-icon-skill: normal;
+    --theme-icon-wyrd: normal;
+}
+
 /* --- Cosmic Theme --- */
 body.theme-cosmic {
     --theme-bg-image: url("images/Cosmicbg.png");
@@ -276,7 +314,7 @@ body.theme-rose-gold {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-deep);
@@ -301,7 +339,7 @@ body:where(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-dark, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-magmatic, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -2870,6 +2908,7 @@ details[open] #skills-collapsed-summary {
             <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="light">Light Theme</option>
                 <option value="dark">Dark Theme</option>
+                <option value="cordillera">Cordillera Theme</option>
                 <option value="cosmic">Cosmic Theme</option>
                 <option value="crystalline">Crystalline Theme</option>
                 <option value="forest">Forest Theme</option>
@@ -30262,7 +30301,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-magmatic', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
+    document.body.classList.remove('theme-dark', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-magmatic', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
