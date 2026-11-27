@@ -3085,7 +3085,7 @@ details[open] #skills-collapsed-summary {
                     <span>Translucence</span>
                     <span id="sheet-translucence-val">0%</span>
                 </div>
-                <input type="range" id="sheet-translucence-slider" min="0" max="90" step="5" value="0" oninput="setSheetTranslucence(this.value)" style="width: 100%; margin: 0; padding: 0; cursor: pointer; accent-color: var(--accent-gold);">
+                <input type="range" id="sheet-translucence-slider" min="0" max="100" step="5" value="0" oninput="setSheetTranslucence(this.value)" style="width: 100%; margin: 0; padding: 0; cursor: pointer; accent-color: var(--accent-gold);">
             </div>
 
             <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; margin-top: 6px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
@@ -30500,7 +30500,7 @@ function setThemeBgEnabled(enabled) {
 }
 
 function setSheetTranslucence(val) {
-    const translucence = Math.max(0, Math.min(90, parseInt(val, 10) || 0));
+    const translucence = Math.max(0, Math.min(100, parseInt(val, 10) || 0));
     const alpha = 100 - translucence;
     document.documentElement.style.setProperty('--sheet-alpha', `${alpha}%`);
 
