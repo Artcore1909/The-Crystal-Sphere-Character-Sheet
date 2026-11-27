@@ -310,6 +310,7 @@ body.theme-paladinic {
     --theme-bg-th: var(--theme-bg-card);
     --theme-th-text: var(--theme-text);
     --theme-checkbox-filter: none;
+    --theme-checkbox-after: none;
     --theme-icon-hit: url("images/Hitenc.png");
     --theme-icon-crit: url("images/Critenc.png");
     --theme-icon-skill: url("images/Skillenc.png");
@@ -414,7 +415,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     color: var(--theme-text) !important;
     scrollbar-color: var(--theme-border) var(--theme-bg-deep);
 
-    /* 1. Major Containers & Panels (Base Layer) */
+/* 1. Major Containers & Panels (Base Layer) */
     & .container,
     & .skills-tab-container {
         background-color: var(--t-bg-base) !important;
@@ -422,9 +423,9 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         color: var(--theme-text) !important;
     }
 
-    & .container {
-        backdrop-filter: blur(var(--sheet-bg-blur, 0px));
-        -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
+    &.bg-blur .container {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
     & #sheet-settings-dropdown,
@@ -940,12 +941,15 @@ html body.no-theme-bg {
             max-width: 950px;
             margin: 0 auto;
             background: color-mix(in srgb, #fff var(--sheet-alpha, 100%), transparent);
-            backdrop-filter: blur(var(--sheet-bg-blur, 0px));
-            -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid var(--border-warm);
+        }
+
+        body.bg-blur .container {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         h1 {
@@ -2881,14 +2885,15 @@ details[open] #skills-collapsed-summary {
 
         /* Character Manager Modal Styles */
         .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; position: fixed; inset: 0; width: 100vw; height: 100vh;
             background: rgba(44, 37, 30, 0.6); z-index: 100000; align-items: center; justify-content: center;
-            backdrop-filter: blur(2px);
+            padding: 20px; box-sizing: border-box; backdrop-filter: blur(2px);
         }
         .char-modal {
             background: #fff; width: 550px; max-width: 95%; border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 20px;
             border: 1px solid var(--border-warm); max-height: 85vh; overflow-y: auto;
+            margin: auto;
         }
         .char-list { list-style: none; padding: 0; margin: 0; }
         .char-list-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 8px; border-bottom: 1px dashed var(--border-light); }
@@ -2993,9 +2998,11 @@ details[open] #skills-collapsed-summary {
 <div style="position: relative;">
     <!-- Top-Right Settings Gear Icon & Dropdown Menu -->
     <div style="position: relative;">
+    <!-- Top-Right Settings Gear Icon & Dropdown Menu -->
+    <div style="position: relative;">
         <button type="button" onclick="toggleSettingsMenu(event)" title="Sheet Settings" style="position: absolute; right: 0; top: 10px; padding: 6px 12px; font-size: 0.85rem; background: var(--bg-cream); border: 1px solid var(--border-dark); border-radius: 4px; cursor: pointer; color: var(--text-dark); z-index: 10; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Manage Sheet</button>
-        
-<!-- Dropdown Panel -->
+
+        <!-- Dropdown Panel -->
         <div id="sheet-settings-dropdown" style="display: none; position: absolute; right: 0; top: 38px; background: #fff; border: 1px solid var(--border-dark); border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); padding: 10px; width: 220px; box-sizing: border-box; z-index: 101;">
 
             <!-- 1. Primary Action -->
@@ -3058,7 +3065,7 @@ details[open] #skills-collapsed-summary {
 
         </div>
     </div>
-    
+
     <h1>The Crystal Sphere Character Sheet</h1>
 </div>
     
@@ -24957,6 +24964,9 @@ if (data.checkboxes) {
 function openCharacterManager() {
     const modal = document.getElementById("char-manager-modal");
     if (!modal) return;
+    if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
     
     // Only pre-fill if the input box is currently empty
     const nameInput = document.getElementById("save-char-name");
@@ -30460,6 +30470,7 @@ function setSheetTranslucence(val) {
 
 function setBgBlurEnabled(enabled) {
     const isEnabled = !!enabled;
+    document.body.classList.toggle('bg-blur', isEnabled);
     document.documentElement.style.setProperty('--sheet-bg-blur', isEnabled ? '8px' : '0px');
 
     const toggle = document.getElementById("toggle-bg-blur");
