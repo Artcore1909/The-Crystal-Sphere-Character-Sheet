@@ -75,6 +75,29 @@ body.theme-dark {
     --theme-shadow-btn: 0 1px 3px rgba(4, 6, 14, 0.6);
 }
 
+/* --- Aizenfestung Theme --- */
+body.theme-aizenfestung {
+    --theme-bg-image: url("images/Aizenfestungbg.png");
+    --theme-bg-deep: #0d121c;
+    --theme-bg-base: #141c2b;
+    --theme-bg-card: #1c2638;
+    --theme-bg-elevated: #232f45;
+    --theme-bg-panel-nested: #172030;
+    --theme-bg-input: #0d121c;
+    --theme-bg-hover: #2b3a54;
+    --theme-bg-th: #202b3f;
+    --theme-th-text: #e2b66b;
+    --theme-bg-footer: rgba(20, 28, 43, 0.92);
+    --theme-border: #7d643b;
+    --theme-text: #ece7dc;
+    --theme-text-muted: #9fb1c9;
+    --theme-accent: #4db8ff;
+    --theme-row-even: rgba(77, 184, 255, 0.05);
+    --theme-row-hover: rgba(226, 182, 107, 0.15);
+    --theme-shadow-card: 0 4px 6px -1px rgba(6, 9, 15, 0.65), 0 2px 4px -1px rgba(77, 184, 255, 0.16);
+    --theme-shadow-btn: 0 1px 3px rgba(6, 9, 15, 0.6);
+}
+
 /* --- Cordillera Theme (Light) --- */
 body.theme-cordillera {
     --theme-bg-image: url("images/Cordillerabg.png");
@@ -361,7 +384,7 @@ body.theme-rose-gold {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-dark, .theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-deep);
@@ -387,7 +410,7 @@ body:where(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .t
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:is(.theme-dark, .theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -3016,6 +3039,7 @@ details[open] #skills-collapsed-summary {
             <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
                 <option value="light">Light Theme</option>
                 <option value="dark">Dark Theme</option>
+                <option value="aizenfestung">Aizenfestung Theme</option>
                 <option value="cordillera">Cordillera Theme</option>
                 <option value="cosmic">Cosmic Theme</option>
                 <option value="crystalline">Crystalline Theme</option>
@@ -30435,7 +30459,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
+    document.body.classList.remove('theme-dark', 'theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
