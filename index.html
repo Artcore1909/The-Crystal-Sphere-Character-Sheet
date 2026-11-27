@@ -636,26 +636,29 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     /* 3. Inputs & Form Controls */
     & input:not([readonly]),
+    & select,
     & textarea,
     & .roll-input,
-    & .pnp-pool-input {
+    & .pnp-pool-input,
+    & .locus-builder-select,
+    & #theme-selector {
         background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
-    & select,
-    & .locus-builder-select,
-    & #theme-selector {
+    & select:open {
         background-color: var(--theme-bg-card) !important;
-        border-color: var(--theme-border) !important;
-        color: var(--theme-text) !important;
     }
 
     & select option,
     & select optgroup {
         background-color: var(--theme-bg-select-option) !important;
         color: var(--theme-text) !important;
+    }
+
+    & select option:disabled {
+        color: var(--theme-text-muted) !important;
     }
 
     & input[type="range"] {
