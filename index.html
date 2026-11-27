@@ -47,6 +47,8 @@
             --danger-red: #b82c2c;
             --overlay-dark: #2c251e;
             --container-bg: #fff;
+            --sheet-alpha: 100%;
+            --sheet-bg-blur: 0px;
         }
 /* =========================================================================
    1. THEME PALETTES
@@ -401,10 +403,26 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     /* 1. Major Containers & Panels (Base Layer) */
     & .container,
-    & .skills-tab-container,
+    & .skills-tab-container {
+        background-color: color-mix(in srgb, var(--theme-bg-base) var(--sheet-alpha, 100%), transparent) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .container {
+        backdrop-filter: blur(var(--sheet-bg-blur, 0px));
+        -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
+    }
+
     & .char-modal,
     & #sheet-settings-dropdown {
         background-color: var(--theme-bg-base) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & .builder-panel {
+        background-color: color-mix(in srgb, var(--theme-bg-card) var(--sheet-alpha, 100%), transparent) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -526,7 +544,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & #encounter-display-grid > div,
     & .locus-builder,
     & .tab-btn {
-        background-color: var(--theme-bg-card) !important;
+        background-color: color-mix(in srgb, var(--theme-bg-card) var(--sheet-alpha, 100%), transparent) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-card) !important;
@@ -538,11 +556,12 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     & .pnp-weapon-slot-row,
     & .pnp-gear-slot-row {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: color-mix(in srgb, var(--theme-bg-elevated) var(--sheet-alpha, 100%), transparent) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-row) !important;
     }
+
 
     & .pnp-subpace-field {
         background-color: transparent !important;
@@ -585,7 +604,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     /* 2c. Weapon rows, Locus tags & Placeholders */
     & .pnp-static-row {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: color-mix(in srgb, var(--theme-bg-elevated) var(--sheet-alpha, 100%), transparent) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -614,6 +633,11 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
+    }
+
+& input[type="range"] {
+        background-color: transparent !important;
+        border: none !important;
     }
 
     & .pnp-gear-dropdown,
@@ -889,7 +913,9 @@ html body.no-theme-bg {
         .container {
             max-width: 950px;
             margin: 0 auto;
-            background: #fff;
+            background: color-mix(in srgb, #fff var(--sheet-alpha, 100%), transparent);
+            backdrop-filter: blur(var(--sheet-bg-blur, 0px));
+            -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -2972,6 +2998,19 @@ details[open] #skills-collapsed-summary {
             <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
                 <input type="checkbox" id="toggle-theme-bg" checked onchange="setThemeBgEnabled(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
                 <span>Theme Background</span>
+            </label>
+
+            <div class="btn-sm" style="width: 100%; padding: 6px 8px; margin-top: 6px; box-sizing: border-box;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; font-weight: bold; margin-bottom: 4px;">
+                    <span>Translucence</span>
+                    <span id="sheet-translucence-val">0%</span>
+                </div>
+                <input type="range" id="sheet-translucence-slider" min="0" max="90" step="5" value="0" oninput="setSheetTranslucence(this.value)" style="width: 100%; margin: 0; padding: 0; cursor: pointer; accent-color: var(--accent-gold);">
+            </div>
+
+            <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; margin-top: 6px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
+                <input type="checkbox" id="toggle-bg-blur" onchange="setBgBlurEnabled(this.checked)" style="margin: 0; cursor: pointer; flex-shrink: 0;">
+                <span>Blur Background</span>
             </label>
 
             <div style="border-top: 1px dashed var(--border-warm); margin: 10px 0;"></div>
@@ -30377,6 +30416,32 @@ function setThemeBgEnabled(enabled) {
     localStorage.setItem('cscs_theme_bg', isEnabled ? '1' : '0');
 }
 
+function setSheetTranslucence(val) {
+    const translucence = Math.max(0, Math.min(90, parseInt(val, 10) || 0));
+    const alpha = 100 - translucence;
+    document.documentElement.style.setProperty('--sheet-alpha', `${alpha}%`);
+
+    const label = document.getElementById("sheet-translucence-val");
+    if (label) label.textContent = `${translucence}%`;
+
+    const slider = document.getElementById("sheet-translucence-slider");
+    if (slider && String(slider.value) !== String(translucence)) {
+        slider.value = translucence;
+    }
+
+    localStorage.setItem('cscs_sheet_translucence', String(translucence));
+}
+
+function setBgBlurEnabled(enabled) {
+    const isEnabled = !!enabled;
+    document.documentElement.style.setProperty('--sheet-bg-blur', isEnabled ? '8px' : '0px');
+
+    const toggle = document.getElementById("toggle-bg-blur");
+    if (toggle) toggle.checked = isEnabled;
+
+    localStorage.setItem('cscs_bg_blur', isEnabled ? '1' : '0');
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem('cscs_theme') || 'default';
     const selector = document.getElementById("theme-selector");
@@ -30387,6 +30452,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgToggle = document.getElementById("toggle-theme-bg");
     if (bgToggle) bgToggle.checked = bgEnabled;
     setThemeBgEnabled(bgEnabled);
+
+    const savedTranslucence = localStorage.getItem('cscs_sheet_translucence') || '0';
+    setSheetTranslucence(savedTranslucence);
+
+    const blurEnabled = localStorage.getItem('cscs_bg_blur') === '1';
+    setBgBlurEnabled(blurEnabled);
 });
 
 </script>
