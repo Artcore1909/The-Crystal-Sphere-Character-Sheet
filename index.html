@@ -56,25 +56,6 @@
    then adding its class name to the :where(...) and :is(...) lists in Sections 2 & 3.
    ========================================================================= */
 
-/* --- Dark Theme --- */
-body.theme-dark {
-    --theme-bg-image: url("images/Darkbg.png");
-    --theme-bg-deep: #0b0d14;
-    --theme-bg-base: #10141f;
-    --theme-bg-card: #171c2b;
-    --theme-bg-input: #0d1019;
-    --theme-bg-hover: #21283d;
-    --theme-bg-footer: rgba(13, 16, 26, 0.9);
-    --theme-border: #2c354f;
-    --theme-text: #dce3f5;
-    --theme-text-muted: #8a95b3;
-    --theme-accent: #a685ff;
-    --theme-row-even: rgba(180, 200, 255, 0.025);
-    --theme-row-hover: rgba(166, 133, 255, 0.08);
-    --theme-shadow-card: 0 4px 6px -1px rgba(4, 6, 14, 0.5), 0 2px 4px -1px rgba(4, 6, 14, 0.3);
-    --theme-shadow-btn: 0 1px 3px rgba(4, 6, 14, 0.6);
-}
-
 /* --- Aizenfestung Theme --- */
 body.theme-aizenfestung {
     --theme-bg-image: url("images/Aizenfestungbg.png");
@@ -220,6 +201,29 @@ body.theme-great-slough {
     --theme-row-hover: rgba(155, 194, 176, 0.11);
     --theme-shadow-card: 0 4px 8px -1px rgba(4, 8, 7, 0.6), 0 2px 6px -1px rgba(61, 82, 76, 0.18);
     --theme-shadow-btn: 0 1px 3px rgba(4, 8, 7, 0.55);
+}
+
+/* --- Kassan Theme --- */
+body.theme-kassan {
+    --theme-bg-image: url("images/Kassanbg.png");
+    --theme-bg-deep: #11141d;
+    --theme-bg-base: #181d2a;
+    --theme-bg-card: #222738;
+    --theme-bg-elevated: #2a3044;
+    --theme-bg-panel-nested: #1b202e;
+    --theme-bg-input: #11141d;
+    --theme-bg-hover: #333a50;
+    --theme-bg-th: #262c3f;
+    --theme-th-text: #ebb55b;
+    --theme-bg-footer: rgba(24, 29, 42, 0.92);
+    --theme-border: #8a6b3e;
+    --theme-text: #f0e8da;
+    --theme-text-muted: #a8b0c4;
+    --theme-accent: #e5a445;
+    --theme-row-even: rgba(229, 164, 69, 0.05);
+    --theme-row-hover: rgba(138, 107, 62, 0.24);
+    --theme-shadow-card: 0 4px 6px -1px rgba(10, 11, 16, 0.65), 0 2px 4px -1px rgba(212, 141, 59, 0.16);
+    --theme-shadow-btn: 0 1px 3px rgba(10, 11, 16, 0.6);
 }
 
 /* --- Magmatic Theme --- */
@@ -380,14 +384,32 @@ body.theme-rose-gold {
     --theme-icon-filter: none;
 }
 
+/* --- Sculpted Darkness Theme --- */
+body.theme-sculpted-darkness {
+    --theme-bg-image: url("images/Darkbg.png");
+    --theme-bg-deep: #0b0d14;
+    --theme-bg-base: #10141f;
+    --theme-bg-card: #171c2b;
+    --theme-bg-input: #0d1019;
+    --theme-bg-hover: #21283d;
+    --theme-bg-footer: rgba(13, 16, 26, 0.9);
+    --theme-border: #2c354f;
+    --theme-text: #dce3f5;
+    --theme-text-muted: #8a95b3;
+    --theme-accent: #a685ff;
+    --theme-row-even: rgba(180, 200, 255, 0.025);
+    --theme-row-hover: rgba(166, 133, 255, 0.08);
+    --theme-shadow-card: 0 4px 6px -1px rgba(4, 6, 14, 0.5), 0 2px 4px -1px rgba(4, 6, 14, 0.3);
+    --theme-shadow-btn: 0 1px 3px rgba(4, 6, 14, 0.6);
+}
 
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-dark, .theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted_darkness) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
-    --theme-bg-readonly: var(--theme-bg-deep);
+    --theme-bg-readonly: var(--theme-bg-card);
     --theme-bg-panel-nested: var(--theme-bg-hover);
     --theme-bg-placeholder: var(--theme-bg-base);
     --theme-bg-tcs-member: var(--theme-bg-base);
@@ -410,7 +432,7 @@ body:where(.theme-dark, .theme-aizenfestung, .theme-cordillera, .theme-cosmic, .
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-dark, .theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold) {
+body:is(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted-darkness) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -3037,19 +3059,20 @@ details[open] #skills-collapsed-summary {
 
             <!-- 2. Appearance -->
             <select id="theme-selector" onchange="switchTheme(this.value)" style="width: 100%; padding: 6px; font-size: 0.85rem; margin-bottom: 6px; border: 1px solid var(--border-dark); border-radius: 4px; background: var(--bg-cream); color: var(--text-dark); font-weight: bold; text-align: left;">
-                <option value="light">Light Theme</option>
-                <option value="dark">Dark Theme</option>
-                <option value="aizenfestung">Aizenfestung Theme</option>
-                <option value="cordillera">Cordillera Theme</option>
-                <option value="cosmic">Cosmic Theme</option>
-                <option value="crystalline">Crystalline Theme</option>
-                <option value="forest">Forest Theme</option>
-                <option value="great-slough">Great Slough Theme</option>
-                <option value="magmatic">Magmatic Theme</option>
-                <option value="orkipelago">Orkipelago Theme</option>
-                <option value="overworld">Overworld Theme</option>
-                <option value="paladinic">Paladinic Theme</option>
-                <option value="rose-gold">Rose Gold Theme</option>
+                <option value="light">Default Theme</option>
+                <option value="aizenfestung">Aizenfestung</option>
+                <option value="cordillera">Cordillera</option>
+                <option value="cosmic">Cosmic</option>
+                <option value="crystalline">Crystalline</option>
+                <option value="forest">Forest</option>
+                <option value="great-slough">Great Slough</option>
+                <option value="magmatic">Magmatic</option>
+                <option value="kassan">Kassan</option>
+                <option value="orkipelago">Orkipelago</option>
+                <option value="overworld">Overworld</option>
+                <option value="paladinic">Paladinic</option>
+                <option value="rose-gold">Rose Gold</option>
+                <option value="sculpted-darkness">Sculpted Darkness</option>
             </select>
 
             <label class="btn-sm" style="display: flex; align-items: center; gap: 6px; width: 100%; padding: 6px 8px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; cursor: pointer; line-height: 1.2;">
@@ -30459,7 +30482,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-dark', 'theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold');
+    document.body.classList.remove('theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-great-slough', 'theme-magmatic', 'theme-kassan', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold', 'theme-sculpted-darkness');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
