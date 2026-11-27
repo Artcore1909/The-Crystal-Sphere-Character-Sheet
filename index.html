@@ -427,14 +427,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
     }
 
-    & #sheet-settings-dropdown {
-        background-color: var(--t-bg-base) !important;
-        border-color: var(--theme-border) !important;
-        color: var(--theme-text) !important;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-    }
-
+    & #sheet-settings-dropdown,
     & .char-modal {
         background-color: var(--theme-bg-base) !important;
         border-color: var(--theme-border) !important;
@@ -526,7 +519,6 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     /* 2. Cards, Items, & Components (Pop Layer) */
     & .aspect-card,
-    & .creation-skill-drawer,
     & .enchant-group-box,
     & .inventory-column-card,
     & .pnp-resource-card,
@@ -559,6 +551,13 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & .locus-builder,
     & .tab-btn {
         background-color: var(--t-bg-card) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+        box-shadow: var(--theme-shadow-card) !important;
+    }
+
+    & .creation-skill-drawer {
+        background-color: var(--theme-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-card) !important;
@@ -637,14 +636,25 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     /* 3. Inputs & Form Controls */
     & input:not([readonly]),
-    & select,
     & textarea,
     & .roll-input,
-    & .pnp-pool-input,
-    & .locus-builder-select,
-    & #theme-selector {
+    & .pnp-pool-input {
         background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & select,
+    & .locus-builder-select,
+    & #theme-selector {
+        background-color: var(--theme-bg-card) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+    }
+
+    & select option,
+    & select optgroup {
+        background-color: var(--theme-bg-select-option) !important;
         color: var(--theme-text) !important;
     }
 
