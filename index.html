@@ -392,6 +392,19 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     --border-warm: var(--theme-border);
     --border-dark: var(--theme-border);
     --accent-gold: var(--theme-accent);
+
+    /* Translucence-aware surface tokens */
+    --t-bg-base:         color-mix(in srgb, var(--theme-bg-base) var(--sheet-alpha, 100%), transparent);
+    --t-bg-card:         color-mix(in srgb, var(--theme-bg-card) var(--sheet-alpha, 100%), transparent);
+    --t-bg-elevated:     color-mix(in srgb, var(--theme-bg-elevated) var(--sheet-alpha, 100%), transparent);
+    --t-bg-hover:        color-mix(in srgb, var(--theme-bg-hover) var(--sheet-alpha, 100%), transparent);
+    --t-bg-input:        color-mix(in srgb, var(--theme-bg-input) var(--sheet-alpha, 100%), transparent);
+    --t-bg-readonly:     color-mix(in srgb, var(--theme-bg-readonly) var(--sheet-alpha, 100%), transparent);
+    --t-bg-panel-nested: color-mix(in srgb, var(--theme-bg-panel-nested) var(--sheet-alpha, 100%), transparent);
+    --t-bg-placeholder:  color-mix(in srgb, var(--theme-bg-placeholder) var(--sheet-alpha, 100%), transparent);
+    --t-bg-th:           color-mix(in srgb, var(--theme-bg-th) var(--sheet-alpha, 100%), transparent);
+    --t-bg-footer:       color-mix(in srgb, var(--theme-bg-footer) var(--sheet-alpha, 100%), transparent);
+
     background-color: var(--theme-bg-deep) !important;
     background-image: var(--theme-bg-image) !important;
     background-size: cover;
@@ -404,7 +417,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     /* 1. Major Containers & Panels (Base Layer) */
     & .container,
     & .skills-tab-container {
-        background-color: color-mix(in srgb, var(--theme-bg-base) var(--sheet-alpha, 100%), transparent) !important;
+        background-color: var(--t-bg-base) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -414,27 +427,28 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         -webkit-backdrop-filter: blur(var(--sheet-bg-blur, 0px));
     }
 
-    & .char-modal,
     & #sheet-settings-dropdown {
+        background-color: var(--t-bg-base) !important;
+        border-color: var(--theme-border) !important;
+        color: var(--theme-text) !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    & .char-modal {
         background-color: var(--theme-bg-base) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
     & .builder-panel {
-        background-color: color-mix(in srgb, var(--theme-bg-card) var(--sheet-alpha, 100%), transparent) !important;
-        border-color: var(--theme-border) !important;
-        color: var(--theme-text) !important;
-    }
-
-    & .builder-panel {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
     & .aspect-card .builder-panel {
-        background-color: var(--theme-bg-panel-nested) !important;
+        background-color: var(--t-bg-panel-nested) !important;
     }
 
     & .char-modal > div:first-child button {
@@ -449,12 +463,12 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & [id^="compendium-inspector-card-"],
     & [id^="compendium-creature-sheet-container-"],
     & #compendium-inspector-wrapper div[style*="background"] {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
-& #compendium-inspector-wrapper div[style*="border"],
+    & #compendium-inspector-wrapper div[style*="border"],
     & .compendium-accordion div[style*="border"],
     & #tab-skills .skill-accordion div[style*="border"],
     & #mount-mini-sheet-container div[style*="border"],
@@ -463,7 +477,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         border-color: var(--theme-border) !important;
     }
 
-    /* 1b. Floating Windows, Tooltips & Popups */
+    /* 1b. Floating Windows, Tooltips & Popups (kept solid for readability) */
     & .tcs-tooltip,
     & .tcs-floating-window,
     & [id^="tcs-"] {
@@ -486,7 +500,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     }
 
     & .tcs-close-btn:hover {
-        background-color: var(--theme-bg-hover) !important;
+        background-color: var(--t-bg-hover) !important;
         color: var(--theme-accent) !important;
     }
 
@@ -544,7 +558,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & #encounter-display-grid > div,
     & .locus-builder,
     & .tab-btn {
-        background-color: color-mix(in srgb, var(--theme-bg-card) var(--sheet-alpha, 100%), transparent) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-card) !important;
@@ -556,12 +570,11 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     & .pnp-weapon-slot-row,
     & .pnp-gear-slot-row {
-        background-color: color-mix(in srgb, var(--theme-bg-elevated) var(--sheet-alpha, 100%), transparent) !important;
+        background-color: var(--t-bg-elevated) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-row) !important;
     }
-
 
     & .pnp-subpace-field {
         background-color: transparent !important;
@@ -576,48 +589,48 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
 
     & #compendium-inspector-wrapper button,
     & .compendium-accordion button {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--t-bg-elevated) !important;
         border: 1px solid var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
     & #compendium-inspector-wrapper button:hover,
     & .compendium-accordion button:hover {
-        background-color: var(--theme-bg-hover) !important;
+        background-color: var(--t-bg-hover) !important;
         color: var(--theme-accent) !important;
     }
 
     /* 2b. Language pills / tags and hardcoded inline backgrounds */
     & .aspect-card div[style*="background"],
     & .skill-item div[style*="background"] {
-        background-color: var(--theme-bg-readonly) !important;
+        background-color: var(--t-bg-readonly) !important;
         color: var(--theme-text) !important;
         border-color: var(--theme-border) !important;
     }
 
     & span[style*="background"],
     & div[style*="background: #eae6df"] {
-        background-color: var(--theme-bg-input) !important;
+        background-color: var(--t-bg-input) !important;
         color: var(--theme-text) !important;
         border-color: var(--theme-border) !important;
     }
 
     /* 2c. Weapon rows, Locus tags & Placeholders */
     & .pnp-static-row {
-        background-color: color-mix(in srgb, var(--theme-bg-elevated) var(--sheet-alpha, 100%), transparent) !important;
+        background-color: var(--t-bg-elevated) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
     & .locus-ench-tag {
-        background-color: var(--theme-bg-input) !important;
+        background-color: var(--t-bg-input) !important;
         border: 1px solid var(--theme-border) !important;
         color: var(--theme-text-muted) !important;
     }
 
     & .placeholder-card,
     & #active-unlocked-skills-column .aspect-card {
-        background-color: var(--theme-bg-placeholder) !important;
+        background-color: var(--t-bg-placeholder) !important;
         border-color: var(--theme-border) !important;
         box-shadow: none !important;
     }
@@ -630,19 +643,19 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & .pnp-pool-input,
     & .locus-builder-select,
     & #theme-selector {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
-& input[type="range"] {
+    & input[type="range"] {
         background-color: transparent !important;
         border: none !important;
     }
 
     & .pnp-gear-dropdown,
     & .locus-direct-select {
-        background-color: transparent;
+        background-color: transparent !important;
         border: none;
         color: var(--theme-text) !important;
     }
@@ -657,7 +670,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & .builder-btn-cancel,
     & input[readonly],
     & .aspect-card input[readonly] {
-        background-color: var(--theme-bg-readonly) !important;
+        background-color: var(--t-bg-readonly) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -670,7 +683,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & div[style*="background: #ffffff"],
     & div[style*="background:#ffffff"],
     & .qualities-checklist {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -692,7 +705,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         color: var(--theme-text) !important;
     }
 
-& .builder-panel div[style*="border"] {
+    & .builder-panel div[style*="border"] {
         border-color: var(--theme-border) !important;
     }
 
@@ -707,31 +720,31 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     & .builder-btn:hover,
     & .builder-btn-cancel:hover,
     & .builder-btn-save:hover {
-        background-color: var(--theme-bg-hover) !important;
+        background-color: var(--t-bg-hover) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-accent) !important;
     }
 
     & table.game-data th {
-        background-color: var(--theme-bg-th) !important;
+        background-color: var(--t-bg-th) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-th-text) !important;
     }
 
-& table.game-data td,
+    & table.game-data td,
     & table.game-data div[style*="border"] {
         border-color: var(--theme-border) !important;
     }
 
     & .builder-btn-save {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--t-bg-elevated) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
 
     /* 5. Tables & Utility Rows */
     & .char-list-item {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--t-bg-elevated) !important;
         border-bottom-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
     }
@@ -746,34 +759,34 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     }
 
     & .sticky-xp-footer {
-        background-color: var(--theme-bg-footer) !important;
+        background-color: var(--t-bg-footer) !important;
         border-color: var(--theme-border) !important;
     }
 
     & .racial-bonus,
     & .racial-penalty {
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--t-bg-elevated) !important;
         color: var(--theme-text) !important;
         border-color: var(--theme-border) !important;
     }
 
     & button[title="Sheet Settings"],
     & .btn-sm {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
         color: var(--theme-text) !important;
         box-shadow: var(--theme-shadow-btn) !important;
     }
 
     & #conditional-modifiers:not(:empty) {
-        background-color: var(--theme-bg-card) !important;
+        background-color: var(--t-bg-card) !important;
         border-color: var(--theme-border) !important;
     }
 
     & .pnp-section-divider,
     & .pnp-octagon {
         border-color: var(--theme-border) !important;
-        background-color: var(--theme-bg-elevated) !important;
+        background-color: var(--t-bg-elevated) !important;
         color: var(--theme-text) !important;
     }
 
@@ -865,7 +878,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
         height: 13px !important;
         min-width: 13px !important;
         min-height: 13px !important;
-        background-color: var(--theme-bg-input) !important;
+        background-color: var(--t-bg-input) !important;
         border: 1px solid var(--theme-border) !important;
         border-radius: 2px !important;
         margin: 0 4px !important;
@@ -876,7 +889,7 @@ body:is(.theme-dark, .theme-cordillera, .theme-cosmic, .theme-crystalline, .them
     }
 
     & input[type="checkbox"]:checked {
-        background-color: var(--theme-bg-hover) !important;
+        background-color: var(--t-bg-hover) !important;
         border-color: var(--theme-accent) !important;
         accent-color: var(--theme-accent);
     }
