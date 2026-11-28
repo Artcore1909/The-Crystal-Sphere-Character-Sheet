@@ -272,6 +272,29 @@ body.theme-kassan {
     --theme-shadow-btn: 0 1px 3px rgba(10, 11, 16, 0.6);
 }
 
+/* --- Lost Kingdom Theme --- */
+body.theme-lost-kingdom {
+    --theme-bg-image: url("images/LostKingdombg.png");
+    --theme-bg-deep: #090b0f;
+    --theme-bg-base: #11141b;
+    --theme-bg-card: #191e28;
+    --theme-bg-elevated: #222834;
+    --theme-bg-panel-nested: #1d2733;
+    --theme-bg-input: #0c0e14;
+    --theme-bg-hover: #263240;
+    --theme-bg-th: #1f2531;
+    --theme-th-text: #e0a148;
+    --theme-bg-footer: rgba(17, 20, 27, 0.92);
+    --theme-border: #416278;
+    --theme-text: #e8edf2;
+    --theme-text-muted: #8ea2b5;
+    --theme-accent: #e0983c;
+    --theme-row-even: rgba(142, 162, 181, 0.05);
+    --theme-row-hover: rgba(72, 158, 194, 0.14);
+    --theme-shadow-card: 0 4px 10px -1px rgba(4, 5, 8, 0.75), 0 2px 6px -1px rgba(65, 98, 120, 0.18);
+    --theme-shadow-btn: 0 1px 3px rgba(4, 5, 8, 0.7);
+}
+
 /* --- Magmatic Theme --- */
 body.theme-magmatic {
     --theme-bg-image: url("images/Magmaticbg.png");
@@ -452,7 +475,7 @@ body.theme-sculpted-darkness {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted_darkness) {
+body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-lost-kingdom, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted_darkness) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-card);
@@ -478,7 +501,7 @@ body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystal
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted-darkness) {
+body:is(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-lost-kingdom, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted-darkness) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -3114,6 +3137,7 @@ details[open] #skills-collapsed-summary {
                 <option value="frosinlands">Frosinlands</option>
                 <option value="gloaming">Gloaming</option>
                 <option value="great-slough">Great Slough</option>
+                <option value="lost-kingdom">Lost Kingdom</option>
                 <option value="magmatic">Magmatic</option>
                 <option value="kassan">Kassan</option>
                 <option value="orkipelago">Orkipelago</option>
@@ -30612,7 +30636,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-frosinlands', 'theme-gloaming', 'theme-great-slough', 'theme-magmatic', 'theme-kassan', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold', 'theme-sculpted-darkness');
+    document.body.classList.remove('theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-frosinlands', 'theme-gloaming', 'theme-great-slough', 'theme-lost-kingdom', 'theme-magmatic', 'theme-kassan', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold', 'theme-sculpted-darkness');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
