@@ -5449,7 +5449,7 @@ details[open] #skills-collapsed-summary {
             <td style="text-align: center;">TN 10</td>
         </tr>
         <tr>
-            <td><strong>Hardened Leather; Weftling Silk; Star-glass</strong></td>
+            <td><strong>Clay; Hardened Leather; Weftling Silk; Star-glass</strong></td>
             <td style="text-align: center;">TN 4</td>
             <td style="text-align: center;">TN 7</td>
             <td style="text-align: center;">TN 10</td>
@@ -9597,6 +9597,10 @@ const tooltipRegistry = {
     title: "Weapon Affinity (Crossbow)",
     description: "You gain +1d on attacks with Crossbows."
   },
+    "acid_breath": {
+        title: "Acid Breath",
+        description: "As an Attack action, the creature can spray acid at an 8-hex, adjacent diamond."
+    },
     "aetherial_tension": {
         title: "Aetherial Tension",
         description: "So long as the spirit is within its Mana reserve number of Hexes, all regenerated Mana goes to it instead the target anthropoids."
@@ -9730,9 +9734,9 @@ const tooltipRegistry = {
         title: "Magic Immunity",
         description: "The creature suffers no damage or ill effects from magic."
     },
-    "creature_non_sundering_weapon_immunity": {
-        title: "Non-sundering Weapon Immunity",
-        description: "The creature suffers no damage or effects from standard weapons that are not specifically designated for sundering."
+    "creature_non_sundering_attacks_immunity": {
+        title: "Non-sundering Attacks Immunity",
+        description: "In order to damage the creature, you must follow the sundering rules: Minor, Moderate, Major, and Catastrophic damage deal 1, 2, 4, or 8 points of Vitality damage respectively."
     },
     "creature_physical_immunity": {
         title: "Physical Immunity",
@@ -9794,8 +9798,8 @@ const tooltipRegistry = {
         title: "Thunder Vulnerability",
         description: "The creature suffers double damage from thunder attacks."
     },
-    "creature_umbral_immunity": {
-        title: "Umbral Immunity",
+    "creature_umbra_immunity": {
+        title: "Umbra Immunity",
         description: "The creature suffers no damage or ill effects from umbral attacks."
     },
     "creature_vulnerability": {
@@ -9870,6 +9874,10 @@ const tooltipRegistry = {
         title: "Filthy",
         description: "The target must pass a Health save or become affected by the plague."
     },
+    "fire_breath": {
+        title: "Fire Breath",
+        description: "As an Attack action, the creature can spray fire at an 8-hex, adjacent diamond."
+    },
     "fire_spray": {
         title: "Fire Spray",
         description: "As a standard attack action, the creature can spray fire at 1 hex within its spray range."
@@ -9881,6 +9889,10 @@ const tooltipRegistry = {
     "firststrike": {
         title: "Firststrike",
         description: "You retain the right of first strike against approaching combatants."
+    },
+    "frost_breath": {
+        title: "Frost Breath",
+        description: "As an Attack action, the creature can spray frost at an 8-hex, adjacent diamond."
     },
     "frost_touch": {
         title: "Frost Touch",
@@ -9921,6 +9933,10 @@ const tooltipRegistry = {
     "light_touch": {
         title: "Light Touch",
         description: "The creature's natural critical attacks inflict Blindness."
+    },
+    "lightning_arc": {
+        title: "Lightning Arc",
+        description: "As an Attack, the creature can arc lightning at one target within an 8-hex, adjacent diamond."
     },
     "lightning_touch": {
         title: "Lightning Touch",
@@ -10030,6 +10046,18 @@ const tooltipRegistry = {
         title: "Heavy Suit",
         description: "DR+12; cc4"
     },
+    "clay_suit": {
+        title: "Iron Suit",
+        description: "DR+8; cc4"
+    },
+    "iron_suit": {
+        title: "Iron Suit",
+        description: "DR+14; cc4"
+    },
+    "orichalcum_suit": {
+        title: "Orichalcum Suit",
+        description: "DR+20; cc4"
+    },
     "stone_suit": {
         title: "Stone Suit",
         description: "DR+18; cc4"
@@ -10077,6 +10105,10 @@ const tooltipRegistry = {
     "rot": {
         title: "Rot",
         description: "The target’s total Vitality is lowered by the amount rolled, and he suffers a penalty to all Dexterity, Health, and Strength based skills & saves. This effect recurs every week until the creature has no vitality remaining, at which point he dies and becomes a zombie. TN 5 to purify."
+    },
+    "irradiating_light": {
+        title: "Irradiating Light",
+        description: "As an Attack, the creature can irradiate all targets within an 8-hex, adjacent diamond."
     },
     "sense_undead": {
         title: "Sense Undead",
@@ -10138,46 +10170,26 @@ const tooltipRegistry = {
         title: "Brutal Weapons Affinity",
         description: "You gain +1d on attacks with Brutal weapons."
     },
-    "web_blast": {
+    "creature_web_blast": {
         title: "Web Blast",
         description: "Forces the target to pass a TN 5 Escape or Strength save to avoid or break entanglement."
     },
-"creature_acid_breath": {
-    title: "Acid Breath",
-    description: "Targets all creatures within a 9-hex diamond."
-},
-"creature_fire_breath": {
-    title: "Fire Breath",
-    description: "Targets all creatures within a 9-hex diamond."
-},
-"creature_frost_breath": {
-    title: "Frost Breath",
-    description: "Targets all creatures within a 9-hex diamond."
-},
-"creature_lightning_arc": {
-    title: "Lightning Arc",
-    description: "Targets 1 hex."
-},
 "creature_mortal_gaze": {
     title: "Mortal Gaze",
     description: "The target is entitled to an Acuity save to perceive the threat and break eye contact. If they fail, they must pass a Verve confrontation or die."
 },
-"creature_petrifying_gaze": {
+"petrifying_gaze__acuity_confronts": {
     title: "Petrifying Gaze",
     description: "One target must pass an Acuity Save or become Petrified."
 },
-"creature_poison_breath": {
-    title: "Poison Breath",
-    description: "Targets all creatures within a 9-hex diamond (TN 5)."
-},
-"creature_searing_light_breath": {
-    title: "Searing Light [Breath]",
-    description: "Targets all creatures within a 9-hex diamond."
-},
-"creature_thunderous_roar": {
-    title: "Thunderous Roar",
-    description: "Targets all creatures within a 9-hex diamond."
-},
+    "poison_breath__tn_5": {
+        title: "Poison Breath",
+        description: "As an Attack action, the creature can spray poison at an 8-hex, adjacent diamond."
+    },
+"thunderous_roaring": {
+        title: "Thunderous Roaring",
+        description: "As an Attack action, the creature can unleash a thunderous roar affecting all creatures within an 8-hex, adjacent diamond."
+    },
 "screech": {
     title: "Screech",
     description: "Targets all creatures within a 9-hex diamond."
@@ -16818,6 +16830,7 @@ function getMaxEnchant(enchId, includeArmor, includeShield) {
 
 let baseDr = 0;
 if (race === "Hanyo (Earth)") baseDr += 2;
+if (race.includes("Dragon")) baseDr += 8;
 
 // --- COMMON HELPER LOOPS FOR STRUCTURAL VALIDATION ---
 
@@ -18190,12 +18203,12 @@ window.racialSkillsMap = {
     "Centaur":                    ["creature_curse_disease_immunity", "starlight_vision"],
     "Derro":                      ["earthray_vision", "weapon_affinity_derro_brutal"],
     "Dhampir":                      ["darkvision", "creature_curse_disease_immunity", "creature_silver_aversion", "creature_light_aversion", "sense_undead"],
-    "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "medium_natural_armor", "creature_frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
-    "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "medium_natural_armor", "creature_lightning_arc", "creature_magic_resistance", "creature_thunderous_roar"],
-    "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "medium_natural_armor", "creature_fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
-    "Dragon, Or": ["creature_curse_disease_immunity", "creature_light_immunity", "creature_darkness_aversion", "creature_umbra_aversion", "medium_natural_armor", "creature_magic_resistance", "creature_searing_light_breath"],
-    "Dragon, Sable": ["creature_acid_breath", "creature_acid_immunity", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbra_immunity", "medium_natural_armor", "creature_light_aversion", "creature_magic_resistance"],
-    "Dragon, Vert": ["creature_curse_disease_immunity", "creature_poison_immunity", "creature_venom_immunity", "medium_natural_armor", "creature_magic_resistance", "creature_petrifying_gaze", "creature_poison_breath"],
+    "Dragon, Argent": ["creature_curse_disease_immunity", "creature_frost_immunity", "thick_hide", "frost_breath", "creature_fire_aversion", "creature_magic_resistance"],
+    "Dragon, Azure": ["creature_curse_disease_immunity", "creature_lightning_immunity", "creature_thunder_immunity", "thick_hide", "lightning_arc", "creature_magic_resistance", "thunderous_roaring"],
+    "Dragon, Gules": ["creature_curse_disease_immunity", "creature_fire_immunity", "thick_hide", "fire_breath", "creature_frost_aversion", "creature_magic_resistance"],
+    "Dragon, Or": ["creature_curse_disease_immunity", "creature_light_immunity", "creature_darkness_aversion", "creature_umbra_aversion", "thick_hide", "creature_magic_resistance", "irradiating_light"],
+    "Dragon, Sable": ["acid_breath", "creature_acid_immunity", "creature_curse_disease_immunity", "creature_darkness_immunity", "creature_umbra_immunity", "thick_hide", "creature_light_aversion", "creature_magic_resistance"],
+    "Dragon, Vert": ["creature_curse_disease_immunity", "creature_poison_immunity", "thick_hide", "creature_magic_resistance", "petrifying_gaze__acuity_confronts", "poison_breath__tn_5"],
     "Doppelgänger, Transcendent": ["unhinging_jaw"],
     "Dryad":                      ["creature_curse_disease_immunity", "meld", "life_bond"],
     "Ent":                        ["creature_curse_disease_immunity", "creature_light_immunity", "creature_thunder_immunity", "creature_lightning_immunity", "creature_fire_vulnerability"],
@@ -23850,7 +23863,7 @@ window.updateEquipmentCardViews = function() {
             detailString = `<span style="font-size: 0.75rem; color: #7c6f64; display:block; margin-top:2px;">${parts.join(" | ")}</span>`;
         }
 
-        // =========================================================================
+// =========================================================================
         // NEW: CRIT COUNT (CC) CALCULATOR & FLEXBOX RENDERING
         // =========================================================================
         let ccDisplayHtml = "";
@@ -23859,6 +23872,11 @@ window.updateEquipmentCardViews = function() {
             if (slotData.makerId === "darkfolk") {
                 activeCc += 1;
             }
+
+        const raceSelect = document.getElementById("char-race");
+        const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
+        const isDragon = currentRace.includes("dragon");
+
             const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
             if (hasArcaneArmor) {
                 const rankInput = document.getElementById("char-rank-input-xp");
@@ -23871,11 +23889,15 @@ window.updateEquipmentCardViews = function() {
                 else if (rankXp >= 6) charRank = 2;
                 activeCc += charRank;
             }
+        if (isDragon) {
+                activeCc += 4;
+            }
             const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
             if (hasBarkskin) {
                 const barkskinSurgeCc = Math.max(0, parseInt(document.getElementById("barkskin-surge-cc")?.value, 10) || 0);
                 activeCc += barkskinSurgeCc;
             }
+
             ccDisplayHtml = `<strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>`;
         }
 
@@ -23889,6 +23911,7 @@ window.updateEquipmentCardViews = function() {
         // =========================================================================
     };
 
+
 const armorHtml = renderCardText(equip.armor);
     if (armorHtml) {
         document.getElementById("card-view-armor").innerHTML = armorHtml;
@@ -23896,8 +23919,10 @@ const armorHtml = renderCardText(equip.armor);
         const hasBarkskin = document.getElementById("chk-barkskin")?.checked || false;
         const barkskinSurgeCc = hasBarkskin ? Math.max(0, parseInt(document.getElementById("barkskin-surge-cc")?.value, 10) || 0) : 0;
         const hasArcaneArmor = document.getElementById("chk-arcane-armor")?.checked || false;
+        const raceSelect = document.getElementById("char-race");
+        const currentRace = raceSelect ? raceSelect.value.toLowerCase() : "";
+        const isDragon = currentRace.includes("dragon");
 
-        if ((hasBarkskin && barkskinSurgeCc > 0) || hasArcaneArmor) {
             let activeCc = 1 + barkskinSurgeCc;
             if (hasArcaneArmor) {
                 const rankInput = document.getElementById("char-rank-input-xp");
@@ -23910,14 +23935,14 @@ const armorHtml = renderCardText(equip.armor);
                 else if (rankXp >= 6) charRank = 2;
                 activeCc += charRank;
             }
+          if (isDragon) {
+              activeCc += 4;
+            }
             document.getElementById("card-view-armor").innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: baseline;">
                     <div class="pnp-empty-line" style="flex: 1;">Empty Armor Slot</div>
                     <strong style="font-size: 0.85rem; color: #5c1d1d;">Crit Count: ${activeCc}</strong>
                 </div>`;
-        } else {
-            document.getElementById("card-view-armor").innerHTML = '<div class="pnp-empty-line">Empty Armor Slot</div>';
-        }
     }
 };
 // =========================================================================
@@ -27737,12 +27762,12 @@ const compendiumRegistry = {
     "pace": "6", 
     "vit": 28, 
     "mana": 15, 
-    "avoid": "5d+8; cc4", 
+    "avoid": "5d; cc4", 
     "aspects": { dex: 5, str: 14, act: 5 }, 
     "attacks": ["Slam: 6d+8; Bash"], 
-    "immunities": ["Curse", "Critical Effect", "Disease", "Thrust"],
+    "immunities": ["Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
     "vulnerabilities": ["Fire", "Frost"],
-    "abilities": ["Clay"]
+    "abilities": []
 },
 { 
     "name": "Golem, Iron", 
@@ -27751,11 +27776,11 @@ const compendiumRegistry = {
     "pace": "6", 
     "vit": 52, 
     "mana": 15, 
-    "avoid": "5d+24; cc4", 
+    "avoid": "5d; cc4", 
     "aspects": { dex: 5, str: 26, act: 5 }, 
     "attacks": ["Fire: 6d; Pain", "Morningstar [Size D]: 6d+23; Bash & Thrust; cc5", "Stomp [Size D]: 6d+20; Bash & Crush; cc4"], 
-    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Fire Breath", "Iron Suit [Size D]"]
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
+    "abilities": ["Fire Breath"]
 },
 {
     "name": "Golem, Orichalcum Knight", 
@@ -27764,24 +27789,24 @@ const compendiumRegistry = {
     "pace": "12", 
     "vit": 16, 
     "mana": 24, 
-    "avoid": "6d; cc10", 
+    "avoid": "8d; cc10", 
     "aspects": { dex: 8, str: 8, act: 8 }, 
     "attacks": ["Orichalcum Longsword: 7d+17; Slash or Thrust"], 
-    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Orichalcum Suit", "Arcane Armor [Rank 6]", "Blur"]
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
+    "abilities": ["Arcane Armor [Rank 6]", "Blur"]
 },
 {
     "name": "Golem, Sentry", 
     "description": "Sentries are stationary contructs that are used for security purposes.",
     "size": "B", 
     "pace": "12", 
-    "vit": 2, 
+    "vit": "—", 
     "mana": 36, 
-    "avoid": "6d", 
+    "avoid": "—", 
     "aspects": { act: 12 }, 
     "attacks": ["Explode: 6d+6; Varies"], 
     "immunities": ["Curse", "Critical Effect", "Disease"],
-    "abilities": ["Explode", "Telepathy"]
+    "abilities": ["Explode", "Telepathy", "Unbreaking"]
 },
 {
     "name": "Golem, Spider", 
@@ -27793,8 +27818,21 @@ const compendiumRegistry = {
     "avoid": "6d", 
     "aspects": { dex: 6, str: 1, act: 1 }, 
     "attacks": ["Explode: 6d+6; Varies"], 
-    "immunities": ["Curse", "Critical Effect", "Disease"],
+    "immunities": ["Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
     "abilities": ["Explode"]
+},
+{ 
+    "name": "Golem, Steel", 
+    "description": "Iron golems are often created to defend an area from intrusion and are considered one of the most deadly things within the Crystal Sphere.",
+    "size": "C", 
+    "pace": "8", 
+    "vit": 16, 
+    "mana": 24, 
+    "avoid": "6d+2; cc4", 
+    "aspects": { dex: 8, str: 8, act: 8 }, 
+    "attacks": ["Frost: 6d; Numb", "Spiked Caestus [Size C]: 6d+1; Thrust; cc5", "Stomp [Size C]: 6d+4; Bash & Crush; cc4"], 
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
+    "abilities": ["Frost Breath"]
 },
 { 
     "name": "Golem, Stone", 
@@ -27803,11 +27841,11 @@ const compendiumRegistry = {
     "pace": "6", 
     "vit": 52, 
     "mana": 15, 
-    "avoid": "5d+18; cc4", 
+    "avoid": "5d; cc4", 
     "aspects": { dex: 5, str: 26, act: 5 }, 
-    "attacks": ["Slam [Size D]: 6d+21; Bash; cc4"], 
-    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Weapon"],
-    "abilities": ["Stone Suit"]
+    "attacks": ["Explode: 6d+42; Daze", "Slam [Size D]: 6d+21; Bash; cc4"], 
+    "immunities": ["Battle Magic", "Curse", "Critical Effect", "Disease", "Non-sundering Attacks"],
+    "abilities": ["Explode"]
 }
     ],
     "Plant": [
@@ -27907,7 +27945,7 @@ const compendiumRegistry = {
             attacks: ["Bite: 6d+10; Crush", "Claw: 6d+10; Slash", "Tail: 6d+10; Bash", "Trample: 6d+42; Crush", "Lightning: 6d+10; Weaken", "Thunder: 6d+10; Daze"], 
             immunities: ["Curse", "Disease", "Lightning", "Thunder"],
             resistances: ["Magic"],
-            abilities: ["Thick Hide", "Lightning Arc", "Thunderous Roar"] 
+            abilities: ["Thick Hide", "Lightning Arc", "Thunderous Roaring"] 
         },
         { 
             name: "Dragon, Gules", 
@@ -27937,7 +27975,7 @@ const compendiumRegistry = {
             immunities: ["Curse", "Disease", "Light"],
             aversions: ["Darkness", "Umbral"],
             resistances: ["Magic"],
-            abilities: ["Thick Hide", "Searing Light [Breath]"] 
+            abilities: ["Thick Hide", "Irradiating Light"] 
         },
         { 
             name: "Dragon, Sable", 
@@ -29612,7 +29650,7 @@ const compendiumCategoryDescriptions = {
     "Anthropoid": "The sentient Human-like folk of the Crystal Sphere.",
     "Giant": "Giants are 18-foot tall anthropoids of varying complexions, cultures, and dispositions. In general, giants are nomadic and keep out of the affairs of the other races, but when riled, giants are a ruthless foe.\n\n“Among the rest was one detestable monster, named Goëmagot, in stature twelve cubits, and of such prodigious strength that at one shake he pulled up an oak as if it had been a hazel wand.”\n\nHistoria Regum Britanniae by Geoffrey of Monmouth",
     "Beast": "An indominable class of fauna often hunted for prestige, wealth, and survival. Few who take on such marks survive.",
-    "Construct":"A golem is a magical construct meant to do various tasks. A golem can be made from clay, stone, or iron. Orichalcum, mythral, gold, and silver golems are theoretically possible, however they are cost prohibitive. Since golems are made for specific purposes, each needs to be designed by the LM. A golem only has 3 Aspects: Dexterity, Strength, and Acuity. You must distribute among those 3 a number of Aspect Points equal to ⅑, ⅙, ⅓, or ½ the amount of Mana spent in the rite for size A, B, C, or D golems respectively. Having no Verve, golems cannot cast, they can, however, be charged. A golem charged with a spell will bear runes that contain and discharge the charged spells; runes have their own charges and do not deplete the Mana of the golem. Runes can be etched before and charged after a golem has been made, and so the Mana cost of these need not lessen the aspects of the golem. If a golem has Non-sundering Weapon immunity, their Vitality can only be depleted by sunders; Each instance of minor damage equates to one point of Vitality lost.",
+    "Construct":"A golem is a magical construct meant to do various tasks. A golem can be made from clay, stone, or iron. Orichalcum, mythral, gold, and silver golems are theoretically possible, however they are cost prohibitive. Since golems are made for specific purposes, each needs to be designed by the LM. A golem only has 3 Aspects: Dexterity, Strength, and Acuity. You must distribute among those 3 a number of Aspect Points equal to ⅑, ⅙, ⅓, or ½ the amount of Mana spent in the rite for size A, B, C, or D golems respectively. Having no Verve, golems cannot cast, they can, however, be charged. A golem charged with a spell will bear runes that contain and discharge the charged spells; runes have their own charges and do not deplete the Mana of the golem. Runes can be etched before and charged after a golem has been made, and so the Mana cost of these need not lessen the aspects of the golem. If a golem has Non-sundering Attacks immunity, their Vitality can only be depleted by sunders; Each instance of minor damage equates to one point of Vitality lost.",
     "Plant":"Across the Empire rages a great debate as to the palatability of certain plants: some argue the Coriandrum sativum is delicious, others argue it tastes like soap. The plants herein, however, engage in no such bickering when it comes to eating people.",
     "Dragon":"There are three types of dragons within the Crystal Sphere: High Dragons, Drakes, and Wyrms. High dragons (the heraldic colors) are civil creatures whereas lesser dragon (Drakes and Wyrms), though still intelligent, are bestial.\n\n“My armour is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!”\n\nThe Hobbit by J.R.R. Tolkien",
     "Elemental":"Elementals are composed of spirit and body alone—they are mindless. The elementals came into being incidentally when the various elements were spoken into existence, and they are generally of a neutral disposition. It is suspected that elementals cannot truly die, and that when one is “slain” its spirit immediately takes possession of more matter of its kind, bypassing the transmigration process. Slaying an elemental, however, is tricky. Their vitality can only be damaged by Battle Magic, Arcane Dart or Vortex, Drain Vitality, or weapons with the Powered Blade enchantment. When an elemental is slain, there is left behind a granular essence which is prized for its fortifying effect on alchemy, enchantments, and spells and its mind altering effects when consumed. Elementals tend to avoid civilized portions of the world, because, although they can pass freely through the element of their composition naturally deposited, they are incapable of travelling through that which has been wrought.",
