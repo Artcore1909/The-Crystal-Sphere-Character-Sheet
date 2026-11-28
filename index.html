@@ -206,6 +206,29 @@ body.theme-frosinlands {
     --theme-shadow-btn: 0 1px 3px rgba(8, 10, 12, 0.65);
 }
 
+/* --- Gloaming Theme --- */
+body.theme-gloaming {
+    --theme-bg-image: url("images/Gloamingbg.png");
+    --theme-bg-deep: #120e1c;
+    --theme-bg-base: #1b1629;
+    --theme-bg-card: #251e38;
+    --theme-bg-elevated: #2f2645;
+    --theme-bg-panel-nested: #3a2b47;
+    --theme-bg-input: #141020;
+    --theme-bg-hover: #422c3d;
+    --theme-bg-th: #2a213d;
+    --theme-th-text: #e8b45a;
+    --theme-bg-footer: rgba(27, 22, 41, 0.92);
+    --theme-border: #68507d;
+    --theme-text: #f3ecf7;
+    --theme-text-muted: #b29ec4;
+    --theme-accent: #e09b3d;
+    --theme-row-even: rgba(178, 158, 196, 0.05);
+    --theme-row-hover: rgba(224, 155, 61, 0.15);
+    --theme-shadow-card: 0 4px 8px -1px rgba(10, 7, 18, 0.65), 0 2px 6px -1px rgba(104, 80, 125, 0.22);
+    --theme-shadow-btn: 0 1px 3px rgba(10, 7, 18, 0.6);
+}
+
 /* --- Great Slough Theme --- */
 body.theme-great-slough {
     --theme-bg-image: url("images/GreatSloughbg.png");
@@ -429,7 +452,7 @@ body.theme-sculpted-darkness {
 /* =========================================================================
    2. SHARED DEFAULTS (Zero specificity so palettes always win)
    ========================================================================= */
-body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted_darkness) {
+body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted_darkness) {
     --theme-bg-elevated: var(--theme-bg-card);
     --theme-bg-image: none;
     --theme-bg-readonly: var(--theme-bg-card);
@@ -455,7 +478,7 @@ body:where(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystal
 /* =========================================================================
    3. SHARED THEME ENGINE
    ========================================================================= */
-body:is(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted-darkness) {
+body:is(.theme-aizenfestung, .theme-cordillera, .theme-cosmic, .theme-crystalline, .theme-forest, .theme-frosinlands, .theme-gloaming, .theme-great-slough, .theme-magmatic, .theme-kassan, .theme-orkipelago, .theme-overworld, .theme-paladinic, .theme-rose-gold, .theme-sculpted-darkness) {
     --primary-red: var(--theme-border);
     --border-light: var(--theme-border);
     --border-warm: var(--theme-border);
@@ -3089,6 +3112,7 @@ details[open] #skills-collapsed-summary {
                 <option value="crystalline">Crystalline</option>
                 <option value="forest">Forest</option>
                 <option value="frosinlands">Frosinlands</option>
+                <option value="gloaming">Gloaming</option>
                 <option value="great-slough">Great Slough</option>
                 <option value="magmatic">Magmatic</option>
                 <option value="kassan">Kassan</option>
@@ -30588,7 +30612,7 @@ document.addEventListener("click", (e) => {
 
 function switchTheme(themeName) {
     // 1. Remove all possible theme classes
-    document.body.classList.remove('theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-frosinlands', 'theme-great-slough', 'theme-magmatic', 'theme-kassan', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold', 'theme-sculpted-darkness');
+    document.body.classList.remove('theme-aizenfestung', 'theme-cordillera', 'theme-cosmic', 'theme-crystalline', 'theme-forest', 'theme-frosinlands', 'theme-gloaming', 'theme-great-slough', 'theme-magmatic', 'theme-kassan', 'theme-orkipelago', 'theme-overworld', 'theme-paladinic', 'theme-rose-gold', 'theme-sculpted-darkness');
     
     // 2. Add the selected theme class if it's not the default
     if (themeName && themeName !== 'default') {
